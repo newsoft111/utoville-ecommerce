@@ -52,7 +52,11 @@
 							<button class="btn btn-primary" type="button" onclick="join_submit();">Sign up</button>
 						</div>
 						<div class="col-sm-8 text-sm-end mt-3 mt-sm-0">
-							<span class="text-muted">Already have an account? <a href="{% url 'accounts_login' %}">Signin here</a></span>
+							<span class="text-muted">Already have an account? 
+
+									<a href="{% url 'account:login' %}">Signin here</a>
+	
+							</span>
 						</div>
 					</div>	
 				</form>
@@ -162,7 +166,7 @@
         dataType : 'json',
         success: function(data){
           if(data.result==200){
-            location.replace("{% url 'Index' %}");
+            location.replace("{% url 'main:index' %}");
           }else{
             openModal("알림", data.result_text);
           }

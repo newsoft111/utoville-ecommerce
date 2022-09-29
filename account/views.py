@@ -26,7 +26,7 @@ def user_login(request):
 					result = '201'
 					result_text = '탈퇴한 계정입니다.'	
 			else:
-				verify_email_url = resolve_url('VerifyEmail')
+				#verify_email_url = resolve_url('VerifyEmail')
 				result = '201'
 				result_text = f"이메일 인증을 완료해주세요.<a href='{verify_email_url}' class='w-100 btn btn-primary mt-3'>인증메일 다시받기</a>"
 		else:
@@ -41,7 +41,7 @@ def user_login(request):
 
 def user_logout(request):
 	auth.logout(request)
-	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+	return HttpResponseRedirect(resolve_url('main:index'))
 
 
 def user_join(request):
@@ -49,7 +49,7 @@ def user_join(request):
 		'title': "회원가입 - 콘디",
 	}
 	if request.user.is_authenticated:
-		return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+		return HttpResponseRedirect(resolve_url('main:index'))
 	if request.method == 'POST':
 		email=request.POST.get('email')
 		nickname=request.POST.get('nickname')

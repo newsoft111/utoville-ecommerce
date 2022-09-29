@@ -14,4 +14,5 @@ def product_list(request):
 
 class ProductLV(ListView):
 	model = Product
+	print(model)
 

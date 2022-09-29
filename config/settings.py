@@ -41,13 +41,12 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'django.contrib.humanize',
-	'sso',
 	'main',
 	'account',
 	'product',
 ]
 
-AUTH_USER_MODEL = 'sso.User'
+AUTH_USER_MODEL = 'account.User'
 
 
 MIDDLEWARE = [
@@ -87,7 +86,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'utoville_home_care',
+        'NAME': 'utoville',
         'USER': 'utoville2021',
         'PASSWORD': 'Dbutoville21!',
         'HOST': 'utoville.cznhdsumbvrn.ap-southeast-1.rds.amazonaws.com',
@@ -96,22 +95,9 @@ DATABASES = {
             'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
         }
     },
-		"sso_db": {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'utoville_sso',
-        'USER': 'utoville2021',
-        'PASSWORD': 'Dbutoville21!',
-        'HOST': 'utoville.cznhdsumbvrn.ap-southeast-1.rds.amazonaws.com',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
-        }
-      }
+		
 }
 
-DATABASE_ROUTERS = [
-    'sso.db_router.SSORouter',
-]
 
 
 # Password validation
