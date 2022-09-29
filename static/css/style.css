@@ -873,6 +873,7 @@ progress {
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
   width: 100%;
+  text-align: right;
 }
 
 .offset-1 {
@@ -17306,6 +17307,33 @@ html[dir="rtl"] select option,
 }
 
 /*--------------추가--------------*/
+<<<<<<< Updated upstream
+=======
+/*Header*/
+.utils li {
+  display: inline-block;
+  margin-left: 30px;
+}
+.utils li:first-child {
+  margin-left: 0;
+}
+.utils li a {
+  position: relative;
+  display: block;
+  font-size: 14px;
+  color: #000;
+}
+/*.utils li a::after {
+  content: "";
+  width: 1px;
+  height: 18px;
+  background-color: rgba(0, 0, 0, 0.2); 
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);  
+} */
+>>>>>>> Stashed changes
 /*Property List*/
 #sub_gnb span {
   font-weight: 900;
@@ -17379,6 +17407,29 @@ html[dir="rtl"] select option,
   display: inline-block;
   height: 18px;
   background: url(../images/property/grid-list/stars_state.png) no-repeat 0 center;
+}
+
+/*product_detaile*/
+.buy_area {
+  text-align: right;
+}
+.buy_area li {
+  display: inline-block;
+}
+.buy_area li.buy {  
+  padding: 10px 20px;
+  border: 1px solid #90c31f;
+  border-radius: 80px;
+}
+.buy_area li.cart {  
+  padding: 10px 20px;
+  border: 1px solid #90c31f;
+  border-radius: 80px;
+}
+.buy_area li.heart {  
+  padding: 10px 20px;
+  border: 1px solid #90c31f;
+  border-radius: 80px;
 }
 /*User CSS*/
 
