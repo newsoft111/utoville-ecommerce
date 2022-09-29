@@ -1,0 +1,249 @@
+// 
+// general.scss
+// Theme general elements and helper styling
+
+// GLightbox controls theme
+.plyr__control--overlaid, .plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true]{
+  background: $primary;
+}
+.plyr--full-ui input[type=range]{
+  color: $primary;
+}
+
+/* rtl:raw:
+.glightbox-clean .gclose, .glightbox-modern .gclose{
+  right: auto !important;
+  left: 20px;
+}
+*/
+
+// To flip element in RTL
+/* rtl:raw:
+  .rtl-flip {
+    transform: scaleX(-1);
+  }
+  .rtl-flip.bi:before{
+    transform: inherit;
+  }
+*/
+
+// Parallax
+.bg-parallax{
+  -webkit-transform: translate3d(0, 0, 0);
+  &:before {
+    z-index: 0;
+  }
+}
+
+// Pre loader
+.preloader {
+  background-color: $white;
+  position: fixed;
+  z-index: 1190;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  .preloader-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// Background blur
+.blur-element {
+  height: 500px;
+  width: 500px;
+  background-color: $primary;
+  border-radius: 50%;
+  display: inline-block;
+  filter: blur(1.5rem);
+}
+
+// Background blur
+.bg-blur {
+  backdrop-filter: blur(10px);
+  border: solid 1px rgba($white, 0.2);
+  background: rgba($white, 0.2);
+}
+
+// Box
+.box-xs {
+  width: 1rem;
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+}
+.box-sm {
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+}
+.box-md {
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+}
+.box-lg {
+  width: 4rem;
+  height: 4rem;
+  line-height: 4rem;
+  text-align: center;
+}
+.box-xl {
+  width: 8rem;
+  height: 8rem;
+  line-height: 8rem;
+  text-align: center;
+}
+.box-xxl {
+  width: 10rem;
+  height: 10rem;
+  line-height: 10rem;
+  text-align: center;
+}
+.box-xxxl {
+  width: 12rem;
+  height: 12rem;
+  line-height: 8rem;
+  text-align: center;
+}
+.box-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+	border-radius: 100%;
+}
+
+// More filter plus icon on click
+.btn-more-fliter i {
+  transition: $transition-base;
+}
+.btn-more-fliter[data-bs-toggle=collapse][aria-expanded=true] i {
+  transform:rotateZ(45deg);
+}
+
+// Footer half soft bg
+.primary-soft-footer{
+  position: relative;
+}
+.primary-soft-footer::before{
+  content:'';
+  position:absolute;
+  background-color: rgba($primary, 0.1);
+  top: 50%;
+  left: 0;
+  width:50%;
+  height:100%;
+  transform: translateY(-50%);
+}
+
+// Style for index 2 header
+.hero-2 {
+  position: relative;
+  z-index: 9;
+
+  .hero-2-heading {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .hero-2-searchbar {
+    z-index: 9;
+    padding-bottom: 4rem;
+    margin-bottom: 4rem;
+    justify-content: center;
+  }
+
+  .hero-2-image-left {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    margin-left: -3rem;
+  }
+
+  .hero-2-image-right {
+    padding-bottom: 3rem;
+    margin-right: -40px;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .hero-2 .hero-2-heading {
+    position: relative;
+    transform: translate(-50%, 0%);
+  }
+}
+
+@include media-breakpoint-down(xxl) {
+  .hero-2 .hero-2-searchbar {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+// Back to Top
+.back-top {
+  cursor: pointer;
+  position: fixed !important;
+  bottom: 40px;
+  right: 40px;
+  display: block;
+  z-index: 99;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(50%);
+  transition: $transition-base;
+  background: rgba($primary, 0.1);
+  color: $primary;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  text-align: center;
+}
+
+.back-top i {
+  font-size: 1.6rem;
+  vertical-align: middle;
+  line-height: 1.4rem;
+}
+
+.back-top:hover {
+  background: $primary;
+  color: $white;
+}
+
+.back-top.back-top-show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+@media (max-width: 767.98px) {
+  .back-top {
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
+  .back-top i {
+    font-size: 1rem;
+  }
+}
+
+@include media-breakpoint-up(lg){
+  .position-absolute-lg{
+    position: absolute;
+    left:0;
+  }
+}

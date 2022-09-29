@@ -1,0 +1,155 @@
+// 
+// dashboard.scss
+// Theme dashboard styles
+
+//Agent-dashboard css
+.dashboard-topbar{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: $zindex-sticky;
+}
+
+// Dashboard logo
+.dashboard-topbar .navbar-brand .navbar-brand-item {
+  height: 35px;
+  display: block;
+  width: auto;
+}
+@include media-breakpoint-down(lg){
+.dashboard-topbar  .navbar-brand .navbar-brand-item {
+    height: 25px;
+  }
+}
+.page-wrapper {
+  margin-top: 66px;
+}
+
+// Dashboard  sidebar
+.dashboard-sidebar{
+  position: fixed;
+  top: 56px;
+  left: 0;
+  bottom: 0;
+  width: $sidebar-width;
+  overflow: auto;
+  transition: $transition-base;
+}
+@include media-breakpoint-down(lg) {
+  .dashboard-sidebar{
+    left: -$sidebar-width;
+  }
+  .navbar-expand-lg .navbar-collapse.show .dashboard-sidebar{
+    left: 0;
+  }
+}
+@include media-breakpoint-down(md) {
+  .dashboard-sidebar{
+    top: 35px;
+  }
+}
+.dashboard-sidebar {
+  ul {
+    overflow: hidden;
+  }
+
+  .list-group-borderless {
+    .list-group-item {
+      padding: 5px 12px;
+      font-size: 1rem;
+    }
+
+    .active:hover {
+      background: $dark;
+      color: $white;
+    }
+  }
+}
+
+// Main content
+.main-content{
+  margin-left: $sidebar-width;
+  padding: 0px 100px 50px;
+}
+@include media-breakpoint-down(lg) {
+  .dashboard-topbar{
+    position: relative;
+    padding: 0.5rem 0;
+  }
+  .page-wrapper {
+    margin-top: 0;
+  }
+  .main-content{
+    margin-left: 0px;
+    padding: 0px 50px 50px;
+  }
+}
+@include media-breakpoint-down(xl) {
+  .main-content{
+    padding: 0px 50px 50px;
+  }
+}
+@include media-breakpoint-down(md) {
+  .main-content{
+    padding: 0px 20px 20px;
+  }
+}
+
+// Hover and active for sidebar
+.dashboard-sidebar .list-group-borderless .hover-primary-soft{
+  color:$dark
+}
+.dashboard-sidebar .list-group-borderless .hover-primary-soft {
+  &:hover, &.active {
+    color: $primary;
+    background-color: rgba($primary, 0.1);
+    border-radius: 5px;
+  }
+}
+
+// Agent profile image upload square
+.file-upload .square{
+  height: 250px;
+  width: 250px;
+  margin: auto;
+  vertical-align: middle;
+  border: 1px solid $gray-300;
+  background-color: $white;
+  border-radius: 5px;
+}
+
+// Agent add property media dash
+.file-upload .border-dashed{
+  border: 2px dashed $primary;
+}
+
+// Add property widget
+.file-upload .hidden {
+  display: none;
+}
+.file-upload .progress-step {
+  width: 100%;
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3.5em;
+  .progress-bar__dot {
+    display: block;
+    border-radius: 100%;
+    background-color: rgba($primary, 0.1);
+    color: $primary;
+    cursor:pointer;
+    transition: all .5s ease;
+
+    &.full {
+      background-color: $primary;
+      color: $white;
+    }
+  }
+
+  li.progress-bar__connector {
+    width: 160px;
+  }
+}

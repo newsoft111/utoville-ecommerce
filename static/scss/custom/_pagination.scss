@@ -1,0 +1,28 @@
+// 
+// pagination.scss
+// Extended from Bootstrap
+// 
+
+// 
+// Additional style for theme
+//
+
+.pagination-bordered {
+  border: 1px solid rgba($dark, 0.1);
+  padding: 4px;
+  border-radius: 0.25rem;
+}
+
+.pagination-bordered .page-item {
+  margin: 2px;
+}
+
+.pagination-bordered .page-link {
+  border: transparent;
+  border-radius: 0.25rem;
+}
+
+
+
+
+

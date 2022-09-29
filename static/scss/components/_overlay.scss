@@ -1,0 +1,74 @@
+// 
+// overlay.scss
+// Theme Component
+
+// Background overlay
+.bg-overlay {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: $dark;
+  opacity: .5;
+  z-index: 1;
+}
+.bg-overlay-content{
+  z-index: 5;
+}
+
+// Background primary overlay
+.bg-primary-overlay-hover:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  border-radius:50%;
+	border: 5px solid $white;
+	transition: $transition-base;
+  background-color: $primary;
+  display: block;
+}
+
+.card:hover .bg-primary-overlay-hover:before {
+  opacity: 0.5;
+}
+
+// Background dark overlay
+.bg-dark-overlay-hover {
+  height: 100%;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.bg-dark-overlay-hover:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: $transition-base;
+  background-color: $dark;
+  display: block;
+  z-index: -1;
+}
+
+.card:hover .bg-dark-overlay-hover:before {
+  opacity: 0.6;
+}
+

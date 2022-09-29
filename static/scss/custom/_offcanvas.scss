@@ -1,0 +1,13 @@
+// 
+// offcanvas.scss
+// Extended from Bootstrap
+// 
+
+// 
+// Bootstrap Overrides
+// 
+
+// Quick fix to remove padding while offcanvas is opened. If you remove overflow-x hidden from HTML tag then you should remove below padding
+[data-bs-padding-right]{
+  padding: 0 !important;
+}

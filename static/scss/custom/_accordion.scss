@@ -1,0 +1,105 @@
+//
+// accordion.scss
+// Extended from Bootstrap
+//
+
+//
+// Bootstrap Overrides
+//
+.accordion .accordion-button{
+  text-align: left;
+}
+
+//
+// Additional style for theme
+// 
+
+// Accordion collapse plus/minus icon
+.accordion{
+  &.accordion-icon{
+    .accordion-header{
+      position: relative;
+      .accordion-button{
+        background:transparent;
+        color: $dark;
+        font-size: inherit;
+        border: none;
+        padding-left: 1.7rem;
+        &:after {
+          content:"";
+          background: $white;
+          width: 10px;
+          height: 2px;
+          display: block;
+          position: absolute;
+          top: 47%;
+          left: 20px;
+          transform: translateY(-50%);
+          transition: $transition-base;
+          transform: rotateZ(0deg);
+          z-index: 9;
+        }
+        &:before {
+          content:"";
+          background: $white;
+          width: 10px;
+          height: 2px;
+          display: block;
+          position: absolute;
+          top: 47%;
+          left: 20px;
+          transform: translateY(-50%);
+          transition: $transition-base;
+          transform: rotateZ(0deg);
+          z-index: 9;
+        }
+        &.collapsed:after {
+          transform: rotateZ(90deg);
+        }
+        &.collapsed:before {
+          transform: rotateZ(0deg);
+        }
+      }
+    }
+    .accordion-collapse{
+      border: none;
+    }
+    .accordion-body {
+      padding: 0.2rem 0.5rem 0.5rem 1.7rem;
+    }
+  }
+}
+
+// Accordion bordered
+.accordion-bordered .accordion-button:not(.collapsed) {
+  color: $dark;
+  background-color: transparent;
+}
+
+// Accordion icon bg
+.accordion.accordion-icon-bg {
+  .accordion-item {
+    border: none;
+  }
+  .accordion-header .accordion-button {
+    padding-left: 4rem;
+    &:not(.collapsed) {
+      box-shadow: none !important;
+    }
+    span {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 100%;
+      background: $primary;
+      float: left;
+      text-align: center;
+      left: 0;
+      border-radius: 5px 0px 0px 5px;
+      z-index: 1;
+    }
+  }
+  .accordion-icon-bg .accordion-body {
+    padding: 0.6rem 0.5rem 0.5rem 4rem;
+  }
+}

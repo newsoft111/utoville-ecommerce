@@ -1,0 +1,74 @@
+// 
+// testimonial.scss
+// Theme Component
+// 
+
+// Testimonial
+.testimonial{
+  position: relative;
+}
+.testimonial-items{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  padding: 1.5rem;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  background-color: $white;
+  box-shadow: 0 1rem 3rem rgba(83, 88, 93, 0.15); 
+  z-index: 9; 
+}
+@include media-breakpoint-down(md) {
+  .testimonial-items{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}
+@include media-breakpoint-down(sm) {
+  .testimonial-items{
+    position: relative;
+    padding:1rem;
+  }
+}
+
+// Testimonial Blockquote
+.testimonial-blockquote-lg {
+	width: 3.9rem;
+  height: 3.9rem;
+  line-height: 3.9rem;
+  text-align: center;
+}
+.testimonial-blockquote-md {
+	width: 2.9rem;
+  height: 2.9rem;
+  line-height: 2.9rem;
+  text-align: center;
+}
+.testimonial-blockquote-sm {
+	width: 1.9rem;
+  height: 1.9rem;
+  line-height: 1.8rem;
+  text-align: center;
+  font-size:  10px;
+}
+@media (max-width: 786px) {
+  .testimonial-blockquote-sm {
+    width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+  }
+  .testimonial-blockquote-md {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+  }
+  .testimonial-blockquote-lg {
+    width: 2.9rem;
+    height: 2.9rem;
+    line-height: 2.8rem;
+    text-align: center;
+  }
+}

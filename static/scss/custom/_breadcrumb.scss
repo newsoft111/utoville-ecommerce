@@ -1,0 +1,44 @@
+// 
+// breadcrumb.scss
+// Extended from Bootstrap
+// 
+
+
+// 
+// Bootstrap Overrides
+//
+.breadcrumb-item {
+  font-size: $font-size-xs;
+  a {
+    color: $gray-600;
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  // The separator between breadcrumbs (by default, a forward-slash:"/")
+  + .breadcrumb-item {
+    &::before {
+      font-family: "Font Awesome 5 Free";
+      font-size: 6px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      padding-top: 6px;
+    }
+  }
+}
+
+// 
+// Additional style for theme
+// 
+.breadcrumb.breadcrumb-dark {
+  .breadcrumb-item {
+    a {
+      color: $gray-300;
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}

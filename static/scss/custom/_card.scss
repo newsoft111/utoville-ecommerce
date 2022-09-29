@@ -1,0 +1,86 @@
+// 
+// card.scss
+// Extended from Bootstrap
+//
+
+
+// 
+// Additional styles for theme
+// 
+.card-metro{
+  overflow: hidden;
+    .card-img-overlay{
+      z-index: 2;
+    }
+    .card-text{
+      transition: $transition-base;
+    }
+    img{
+      transition: $transition-base;
+    }
+    &:before{
+      content: "";
+      position: absolute;
+      height: 50%;
+      width: 100%;
+      bottom: 0;
+      background-image: -webkit-gradient(linear,left top,left bottom,from(transparent),to(rgba(0,0,0,.8)));
+      background-image: linear-gradient(180deg,transparent,rgba(0,0,0,.8));
+      z-index: 1;
+    }
+    &:hover{
+      .card-text{
+        margin-bottom: 10px;
+      }
+      .card-image{
+        img{
+          transform: scale(1.08);
+        }
+      }
+    }
+  
+}
+
+// Hovering on card to show element
+.card{
+  .card-element-hover{
+    visibility: hidden;
+    margin-top: 30px;
+    opacity: 0;
+    transition: $transition-base;
+    z-index: 9;
+  }
+  &:hover{
+    .card-element-hover{
+      visibility: visible;
+      margin-top: 0px;
+      opacity: 1;
+    }
+  }
+}
+
+// Card grid 
+.card-grid {
+  .card-grid-lg{
+    height: 560px;
+  }
+  .card-grid-sm{
+    height: calc(280px - calc(var(--bs-gutter-y) / 2));
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .card-grid .card-grid-lg{
+    height: 400px;
+  }
+}
+
+// Card image scale
+.card.card-img-scale .card-img {
+  transition: $transition-base;
+  transform: scale(1);
+}
+
+.card:hover.card-img-scale .card-img {
+  transform: scale(1.08);
+}

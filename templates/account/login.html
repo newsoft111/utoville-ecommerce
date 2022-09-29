@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<section class="pt-3 pt-md-5">
+	<div class="container card-grid">
+		<div class="row align-items-center">
+			<div class="col-md-6 mt-5 mt-md-0 order-2 order-md-1">
+				<!-- Title -->
+				<h3>Please log in with your account! {{request.user.id}}</h3>
+				<p class="mb-4 mb-lg-5">Login to your account easily with less information.</p>
+				<!-- Contact form START -->
+				<form class="row" name="loginForm">
+					{% csrf_token %}
+					{{ form.non_field_errors }}
+					<!-- Email -->
+					<div class="col-md-12 mb-3">
+						<label for="email" class="form-label text-dark">Email address *</label>
+						<input type="email" class="form-control bg-light border-0" name="email" id="email">
+					</div>
+					<!-- Password -->
+					<div class="col-md-12 mb-3">
+						<label for="password" class="form-label text-dark">Password *</label>
+						<input type="email" class="form-control bg-light border-0" name="password" id="password">
+						<div id="passwordHelpBlock" class="form-text">
+							Your password must be 8 characters at least 
+						</div>
+					</div>
+					<div class="col-md-12 d-flex justify-content-between mb-4">
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input" id="exampleCheck1">
+							<label class="form-check-label" for="exampleCheck1">keep me signed in</label>
+						</div>
+						<div class="text-primary-hover"><a href="#" class="text-secondary"><u>Forgot password?</u></a></div>	
+					</div>
+					<!-- Button -->
+					<div class="row align-items-center">
+						<div class="col-sm-4">
+							<button class="btn btn-primary" type="button" onclick="login_submit();" id="loginBtn">Login</button>
+						</div>
+						<div class="col-sm-8 text-sm-end mt-3 mt-sm-0">
+							<span class="text-muted">Don't have an account? <a href="{% url 'accounts_join' %}">Signup here</a></span>
+						</div>
+					</div>	
+				</form>
+				<!-- Contact form END -->
+
+			</div>
+
+			<!-- Image -->
+			<div class="col-md-6 order-1">
+				<img src="{% static 'images/signin-signup/01.png' %}" alt="">
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<script>
+	var is_run = false;
+
+	$(document).ready(function() {
+    $("form[name=loginForm]").keypress(function (e) {
+			if (e.keyCode === 13) {
+				login_submit();
+			}
+		});
+  });
+	
+
+	function login_submit() {
+    var loginForm = document.loginForm;
+    var email = loginForm.email.value;
+    var password = loginForm.password.value;
+
+		var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        
+    if (isEmpty(email)) {
+      openModal('알림','이메일을 입력해주세요.');
+			return false;
+		}
+		if (!reg_email.test(email)) {
+      openModal('알림','올바른 이메일이 아닙니다.');
+			return false;
+    }
+		if (isEmpty(password)) {
+      openModal('알림','비밀번호를 입력해주세요.');
+			return false;
+    }
+
+		if(is_run == true) {
+			openModal('알림','잠시후에 다시시도 해주세요.');
+			return false;
+    }
+
+		is_run = true;
+    var queryString = $("form[name=loginForm]").serialize();
+		
+    $.ajax({
+        type : 'POST',
+        url : "{{request.path}}",
+        data : queryString,
+        dataType : 'json',
+        success: function(data){
+          if(data.result==200){
+            location.replace("{% url 'Index' %}");
+          }else{
+            openModal("알림", data.result_text);
+          }
+					is_run  = false;
+          return;
+        },
+        error: function (request, status, error){
+          var msg = "ERROR : " + request.status + "<br>"
+			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
+			    console.log(msg);
+        }
+    });
+  }
+
+</script>
+{% endblock %}

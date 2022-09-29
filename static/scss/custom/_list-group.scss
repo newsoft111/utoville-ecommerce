@@ -1,0 +1,58 @@
+// 
+// list-group.scss
+// Extended from Bootstrap
+// 
+
+
+// 
+// Additional style for theme
+// 
+.list-group .list-group-item i, .list-group .list-group-item span{
+  margin-right: 5px;
+}
+
+// List group borderless
+.list-group-borderless {
+  .list-group-item {
+    border: none;
+    padding: 0.425rem 0;
+  }
+  a.list-group-item {
+    &:hover {
+      background-color: transparent;
+      color:  $primary;
+    }
+  }
+}
+
+// List group inline 
+.list-group-inline {
+  display: block;
+  li {
+    border: none;
+    display: inline-block;
+    padding: 0.425rem 0;
+  }
+  .list-group-item {
+    border: none;
+    display: inline-block;
+    padding: 0.425rem 0;
+    margin-right: 30px;
+    width: auto;
+  }
+  &.list-group-icon-primary-bg{
+    .list-group-item{
+      display: inline-flex;
+    }
+  }
+}
+.list-group-item-action {
+  &:hover {
+    background: transparent;
+    color: $primary;
+  }
+  &:focus {
+    background: transparent;
+    color: $primary;
+  }
+}

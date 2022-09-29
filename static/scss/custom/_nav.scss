@@ -1,0 +1,73 @@
+// 
+// nav.scss
+// Extended from Bootstrap
+// 
+
+// 
+// Additional style for theme
+// 
+
+// Pills
+.nav-pills {
+  .nav-link {
+    cursor: pointer;
+    margin-bottom: 15px;
+    color: $nav-pills-link-color;
+    padding: 0.5rem 1rem;
+  }
+}
+
+// Nav
+.nav.flex-column:not(.nav-pills) .nav-link {
+  padding-left: 0;
+  padding-top: 0.30rem;
+  padding-bottom: 0.30rem;
+}
+
+// Tab
+.tab-content {
+  padding: 25px 0;
+  margin-bottom: 20px;
+}
+
+.nav-tabs {
+  .nav-link {
+    color: $gray-800;
+    padding: 0.5rem 1rem;
+    border: none;
+  }
+  .nav-link.active {
+    background: $primary;
+    color: $white;
+    border: none;
+    .nav-link {
+      color: $white;
+    }
+  }
+}
+
+// Index buy rent and sale style
+.nav-pills-white .nav-link {
+  background: $white;
+}
+.advance-search-content{
+  position: absolute;
+  top:100%;
+  width:100%;
+  background-color: $white;
+  border-radius: 5px;
+  left:0;
+  right: 0;
+  padding: 0 30px 20px;
+  box-shadow: 0 30px 50px rgba(107, 124, 147, 0.15) !important;
+}
+
+// Tab style for index 2 service section
+.tab-primary-soft{
+  border: none;
+}
+.tab-primary-soft .nav-link.active {
+  background-color: rgba($primary, 0.1);
+  color: $primary;
+  border: none;
+}

@@ -1,0 +1,123 @@
+// 
+// utilities.scss
+// Theme component for utility classes (helper classes)
+
+
+@include media-breakpoint-up(lg){
+  .position-lg-absolute{
+    content:'';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) !important;
+  }
+}
+
+// Text color on hover
+.text-primary-hover {
+  a {
+    color: $gray-500;
+    &:hover {
+      color: $primary !important;
+    }
+  }
+}
+a.text-primary-hover, button.text-primary-hover {
+  color: $gray-400;
+  &:hover {
+    color: $primary !important;
+  }
+}
+.text-primary-hover {
+  li {
+    color: $gray-400;
+    &:hover {
+      color: $primary !important;
+    }
+  }
+}
+
+// Text dark on hover
+.text-dark-hover {
+  a {
+    color: $white !important;
+    &:hover {
+      color: $dark !important;
+    }
+  }
+}
+a.text-dark-hover, button.text-dark-hover {
+  color: $white !important;
+  &:hover {
+    color: $dark !important;
+  }
+}
+.text-dark-hover {
+  li {
+    color: $white !important;
+    &:hover {
+      color: $dark !important;
+    }
+  }
+}
+
+// Font family
+.font-base {
+  font-family: $font-family-base !important;
+}
+.font-heading {
+  font-family: $font-family-heading !important;
+}
+
+// Filter
+.grayscale {
+  filter: grayscale(100%);
+  transition: all .6s ease;
+  &:hover {
+    filter: none;
+    -webkit-filter: grayscale(0%);
+  }
+}
+
+// Rotate
+.rotate-180 {
+  transform: rotate(180deg);
+}
+.rotate-200 {
+  transform: rotate(200deg);
+}
+
+// SVG colors
+.fill-none{
+  fill: none;
+}
+.fill-primary {
+  fill: $primary;
+}
+.fill-white {
+  fill: $white;
+}
+.fill-light {
+  fill: $gray-100;
+}
+.fill-dark {
+  fill: $gray-800;
+}
+.fill-primary-soft {
+  fill: $primary !important;
+}
+.fill-light{
+	fill: $white !important;
+}
+.fill-warning{
+	fill: $warning !important;
+}
+.fill-success{
+	fill: $success !important;
+}
+.fill-orange{
+	fill: $orange !important;
+}
+.fill-danger{
+	fill: $danger !important;
+}
