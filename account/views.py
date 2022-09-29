@@ -9,10 +9,10 @@ def user_login(request):
 		'title': "로그인 - 유토빌",
 	}
 	if request.user.is_authenticated: #로그인 상태면
-		return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+		return HttpResponseRedirect(resolve_url('main:index'))
 	if request.method == 'POST':
 		email=request.POST.get('email')
-		password=request.POST.gaet('password')
+		password=request.POST.get('password')
 
 		user = auth.authenticate(request, email=email, password=password)
 
