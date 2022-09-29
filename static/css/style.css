@@ -5138,15 +5138,14 @@ fieldset:disabled .btn {
 }
 
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
-  color: #0bc0eb;
+  color: #90c31f;
 }
 
 .navbar-light .navbar-nav .nav-link.disabled {
   color: rgba(0, 0, 0, 0.3);
 }
 
-.navbar-light .navbar-nav .show > .nav-link,
-.navbar-light .navbar-nav .nav-link.active {
+.navbar-light .navbar-nav .show > .nav-link {
   color: #0bc0eb;
 }
 
@@ -17326,15 +17325,23 @@ html[dir="rtl"] select option,
 }
 
 #sub_gnb ul ul {
-  display: none;
+  max-height: 0;
+  overflow: hidden;
+  padding-left: 15px;
 }
-#sub_gnb.active ul ul {
-  display: block;
+#sub_gnb ul ul a:hover {
+  color: #28a7e1;
+}
+#sub_gnb > ul > li.active > ul {
+  max-height: 200px;
+}
+#sub_gnb > ul > li.active > a {
+  color: #90c31f;
 }
 #sub_gnb ul ul a {
   display: block;
-  line-height: 20px;
-  font-size: 13px;
+  line-height: 30px;
+  font-size: 12px;
   color: #000;
 }
 .nav-link {

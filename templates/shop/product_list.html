@@ -564,4 +564,31 @@
 	</div>
 </section>
 
+<script>
+window.addEventListener("load", function(){
+	let subgnb=document.getElementById("sub_gnb");
+	let subgnbUl=subgnb.firstElementChild;
+	let subgnbLi=subgnbUl.children;
+	let n;
+	
+	for(var i=0; i<subgnbLi.length; i++){
+		subgnbLi[i].index=i;
+
+		subgnbLi[i].addEventListener("click", e=>{
+			if(n == e.currentTarget.index) return; //same number
+			n=e.currentTarget.index;
+
+			for(var j=0; j<subgnbLi.length; j++){
+				if(j == n){
+					subgnbLi[j].classList.add("active");
+				}
+				else{
+					subgnbLi[j].classList.remove("active");					
+				}
+			}
+		});
+	}
+
+});
+</script>
 {% endblock %}
