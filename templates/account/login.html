@@ -13,7 +13,6 @@
 				<!-- Contact form START -->
 				<form class="row" name="loginForm">
 					{% csrf_token %}
-					{{ form.non_field_errors }}
 					<!-- Email -->
 					<div class="col-md-12 mb-3">
 						<label for="email" class="form-label text-dark">Email address *</label>
@@ -22,7 +21,7 @@
 					<!-- Password -->
 					<div class="col-md-12 mb-3">
 						<label for="password" class="form-label text-dark">Password *</label>
-						<input type="email" class="form-control bg-light border-0" name="password" id="password">
+						<input type="password" class="form-control bg-light border-0" name="password" id="password">
 						<div id="passwordHelpBlock" class="form-text">
 							Your password must be 8 characters at least 
 						</div>
@@ -40,7 +39,7 @@
 							<button class="btn btn-primary" type="button" onclick="login_submit();" id="loginBtn">Login</button>
 						</div>
 						<div class="col-sm-8 text-sm-end mt-3 mt-sm-0">
-							<span class="text-muted">Don't have an account? <a href="{% url 'accounts_join' %}">Signup here</a></span>
+							<span class="text-muted">Don't have an account? <a href="{% url 'account:join' %}">Signup here</a></span>
 						</div>
 					</div>	
 				</form>
@@ -104,7 +103,7 @@
         dataType : 'json',
         success: function(data){
           if(data.result==200){
-            location.replace("{% url 'Index' %}");
+            location.replace("{% url 'main:index' %}");
           }else{
             openModal("알림", data.result_text);
           }
