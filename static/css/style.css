@@ -17426,6 +17426,19 @@ html[dir="rtl"] select option,
 .buy_area a.order {
   margin-left: 0;
 }
+.select-wrapper .select-service p {
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+}
+.select-wrapper .select-service select {
+  padding: 8px 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.select-wrapper .select-service select span {
+	font-weight: bold;
+}
 /*User CSS*/
 
 /*# sourceMappingURL=style.css.map */
