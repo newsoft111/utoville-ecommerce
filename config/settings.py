@@ -145,3 +145,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CURRENT_URL = 'http://localhost:8000'
+
+
+EMAIL_HOST = 'smtp.hanmail.net' 		 # 메일 호스트 서버
+EMAIL_PORT = 465 			 # 서버 포트
+EMAIL_HOST_USER =  'cornde_noreply'
+EMAIL_HOST_PASSWORD = 'ehdwns2510123!@#'
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'no_reply@cornde.com'	 # 기본 발신자
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
