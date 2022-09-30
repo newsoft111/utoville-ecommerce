@@ -22,5 +22,9 @@ class ProductLV(ListView):
 	return render(request, 'product/product_detail.html' ,{
 		"seo":seo,
 		"product_detail": product_detail,
+<<<<<<< Updated upstream
+	})
+>>>>>>> Stashed changes
+=======
 	})
 >>>>>>> Stashed changes
