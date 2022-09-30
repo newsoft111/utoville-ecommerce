@@ -1,0 +1,44 @@
+
+<div style="height:100%; background: #f5f5f5;">
+	&nbsp;
+	<center>
+		<table cellspacing="0" cellpadding="0" style="border-radius: 5px; min-width: 340px; background: #fff; margin:0 auto; margin-left: 20px; margin-right: 20px; margin-bottom: 0px; border: 1px solid #ddd; font-size:14px; font-family: AppleSDGothic, 나눔고딕, Dotum, Baekmuk Dotum, Undotum, Latin font, sans-serif; line-height: 160%;">
+			<tbody>
+				<tr>
+					<td style="background-color: #f8f9fa; min-height: 93px;">
+						<img src="{{domain}}/static/images/email-logo.png" style="margin: 35px 286px;" loading="lazy">
+					</td>
+								</tr>
+				<tr>
+					<td style="word-break: break-all; border-bottom: 1px solid #cccccc; max-width: 640px; margin-bottom: 4px; padding: 20px;padding-left: 25px; padding-bottom: 4px; min-height: 354px; ">
+						<span style="line-height: 10%"><br></span>
+										
+						<p style="margin: 6px !important;text-align: left !important;">
+							안녕하세요. 콘디입니다.<br>
+							{{user.nickname}}님, 아래 링크를 클릭하여 비밀번호를 재설정하세요.<br>
+							<a href="{{domain}}{% url 'account:reset_passwd' uid token %}">비밀번호 재설정</a><br>
+							{{domain}}{% url 'account:reset_passwd' uid token %}
+						</p>
+
+						<p style="margin: 6px !important; padding-top: 12px !important;text-align: left !important;">
+							감사합니다.<br>
+							콘디 드림
+						</p>
+
+						<span style="color: #767676; white-space: nowrap; margin-right:0px; float: right; font-size: 9pt">© 2018 Cornde Corp.</span>
+					</td>
+				</tr>
+	
+				<tr>
+					<td style="min-width: 640px; color: #cccccc; background-color: #2d343f; margin: 19px 0 0;  display: block; padding: 20px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;  margin-top:0px !important;">
+						<p style="padding-left: 5px; font-size:11pt; color: #fff;text-align: left !important; ">
+							<span style="position:relative; color: #fff !important; white-space: nowrap; margin-right:8px; margin-top: 5px; font-size: 8pt">
+		이 메일은 발신전용 메일입니다.
+						</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</center>
+	&nbsp;
+</div>
