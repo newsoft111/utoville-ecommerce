@@ -101,7 +101,7 @@
 											</ul>
 										</li>
 										<!-- Heart icon -->
-										<li class="list-inline-item"><a href="#" class="border rounded p-1 me-1 small"><i class="fas fa-fw fa-heart text-danger"></i></a></li>
+										<!-- <li class="list-inline-item"><a href="#" class="border rounded p-1 me-1 small"><i class="fas fa-fw fa-heart text-danger"></i></a></li> -->
 									</ul>
 								</div>
 								<!-- Title -->
@@ -115,13 +115,9 @@
 								</div>
 							</div>
 							<div class="buy_area">
-								<ul>
-									<li class="buy"><a href="#">구매하기</a></li>
-									<li class="cart"><a href="#">장바구니</a></li>
-									<li class="heart">
-										<a href="#"><i class="far fa-heart fa-fw"></i></a>
-									</li>
-								</ul>
+								<a class="buy_btn order" href="#" >구매하기</a>
+								<a class="buy_btn cart" href="#" >장바구니</a>
+								<a class="buy_btn heart" href="#" ><i class="far fa-heart fa-fw"></i></a>
 							</div>
 						</div>
 				</div>
@@ -325,8 +321,8 @@ Inner part START -->
 							<div class="col-md-8 my-auto">
 								<div class="row mt-4 mt-md-0">
 									<!-- Service review -->
-									<div class="col-6">
-										<div class="pb-3">
+									<div class="col-7">
+										<div class="pb-1">
 												<h6 class="Font-base">5</h6>
 												<!-- Progress bar -->
 												<div class="progress bg-success-soft" style="height: 4px;">
@@ -336,8 +332,8 @@ Inner part START -->
 											</div>
 									</div>
 									<!-- Hospitality review -->
-									<div class="col-6">
-										<div class="pb-3">
+									<div class="col-7">
+										<div class="pb-1">
 												<h6 class="Font-base">4</h6>
 												<!-- Progress bar -->
 												<div class="progress bg-success-soft" style="height: 4px;">
@@ -347,8 +343,8 @@ Inner part START -->
 											</div>
 									</div>
 									<!-- Location review -->
-									<div class="col-6">
-										<div class="pb-3">
+									<div class="col-7">
+										<div class="pb-1">
 												<h6 class="Font-base">3</h6>
 											<!-- Progress bar -->
 											<div class="progress bg-warning-soft" style="height: 4px;">
@@ -358,8 +354,8 @@ Inner part START -->
 											</div>
 									</div>
 									<!-- Qualiety review -->
-									<div class="col-6">
-										<div class="pb-3">
+									<div class="col-7">
+										<div class="pb-1">
 												<h6 class="Font-base">2</h6>
 												<!-- Progress bar -->
 												<div class="progress bg-danger-soft" style="height: 4px;">
@@ -369,8 +365,8 @@ Inner part START -->
 											</div>
 									</div>
 
-									<div class="col-6">
-										<div class="pb-3">
+									<div class="col-7">
+										<div class="pb-1">
 												<h6 class="Font-base">1</h6>
 												<!-- Progress bar -->
 												<div class="progress bg-danger-soft" style="height: 4px;">
@@ -382,6 +378,18 @@ Inner part START -->
 								</div><!-- Row END -->
 							</div>
 							
+							<!-- <div class="col-md-8 my-auto photo_review">
+								<h2 style="font-size: 15px">포토 구매평 모아보기</h2>
+								<a href="#">left_arrow</a>
+								<ul>
+									<li><img src="{% static 'images/property/grid-list/a.jpg' %}" alt="Card image"></li>
+									<li><img src="{% static 'images/property/grid-list/b.jpeg' %}" alt="Card image"></li>
+									<li><img src="{% static 'images/property/grid-list/a.jpg' %}" alt="Card image"></li>	
+									<li><img src="{% static 'images/property/grid-list/b.jpeg' %}" alt="Card image"></li>																	
+								</ul>
+								<a href="#">right_arrow</a>								
+							</div> -->
+
 							<!-- Customer Review START -->
 							<div class="mt-5">
 								<!-- Title -->
@@ -546,8 +554,7 @@ Inner part START -->
 									Write a Q&A
 									</label>
 								</p>
-							</div>	
-							<!-- Write a review END -->
+							</div>
 						</div>
 					</div>
 				</div>

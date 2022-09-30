@@ -712,7 +712,7 @@ progress {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
@@ -1269,7 +1269,7 @@ progress {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 auto;
             flex: 0 0 auto;
-    width: 33.33333%;
+    width: 30%;
   }
   .col-md-5 {
     -webkit-box-flex: 0;
@@ -1293,7 +1293,7 @@ progress {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 auto;
             flex: 0 0 auto;
-    width: 66.66667%;
+    width: 30%;
   }
   .col-md-9 {
     -webkit-box-flex: 0;
@@ -17409,39 +17409,22 @@ html[dir="rtl"] select option,
 
 /*product_detaile*/
 .buy_area {
+  display: flex;
+  align-items: center;
   margin-top: 50px;
   text-align: center;
 }
-.buy_area ul {
-  display:flex;
-  align-items: center;
-}
-.buy_area li {
-  display: inline-block;
-  margin-right: 10px;
-}
-.buy_area li:last-child {
-  margin-right: 0;
-}
-.buy_area li.buy {  
+.buy_area a.buy_btn {
+  margin-left: 12px;
   float: left;
+  display: block;
   padding: 12px 0;
   width: 100%;
   border: 1px solid #90c31f;
   border-radius: 80px;
 }
-.buy_area li.cart {  
-  float: left;
-  padding: 12px 0;
-  width: 100%;
-  border: 1px solid #90c31f;
-  border-radius: 80px;
-}
-.buy_area li.heart {  
-  padding: 12px 0;
-  width: 100%;
-  border: 1px solid #90c31f;
-  border-radius: 80px;
+.buy_area a.order {
+  margin-left: 0;
 }
 /*User CSS*/
 
