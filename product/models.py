@@ -43,7 +43,7 @@ class ProductImg(models.Model):
 		on_delete=models.CASCADE
 	)
 	
-	class Meta:aa
+	class Meta:
 		managed = True
 		db_table = 'ecommerce_product_img'
 
