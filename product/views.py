@@ -24,12 +24,12 @@ def product_list(request):
 	})
 
 
-def product_detail(request, product_id):
+def product_detail(request):
 	seo = {
 		'title': "상품 디테일 - 유토빌",
 	}
 
-	product_detail = get_object_or_404(Product, pk=product_id)
+	product_detail = get_object_or_404(Product, pk=1)
 
 
 	return render(request, 'product/product_detail.html' ,{
