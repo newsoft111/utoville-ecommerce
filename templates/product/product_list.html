@@ -347,7 +347,7 @@
 						<div class="card mb-4">
 							<div class="position-relative overflow-hidden">
 								<!-- Image -->
-								<img class="card-img rounded" src="../static/images/property/grid-list/homecare1.jpg" alt="Card image">
+								<img class="card-img rounded" src="{% static 'images/property/grid-list/homecare1.jpg' %}" alt="Card image">
 								<!-- Image overlay -->
 								<div class="card-img-overlay">
 									<div class="text-end">
@@ -368,7 +368,7 @@
 								</div>
 								<!-- Title -->
 								<h4 class="card-title mt-3">
-									<a href="#">세탁기 청소</a>
+									<a href="{% url 'product:detail' productList.id %}">세탁기 청소</a>
 								</h4>
 								<!-- Info -->
 								<ul class="nav nav-divider align-items-center text-uppercase small mt-3" style="height: 25px">
