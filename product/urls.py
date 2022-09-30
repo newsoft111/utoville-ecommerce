@@ -1,8 +1,9 @@
 ### users/urls.py
-from django.urls import path        #new
+from django.urls import path
 from .views import *
 
 
-urlpatterns = [        #new
-    path('', product_list, name="ProductList"),
+urlpatterns = [
+	path('', product_list, name="list"),
+	path('<int:product_id>/', product_detail, name="detail"),
 ]

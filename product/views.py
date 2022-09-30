@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -24,12 +24,15 @@ def product_list(request):
 	})
 
 
-def product_detail(request):
+def product_detail(request, product_id):
 	seo = {
 		'title': "상품 디테일 - 유토빌",
 	}
 
+	product_detail = get_object_or_404(Product, pk=product_id)
+
 
 	return render(request, 'product/product_detail.html' ,{
 		"seo":seo,
+		"product_detail": product_detail,
 	})
