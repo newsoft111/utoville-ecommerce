@@ -17408,23 +17408,37 @@ html[dir="rtl"] select option,
 
 /*product_detaile*/
 .buy_area {
-  text-align: right;
+  margin-top: 50px;
+  text-align: center;
+}
+.buy_area ul {
+  display:flex;
+  align-items: center;
 }
 .buy_area li {
   display: inline-block;
+  margin-right: 10px;
+}
+.buy_area li:last-child {
+  margin-right: 0;
 }
 .buy_area li.buy {  
-  padding: 10px 20px;
+  float: left;
+  padding: 12px 0;
+  width: 100%;
   border: 1px solid #90c31f;
   border-radius: 80px;
 }
 .buy_area li.cart {  
-  padding: 10px 20px;
+  float: left;
+  padding: 12px 0;
+  width: 100%;
   border: 1px solid #90c31f;
   border-radius: 80px;
 }
 .buy_area li.heart {  
-  padding: 10px 20px;
+  padding: 12px 0;
+  width: 100%;
   border: 1px solid #90c31f;
   border-radius: 80px;
 }
