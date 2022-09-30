@@ -1,5 +1,5 @@
 ### users/urls.py
-from django.urls import path        #new
+from django.urls import path
 from .views import *
 
 
