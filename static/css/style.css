@@ -712,6 +712,7 @@ progress {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  justify-content: flex-end;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
@@ -17344,7 +17345,7 @@ html[dir="rtl"] select option,
 #sub_gnb > ul > li > a {
   display: block;
   line-height: 30px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   color: #000;
 }
