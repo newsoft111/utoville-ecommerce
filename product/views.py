@@ -15,3 +15,12 @@ def product_list(request):
 class ProductLV(ListView):
 	model = Product
 
+<<<<<<< Updated upstream
+=======
+	product_detail = get_object_or_404(Product, pk=product_id)
+
+	return render(request, 'product/product_detail.html' ,{
+		"seo":seo,
+		"product_detail": product_detail,
+	})
+>>>>>>> Stashed changes

@@ -19,7 +19,6 @@ Table Of Content
 08 POPOVER
 09 BACK TO TOP
 10 GLIGHTBOX
-11 CHOICES
 12 NOUISLIDER
 13 SPLIDE SLIDER
 14 CHART
@@ -77,7 +76,6 @@ var e = {
         e.popOverFunc(),
         e.backTotop(),
         e.lightBox(),
-        e.choicesSelect(),
         e.rangeSlider(),
         e.splideSlider(),
         e.chartFunc()
@@ -454,22 +452,6 @@ var e = {
     },
     // END: GLightbox
 
-
-    // START: 11 Choices
-    choicesSelect: function () {
-        var choice = e.select('.js-choice');
-        if (e.isVariableDefined(choice)) {
-          var element = document.querySelectorAll('.js-choice');
-          element.forEach(function (item) {
-              var choices = new Choices(item, {
-              removeItemButton: false,
-              maxItemCount: 2,
-              searchEnabled: true
-          });
-          });
-        }
-    },
-    // END: Choices
 
     // START: 12 noUislider
     rangeSlider: function () {
