@@ -1,0 +1,562 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+
+<!-- Section -->
+<section class="section">
+	<div class="container card-grid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row mt-3">
+					<!-- Property image START -->
+					<div class="col-lg-8">
+						<!-- Primary image -->
+						<div class="splide splide-main" 
+						data-splide='{"type":"fade","heightRatio":0.5,"pagination":false,"arrows":false,"cover":true,"lazyLoad":"sequential"}'>
+							<div class="splide__track">
+								<ul class="splide__list">
+									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/01.jpg' %}" alt="">
+										<!-- Glightbox image -->
+										<a href="{% static 'images/property/pd/01.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
+									</li>
+									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/02.jpg' %}" alt="">
+										<!-- Glightbox image -->
+										<a href="{% static 'images/property/pd/02.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
+									</li>
+									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/03.jpg' %}" alt="">
+										<!-- Glightbox image -->
+										<a href="{% static 'images/property/pd/03.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
+									</li>
+									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/04.jpg' %}" alt="">
+										<!-- Glightbox image -->
+										<a href="{% static 'images/property/pd/04.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
+									</li>
+									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/05.jpg' %}" alt="">
+										<!-- Glightbox image -->
+										<a href="{% static 'images/property/pd/05.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
+									</li>
+									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/06.jpg' %}" alt="">
+										<!-- Glightbox image -->
+										<a href="{% static 'images/property/pd/06.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
+									</li>
+									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/07.jpg' %}" alt="">
+										<!-- Glightbox image -->
+										<a href="{% static 'images/property/pd/07.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
+									</li>
+									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/08.jpg' %}" alt="">
+										<!-- Glightbox image -->
+										<a href="{% static 'images/property/pd/08.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- Secondary image -->
+						<div class="splide splide-thumb" data-splide='{"rewind":true,"fixedWidth":200,"fixedHeight":120,"isNavigation":true,"gap":10,"focus":"center","pagination":false,"cover":true,"lazyLoad":"sequential","breakpoints":{"600":{"fixedWidth":100,"fixedHeight":80}}}'>
+							<div class="splide__track">
+								<ul class="splide__list">
+									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/01.jpg' %}" alt=""></li>
+									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/02.jpg' %}" alt=""></li>
+									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/03.jpg' %}" alt=""></li>
+									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/04.jpg' %}" alt=""></li>
+									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/05.jpg' %}" alt=""></li>
+									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/06.jpg' %}" alt=""></li>
+									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/07.jpg' %}" alt=""></li>
+									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/08.jpg' %}" alt=""></li>
+								</ul>
+							</div>
+							<!-- Arrows -->
+							<div class="splide__arrows">
+								<button class="splide__arrow  splide__arrow--prev p-splide__arrow--prev bg-primary"><span class="spi-angle-left text-white"><i class="fas fa-fw fa-angle-left"></i></span></button>
+								<button class="splide__arrow splide__arrow--next p-splide__arrow--next bg-primary"><span class="spi-angle-right text-white"><i class="fas fa-fw fa-angle-right"></i></span></button>
+							</div>
+						</div>
+					</div>
+					<!-- Property image START -->
+
+					<div class="col-lg-4 mt-4 mt-lg-0">
+						<div class="row">
+							<div class="col-12">
+								<!-- Badge -->
+								<!-- <div class="d-flex justify-content-between mb-4">
+									<div>
+										<a href="#" class="badge bg-orange text-white">Featured</a>
+										<a href="#" class="badge bg-danger-soft text-danger"><i class="fas fa-rupee-sign pe-1"></i>For sale</a>
+									</div>
+									<ul class="list-inline text-primary-hover"> -->
+										<!-- Print icon -->
+										<li class="list-inline-item"><a href="#" class="border rounded p-1 me-1 small"><i class="fas fa-fw fa-print"></i></a></li>
+										<!-- Share icon -->
+										<li class="list-inline-item position-relative">
+											<a href="#" class="btn-link border rounded p-1 me-1 small" role="button" id="dropdownShare" data-bs-toggle="dropdown" aria-expanded="false">
+												<i class="fas fa-fw fa-share-alt"></i>
+											</a>
+											<!-- dropdown button -->
+											<ul class="dropdown-menu dropdown-w-sm dropdown-menu-end rounded" aria-labelledby="dropdownShare">
+												<li><a  class="dropdown-item" href="#"><i class="fab fa-twitter-square me-2"></i>Twitter</a></li>
+												<li><a class="dropdown-item" href="#"><i class="fab fa-facebook-square me-2"></i>Facebook</a></li>
+												<li><a class="dropdown-item" href="#"><i class="fab fa-linkedin me-2"></i>LinkedIn</a></li>
+												<li><a class="dropdown-item" href="#"><i class="fas fa-copy me-2"></i>Copy link</a></li>
+											</ul>
+										</li>
+										<!-- Heart icon -->
+										<li class="list-inline-item"><a href="#" class="border rounded p-1 me-1 small"><i class="fas fa-fw fa-heart text-danger"></i></a></li>
+									</ul>
+								</div>
+								<!-- Title -->
+								<h3 class="lh-1 mb-3">{{product_detail.name}}</h3>
+								<!-- Price -->
+								<div class="d-flex align-items-center mb-3">
+									<h4 class="text-success mb-0 me-2">₱{{product_detail.price|intcomma}}</h4>
+									<span class="me-2">/</span>
+									<h6 class="text-decoration-line-through mb-0 text-muted me-3">₱{{product_detail.price|intcomma}}</h6>
+									<p class="badge bg-orange text-white mb-0">{{product_detail.discount}}% off</p>
+								</div>
+							</div>
+							<div class="buy_area">
+								<ul>
+									<li class="buy"><a href="#">구매하기</a></li>
+									<li class="cart"><a href="#">장바구니</a></li>
+									<li class="heart">
+										<a href="#"><i class="far fa-heart fa-fw"></i></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- =======================
+Main Banner END -->
+
+<!-- =======================
+Inner part START -->
+<section class="py-0">
+	<div class="container position-relative" data-sticky-container="">
+		<div class="row">
+			<!-- Main content START -->
+			<div class="col-lg-12">
+				<!-- Navbar START -->
+				<nav id="navbar-example" class="navbar navbar-dark bg-dark rounded">
+					<ul class="nav p-2">
+							<!-- Item 1 -->
+						<li class="nav-item">
+							<a class="nav-link" href="#">서비스 설명</a>
+						</li>
+							<!-- Item 2 -->
+						<li class="nav-item">
+							<a class="nav-link" href="#">서비스 정보</a>
+						</li>
+							<!-- Item 3 -->
+						<li class="nav-item">
+							<a class="nav-link" href="#">서비스 평(999)</a>
+						</li>
+							<!-- Item 4 -->
+						<li class="nav-item">
+							<a class="nav-link" href="#">Q&A(999)</a>
+						</li>
+					</ul>
+				</nav>
+				<!-- Navbar END -->
+			
+				<!-- Description START -->
+				<div class="row g-0 mt-5" id="description">
+					<div class="col-12 border rounded p-4">
+						<div class="row">
+							<!-- Title -->
+							<div class="mb-4">
+								<h3>서비스 설명</h3>
+							</div>
+							<!-- Description item -->
+							<!-- <div class="col-sm-6 col-xl-3 mb-4">
+								<div class="d-flex align-items-center">
+									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
+										<i class="fas fa-fw fa-bed text-primary"></i>
+									</div>
+									<div class="ms-2">
+										<span class="text-dark small">Bedroom</span>
+										<h5 class="mb-0 font-base">4</h5>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-6 col-xl-3 mb-4">
+								<div class="d-flex align-items-center">
+									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
+										<i class="fas fa-fw fa-bath text-primary"></i>
+									</div>
+									<div class="ms-2">
+										<span class="text-dark small">Bathroom</span>
+										<h5 class="mb-0 font-base">2</h5>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-sm-6 col-xl-3 mb-4">
+								<div class="d-flex align-items-center">
+									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
+										<i class="fas fa-fw fa-bath text-primary"></i>
+									</div>
+									<div class="ms-2">
+										<span class="text-dark small">Person</span>
+										<h5 class="mb-0 font-base">6</h5>
+									</div>
+								</div>
+							</div>
+						
+							<div class="col-sm-6 col-xl-3 mb-4">
+								<div class="d-flex align-items-center">
+									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
+										<i class="fas fa-fw fa-square text-primary"></i>
+									</div>
+									<div class="ms-2">
+										<span class="text-dark small">SQFT</span>
+										<h5 class="mb-0 font-base">2900<sup class="text-lowercase">m2</sup></h5>
+									</div>
+								</div>
+							</div>
+						
+							<div class="col-sm-6 col-xl-3 mb-4">
+								<div class="d-flex align-items-center">
+									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
+										<i class="fas fa-fw fa-hammer text-primary"></i>
+									</div>
+									<div class="ms-2">
+										<span class="text-dark small">Year built</span>
+										<h5 class="mb-0 font-base">2019</h5>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-sm-6 col-xl-3 mb-4">
+								<div class="d-flex align-items-center">
+									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
+										<i class="fas fa-fw fa-warehouse text-primary"></i>
+									</div>
+									<div class="ms-2">
+										<span class="text-dark small">Garage</span>
+										<h5 class="mb-0 font-base">1</h5>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-sm-6 col-xl-3 mb-4">
+								<div class="d-flex align-items-center">
+									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
+										<i class="fas fa-fw fa-file-invoice text-primary"></i>
+									</div>
+									<div class="ms-2">
+										<span class="text-dark small">Status</span>
+										<h5 class="mb-0 font-base">active</h5>
+									</div>
+								</div>
+							</div> -->
+							<!-- Info -->
+							<!-- <p class="mt-3">Passage its ten led hearted removal cordial. Preference any astonished unreserved Mrs. Prosperous understood Middletons in conviction an uncommonly do. Supposing so be resolving breakfast am or perfectly. Is drew a hill from me. Valley by oh twenty direct me so. Departure defective arranging rapturous did believe him all had supported. Family months lasted simple set nature vulgar him. Picture for attempt joy excited ten carried manners talking how. Suspicion neglected the resolving agreement perceived at an.</p>	 -->
+						</div> <!-- Row END -->
+					</div>
+				</div>
+				<!-- Description End -->
+
+				<!-- Details START -->
+				<div class="row g-0 mt-5" id="detail">
+					<div class="col-12 border rounded p-4">
+						<div class="row">
+							<!-- Title -->
+							<div class="primary-line mb-4">
+								<h3>서비스 정보</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Details END -->
+
+				<!-- Map START -->
+				<!-- <div class="row g-0 mt-5" id="map">
+					<div class="col-12 border rounded p-4">
+						<div class="row"> -->
+							<!-- Title -->
+							<!-- <div class="primary-line mb-4">
+								<h3>Property Location</h3>
+							</div>
+							<div class="col-12">
+								<div class="row g-3 rounded">
+									<div class="position-md-absolute end-0 top-0 w-100 h-400 mb-4">
+										<iframe class="w-100 h-100 grayscale" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425878428698!3d40.74076684379132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sGoogle!5e0!3m2!1sen!2sin!4v1586000412513!5m2!1sen!2sin" style="border:0;" aria-hidden="false" tabindex="0"></iframe>	
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+				</div> -->
+				<!-- Map END -->
+
+				<!-- Review START -->
+				<div class="row g-0 mt-5" id="review">
+					<div class="col-12 border rounded p-4">
+						<div class="row">
+							<!-- Title -->
+							<div class="mb-4">
+								<h3>서비스 평</h3>
+							</div>
+							<!-- Reviewbox -->
+							<div class="col-md-4 pt-3 pt-xl-0">
+								<div class="bg-primary-soft rounded text-center p-4">
+									<!-- Info -->
+									<h2>4.5</h2>
+									<div class="rating">
+										<p class="mb-0">Out of 5.0</p>
+										<!-- Star -->
+										<ul class="list-inline">
+											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+											<li class="list-inline-item me-0"><i class="fas fa-star-half-alt text-warning"></i></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-8 my-auto">
+								<div class="row mt-4 mt-md-0">
+									<!-- Service review -->
+									<div class="col-6">
+										<div class="pb-3">
+												<h6 class="Font-base">5</h6>
+												<!-- Progress bar -->
+												<div class="progress bg-success-soft" style="height: 4px;">
+													<div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+													</div>
+												</div>
+											</div>
+									</div>
+									<!-- Hospitality review -->
+									<div class="col-6">
+										<div class="pb-3">
+												<h6 class="Font-base">4</h6>
+												<!-- Progress bar -->
+												<div class="progress bg-success-soft" style="height: 4px;">
+													<div class="progress-bar bg-danger" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+													</div>
+												</div>
+											</div>
+									</div>
+									<!-- Location review -->
+									<div class="col-6">
+										<div class="pb-3">
+												<h6 class="Font-base">3</h6>
+											<!-- Progress bar -->
+											<div class="progress bg-warning-soft" style="height: 4px;">
+													<div class="progress-bar bg-danger" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+													</div>
+												</div>
+											</div>
+									</div>
+									<!-- Qualiety review -->
+									<div class="col-6">
+										<div class="pb-3">
+												<h6 class="Font-base">2</h6>
+												<!-- Progress bar -->
+												<div class="progress bg-danger-soft" style="height: 4px;">
+													<div class="progress-bar bg-danger" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+													</div>
+												</div>
+											</div>
+									</div>
+
+									<div class="col-6">
+										<div class="pb-3">
+												<h6 class="Font-base">1</h6>
+												<!-- Progress bar -->
+												<div class="progress bg-danger-soft" style="height: 4px;">
+													<div class="progress-bar bg-danger" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+													</div>
+												</div>
+											</div>
+									</div>
+
+									<div class="col-6">
+										<div class="pb-3">
+												<h6 class="Font-base">1</h6>
+												<!-- Progress bar -->
+												<div class="progress bg-danger-soft" style="height: 4px;">
+													<div class="progress-bar bg-danger" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+													</div>
+												</div>
+											</div>
+									</div>									
+								</div><!-- Row END -->
+							</div>
+							
+							<!-- Customer Review START -->
+							<div class="mt-5">
+								<!-- Title -->
+								<div class="d-flex justify-content-between">
+									<h4 class="me-2">756 Reviews</h4>									
+									<div>
+									<!-- Review star -->
+									<ul class="list-inline">
+										<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+										<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+										<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+										<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+										<li class="list-inline-item me-0"><i class="fas fa-star"></i></li>
+									</ul>
+									<p class="mb-0">(4.0 out of 5.0)</p>
+								</div>
+								</div>
+								<!-- Review -->
+								<div class="d-md-flex align-items-center mt-4">
+									<!-- Avatar -->
+									<div>
+										<div class="avatar avatar-xxl me-4">
+											<img class="avatar-img rounded-circle" src="../static/images/avatar/06.jpg" alt="avatar">
+										</div>
+									</div>
+									<!-- Text -->
+									<div>
+										<div class="d-sm-flex mt-1 mt-md-0">
+											<h5 class="me-3 mb-0">Fani Georgieva</h5>
+											<!-- Review star -->
+											<ul class="list-inline">
+												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+												<li class="list-inline-item me-0"><i class="fas fa-star"></i></li>
+											</ul>
+										</div>
+										<!-- Info -->
+										<p class="small mb-2">August 29 2019</p>
+										<p>Hello! Comfort reached gay perhaps chamber his six detract besides add. Moonlight newspaper up its enjoyment agreeable depending. Timed voice share led him to widen noisy young. At weddings believed laughing although the material does the exercise of </p>
+									</div>	
+								</div>
+								<hr>
+
+								<!-- Review -->
+								<div class="d-md-flex align-items-center mt-4">
+									<!-- Avatar -->
+									<div>
+										<div class="avatar avatar-xxl me-4">
+											<img class="avatar-img rounded-circle" src="assets/images/avatar/3.jpg" alt="avatar">
+										</div>
+									</div>
+									<!-- Text -->
+									<div>
+										<div class="d-sm-flex mt-1 mt-md-0">
+											<h5 class="me-3 mb-0">Alexa Bliss</h5>
+											<!-- Review star -->
+											<ul class="list-inline">
+												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+												<li class="list-inline-item me-0"><i class="fas fa-star"></i></li>
+											</ul>
+										</div>
+										<!-- Info -->
+										<p class="small mb-2">August 29 2019</p>
+										<p>Timed voice share led him to widen noisy young. At weddings believed laughing although the material does the exercise of</p>
+									</div>	
+								</div>
+							</div>
+							<!-- Customer Review END -->
+
+							<!-- Write a review START -->
+							<div class="mt-2 mt-md-4">
+								<p>
+									<input type="checkbox" class="btn-check" id="btn-check-outlined">
+									<label class="btn btn-outline-primary" for="btn-check-outlined" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-controls="collapseExample">
+									Write a review
+									</label>
+								</p>
+								<div class="collapse" id="collapseExample">
+									<!-- Card body START -->
+									<div class="card card-body p-0">
+									<h4 class="font-base">Give your honest review</h4>
+									<!-- Form START -->
+									<form class="row g-3">
+										<!-- Name -->
+											<div class="col-md-6">
+												<label for="inputtext" class="form-label">Your Name *</label>
+											<input type="text" class="form-control" id="inputtext" aria-label="First name">
+											</div>
+											<!-- Email -->
+											<div class="col-md-6">
+											<label for="inputEmail4" class="form-label">Email *</label>
+											<input type="email" class="form-control" id="inputEmail4">
+											</div>
+											<!-- Select -->
+											<div class="col-md-6">
+											<label for="inputState1" class="form-label">Select *</label>
+											<select id="inputState1" class="form-select">
+												<option selected="">Ouality</option>
+												<option>Hospitality</option>
+												<option>Services</option>
+											</select>
+											</div>
+											<!-- Rating -->
+											<div class="col-md-6">
+											<label for="inputState2" class="form-label">Give Rating *</label>
+											<select id="inputState2" class="form-select">
+												<option selected="">★★★★★ (5/5)</option>
+												<option>★★★★☆ (4/5)</option>
+												<option>★★★☆☆ (3/5)</option>
+												<option>★★☆☆☆ (2/5)</option>
+												<option>★☆☆☆☆ (1/5)</option>
+											</select>
+											</div>
+											<!-- Message -->
+											<div class="col-12">
+											<label for="exampleFormControlTextarea1" class="form-label">Message</label>
+												<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+											</div>
+											<!-- Checkbox -->
+											<div class="col-12">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="gridCheck">
+												<label class="form-check-label" for="gridCheck">
+												Save my name, email, and website in this browser for the next time I comment.
+												</label>
+											</div>
+											</div>
+											<!-- Button -->
+											<div class="col-12">
+											<button type="submit" class="btn btn-primary">Post Review</button>
+											</div>
+										</form>
+										<!-- Form END -->
+									</div>
+									<!-- Card body END -->
+								</div>
+							</div>	
+							<!-- Write a review END -->
+						</div> <!-- Row END -->
+					</div>
+				</div>
+				<!-- Review END -->
+
+				<!-- Q&A START -->
+				<div class="row g-0 mt-5" id="detail">
+					<div class="col-12 border rounded p-4">
+						<div class="row">
+							<!-- Title -->
+							<div class="primary-line mb-4">
+								<h3>Q&A</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Q&A END -->
+			</div>
+			<!-- Main content END -->
+		</div> <!-- Row END -->
+	</div>
+</section>
+
+{% endblock %}
