@@ -250,3 +250,7 @@ def send_auth_mail(email):
 		return True
 	else:
 		return False
+
+
+def my_order(request):
+	return render(request, 'account/mypage/my_order.html')
