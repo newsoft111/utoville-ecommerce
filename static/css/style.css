@@ -17488,41 +17488,19 @@ html[dir="rtl"] select option,
 	margin-left: 10px;
 }
 
-/* Cart */
-/* @media (min-width: 1025px) {
-	.h-custom {
-	height: 100vh !important;
-	}
-} */
-	
-.card-registration .select-input.form-control[readonly]:not([disabled]) {
-	font-size: 1rem;
-	line-height: 2.15;
-	padding-left: .75em;
-	padding-right: .75em;
-}
-	
-.card-registration .select-arrow {
-	top: 13px;
-}
-	
-.bg-grey {
-	background-color: #eae8e8;
+/* shopping cart */
+
+.dropdown-toggle::after {
+	display: inline-block;
+	margin-left: 0.255em;
+	vertical-align: 0.255em;
+	content: "";
+	border-top: 0.3em solid;
+	border-right: 0.3em solid transparent;
+	border-bottom: 0;
+	border-left: 0.3em solid transparent;
 }
 
-@media (min-width: 992px) {
-	.card-registration-2 .bg-grey {
-		border-top-right-radius: 16px;
-		border-bottom-right-radius: 16px;
-	}
-}
-
-@media (max-width: 991px) {
-	.card-registration-2 .bg-grey {
-		border-bottom-left-radius: 16px;
-		border-bottom-right-radius: 16px;
-	}
-}
 /*User CSS*/
 
 /*# sourceMappingURL=style.css.map */
