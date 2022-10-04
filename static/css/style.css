@@ -16910,7 +16910,7 @@ small, .small,
 
 .dashboard-sidebar {
   position: fixed;
-  top: 56px;
+  top: 90px;
   left: 0;
   bottom: 0;
   width: 260px;
@@ -17507,6 +17507,11 @@ html[dir="rtl"] select option,
 	border-left: 0.3em solid transparent;
 }
 
+/* my page */
+
+.p-3 .list-group-item {
+	margin-bottom: 40px;
+} 
 /*User CSS*/
 
 /*# sourceMappingURL=style.css.map */

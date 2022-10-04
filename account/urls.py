@@ -11,4 +11,9 @@ urlpatterns = [
 	path('find/password/', views.find_passwd, name='find_passwd'),
 	path('reset/password/<str:uidb64>/<str:token>/', views.reset_passwd, name='reset_passwd'),
 	path('re/verify/email/', views.re_verify, name='re_verify'),
+	path('mypage/',
+		include([
+			path('orders/', views.my_order, name='my_order'),
+		])
+	)
 ]
