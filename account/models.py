@@ -7,16 +7,16 @@ from django.core.validators import MinValueValidator
 
 		
 class UserManager(BaseUserManager):
-	def create_user(self,email,password,**other_fields):
-		if not email:
-				raise ValueError(_('Please provide an email address'))
-		email=self.normalize_email(email)
-		user=self.model(email=email,**other_fields)
+	def create_user(self,mb_id,password,**other_fields):
+		if not mb_id:
+				raise ValueError(_('Please provide an mb_id address'))
+		mb_id=self.normalize_mb_id(mb_id)
+		user=self.model(mb_id=mb_id,**other_fields)
 		user.set_password(password)
 		user.save()
 		return user
 
-	def create_superuser(self,email,password,**other_fields):
+	def create_superuser(self,mb_id,password,**other_fields):
 		other_fields.setdefault('is_staff',True)
 		other_fields.setdefault('is_superuser',True)
 		other_fields.setdefault('is_active',True)
@@ -24,33 +24,50 @@ class UserManager(BaseUserManager):
 						raise ValueError(_('Please assign is_staff=True for superuser'))
 		if other_fields.get('is_superuser') is not True:
 						raise ValueError(_('Please assign is_superuser=True for superuser'))
-		return self.create_user(email,password,**other_fields)
+		return self.create_user(mb_id,password,**other_fields)
+
+	
+
 
 def upload_to(instance, filename):
 	nowDate = datetime.now().strftime("%Y/%m/%d")
 	return '/'.join([str(instance.id), instance.folder , nowDate, filename])
 
 class User(AbstractBaseUser,PermissionsMixin):
-	email=models.EmailField(unique=True)
-	username= None
-	first_name = None
-	last_name = None
-	point = models.PositiveIntegerField(default=0)
-	nickname = models.CharField(u'닉네임', max_length=10, blank=False, unique=True, default='')
-	full_name = models.CharField(u'이름', max_length=10, blank=True)
-	phone_number = models.CharField(max_length=255,blank=True)
-	birth_year = models.IntegerField(null=True)
-	is_staff=models.BooleanField(default=False)
-	is_active=models.BooleanField(default=True)
-	is_verify=models.BooleanField(default=False)
-	joined_at = models.DateTimeField(default=datetime.now)
-	folder = 'avater'
-	avater = models.ImageField(upload_to=upload_to, default="avater.jpg")
+	password = None
+	last_login = None
+	is_superuser = None
+	mb_seq = models.AutoField(primary_key=True)
+	mbm_seq = models.PositiveIntegerField(null=True)
+	ctl_seq1 = models.PositiveIntegerField(null=True)
+	ctl_seq2 = models.PositiveIntegerField(null=True)
+	ctl_seq3 = models.PositiveIntegerField(null=True)
+	ctl_seq4 = models.PositiveIntegerField(null=True)
+	mb_id = models.CharField(max_length=200,unique=True)
+	mb_name = models.CharField(max_length=100)
+	mb_password = models.CharField(max_length=200)
+	mb_type = models.CharField(max_length=1)
+	mb_status = models.CharField(max_length=1)
+	mb_profile = models.ImageField(upload_to=upload_to, default="avater.jpg")
+	mb_profile_org = models.CharField(max_length=300)
+	mb_email = models.CharField(max_length=200)
+	mb_phone = models.CharField(max_length=100)
+	mb_active = models.CharField(max_length=1)
+	mb_position_seq = models.PositiveIntegerField(null=True)
+	mb_position = models.CharField(max_length=200)
+	mb_fcm = models.CharField(max_length=200)
+	mb_del_date = models.DateTimeField(null=True)
+	mb_regdate = models.DateTimeField(default=datetime.now)
 
 	objects=UserManager()
 
-	USERNAME_FIELD='email'
+	USERNAME_FIELD='mb_id'
 	REQUIRED_FIELDS=[]
 
 	def __str__(self):
-			return self.email
+		return self.mb_id
+
+	class Meta:
+		managed = True
+		db_table = 'member_tb'
+

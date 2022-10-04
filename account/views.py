@@ -27,7 +27,7 @@ def user_login(request):
 
 		if user is not None:
 			if user.is_verify:
-				if user.is_active:
+				if not user.is_deleted:
 					auth.login(request, user)
 					result = '200'
 					result_text = '로그인 성공'
@@ -60,48 +60,41 @@ def user_join(request):
 	if request.user.is_authenticated:
 		return HttpResponseRedirect(resolve_url('main:index'))
 	if request.method == 'POST':
-		email=request.POST.get('email')
-		nickname=request.POST.get('nickname')
-		password=request.POST.get('password')
-		password2=request.POST.get('password2')
+		mb_id=request.POST.get('emmb_idail')
+		mb_password=request.POST.get('mb_password')
+		mb_password2=request.POST.get('mb_password2')
 
 		try:
-			_email = User.objects.get(email=email)
+			_mb_id = User.objects.get(mb_id=mb_id)
 		except:
-			_email = None
-		try:
-			_nickname = User.objects.get(nickname=nickname)
-		except:
-			_nickname = None
+			_mb_id = None
 
-		if _email is None:
-			if _nickname is None:
-				if password == password2:
-					user = User.objects.create_user(
-																		email=email,
-																		nickname=nickname,
-																		password=password,
-																	)
 
-					
-					if send_auth_mail(email):
-						result = '200'
-						result_text = "회원가입이 완료되었습니다.<br>가입하신 이메일 주소로 인증 메일을 보내드렸습니다.<br>이메일 인증을 한 후에 정상적인 서비스 이용이 가능합니다."
-					else:
-						result = '201'
-						result_text = '알수없는 오류입니다.<br>다시시도 해주세요.'
+		if _mb_id is None:
+
+			if mb_password == mb_password2:
+				user = User.objects.create_user(
+																	mb_id=mb_id,
+																	mb_password=mb_password,
+																)
+
+				
+				if send_auth_mail(email):
+					result = '200'
+					result_text = "회원가입이 완료되었습니다.<br>가입하신 이메일 주소로 인증 메일을 보내드렸습니다.<br>이메일 인증을 한 후에 정상적인 서비스 이용이 가능합니다."
 				else:
 					result = '201'
-					result_text = '비밀번호가 일치하지 않습니다.'
+					result_text = '알수없는 오류입니다.<br>다시시도 해주세요.'
 			else:
 				result = '201'
-				result_text = '입력한 닉네임은 이미 사용 중입니다.'
+				result_text = '비밀번호가 일치하지 않습니다.'
+
 		else:
 			result = '201'
 			result_text = '입력한 이메일은 이미 사용 중입니다.'
 
-		result = {'result': result, 'result_text': result_text}
-		return JsonResponse(result)
+			result = {'result': result, 'result_text': result_text}
+			return JsonResponse(result)
 
 	else:
 		return render(request, 'account/join.html', {"seo":seo})
