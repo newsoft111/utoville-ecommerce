@@ -11,6 +11,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 	id = models.AutoField(primary_key=True, db_column='mb_seq')
 	username = models.CharField(max_length=200,unique=True, db_column='mb_id')
 	password = models.CharField(max_length=200, db_column='mb_password')
+	email = models.CharField(max_length=200, db_column='mb_email')
 	last_login = None
 	is_superuser = None
 	mbm_seq = models.PositiveIntegerField(null=True)
@@ -23,7 +24,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 	mb_status = models.CharField(max_length=1)
 	mb_profile = models.ImageField(upload_to=upload_to, default="avater.jpg")
 	mb_profile_org = models.CharField(max_length=300)
-	mb_email = models.CharField(max_length=200)
+ 
 	mb_phone = models.CharField(max_length=100)
 	mb_active = models.CharField(max_length=1)
 	mb_position_seq = models.PositiveIntegerField(null=True)

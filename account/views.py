@@ -20,14 +20,14 @@ def user_login(request):
 	if request.user.is_authenticated: #로그인 상태면
 		return HttpResponseRedirect(resolve_url('main:index'))
 	if request.method == 'POST':
-		email=request.POST.get('email')
+		username=request.POST.get('username')
 		password=request.POST.get('password')
 
-		user = auth.authenticate(request, email=email, password=password)
+		user = auth.authenticate(request, username=username, password=password)
 
 		if user is not None:
-			if user.is_verify:
-				if user.is_active:
+			if user.mb_status == 'Y':
+				if user.mb_active == 'Y':
 					auth.login(request, user)
 					result = '200'
 					result_text = '로그인 성공'
