@@ -17411,7 +17411,7 @@ html[dir="rtl"] select option,
 .buy_area {
   display: flex;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 20px;
   text-align: center;
 }
 .buy_area a.buy_btn {
@@ -17426,18 +17426,59 @@ html[dir="rtl"] select option,
 .buy_area a.order {
   margin-left: 0;
 }
-.select-wrapper .select-service p {
-  color: #000;
-  font-size: 14px;
-  font-weight: bold;
+/*Select*/
+.select-area {
+	padding: 8px 24px 8px 12px;
+	border: 1px solid #ddd;
+	box-sizing: border-box;
 }
-.select-wrapper .select-service select {
-  padding: 8px 10px;
-  box-sizing: border-box;
-  font-size: 14px;
+.select-area a {
+	display: block;
+	font-size: 14px;
+	color: #000;
 }
-.select-wrapper .select-service select span {
+.list-area {
+	position: relative;
+}
+.list-area .list-group {
+	display:  none;
+}
+.list-area .list-group.show {
+	position: absolute;
+	width: 100%;
+	display: block;
+	height: 300px;
+	overflow-y: scroll;
+	background-color: #fff;
+}
+.list-group h5 {
+	font-size: 14px;
+}
+.list-group p {
+	font-size: 14px;
 	font-weight: bold;
+}
+/*service description*/
+#description .mb-4 h3, #detail .mb-4 h3, #review .mb-4 h3 {
+	text-align: left;
+}
+#detail .mb-4 .desc {
+	text-align: left;
+}
+#detail .mb-4 .desc .title {
+	margin-bottom: 50px;
+}
+#detail .mb-4 .desc h2 {
+	font-size: 30px;
+}
+#detail .mb-4 .desc h2 small {
+	font-size: 13px;
+}
+#detail .mb-4 .desc .info {
+	font-size: 13px;
+}
+#detail .mb-4 .desc .info span {
+	margin-left: 10px;
 }
 /*User CSS*/
 
