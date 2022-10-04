@@ -114,14 +114,49 @@
 									<p class="badge bg-orange text-white mb-0">{{product_detail.discount}}% off</p>
 								</div>
 							</div>
-							<div class="select-wrapper">
-								<div class="select-service">
-									<p>*선택해주세요.</p>
-									<select>
-										<option>통돌이 세탁기<span>₱3,000</span></option>
-										<option>드럼 세탁기<span>₱4,000</span></option>
-										<option>미니 세탁기<span>₱2,000</span></option>
-									</select>
+							<div class="select-area" id="select">
+								<a href="#">
+									종류 및 키로수를 선택해주세요 (필수)
+								</a>
+							</div>
+							<div class="list-area">
+								<div class="list-group">
+									<a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">통돌이(16kg 이하)</h5>
+									</div>
+									<p class="mb-1">86,400원</p>
+									</a>
+									<a href="#" class="list-group-item list-group-item-action ">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">통돌이(17kg 이상)</h5>
+									</div>
+									<p class="mb-1">96,000원</p>
+									</a>
+									<a href="#" class="list-group-item list-group-item-action">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">통돌이(20kg 이상)</h5>
+									</div>
+									<p class="mb-1">122,400원</p>
+									</a>
+									<a href="#" class="list-group-item list-group-item-action ">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">드럼(16kg 이하)</h5>
+									</div>
+									<p class="mb-1">128,000원</p>
+									</a>
+									<a href="#" class="list-group-item list-group-item-action">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">드럼(20kg 이상)</h5>
+									</div>
+									<p class="mb-1">180,000원</p>
+									</a>
+									<a href="#" class="list-group-item list-group-item-action ">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">미니 세탁기</h5>
+									</div>
+									<p class="mb-1">60,000원</p>
+									</a>
 								</div>
 							</div>
 							<div class="buy_area">
@@ -275,6 +310,20 @@ Inner part START -->
 							<!-- Title -->
 							<div class="primary-line mb-4">
 								<h3>서비스 정보</h3>
+								<div class="desc">
+									<div class="title">
+										<h2>V-CLEAN-WM(업체 이름)</h2>
+										<small>세탁기 청소 - 일반세탁기(16kg 이하)/분해청소 전문CS마스터
+											(업체 간략 설명)</small>										
+									</div>
+									<div class="info">
+										<p>서비스 제공 사업자 <span>""</span></p>
+										<p>이용조건<span>""</span></p>
+										<p>취소, 중도해약/해지 조건 및 환불 기준<span>""</span></p>
+										<p>취소 및 환불 방법(필수)<span>""</span></p>
+										<p>소비자상담관련 전화번호<span>""</span></p>
+									</div>
+								</div>							
 							</div>
 						</div>
 					</div>
@@ -574,5 +623,19 @@ Inner part START -->
 		</div> <!-- Row END -->
 	</div>
 </section>
+
+<script>
+window.addEventListener("load", function(){
+	select=document.getElementById("select");
+	list_group=document.getElementsByClassName("list-group")[0];
+
+	console.log(list_group);
+	select.addEventListener("click", (e) => {
+		e.preventDefault();
+		
+		list_group.classList.toggle("show");
+	})
+});
+</script>
 
 {% endblock %}
