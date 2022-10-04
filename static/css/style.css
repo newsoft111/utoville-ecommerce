@@ -17490,6 +17490,12 @@ html[dir="rtl"] select option,
 
 /* shopping cart */
 
+.cart-title {
+	display: inline-block;
+	margin-bottom: 30px;
+	font-size: 36px;
+	color: #000;
+}
 .dropdown-toggle::after {
 	display: inline-block;
 	margin-left: 0.255em;
