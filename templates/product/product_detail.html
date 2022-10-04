@@ -121,7 +121,7 @@
 							</div>
 							<div class="list-area">
 								<div class="list-group">
-									<a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+									<a href="#" class="list-group-item list-group-item-action " aria-current="true">
 									<div class="d-flex w-100 justify-content-between">
 										<h5 class="mb-1">통돌이(16kg 이하)</h5>
 									</div>
@@ -165,7 +165,7 @@
 								<a class="buy_btn heart" href="#" ><i class="far fa-heart fa-fw"></i></a>
 							</div>
 						</div>
-				</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -626,15 +626,35 @@ Inner part START -->
 
 <script>
 window.addEventListener("load", function(){
-	select=document.getElementById("select");
-	list_group=document.getElementsByClassName("list-group")[0];
+	let select=document.getElementById("select");
+	let list_group=document.getElementsByClassName("list-group")[0];
+	// var n;
 
-	console.log(list_group);
 	select.addEventListener("click", (e) => {
 		e.preventDefault();
 		
 		list_group.classList.toggle("show");
+		select.classList.toggle("active");
 	})
+	// for(var i=0; i<list_group_item.length; i++){
+	// 	list_group_item[i].index=i;
+
+
+	// 	list_group_item[i].addEventListener("click", (e) => {
+	// 		if(n == e.currentTarget.index) return;
+	// 		n=e.currentTarget.index;
+	// 		console.log(e.currentTarget.index);
+	// 		for(var j=0; j<list_group_item.length; j++){
+	// 			if(j == n){
+	// 				list_group_item[j].classList.add("active");					
+	// 			}
+	// 			else{
+	// 				list_group_item[j].classList.remove("active");
+	// 			}
+	// 		}
+
+	// 	});
+	// }
 });
 </script>
 

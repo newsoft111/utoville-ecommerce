@@ -5937,14 +5937,7 @@ fieldset:disabled .btn {
 .list-group-item.disabled, .list-group-item:disabled {
   color: #6c757d;
   pointer-events: none;
-  background-color: #fff;
-}
-
-.list-group-item.active {
-  z-index: 2;
-  color: #fff;
-  background-color: #0bc0eb;
-  border-color: #0bc0eb;
+  background-color: #fff;s
 }
 
 .list-group-item + .list-group-item {
@@ -15178,10 +15171,10 @@ a.badge {
   display: inline-flex;
 }
 
-.list-group-item-action:hover {
+/* .list-group-item-action:hover {
   background: transparent;
   color: #0bc0eb;
-}
+} */
 
 .list-group-item-action:focus {
   background: transparent;
@@ -17428,12 +17421,26 @@ html[dir="rtl"] select option,
 }
 /*Select*/
 .select-area {
-	padding: 8px 24px 8px 12px;
+	position: relative;
 	border: 1px solid #ddd;
-	box-sizing: border-box;
+}
+.select-area::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 15px;
+	background: url(../images/property/pd/down-arrow.png) no-repeat 0 0;
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+}
+.select-area.active::before{
+	background: url(../images/property/pd/up-arrow.png) no-repeat 0 0;
 }
 .select-area a {
 	display: block;
+	padding: 10px 24px 10px 12px;
 	font-size: 14px;
 	color: #000;
 }
@@ -17479,6 +17486,42 @@ html[dir="rtl"] select option,
 }
 #detail .mb-4 .desc .info span {
 	margin-left: 10px;
+}
+
+/* Cart */
+/* @media (min-width: 1025px) {
+	.h-custom {
+	height: 100vh !important;
+	}
+} */
+	
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+	font-size: 1rem;
+	line-height: 2.15;
+	padding-left: .75em;
+	padding-right: .75em;
+}
+	
+.card-registration .select-arrow {
+	top: 13px;
+}
+	
+.bg-grey {
+	background-color: #eae8e8;
+}
+
+@media (min-width: 992px) {
+	.card-registration-2 .bg-grey {
+		border-top-right-radius: 16px;
+		border-bottom-right-radius: 16px;
+	}
+}
+
+@media (max-width: 991px) {
+	.card-registration-2 .bg-grey {
+		border-bottom-left-radius: 16px;
+		border-bottom-right-radius: 16px;
+	}
 }
 /*User CSS*/
 
