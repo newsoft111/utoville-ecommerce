@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+
+<!-- Section -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+	<span class="cart-title">Cart</span>
+	<table id="cart" class="table table-hover table-condensed">
+		<thead>
+		<tr>
+			<th style="width:50%">Product</th>
+			<th style="width:10%">Price</th>
+			<th style="width:8%">Quantity</th>
+			<th style="width:8%; text-align: center;">Subscription</th>
+			<th style="width:14%" class="text-center">Subtotal</th>
+			<th style="width:10%"></th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td data-th="Product" colspan="2">
+					<div class="row">
+						<div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" /></div>
+						<div class="col-sm-10">
+							<h4 class="nomargin">세탁기 청소(통돌이 17kg 이상)</h4>
+							<p>세탁기 청소 - 일반세탁기(16kg 이하)/분해청소 전문CS마스터</p>
+							<p style="font-size:8px">V-CLEAN-WM</p>	
+					</div>
+				</td>
+				<td data-th="Price">₱3500</td>
+				<td data-th="Quantity">
+					<input type="number" class="form-control text-center" min="0" value="1">
+				</td>
+				<td data-th="subscribe">
+					<div class="btn-group">
+						<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						select months
+						</button>
+						<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#">three months</a></li>
+						<li><a class="dropdown-item" href="#">half year</a></li>
+						<li><a class="dropdown-item" href="#">one year</a></li>
+						</ul>
+					</div>
+				</td>
+				<td data-th="Subtotal" class="text-center">₱3500</td>
+				<td class="actions" data-th="">
+					<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+					<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+		<tr>
+			<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+			<td colspan="3" class="hidden-xs"></td>
+			<td class="hidden-xs text-center"><strong>Total ₱3500</strong></td>
+			<td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+		</tr>
+		</tfoot>
+	</table>
+</div>
+{% endblock %}
