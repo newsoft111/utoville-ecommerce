@@ -329,6 +329,18 @@
 			<!-- <div class="ms-2 ms-lg-0">
 				<a href="#" class="btn btn-sm btn-dark-soft"><i class="fas fa-plus me-2"></i>Add listing</a>
 			</div> -->
+
+			<!-- utilis area -->
+			<div class="utils">
+				<ul>
+					{% if not user.is_authenticated %}
+					<li><a href="{% url 'account:login' %}">Login</a></li>
+					{% else %}
+					<li><a href="#">My</a></li>
+					{% endif %}
+				</ul>
+			</div>
+			
 		</div>
 	</nav>
 	<!-- Logo Nav END -->
