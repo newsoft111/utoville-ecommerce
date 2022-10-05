@@ -659,17 +659,20 @@ window.addEventListener("load", function(){
 
 is_run = false;
 
-function add_cart_submit(id) {
+function add_cart_submit(product_id) {
 	is_run = true;
 
     $.ajax({
         type : 'POST',
-        url : "{{request.path}}",
-        data : queryString,
+        url : "{% url 'cart:add' %}",
+		headers: { "X-CSRFToken": '{{csrf_token}}' },
+        data : {
+			product_id:product_id,
+		},
         dataType : 'json',
         success: function(data){
 			if(data.result==200){
-				location.replace("{% url 'main:index' %}");
+				openModal("알림", data.result_text);
 			}else{
 				openModal("알림", data.result_text);
 			}
