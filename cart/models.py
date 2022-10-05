@@ -1,23 +1,29 @@
 from django.db import models
 from product.models import Product
 from datetime import datetime
+from django.conf import settings
 
 # Create your models here.
 
 class Cart(models.Model):
-	cart_id = models.CharField(max_length=250, blank=True)
-	created_at = models.DateTimeField(default=datetime.now)
+	user = models.ForeignKey(
+				settings.AUTH_USER_MODEL,
+				on_delete=models.CASCADE,
+				null=True, 
+				blank=True
+	)
+	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+	updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
+	active = models.BooleanField(default=True)
 
 	class Meta:
 		db_table = 'ecommerce_cart'
 
-	def __str__(self):
-		return self.cart_id
 
 
 class CartItem(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.CASCADE)
-	cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+	cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True, blank=True)
 	quantity = models.PositiveIntegerField()
 	active = models.BooleanField(default=True)
 
@@ -29,3 +35,4 @@ class CartItem(models.Model):
 
 	def __str__(self):
 		return self.product
+
