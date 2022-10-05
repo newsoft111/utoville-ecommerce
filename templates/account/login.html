@@ -15,8 +15,8 @@
 					{% csrf_token %}
 					<!-- Email -->
 					<div class="col-md-12 mb-3">
-						<label for="email" class="form-label text-dark">Email address *</label>
-						<input type="email" class="form-control bg-light border-0" name="email" id="email">
+						<label for="username" class="form-label text-dark">username *</label>
+						<input type="text" class="form-control bg-light border-0" name="username" id="username">
 					</div>
 					<!-- Password -->
 					<div class="col-md-12 mb-3">
@@ -65,35 +65,32 @@
 				login_submit();
 			}
 		});
-  });
+  	});
 	
 
 	function login_submit() {
     var loginForm = document.loginForm;
-    var email = loginForm.email.value;
+    var username = loginForm.username.value;
     var password = loginForm.password.value;
 
 		var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
         
-    if (isEmpty(email)) {
-      openModal('알림','이메일을 입력해주세요.');
-			return false;
-		}
-		if (!reg_email.test(email)) {
-      openModal('알림','올바른 이메일이 아닙니다.');
-			return false;
+    if (isEmpty(username)) {
+      	openModal('알림','이메일을 입력해주세요.');
+		return false;
+
     }
-		if (isEmpty(password)) {
-      openModal('알림','비밀번호를 입력해주세요.');
-			return false;
+	if (isEmpty(password)) {
+      	openModal('알림','비밀번호를 입력해주세요.');
+		return false;
     }
 
-		if(is_run == true) {
-			openModal('알림','잠시후에 다시시도 해주세요.');
-			return false;
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
     }
 
-		is_run = true;
+	is_run = true;
     var queryString = $("form[name=loginForm]").serialize();
 		
     $.ajax({
