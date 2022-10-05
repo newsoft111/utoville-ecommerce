@@ -668,6 +668,7 @@ function add_cart_submit(product_id) {
 		headers: { "X-CSRFToken": '{{csrf_token}}' },
         data : {
 			product_id:product_id,
+			qty:1
 		},
         dataType : 'json',
         success: function(data){

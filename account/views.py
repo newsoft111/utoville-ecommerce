@@ -35,9 +35,8 @@ def user_login(request):
 					result = '201'
 					result_text = '탈퇴한 계정입니다.'	
 			else:
-				re_verify_url = resolve_url('account:re_verify')
 				result = '201'
-				result_text = f"이메일 인증을 완료해주세요.<a href='{re_verify_url}' class='w-100 btn btn-primary mt-3'>인증메일 다시받기</a>"
+				result_text = f"관리자에게 문의바랍니다."
 		else:
 			result = '201'
 			result_text = '아이디와 비밀번호를 정확히 입력해 주세요.'

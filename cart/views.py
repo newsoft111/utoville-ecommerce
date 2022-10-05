@@ -1,44 +1,54 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from product.models import *
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 
-def _cart_id(request):
-	cart = request.session.session_key
-	if not cart:
-		cart = request.session.create()
-	return cart
+def get_user_cart(request):
+    cart_id = None
+    cart = None
+
+    if request.user.is_authenticated and not request.user.is_anonymous:
+        try:
+            cart = Cart.objects.get(user=request.user)
+        except Cart.DoesNotExist:
+            cart = Cart(user=request.user)
+            cart.save()
+    else:
+        cart_id = request.session.get('cart_id')
+        if not cart_id:
+            cart = Cart()
+            cart.save()
+            request.session['cart_id'] = cart.id
+        else:
+            cart = Cart.objects.get(id=cart_id)
+    return cart
+
 
 
 def add_cart(request):
-	product_id=request.POST.get('product_id')
-	product = Product.objects.get(id=product_id)
-	try:
-		cart = Cart.objects.get(cart_id=_cart_id(request))
-	except Cart.DoesNotExist:
-		cart = Cart.objects.create(
-			cart_id = _cart_id(request)
-		)
-		cart.save()
+	cart = get_user_cart(request)
 
-	try:
-		cart_item = CartItem.objects.get(product=product, cart=cart)
-		cart_item.quantity += 1
-		cart_item.save()
-	except CartItem.DoesNotExist:
-		cart_item = CartItem.objects.create(
-			product = product,
-			quantity = 1,
-			cart = cart
-		)
-		cart_item.save()
+	product_id=request.POST.get('product_id')
+
+	product = Product.objects.get(pk=product_id)
+	quantity = int(request.POST.get('qty')) or 1
+
+	cart_item = CartItem(product=product, cart=cart, quantity=0)
+	cart_item.quantity += quantity
+	cart_item.save()
+
+	if request.session.get('cart_count'):
+		request.session['cart_count'] += quantity
+	else:
+		request.session['cart_count'] = quantity
 
 	result = '200'
 	result_text = '장바구니 넣었음.'
 
 	result = {'result': result, 'result_text': result_text}
 	return JsonResponse(result)
+	
 
 
 def cart_detail(request, total=0, counter=0, cart_items=None):
@@ -47,8 +57,7 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
 	}
 
 	try:
-		cart = Cart.objects.get(cart_id=_cart_id(request))
-		cart_items = CartItem.objects.filter(cart=cart, active=True)
+		cart_items = CartItem.objects.filter(cart=get_user_cart(request), active=True)
 		for cart_item in cart_items:
 			total += (cart_item.product.price * cart_item.quantity)
 			counter += cart_item.quantity
@@ -64,3 +73,5 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
 			counter = counter
 		)
 	)
+
+
