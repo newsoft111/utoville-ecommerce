@@ -17298,35 +17298,9 @@ html[dir="rtl"] select option,
 
 /*--------------추가--------------*/
 /*Header*/
-.utils li {
-  display: inline-block;
-  margin-left: 30px;
+ul.navbar-nav > li {
+	margin-left: 30px;
 }
-.utils li:first-child {
-  margin-left: 0;
-}
-.utils ul {
-	margin-bottom: 0;
-}
-.utils li a {
-  position: relative;
-  display: block;
-  font-size: 14px;
-  color: #000;
-  text-decoration: none;
-  line-height: 88px;
-}
-/*.utils li a::after {
-  content: "";
-  width: 1px;
-  height: 18px;
-  background-color: rgba(0, 0, 0, 0.2); 
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);  
-} */
-
 @media only screen and (max-width: 991px){
 	.utils {
 		display: none;
