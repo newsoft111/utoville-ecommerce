@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+
+<!-- Section -->
+<<<<<<< Updated upstream:templates/cart/cart_list.html
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+	<span class="cart-title">Cart</span>
+	<table id="cart" class="table table-hover table-condensed">
+		<thead>
+		<tr>
+			<th style="width:60%">Product</th>
+			<th style="width:10%">Price</th>
+			<th style="width:8%">Quantity</th>
+			<th style="width:12%" class="text-center">Subtotal</th>
+			<th style="width:10%"></th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td data-th="Product">
+					<div class="row">
+						<div class="col-sm-2 hidden-xs"><img src="" alt="이미지 추가 예정" class="img-responsive" /></div>
+						<div class="col-sm-10">
+							<h4 class="nomargin">세탁기 청소(통돌이 17kg 이상)</h4>
+							<p>세탁기 청소 - 일반세탁기(16kg 이하)/분해청소 전문CS마스터</p>
+							<p style="font-size:8px">V-CLEAN-WM</p>	
+					</div>
+				</td>
+				<td data-th="Price">₱3500</td>
+				<td data-th="Quantity">
+					<input type="number" class="form-control text-center" min="0" value="1">
+				</td>
+				<td data-th="Subtotal" class="text-center">₱3500</td>
+				<td class="actions" data-th="">
+					<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+					<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+		<tr>
+			<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+			<td colspan="3" class="hidden-xs"></td>
+			<td class="hidden-xs text-center"><strong>Total ₱3500</strong></td>
+			<td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+		</tr>
+		</tfoot>
+	</table>
+=======
+<div class="row">
+	<div class="col-md-12">
+		<div class="bg-secondary-soft p-3 p-md-5 rounded">
+			<!-- Title -->
+			<div class="row d-none d-xxl-block">
+				<div class="col-12 align-middle py-3">
+					<div class="row border-bottom">
+						<div class="col-6 text-start">
+							<h5>Product</h5>
+						</div>
+						<div class="col-6">
+							<div class="row">
+								<div class="col-3 align-middle text-center py-2">
+									<h5>Price</h5>
+								</div>
+								<div class="col-3 align-middle text-center py-2">
+									<h5>Quantity</h5>
+								</div>
+								<div class="col-3 align-middle text-center py-2">
+									<h5>Subtotal</h5>
+								</div>
+								<div class="col-2 align-middle text-center py-2">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Property -->
+			
+			<!-- Property -->
+			<div class="row">
+				<div class="col-12 align-middle py-4">
+					<div class="row">
+						<div class="col-xxl-6">
+							<div class="card bg-transparent">
+								<div class="row">
+									<!-- Image -->
+									<div class="col-xl-3">
+										<img class="rounded" src="assets/images/property/grid-list/08.jpg" alt="">
+									</div>
+									<!-- Info -->
+									<div class="col-xl-9 pt-2 pt-xl-0">
+										<h6 class="mb-1">5620 morningstar Avenue</h6>
+										<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
+										<span class="text-success">₱3500</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Content -->
+						<div class="col-xxl-6 pt-2 pt-xxl-0">
+							<div class="row">
+								<!-- Price -->
+								<div class="col-md-3 align-middle text-center">
+									₱3500
+								</div>
+								<!-- Quantity -->
+								<div class="col-md-3 align-middle pt-2 pt-md-0 text-center">
+									<input type="number" class="form-control text-center" min="0" value="1">
+								</div>
+								<!-- Subtotal-->
+								<div class="col-md-3 align-middle pt-2 pt-md-0 text-center">
+									₱3500
+								</div>
+								<!-- Trash -->
+								<div class="col-md-2 align-middle pt-2 pt-md-0">
+									<button class="btn btn-sm btn-danger-soft mb-1"><i class="far fa-fw fa-trash-alt"></i></button>
+								</div>
+							</div>
+						</div>
+					</div> <!-- Row END -->
+				</div>
+			</div>
+			<div class="Checkout">
+				<table id="cart" class="table table-hover table-condensed">
+					<tfoot>
+					<tr>
+						<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+						<td colspan="3" class="hidden-xs"></td>
+						<td class="hidden-xs" style="text-align:right !important;"><strong>Total ₱3500</strong></td>
+						<td style="text-align: right;"><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+					</tr>
+					</tfoot>
+				</table>
+			</div>	
+		</div>
+	</div>
+>>>>>>> Stashed changes:templates/cart/cart_detail.html
+</div>
+
+
+{% endblock %}
