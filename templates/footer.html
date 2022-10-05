@@ -6,13 +6,13 @@
 
 <!-- =======================
 Footer START -->
-<footer class="position-relative bg-dark">
+<footer class="position-relative bg-dark" style="z-index: 10;">
 	<div class="container">
 		<!-- Row START -->
 		<div class="row py-5 position-relative">
 
 			<!-- Widget 1 START -->
-			<div class="col-12 col-lg-3 mb-4 mb-lg-0">
+			<div class="col-12 col-lg-3 mb-4 mb-lg-0" style="text-align: left;">
 				<!-- logo -->
 				<div class="logo mb-2">
 					<img src="{% static 'images/logo-light.png' %}" alt="">
@@ -139,11 +139,16 @@ JS libraries, plugins and custom scripts -->
 <script src="{% static 'vendor/sticky-js/sticky.min.js' %}"></script>
 <script src="{% static 'vendor/glightbox/js/glightbox.js' %}"></script>
 <script src="{% static 'vendor/splide-master/dist/js/splide.min.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/choices.js/public/{% static 'scripts/choices.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="{% static 'vendor/chart/chart.js' %}"></script>
 
 <!-- Template Functions -->
 <script src="{% static 'js/functions.js' %}"></script>
+
+<!-- JS-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script> -->
 
 <!-- Modal -->
 <div class="modal fade" id="globalModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="globalModalLabel" aria-hidden="true">
