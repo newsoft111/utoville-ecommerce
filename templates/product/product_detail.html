@@ -161,7 +161,7 @@
 							</div>
 							<div class="buy_area">
 								<a class="buy_btn order" href="#" >구매하기</a>
-								<a class="buy_btn cart" href="#" >장바구니</a>
+								<a class="buy_btn cart" href="#" onclick="add_cart_submit();">장바구니</a>
 								<a class="buy_btn heart" href="#" ><i class="far fa-heart fa-fw"></i></a>
 							</div>
 						</div>
@@ -656,6 +656,55 @@ window.addEventListener("load", function(){
 	// 	});
 	// }
 });
+
+is_run = false;
+
+function add_cart_submit() {
+    var loginForm = document.loginForm;
+    var username = loginForm.username.value;
+    var password = loginForm.password.value;
+
+		var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        
+    if (isEmpty(username)) {
+      	openModal('알림','이메일을 입력해주세요.');
+		return false;
+
+    }
+	if (isEmpty(password)) {
+      	openModal('알림','비밀번호를 입력해주세요.');
+		return false;
+    }
+
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+    }
+
+	is_run = true;
+    var queryString = $("form[name=loginForm]").serialize();
+		
+    $.ajax({
+        type : 'POST',
+        url : "{{request.path}}",
+        data : queryString,
+        dataType : 'json',
+        success: function(data){
+			if(data.result==200){
+				location.replace("{% url 'main:index' %}");
+			}else{
+				openModal("알림", data.result_text);
+			}
+			is_run  = false;
+			return;
+        },
+        error: function (request, status, error){
+          var msg = "ERROR : " + request.status + "<br>"
+			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
+			    console.log(msg);
+        }
+    });
+}
 </script>
 
 {% endblock %}
