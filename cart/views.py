@@ -2,6 +2,7 @@ from django.shortcuts import render
 from product.models import *
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import JsonResponse
 
 def _cart_id(request):
 	cart = request.session.session_key
@@ -32,7 +33,12 @@ def add_cart(request):
 			cart = cart
 		)
 		cart_item.save()
-	return True
+
+	result = '200'
+	result_text = '장바구니 넣었음.'
+
+	result = {'result': result, 'result_text': result_text}
+	return JsonResponse(result)
 
 
 def cart_detail(request, total=0, counter=0, cart_items=None):
@@ -50,11 +56,11 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
 		pass
 
 
-	return render(request, 'cart/cart_detail.html' ,{
+	return render(request, 'cart/cart_detail.html' ,
 		dict(
 			seo = seo,
 			cart_items = cart_items,
 			total = total,
 			counter = counter
 		)
-	})
+	)
