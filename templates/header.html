@@ -27,26 +27,13 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'vendor/glightbox/css/glightbox.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'vendor/splide-master/dist/css/splide.min.css' %}">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet"/>
+	<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+	<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet"/> -->
 
 	<!-- Theme CSS -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
-	<!-- Bootstrap JS -->
-	<script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
-
-	<!-- Vendors -->
-	<script src="{% static 'vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
-	<script src="{% static 'vendor/chart/chart.js' %}"></script>
-
-	<!-- Template Functions -->
-	<script src="{% static 'js/functions.js' %}"></script>
-	
-	<!-- JS-->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="{% static 'js/main.js' %}"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/sidebars.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 
 </head>
 
@@ -86,7 +73,7 @@
 			<!-- Logo END -->
 
 			<!-- Responsive navbar toggler -->
-			<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" style="border: none; box-shadow: none;">
 			  <span class="navbar-toggler-icon"></span>
 		  </button>
 
@@ -94,31 +81,31 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav navbar-nav-scroll mx-auto">
 
-					<!-- Nav item 1 청소 -->
+					<!-- Nav item 1 -->
 					<li class="nav-item dropdown">
 						<a class="nav-link navbar-primary-soft-hover dropdown-toggle active" href="#" id="homeMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">청소</a>
 						<ul class="dropdown-menu" aria-labelledby="homeMenu">
 							<li class="dropdown-submenu dropend"> 
 								<a class="dropdown-item dropdown-toggle" href="#">가정 청소</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
 									<li> <a class="dropdown-item" href="#">방</a> </li>
 									<li> <a class="dropdown-item" href="#">화장실</a> </li>
 									<li> <a class="dropdown-item" href="#">베란다</a> </li>
 									<li> <a class="dropdown-item" href="#">거실</a> </li>
-								</ul>
+								</ul>`
 							</li>
 							
 							<li> <a class="dropdown-item" href="#">입주 청소</a></li>
 						</ul>
 					</li>
 
-					<!-- Nav item 2 소독 -->
+					<!-- Nav item 2 -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">소독</a>
 						<ul class="dropdown-menu" aria-labelledby="pagesMenu">
 							<li class="dropdown-submenu dropend"> 
 								<a class="dropdown-item dropdown-toggle" href="#">가정</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
 									<li> <a class="dropdown-item" href="#">침대</a> </li>
 									<li> <a class="dropdown-item" href="#">소파</a> </li>
 									<li> <a class="dropdown-item" href="#">pesticide</a> </li>
@@ -128,13 +115,13 @@
 						</ul>
 					</li>
 
-					<!-- Nav item 3 수리 -->
+					<!-- Nav item 3 -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="listings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">수리</a>
 						<ul class="dropdown-menu" aria-labelledby="listings">
 							<li class="dropdown-submenu dropend"> 
 								<a class="dropdown-item dropdown-toggle" href="#">체크</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
 									<li> <a class="dropdown-item" href="#">집 내부 전체 검사</a></li>
 									<li> <a class="dropdown-item" href="#">수도 검사</a></li>
 									<li> <a class="dropdown-item" href="#">전기 검사</a></li>
@@ -144,7 +131,7 @@
 
 							<li class="dropdown-submenu dropend"> 
 								<a class="dropdown-item dropdown-toggle" href="#">외부 수리</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;"> 
 									<li> <a class="dropdown-item" href="#">지붕</a></li>
 									<li> <a class="dropdown-item" href="#">게이트</a></li>
 									<li> <a class="dropdown-item" href="#">창문</a></li>
@@ -154,7 +141,7 @@
 
 							<li class="dropdown-submenu dropend"> 
 								<a class="dropdown-item dropdown-toggle" href="#">내부수리</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
 									<li> <a class="dropdown-item" href="#">거실</a></li>
 									<li> <a class="dropdown-item" href="#">부엌</a></li>
 									<li> <a class="dropdown-item" href="#">침실</a></li>
@@ -164,14 +151,14 @@
 
 							<li class="dropdown-submenu dropend"> 
 								<a class="dropdown-item dropdown-toggle" href="#">리모델링</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
 									<li> <a class="dropdown-item" href="#">인테리어</a></li>
 								</ul>
 							</li>	
 							
 							<li class="dropdown-submenu dropend"> 
 								<a class="dropdown-item dropdown-toggle" href="#">기타</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
 									<li> <a class="dropdown-item" href="#">전기</a></li>
 									<li> <a class="dropdown-item" href="#">수도</a></li>
 									<li> <a class="dropdown-item" href="#">배관</a></li>
@@ -234,49 +221,49 @@
 						</div>
 					</li> -->
 
-					<!-- Nav item 4 가전케어 -->
+					<!-- Nav item 4 -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="listings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">가전 케어</a>
 						<ul class="dropdown-menu" aria-labelledby="listings">
 							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">에어컨</a>
+								<a class="dropdown-item" href="#">에어컨</a>
 							</li>
 
 							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">세탁기</a>
+								<a class="dropdown-item" href="#">세탁기</a>
 							</li>
 
 							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">냉장고</a>
+								<a class="dropdown-item" href="#">냉장고</a>
 							</li>
 
 							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">TV</a>
+								<a class="dropdown-item" href="#">TV</a>
 							</li>						
 						</ul>
 					</li>					
 
-					<!-- Nav item 5 이사-->
+					<!-- Nav item 5 -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="listings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">이사</a>
 						<ul class="dropdown-menu" aria-labelledby="listings">
 							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">이사 서비스</a>
+								<a class="dropdown-item" href="#">이사 서비스</a>
 							</li>
 
 							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">용달 대여</a>
+								<a class="dropdown-item" href="#">용달 대여</a>
 							</li>						
 						</ul>
 					</li>	
 
-					<!-- Nav item 6 차 서비스 -->
+					<!-- Nav item 6 -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="listings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">차 서비스</a>
 						<ul class="dropdown-menu" aria-labelledby="listings">
 							<li class="dropdown-submenu dropend"> 
 								<a class="dropdown-item dropdown-toggle" href="#">내부 세차</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
 									<li> <a class="dropdown-item" href="#">스팀</a></li>
 									<li> <a class="dropdown-item" href="#">냄새 제거</a></li>
 									<li> <a class="dropdown-item" href="#">카시트 청소</a></li>
@@ -285,7 +272,7 @@
 
 							<li class="dropdown-submenu dropend"> 
 								<a class="dropdown-item dropdown-toggle" href="#">정비</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
 									<li> <a class="dropdown-item" href="#">타이어 교체</a></li>
 									<li> <a class="dropdown-item" href="#">배터리 교체</a></li>
 									<li> <a class="dropdown-item" href="#">엔진 오일 교체</a></li>
@@ -294,22 +281,22 @@
 							</li>
 
 							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">손세차</a>
+								<a class="dropdown-item" href="#">손세차</a>
 							</li>							
 						</ul>
 					</li>	
 					
-					<!-- Nav item 7 생수 배달 -->
+					<!-- Nav item 7 -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="listings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">생수 배달</a>
 						<ul class="dropdown-menu" aria-labelledby="listings">
 							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">5gl드럼 & 페트</a>
+								<a class="dropdown-item" href="#">5gl드럼 & 페트</a>
 							</li>
 
 							<li class="dropdown-submenu dropend"> 
 								<a class="dropdown-item dropdown-toggle" href="#">보틀</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
 									<li> <a class="dropdown-item" href="#">물병</a></li>
 									<li> <a class="dropdown-item" href="#">500ml</a></li>
 									<li> <a class="dropdown-item" href="#">1000ml</a></li>
