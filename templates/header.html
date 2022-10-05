@@ -318,7 +318,6 @@
 				<ul>
 					{% if not user.is_authenticated %}
 					<li><a href="{% url 'account:login' %}">Login</a></li>
-					<li><a href="{% url 'account:join' %}">Join</a></li>
 					{% else %}
 					<li><a href="#">My</a></li>
 					{% endif %}
