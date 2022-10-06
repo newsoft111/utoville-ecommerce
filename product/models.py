@@ -30,11 +30,45 @@ class Product(models.Model):
 	is_deleted = models.BooleanField(default=False)
 	deleted_at = models.DateTimeField(null=True)
 
+	'''offer_user = models.ManyToManyField(
+				settings.AUTH_USER_MODEL,
+				related_name="offer_user_set",
+				blank=True,
+				through='GigCampaignOffer'
+	)'''
+
 	objects = ModelDeleteManager()
 
 	class Meta:
-		managed = True
 		db_table = 'ecommerce_product'
+
+
+class ProductVariant(models.Model):
+	product = models.ForeignKey(
+			Product,
+			on_delete=models.CASCADE
+	)
+	variant = models.CharField(max_length=255)
+
+	class Meta:
+		db_table = 'ecommerce_product_variant'
+
+	def __str__(self) :
+		return self.variant
+
+
+
+
+class ProductVariantValue(models.Model):
+	variant = models.ForeignKey(
+			ProductVariant,
+			on_delete=models.CASCADE
+	)
+	value = models.CharField(max_length=255)
+	price = models.IntegerField(default=0)
+
+	class Meta:
+		db_table = 'ecommerce_product_variant_value'
 
 
 
@@ -47,7 +81,6 @@ class ProductImage(models.Model):
 	)
 	
 	class Meta:
-		managed = True
 		db_table = 'ecommerce_product_image'
 
 
@@ -65,6 +98,5 @@ class ProductThumbnail(models.Model):
 	)
 
 	class Meta:
-		managed = True
 		db_table = 'ecommerce_product_thumbnail'
 
