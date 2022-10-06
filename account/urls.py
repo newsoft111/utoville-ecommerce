@@ -14,6 +14,7 @@ urlpatterns = [
 	path('mypage/',
 		include([
 			path('orders/', views.my_order, name='my_order'),
+			path('wishes/', views.wish_list, name='wish_list'),
 		])
 	)
 ]
