@@ -5,24 +5,24 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 
 def get_user_cart(request):
-    cart_id = None
-    cart = None
+	cart_id = None
+	cart = None
 
-    if request.user.is_authenticated and not request.user.is_anonymous:
-        try:
-            cart = Cart.objects.get(user=request.user)
-        except Cart.DoesNotExist:
-            cart = Cart(user=request.user)
-            cart.save()
-    else:
-        cart_id = request.session.get('cart_id')
-        if not cart_id:
-            cart = Cart()
-            cart.save()
-            request.session['cart_id'] = cart.id
-        else:
-            cart = Cart.objects.get(id=cart_id)
-    return cart
+	if request.user.is_authenticated and not request.user.is_anonymous:
+		try:
+			cart = Cart.objects.get(user=request.user)
+		except Cart.DoesNotExist:
+			cart = Cart(user=request.user)
+			cart.save()
+	else:
+		cart_id = request.session.get('cart_id')
+		if not cart_id:
+			cart = Cart()
+			cart.save()
+			request.session['cart_id'] = cart.id
+		else:
+			cart = Cart.objects.get(id=cart_id)
+	return cart
 
 
 
@@ -63,7 +63,7 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
 			counter += cart_item.quantity
 	except ObjectDoesNotExist:
 		pass
-
+	
 
 	return render(request, 'cart/cart_detail.html' ,
 		dict(
