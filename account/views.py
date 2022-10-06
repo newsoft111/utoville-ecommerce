@@ -20,6 +20,7 @@ def user_login(request):
 	if request.user.is_authenticated: #로그인 상태면
 		return HttpResponseRedirect(resolve_url('main:index'))
 	if request.method == 'POST':
+		print(request.session.get('cart_id'))
 		username=request.POST.get('username')
 		password=request.POST.get('password')
 
