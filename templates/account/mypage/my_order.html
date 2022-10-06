@@ -33,7 +33,7 @@
 			</symbol>	
 		</svg>
 
-	<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100vh; position:absolute;">
+	<div class="flex-column flex-shrink-0 p-3 bg-light newsidebar">
 		<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
 			<span class="fs-4">Mypage</span>
 		</a>
@@ -79,6 +79,49 @@
 		<hr>
 	</div>
 	<div class="b-example-divider b-example-vr"></div>
+
+	<!-- Navbar START -->
+	<nav id="navbar-example2" class="navbar navbar-dark bg-light rounded resp_sidebar">
+		<ul class="nav p-2" style="justify-content: space-evenly;">
+			<!-- Dropdown item -->
+			<li>
+				<a class="order-nav-link" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					주문조회
+				</a>
+	  		</li>
+			<!-- Dropdown item -->
+			<li>
+				<a class="order-nav-link" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					위시리스트
+				</a>
+			</li>
+				<!-- Dropdown item -->
+			<li>
+				<a class="order-nav-link" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					정기구독 관리
+				</a>
+			</li>
+				<!-- Dropdown item -->
+			<li>
+				<a class="order-nav-link" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				취소/교환/환불
+				</a>
+			</li>
+				<!-- Dropdown item -->
+			<li>
+				<a class="order-nav-link" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					1:1 문의
+				</a>
+			</li>
+				<!-- Dropdown item -->
+			<li>
+				<a class="order-nav-link" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					정보 수정
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<!-- Navbar END -->
 	<!-- Left sidebar END -->
 
 
@@ -86,36 +129,36 @@
 		<div class="row">
 			<div class="col-12">
 				<!-- Page title -->
-				<div class="my-5">
+				<div class="my-5 newordertitle">
 					<h3>주문 조회</h3>
 					<hr>
 				</div>
 				<!-- Table -->
 				<div class="row">
 					<div class="col-md-12">
-						<div class="bg-secondary-soft p-3 p-md-5 rounded">
+						<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
 							<div class="table-responsive" style="text-align: center;">
 								<table class="table">
 									<!-- Data -->
 									<tbody>
 										<tr>
-											<td class="p-4 ordertdleft">기간별</td>
-											<td colspan="3" class="p-4">
+											<td class="p-4 order-tb-left">기간별</td>
+											<td colspan="3" class="p-4 order-tb-right">
 												<button type="button" class="btn btn-outline-secondary">6개월</button>
 												<button type="button" class="btn btn-outline-secondary">1년</button>
 											</td>
 										</tr>
 										<tr>
-											<td class="p-4 ordertdleft">날짜</td>
-											<td colspan="3" class="p-4">
-												<div class="container px-1 px-sm-5 mx-auto">
+											<td class="p-4 order-tb-left">날짜</td>
+											<td colspan="3" class="p-4 order-tb-right">
+												<div class="container px-1 px-sm-5 mx-auto" style="padding-left: 0 !important;">
 													<form autocomplete="off">
 														<div class="flex-sm-row flex-column d-flex">
 															<div class="col-sm-9 col-12 px-0 mb-2">
 																<div class="input-group input-daterange">
-																<input type="text" class="form-control" placeholder="시작 날짜 선택" readonly>
-																~
-																<input type="text" class="form-control" placeholder="종료 날짜 선택" readonly>
+																	<input type="text" class="form-control" placeholder="시작 날짜 선택" readonly>
+																    	~
+																	<input type="text" class="form-control" placeholder="종료 날짜 선택" readonly>
 																</div>
 															</div>
 															<div class="col-sm-3 col-12 px-0" style="margin-top: 5px; margin-left: 70px;">
@@ -127,13 +170,13 @@
 											</td>
 										</tr>
 										<tr>
-											<td class="p-4 ordertdleft">주문 구분</td>
-											<td class="p-4">
+											<td class="p-4 order-tb-left">주문 구분</td>
+											<td class="p-4 order-tb-right">
 												<input type="checkbox" value=""> 일반주문
 												<input type="checkbox" value=""> 휴대폰 주문
 											</td>
-											<td class="p-4 ordertdleft">주문 상태</td>
-											<td class="p-4">
+											<td class="p-4 order-tb-left">주문 상태</td>
+											<td class="p-4 order-tb-right">
 												<select class="form-select" aria-label="Default select example">
 													<option selected>전체</option>
 													<option value="1">입금대기</option>
@@ -144,8 +187,8 @@
 											</td>
 										</tr>											
 										<tr>
-											<td class="p-4 ordertdleft">서비스명</td>
-											<td colspan="3" class="p-4">
+											<td class="p-4 order-tb-left">서비스명</td>
+											<td colspan="3" class="p-4 order-tb-right">
 												<form class="row g-3">
 													<div class="col-auto">
 													  <label for="inputPassword2" class="visually-hidden">Password</label>
@@ -170,7 +213,7 @@
 			<!-- Table -->
 			<div class="row">
 				<div class="col-md-12">
-					<div class="bg-secondary-soft p-3 p-md-5 rounded">
+					<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
 						<div class="table-responsive" style="text-align: center;">
 							<table class="table">
 								<!-- Title -->
