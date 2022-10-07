@@ -2,33 +2,43 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
 from .models import *
+from category.models import *
 # Create your views here.
 def product_list(request):
-<<<<<<< Updated upstream
-   seo = {
-      'title': "상품 리스트 - 유토빌",
-   }
-=======
 	seo = {
 		'title': "상품 리스트 - 유토빌",
 	}
 
-	category_list =  CategoryFirst.objects.all().order_by( "-id")
->>>>>>> Stashed changes
+	category_first_list =  CategoryFirst.objects.all().order_by( "-id")
 
-   q = Q()
-   #q &= Q(is_deleted = True)
+	q = Q()
+	if request.GET.get("category_1"):
+		q &= Q(parent = int(request.GET.get("category_1")))
+		category_second_list =  CategorySecond.objects.filter(q).order_by( "-id")
+	else:
+		category_second_list = None
 
 
-   product_list =  Product.objects.filter(q).order_by( "-id")
-   page        = int(request.GET.get('p', 1))
-   pagenator   = Paginator(product_list, 12)
-   product_list = pagenator.get_page(page)
 
-   return render(request, 'product/product_list.html' ,{
-      "seo":seo,
-      "product_list":product_list,
-   })
+	q = Q()
+	if request.GET.get("category_1"):
+		q &= Q(category = int(request.GET.get("category_1")))
+	if request.GET.get("category_2"):
+		q &= Q(category = int(request.GET.get("category_2")))
+	if request.GET.get("category_3"):
+		q &= Q(category = int(request.GET.get("category_3")))
+
+	product_list =  Product.objects.filter(q).order_by( "-id")
+	page        = int(request.GET.get('p', 1))
+	pagenator   = Paginator(product_list, 12)
+	product_list = pagenator.get_page(page)
+
+	return render(request, 'product/product_list.html' ,{
+		"seo":seo,
+		"category_first_list":category_first_list,
+		"category_second_list":category_second_list,
+		"product_list":product_list,
+	})
 
 
 def product_detail(request, product_id):
