@@ -17727,8 +17727,12 @@ thead tr:nth-child(3) th {
 
 
 /*=====subs=====*/
-.subs-table {
+.subs-banner {
 	margin-top: 50px !important;
+}
+.subs-table {
+	margin-top: 50px;
+	text-align: center;
 }
 
 /*=====foooter=====*/
