@@ -41,56 +41,17 @@
 										<h6 class="font-base mt-4"><i class="fas fa-fw fa-home me-2"></i>Category:</h6>	
 										<nav id="sub_gnb">
 											<ul>
+												{% for category in category_list %}
 												<li>
-													<a href="#">청소</a>
+													<a href="?category={{category.id}}">{{category.name}}</a>
+													{% if False %}
 													<ul>
 														<li><a href="#">가정 청소</a></li>
 														<li><a href="#">에어컨 청소</a></li>
 													</ul>
+													{% endif %}
 												</li>
-												<li>
-													<a href="#">소독</a>
-													<ul>
-														<li><a href="#">가정</a></li>
-														<li><a href="#">수영장</a></li>
-													</ul>
-												</li>												
-												<li>
-													<a href="#">수리</a>
-													<ul>
-														<li><a href="#">체크</a></li>
-														<li><a href="#">외부 수리</a></li>
-														<li><a href="#">내부 수리</a></li>
-														<li><a href="#">리모델링</a></li>
-														<li><a href="#">기타</a></li>
-													</ul>
-												</li>
-												<li>
-													<a href="#">가전케어</a>
-												</li>												
-												<li>
-													<a href="#">이사</a>
-													<ul>
-														<li><a href="#">이삿짐</a></li>
-														<li><a href="#">용달</a></li>
-														<li><a href="#">이사/입주 청소</a></li>
-													</ul>													
-												</li>												
-												<li>
-													<a href="#">차 서비스</a>
-													<ul>
-														<li><a href="#">내부 세차</a></li>
-														<li><a href="#">정비</a></li>
-														<li><a href="#">손세차</a></li>
-													</ul>													
-												</li>												
-												<li>
-													<a href="#">생수 배달</a>
-													<ul>
-														<li><a href="#">5gl드럼 & 페트</a></li>
-														<li><a href="#">보틀</a></li>
-													</ul>													
-												</li>												
+												{% endfor %}											
 											</ul>
 										</nav>
 										<!-- Form START -->
