@@ -3,7 +3,7 @@ from django.conf import settings
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 from datetime import datetime
-from django.core.validators import MinValueValidator
+from category.models import CategoryThird
 
 
 class ModelDeleteManager(models.Manager):
@@ -21,6 +21,10 @@ class Product(models.Model):
 				settings.AUTH_USER_MODEL,
 				on_delete=models.CASCADE,
 	)
+	category = models.ForeignKey(
+				CategoryThird,
+				on_delete=models.CASCADE,
+	)
 	name = models.CharField(max_length=255)
 	content = models.TextField()
 	price = models.PositiveIntegerField(default=0)
@@ -30,7 +34,8 @@ class Product(models.Model):
 	is_deleted = models.BooleanField(default=False)
 	deleted_at = models.DateTimeField(null=True)
 
-	'''offer_user = models.ManyToManyField(
+
+	'''variant = models.ManyToManyField(
 				settings.AUTH_USER_MODEL,
 				related_name="offer_user_set",
 				blank=True,
