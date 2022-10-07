@@ -9,12 +9,12 @@ def product_list(request):
 		'title': "상품 리스트 - 유토빌",
 	}
 
-	category_first_list =  CategoryFirst.objects.all().order_by( "-id")
+	category_first_list =  CategoryFirst.objects.all().order_by( "id")
 
 	q = Q()
 	if request.GET.get("category1"):
 		q &= Q(parent = int(request.GET.get("category1")))
-		category_second_list =  CategorySecond.objects.filter(q).order_by( "-id")
+		category_second_list =  CategorySecond.objects.filter(q).order_by( "id")
 	else:
 		category_second_list = None
 

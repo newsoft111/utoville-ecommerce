@@ -39,19 +39,13 @@
 				<hr>
 				<ul class="nav nav-pills flex-column mb-auto">
 					<li class="nav-item">
-						<a href="#" class="nav-link active" aria-current="page">
+						<a href="#" class="nav-link link-dark" aria-current="page">
 							<svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
 							주문 조회
 						</a>
 					</li>
 					<li>
-						<a href="#" class="nav-link link-dark">
-							<svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-							위시 리스트
-						</a>
-					</li>
-					<li>
-						<a href="#" class="nav-link link-dark">
+						<a href="#" class="nav-link active link-dark">
 							<svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
 							정기구독 관리
 						</a>
@@ -119,127 +113,7 @@
 			<!-- Left sidebar END -->
 
 
-			<div class="main-content">
-				<div class="row">
-					<div class="col-12">
-						<!-- Page title -->
-						<div class="my-5 newordertitle">
-							<h3>주문 조회</h3>
-							<hr>
-						</div>
-						<!-- Table -->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
-									<div class="table-responsive" style="text-align: center;">
-										<table class="table">
-											<!-- Data -->
-											<tbody>
-												<tr>
-													<td class="p-4 order-tb-left">기간별</td>
-													<td colspan="3" class="p-4 order-tb-right">
-														<button type="button" class="btn btn-outline-secondary order-tb-button">6개월</button>
-														<button type="button" class="btn btn-outline-secondary order-tb-button">1년</button>
-													</td>
-												</tr>
-												<tr>
-													<td class="p-4 order-tb-left">날짜</td>
-													<td colspan="3" class="p-4 order-tb-right">
-														<div class="container px-1 px-sm-5 mx-auto" style="padding-left: 0 !important;">
-															<form autocomplete="off">
-																<div class="flex-sm-row flex-column d-flex">
-																	<div class="col-sm-9 col-12 px-0 mb-2">
-																		<div class="input-group input-daterange">
-																			<input type="text" class="form-control" placeholder="시작 날짜 선택" readonly>
-																			&nbsp;&nbsp;~&nbsp;&nbsp;
-																			<input type="text" class="form-control" placeholder="종료 날짜 선택" readonly>
-																		</div>
-																	</div>
-																	<div class="col-sm-3 col-12 px-0 order-tb-search">
-																		<button type="submit" class="btn btn-black">Search</button>
-																	</div>
-																</div>
-															</form>
-														</div>	
-													</td>
-												</tr>
-												<tr>
-													<td class="p-4 order-tb-left">주문 구분</td>
-													<td class="p-4 order-tb-right">
-														<input type="checkbox" value=""> 일반주문
-														<input type="checkbox" value=""> 휴대폰 주문
-													</td>
-													<td class="p-4 order-tb-left">주문 상태</td>
-													<td class="p-4 order-tb-right">
-														<select class="form-select" aria-label="Default select example">
-															<option selected>전체</option>
-															<option value="1">입금대기</option>
-															<option value="2">결제완료</option>
-															<option value="3">서비스 대기</option>
-															<option value="3">서비스 완료</option>
-														</select>
-													</td>
-												</tr>											
-												<tr>
-													<td class="p-4 order-tb-left">서비스명</td>
-													<td colspan="3" class="p-4 order-tb-right">
-														<form class="row g-3">
-															<div class="col-auto">
-															<input type="text" size=60 maxlength=15 class="form-control"  id="inputservicename" placeholder="주문하신 서비스명을 검색하세요">
-															</div>
-															<div class="col-auto">
-															<button type="submit" class="btn btn-secondary mb-3">검색</button>
-															</div>
-														</form>
-													</td>
-												</tr>											
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> 
-				<!-- Oder list START -->
-				<div class="row">
-					<!-- Table -->
-					<div class="row">
-						<div class="col-md-12">
-							<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
-								<div class="table-responsive" style="text-align: center;">
-									<table class="table">
-										<!-- Title -->
-										<thead>
-											<tr>
-												<th scope="col">주문일/주문번호</th>
-												<th scope="col">서비스 정보</th>
-												<th scope="col">수량</th>
-												<th scope="col">주문금액</th>
-												<th scope="col">진행상태</th>
-											</tr>
-										</thead>
-										<!-- Data -->
-										<tbody>
-											<tr>
-												<td class="p-4">2022/10/10</td>
-												<td class="p-4">에어컨 청소</td>
-												<td class="p-4">1</td>
-												<td class="p-4">₱3000</td>
-												<td class="p-4">미진행</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Order list END -->
-			</div>	
-			<!-- Main content END -->
-		</div>
-	</div>
+	
 </section>
 
 {% endblock %}
