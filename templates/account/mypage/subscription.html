@@ -113,7 +113,80 @@
 			<!-- Left sidebar END -->
 
 
-	
+			<div class="main-content">
+				<div class="col-12">
+					<!-- Page title -->
+					<div class="mt-5 mb-3 newordertitle">
+						<h3>정기구독 관리</h3>
+						<hr>
+					</div>	
+					<div class="row">
+						<ul class="nav subs-pills nav-pills-white" id="pills-tab" role="tablist">
+							<li class="nav-item me-3" role="presentation">
+								<button class="nav-link btn-sm shadow active" id="pills-buy-tab" data-bs-toggle="pill" data-bs-target="#pills-buy" type="button" role="tab" aria-controls="pills-buy" aria-selected="true">신청상황 1</button>
+							</li>
+							<li class="nav-item me-3" role="presentation">
+								<button class="nav-link btn-sm shadow" id="pills-rent-tab" data-bs-toggle="pill" data-bs-target="#pills-rent" type="button" role="tab" aria-controls="pills-rent" aria-selected="false">해지내역 0</button>
+							</li>
+						</ul>
+						<!-- Table -->
+						<div class="row subs-table">
+							<div class="col-md-12">
+								<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
+									<div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
+										<div class="bg-danger d-flex justify-content-between align-items-center p-3 rounded">
+											<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
+											<div class="text-center">
+												<h3 class="purecounter mb-0 text-white" data-purecounter-start="0" data-purecounter-end="200" data-purecounter-delay="200">0</h3>
+												<p class="mb-0 text-white">다음 서비스일까지</p>
+											</div>
+										</div>
+									</div>
+									<!-- <div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
+										<div class="bg-danger d-flex justify-content-between align-items-center p-3 rounded">
+											<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
+											<div class="text-center">
+												<h3 class="purecounter mb-0 text-white" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="10">0</h3>
+												<p class="mb-0 text-white">남은 서비스 수</p>
+											</div>
+										</div>
+									</div> -->
+									<div class="table-responsive" style="text-align: center;">
+										<table class="table">
+											<!-- Title -->
+											<thead>
+												<tr>
+													<th scope="col"></th>
+													<th scope="col">서비스 정보</th>
+													<th scope="col">수량</th>
+													<th scope="col">주문금액</th>
+													<th scope="col">진행상태</th>
+												</tr>
+											</thead>
+											<!-- Data -->
+											<tbody>
+												<tr>
+													<td class="p-4">2022/10/10</td>
+													<td class="p-4">에어컨 청소</td>
+													<td class="p-4">1</td>
+													<td class="p-4">₱3000</td>
+													<td class="p-4">미진행</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="subs-cancel">
+							<span class="text">정기구독 해지 내역이 없습니다.</span>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<!-- Main content END -->
+		</div>
+	</div>
 </section>
 
 {% endblock %}
