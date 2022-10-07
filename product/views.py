@@ -29,6 +29,7 @@ def product_list(request):
 		q &= Q(category_third = int(request.GET.get("category3")))
 
 	product_list =  Product.objects.filter(q).order_by( "-id")
+
 	page        = int(request.GET.get('p', 1))
 	pagenator   = Paginator(product_list, 12)
 	product_list = pagenator.get_page(page)

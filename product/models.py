@@ -56,6 +56,20 @@ class Product(models.Model):
 		db_table = 'ecommerce_product'
 
 
+class ProductArea(models.Model):
+	product = models.ForeignKey(
+			Product,
+			on_delete=models.CASCADE
+	)
+	area = models.CharField(max_length=255)
+
+	class Meta:
+		db_table = 'ecommerce_product_area'
+
+	def __str__(self) :
+		return self.area
+
+
 class ProductVariant(models.Model):
 	product = models.ForeignKey(
 			Product,
