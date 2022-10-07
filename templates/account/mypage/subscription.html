@@ -130,46 +130,72 @@
 							</li>
 						</ul>
 						<!-- Table -->
-						<div class="row subs-table">
+						<div class="row subs-banner">
 							<div class="col-md-12">
 								<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
-									<div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
-										<div class="bg-danger d-flex justify-content-between align-items-center p-3 rounded">
-											<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
-											<div class="text-center">
-												<h3 class="purecounter mb-0 text-white" data-purecounter-start="0" data-purecounter-end="200" data-purecounter-delay="200">0</h3>
-												<p class="mb-0 text-white">다음 서비스일까지</p>
+									<div class="row">
+										<!-- Item -->
+										<div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
+											<div class="bg-danger d-flex justify-content-between align-items-center p-3 rounded">
+												<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
+												<div class="text-center">
+													<h3 class="purecounter mb-0 text-white" data-purecounter-start="0" data-purecounter-end="90" data-purecounter-delay="200">0</h3>
+													<p class="mb-0 text-white">다음 서비스까지</p>
+												</div>
 											</div>
 										</div>
-									</div>
-									<!-- <div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
-										<div class="bg-danger d-flex justify-content-between align-items-center p-3 rounded">
-											<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
-											<div class="text-center">
-												<h3 class="purecounter mb-0 text-white" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="10">0</h3>
-												<p class="mb-0 text-white">남은 서비스 수</p>
+										<!-- Item -->
+										<div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
+											<div class="bg-warning d-flex justify-content-between align-items-center p-3 rounded">
+												<span class="display-5 text-white opacity-5"><i class="far fa-fw fa-comment-dots"></i></span>
+												<div class="text-center">
+													<h3 class="purecounter mb-0 text-white" data-purecounter-start="0" data-purecounter-end="5" data-purecounter-delay="200">156</h3>
+													<p class="mb-0 text-white">구독한 서비스 수</p>
+												</div>
 											</div>
 										</div>
-									</div> -->
-									<div class="table-responsive" style="text-align: center;">
+										<!-- Item -->
+										<div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
+											<div class="bg-info d-flex justify-content-between align-items-center p-3 rounded">
+												<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-eye"></i></span>
+												<div class="text-center">
+													<h3 class="purecounter mb-0 text-white" data-purecounter-start="0" data-purecounter-end="30" data-purecounter-delay="200">2255</h3>
+													<p class="mb-0 text-white">남은 생수 개수</p>
+												</div>
+											</div>
+										</div>
+										<!-- Item -->
+										<div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
+											<div class="bg-orange d-flex justify-content-between align-items-center p-3 rounded">
+												<span class="display-5 text-white opacity-5"><i class="fab fa-fw fa-gratipay"></i></span>
+												<div class="text-center">
+													<h3 class="purecounter mb-0 text-white" data-purecounter-start="0" data-purecounter-end="80" data-purecounter-delay="100">80</h3>
+													<p class="mb-0 text-white">Total Favorites</p>
+												</div>
+											</div>
+										</div>
+									</div> <!-- Row END -->
+									<div class="table-responsive subs-table" style="text-align: center;">
 										<table class="table">
 											<!-- Title -->
 											<thead>
 												<tr>
-													<th scope="col"></th>
+													<th scope="col">서비스 시작일</th>
+													<th scope="col">서비스 종료일</th>
 													<th scope="col">서비스 정보</th>
 													<th scope="col">수량</th>
 													<th scope="col">주문금액</th>
-													<th scope="col">진행상태</th>
+													<th scope="col">진행상태(미진행/진행중/완료)</th>
 												</tr>
 											</thead>
 											<!-- Data -->
 											<tbody>
 												<tr>
 													<td class="p-4">2022/10/10</td>
-													<td class="p-4">에어컨 청소</td>
+													<td class="p-4">2022/4/10</td>
+													<td class="p-4">에어컨 청소(6개월)</td>
 													<td class="p-4">1</td>
-													<td class="p-4">₱3000</td>
+													<td class="p-4">₱12,000</td>
 													<td class="p-4">미진행</td>
 												</tr>
 											</tbody>
@@ -188,5 +214,14 @@
 		</div>
 	</div>
 </section>
+
+<script>
+window.addEventListener("load", function(){
+	let btn=document.getElementById("pills-buy-tab");
+
+	console.log(btn);
+});	
+</script>
+
 
 {% endblock %}
