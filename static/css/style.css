@@ -17340,11 +17340,11 @@ ul.navbar-nav > li {
 	text-underline-position: under;
 	color:#90c31f;
 }
-#sub_gnb ul ul {
+/*#sub_gnb ul ul {
   max-height: 0;
   overflow: hidden;
   padding-left: 15px;
-}
+}*/
 #sub_gnb ul ul a:hover {
   color: #28a7e1;
 }
