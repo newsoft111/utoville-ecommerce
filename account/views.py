@@ -255,5 +255,5 @@ def send_auth_mail(email):
 def my_order(request):
 	return render(request, 'account/mypage/my_order.html')
 
-def wish_list(request):
-	return render(request, 'account/mypage/wish_list.html')
+def subscription(request):
+	return render(request, 'account/mypage/subscription.html')
