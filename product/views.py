@@ -27,8 +27,6 @@ def product_list(request):
 		q &= Q(category_second = int(request.GET.get("category2")))
 	if request.GET.get("category3"):
 		q &= Q(category_third = int(request.GET.get("category3")))
-	if request.GET.get("area"):
-		q &= Q(productarea__area__icontains = request.GET.get("area"))
 
 	product_list =  Product.objects.filter(q).order_by( "-id")
 
