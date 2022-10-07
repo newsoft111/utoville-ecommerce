@@ -4,9 +4,17 @@ from django.core.paginator import Paginator
 from .models import *
 # Create your views here.
 def product_list(request):
+<<<<<<< Updated upstream
    seo = {
       'title': "상품 리스트 - 유토빌",
    }
+=======
+	seo = {
+		'title': "상품 리스트 - 유토빌",
+	}
+
+	category_list =  CategoryFirst.objects.all().order_by( "-id")
+>>>>>>> Stashed changes
 
    q = Q()
    #q &= Q(is_deleted = True)
