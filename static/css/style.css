@@ -4533,7 +4533,7 @@ fieldset:disabled .btn {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #0bc0eb;
+  background-color: #e3e3e3 !important;
 }
 
 .nav-fill > .nav-link,
