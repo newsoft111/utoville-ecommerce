@@ -9,11 +9,24 @@ def product_list(request):
 		'title': "상품 리스트 - 유토빌",
 	}
 
-	category_list =  CategoryFirst.objects.filter(q).order_by( "-id")
+	category_first_list =  CategoryFirst.objects.all().order_by( "-id")
+
+	q = Q()
+	if request.GET.get("category_1"):
+		q &= Q(parent = int(request.GET.get("category_1")))
+		category_second_list =  CategorySecond.objects.filter(q).order_by( "-id")
+	else:
+		category_second_list = None
+
 
 
 	q = Q()
-	#q &= Q(is_deleted = True)
+	if request.GET.get("category_1"):
+		q &= Q(category = int(request.GET.get("category_1")))
+	if request.GET.get("category_2"):
+		q &= Q(category = int(request.GET.get("category_2")))
+	if request.GET.get("category_3"):
+		q &= Q(category = int(request.GET.get("category_3")))
 
 	product_list =  Product.objects.filter(q).order_by( "-id")
 	page        = int(request.GET.get('p', 1))
@@ -22,7 +35,8 @@ def product_list(request):
 
 	return render(request, 'product/product_list.html' ,{
 		"seo":seo,
-		"category_list":category_list,
+		"category_first_list":category_first_list,
+		"category_second_list":category_second_list,
 		"product_list":product_list,
 	})
 

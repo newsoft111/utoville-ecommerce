@@ -3,7 +3,7 @@ from django.conf import settings
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 from datetime import datetime
-from category.models import CategoryThird
+from category.models import *
 
 
 class ModelDeleteManager(models.Manager):
@@ -21,7 +21,15 @@ class Product(models.Model):
 				settings.AUTH_USER_MODEL,
 				on_delete=models.CASCADE,
 	)
-	category = models.ForeignKey(
+	category_first = models.ForeignKey(
+				CategoryFirst,
+				on_delete=models.CASCADE,
+	)
+	category_second = models.ForeignKey(
+				CategorySecond,
+				on_delete=models.CASCADE,
+	)
+	category_third = models.ForeignKey(
 				CategoryThird,
 				on_delete=models.CASCADE,
 	)
