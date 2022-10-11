@@ -17801,6 +17801,10 @@ thead tr:nth-child(3) th {
 	border-top: 1px solid #dee2e6;
 	border-bottom: 1px solid #dee2e6;
 }
+.downarrow {
+	margin-top: 20px;
+	text-align: center;
+}
 /*=====foooter=====*/
 #footer {background-color: #383838; z-index: 10;}
 #footer .footer_top .inner{padding: 15px 0 0 0;}
