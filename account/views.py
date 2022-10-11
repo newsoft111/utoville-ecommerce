@@ -257,3 +257,6 @@ def my_order(request):
 
 def subscription(request):
 	return render(request, 'account/mypage/subscription.html')
+
+def cancel(request):
+	return render(request, 'account/mypage/cancel.html')

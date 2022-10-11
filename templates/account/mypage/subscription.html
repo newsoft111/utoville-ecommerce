@@ -120,7 +120,7 @@
 						<h3>정기구독 관리</h3>
 						<hr>
 					</div>	
-					<div class="row banner-parent">
+					<div class="row">
 						<ul class="nav subs-pills nav-pills-white" id="pills-tab" role="tablist">
 							<li class="nav-item me-3" role="presentation">
 								<button class="nav-link btn-sm shadow active" id="pills-buy-tab" data-bs-toggle="pill" data-bs-target="#pills-buy" type="button" role="tab" aria-controls="pills-buy" aria-selected="true">신청상황 1</button>
@@ -130,12 +130,12 @@
 							</li>
 						</ul>
 						<!-- Table -->
-						<div class="row subs-banner active">
+						<div class="mt-5 subs-view show">
 							<div class="col-md-12">
 								<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
 									<div class="row">
 										<!-- Item -->
-										<div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
+										<div class="col-sm-6 col-xxl-3 mb-xxl-0 sub-banner">
 											<div class="bg-danger d-flex justify-content-between align-items-center p-3 rounded">
 												<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
 												<div class="text-center">
@@ -145,7 +145,7 @@
 											</div>
 										</div>
 										<!-- Item -->
-										<div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
+										<div class="col-sm-6 col-xxl-3 mb-xxl-0 sub-banner">
 											<div class="bg-warning d-flex justify-content-between align-items-center p-3 rounded">
 												<span class="display-5 text-white opacity-5"><i class="far fa-fw fa-comment-dots"></i></span>
 												<div class="text-center">
@@ -155,7 +155,7 @@
 											</div>
 										</div>
 										<!-- Item -->
-										<div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
+										<div class="col-sm-6 col-xxl-3 mb-xxl-0 sub-banner">
 											<div class="bg-info d-flex justify-content-between align-items-center p-3 rounded">
 												<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-eye"></i></span>
 												<div class="text-center">
@@ -165,7 +165,7 @@
 											</div>
 										</div>
 										<!-- Item -->
-										<div class="col-sm-6 col-xxl-3 mb-5 mb-xxl-0">
+										<div class="col-sm-6 col-xxl-3 mb-xxl-0 sub-banner">
 											<div class="bg-orange d-flex justify-content-between align-items-center p-3 rounded">
 												<span class="display-5 text-white opacity-5"><i class="fab fa-fw fa-gratipay"></i></span>
 												<div class="text-center">
@@ -185,18 +185,18 @@
 													<th scope="col">서비스 정보</th>
 													<th scope="col">수량</th>
 													<th scope="col">주문금액</th>
-													<th scope="col">진행상태(미진행/진행중/완료)</th>
+													<th scope="col">진행상태</th>
 												</tr>
 											</thead>
 											<!-- Data -->
 											<tbody>
 												<tr>
-													<td class="p-4">2022/10/10</td>
-													<td class="p-4">2022/4/10</td>
-													<td class="p-4">에어컨 청소(6개월)</td>
-													<td class="p-4">1</td>
-													<td class="p-4">₱12,000</td>
-													<td class="p-4">미진행</td>
+													<td>2022/10/10</td>
+													<td>2022/4/10</td>
+													<td>에어컨 청소(6개월)</td>
+													<td>1</td>
+													<td>₱12,000</td>
+													<td>미진행</td>
 												</tr>
 											</tbody>
 										</table>
@@ -205,7 +205,7 @@
 							</div>
 						</div>
 						<div class="subs-cancel">
-							<span class="text">정기구독 해지 내역이 없습니다.</span>
+							구독 취소 내역이 없습니다.
 						</div>
 					</div>
 				</div>
@@ -219,19 +219,18 @@
 window.addEventListener("load", () => {
 	let btn = document.getElementById("pills-tab");
 	let btnLi = btn.children;
-	let banner = document.getElementsByClassName("subs-banner")[0];
+	let view = document.getElementsByClassName("subs-view")[0];
 	let cancel = document.getElementsByClassName("subs-cancel")[0];
 
 	btnLi[0].addEventListener("click", () => {
-		banner.classList.add("active");
-		cancel.classList.remove("active");
+		cancel.classList.remove("show");
+		view.classList.add("show");
 	});
 	btnLi[1].addEventListener("click", () => {
-		cancel.classList.add("active");
-		banner.classList.remove("active");
+		cancel.classList.add("show");
+		view.classList.remove("show");
 	});
-});	
+});
 </script>
-
 
 {% endblock %}
