@@ -39,15 +39,18 @@ $(document).ready(function() {
 	modal.show()
  }
  
- function closeModal() {
+function closeModal() {
 	var before_modal = $('#closeModalBtn').attr('data-before-modal');
 	$("#modal_subject").text('');
-   $("#modal_content").html('');
+	$("#modal_content").html('');
 	if (before_modal) {
-	   $(before_modal).modal('show');
+		$(before_modal).modal('show');
 	}
+	
 	$('#closeModalBtn').attr('data-before-modal','');
- }
+	var modal = new bootstrap.Modal(document.getElementById('globalModal'));
+	modal.hide();
+}
 
  $(document).ready(function(){
 
