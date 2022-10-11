@@ -21,14 +21,16 @@ def product_list(request):
 
 
 	q = Q()
-	if request.GET.get("category1"):
+	if request.GET.get("category1"): #카테고리1 필터
 		q &= Q(category_first = int(request.GET.get("category1")))
-	if request.GET.get("category2"):
+	if request.GET.get("category2"): #카테고리2 필터
 		q &= Q(category_second = int(request.GET.get("category2")))
-	if request.GET.get("category3"):
+	if request.GET.get("category3"): #카테고리3 필터
 		q &= Q(category_third = int(request.GET.get("category3")))
-	if request.GET.get("area"):
+	if request.GET.get("area"): #지역 필터
 		q &= Q(productarea__area = request.GET.get("area"))
+	if request.GET.get("keyword"): #검색 필터
+		q &= Q(name__icontains = request.GET.get("keyword"))
 
 	product_list =  Product.objects.filter(q).order_by( "-id")
 
