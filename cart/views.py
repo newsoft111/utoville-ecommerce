@@ -34,14 +34,17 @@ def add_cart(request):
 	product = Product.objects.get(pk=product_id)
 	quantity = int(request.POST.get('qty')) or 1
 
-	cart_item = CartItem(product=product, cart=cart, quantity=0)
-	cart_item.quantity += quantity
-	cart_item.save()
+	try:
+		cart_item = CartItem.objects.get(product=product, cart=cart)
+		cart_item.quantity += quantity
+		cart_item.save()
+	except CartItem.DoesNotExist:
+		cart_item = CartItem.objects.create(
+			product=product, 
+			cart=cart, 
+			quantity=1
+		)
 
-	if request.session.get('cart_count'):
-		request.session['cart_count'] += quantity
-	else:
-		request.session['cart_count'] = quantity
 
 	result = '200'
 	result_text = '장바구니 넣었음.'
