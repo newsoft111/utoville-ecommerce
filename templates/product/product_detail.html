@@ -678,7 +678,6 @@ function add_cart_submit(product_id) {
 				openModal("알림", data.result_text);
 			}
 			is_run  = false;
-			return;
         },
         error: function (request, status, error){
           var msg = "ERROR : " + request.status + "<br>"

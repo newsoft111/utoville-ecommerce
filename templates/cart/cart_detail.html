@@ -2,6 +2,7 @@
 {% block content %}
 {% load static %}
 {% load humanize %}
+{% load mathfilters %}
 
 
 <!-- Section -->
@@ -62,19 +63,19 @@
 								<div class="row">
 									<!-- Price -->
 									<div class="col-md-3 align-middle text-center">
-										₱3500
+										₱{{cart_item.product.price|intcomma}}
 									</div>
 									<!-- Quantity -->
 									<div class="col-md-3 align-middle pt-2 pt-md-0 text-center">
-										<input type="number" class="form-control text-center" min="0" value="1">
+										<input type="number" class="form-control text-center" min="0" onfocusout="update_cart_submit(this)" data-cart-item-id="{{cart_item.id}}" value="{{cart_item.quantity}}">
 									</div>
 									<!-- Subtotal-->
 									<div class="col-md-3 align-middle pt-2 pt-md-0 text-center">
-										₱3500
+										₱{{cart_item.product.price|mul:cart_item.quantity|intcomma}}
 									</div>
 									<!-- Trash -->
 									<div class="col-md-2 align-middle pt-2 pt-md-0">
-										<button class="btn btn-sm btn-danger-soft mb-1"><i class="far fa-fw fa-trash-alt"></i></button>
+										<button class="btn btn-sm btn-danger-soft mb-1" type="button" onclick="remove_cart_submit('{{cart_item.id}}');"><i class="far fa-fw fa-trash-alt"></i></button>
 									</div>
 								</div>
 							</div>
@@ -88,7 +89,7 @@
 						<tr>
 							<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
 							<td colspan="3" class="hidden-xs"></td>
-							<td class="hidden-xs" style="text-align:right !important;"><strong>Total ₱3500</strong></td>
+							<td class="hidden-xs" style="text-align:right !important;"><strong id="total_price">Total ₱{{total_price|intcomma}}</strong></td>
 							<td style="text-align: right;"><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
 						</tr>
 						</tfoot>
@@ -100,4 +101,66 @@
 </section>
 
 
+<script>
+	
+is_run = false;
+
+function remove_cart_submit(cart_item_id) {
+	is_run = true;
+
+    $.ajax({
+        type : 'POST',
+        url : "{% url 'cart:remove' %}",
+		headers: { "X-CSRFToken": '{{csrf_token}}' },
+        data : {
+			cart_item_id:cart_item_id
+		},
+        dataType : 'json',
+        success: function(data){
+			if(data.result==200){
+				openModal("알림", data.result_text,'','reload');
+			}else{
+				openModal("알림", data.result_text);
+			}
+			is_run  = false;
+        },
+        error: function (request, status, error){
+          var msg = "ERROR : " + request.status + "<br>"
+			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
+			    console.log(msg);
+        }
+    });
+}
+
+function update_cart_submit(e) {
+	is_run = true;
+
+	let cart_item_id = e.dataset.cartItemId;
+	let qty = e.value;
+
+    $.ajax({
+        type : 'POST',
+        url : "{% url 'cart:update' %}",
+		headers: { "X-CSRFToken": '{{csrf_token}}' },
+        data : {
+			cart_item_id: cart_item_id,
+			qty: qty
+		},
+        dataType : 'json',
+        success: function(data){
+			if(data.result==200){
+				openModal("알림", data.result_text,'','reload');
+			}else{
+				openModal("알림", data.result_text);
+			}
+			is_run  = false;
+        },
+        error: function (request, status, error){
+          var msg = "ERROR : " + request.status + "<br>"
+			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
+			    console.log(msg);
+        }
+    });
+}
+</script>
 {% endblock %}
