@@ -657,7 +657,7 @@ function set_variant_value(e) {
 
 	for (idx in json_data[key]) {
 		value = json_data[key][idx];
-		html+=`<option value="${value['value']}" data-value="${value['value']}" data-price="${value['price']}">${value['value']} + ${value['price']}원</option>`;
+		html+=`<option value="${value['value']}" onchange='add_item(this);' data-value="${value['value']}" data-price="${value['price']}">${value['value']} + ${value['price']}원</option>`;
 	}
 
 	document.getElementById("optionSecond").innerHTML = html;
@@ -686,7 +686,15 @@ function cal_total_price() {
 }
 
 function add_item(e) {
-	reset_variant(e, '옵션2')
+	
+let parent = document.querySelector(".selectedList");
+let child = document.querySelector(".optionTotal");
+let btn = document.getElementById("optionSecond");
+
+
+parent.appendChild(document.querySelector("div[id=productItem]"));
+
+reset_variant(e, '옵션2')
 }
 
 function reset_variant(e, val) {
@@ -696,16 +704,6 @@ function reset_variant(e, val) {
 			break;
 		}
 	}
-}
-
-let parent = document.querySelector(".selectedList");
-let child = document.querySelector(".optionTotal");
-let btn = document.getElementById("optionSecond");
-
-for(let i=0; i<btn.length; i++){
-	btn[i].addEventListener("click", function(){
-		parent.appendChild(document.querySelector("div[id=productItem]"));
-	});	
 }
 
 </script>
