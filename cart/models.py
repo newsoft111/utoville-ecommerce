@@ -36,8 +36,9 @@ class CartItem(models.Model):
 	class Meta:
 		db_table = 'ecommerce_cart_item'
 
-	def sub_total(self):
-		return (self.product.price + self.variant_value.price) * self.quantity
+	def get_queryset(self):
+		print(111111111)
+		return super(CartItem, self).get_queryset().filter(is_deleted=False)
 
 	def __str__(self):
 		return self.product

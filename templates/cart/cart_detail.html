@@ -52,8 +52,12 @@
 										<!-- Info -->
 										<div class="col-xl-8 pt-2 pt-xl-0 text-center">
 											<h6 class="mb-1">{{cart_item.product.name}}</h6>
-											<p class="mb-1 text-body">옵션 들어갈곳</p>
-											<span class="text-success">₱{{cart_item.product.price|intcomma}}</span>
+											<p class="mb-1 text-body">
+												{% if cart_item.variant_value is not None %}
+												{{cart_item.variant_value.value}} + ₱{{cart_item.variant_value.price}}
+												{% endif %}
+											</p>
+											<span class="text-success">₱{{cart_item.product.price|add:cart_item.variant_value.price|intcomma}}</span>
 										</div>
 									</div>
 								</div>
@@ -63,7 +67,7 @@
 								<div class="row">
 									<!-- Price -->
 									<div class="col-md-3 align-middle text-center">
-										₱{{cart_item.product.price|intcomma}}
+										₱{{cart_item.product.price|add:cart_item.variant_value.price|intcomma}}
 									</div>
 									<!-- Quantity -->
 									<div class="col-md-3 align-middle pt-2 pt-md-0 text-center">
@@ -71,7 +75,7 @@
 									</div>
 									<!-- Subtotal-->
 									<div class="col-md-3 align-middle pt-2 pt-md-0 text-center">
-										₱{{cart_item.product.price|mul:cart_item.quantity|intcomma}}
+										₱{{cart_item.product.price|add:cart_item.variant_value.price|mul:cart_item.quantity|intcomma}}
 									</div>
 									<!-- Trash -->
 									<div class="col-md-2 align-middle pt-2 pt-md-0">
