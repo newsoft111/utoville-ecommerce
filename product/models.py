@@ -4,6 +4,7 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 from datetime import datetime
 from category.models import *
+from decimal import Decimal
 
 
 class ModelDeleteManager(models.Manager):
@@ -41,14 +42,15 @@ class Product(models.Model):
 	updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
 	is_deleted = models.BooleanField(default=False)
 	deleted_at = models.DateTimeField(null=True)
-
-
-	'''variant = models.ManyToManyField(
+	rating = models.DecimalField(max_digits = 2, decimal_places = 1, default=0.0)
+	rating_count = models.PositiveIntegerField(default=0)
+	review = models.ManyToManyField(
 				settings.AUTH_USER_MODEL,
-				related_name="offer_user_set",
+				related_name="my_review",
 				blank=True,
-				through='GigCampaignOffer'
-	)'''
+				through='ProductReview'
+	)
+
 
 	objects = ModelDeleteManager()
 
@@ -125,3 +127,29 @@ class ProductThumbnail(models.Model):
 	class Meta:
 		db_table = 'ecommerce_product_thumbnail'
 
+
+class ProductReview(models.Model):
+	user = models.ForeignKey(
+		settings.AUTH_USER_MODEL,
+		on_delete=models.CASCADE
+	)
+	product = models.ForeignKey(
+			Product,
+			on_delete=models.CASCADE
+	)
+	review = models.TextField()
+	rating = models.PositiveIntegerField()
+	created_at = models.DateTimeField(default=datetime.now)
+
+	class Meta:
+		db_table = 'ecommerce_product_review'
+
+	def save(self, *args, **kwargs):
+		try:
+			self.product.rating = ((Decimal(self.product.rating) * self.product.rating_count) + Decimal(self.rating)) / (self.product.rating_count+1)
+			self.product.rating_count += 1
+			self.product.save()
+		except:
+			pass
+
+		super().save(*args, **kwargs)

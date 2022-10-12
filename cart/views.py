@@ -32,7 +32,7 @@ def get_cart_info(request):
 	try:
 		cart_items = CartItem.objects.filter(cart=get_user_cart(request), active=True)
 		for cart_item in cart_items:
-			total_price += (cart_item.product.price * cart_item.quantity)
+			total_price += (cart_item.product.price + cart_item.variant_value.price ) * cart_item.quantity
 			total_quantity += cart_item.quantity
 	except ObjectDoesNotExist:
 		pass
@@ -123,9 +123,6 @@ def cart_detail(request, total_price=0, counter=0, cart_items=None):
 
 	try:
 		cart_items = CartItem.objects.filter(cart=get_user_cart(request), active=True)
-		for cart_item in cart_items:
-			total_price += (cart_item.product.price * cart_item.quantity)
-			counter += cart_item.quantity
 	except ObjectDoesNotExist:
 		pass
 
