@@ -3,6 +3,10 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from .models import *
 from category.models import *
+from collections import defaultdict
+import json
+
+
 # Create your views here.
 def product_list(request):
 	seo = {
@@ -47,14 +51,31 @@ def product_list(request):
 
 
 def product_detail(request, product_id):
-   seo = {
-      'title': "상품 디테일 - 유토빌",
-   }
+	seo = {
+		'title': "상품 디테일 - 유토빌",
+	}
 
-   product_detail = get_object_or_404(Product, pk=product_id)
+	product_detail = get_object_or_404(Product, pk=product_id)
 
+	q = Q()
+	q &= Q(product = product_id)
 
-   return render(request, 'product/product_detail.html' ,{
-      "seo":seo,
-      "product_detail": product_detail,
-   })
+	variant_list = ProductVariant.objects.filter(q).values_list('id', flat=True).order_by( "-id")
+	
+	variant_value_list = ProductVariantValue.objects.filter(variant__in=variant_list)
+
+	variant_data = defaultdict(list)
+	for variant_value in variant_value_list:
+		key = variant_value.variant.variant
+		
+		tmp_dict = {}
+		tmp_dict['value'] = variant_value.value
+		tmp_dict['price'] = variant_value.price
+
+		variant_data[key].append(tmp_dict)
+
+	return render(request, 'product/product_detail.html' ,{
+		"seo":seo,
+		"product_detail": product_detail,
+		'variant_data': json.dumps(variant_data)
+	})
