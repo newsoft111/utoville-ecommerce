@@ -17473,6 +17473,35 @@ ul.navbar-nav > li {
 	font-size: 14px;
 	font-weight: bold;
 }
+.optionTotal {
+	padding: 15px;
+	background-color: rgba(35,35,35,0.03);
+}
+.optionTotal .title {
+	display: flex;
+	justify-content: space-between;
+}
+.optionTotal .optionAdd {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+.optionTotal .optionAdd input[type]{
+	width: 20%;
+	height: 40px;
+}
+.optionTotal .optionAdd span.price{
+	padding-top: 10px;
+	font-size: 15px;
+}
+.optionTotal .totalPrice {
+	margin-top: 20px;	
+	display: flex;
+	justify-content: space-between;
+}
+.optionTotal .totalPrice > span {
+	font-size: 20px;
+}
 /*product detail - service description*/
 #description .mb-4 h3, #detail .mb-4 h3, #review .mb-4 h3 {
 	text-align: left;
