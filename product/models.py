@@ -84,8 +84,6 @@ class ProductVariant(models.Model):
 		return self.variant
 
 
-
-
 class ProductVariantValue(models.Model):
 	variant = models.ForeignKey(
 			ProductVariant,
