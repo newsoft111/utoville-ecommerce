@@ -114,6 +114,7 @@
 									<p class="badge bg-orange text-white mb-0">{{product_detail.discount}}% off</p>
 								</div>
 							</div>
+<<<<<<< Updated upstream
 							<div class="select-area" id="select">
 								<a href="#">
 									종류 및 키로수를 선택해주세요 (필수)
@@ -157,6 +158,28 @@
 									</div>
 									<p class="mb-1">60,000원</p>
 									</a>
+=======
+							<select id="firstOption" class="form-select form-select-lg mb-3" onchange="set_variant_value(this)">
+								<option selected>옵션1</option>
+								{% for variant in product_detail.productvariant_set.all %}
+								<option value="{{variant}}">{{variant}}</option>
+								{% endfor %}
+							</select>
+
+							<select id="secondOption" class="form-select form-select-lg mb-3">
+								<option selected>옵션2</option>
+							</select>
+							<div class="optionTotal">
+								<div class="title">
+									<h6>에어컨 청소</h6>
+									<a href="#">X</a>
+								</div>
+								<div class="optionAdd">
+									<input type="number" class="form-control text-center" value="1" min="1"><span class="price">₱123,123</span>
+								</div>
+								<div class="totalPrice">
+									<p>총 상품금액(1개)</p> <span>₱123,123</span>
+>>>>>>> Stashed changes
 								</div>
 							</div>
 							<div class="buy_area">
@@ -625,37 +648,6 @@ Inner part START -->
 </section>
 
 <script>
-window.addEventListener("load", function(){
-	let select=document.getElementById("select");
-	let list_group=document.getElementsByClassName("list-group")[0];
-	// var n;
-
-	select.addEventListener("click", (e) => {
-		e.preventDefault();
-		
-		list_group.classList.toggle("show");
-		select.classList.toggle("active");
-	})
-	// for(var i=0; i<list_group_item.length; i++){
-	// 	list_group_item[i].index=i;
-
-
-	// 	list_group_item[i].addEventListener("click", (e) => {
-	// 		if(n == e.currentTarget.index) return;
-	// 		n=e.currentTarget.index;
-	// 		console.log(e.currentTarget.index);
-	// 		for(var j=0; j<list_group_item.length; j++){
-	// 			if(j == n){
-	// 				list_group_item[j].classList.add("active");					
-	// 			}
-	// 			else{
-	// 				list_group_item[j].classList.remove("active");
-	// 			}
-	// 		}
-
-	// 	});
-	// }
-});
 
 is_run = false;
 
@@ -685,6 +677,21 @@ function add_cart_submit(product_id) {
 			    console.log(msg);
         }
     });
+}
+
+
+
+function set_variant_value(e) {
+	let key = e.options[e.selectedIndex].value;
+	let json_data = JSON.parse("{{variant_data|escapejs}}");
+	let html='<option selected>옵션2</option>';
+
+	for (idx in json_data[key]) {
+		value = json_data[key][idx];
+		html+=`<option value="${value['value']}">${value['value']} + ${value['price']}원</option>`;
+	}
+
+	document.getElementById("secondOption").innerHTML = html;
 }
 </script>
 
