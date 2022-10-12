@@ -114,73 +114,29 @@
 									<p class="badge bg-orange text-white mb-0">{{product_detail.discount}}% off</p>
 								</div>
 							</div>
-<<<<<<< Updated upstream
-							<div class="select-area" id="select">
-								<a href="#">
-									종류 및 키로수를 선택해주세요 (필수)
-								</a>
-							</div>
-							<div class="list-area">
-								<div class="list-group">
-									<a href="#" class="list-group-item list-group-item-action " aria-current="true">
-									<div class="d-flex w-100 justify-content-between">
-										<h5 class="mb-1">통돌이(16kg 이하)</h5>
-									</div>
-									<p class="mb-1">86,400원</p>
-									</a>
-									<a href="#" class="list-group-item list-group-item-action ">
-									<div class="d-flex w-100 justify-content-between">
-										<h5 class="mb-1">통돌이(17kg 이상)</h5>
-									</div>
-									<p class="mb-1">96,000원</p>
-									</a>
-									<a href="#" class="list-group-item list-group-item-action">
-									<div class="d-flex w-100 justify-content-between">
-										<h5 class="mb-1">통돌이(20kg 이상)</h5>
-									</div>
-									<p class="mb-1">122,400원</p>
-									</a>
-									<a href="#" class="list-group-item list-group-item-action ">
-									<div class="d-flex w-100 justify-content-between">
-										<h5 class="mb-1">드럼(16kg 이하)</h5>
-									</div>
-									<p class="mb-1">128,000원</p>
-									</a>
-									<a href="#" class="list-group-item list-group-item-action">
-									<div class="d-flex w-100 justify-content-between">
-										<h5 class="mb-1">드럼(20kg 이상)</h5>
-									</div>
-									<p class="mb-1">180,000원</p>
-									</a>
-									<a href="#" class="list-group-item list-group-item-action ">
-									<div class="d-flex w-100 justify-content-between">
-										<h5 class="mb-1">미니 세탁기</h5>
-									</div>
-									<p class="mb-1">60,000원</p>
-									</a>
-=======
-							<select id="firstOption" class="form-select form-select-lg mb-3" onchange="set_variant_value(this)">
+							<select id="optionFirst" class="form-select form-select-lg mb-3" onchange="set_variant_value(this)">
 								<option selected>옵션1</option>
 								{% for variant in product_detail.productvariant_set.all %}
 								<option value="{{variant}}">{{variant}}</option>
 								{% endfor %}
 							</select>
 
-							<select id="secondOption" class="form-select form-select-lg mb-3">
+							<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-lg mb-3">
 								<option selected>옵션2</option>
 							</select>
-							<div class="optionTotal">
-								<div class="title">
-									<h6>에어컨 청소</h6>
-									<a href="#">X</a>
-								</div>
-								<div class="optionAdd">
-									<input type="number" class="form-control text-center" value="1" min="1"><span class="price">₱123,123</span>
-								</div>
-								<div class="totalPrice">
-									<p>총 상품금액(1개)</p> <span>₱123,123</span>
->>>>>>> Stashed changes
-								</div>
+							<div class="selectedList">
+								<div class="optionTotal">
+									<div class="title" id="optionTitle">
+										<h6>에어컨 청소</h6>
+										<a class="close" href="#">X</a>
+									</div>
+									<div class="optionAdd">
+										<input type="number" onfocusout="cal_total_price();" class="form-control text-center" value="1" min="1"><span class="price">₱123,123</span>
+									</div>
+								</div>							
+							</div>
+							<div class="totalPrice">
+								<p>총 상품금액(<span id="counts">1개</span>)</p> <span id="totals">₱123,123</span>
 							</div>
 							<div class="buy_area">
 								<a class="buy_btn order" href="#" >구매하기</a>
@@ -234,6 +190,9 @@ Inner part START -->
 							<!-- Title -->
 							<div class="mb-4">
 								<h3>서비스 설명</h3>
+							</div>
+							<div class="text-start">
+								{{product_detail.content|safe}}
 							</div>
 							<!-- Description item -->
 							<!-- <div class="col-sm-6 col-xl-3 mb-4">
@@ -647,8 +606,18 @@ Inner part START -->
 	</div>
 </section>
 
-<script>
 
+<div id="productItem" class="optionTotal">
+	<div class="title" id="optionTitle">
+		<h6>에어컨 청소</h6>
+		<a class="close" href="#">X</a>
+	</div>
+	<div class="optionAdd">
+		<input type="number" onfocusout="cal_total_price();" class="form-control text-center" value="1" min="1"><span class="price">₱123,123</span>
+	</div>
+</div>
+
+<script>
 is_run = false;
 
 function add_cart_submit(product_id) {
@@ -688,11 +657,57 @@ function set_variant_value(e) {
 
 	for (idx in json_data[key]) {
 		value = json_data[key][idx];
-		html+=`<option value="${value['value']}">${value['value']} + ${value['price']}원</option>`;
+		html+=`<option value="${value['value']}" data-value="${value['value']}" data-price="${value['price']}">${value['value']} + ${value['price']}원</option>`;
 	}
 
-	document.getElementById("secondOption").innerHTML = html;
+	document.getElementById("optionSecond").innerHTML = html;
 }
+
+
+
+const removeBtn = document.querySelectorAll(".close");
+
+for(let i=0; i<removeBtn.length; i++) {
+	removeBtn[i].index = i;
+
+	removeBtn[i].addEventListener("click", (e) => {
+		const removeItem = document.querySelectorAll(".optionTotal")
+		let n = e.currentTarget.index;
+
+		removeItem[n].classList.add('d-none');
+		cal_total_price()	
+	});
+}
+
+
+
+function cal_total_price() {
+	console.log(11);
+}
+
+function add_item(e) {
+	reset_variant(e, '옵션2')
+}
+
+function reset_variant(e, val) {
+	for( i=0,j=e.length; i<j; i++ ){
+		if( e.options[i].value == val ) {
+			e.options[i].selected = true;
+			break;
+		}
+	}
+}
+
+let parent = document.querySelector(".selectedList");
+let child = document.querySelector(".optionTotal");
+let btn = document.getElementById("optionSecond");
+
+for(let i=0; i<btn.length; i++){
+	btn[i].addEventListener("click", function(){
+		parent.appendChild(document.querySelector("div[id=productItem]"));
+	});	
+}
+
 </script>
 
 {% endblock %}

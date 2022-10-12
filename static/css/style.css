@@ -17494,12 +17494,13 @@ ul.navbar-nav > li {
 	padding-top: 10px;
 	font-size: 15px;
 }
-.optionTotal .totalPrice {
-	margin-top: 20px;	
+.totalPrice {
+	padding: 14px;
 	display: flex;
 	justify-content: space-between;
+	background-color: rgba(35,35,35,0.03);
 }
-.optionTotal .totalPrice > span {
+.totalPrice > span {
 	font-size: 20px;
 }
 /*product detail - service description*/
