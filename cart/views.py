@@ -46,21 +46,27 @@ def get_cart_info(request):
 def add_cart(request):
 	cart = get_user_cart(request)
 
-	product_id=request.POST.get('product_id')
+	product_id = request.POST.get('product_id')
 
 	product = Product.objects.get(pk=product_id)
 	quantity = int(request.POST.get('qty')) or 1
+	variant_value_id = request.POST.get('variant_value_id')
+
 
 	try:
-		cart_item = CartItem.objects.get(product=product, cart=cart)
+		cart_item = CartItem.objects.get(product=product, cart=cart, variant_value=variant_value_id)
 		cart_item.quantity += quantity
 		cart_item.save()
 	except CartItem.DoesNotExist:
+		variant_value = ProductVariantValue.objects.get(variant_value=variant_value_id)
+
 		cart_item = CartItem.objects.create(
 			product=product, 
-			cart=cart, 
+			cart=cart,
+			variant_value=variant_value,
 			quantity=1
 		)
+
 
 	result = '200'
 	result_text = '장바구니 넣었음.'
