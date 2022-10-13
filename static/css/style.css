@@ -17537,6 +17537,10 @@ ul.navbar-nav > li {
 	font-size: 36px;
 	color: #000;
 }
+.select_btn_ara {
+	padding: 8px;
+	margin-bottom: 50px;
+}
 
 @media only screen and (max-width: 1400px) {
 	.py-3 { 

@@ -48,3 +48,4 @@ class CartItem(models.Model):
 		self.deleted_at = datetime.now
 		self.save()
 
+		
