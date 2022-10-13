@@ -17525,6 +17525,10 @@ ul.navbar-nav > li {
 #detail .mb-4 .desc .info span {
 	margin-left: 10px;
 }
+/*product detail - review*/
+.upload_photo {
+	border: 2px dashed #0bc0eb;
+}
 
 /* shopping cart */
 .cart-title {
