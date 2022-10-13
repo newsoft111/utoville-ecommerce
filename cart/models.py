@@ -47,3 +47,5 @@ class CartItem(models.Model):
 		self.is_deleted = False
 		self.deleted_at = datetime.now
 		self.save()
+
+		

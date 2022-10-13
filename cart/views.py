@@ -3,6 +3,7 @@ from product.models import *
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
+import json
 
 def get_user_cart(request):
 	cart_id = None
@@ -30,9 +31,12 @@ def get_cart_info(request):
 	total_quantity=0
 
 	try:
-		cart_items = CartItem.objects.filter(cart=get_user_cart(request), active=True)
+		cart_items = CartItem.objects.filter(cart=get_user_cart(request))
 		for cart_item in cart_items:
-			total_price += (cart_item.product.price + cart_item.variant_value.price ) * cart_item.quantity
+			if cart_item.variant_value is not None:
+				total_price += (cart_item.product.price + cart_item.variant_value.price ) * cart_item.quantity
+			else:
+				total_price += cart_item.product.price * cart_item.quantity
 			total_quantity += cart_item.quantity
 	except ObjectDoesNotExist:
 		pass
@@ -46,26 +50,29 @@ def get_cart_info(request):
 def add_cart(request):
 	cart = get_user_cart(request)
 
-	product_id = request.POST.get('product_id')
+	item_list = json.loads(request.POST.get('data'))
+	for item in item_list:
 
-	product = Product.objects.get(pk=product_id)
-	quantity = int(request.POST.get('qty')) or 1
-	variant_value_id = request.POST.get('variant_value_id')
+		product = Product.objects.get(pk=item["product_id"])
+		variant_value_id = item["variant_value_id"] or None
+		quantity = int(item["qty"]) or 1
+		
+		try:
+			cart_item = CartItem.objects.get(product=product, cart=cart, variant_value=variant_value_id)
+			cart_item.quantity += quantity
+			cart_item.save()
+		except CartItem.DoesNotExist:
+			if variant_value_id is not None:
+				variant_value = ProductVariantValue.objects.get(pk=variant_value_id)
+			else:
+				variant_value = None
 
-
-	try:
-		cart_item = CartItem.objects.get(product=product, cart=cart, variant_value=variant_value_id)
-		cart_item.quantity += quantity
-		cart_item.save()
-	except CartItem.DoesNotExist:
-		variant_value = ProductVariantValue.objects.get(variant_value=variant_value_id)
-
-		cart_item = CartItem.objects.create(
-			product=product, 
-			cart=cart,
-			variant_value=variant_value,
-			quantity=1
-		)
+			cart_item = CartItem.objects.create(
+				product=product, 
+				cart=cart,
+				variant_value=variant_value,
+				quantity=1
+			)
 
 
 	result = '200'
@@ -122,7 +129,7 @@ def cart_detail(request, total_price=0, counter=0, cart_items=None):
 	}
 
 	try:
-		cart_items = CartItem.objects.filter(cart=get_user_cart(request), active=True)
+		cart_items = CartItem.objects.filter(cart=get_user_cart(request))
 	except ObjectDoesNotExist:
 		pass
 
