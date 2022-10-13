@@ -43,11 +43,8 @@ class CartItem(models.Model):
 	def __str__(self):
 		return self.product
 
-<<<<<<< Updated upstream
-=======
 	def delete(self):
 		self.is_deleted = True
 		self.deleted_at = datetime.now()
 		self.save()
 
->>>>>>> Stashed changes
