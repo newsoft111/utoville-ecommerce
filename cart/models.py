@@ -3,7 +3,10 @@ from product.models import Product, ProductVariantValue
 from datetime import datetime
 from django.conf import settings
 
-# Create your models here.
+class ModelDeleteManager(models.Manager):
+	def get_queryset(self):
+		return super(ModelDeleteManager, self).get_queryset().filter(is_deleted=False)
+
 
 class Cart(models.Model):
 	user = models.ForeignKey(
@@ -13,8 +16,6 @@ class Cart(models.Model):
 				blank=True
 	)
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-	updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
-	active = models.BooleanField(default=True)
 
 	class Meta:
 		db_table = 'ecommerce_cart'
@@ -31,15 +32,19 @@ class CartItem(models.Model):
 		null=True, 
 		blank=True
 	)
-	active = models.BooleanField(default=True)
+	is_deleted = models.BooleanField(default=False)
+	deleted_at = models.DateTimeField(null=True)
+
+	objects = ModelDeleteManager()
 
 	class Meta:
 		db_table = 'ecommerce_cart_item'
 
-	def get_queryset(self):
-		print(111111111)
-		return super(CartItem, self).get_queryset().filter(is_deleted=False)
-
 	def __str__(self):
 		return self.product
+
+	def delete(self):
+		self.is_deleted = False
+		self.deleted_at = datetime.now
+		self.save()
 

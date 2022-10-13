@@ -31,9 +31,12 @@ def get_cart_info(request):
 	total_quantity=0
 
 	try:
-		cart_items = CartItem.objects.filter(cart=get_user_cart(request), active=True)
+		cart_items = CartItem.objects.filter(cart=get_user_cart(request))
 		for cart_item in cart_items:
-			total_price += (cart_item.product.price + cart_item.variant_value.price ) * cart_item.quantity
+			if cart_item.variant_value is not None:
+				total_price += (cart_item.product.price + cart_item.variant_value.price ) * cart_item.quantity
+			else:
+				total_price += cart_item.product.price * cart_item.quantity
 			total_quantity += cart_item.quantity
 	except ObjectDoesNotExist:
 		pass
@@ -49,10 +52,9 @@ def add_cart(request):
 
 	item_list = json.loads(request.POST.get('data'))
 	for item in item_list:
-		print(item)
 
 		product = Product.objects.get(pk=item["product_id"])
-		variant_value_id = item["variant_value_id"]
+		variant_value_id = item["variant_value_id"] or None
 		quantity = int(item["qty"]) or 1
 		
 		try:
@@ -60,7 +62,10 @@ def add_cart(request):
 			cart_item.quantity += quantity
 			cart_item.save()
 		except CartItem.DoesNotExist:
-			variant_value = ProductVariantValue.objects.get(pk=variant_value_id)
+			if variant_value_id is not None:
+				variant_value = ProductVariantValue.objects.get(pk=variant_value_id)
+			else:
+				variant_value = None
 
 			cart_item = CartItem.objects.create(
 				product=product, 
@@ -124,7 +129,7 @@ def cart_detail(request, total_price=0, counter=0, cart_items=None):
 	}
 
 	try:
-		cart_items = CartItem.objects.filter(cart=get_user_cart(request), active=True)
+		cart_items = CartItem.objects.filter(cart=get_user_cart(request))
 	except ObjectDoesNotExist:
 		pass
 
