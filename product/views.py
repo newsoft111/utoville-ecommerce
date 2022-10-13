@@ -69,6 +69,7 @@ def product_detail(request, product_id):
 		key = variant_value.variant.variant
 		
 		tmp_dict = {}
+		tmp_dict['id'] = variant_value.pk
 		tmp_dict['value'] = variant_value.value
 		tmp_dict['price'] = variant_value.price
 

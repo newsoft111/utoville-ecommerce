@@ -3,6 +3,7 @@ from product.models import *
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
+import json
 
 def get_user_cart(request):
 	cart_id = None
@@ -46,26 +47,27 @@ def get_cart_info(request):
 def add_cart(request):
 	cart = get_user_cart(request)
 
-	product_id = request.POST.get('product_id')
+	item_list = json.loads(request.POST.get('data'))
+	for item in item_list:
+		print(item)
 
-	product = Product.objects.get(pk=product_id)
-	quantity = int(request.POST.get('qty')) or 1
-	variant_value_id = request.POST.get('variant_value_id')
+		product = Product.objects.get(pk=item["product_id"])
+		variant_value_id = item["variant_value_id"]
+		quantity = int(item["qty"]) or 1
+		
+		try:
+			cart_item = CartItem.objects.get(product=product, cart=cart, variant_value=variant_value_id)
+			cart_item.quantity += quantity
+			cart_item.save()
+		except CartItem.DoesNotExist:
+			variant_value = ProductVariantValue.objects.get(pk=variant_value_id)
 
-
-	try:
-		cart_item = CartItem.objects.get(product=product, cart=cart, variant_value=variant_value_id)
-		cart_item.quantity += quantity
-		cart_item.save()
-	except CartItem.DoesNotExist:
-		variant_value = ProductVariantValue.objects.get(variant_value=variant_value_id)
-
-		cart_item = CartItem.objects.create(
-			product=product, 
-			cart=cart,
-			variant_value=variant_value,
-			quantity=1
-		)
+			cart_item = CartItem.objects.create(
+				product=product, 
+				cart=cart,
+				variant_value=variant_value,
+				quantity=1
+			)
 
 
 	result = '200'
