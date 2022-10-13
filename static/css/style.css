@@ -17549,11 +17549,16 @@ ul.navbar-nav > li {
 	font-size:17px;
 }
 .newordertitle {
-	display: inline-block; 
+	display: block; 
+	padding: 0 30px;
+	text-align: left;
 }
 .resp_sidebar {
 	display: none !important;
 	font-size: 13px;
+}
+.main_contents {
+	padding: 0 30px;
 }
 .order-nav-link {
 	color: #000;
@@ -17788,6 +17793,11 @@ thead tr:nth-child(3) th {
 	display: block;
 }
 
+@media only screen and (max-width: 1200px) {
+	.subs_contents {
+		width: 100% !important;
+	}
+}
 @media only screen and (max-width: 575px) {
 	.sub-banner {
 		margin-bottom: 10px;
