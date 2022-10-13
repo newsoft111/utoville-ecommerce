@@ -6,4 +6,4 @@ def index(request):
 	seo = {
 		'title': "유토빌",
 	}
-	return redirect("product:detail")
+	return redirect("product:list")
