@@ -127,7 +127,7 @@
 							<input type="hidden" name="obj_data">
 							<div class="selectedList"></div>
 							<div class="totalPrice">
-								<p>총 상품금액(<span id="counts">0개</span>)</p> <span id="totals">₱0</span>
+								<p>총 상품금액(<span id="totalQty">0개</span>)</p> <span id="totalPrice">₱0</span>
 							</div>
 							<div class="buy_area">
 								<a class="buy_btn order" href="#" >구매하기</a>
@@ -646,8 +646,8 @@ function set_variant_value(e) {
 }
 
 
-function cal_total_price() {
-	let total_value = document.getElementById("totals");
+function cal_total_value() {
+	let total_price = document.getElementById("totalPrice");
 	let item_list = document.querySelectorAll("span[id=itemPrice]");
 	let arr = [];
 
@@ -671,8 +671,8 @@ function cal_total_price() {
 
 	document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
 
-	document.getElementById("totalQty").innerHTML = count+'개';
-	total_price.innerHTML = '₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');;
+	document.getElementById("totalQty").innerHTML = String(count)+'개';
+	total_price.innerHTML = '₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 function cal_item_price(e) {
@@ -719,12 +719,12 @@ function add_item(e) {
 	}
 
 	reset_variant(e, '옵션2');
-	cal_total_price();
+	cal_total_value();
 }
 
 function remove_item(e) {
 	e.parentNode.parentNode.remove();
-	cal_total_price();
+	cal_total_value();
 }
 
 function reset_variant(e, val) {
