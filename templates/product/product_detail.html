@@ -126,7 +126,8 @@
 							</select>
 							<div class="selectedList"></div>
 							<div class="totalPrice">
-								<p>총 상품금액(<span id="counts">0개</span>)</p> <span id="totals">₱0</span>
+								<p>총 <span id="totalQty">0개</span></p> 
+								<span id="totalPrice">₱0</span>
 							</div>
 							<div class="buy_area">
 								<a class="buy_btn order" href="#" >구매하기</a>
@@ -155,19 +156,19 @@ Inner part START -->
 					<ul class="nav p-2">
 							<!-- Item 1 -->
 						<li class="nav-item">
-							<a class="nav-link" href="#">서비스 설명</a>
+							<a class="nav-link" href="#description">서비스 설명</a>
 						</li>
 							<!-- Item 2 -->
 						<li class="nav-item">
-							<a class="nav-link" href="#">서비스 정보</a>
+							<a class="nav-link" href="#detail">서비스 정보</a>
 						</li>
 							<!-- Item 3 -->
 						<li class="nav-item">
-							<a class="nav-link" href="#">서비스 평(999)</a>
+							<a class="nav-link" href="#review">서비스 평(999)</a>
 						</li>
 							<!-- Item 4 -->
 						<li class="nav-item">
-							<a class="nav-link" href="#">Q&A(999)</a>
+							<a class="nav-link" href="#Q&A">Q&A(999)</a>
 						</li>
 					</ul>
 				</nav>
@@ -570,7 +571,7 @@ Inner part START -->
 				<!-- Review END -->
 
 				<!-- Q&A START -->
-				<div class="row g-0 mt-5" id="detail">
+				<div class="row g-0 mt-5" id="Q&A">
 					<div class="col-12 border rounded p-4">
 						<div class="row">
 							<!-- Title -->
@@ -624,7 +625,6 @@ function add_cart_submit(product_id) {
         error: function (request, status, error){
           var msg = "ERROR : " + request.status + "<br>"
 			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
-			    console.log(msg);
         }
     });
 }
@@ -645,17 +645,34 @@ function set_variant_value(e) {
 }
 
 
-function cal_total_price() {
-	let total_value = document.getElementById("totals");
+function cal_total_value() {
+	let total_price = document.getElementById("totalPrice");
 	let item_list = document.querySelectorAll("span[id=itemPrice]");
-	total = 0;
-	count = 0;
-	
+
+	let total = 0;
+	let count = 0;
+
 	for (i=0; i<item_list.length; i++) {
 		let item = item_list[i].innerHTML;
 		total += Number(item.replace(/[^0-9]/g, ""));
+		count += Number(item_list[i].previousSibling.value);
 	}
-	total_value.innerHTML = total;
+
+	document.getElementById("totalQty").innerHTML = count+'개';
+	total_price.innerHTML = '₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');;
+}
+
+function cal_same_order(e) {
+	let qty = Number(e.value);
+	let ori_price = Number(e.dataset.optionPrice.replace(/[^0-9]/g, ""));
+
+	let total_price_span = e.nextSibling;
+
+	let total_price = qty * ori_price;
+	total_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+	total_price_span.innerHTML = `₱${total_price}`;
+	cal_total_value();
 }
 
 function add_item(e) {
@@ -673,7 +690,7 @@ function add_item(e) {
 	html += '</div>';
 	html += `<div>${option_first_value} / ${option_second_value}</div>`;
 	html += '<div class="optionAdd">';
-	html += '<input type="number" onfocusout="cal_total_price();" class="form-control text-center" value="1" min="1">';
+	html += `<input type="number" onfocusout="cal_same_order(this);" data-option-price='${option_second_price}' class="order_num form-control text-center" value="1" min="1">`;
 	html += `<span class="price" id="itemPrice">₱${option_second_price}</span>`;
 	html += '</div>';
 	html += '</div>';
@@ -688,12 +705,12 @@ function add_item(e) {
 	}
 
 	reset_variant(e, '옵션2');
-	cal_total_price();
+	cal_total_value();
 }
 
 function remove_item(e) {
 	e.parentNode.parentNode.remove();
-	cal_total_price();
+	cal_total_value();
 }
 
 function reset_variant(e, val) {
