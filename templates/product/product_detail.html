@@ -114,22 +114,43 @@
 									<p class="badge bg-orange text-white mb-0">{{product_detail.discount}}% off</p>
 								</div>
 							</div>
-							<select id="optionFirst" class="form-select form-select-lg mb-3" onchange="set_variant_value(this)">
-								<option selected>옵션1</option>
-								{% for variant in product_detail.productvariant_set.all %}
-								<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
-								{% endfor %}
-							</select>
+							{% if product_detail.productvariant_set.all %}
+								<select id="optionFirst" class="form-select form-select-lg mb-3" onchange="set_variant_value(this)">
+									<option selected>옵션1</option>
+									{% for variant in product_detail.productvariant_set.all %}
+									<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
+									{% endfor %}
+								</select>
 
-							<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-lg mb-3">
-								<option selected>옵션2</option>
-							</select>
-							<input type="hidden" name="obj_data">
-							<div class="selectedList"></div>
+								<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-lg mb-3">
+									<option selected>옵션2</option>
+								</select>
+							{% endif %}
+							<div class="selectedList">
+								{% if not product_detail.productvariant_set.all %}
+								<div id="productDom" class="optionTotal">
+									<div class="title" id="optionTitle">
+										<h6>테스트1</h6>
+										<a class="close" href="#" onclick="remove_item(this);">X</a>
+									</div>
+
+									
+									<div class="optionAdd">
+										<input type="number" onfocusout="cal_item_price(this);" data-option-price="{{product_detail.price}}" class="order_num form-control text-center" value="1" min="1"><span class="price" data-id="" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
+									</div>
+								</div>
+
+								{% endif %}
+							</div>
 							<div class="totalPrice">
+								{% if product_detail.productvariant_set.all %}
 								<p>총 상품금액(<span id="totalQty">0개</span>)</p> <span id="totalPrice">₱0</span>
+								{% else %}
+								<p>총 상품금액(<span id="totalQty">1개</span>)</p> <span id="totalPrice">₱{{product_detail.price|intcomma}}</span>
+								{% endif %}
 							</div>
 							<div class="buy_area">
+								<input type="hidden" name="obj_data" value='[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]'>
 								<a class="buy_btn order" href="#" >구매하기</a>
 								<a class="buy_btn cart" href="#" onclick="add_cart_submit('{{product_detail.id}}');">장바구니</a>
 								<a class="buy_btn heart" href="#" ><i class="far fa-heart fa-fw"></i></a>
@@ -606,6 +627,12 @@ function add_cart_submit(product_id) {
 	is_run = true;
 
 	let data = document.querySelector("input[name=obj_data]").value;
+
+	if (isEmpty(data)) {
+		openModal('알림','옵션을 선택해주세요.');
+		return false;
+	}
+
     $.ajax({
         type : 'POST',
         url : "{% url 'cart:add' %}",
@@ -656,10 +683,9 @@ function cal_total_value() {
 
 	for (i=0; i<item_list.length; i++) {
 		let item = item_list[i];
-		
+
 		total += Number(item.innerHTML.replace(/[^0-9]/g, ""));
 		count += Number(item.previousSibling.value);
-
 		
 		let objData = new Object();
 		objData.product_id = "{{product_detail.id}}";
