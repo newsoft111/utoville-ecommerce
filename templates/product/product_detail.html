@@ -558,16 +558,16 @@ Inner part START -->
 	</div>
 </section>
 
-<div class="modal fade" data-bs-backdrop="static" id="gigOrderReviewModal" tabindex="-1">
+<div class="modal fade" data-bs-backdrop="static" id="reviewWriteModal" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered modal-md">
 		<div class="modal-content">
 			<div class="modal-header p-4">
 				<h4 class="mb-0 text-center">리뷰쓰기</h4>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<form name="gigOrderReviewForm">
+			<form name="reviewWriteForm">
 				{% csrf_token %}
-				<input type="hidden" name="gig_order_id" value="">
+				<input type="hidden" name="order_id" value="">
 				<div class="modal-body p-4 text-center">			
 					<h5>만족하셨나요?</h5>
 					<div class="rating">
@@ -581,7 +581,7 @@ Inner part START -->
 				<div class="py-3">
 					<h5>어떤 점이 좋았나요?</h5>
 					<textarea type="text" name="review" class="form-control" rows="5"></textarea>
-				</div>												
+				</div>	
 				<div class="upload_photo p-4 text-center">
 					<h5>사진을 첨부해주세요.</h5>
 					<div class="input-group" id="preview">
@@ -593,7 +593,7 @@ Inner part START -->
 					<textarea class="form-control" style="resize:none"></textarea>		
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-primary ms-1" onclick="gig_order_review_submit()">완료</button>
+					<button type="button" class="btn btn-outline-primary ms-1" onclick="review_write_submit()">완료</button>
 					<button type="button" class="btn btn-primary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">취소</button>
 				</div>
 
@@ -745,11 +745,11 @@ function reset_variant(e, val) {
 	}
 }
 
-function gig_order_review_submit() {
-      var gigOrderReviewForm = document.gigOrderReviewForm;
-      var review = gigOrderReviewForm.review.value;
-      var rating = gigOrderReviewForm.rating.value;
-      let this_modal = "#gigOrderReviewModal";
+function review_write_submit() {
+      var reviewWriteForm = document.reviewWriteForm;
+      var review = reviewWriteForm.review.value;
+      var rating = reviewWriteForm.rating.value;
+      let this_modal = "#ReviewWriteModal";
             
       if (isEmpty(rating)) {
          openPopup('알림','평점을 선택해주세요.',this_modal);
@@ -761,7 +761,7 @@ function gig_order_review_submit() {
          return false;
       }
 
-      var queryString = $("form[name=gigOrderReviewForm]").serialize();
+      var queryString = $("form[name=reviewWriteForm]").serialize();
 
     $.ajax({
         type : 'POST',
