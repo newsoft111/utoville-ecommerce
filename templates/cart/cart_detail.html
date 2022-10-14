@@ -132,7 +132,7 @@ function remove_cart_submit(cart_item_id) {
         url : "{% url 'cart:remove' %}",
 		headers: { "X-CSRFToken": '{{csrf_token}}' },
         data : {
-			cart_item_id:cart_item_id
+			'cart_item_id[]':cart_item_id
 		},
         dataType : 'json',
         success: function(data){
@@ -181,5 +181,35 @@ function update_cart_submit(e) {
         }
     });
 }
+<<<<<<< Updated upstream
+=======
+
+function checkbox_manager() {
+	const allboxes = document.querySelectorAll("input[name=cart_item_id][type=checkbox]");
+	// if some of the checkbox is checked
+	const isSomeCheck = [...allboxes].some(item => item.checked);
+	
+	// if all are checked
+	const isAllChecked = [...allboxes].every(item => item.checked);
+	// if some are checked then on click of button check all
+	if (!isSomeCheck) {
+		allboxes.forEach(item => item.checked = true);
+	} else if (isAllChecked && isSomeCheck) {
+		allboxes.forEach(item => item.checked = false);
+	} else{
+		allboxes.forEach(item => item.checked = true);
+	}
+}
+
+function remove_checked_item() {
+	const item_list = document.querySelectorAll("input[name=cart_item_id][type=checkbox]:checked");
+
+	let arr = [];
+
+	item_list.forEach(ele => arr.push(ele.value));
+
+	remove_cart_submit(arr);
+}
+>>>>>>> Stashed changes
 </script>
 {% endblock %}
