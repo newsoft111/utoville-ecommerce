@@ -521,10 +521,7 @@ Inner part START -->
 							<!-- 별점등록, 리뷰, 사진첨부, 취소버튼, 등록버튼 -->
 							<!-- Write a review START -->
 							
-							<div class="mt-2 mt-md-4">
-								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gigOrderReviewModal" data-bs-whatever="@mdo">Write Review</button>	
-								
-							</div>	
+
 							<!-- Write a review END -->
 						</div> <!-- Row END -->
 					</div>
@@ -596,12 +593,10 @@ Inner part START -->
 					<button type="button" class="btn btn-outline-primary ms-1" onclick="review_write_submit()">완료</button>
 					<button type="button" class="btn btn-primary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">취소</button>
 				</div>
-
 			</form>
 		</div>
 	</div>
 </div>
-
 
 <script>
 is_run = false;
@@ -639,8 +634,6 @@ function add_cart_submit(product_id) {
         }
     });
 }
-
-
 
 function set_variant_value(e) {
 	let key = e.options[e.selectedIndex].value;
@@ -808,9 +801,6 @@ document.getElementById('inputGroupFile04').onchange = function() {
 	}
 	readURL(this);
 }
-
-
-
 </script>
 
 {% endblock %}
