@@ -85,9 +85,9 @@ def add_cart(request):
 def remove_cart(request):
 	cart = get_user_cart(request)
 
-	cart_item_id=request.POST.get('cart_item_id')
+	cart_item_id=request.POST.getlist('cart_item_id[]')
 
-	cart_item = CartItem.objects.get(pk=cart_item_id, cart=cart)
+	cart_item = CartItem.objects.filter(pk__in=cart_item_id, cart=cart)
 	cart_item.delete()
 	
 	result = '200'

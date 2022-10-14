@@ -44,8 +44,8 @@ class CartItem(models.Model):
 		return self.product
 
 	def delete(self):
-		self.is_deleted = False
-		self.deleted_at = datetime.now
+		self.is_deleted = True
+		self.deleted_at = datetime.now()
 		self.save()
 
 		
