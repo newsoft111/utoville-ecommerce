@@ -14,7 +14,7 @@
 				<div class="row d-none d-md-block">
 					<div class="col-12 align-middle py-3">
 						<div class="row border-bottom">
-							<div class="col-6 text-start">
+							<div class="col-6 text-start arrange_title">
 								<h5>Product</h5>
 							</div>
 							<div class="col-6">
@@ -37,12 +37,21 @@
 				</div>
 	
 				<!-- Property -->
+				<div class="select_btn_ara">
+					<label>
+						<button type="button" onclick="checkbox_manager();" class="btn btn-secondary">전체 선택</button>
+						<button type="button" onclick="remove_checked_item();" class="btn btn-dark">선택 삭제</button>
+					</label>		
+				</div>
 				{% for cart_item in cart_items %}
 				<!-- Property -->
 				<div class="row">
 					<div class="col-12 align-middle py-4">
-						<div class="row">
-							<div class="col-xxl-6">
+						<div class="row item_catalog">
+							<div class="col-xxl-1 text-center">
+								<input type="checkbox" name="cart_item_id" value="{{cart_item.pk}}">
+							</div>
+							<div class="col-xxl-5">
 								<div class="card bg-transparent">
 									<div class="row p-2">
 										<!-- Image -->
@@ -50,20 +59,20 @@
 											<img class="rounded" src="{% static 'images/property/grid-list/08.jpg' %}" alt="">
 										</div>
 										<!-- Info -->
-										<div class="col-xl-8 pt-2 pt-xl-0 text-center">
+										<div class="col-xl-8 pt-2 pt-xl-0 arrange_center">
 											<h6 class="mb-1">{{cart_item.product.name}}</h6>
 											<p class="mb-1 text-body">
 												{% if cart_item.variant_value is not None %}
 												{{cart_item.variant_value.value}} + ₱{{cart_item.variant_value.price}}
 												{% endif %}
 											</p>
-											<span class="text-success">
+											<!-- <span class="text-success">
 												{% if variant_value is not None %}
 												₱{{cart_item.product.price|add:cart_item.variant_value.price|intcomma}}
 												{% else %}
 												₱{{cart_item.product.price|intcomma}}
 												{% endif %}
-											</span>
+											</span> -->
 										</div>
 									</div>
 								</div>
@@ -72,7 +81,7 @@
 							<div class="col-xxl-6 pt-2 pt-xxl-0 text-center">
 								<div class="row">
 									<!-- Price -->
-									<div class="col-md-3 align-middle text-center">
+									<div class="col-md-3 align-middle arrange_center">
 										{% if variant_value is not None %}
 										₱{{cart_item.product.price|add:cart_item.variant_value.price|intcomma}}
 										{% else %}
@@ -80,11 +89,11 @@
 										{% endif %}
 									</div>
 									<!-- Quantity -->
-									<div class="col-md-3 align-middle pt-2 pt-md-0 text-center">
+									<div class="col-md-3 align-middle pt-2 pt-md-0 arrange_center">
 										<input type="number" class="form-control text-center" min="0" onfocusout="update_cart_submit(this)" data-cart-item-id="{{cart_item.id}}" value="{{cart_item.quantity}}">
 									</div>
 									<!-- Subtotal-->
-									<div class="col-md-3 align-middle pt-2 pt-md-0 text-center">
+									<div class="col-md-3 align-middle pt-2 pt-md-0 arrange_center">
 										{% if variant_value is not None %}
 										₱{{cart_item.product.price|add:cart_item.variant_value.price|mul:cart_item.quantity|intcomma}}
 										{% else %}
@@ -93,7 +102,7 @@
 										
 									</div>
 									<!-- Trash -->
-									<div class="col-md-2 align-middle pt-2 pt-md-0">
+									<div class="col-md-2 align-middle pt-2 pt-md-0 arrange_center">
 										<button class="btn btn-sm btn-danger-soft mb-1" type="button" onclick="remove_cart_submit('{{cart_item.id}}');"><i class="far fa-fw fa-trash-alt"></i></button>
 									</div>
 								</div>
