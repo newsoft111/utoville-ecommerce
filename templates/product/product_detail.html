@@ -350,128 +350,24 @@ Inner part START -->
 						<div class="row">
 							<!-- Title -->
 							<div class="mb-4">
-								<h3>서비스 평</h3>
-							</div>
-							<!-- Reviewbox -->
-							<div class="col-md-4 pt-3 pt-xl-0">
-								<div class="bg-primary-soft rounded text-center review-total">
-									<!-- Info -->
-									<h2>4.5</h2>
-									<div class="rating">
-										<p class="mb-0">Out of 5.0</p>
-										<!-- Star -->
-										<ul class="list-inline">
-											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-											<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-											<li class="list-inline-item me-0"><i class="fas fa-star-half-alt text-warning"></i></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-md-8 my-auto text-start">
-								<div class="row mt-4 mt-md-0">
-									<!-- Service review -->
-									<div class="col-7">
-										<div class="pb-1">
-												<h6 class="Font-base review-num">5</h6>
-												<!-- Progress bar -->
-												<div class="progress bg-success-soft" style="height: 4px;">
-													<div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-													</div>
-												</div>
-											</div>
-									</div>
-									<!-- Hospitality review -->
-									<div class="col-7">
-										<div class="pb-1">
-												<h6 class="Font-base review-num">4</h6>
-												<!-- Progress bar -->
-												<div class="progress bg-success-soft" style="height: 4px;">
-													<div class="progress-bar bg-danger" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-													</div>
-												</div>
-											</div>
-									</div>
-									<!-- Location review -->
-									<div class="col-7">
-										<div class="pb-1">
-												<h6 class="Font-base review-num">3</h6>
-											<!-- Progress bar -->
-											<div class="progress bg-warning-soft" style="height: 4px;">
-													<div class="progress-bar bg-danger" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-													</div>
-												</div>
-											</div>
-									</div>
-									<!-- Qualiety review -->
-									<div class="col-7">
-										<div class="pb-1">
-												<h6 class="Font-base review-num">2</h6>
-												<!-- Progress bar -->
-												<div class="progress bg-danger-soft" style="height: 4px;">
-													<div class="progress-bar bg-danger" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-													</div>
-												</div>
-											</div>
-									</div>
-
-									<div class="col-7">
-										<div class="pb-1">
-												<h6 class="Font-base review-num">1</h6>
-												<!-- Progress bar -->
-												<div class="progress bg-danger-soft" style="height: 4px;">
-													<div class="progress-bar bg-danger" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-													</div>
-												</div>
-											</div>
-									</div>						
-								</div><!-- Row END -->
+								<h3>서비스 평 {{product_detail.productreview_set.all.count}}개</h3>
 							</div>
 							
-							<!-- <div class="col-md-8 my-auto photo_review">
-								<h2 style="font-size: 15px">포토 구매평 모아보기</h2>
-								<a href="#">left_arrow</a>
-								<ul>
-									<li><img src="{% static 'images/property/grid-list/a.jpg' %}" alt="Card image"></li>
-									<li><img src="{% static 'images/property/grid-list/b.jpeg' %}" alt="Card image"></li>
-									<li><img src="{% static 'images/property/grid-list/a.jpg' %}" alt="Card image"></li>	
-									<li><img src="{% static 'images/property/grid-list/b.jpeg' %}" alt="Card image"></li>																	
-								</ul>
-								<a href="#">right_arrow</a>								
-							</div> -->
 
 							<!-- Customer Review START -->
-							<div class="mt-5">
-								<!-- Title -->
-								<div class="d-flex justify-content-between">
-									<h4 class="me-2">756 Reviews</h4>									
-									<div>
-									<!-- Review star -->
-									<ul class="list-inline">
-										<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-										<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-										<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-										<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-										<li class="list-inline-item me-0"><i class="fas fa-star"></i></li>
-									</ul>
-									<p class="mb-0">(4.0 out of 5.0)</p>
-								</div>
-								</div>
-								<!-- Review -->
+							<div class="">
+								{% for review in product_detail.productreview_set.all %}
 								<div class="d-md-flex align-items-center mt-4">
 									<!-- Avatar -->
 									<div>
 										<div class="avatar avatar-xxl me-4">
-											<img class="avatar-img rounded-circle" src="../static/images/avatar/06.jpg" alt="avatar">
+											<img class="avatar-img rounded-circle" src="{{review.user.avatar.url}}" alt="avatar">
 										</div>
 									</div>
 									<!-- Text -->
 									<div>
 										<div class="d-sm-flex mt-1 mt-md-0">
-											<h5 class="me-3 mb-0">Fani Georgieva</h5>
+											<h5 class="me-3 mb-0">{{review.user.username}}</h5>
 											<!-- Review star -->
 											<ul class="list-inline">
 												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
@@ -482,38 +378,12 @@ Inner part START -->
 											</ul>
 										</div>
 										<!-- Info -->
-										<p class="small mb-2">August 29 2019</p>
-										<p>Hello! Comfort reached gay perhaps chamber his six detract besides add. Moonlight newspaper up its enjoyment agreeable depending. Timed voice share led him to widen noisy young. At weddings believed laughing although the material does the exercise of </p>
+										<p class="small mb-2">{{review.created_at}}</p>
+										<p>{{review.review}}</p>
 									</div>	
 								</div>
+								{% endfor %}
 								<hr>
-
-								<!-- Review -->
-								<div class="d-md-flex align-items-center mt-4">
-									<!-- Avatar -->
-									<div>
-										<div class="avatar avatar-xxl me-4">
-											<img class="avatar-img rounded-circle" src="assets/images/avatar/3.jpg" alt="avatar">
-										</div>
-									</div>
-									<!-- Text -->
-									<div>
-										<div class="d-sm-flex mt-1 mt-md-0">
-											<h5 class="me-3 mb-0">Alexa Bliss</h5>
-											<!-- Review star -->
-											<ul class="list-inline">
-												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-												<li class="list-inline-item me-0"><i class="fas fa-star"></i></li>
-											</ul>
-										</div>
-										<!-- Info -->
-										<p class="small mb-2">August 29 2019</p>
-										<p>Timed voice share led him to widen noisy young. At weddings believed laughing although the material does the exercise of</p>
-									</div>	
-								</div>
 							</div>
 							<!-- Customer Review END -->
 
