@@ -555,49 +555,6 @@ Inner part START -->
 	</div>
 </section>
 
-<div class="modal fade" data-bs-backdrop="static" id="reviewWriteModal" tabindex="-1">
-	<div class="modal-dialog modal-dialog-centered modal-md">
-		<div class="modal-content">
-			<div class="modal-header p-4">
-				<h4 class="mb-0 text-center">리뷰쓰기</h4>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<form name="reviewWriteForm">
-				{% csrf_token %}
-				<input type="hidden" name="order_id" value="">
-				<div class="modal-body p-4 text-center">			
-					<h5>만족하셨나요?</h5>
-					<div class="rating">
-						<input type="radio" name="rating" value="5" id="review-start-5"><label for="review-start-5">☆</label>
-						<input type="radio" name="rating" value="4" id="review-start-4"><label for="review-start-4">☆</label>
-						<input type="radio" name="rating" value="3" id="review-start-3"><label for="review-start-3">☆</label>
-						<input type="radio" name="rating" value="2" id="review-start-2"><label for="review-start-2">☆</label>
-						<input type="radio" name="rating" value="1" id="review-start-1"><label for="review-start-1">☆</label>
-					</div>
-				</div>
-				<div class="py-3">
-					<h5>어떤 점이 좋았나요?</h5>
-					<textarea type="text" name="review" class="form-control" rows="5"></textarea>
-				</div>	
-				<div class="upload_photo p-4 text-center">
-					<h5>사진을 첨부해주세요.</h5>
-					<div class="input-group" id="preview">
-						<input type="file" accept="image/gif, image/jpeg, image/png" class="form-control" id="inputGroupFile04" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-					</div>
-				</div>
-				<div class="review_area p-4 text-center">
-					<h5>리뷰를 작성해주세요.</h5>
-					<textarea class="form-control" style="resize:none"></textarea>		
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-primary ms-1" onclick="review_write_submit()">완료</button>
-					<button type="button" class="btn btn-primary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">취소</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
 <script>
 is_run = false;
 
@@ -738,69 +695,6 @@ function reset_variant(e, val) {
 	}
 }
 
-function review_write_submit() {
-      var reviewWriteForm = document.reviewWriteForm;
-      var review = reviewWriteForm.review.value;
-      var rating = reviewWriteForm.rating.value;
-      let this_modal = "#ReviewWriteModal";
-            
-      if (isEmpty(rating)) {
-         openPopup('알림','평점을 선택해주세요.',this_modal);
-         return false;
-      }
-
-      if (isEmpty(review)) {
-         openPopup('알림','리뷰를 입력해주세요.',this_modal);
-         return false;
-      }
-
-      var queryString = $("form[name=reviewWriteForm]").serialize();
-
-    $.ajax({
-        type : 'POST',
-        url : "",
-        data : queryString,
-        dataType : 'json',
-        success: function(data){
-          if(data.result==200){
-            openPopup("알림", data.result_text,'',"reload");
-          }else{
-            openPopup("알림", data.result_text);
-          }
-          return;
-        },
-        error: function (request, status, error){
-          var msg = "ERROR : " + request.status + "<br>"
-             msg +=  + "내용 : " + request.responseText + "<br>" + error;
-        }
-    });
-}
-
-document.getElementById('inputGroupFile04').onchange = function() {
-	let this_modal = "#gigOrderReviewModal";
-	var fileTypes = ['jpg', 'jpeg', 'png', 'gif'];  //acceptable file types
-
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var extension = input.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
-					isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
-			if (isSuccess) {         
-				var reader = new FileReader();
-				///reader.onload = function(e) {
-				///   $('.gig-image-preview').removeClass("d-none");
-				///   $('.gig-image-preview img').attr("src", e.target.result);
-				///}
-				reader.readAsDataURL(input.files[0]);
-				
-			} else {
-				document.querySelector("[id=reviewModalCloseBtn]").click();
-				openModal('알림','이미지 파일이 아닙니다.',this_modal);
-				input.value='';
-			}
-		}
-	}
-	readURL(this);
-}
 </script>
 
 {% endblock %}
