@@ -141,7 +141,7 @@ function remove_cart_submit(cart_item_id) {
         url : "{% url 'cart:remove' %}",
 		headers: { "X-CSRFToken": '{{csrf_token}}' },
         data : {
-			cart_item_id:cart_item_id
+			'cart_item_id[]':cart_item_id
 		},
         dataType : 'json',
         success: function(data){
@@ -211,7 +211,11 @@ function checkbox_manager() {
 function remove_checked_item() {
 	const item_list = document.querySelectorAll("input[name=cart_item_id][type=checkbox]:checked");
 
-	item_list.forEach(ele => remove_cart_submit(ele.value));
+	let arr = [];
+
+	item_list.forEach(ele => arr.push(ele.value));
+
+	remove_cart_submit(arr);
 }
 </script>
 {% endblock %}

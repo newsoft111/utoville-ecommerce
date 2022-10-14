@@ -20,30 +20,30 @@ def user_login(request):
 	if request.user.is_authenticated: #로그인 상태면
 		return HttpResponseRedirect(resolve_url('main:index'))
 	if request.method == 'POST':
-		print(request.session.get('cart_id'))
 		username=request.POST.get('username')
 		password=request.POST.get('password')
 
 		user = auth.authenticate(request, username=username, password=password)
 
-		if user is not None:
-			if user.mb_status == 'Y':
-				if user.mb_active == 'Y':
-					auth.login(request, user)
-					result = '200'
-					result_text = '로그인 성공'
-				else:
-					result = '201'
-					result_text = '탈퇴한 계정입니다.'	
-			else:
-				result = '201'
-				result_text = f"관리자에게 문의바랍니다."
-		else:
+		if user is None:
 			result = '201'
 			result_text = '아이디와 비밀번호를 정확히 입력해 주세요.'
+			return JsonResponse({'result': result, 'result_text': result_text})
 
-		result = {'result': result, 'result_text': result_text}
-		return JsonResponse(result)
+		if user.mb_status != 'Y':
+			result = '201'
+			result_text = f"관리자에게 문의바랍니다."
+			return JsonResponse({'result': result, 'result_text': result_text})
+
+		if user.mb_active == 'Y':
+			auth.login(request, user)
+			result = '200'
+			result_text = '로그인 성공'
+		else:
+			result = '201'
+			result_text = '탈퇴한 계정입니다.'	
+
+		return JsonResponse({'result': result, 'result_text': result_text})
 	else:
 		return render(request, 'account/login.html',{"seo":seo})
 
@@ -74,31 +74,34 @@ def user_join(request):
 		except:
 			_nickname = None
 
-		if _email is None:
-			if _nickname is None:
-				if password == password2:
-					user = User.objects.create_user(
-																		email=email,
-																		nickname=nickname,
-																		password=password,
-																	)
-
-					
-					if send_auth_mail(email):
-						result = '200'
-						result_text = "회원가입이 완료되었습니다.<br>가입하신 이메일 주소로 인증 메일을 보내드렸습니다.<br>이메일 인증을 한 후에 정상적인 서비스 이용이 가능합니다."
-					else:
-						result = '201'
-						result_text = '알수없는 오류입니다.<br>다시시도 해주세요.'
-				else:
-					result = '201'
-					result_text = '비밀번호가 일치하지 않습니다.'
-			else:
-				result = '201'
-				result_text = '입력한 닉네임은 이미 사용 중입니다.'
-		else:
+		if _email is not None:
 			result = '201'
 			result_text = '입력한 이메일은 이미 사용 중입니다.'
+			return JsonResponse({'result': result, 'result_text': result_text})
+
+		if _nickname is not None:
+			result = '201'
+			result_text = '입력한 닉네임은 이미 사용 중입니다.'
+			return JsonResponse({'result': result, 'result_text': result_text})
+
+		if password != password2:
+			result = '201'
+			result_text = '비밀번호가 일치하지 않습니다.'
+			return JsonResponse({'result': result, 'result_text': result_text})
+		
+
+		user = User.objects.create_user(
+								email=email,
+								nickname=nickname,
+								password=password,
+							)
+		
+		if send_auth_mail(email):
+			result = '200'
+			result_text = "회원가입이 완료되었습니다.<br>가입하신 이메일 주소로 인증 메일을 보내드렸습니다.<br>이메일 인증을 한 후에 정상적인 서비스 이용이 가능합니다."
+		else:
+			result = '201'
+			result_text = '알수없는 오류입니다.<br>다시시도 해주세요.'
 
 		result = {'result': result, 'result_text': result_text}
 		return JsonResponse(result)
@@ -164,30 +167,33 @@ def find_passwd(request):
 		except:
 			user = None
 
-		if user is not None:
-			emailContent = render_to_string('email/reset_passd.html',{
-					'user': user,
-					'domain': settings.CURRENT_URL,
-					'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-					'token': PasswordResetTokenGenerator().make_token(user),
-			})
-
-			_result = EmailSender(
-				email              = email,
-				subject = '[유토빌] 비밀번호 재설정 안내 메일입니다.',
-				message = emailContent,
-				mailType = 'html'
-			)
-			
-			if _result:
-				result = '200'
-				result_text = '비밀번호 재설정 메일이 전송되었습니다.<br>메일함을 확인해주세요.'
-			else:
-				result = '201'
-				result_text = '알수없는 오류입니다. 다시시도 해주세요.'
-		else:
+		if user is None:
 			result = '201'
 			result_text = '등록되지 않은 이메일 입니다.'
+			return JsonResponse({'result': result, 'result_text': result_text})
+
+
+		emailContent = render_to_string('email/reset_passd.html',{
+				'user': user,
+				'domain': settings.CURRENT_URL,
+				'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+				'token': PasswordResetTokenGenerator().make_token(user),
+		})
+
+		_result = EmailSender(
+			email              = email,
+			subject = '[유토빌] 비밀번호 재설정 안내 메일입니다.',
+			message = emailContent,
+			mailType = 'html'
+		)
+		
+		if _result:
+			result = '200'
+			result_text = '비밀번호 재설정 메일이 전송되었습니다.<br>메일함을 확인해주세요.'
+		else:
+			result = '201'
+			result_text = '알수없는 오류입니다. 다시시도 해주세요.'
+			
 		result = {'result': result, 'result_text': result_text}
 		return JsonResponse(result)   
 	else:
@@ -202,29 +208,29 @@ def reset_passwd(request, uidb64, token):
 	except(TypeError, ValueError, OverflowError, User.DoesNotExist):
 		user = None
 
-	if user is not None:
-		if PasswordResetTokenGenerator().check_token(user, token):
-			if request.method == 'POST':
-				new_password = request.POST.get("password")
-				password_confirm = request.POST.get("password2")
-				if new_password == password_confirm:
-					user.set_password(new_password)
-					user.save()
-					result = '200'
-					result_text = '비밀번호 변경이 완료되었습니다.<br>변경하신 비밀번호로 다시 로그인 해주시기 바랍니다.'
-				else:
-					result = '201'
-					result_text = '입력하신 비밀번호가 동일하지 않습니다.'
-
-				result = {'result': result, 'result_text': result_text}
-				return JsonResponse(result)
-			else:
-				return render(request, 'account/reset_passwd.html')
-		else:
-			return render(request, 'main/index.html', {"message":"이미 사용된 인증메일 입니다."})
-	else:
+	if user is None:
 		return render(request, 'main/index.html', {"message":"알수없는 오류입니다. 다시시도 해주세요."})
+		
+	if not PasswordResetTokenGenerator().check_token(user, token):
+		return render(request, 'main/index.html', {"message":"이미 사용된 인증메일 입니다."})
 
+
+	if request.method == 'POST':
+		new_password = request.POST.get("password")
+		password_confirm = request.POST.get("password2")
+		if new_password == password_confirm:
+			user.set_password(new_password)
+			user.save()
+			result = '200'
+			result_text = '비밀번호 변경이 완료되었습니다.<br>변경하신 비밀번호로 다시 로그인 해주시기 바랍니다.'
+		else:
+			result = '201'
+			result_text = '입력하신 비밀번호가 동일하지 않습니다.'
+
+		result = {'result': result, 'result_text': result_text}
+		return JsonResponse(result)
+	else:
+		return render(request, 'account/reset_passwd.html')
 
 
 def send_auth_mail(email):
