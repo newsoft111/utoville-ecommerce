@@ -31,49 +31,22 @@
                 <div class="row">
                     <!-- product grid left panel -->
 					<div class="col-lg-3">
-						<div class="categories mb-1-9">
-							<h3 class="bg-primary text-white m-0 h5 px-3 py-2 font-weight-600 d-none d-lg-block">Homcare</h3>
-							<h3 class="bg-primary text-white collapse-sm m-0 h5 px-3 py-2 font-weight-600 d-block d-lg-none">Homcare</h3>
-							<ul class="list-style-5 shop-category">
-								{% for categoryFirst in category_first_list %}
-								<li>
-									<a href="{% url 'product:list' %}?category1={{categoryFirst.id}}">{{categoryFirst.name}}</a>
-								</li>
-								{% endfor %}
-							</ul>
-							<div id="collapse{{categoryFirst.id}}" class="collapse {% if not categoryFirst.categorysecond_set.all is None and request.GET.category1|slugify == categoryFirst.id|slugify %}show{% endif %}" aria-labelledby="heading{{categoryFirst.id}}" data-bs-parent="#accordion">
-								<div class="card-body">
-									<ul class="list-style-5">
-										<li><a href="?category1={{categoryFirst.id}}">전체보기</a></li>
-										{% for categorySecond in categoryFirst.categorysecond_set.all %}
-										<li><a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}">{{categorySecond.name}}</a></li>
-										{% endfor %}
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="offer-banner bg-primary text-center d-none d-lg-block">
-							<a href="#!"><img src="img/shop/left-panel-banner.png" alt="배너광고"></a>
-						</div>
-						
-						<!--작업 다하고 징루것-->
-						<!-- 
                         <div id="accordion" class="accordion-style2 mb-4">
 							{% for categoryFirst in category_first_list %}
                             <div class="card">
-                                <div class="card-header" id="heading{{categoryFirst.id}}">
+                                <!--<div class="card-header" id="heading{{categoryFirst.id}}">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapse{{categoryFirst.id}}" aria-expanded="true" aria-controls="collapse{{categoryFirst.id}}">{{categoryFirst.name}}</button>
                                     </h5>
-                                </div> -->
+                                </div>-->
 
-								<!--<div class="card-header">
+								<div class="card-header">
 									<h5 class="mb-0">
 										<a class="btn btn-link" href="?category1={{categoryFirst.id}}">{{categoryFirst.name}}</a>
 									</h5>
-								</div>-->
+								</div>
 								
-                                <!-- <div id="collapse{{categoryFirst.id}}" class="collapse {% if not categoryFirst.categorysecond_set.all is None and request.GET.category1|slugify == categoryFirst.id|slugify %}show{% endif %}" aria-labelledby="heading{{categoryFirst.id}}" data-bs-parent="#accordion">
+                                <div id="collapse{{categoryFirst.id}}" class="collapse {% if not categoryFirst.categorysecond_set.all is None and request.GET.category1|slugify == categoryFirst.id|slugify %}show{% endif %}" aria-labelledby="heading{{categoryFirst.id}}" data-bs-parent="#accordion">
                                     <div class="card-body">
                                         <ul class="list-style-5">
 											<li><a href="?category1={{categoryFirst.id}}">전체보기</a></li>
@@ -85,7 +58,7 @@
                                 </div>
                             </div>
                             {% endfor %}
-                        </div> -->
+                        </div>
 						<!--여기까지-->
                         <div class="offer-banner bg-primary text-center d-none d-lg-block">
                             <a href="#!"><img src="{% static 'img/shop/left-panel-banner.png' %}" alt="..."></a>
@@ -160,26 +133,19 @@
 
                         <div class="row product-grid mb-1-9 mb-lg-6 mt-n1-9">
 							{% for productList in product_list %}
-                            <div class="col-xl-4 col-md-6 mt-1-9">
-                                <div class="border">
-
-                                    <a href="#!" class="product-block">
-                                        <div class="label-offer bg-red">Sale</div><img src="{% static 'img/shop/product-01.jpg' %}" alt="...">
-                                    </a>
-                                    <div class="product-info">
-                                        <a href="{% url 'product:detail' productList.id %}">{{productList.name}}</a>
-                                        <p class="price text-center m-0">
-                                            <span class="red line-through me-2">₱{{productList.price}}</span>
-                                            <span>₱{{productList.price}}</span>
-                                        </p>
-                                    </div>
-                                    <div class="buttons">
-                                        <a href="#!" class="bg-extra-dark-gray text-white"><i class="fas fa-heart me-2"></i>Wishlist</a>
-                                        <a href="#!" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
-                                    </div>
-
-                                </div>
-                            </div>
+								<div class="col-xl-4 col-md-6 mt-1-9">
+									<div class="border">
+										<a href="{% url 'product:detail' productList.id %}" class="product-block">
+											<img src="{% static 'img/shop/product-01.jpg' %}" alt="...">
+										</a>
+										<div class="product-info">
+											<a href="{% url 'product:detail' productList.id %}">{{productList.name}}</a>
+											<p class="price text-center m-0">
+												<span>₱{{productList.price|intcomma}}</span>
+											</p>
+										</div>
+									</div>
+								</div>
 							{% endfor %}
                         </div>
 
@@ -189,7 +155,7 @@
                                     <ul>
 										{% if product_list.has_previous %}
                                         <li class="">
-											<a href="?p={{page_number }}
+											<a href="?p={{product_list.previous_page_number }}
 													{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
 													{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">
 												<i class="fas fa-long-arrow-alt-left me-1 d-none d-md-inline-block"></i> Prev
@@ -215,9 +181,9 @@
 											{% endif %}
 										{% endfor %}
 
-										{% if product_list.has_previous %}
+										{% if product_list.has_next %}
 										<li>
-											<a href="?p={{page_number }}
+											<a href="?p={{product_list.next_page_number }}
 													{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
 													{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">
 												Next <i class="fas fa-long-arrow-alt-right ms-1 d-none d-md-inline-block"></i>
