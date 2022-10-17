@@ -52,22 +52,26 @@
 						</select>
 					{% endif %}
 					</div>
-					<div class="row">
+					<div class="buy_area">
 						<div class="pd_qty col-4 col-lg-2">
-							<label>Qty 장바구니의 Qty와 통일:</label>
-							<input type="text" value="1" placeholder="1" class="mb-3 form-control">
+							<label>Qty:</label>
+							<select id="qty" class="form-control form-select" onchange="update_cart_submit(this);" data-cart-item-id="{{cart_item.id}}">
+								{% for i in 10|times %}
+								<option value="{{forloop.counter}}" {% if forloop.counter is cart_item.quantity %}selected{% endif %} >{{forloop.counter}}</option>
+								{% endfor %}
+							</select>
 						</div>
 
-					</div>
-
-					<div class="row mb-3">
-						<div class="buy_area col-lg-12">					
-							<div class="bd-example mb-2">
-								<a href="#!" class="cart_btn butn-style3"><span><i class="fas fa-shopping-cart me-1"></i> Add to Cart</span></a>
-								<a href="#!" class="buy_btn butn-style3"><span><i class="fas fa-shopping-cart me-1"></i> Buy Now!</span></a>
+						<div class="btn_row">
+							<div class="btn_area col-lg-12">					
+								<div class="bd-example mb-2">
+									<a href="#!" class="cart_btn butn-style3"><span><i class="fas fa-shopping-cart me-1"></i> Add to Cart</span></a>
+									<a href="#!" class="buy_btn butn-style3"><span><i class="fas fa-shopping-cart me-1"></i> Buy Now!</span></a>
+								</div>
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -80,112 +84,91 @@
 				<div class="horizontaltab tab-style5">
 					<ul class="resp-tabs-list hor_1 text-start">
 						<li>Description</li>
-						<li>Additional Info</li>
+						<li>Service Info</li>
 						<li>Reviews (2)</li>
+						<li>Q&A</li>
 					</ul>
 					<div class="resp-tabs-container hor_1">
-						<div>
-							<p >Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in ea voluptate velit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in ea voluptate velit.</p>
-							<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in ea voluptate velit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in ea voluptate velit.</p>
-
+						<div class="text-start">
+							{{product_detail.content|safe}}
 						</div>
-						<div>
-							<div class="row align-items-center">
-								<div class="col-lg-6 mb-4 mb-lg-0">
-									<ul class="list-style-5">
-										<li><strong>Weight:</strong> 0.150 Kg</li>
-										<li><strong>Dimensions:</strong> 90x60x90 Cm</li>
-										<li><strong>Size:</strong> One Size Fits All</li>
-										<li><strong>Color:</strong> Gray</li>
-										<li><strong>Guarantee:</strong> 5 Years</li>
-									</ul>
+						<div class="row align-items-center">
+							<div class="col-lg-12 mb-4 mb-lg-0">
+								<ul class="service_info list-style-5">	
+									<li><strong>업체명 :</strong> <span>유토빌홈케어</span></li>
+									<li><strong>이용조건 :</strong> <span>홈케어 서비스 가능 지역 - 출장서비스 운영시간 (월~토 09시 ~ 18시) *서비스 가능지역은 상세페이지를 참고해주시기 바랍니다. *품목이 상이한 경우 추가금액이 발생할 수 있습니다.</span></li>
+									<li><strong>취소, 중도해약/해지 조건 및 환불 기준 :</strong> <span>홈케어 서비스를 받으시기 전 취소가 가능하며 콜 센터로 연락해주시기 바랍니다. 사정에 의해 희망예약일자가 변경되거나 홈케어 서비스가 불가능한 상품일 수 있습니다. 신청하신 품목과 실제 서비스대상 품목이 상이한 경우 서비스가 불가할 수 있습니다.</span></li>
+									<li><strong>취소 및 환불 방법(필수) :</strong> <span>홈케어 서비스를 받으시기 전 취소가 가능하며 콜 센터로 연락해주시기 바랍니다. 사정에 의해 희망예약일자가 변경되거나 홈케어 서비스가 불가능한 상품일 수 있습니다. 신청하신 품목과 실제 서비스대상 품목이 상이한 경우 서비스가 불가할 수 있습니다.</span></li>
+									<li><strong>소비자상담관련 전화번호 :</strong> <span>xxxx-xxxx</span></li>
+								</ul>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-9 mb-4 mb-lg-0 mx-auto">
+								<form class="quform" action="quform/contact.php" method="post" enctype="multipart/form-data" onclick="">
+									<div class="quform-elements">
+										<div class="row">
+											<form name="reviewWriteForm">
+												{% csrf_token %}
+												<input type="hidden" name="order_id" value="">
+												<div class="modal-body p-4 text-center">			
+													<h5>만족하셨나요?</h5>
+													<div class="rating">
+														<input type="radio" name="rating" value="5" id="review-start-5"><label for="review-start-5">☆</label>
+														<input type="radio" name="rating" value="4" id="review-start-4"><label for="review-start-4">☆</label>
+														<input type="radio" name="rating" value="3" id="review-start-3"><label for="review-start-3">☆</label>
+														<input type="radio" name="rating" value="2" id="review-start-2"><label for="review-start-2">☆</label>
+														<input type="radio" name="rating" value="1" id="review-start-1"><label for="review-start-1">☆</label>
+													</div>
+												</div>
+												<div class="py-3">
+													<h5>어떤 점이 좋았나요?</h5>
+													<textarea type="text" name="review" class="form-control" rows="5"></textarea>
+												</div>	
+												<div class="upload_photo p-4 text-center">
+													<h5>사진을 첨부해주세요.</h5>
+													<div class="input-group" id="preview">
+														<input type="file" accept="image/gif, image/jpeg, image/png" class="form-control" id="inputGroupFile04" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+													</div>
+												</div>
+												<div class="review_area p-4 text-center">
+													<h5>리뷰를 작성해주세요.</h5>
+													<textarea class="form-control" style="resize:none"></textarea>		
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-outline-primary ms-1" onclick="review_write_submit()">완료</button>
+													<button type="button" class="btn btn-primary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">취소</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-lg-12 ps-lg-4">
+								<div class="mb-3">
+									<p class="p-0 mb-0"><strong>Nathan Ford,</strong> Sep 15, 2018</p>
+									<div class="mb-3 display-30">
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star-half-alt"></i>
+									</div>
+									<p >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.</p>
+									<div class="bg-medium-light-gray separator-line-horrizontal-full"></div>
 								</div>
-								<div class="col-lg-6 ps-lg-1-9">
-									<p >Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in ea voluptate velit.</p>
-									<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in ea voluptate velit.</p>
+								<div>
+									<p class="m-0"><strong>Mac Still,</strong> Aug 08, 2018</p>
+									<div class="mb-3 display-30">
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star-half-alt"></i>
+									</div>
+									<p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.</p>
 								</div>
 							</div>
-
-						</div>
-						<div>
-							<div class="row">
-								<div class="col-lg-6 mb-4 mb-lg-0">
-									<form class="quform" action="quform/contact.php" method="post" enctype="multipart/form-data" onclick="">
-
-										<div class="quform-elements">
-
-											<div class="row">
-
-												<form name="reviewWriteForm">
-													{% csrf_token %}
-													<input type="hidden" name="order_id" value="">
-													<div class="modal-body p-4 text-center">			
-														<h5>만족하셨나요?</h5>
-														<div class="rating">
-															<input type="radio" name="rating" value="5" id="review-start-5"><label for="review-start-5">☆</label>
-															<input type="radio" name="rating" value="4" id="review-start-4"><label for="review-start-4">☆</label>
-															<input type="radio" name="rating" value="3" id="review-start-3"><label for="review-start-3">☆</label>
-															<input type="radio" name="rating" value="2" id="review-start-2"><label for="review-start-2">☆</label>
-															<input type="radio" name="rating" value="1" id="review-start-1"><label for="review-start-1">☆</label>
-														</div>
-													</div>
-													<div class="py-3">
-														<h5>어떤 점이 좋았나요?</h5>
-														<textarea type="text" name="review" class="form-control" rows="5"></textarea>
-													</div>	
-													<div class="upload_photo p-4 text-center">
-														<h5>사진을 첨부해주세요.</h5>
-														<div class="input-group" id="preview">
-															<input type="file" accept="image/gif, image/jpeg, image/png" class="form-control" id="inputGroupFile04" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-														</div>
-													</div>
-													<div class="review_area p-4 text-center">
-														<h5>리뷰를 작성해주세요.</h5>
-														<textarea class="form-control" style="resize:none"></textarea>		
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-outline-primary ms-1" onclick="review_write_submit()">완료</button>
-														<button type="button" class="btn btn-primary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">취소</button>
-													</div>
-												</form>
-
-											</div>
-
-										</div>
-
-									</form>
-								</div>
-								<div class="col-lg-6 ps-lg-4">
-
-									<div class="mb-3">
-										<p class="p-0 mb-0"><strong>Nathan Ford,</strong> Sep 15, 2018</p>
-										<div class="mb-3 display-30">
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star-half-alt"></i>
-										</div>
-										<p >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.</p>
-										<div class="bg-medium-light-gray separator-line-horrizontal-full"></div>
-									</div>
-
-									<div>
-										<p class="m-0"><strong>Mac Still,</strong> Aug 08, 2018</p>
-										<div class="mb-3 display-30">
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star-half-alt"></i>
-										</div>
-										<p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.</p>
-
-									</div>
-
-								</div>
-							</div>
-
 						</div>
 					</div>
 				</div>
@@ -213,7 +196,6 @@
 							</p>
 						</div>
 						<div class="buttons">
-							<a href="#!" class="bg-extra-dark-gray text-white"><i class="fas fa-heart me-2"></i>Wishlist</a>
 							<a href="#!" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
 						</div>
 
@@ -229,8 +211,7 @@
 							</p>
 						</div>
 						<div class="buttons">
-							<a href="#!" class="bg-extra-dark-gray text-white"><i class="fas fa-heart me-2"></i>Wishlist</a>
-							<a href="#!" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
+							<a href="#!" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
 						</div>
 
 					</div>
@@ -247,8 +228,7 @@
 							</p>
 						</div>
 						<div class="buttons">
-							<a href="#!" class="bg-extra-dark-gray text-white"><i class="fas fa-heart me-2"></i>Wishlist</a>
-							<a href="#!" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
+							<a href="#!" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
 						</div>
 
 					</div>
@@ -265,8 +245,7 @@
 							</p>
 						</div>
 						<div class="buttons">
-							<a href="#!" class="bg-extra-dark-gray text-white"><i class="fas fa-heart me-2"></i>Wishlist</a>
-							<a href="#!" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
+							<a href="#!" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
 						</div>
 
 					</div>
@@ -281,13 +260,11 @@
 							</p>
 						</div>
 						<div class="buttons">
-							<a href="#!" class="bg-extra-dark-gray text-white"><i class="fas fa-heart me-2"></i>Wishlist</a>
-							<a href="#!" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
+							<a href="#!" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
 						</div>
 
 					</div>
 					<div class="border">
-
 						<a href="#!" class="product-block">
 							<div class="label-offer bg-primary">New</div><img src="img/shop/product-15.jpg" alt="...">
 						</a>
@@ -299,12 +276,10 @@
 							</p>
 						</div>
 						<div class="buttons">
-							<a href="#!" class="bg-extra-dark-gray text-white"><i class="fas fa-heart me-2"></i>Wishlist</a>
-							<a href="#!" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
+							<a href="#!" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
 						</div>
 
 					</div>
-
 				</div>
 			</div>
 
