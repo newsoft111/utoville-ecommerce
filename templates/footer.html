@@ -84,6 +84,22 @@
     </div>
 
     
+	<div class="modal fade" id="globalModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="globalModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+			<div class="modal-content">
+			<div class="modal-header p-4">
+				<h4 class="mb-0 text-center" id="modal_subject">알림</h4>
+				<button type="button" class="btn-close" id="closeModalBtn" data-before-modal="" onclick="closeModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body p-4" id="modal_content">
+			</div>
+			<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-md" id="closeModalBtn" data-before-modal="" onclick="closeModal()" data-bs-dismiss="modal">확인</button>
+			</div>
+			</div>
+		</div>
+	</div>
+	
     <!-- SCROLL TO TOP
     ================================================== -->
     <a href="#!" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
@@ -115,7 +131,7 @@
     <script src="{% static 'quform/js/scripts.js' %}"></script>
 
     <!-- all js include end -->
-
+	<script src="{% static 'js/custom.js' %}"></script>
 </body>
 
 </html>
