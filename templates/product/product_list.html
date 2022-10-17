@@ -3,304 +3,76 @@
 {% load static %}
 {% load humanize %}
 
-<section class="pt-5">
-	<div class="container">
-		<!-- Title -->
-		<!-- <div class="row mb-4">
-			<div class="col-md-12"> -->
-				<!-- Title START -->
-				<!-- <div class="d-md-flex justify-content-md-between align-items-center"> -->
-					<!-- Title -->
-					<!-- <h3 class="mb-0">유토빌 홈케어</h3> -->
-					<!-- Button -->
-					<!-- <div class="text-primary-hover text-end d-none d-md-block">
-							<ul class="list-inline"> -->
-							<!-- Grid icon -->
-							<!-- <li class="list-inline-item"><a href="#" class="border rounded-1 p-2 me-2"><i class="fas fa-fw fa-th-large"></i></a></li> -->
-							<!-- list icon -->
-							<!-- <li class="list-inline-item"><a href="#" class="border rounded-1 p-2 me-2"><i class="fas fa-fw fa-list-ul"></i></a></li> -->
-						<!-- </ul>
-	   				</div>
-				</div> -->
-				<!-- Title END -->
-			<!-- </div>
-		</div> -->
-		
-		<div class="row">
-			<!-- Left sidebar START -->
-			<div class="col-lg-3 pt-5 pt-lg-0 order-2 order-lg-1">
-				<div class="row mb-5 mb-lg-0">
-					<div class="col-12 col-sm-6 col-lg-12">
+<!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section bg-img cover-background" data-overlay-dark="7" data-background="img/bg/bg5.jpg">
+            <div class="container">
 
-						<!-- Advance search START -->
-						<div class="bg-white shadow-lg rounded-1 p-4 mb-4">
-							<!-- Title -->
-							<!-- <h4 class="mb-4">Advance Search</h4> -->
-								<div class="row">
-									<div class="col-12" style="text-align: left;">
-										<h6 class="font-base mt-4"><i class="fas fa-fw fa-home me-2"></i>Category:</h6>	
-										<nav id="sub_gnb">
-											<ul>
-												{% for categoryFirst in category_first_list %}
-												<li>
-													<a href="?category1={{categoryFirst.id}}">{{categoryFirst.name}}</a>
-													{% if not categoryFirst.categorysecond_set.all is None and request.GET.category1|slugify == categoryFirst.id|slugify %}
-													<ul>
-														{% for categorySecond in categoryFirst.categorysecond_set.all %}
-														<li><a href="?category1={{categorySecond.parent.id}}&category2={{categorySecond.id}}">{{categorySecond.name}}</a></li>
-														{% endfor %}
-													</ul>
-													{% endif %}
-												</li>
-												{% endfor %}											
-											</ul>
-										</nav>
-										<!-- Form START -->
-										<form>
-											<hr class="my-0">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Shop Product Grid</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="text-md-end text-start mt-2 mt-lg-0 ps-0">
+                            <li><a href="home-default.html">Home</a></li>
+                            <li><a href="#!">Shop Product Grid</a></li>
+                        </ul>
+                    </div>
+                </div>
 
-											<!-- Area item -->
-											<h6 class="font-base mt-4"><i class="fas fa-fw fa-street-view me-2"></i>Area:</h6>
-											<select class="form-select mb-4 js-choice" aria-label="Default select example">
-												<option value="">Select</option>
-												<option>Manhattan</option>
-												<option>Queens</option>
-												<option>West side</option>
-											</select>
-											<hr class="my-0">
+            </div>
+        </section>
 
-											<!-- City item -->
-											<h6 class="font-base mt-4"><i class="fas fa-fw fa-city me-2"></i>City:</h6>
-											<select class="form-select mb-4 js-choice" aria-label="Default select example">
-												<option value="">Select</option>
-												<option>Manhattan</option>
-												<option>Queens</option>
-												<option>West side</option>
-											</select>
-											<hr class="my-0">
+        <!-- SHOP GRID
+        ================================================== -->
+        <section>
+            <div class="container">
+                <div class="row">
 
-											<!-- Price range START -->
-											<h6 class="font-base mt-4"><i class="fas fa-dollar-sign me-2"></i>Price range</h6>
-											<div class="position-relative mt-2">
-												<div class="noui-wrapper m-b-50 p-l-r">
-													<div class="d-flex justify-content-between">
-														<input type="text" class="text-body input-with-range-min">
-														<input type="text" class="text-body input-with-range-max">
-													</div>
-													<div class="noui-slider-range m-b-20 mt-2" data-range-min='10000' data-range-max='20000' data-range-selected-min='11000' data-range-selected-max='17000'></div>
-												</div>
-											</div>
-											<!-- Price range END -->
+                    <!-- product grid left panel -->
+                    <div class="col-lg-3">
 
-											<!-- More filter START -->
-											<div class="mt-5">
-												<!-- More search button link -->
-												<a class="btn btn-link btn-more-fliter p-0" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
-													<i class="fas fa-plus me-2"></i>More filter
-												</a>
-												<div class="collapse" id="collapseExample1">
-													<div class="card card-body p-0 mt-4">
-														<!-- Amenities START -->
-														<h6 class="font-base"><i class="fas fa-bars me-2"></i>Amenities</h6>
-															<div class="row">
-																<!-- Amenities group -->
-																<div class="col-6">
-																	<!-- Checkbox -->
-																	<div class="form-check">
-																		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault9">
-																			<label class="form-check-label" for="flexCheckDefault9">
-																				Clinic
-																			</label>
-																	</div>
-																	<!-- Checkbox -->
-																	<div class="form-check">
-																		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault10">
-																			<label class="form-check-label" for="flexCheckDefault10">
-																				Internet
-																			</label>
-																	</div>
-																	<!-- Checkbox -->
-																	<div class="form-check">
-																		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault11">
-																			<label class="form-check-label" for="flexCheckDefault11">
-																				Park
-																			</label>
-																	</div>
-																	<!-- Checkbox -->
-																	<div class="form-check">
-																		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault12">
-																			<label class="form-check-label" for="flexCheckDefault12">
-																				School
-																			</label>
-																	</div>
-																</div>
+                        <div id="accordion" class="accordion-style2 mb-4">
+							{% for categoryFirst in category_first_list %}
+                            <div class="card">
+                                <div class="card-header" id="heading{{categoryFirst.id}}">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapse{{categoryFirst.id}}" aria-expanded="true" aria-controls="collapse{{categoryFirst.id}}">{{categoryFirst.name}}</button>
+                                    </h5>
+                                </div>
 
-																<!-- Amenities group -->
-																<div class="col-6">
-																	<!-- Checkbox -->
-																	<div class="form-check">
-																		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault13">
-																			<label class="form-check-label" for="flexCheckDefault13">
-																				Supermarket
-																			</label>
-																	</div>
-																	<!-- Checkbox -->
-																	<div class="form-check">
-																		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault14">
-																			<label class="form-check-label" for="flexCheckDefault14">
-																				Swiming pool
-																			</label>
-																	</div>
-																	<!-- Checkbox -->
-																	<div class="form-check">
-																		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault15">
-																			<label class="form-check-label" for="flexCheckDefault15">
-																				Transportation hub
-																			</label>
-																	</div>
-																	<!-- Checkbox -->
-																	<div class="form-check">
-																		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault16">
-																			<label class="form-check-label" for="flexCheckDefault16">
-																				Air Conditioning
-																			</label>
-																	</div>
-																</div>
-															</div><!-- Row END -->
-														<!-- Amenities END -->
+								<!--<div class="card-header">
+									<h5 class="mb-0">
+										<a class="btn btn-link" href="?category1={{categoryFirst.id}}">{{categoryFirst.name}}</a>
+									</h5>
+								</div>-->
+								
+                                <div id="collapse{{categoryFirst.id}}" class="collapse {% if not categoryFirst.categorysecond_set.all is None and request.GET.category1|slugify == categoryFirst.id|slugify %}show{% endif %}" aria-labelledby="heading{{categoryFirst.id}}" data-bs-parent="#accordion">
+                                    <div class="card-body">
+                                        <ul class="list-style-5">
+											{% for categorySecond in categoryFirst.categorysecond_set.all %}
+                                            <li><a href="?category1={{categorySecond.parent.id}}&category2={{categorySecond.id}}">{{categorySecond.name}}</a></li>
+											{% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="offer-banner bg-primary text-center d-none d-lg-block">
+                            <a href="#!"><img src="img/shop/left-panel-banner.png" alt="..."></a>
+                        </div>
+                    </div>
+                    <!-- end product grid left panel -->
 
-														<!-- Measurement START -->
-														<h6 class="font-base mt-3"><i class="fas fa-drafting-compass me-2"></i>Measurement unit</h6>
-															<!-- Radio -->
-															<div class="form-check">
-																<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault">
-																	<label class="form-check-label" for="flexRadioDefault">
-																		Square meters - m<sup>2</sup>
-																	</label>
-															</div>
-															<!-- Radio -->
-															<div class="form-check">
-																<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault10">
-																	<label class="form-check-label" for="flexRadioDefault10">
-																		Square feet - ft<sup>2</sup>
-																	</label>
-															</div>
-															<!-- Radio -->
-															<div class="form-check">
-																<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault11">
-																	<label class="form-check-label" for="flexRadioDefault11">
-																		Acres - ac
-																	</label>
-															</div>
-															<!-- Radio -->
-															<div class="form-check">
-																<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault12">
-																	<label class="form-check-label" for="flexRadioDefault12">
-																		Aquare yards - yd<sup>2</sup>
-																	</label>
-															</div>
-															<!-- Radio -->
-															<div class="form-check">
-																<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault13">
-																<label class="form-check-label" for="flexRadioDefault13">
-																	Hectares area - ha
-																</label>
-															</div>
-														<!-- Measurement END -->
-														<!-- Property size START -->
-														<h6 class="font-base mt-4 mb-0"><i class="fas fa-drafting-compass me-2"></i>Property size</h6>
-														<div class="position-relative my-3">
-															<div class="noui-wrapper m-b-50 p-l-r">
-																<div class="d-flex justify-content-between">
-																	<input type="text" class="text-body input-with-range-min">
-																	<input type="text" class="text-body input-with-range-max">
-																</div>
-																<div class="noui-slider-range m-b-20 mt-2" data-range-min='2000' data-range-max='50000' data-range-selected-min='18000' data-range-selected-max='24000'></div>
-															</div>
-														</div>
-														<!-- Property size END -->
-													</div>
-												</div>
-											</div>
-											<!-- buttton -->
-											<div class="d-grid gap-2 mt-4">
-												<a href="#" class="btn btn-primary">Apply filter</a>
-											</div>
-											<!-- More filter END -->
-										</form>
-										<!-- Form END -->
-									</div>
-								</div> <!-- Row END -->
-						</div>
-						<!-- Advance search END -->
-					</div>
-				</div><!-- Row End -->
-			</div>
-			<!-- Left sidebar END -->
+                    <!-- right panel section -->
+                    <div class="col-lg-9 ps-lg-1-9">
 
-			<!-- Main content START -->
-			<div class="col-lg-9 order-1" style="z-index: 8;">
-				<!-- Navbar START -->
-				<nav id="navbar-example2" class="navbar navbar-dark bg-dark rounded">
-					<ul class="nav p-2">
-						<!-- Dropdown item -->
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								판매량순
-							</a>
-							<!-- <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown1">
-								<li><a class="dropdown-item" href="#">Rent</a></li>
-								<li><a class="dropdown-item" href="#">Sale</a></li>
-							</ul> -->
-						</li>
-						<!-- Dropdown item -->
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">상품평많은순</a>
-							<!-- <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown2">
-								<li><a class="dropdown-item" href="#">Apartment</a></li>
-								<li><a class="dropdown-item" href="#">Land</a></li>
-								<li><a class="dropdown-item" href="#">House</a></li>
-								<li><a class="dropdown-item" href="#">Office</a></li>
-								<li><a class="dropdown-item" href="#">Shop</a></li>
-								<li><a class="dropdown-item" href="#">Villa</a></li>
-							</ul> -->
-						</li>
-						<!-- Dropdown item -->
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">낮은가격순</a>
-							<!-- <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown3">
-								<li><a class="dropdown-item" href="#">New york</a></li>
-								<li><a class="dropdown-item" href="#">Los Angeles</a></li>
-								<li><a class="dropdown-item" href="#">Pheoenix</a></li>
-							</ul> -->
-		        		</li>
-						<!-- Dropdown item -->
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">높은가격순
-							</a>
-							<!-- <ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown4">
-								<li><a class="dropdown-item" href="#">Queens</a></li>
-								<li><a class="dropdown-item" href="#">Manhattan</a></li>
-								<li><a class="dropdown-item" href="#">West Side</a></li>
-							</ul> -->
-						</li>
-						<!-- Dropdown item -->
-						<!-- <li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Default Order
-						</a>
-						<ul class="dropdown-menu mt-2" aria-labelledby="navbarDropdown5">
-							<li><a class="dropdown-item" href="#">Price - Low to High</a></li>
-							<li><a class="dropdown-item" href="#">Price - High to Low</a></li>
-							<li><a class="dropdown-item" href="#">Featured Listings First</a></li>
-							<li><a class="dropdown-item" href="#">Date - Old to New</a></li>
-							<li><a class="dropdown-item" href="#">Date - New to Old</a></li>
-						</ul>
-						</li>-->
-					</ul>
-				</nav>
-				<!-- Navbar END -->
+                        <div class="row g-0 align-items-center bg-light rounded p-3 mb-1-9">
 
+<<<<<<< HEAD
+                            <div class="col-12 col-md mb-2 mb-md-0 text-center text-md-start">Showing 1–9 of 27 results</div>
+=======
 				<!-- Property grid START -->
 				<div class="row row-cols-2 mt-5">
 					<!-- Property START -->
@@ -357,94 +129,124 @@
 					<!-- Property END -->
 				</div>
 				<!-- Property grid END -->
+>>>>>>> 80f6a3b1e5e31208befcca7a0ca80576c05b6c02
 
-				<!-- Pagination START -->
-				<div class="col-12">
-					<nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
-						<ul class="pagination pagination-bordered rounded">
-							{% if product_list.has_previous %}
-							<li class="page-item">
-								<a class="page-link" 
-								href="?p={{page_number }}
-									{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
-									{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">
-									<i class="fas fa-chevron-left"></i>
-								</a>
-							</li>
-							{% else %}
-							<li class="page-item disabled">
-								<span class="page-link"><i class="fas fa-chevron-left"></i></span>
-							</li>
-							{% endif %}
+                            <div class="col-12 col-md-auto">
 
-							{% for page_number in product_list.paginator.page_range %}
-								{% if page_number >= product_list.number|add:-2 and page_number <= product_list.number|add:2 %}
-									{% if page_number == product_list.number %}
-									<li class="page-item active">
-										<span class="page-link">{{ page_number }}</span>
-									</li>
-									{% else %}
-									<li class="page-item">
-											<a class="page-link" 
-											href="?p={{page_number }}
-												{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
-												{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">
-												{{ page_number }}
-											</a>
-									</li>
-									{% endif %}
-								{% endif %}
+                                <div class="row justify-content-center">
+
+                                    <div class="col-auto my-2 my-md-0">
+                                        <label class="m-0">Sort By:</label>
+                                        <select class="w-auto d-inline-block bg-white form-control form-select">
+                                            <option value="#?sort=p.sort_order&amp;order=ASC">Default</option>
+                                            <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
+                                            <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
+                                            <option value="#?sort=p.price&amp;order=ASC" selected="">Price (Low &gt; High)</option>
+                                            <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
+                                            <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
+                                            <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
+                                            <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
+                                            <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto my-2 my-md-0">
+                                        <label class="m-0">Show:</label>
+                                        <select class="w-auto d-inline-block bg-white form-control form-select">
+                                            <option value="#?limit=24" selected="selected">24</option>
+                                            <option value="#?limit=25">25</option>
+                                            <option value="#?limit=50">50</option>
+                                            <option value="#?limit=75">75</option>
+                                            <option value="#?limit=100">100</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row product-grid mb-1-9 mb-lg-6 mt-n1-9">
+							{% for productList in product_list %}
+                            <div class="col-xl-4 col-md-6 mt-1-9">
+                                <div class="border">
+
+                                    <a href="#!" class="product-block">
+                                        <div class="label-offer bg-red">Sale</div><img src="img/shop/product-01.jpg" alt="...">
+                                    </a>
+                                    <div class="product-info">
+                                        <a href="{% url 'product:detail' productList.id %}">{{productList.name}}</a>
+                                        <p class="price text-center m-0">
+                                            <span class="red line-through me-2">₱{{productList.price}}</span>
+                                            <span>₱{{productList.price}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="buttons">
+                                        <a href="#!" class="bg-extra-dark-gray text-white"><i class="fas fa-heart me-2"></i>Wishlist</a>
+                                        <a href="#!" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
+                                    </div>
+
+                                </div>
+                            </div>
 							{% endfor %}
+                        </div>
 
-							{% if product_list.has_next  %}
-							<li class="page-item">
-								<a class="page-link" 
-								href="?p={{page_number }}
-									{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
-									{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">
-									<i class="fas fa-chevron-right"></i>
-								</a> 
-							</li>
-							{% else %}
-							<li class="page-item disabled">
-								<span class="page-link"><i class="fas fa-chevron-right"></i></span>
-							</li>
-							{% endif %}
-						</ul>
-					</nav>
-				</div>
-				<!-- Pagination END -->
-			</div>
-			<!-- Main content END -->
-		</div><!-- Row END -->
-	</div>
-</section>
+                        <div class="row">
+                            <div class="col-12 px-lg-0">
+                                <div class="pagination text-small text-uppercase text-extra-dark-gray">
+                                    <ul>
+										{% if product_list.has_previous %}
+                                        <li class="">
+											<a href="?p={{page_number }}
+													{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
+													{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">
+												<i class="fas fa-long-arrow-alt-left me-1 d-none d-md-inline-block"></i> Prev
+											</a>
+										</li>
+										{% else %}
+										<li>
+											<a href="#">
+												<i class="fas fa-long-arrow-alt-left me-1 d-none d-md-inline-block"></i> Prev
+											</a>
+										</li>
+										{% endif %}
 
-<script>
-window.addEventListener("load", function(){
-	let subgnb=document.getElementById("sub_gnb");
-	let subgnbUl=subgnb.firstElementChild;
-	let subgnbLi=subgnbUl.children;
-	let n;
-	
-	for(var i=0; i<subgnbLi.length; i++){
-		subgnbLi[i].index=i;
+										{% for page_number in product_list.paginator.page_range %}
+											{% if page_number >= product_list.number|add:-2 and page_number <= product_list.number|add:2 %}
+												{% if page_number == product_list.number %}
+												<li class="active"><a href="#">{{ page_number }}</a></li>
+												{% else %}
+                                        <li><a href="?p={{page_number }}
+													{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
+													{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">{{ page_number }}</a></li>
+												{% endif %}
+											{% endif %}
+										{% endfor %}
 
-		subgnbLi[i].addEventListener("click", e=>{
-			if(n == e.currentTarget.index) return; //same number
-			n=e.currentTarget.index;
+										{% if product_list.has_previous %}
+										<li>
+											<a href="?p={{page_number }}
+													{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
+													{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">
+												Next <i class="fas fa-long-arrow-alt-right ms-1 d-none d-md-inline-block"></i>
+											</a>
+										</li>
+										{% else %}
+										<li>
+											<a href="#!">
+												Next <i class="fas fa-long-arrow-alt-right ms-1 d-none d-md-inline-block"></i>
+											</a>
+										</li>
+										{% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
-			for(var j=0; j<subgnbLi.length; j++){
-				if(j == n){
-					subgnbLi[j].classList.add("active");
-				}
-				else{
-					subgnbLi[j].classList.remove("active");					
-				}
-			}
-		});
-	}
+                    </div>
+                    <!-- end right panel section -->
 
-});
-</script>
+                </div>
+            </div>
+        </section>
 {% endblock %}
