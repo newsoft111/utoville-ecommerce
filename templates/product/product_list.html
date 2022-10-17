@@ -70,66 +70,7 @@
 
                         <div class="row g-0 align-items-center bg-light rounded p-3 mb-1-9">
 
-<<<<<<< HEAD
                             <div class="col-12 col-md mb-2 mb-md-0 text-center text-md-start">Showing 1–9 of 27 results</div>
-=======
-				<!-- Property grid START -->
-				<div class="row row-cols-2 mt-5">
-					<!-- Property START -->
-					{% for productList in product_list %}
-					<div class="col-sm-4">
-						<div class="card mb-4">
-							<div class="position-relative overflow-hidden">
-								<!-- Image -->
-								<a href="{% url 'product:detail' productList.id %}">
-									<img class="card-img rounded" src="{% static 'images/property/grid-list/homecare1.jpg' %}" alt="Card image">
-								</a>
-							</div>
-							<!-- Card body START -->
-							<div class="card-body px-2 pt-3">
-								<!-- Meta -->
-								<div class="d-flex justify-content-between">
-									<a href="#"><i class="fas fa-heart fa-fw text-danger ms-auto"></i></a>
-								</div>
-								<!-- Title -->
-								<h4 class="product_title card-title mt-3">
-									<a href="{% url 'product:detail' productList.id %}">{{productList.name}}</a>
-								</h4>
-								<!-- Info -->
-								<ul class="nav nav-divider align-items-center text-uppercase small mt-3" style="height: 25px">
-									<li class="nav-item me-4">
-										<i class="fa fa-comment" aria-hidden="true"></i> <span>5</span>
-									</li>
-									<li class="nav-item me-4">
-										<i class="fa fa-heart" aria-hidden="true"></i> <span>3</span>
-									</li>
-									<li class="nav-item me-4">
-										<i class="fa fa-shopping-cart" aria-hidden="true"></i> <span></span>
-									</li>
-									<!-- <li class="nav-item me-4">
-										<i class="fas fa-square pe-1"></i> <span>2200<sup class="text-lowercase">m2</sup></span>
-									</li> -->
-								</ul>
-								<!--Star rating-->
-								<div class="prdRating">
-									<span class="ratingView">
-										<span class="ratingStar" style="width:80%">4</span>
-									</span>
-									<span class="ratingPoint">4.0</span>									
-								</div>								
-								<!-- Price -->
-								<div class="prd_price_area mt-3">
-									<h3 class="product_price text-success">₱3,000</h3>
-								</div>
-							</div>
-							<!-- Card body END -->
-						</div>
-					</div>
-					{% endfor %}
-					<!-- Property END -->
-				</div>
-				<!-- Property grid END -->
->>>>>>> 80f6a3b1e5e31208befcca7a0ca80576c05b6c02
 
                             <div class="col-12 col-md-auto">
 
