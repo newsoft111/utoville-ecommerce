@@ -10,7 +10,7 @@
    <!-- CART DETAILS
         ================================================== -->
         <section>
-            <div class="container">
+            <div class="container" id="cart-container">
 
                 <div class="row">
 
@@ -28,11 +28,11 @@
 
                             <thead>
                                 <tr >
-                                    <th class="first"></th>
-                                    <th class="text-start text-uppercase font-weight-500">Product</th>
-                                    <th class="text-start text-uppercase font-weight-500">Price</th>
-                                    <th class="text-center text-uppercase font-weight-500">Qty</th>
-                                    <th class="text-start text-uppercase font-weight-500">Sub Total</th>
+                                    <th class="first" style="width:10%;"></th>
+                                    <th class="text-start text-uppercase font-weight-500" style="width:40%;">Product</th>
+                                    <th class="text-start text-uppercase font-weight-500" style="width:20%;">Price</th>
+                                    <th class="text-center text-uppercase font-weight-500" style="width:10%;">Qty</th>
+                                    <th class="text-start text-uppercase font-weight-500" style="width:20%;">Total</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -66,7 +66,7 @@
                                     </td>
                                     <td class="product-quantity {% if forloop.last %}border-bottom-0{% endif %}">
 										<div class="d-flex justify-content-center">
-											<select id="qty" class="form-control form-select" style="width:60px;" name="qty">
+											<select id="qty" class="form-control form-select" onchange="update_cart_submit(this);" data-cart-item-id="{{cart_item.id}}">
 												{% for i in 10|times %}
 												<option value="{{forloop.counter}}" {% if forloop.counter is cart_item.quantity %}selected{% endif %} >{{forloop.counter}}</option>
 												{% endfor %}
@@ -81,7 +81,7 @@
 										{% endif %}
 									</td>
                                     <td class="product-remove text-center {% if forloop.last %}border-bottom-0{% endif %}">
-                                        <a href="#!"><i class="fas fa-times"></i></a>
+                                        <a href="#" onclick="remove_cart_submit('{{cart_item.id}}');"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
 								{% endfor %}
@@ -92,7 +92,7 @@
 					
 					<div class="col-12 text-end border-bottom border-top py-1-9 py-lg-2-3 mb-3 mb-lg-0">
 						<button class="butn primary small ms-2" onclick="checkbox_manager();"><span>전체선택</span></button>
-                        <button class="butn small ms-2 mb-2 mb-sm-0"><span>선택삭제</span></button>
+                        <button class="butn small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span>선택삭제</span></button>
                     </div>
 
 					<div class="col-12 cart-total py-1-9 pt-lg-2-3 pb-lg-0">
@@ -171,6 +171,8 @@ is_run = false;
 function remove_cart_submit(cart_item_id) {
 	is_run = true;
 
+	$('#my-spinner').show();
+
     $.ajax({
         type : 'POST',
         url : "{% url 'cart:remove' %}",
@@ -181,7 +183,7 @@ function remove_cart_submit(cart_item_id) {
         dataType : 'json',
         success: function(data){
 			if(data.result==200){
-				openModal("알림", data.result_text,'','reload');
+				$("#cart-container").load(location.href + " #cart-container");
 			}else{
 				openModal("알림", data.result_text);
 			}
@@ -191,7 +193,10 @@ function remove_cart_submit(cart_item_id) {
           var msg = "ERROR : " + request.status + "<br>"
 			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
 			    console.log(msg);
-        }
+        },
+		complete: function () {
+			$('#my-spinner').hide();
+		}
     });
 }
 
@@ -200,6 +205,8 @@ function update_cart_submit(e) {
 
 	let cart_item_id = e.dataset.cartItemId;
 	let qty = e.value;
+
+	$('#my-spinner').show();
 
     $.ajax({
         type : 'POST',
@@ -212,7 +219,7 @@ function update_cart_submit(e) {
         dataType : 'json',
         success: function(data){
 			if(data.result==200){
-				openModal("알림", data.result_text,'','reload');
+				$("#cart-container").load(location.href + " #cart-container");
 			}else{
 				openModal("알림", data.result_text);
 			}
@@ -222,7 +229,10 @@ function update_cart_submit(e) {
           var msg = "ERROR : " + request.status + "<br>"
 			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
 			    console.log(msg);
-        }
+        },
+		complete: function () {
+			$('#my-spinner').hide();
+		}
     });
 }
 
