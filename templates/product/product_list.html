@@ -5,7 +5,7 @@
 
 <!-- PAGE TITLE
         ================================================== -->
-        <section class="page-title-section bg-img cover-background" data-overlay-dark="7" data-background="img/bg/bg5.jpg">
+        <section class="page-title-section bg-img cover-background d-lg-none" data-overlay-dark="7" data-background="img/bg/bg5.jpg">
             <div class="container">
 
                 <div class="row">
@@ -30,7 +30,21 @@
                 <div class="row">
 
                     <!-- product grid left panel -->
-                    <div class="col-lg-3">
+					<div class="col-lg-3">
+						<div class="categories mb-1-9">
+							<h3 class="bg-primary text-white m-0 h5 px-3 py-2 font-weight-600 d-none d-lg-block">Categories</h3>
+							<h3 class="bg-primary text-white collapse-sm m-0 h5 px-3 py-2 font-weight-600 d-block d-lg-none">Categories</h3>
+							<ul class="list-style-5 shop-category">
+								{% for categoryFirst in category_first_list %}
+								<li><a href="{% url 'product:list' %}?category1={{categoryFirst.id}}">{{categoryFirst.name}}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+						<div class="offer-banner bg-primary text-center d-none d-lg-block">
+							<a href="#!"><img src="img/shop/left-panel-banner.png" alt="..."></a>
+						</div>
+						
+						<!--작업 다하고 징루것-->
 
                         <div id="accordion" class="accordion-style2 mb-4">
 							{% for categoryFirst in category_first_list %}
@@ -60,8 +74,9 @@
                             </div>
                             {% endfor %}
                         </div>
+						<!--여기까지-->
                         <div class="offer-banner bg-primary text-center d-none d-lg-block">
-                            <a href="#!"><img src="img/shop/left-panel-banner.png" alt="..."></a>
+                            <a href="#!"><img src="{% static 'img/shop/left-panel-banner.png' %}" alt="..."></a>
                         </div>
                     </div>
                     <!-- end product grid left panel -->
@@ -114,7 +129,7 @@
                                 <div class="border">
 
                                     <a href="#!" class="product-block">
-                                        <div class="label-offer bg-red">Sale</div><img src="img/shop/product-01.jpg" alt="...">
+                                        <div class="label-offer bg-red">Sale</div><img src="{% static 'img/shop/product-01.jpg' %}" alt="...">
                                     </a>
                                     <div class="product-info">
                                         <a href="{% url 'product:detail' productList.id %}">{{productList.name}}</a>
