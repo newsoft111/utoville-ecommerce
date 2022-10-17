@@ -17316,6 +17316,12 @@ html[dir="rtl"] select option,
 }
 
 /*Header*/
+.top_utils_area {
+	justify-content: flex-end;
+}
+.top_utils {
+	color: #fff;
+}
 ul.navbar-nav > li {
 	margin-left: 30px;
 }
