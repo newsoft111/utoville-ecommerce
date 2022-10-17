@@ -180,7 +180,7 @@ ol,
 ul,
 dl {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 ol ol,
@@ -17585,6 +17585,30 @@ ul.navbar-nav > li {
 }
 
 /* shopping cart */
+.product-quantity {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.product-quantity ul {
+	padding-left: 10px;
+}
+.product-quantity ul li.up a {
+	display: inline-block;
+	text-indent: -9999px;
+	width: 15px;
+	height: 15px;
+	overflow: hidden;
+	background: url(../img/cart/up.png) no-repeat 0 0;
+}
+.product-quantity ul li.down a {
+	display: inline-block;
+	text-indent: -9999px;
+	width: 15px;
+	height: 15px;
+	overflow: hidden;
+	background: url(../img/cart/down.png) no-repeat 0 0;
+}
 .cart-title {
 	display: inline-block;
 	margin-bottom: 30px;
