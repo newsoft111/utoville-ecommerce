@@ -2,336 +2,151 @@
 {% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title>Realty - Real Estate Bootstrap 5 Template</title>
-	<!-- Meta Tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="author" content="Webestica.com">
-	<meta name="description" content="bootstrap 5 based real estate template">
 
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    <!-- metas -->
+    <meta charset="utf-8">
+    <meta name="author" content="Chitrakoot Web" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="Multipurpose Business and Admin HTML5 Template" />
+    <meta name="description" content="Fabrex - Multipurpose Business and Admin Template" />
 
-	<!-- Google Font -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Text&display=swap" rel="stylesheet">
+    <!-- title  -->
+    <title>Fabrex - Multipurpose Business and Admin Template</title>
 
-	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/tiny-slider/tiny-slider.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/choices/css/choices.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/nouislider/nouislider.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/glightbox/css/glightbox.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'vendor/splide-master/dist/css/splide.min.css' %}">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="img/logos/favicon.png">
+    <link rel="apple-touch-icon" href="img/logos/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/logos/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/logos/apple-touch-icon-114x114.png">
 
-	<!-- Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- plugins -->
+    <link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+
+    <!-- quform css -->
+    <link rel="stylesheet" href="{% static 'quform/css/base.css' %}">
+
+    <!-- search css -->
+    <link rel="stylesheet" href="{% static 'search/search.css' %}">
+
+    <!-- theme core css -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
 </head>
 
 <body>
 
-<!-- Header START -->
-<header class="navbar-light navbar-sticky header-static">
-	<div class="navbar-top small bg-light">
-		<div class="container">
-			<div class="d-md-flex justify-content-between align-items-center my-2">
-				<!-- Navbar top Left-->
-				<div class="d-flex align-items-center justify-content-center">
-					<!-- Top info -->
-					<ul class="nav justify-content-center justify-content-md-start">
-						<li class="nav-item me-3">
-							<a class="navbar-link" href="#"><i class="far fa-envelope me-2"></i>manager@utoville.com</a>
-						</li>
-						<li class="nav-item">
-							<a class="navbar-link" href="#"><i class="fas fa-headset me-2"></i>+82)10-5619-1931 </a>
-						</li>
-					</ul>
-				</div>
+    <!-- PAGE LOADING
+    ================================================== -->
+    <div id="preloader"></div>
 
-				<!-- Navbar top Right-->
-				<div class="d-flex align-items-center justify-content-center">
-					<!-- Top social -->
-					<!-- <ul class="list-unstyled d-flex">
-						<li> <a class="px-2" href="#"><i class="fab fa-facebook-square"></i></a> </li>
-						<li> <a class="px-2" href="#"><i class="fab fa-instagram-square"></i></a> </li>
-						<li> <a class="px-2" href="#"><i class="fab fa-twitter-square"></i></a> </li>
-						<li> <a class="ps-2" href="#"><i class="fab fa-linkedin"></i></a> </li>
-					</ul> -->
-					<!-- Top link -->
-					<ul class="nav ms-3">
-           				<li class="nav-item">
-           					<a href="#" class="nav-link pe-0"><i class="far fa-user me-2"></i>Login</a>
-           				</li>
-           				<li class="nav-item">
-           					<a href="#" class="nav-link pe-0"><i class="fa fa-shopping-cart me-2"></i>Cart</a>
-           				</li>
-         			</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- MAIN WRAPPER
+    ================================================== -->
+    <div class="main-wrapper">
 
-	<!-- Logo Nav START -->
-	<nav class="navbar navbar-expand-lg">
-		<div class="container">
-			<!-- Logo START -->
-			<a class="navbar-brand" href="{% url 'main:index' %}">
-				<img class="navbar-brand-item" src="{% static 'images/logo_on.png' %}" alt="logo">
-			</a>
-			<!-- Logo END -->
+        <!-- HEADER
+        ================================================== -->
+        <header class="header-style8">
+            <div id="top-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="top-bar-info">
+                                <ul class="ps-0">
+                                    <li><i class="fas fa-mobile-alt"></i>(+123) 456 7890</li>
+                                    <li><i class="fas fa-envelope"></i>addyour@emailhere</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-none d-md-block">
+                            <ul class="top-social-icon ps-0">
+                                <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#!"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-			<!-- Responsive navbar toggler -->
-			<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" style="border: none; box-shadow: none;">
-			  <span class="navbar-toggler-icon"></span>
-			</button>
+            <div class="navbar-default">
 
-			<!-- Main navbar START -->
-			<div class="collapse navbar-collapse" id="navbarCollapse">
-				<ul class="navbar-nav navbar-nav-scroll mx-auto">
+                <!-- top search -->
+                <div class="top-search bg-primary">
+                    <div class="container">
+                        <form class="search-form" action="search.html" method="GET" accept-charset="utf-8">
+                            <div class="input-group">
+                                <span class="input-group-addon cursor-pointer">
+                                    <button class="search-form_submit fas fa-search text-white" type="submit"></button>
+                                </span>
+                                <input type="text" class="search-form_input form-control" name="s" autocomplete="off" placeholder="Type & hit enter...">
+                                <span class="input-group-addon close-search"><i class="fas fa-times mt-1"></i></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- end top search -->
 
-					<!-- Nav item 1 -->
-					<li class="nav-item dropdown">
-						<a class="nav-link navbar-primary-soft-hover dropdown-toggle active" href="#" id="homeMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">청소</a>
-						<ul class="dropdown-menu" aria-labelledby="homeMenu">
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">가정 청소</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
-									<li> <a class="dropdown-item" href="#">방</a> </li>
-									<li> <a class="dropdown-item" href="#">화장실</a> </li>
-									<li> <a class="dropdown-item" href="#">베란다</a> </li>
-									<li> <a class="dropdown-item" href="#">거실</a> </li>
-								</ul>`
-							</li>
-							
-							<li> <a class="dropdown-item" href="#">입주 청소</a></li>
-						</ul>
-					</li>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="menu_area alt-font">
+                                <nav class="navbar navbar-expand-lg navbar-light p-0">
 
-					<!-- Nav item 2 -->
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">소독</a>
-						<ul class="dropdown-menu" aria-labelledby="pagesMenu">
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">가정</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
-									<li> <a class="dropdown-item" href="#">침대</a> </li>
-									<li> <a class="dropdown-item" href="#">소파</a> </li>
-									<li> <a class="dropdown-item" href="#">pesticide</a> </li>
-								</ul>
-							</li>
-							<li> <a class="dropdown-item" href="#">수영장</a></li>
-						</ul>
-					</li>
+                                    <div class="navbar-header navbar-header-custom">
+                                        <!-- logo -->
+                                        <a href="index.html" class="navbar-brand logodefault"><img id="logo" src="img/logos/logo.png" alt="logo"></a>
+                                        <!-- end logo -->
+                                    </div>
 
-					<!-- Nav item 3 -->
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="listings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">수리</a>
-						<ul class="dropdown-menu" aria-labelledby="listings">
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">체크</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
-									<li> <a class="dropdown-item" href="#">집 내부 전체 검사</a></li>
-									<li> <a class="dropdown-item" href="#">수도 검사</a></li>
-									<li> <a class="dropdown-item" href="#">전기 검사</a></li>
-									<li> <a class="dropdown-item" href="#">배관 검사</a></li>
-								</ul>
-							</li>
+                                    <div class="navbar-toggler"></div>
 
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">외부 수리</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;"> 
-									<li> <a class="dropdown-item" href="#">지붕</a></li>
-									<li> <a class="dropdown-item" href="#">게이트</a></li>
-									<li> <a class="dropdown-item" href="#">창문</a></li>
-									<li> <a class="dropdown-item" href="#">벽</a></li>
-								</ul>
-							</li>
+                                    <!-- menu area -->
+                                    <ul class="navbar-nav mx-auto" id="nav" style="display: none;">
+										                                                
+									{% for categoryFirst in category_first_list %}
+										<li><a href="#!">{{categoryFirst.name}}</a>
+										{% if categoryFirst.categorysecond_set.all.count > 0 %}
+											<ul>
+											{% for categorySecond in categoryFirst.categorysecond_set.all %}
+												<li><a href="#!">{{categorySecond.name}}</a>
+													<ul>
+														<li><a href="home-corporate-1.html">Corporate - 1</a></li>
+														<li><a href="home-corporate-2.html">Corporate - 2</a></li>
+														<li><a href="home-corporate-3.html">Corporate - 3</a></li>
+														<li><a href="home-corporate-4.html">Corporate - 4</a></li>
+														<li><a href="home-corporate-5.html">Corporate - 5</a></li>
+													</ul>
+												</li>
+											{% endfor %}
+											</ul>
+											{% endif %}
+										</li>
+									{% endfor %}
+									</ul>
+								<!-- end menu area -->
 
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">내부수리</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
-									<li> <a class="dropdown-item" href="#">거실</a></li>
-									<li> <a class="dropdown-item" href="#">부엌</a></li>
-									<li> <a class="dropdown-item" href="#">침실</a></li>
-									<li> <a class="dropdown-item" href="#">화장실</a></li>
-								</ul>
-							</li>
+                                    <!-- atribute navigation -->
+                                    <div class="attr-nav">
+                                        <ul>
+                                            <li class="dropdown me-3 me-lg-0">
+                                                <a href="{% url 'cart:detail' %}">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                    <span class="badge bg-primary">3</span>
+                                                </a>
+                                            </li>
+                                            <li class="search"><a href="#!"><i class="fas fa-search"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- end atribute navigation -->
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">리모델링</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
-									<li> <a class="dropdown-item" href="#">인테리어</a></li>
-								</ul>
-							</li>	
-							
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">기타</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
-									<li> <a class="dropdown-item" href="#">전기</a></li>
-									<li> <a class="dropdown-item" href="#">수도</a></li>
-									<li> <a class="dropdown-item" href="#">배관</a></li>
-									<li> <a class="dropdown-item" href="#">페인트 시공</a></li>
-								</ul>
-							</li>							
-						</ul>
-					</li>
-
-					<!-- Nav item 4 Dashboard -->
-					<!-- <li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="dashboard" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dashboard</a>
-						<div class="dropdown-menu pb-3 pb-lg-0 rounded" aria-labelledby="dashboard"> -->
-							<!-- Nav title -->
-							<!-- <div class="d-none d-sm-flex p-4 bg-light align-items-center mb-3">
-								<span class="me-3 mb-0 h2"><i class="far fa-chart-bar fa-fw"></i></span>
-								<div>
-									<h5 class="mb-0">Analyze full dashboard</h5>
-									<p class="mb-0">Points afraid but may end laughter raptures</p>
-								</div>
-							</div> -->
-						<!-- <div class="d-block d-sm-flex">
-								<ul class="list-unstyled w-100 pe-0 pe-lg-5">
-									<li> <a class="dropdown-item" href="agent-dashboard.html">Dashboard</a></li>
-									<li> <a class="dropdown-item" href="agent-add-property.html">Add new property</a></li>
-									<li> <a class="dropdown-item" href="agent-property.html">My property</a></li>
-									<li> <a class="dropdown-item" href="agent-favorite.html">My favorites</a></li>
-									<li> <a class="dropdown-item" href="agent-review.html">Review</a></li>
-								</ul>
-								<ul class="list-unstyled w-100 pe-0 pe-lg-5">
-									<li> <a class="dropdown-item" href="agent-profile.html">My profile</a></li>
-									<li> <a class="dropdown-item" href="agent-package.html">My package</a></li>
-									<li> <a class="dropdown-item" href="agent-message.html">Message</a></li>
-									<li> <a class="dropdown-item" href="agency-agent-list.html">Agent list</a></li>
-									<li> <a class="dropdown-item" href="add-new-agent.html">Add new agent</a></li>
-								</ul>
-							</div> -->
-							<!-- Join us --> 
-							<!-- <div class="row d-none d-lg-flex align-items-center justify-content-center text-center">
-								<div class="col-md-11 rounded position-relative mt-2">
-									<div class="card mb-4 overflow-hidden"> -->
-										<!-- Image -->
-										<!-- <img class="card-img" src="{% static 'images/bg/bg-05.jpg' %}" alt="Card image"> -->
-										<!-- Image overlay -->
-										<!-- <div class="bg-overlay"></div>
-										<div class="card-img-overlay bg-overlay-content">  -->
-											<!-- Category -->
-											<!-- <div class="w-100 h-100 d-flex flex-column"> -->
-												<!-- <div class="my-auto"> -->
-													<!-- Title -->
-													<!-- <h3 class="card-title text-white">Do you want to join our team?</h3> -->
-													<!-- Button -->
-													<!-- <a href="#" class="btn btn-primary mb-0">Join us</a> -->
-												<!-- </div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li> -->
-
-					<!-- Nav item 4 -->
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="listings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">가전 케어</a>
-						<ul class="dropdown-menu" aria-labelledby="listings">
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item" href="#">에어컨</a>
-							</li>
-
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item" href="#">세탁기</a>
-							</li>
-
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item" href="#">냉장고</a>
-							</li>
-
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item" href="#">TV</a>
-							</li>						
-						</ul>
-					</li>					
-
-					<!-- Nav item 5 -->
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="listings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">이사</a>
-						<ul class="dropdown-menu" aria-labelledby="listings">
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item" href="#">이사 서비스</a>
-							</li>
-
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item" href="#">용달 대여</a>
-							</li>						
-						</ul>
-					</li>	
-
-					<!-- Nav item 6 -->
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="listings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">차 서비스</a>
-						<ul class="dropdown-menu" aria-labelledby="listings">
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">내부 세차</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
-									<li> <a class="dropdown-item" href="#">스팀</a></li>
-									<li> <a class="dropdown-item" href="#">냄새 제거</a></li>
-									<li> <a class="dropdown-item" href="#">카시트 청소</a></li>
-								</ul>
-							</li>
-
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">정비</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
-									<li> <a class="dropdown-item" href="#">타이어 교체</a></li>
-									<li> <a class="dropdown-item" href="#">배터리 교체</a></li>
-									<li> <a class="dropdown-item" href="#">엔진 오일 교체</a></li>
-									<li> <a class="dropdown-item" href="#">자동차 정밀 검사</a></li>
-								</ul>
-							</li>
-
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item" href="#">손세차</a>
-							</li>							
-						</ul>
-					</li>	
-					
-					<!-- Nav item 7 -->
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="listings" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">생수 배달</a>
-						<ul class="dropdown-menu" aria-labelledby="listings">
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item" href="#">5gl드럼 & 페트</a>
-							</li>
-
-							<li class="dropdown-submenu dropend"> 
-								<a class="dropdown-item dropdown-toggle" href="#">보틀</a>
-								<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none" style="margin-left: 0;">
-									<li> <a class="dropdown-item" href="#">물병</a></li>
-									<li> <a class="dropdown-item" href="#">500ml</a></li>
-									<li> <a class="dropdown-item" href="#">1000ml</a></li>
-								</ul>
-							</li>
-						</ul>
-					</li>										
-				</ul>
-			</div>
-			<!-- Main navbar END -->
-
-			<!-- Add listing button -->
-			<!-- <div class="ms-2 ms-lg-0">
-				<a href="#" class="btn btn-sm btn-dark-soft"><i class="fas fa-plus me-2"></i>Add listing</a>
-			</div> -->
-
-			
-		</div>
-	</nav>
-	<!-- Logo Nav END -->
-</header>
-
-<main>
+        </header>
