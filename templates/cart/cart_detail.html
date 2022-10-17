@@ -3,6 +3,7 @@
 {% load static %}
 {% load humanize %}
 {% load mathfilters %}
+{% load product_filter %}
 
 
 <!-- Section -->
@@ -36,17 +37,34 @@
                                 </tr>
                             </thead>
                             <tbody>
+								{% for cart_item in cart_items %}
                                 <tr>
-                                    <td class="product-thumbnail text-start">
-                                        <a href="#!"><img src="img/shop/product-01.jpg" alt="..." class="w-100px"></a>
+									<td class="product-thumbnail text-start {% if forloop.last %}border-bottom-0{% endif %}">
+                                        <a href="#!" class="position-relative">
+											<input type="checkbox" class="position-absolute top-0 start-0" name="cart_item_id" value="{{cart_item.pk}}">
+											<img src="{% static 'img/shop/product-01.jpg' %}" alt="..." class="w-100px">
+										</a>
+										
                                     </td>
-                                    <td class="text-start">
-                                        <a href="#!">Red Leather bag</a>
-                                        <span class="text-uppercase d-block">SKU: 290397</span>
+                                    
+                                    <td class="text-start {% if forloop.last %}border-bottom-0{% endif %}">
+                                        <a href="#!">{{cart_item.product.name}}</a>
+										{% if cart_item.variant_value is not None %}
+                                        <span class="text-uppercase d-block">
+											{{cart_item.variant_value.variant}}: {{cart_item.variant_value.value}}
+										</span>
+										
+										<span class="text-uppercase d-block">+₱{{cart_item.variant_value.price}}</span>
+										{% endif %}
                                     </td>
-                                    <td class="text-start">
-                                        $599
+                                    <td class="text-start {% if forloop.last %}border-bottom-0{% endif %}">
+                                        {% if variant_value is not None %}
+										₱{{cart_item.product.price|add:cart_item.variant_value.price|intcomma}}
+										{% else %}
+										₱{{cart_item.product.price|intcomma}}
+										{% endif %}
                                     </td>
+<<<<<<< Updated upstream
                                     <td class="product-quantity">
                                         <input class="text-center" readonly type="text" name="qty" value="0" />
 										<div class="arrow">
@@ -54,13 +72,29 @@
 												<li class="up"><a href="#">up</a></li>
 												<li class="down"><a href="#">down</a></li>
 											</ul>
+=======
+                                    <td class="product-quantity {% if forloop.last %}border-bottom-0{% endif %}">
+										<div class="d-flex justify-content-center">
+											<select id="qty" class="form-control form-select" style="width:60px;" name="qty">
+												{% for i in 10|times %}
+												<option value="{{forloop.counter}}" {% if forloop.counter is cart_item.quantity %}selected{% endif %} >{{forloop.counter}}</option>
+												{% endfor %}
+											</select>
+>>>>>>> Stashed changes
 										</div>
                                     </td>
-                                    <td class="product-subtotal text-start">$599</td>
-                                    <td class="product-remove text-center">
+                                    <td class="product-subtotal text-start {% if forloop.last %}border-bottom-0{% endif %}">
+										{% if variant_value is not None %}
+										₱{{cart_item.product.price|add:cart_item.variant_value.price|mul:cart_item.quantity|intcomma}}
+										{% else %}
+										₱{{cart_item.product.price|mul:cart_item.quantity|intcomma}}
+										{% endif %}
+									</td>
+                                    <td class="product-remove text-center {% if forloop.last %}border-bottom-0{% endif %}">
                                         <a href="#!"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
+<<<<<<< Updated upstream
                                 <tr>
                                     <td class="product-thumbnail text-start">
                                         <a href="#!"><img src="img/shop/product-06.jpg" alt="..." class="w-100px"></a>
@@ -111,44 +145,24 @@
                                         <a href="#!"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
+=======
+								{% endfor %}
+>>>>>>> Stashed changes
                             </tbody>
                         </table>
                     </div>
                     <!-- end product table -->
-
-                    <!-- button set -->
-                    <div class="col-12 border-bottom border-top py-1-9 py-lg-2-3 mb-3 mb-lg-0">
-                        <button class="butn small mb-2 mb-sm-0"><span>Empty Cart</span></button>
-                        <button class="butn small float-end ms-2 mb-2 mb-sm-0"><span>Continue Shopping</span></button>
-                        <button class="butn small float-end ms-2"><span>Update Shopping Cart</span></button>
+					
+					<div class="col-12 text-end border-bottom border-top py-1-9 py-lg-2-3 mb-3 mb-lg-0">
+						<button class="butn primary small ms-2" onclick="checkbox_manager();"><span>전체선택</span></button>
+                        <button class="butn small ms-2 mb-2 mb-sm-0"><span>선택삭제</span></button>
                     </div>
-                    <!-- end button set -->
 
-                    <!-- total block set -->
-                    <div class="col-12 cart-total py-1-9 pt-lg-2-3 pb-lg-0">
+					<div class="col-12 cart-total py-1-9 pt-lg-2-3 pb-lg-0">
                         <div class="row">
 
                             <div class="col-lg-5 col-md-5 mb-1-9 mb-md-0">
                                 <div id="accordion" class="accordion-style2">
-                                    <div class="card">
-                                        <div class="card-header" id="headingOne">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                    Coupon Code
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion">
-                                            <div class="card-body">
-                                                <form action="#">
-
-                                                    <input type="text" class="form-control mb-2" placeholder="Enter Your Coupon code">
-                                                    <button class="butn small"><span>Apply Code</span></button>
-
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="card">
                                         <div class="card-header" id="headingTwo">
                                             <h5 class="mb-0">
@@ -157,7 +171,7 @@
                                                 </button>
                                             </h5>
                                         </div>
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordion">
                                             <div class="card-body">
                                                 <form action="#">
 
@@ -178,7 +192,7 @@
                                     <tbody>
                                         <tr>
                                             <th class="text-end pe-0 text-uppercase">Cart Subtotal</th>
-                                            <td class="text-uppercase text-end pe-0">$1598</td>
+                                            <td class="text-uppercase text-end pe-0">₱{{total_price|intcomma}}</td>
                                         </tr>
                                         <tr>
                                             <th class="text-end pe-0 text-uppercase">Shipping and Handling</th>
@@ -191,7 +205,7 @@
                                         </tr>
                                         <tr class="total">
                                             <th class="text-uppercase text-end pe-0">Order Total</th>
-                                            <td class="text-uppercase text-end pe-0">$1598</td>
+                                            <td class="text-uppercase text-end pe-0">₱{{total_price|intcomma}}</td>
                                         </tr>
                                         <tr>
                                             <td class="pe-0" colspan="2">
@@ -204,6 +218,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- end total block set -->
 
                 </div>
