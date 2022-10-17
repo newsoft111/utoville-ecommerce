@@ -41,16 +41,6 @@
 								</li>
 								{% endfor %}
 							</ul>
-							<div id="collapse{{categoryFirst.id}}" class="collapse {% if not categoryFirst.categorysecond_set.all is None and request.GET.category1|slugify == categoryFirst.id|slugify %}show{% endif %}" aria-labelledby="heading{{categoryFirst.id}}" data-bs-parent="#accordion">
-								<div class="card-body">
-									<ul class="list-style-5">
-										<li><a href="?category1={{categoryFirst.id}}">전체보기</a></li>
-										{% for categorySecond in categoryFirst.categorysecond_set.all %}
-										<li><a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}">{{categorySecond.name}}</a></li>
-										{% endfor %}
-									</ul>
-								</div>
-							</div>
 						</div>
 						<div class="offer-banner bg-primary text-center d-none d-lg-block">
 							<a href="#!"><img src="img/shop/left-panel-banner.png" alt="배너광고"></a>
@@ -94,15 +84,7 @@
                     <!-- end product grid left panel -->
 
                     <!-- right panel section -->
-                    <div class="col-lg-9 ps-lg-1-9">		
-						<div class="horizontaltab">
-							<ul class="resp-tabs-list hor_1">
-								<li><a href="{% url 'product:list' %}?category1={{categoryFirst.id}}">전체보기</a></li>
-									{% for categorySecond in category_second_list %}
-								<li><a href="{% url 'product:list' %}?category1={{categoryFirst.id}}&category2={{categorySecond.id}}">{{categorySecond.name}}</a></li>
-									{% endfor %}
-							</ul>
-						</div>   										
+                    <div class="col-lg-9 ps-lg-1-9">											
                         <!-- <div id="accordion" class="accordion-style2 mb-4"> -->
 							<!-- {% for categoryFirst in category_first_list %} -->
                             <!-- <div class="card"> -->
@@ -162,9 +144,8 @@
 							{% for productList in product_list %}
                             <div class="col-xl-4 col-md-6 mt-1-9">
                                 <div class="border">
-
-                                    <a href="#!" class="product-block">
-                                        <div class="label-offer bg-red">Sale</div><img src="{% static 'img/shop/product-01.jpg' %}" alt="...">
+                                    <a href="{% url 'product:detail' productList.id %}" class="product-block">
+         								<img src="{% static 'img/shop/product-01.jpg' %}" alt="...">
                                     </a>
                                     <div class="product-info">
                                         <a href="{% url 'product:detail' productList.id %}">{{productList.name}}</a>
@@ -174,8 +155,7 @@
                                         </p>
                                     </div>
                                     <div class="buttons">
-                                        <a href="#!" class="bg-extra-dark-gray text-white"><i class="fas fa-heart me-2"></i>Wishlist</a>
-                                        <a href="#!" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
+                                        <a href="{% url 'cart:detail' %}" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
                                     </div>
 
                                 </div>
