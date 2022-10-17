@@ -105,11 +105,21 @@
                                     <div class="navbar-toggler"></div>
 
                                     <!-- menu area -->
+<<<<<<< Updated upstream
                                     <ul class="navbar-nav ms-auto" id="nav" style="display: none;">
                                         <li><a href="#!">Home</a>
                                             <ul>
                                                 <li><a href="home-default.html">Home Default</a></li>
                                                 <li><a href="#!">Corporate Layouts</a>
+=======
+                                    <ul class="navbar-nav mx-auto" id="nav" style="display: none;">
+										{% for categoryFirst in category_first_list %}
+                                        <li><a href="?category1={{categoryFirst.id}}">{{categoryFirst.name}}</a>
+											{% if categoryFirst.categorysecond_set.all.count > 0 %}
+                                            <ul>
+												{% for categorySecond in categoryFirst.categorysecond_set.all %}
+                                                <li><a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}">{{categorySecond.name}}</a>
+>>>>>>> Stashed changes
                                                     <ul>
                                                         <li><a href="home-corporate-1.html">Corporate - 1</a></li>
                                                         <li><a href="home-corporate-2.html">Corporate - 2</a></li>
