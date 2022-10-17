@@ -50,8 +50,9 @@
                                 <div id="collapse{{categoryFirst.id}}" class="collapse {% if not categoryFirst.categorysecond_set.all is None and request.GET.category1|slugify == categoryFirst.id|slugify %}show{% endif %}" aria-labelledby="heading{{categoryFirst.id}}" data-bs-parent="#accordion">
                                     <div class="card-body">
                                         <ul class="list-style-5">
+											<li><a href="?category1={{categoryFirst.id}}">전체보기</a></li>
 											{% for categorySecond in categoryFirst.categorysecond_set.all %}
-                                            <li><a href="?category1={{categorySecond.parent.id}}&category2={{categorySecond.id}}">{{categorySecond.name}}</a></li>
+                                            <li><a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}">{{categorySecond.name}}</a></li>
 											{% endfor %}
                                         </ul>
                                     </div>
