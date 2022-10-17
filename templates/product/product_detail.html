@@ -2,6 +2,7 @@
 {% block content %}
 {% load static %}
 {% load humanize %}
+{% load product_filter %}
 
 
 <!-- Section -->
@@ -357,33 +358,29 @@ Inner part START -->
 							<!-- Customer Review START -->
 							<div class="">
 								{% for review in product_detail.productreview_set.all %}
-								<div class="d-md-flex align-items-center mt-4">
+								<div class="text-start mt-4 border-bottom">
 									<!-- Avatar -->
-									<div>
-										<div class="avatar avatar-xxl me-4">
-											<img class="avatar-img rounded-circle" src="{{review.user.avatar.url}}" alt="avatar">
-										</div>
-									</div>
-									<!-- Text -->
-									<div>
-										<div class="d-sm-flex mt-1 mt-md-0">
-											<h5 class="me-3 mb-0">{{review.user.username}}</h5>
-											<!-- Review star -->
-											<ul class="list-inline">
-												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-												<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+									<div class="d-sm-flex mt-1 mt-md-0">
+										<h5 class="me-3 mb-0">{{review.user.username}}</h5>
+										<!-- Review star -->
+										<ul class="list-inline">
+											{% for i in 5|times %}
+												{% if i < review.rating %}
+													<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
+												{% else %}
 												<li class="list-inline-item me-0"><i class="fas fa-star"></i></li>
-											</ul>
-										</div>
+												{% endif %}
+											{% endfor %}
+										</ul>
+										<div class="ms-auto">{{product_detail.created_at}}</div>
+									</div>
+									<div>
 										<!-- Info -->
-										<p class="small mb-2">{{review.created_at}}</p>
+
 										<p>{{review.review}}</p>
 									</div>	
 								</div>
 								{% endfor %}
-								<hr>
 							</div>
 							<!-- Customer Review END -->
 
@@ -406,6 +403,286 @@ Inner part START -->
 							<div class="primary-line mb-4">
 								<h3>Q&A</h3>
 							</div>
+							<div class="main-content">
+								<div class="row">
+									<div class="col-12">
+												<div class="bg-secondary-soft p-3 p-md-5 rounded">
+													<!-- Info -->
+													<div class="d-xl-flex justify-content-xl-between align-items-center mb-3 mb-xl-5">
+														<p class="fs-5 mb-0">You have <b>25</b> properties in your favorite list</p>
+														<!-- Short by -->
+															<div class="d-flex align-items-center">
+																<span class="me-1 me-xxl-3">Short by:</span>
+																	<div>
+																		<select class="form-select" aria-label="Default select example">
+																			<option selected="">Select item</option>
+																			<option value="1">Price - Low to High</option>
+																			<option value="2">Price - High to Low</option>
+																			<option value="3">Featured Listings First</option>
+																			<option value="3">Date - Old to New</option>
+																			<option value="3">Date - New to Old</option>
+																		</select>
+																	</div>
+															</div>
+														</div>
+													<!-- Title -->
+													<div class="row d-none d-xxl-block">
+														<div class="col-12 align-middle py-3">
+															<div class="row border-bottom">
+																<div class="col-5">
+																	<h5>Listing</h5>
+																</div>
+																<div class="col-7">
+																	<div class="row">
+																		<div class="col-5 align-middle text-body py-2">
+																			<h5>Publish date</h5>
+																		</div>
+																		<div class="col-4 align-middle py-2">
+																			<h5>Rating</h5>
+																		</div>
+																		<div class="col-3 align-middle py-2">
+																			<h5>Action</h5>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- Property -->
+													<div class="row">
+														<div class="col-12 align-middle py-4">
+															<div class="row">
+																<div class="col-12 col-xxl-5">
+																	<div class="card bg-transparent">
+																		<div class="row">
+																			<!-- Image -->
+																			<div class="col-xl-3">
+																				<img class="rounded" src="assets/images/property/grid-list/09.jpg" alt="">
+																			</div>
+																			<!-- Info -->
+																			<div class="col-xl-9 pt-2 pt-xl-0">
+																				<h5 class="mb-1">Single House Near New York</h5>
+																				<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
+																				<span class="text-success">$160,000</span>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<!-- Content -->
+																<div class="col-xxl-7 pt-2 pt-xxl-0">
+																	<div class="row">
+																		<div class="col-md-5 text-body">
+																			<!-- Date -->
+																			<ul class="list-group list-group-borderless">
+																				<li class="list-group-item p-0 d-flex">
+																					Viewed:<span class="text-body ms-2">255</span>
+																				</li>
+																				<li class="list-group-item p-0 d-flex">
+																					published:<span class="text-body ms-2">29 august 2019</span>
+																				</li>
+																				<li class="list-group-item p-0 d-flex">
+																					Expiry:<span class="text-body ms-2">29 January 2020</span>
+																				</li>
+																			</ul>
+																		</div>
+																		<div class="col-md-4 pt-2 pt-md-0">
+																			<!-- Star -->
+																			<ul class="list-inline">
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
+																			</ul>
+																		</div>
+																		<!-- Cancle button -->
+																		<div class="col-md-3 pt-2 pt-md-0">
+																			<button class="btn btn-sm btn-danger-soft mb-1"><i class="fas fa-fw fa-times"></i></button>
+																		</div>
+																	</div>
+																</div>
+															</div> <!-- Row END -->
+														</div>
+													</div>
+													<hr> <!-- Divider -->
+					
+													<!-- Property -->
+													<div class="row">
+														<div class="col-12 align-middle py-4">
+															<div class="row">
+																<div class="col-xxl-5">
+																	<div class="card bg-transparent">
+																		<div class="row">
+																			<!-- Image -->
+																			<div class="col-xl-3">
+																				<img class="rounded" src="assets/images/property/grid-list/10.jpg" alt="">
+																			</div>
+																			<!-- Info -->
+																			<div class="col-xl-9 pt-2 pt-xl-0">
+																				<h5 class="mb-1">157485 Camino Codorniz</h5>
+																				<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
+																				<span class="text-success">$80,000</span>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<!-- Content -->
+																<div class="col-xxl-7 pt-2 pt-xxl-0">
+																	<div class="row">
+																		<div class="col-md-5 text-body">
+																			<!-- Date -->
+																			<ul class="list-group list-group-borderless">
+																				<li class="list-group-item p-0 d-flex">
+																					Viewed:<span class="text-body ms-2">556</span>
+																				</li>
+																				<li class="list-group-item p-0 d-flex">
+																					published:<span class="text-body ms-2">08 July 2019</span>
+																				</li>
+																				<li class="list-group-item p-0 d-flex">
+																					Expiry:<span class="text-body ms-2">08 August 2020</span>
+																				</li>
+																			</ul>
+																		</div>
+																		<div class="col-md-4 pt-2 pt-md-0">
+																			<!-- Star -->
+																			<ul class="list-inline">
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star"></i></li>
+																			</ul>
+																		</div>
+																		<!-- Cancle button -->
+																		<div class="col-md-3 pt-2 pt-md-0">
+																			<button class="btn btn-sm btn-danger-soft mb-1"><i class="fas fa-fw fa-times"></i></button>
+																		</div>
+																	</div>
+																</div>
+															</div> <!-- Row END -->
+														</div>
+													</div>
+													<hr> <!-- Divider -->
+					
+													<!-- Property -->
+													<div class="row">
+														<div class="col-12 align-middle py-4">
+															<div class="row">
+																<div class="col-xxl-5">
+																	<div class="card bg-transparent">
+																		<div class="row">
+																			<!-- Image -->
+																			<div class="col-xl-3">
+																				<img class="rounded" src="assets/images/property/grid-list/02.jpg" alt="">
+																			</div>
+																			<!-- Info -->
+																			<div class="col-xl-9 pt-2 pt-xl-0">
+																				<h5 class="mb-1">Store in Woodside, San Francisco</h5>
+																				<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
+																				<span class="text-success">$200,000</span>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<!-- Content -->
+																<div class="col-xxl-7 pt-2 pt-xxl-0">
+																	<div class="row">
+																		<div class="col-md-5 text-body">
+																			<!-- Date -->
+																			<ul class="list-group list-group-borderless">
+																				<li class="list-group-item p-0 d-flex">
+																					Viewed:<span class="text-body ms-2">856</span>
+																				</li>
+																				<li class="list-group-item p-0 d-flex">
+																					published:<span class="text-body ms-2">08 July 2019</span>
+																				</li>
+																				<li class="list-group-item p-0 d-flex">
+																					Expiry:<span class="text-body ms-2">08 August 2020</span>
+																				</li>
+																			</ul>
+																		</div>
+																		<div class="col-md-4 pt-2 pt-md-0">
+																			<!-- Rating -->
+																			<ul class="list-inline">
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star"></i></li>
+																			</ul>
+																		</div>
+																		<!-- Cancle button -->
+																		<div class="col-md-3 pt-2 pt-md-0">
+																			<button class="btn btn-sm btn-danger-soft mb-1"><i class="fas fa-fw fa-times"></i></button>
+																		</div>
+																	</div>
+																</div>
+															</div> <!-- Row END -->
+														</div>
+													</div>
+													<hr> <!-- Divider -->
+					
+													<!-- Property -->
+													<div class="row">
+														<div class="col-12 align-middle py-4">
+															<div class="row">
+																<div class="col-xxl-5">
+																	<div class="card bg-transparent">
+																		<div class="row">
+																			<!-- Image -->
+																			<div class="col-xl-3">
+																				<img class="rounded" src="assets/images/property/grid-list/05.jpg" alt="">
+																			</div>
+																			<!-- Info -->
+																			<div class="col-xl-9 pt-2 pt-xl-0">
+																				<h5 class="mb-1">5620 morningstar Avenue</h5>
+																				<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
+																				<span class="text-success">$50,000</span>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<!-- Content -->
+																<div class="col-xxl-7 pt-2 pt-xxl-0">
+																	<div class="row">
+																		<div class="col-md-5 text-body">
+																			<!-- Date -->
+																			<ul class="list-group list-group-borderless">
+																				<li class="list-group-item p-1 p-xxl-0 d-flex">
+																					Viewed:<span class="text-body ms-2">992</span>
+																				</li>
+																				<li class="list-group-item p-1 p-xxl-0 d-flex">
+																					published:<span class="text-body ms-2">29 February 2019</span>
+																				</li>
+																				<li class="list-group-item p-1 p-xxl-0 d-flex">
+																					Expiry:<span class="text-body ms-2">08 June 2019</span>
+																				</li>
+																			</ul>
+																		</div>
+																		<div class="col-md-4 pt-2 pt-md-0">
+																			<!-- Star -->
+																			<ul class="list-inline">
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star"></i></li>
+																				<li class="list-inline-item me-0 small"><i class="fas fa-star"></i></li>
+																			</ul>
+																		</div>
+																		<!-- Cancle button -->
+																		<div class="col-md-3 pt-2 pt-md-0">
+																			<button class="btn btn-sm btn-danger-soft mb-1"><i class="fas fa-fw fa-times"></i></button>
+																		</div>
+																	</div>
+																</div>
+															</div> <!-- Row END -->
+														</div>
+													</div>
+										</div> <!-- Row END -->
+									</div>
+								</div> <!-- Row END -->
+							</div>
+							<!-- Main content END -->
 							<!-- Write a review START -->
 							<div class="mt-2 mt-md-4">
 								<p>
