@@ -17324,8 +17324,13 @@ ul.navbar-nav > li {
 		display: none;
 	}
 }
+@media only screen and (max-width: 767px){
+	.navbar-top {
+		/* display: inline-block; */
+	}
+}
 
-/*Property List*/
+/*Product list*/
 #sub_gnb span {
   font-weight: 900;
   font-size: 14px;
@@ -17347,11 +17352,6 @@ ul.navbar-nav > li {
 	text-underline-position: under;
 	color:#90c31f;
 }
-/*#sub_gnb ul ul {
-  max-height: 0;
-  overflow: hidden;
-  padding-left: 15px;
-}*/
 #sub_gnb ul ul a:hover {
   color: #28a7e1;
 }
@@ -17399,6 +17399,24 @@ ul.navbar-nav > li {
   height: 18px;
   background: url(../images/property/grid-list/stars_state.png) no-repeat 0 center;
 }
+.prd_price_area {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/* height: 63px; */
+}
+@media only screen and (max-width: 767px) {
+	.product_title, .product_price {
+		font-size: 20px;
+	}
+	.prd_price_area {
+		flex-wrap: wrap;
+	}
+
+}
+
+
+
 
 /*product_detail*/
 .buy_area {
