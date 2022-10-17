@@ -13,17 +13,6 @@ def product_list(request):
 		'title': "상품 리스트 - 유토빌",
 	}
 
-	category_first_list =  CategoryFirst.objects.all().order_by( "id")
-
-	q = Q()
-	if request.GET.get("category1"):
-		q &= Q(parent = int(request.GET.get("category1")))
-		category_second_list =  CategorySecond.objects.filter(q).order_by( "id")
-	else:
-		category_second_list = None
-
-
-
 	q = Q()
 	if request.GET.get("category1"): #카테고리1 필터
 		q &= Q(category_first = int(request.GET.get("category1")))
@@ -44,8 +33,6 @@ def product_list(request):
 
 	return render(request, 'product/product_list.html' ,{
 		"seo":seo,
-		"category_first_list":category_first_list,
-		"category_second_list":category_second_list,
 		"product_list":product_list,
 	})
 
