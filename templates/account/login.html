@@ -3,53 +3,62 @@
 {% load static %}
 {% load humanize %}
 
-<section class="pt-3 pt-md-5">
-	<div class="container card-grid">
-		<div class="row align-items-center">
-			<div class="col-md-6 mt-5 mt-md-0 order-2 order-md-1">
-				<!-- Title -->
-				<h3>Please log in with your account! {{request.user.id}}</h3>
-				<p class="mb-4 mb-lg-5">Login to your account easily with less information.</p>
-				<!-- Contact form START -->
-				<form class="row" name="loginForm">
-					{% csrf_token %}
-					<!-- Email -->
-					<div class="col-md-12 mb-3">
-						<label for="username" class="form-label text-dark">username *</label>
-						<input type="text" class="form-control bg-light border-0" name="username" id="username">
+<section>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-10 col-lg-7 col-xl-6">
+				<div class="bg-white p-4 border border-width-5">
+					<div class="text-center section-heading">
+						<h2>Login</h2>
+
 					</div>
-					<!-- Password -->
-					<div class="col-md-12 mb-3">
-						<label for="password" class="form-label text-dark">Password *</label>
-						<input type="password" class="form-control bg-light border-0" name="password" id="password">
-						<div id="passwordHelpBlock" class="form-text">
-							Your password must be 8 characters at least 
-						</div>
-					</div>
-					<div class="col-md-12 d-flex justify-content-between mb-4">
-						<div class="form-check">
-							<input type="checkbox" class="form-check-input" id="exampleCheck1">
-							<label class="form-check-label" for="exampleCheck1">keep me signed in</label>
-						</div>
-						<div class="text-primary-hover"><a href="#" class="text-secondary"><u>Forgot password?</u></a></div>	
-					</div>
-					<!-- Button -->
-					<div class="row align-items-center">
-						<div class="col-12">
-							<button class="btn btn-primary" type="button" onclick="login_submit();" id="loginBtn">Login</button>
+					<form name="loginForm">
+						{% csrf_token %}
+						<div class="row">
+
+							<div class="col-sm-12">
+
+								<div class="form-group">
+									<label>Username</label>
+									<input type="text" class="form-control" name="username" placeholder="Your Username here">
+								</div>
+
+							</div>
+
+							<div class="col-sm-12">
+
+								<div class="form-group">
+									<label>Password </label>
+									<input type="password" class="form-control" name="password" placeholder="Your password here">
+								</div>
+
+							</div>
+
 						</div>
 
-					</div>	
-				</form>
-				<!-- Contact form END -->
+						<div class="row">
+							<div class="col-sm-6 mb-2">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="login-remember">
+									<label class="custom-control-label" for="login-remember">Keep me signed in</label>
+								</div>
+							</div>
+							<div class="col-sm-6 text-start text-sm-end">
+								<a href="forgot-password.html" class="m-link-muted">Forgot password?</a>
+							</div>
 
-			</div>
+						</div>
 
-			<!-- Image -->
-			<div class="col-md-6 order-1">
-				<img src="{% static 'images/signin-signup/01.png' %}" alt="">
+						<button type="button" class="butn primary w-100 mt-4" onclick="login_submit();"><span>Login</span></button>
+						<div class="text-center text-small mt-4">
+							<span>Don't have an account yet? <a href="registration.html">Register</a></span>
+						</div>
+
+					</form>
+				</div>
 			</div>
 		</div>
+
 	</div>
 </section>
 
@@ -90,7 +99,9 @@
 
 	is_run = true;
     var queryString = $("form[name=loginForm]").serialize();
-		
+	
+	$('#my-spinner').show();
+
     $.ajax({
         type : 'POST',
         url : "{{request.path}}",
@@ -109,7 +120,10 @@
           var msg = "ERROR : " + request.status + "<br>"
 			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
 			    console.log(msg);
-        }
+        },
+		complete: function () {
+			$('#my-spinner').hide();
+		}
     });
   }
 
