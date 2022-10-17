@@ -105,28 +105,29 @@
                                     <div class="navbar-toggler"></div>
 
                                     <!-- menu area -->
-                                    <ul class="navbar-nav ms-auto" id="nav" style="display: none;">
-										{% for categoryFirst in category_first_list %}
-                                        <li><a href="#!">{{categoryFirst.name}}</a>
-											{% if categoryFirst.categorysecond_set.all.count > 0 %}
-                                            <ul>
-												{% for categorySecond in categoryFirst.categorysecond_set.all %}
-                                                <li><a href="#!">{{categorySecond.name}}</a>
-                                                    <ul>
-                                                        <li><a href="home-corporate-1.html">Corporate - 1</a></li>
-                                                        <li><a href="home-corporate-2.html">Corporate - 2</a></li>
-                                                        <li><a href="home-corporate-3.html">Corporate - 3</a></li>
-                                                        <li><a href="home-corporate-4.html">Corporate - 4</a></li>
-                                                        <li><a href="home-corporate-5.html">Corporate - 5</a></li>
-                                                    </ul>
-                                                </li>
-												{% endfor %}
-                                            </ul>
+                                    <ul class="navbar-nav mx-auto" id="nav" style="display: none;">
+										                                                
+									{% for categoryFirst in category_first_list %}
+										<li><a href="#!">{{categoryFirst.name}}</a>
+										{% if categoryFirst.categorysecond_set.all.count > 0 %}
+											<ul>
+											{% for categorySecond in categoryFirst.categorysecond_set.all %}
+												<li><a href="#!">{{categorySecond.name}}</a>
+													<ul>
+														<li><a href="home-corporate-1.html">Corporate - 1</a></li>
+														<li><a href="home-corporate-2.html">Corporate - 2</a></li>
+														<li><a href="home-corporate-3.html">Corporate - 3</a></li>
+														<li><a href="home-corporate-4.html">Corporate - 4</a></li>
+														<li><a href="home-corporate-5.html">Corporate - 5</a></li>
+													</ul>
+												</li>
+											{% endfor %}
+											</ul>
 											{% endif %}
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                    <!-- end menu area -->
+										</li>
+									{% endfor %}
+									</ul>
+								<!-- end menu area -->
 
                                     <!-- atribute navigation -->
                                     <div class="attr-nav">
@@ -147,5 +148,4 @@
                     </div>
                 </div>
             </div>
-
         </header>
