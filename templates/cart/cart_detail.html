@@ -37,6 +37,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+								{% if not cart_items %}
+								<tr>
+									<td class="border-bottom-0" colspan="7">상품이 없습니다.</td>
+								</tr>
+								{% endif%}
 								{% for cart_item in cart_items %}
                                 <tr>
 									<td class="product-thumbnail text-start {% if forloop.last %}border-bottom-0{% endif %}">
