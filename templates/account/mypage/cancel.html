@@ -5,225 +5,271 @@
 
 
 <!-- Section -->
-<section class="pt-0 pb-0">
-	<div class="container px-0">
-		<div class="row">
-			{% include "account/mypage/sidemenu.html" with active_tab="취소/변경" %}
-			<div class="col-lg-9">
-				<div class="row">
-					<div class="col-12">
-						<!-- Page title -->
-						<div class="my-5 newordertitle">
-							<h3>취소/변경</h3>
-						</div>
-						<!-- Property list START -->
-						<div class="row main_contents">
-							<div class="col-md-12">
-								<div class="bg-secondary-soft p-3 p-md-5 rounded">
-									<!-- Title -->
-									<div class="row d-none d-xxl-block">
-										<div class="col-12 align-middle py-3">
-											<div class="row border-bottom">
-												<div class="col-6 align-middle text-center py-2">
-													<h5>Listing</h5>
-												</div>
-												<div class="col-6">
-													<div class="row">
-														<div class="col-4 align-middle text-center py-2">
-															<h5>Purchase date</h5>
-														</div>
-														<div class="col-4 align-middle text-center py-2">
-															<h5>Status</h5>
-														</div>
-														<div class="col-4 align-middle text-center py-2">
-															<h5>Action</h5>
+<section class="position-relative">
+	<div class="container position-relative">
+		<div class="position-relative pt-9 pb-9 pb-lg-11">
+			<div class="row">
+				{% include "account/mypage/sidemenu.html" with active_tab="취소/변경" %}
+				<div class="col-lg-9">
+					<div class="row">
+						<div class="col-12">
+							<!-- Page title -->
+							<div class="newordertitle">
+								<h3>취소/변경</h3>
+							</div>
+							<!-- Property list START -->
+							<div class="row main_contents">
+								<div class="col-md-12">
+									<div class="bg-secondary-soft p-3 p-md-5 rounded">
+										<!-- Title -->
+										<div class="row d-none d-xxl-block">
+											<div class="col-12 align-middle py-3">
+												<div class="row border-bottom">
+													<div class="col-6 align-middle text-center py-2">
+														<h5>Listing</h5>
+													</div>
+													<div class="col-6">
+														<div class="row">
+															<div class="col-4 align-middle text-center py-2">
+																<h5>Purchase date</h5>
+															</div>
+															<div class="col-4 align-middle text-center py-2">
+																<h5>Status</h5>
+															</div>
+															<div class="col-4 align-middle text-center py-2">
+																<h5>Action</h5>
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
 
-									<!-- Property -->
-									<div class="row">
-										<div class="col-12 align-middle text-center py-4">
-											<div class="row">
-												<div class="col-xxl-6">
-													<div class="card bg-transparent">
-														<div class="row">
-															<!-- Image -->
-															<div class="col-xl-3">
-																<img class="rounded" src="{% static 'images/property/grid-list/02.jpg' %}" alt="">
-															</div>
-															<!-- Info -->
-															<div class="col-xl-9 pt-2 pt-xl-0 text-start">
-																<h6 class="mb-1">에어컨청소</h6>
-																<p class="mb-1 text-body">스탠드형</p>
-																<span class="text-success">₱5,000 / 1개</span>
+										<!-- Property -->
+										<div class="row">
+											<div class="col-12 align-middle text-center py-4">
+												<div class="row">
+													<div class="col-xxl-6">
+														<div class="card bg-transparent">
+															<div class="row">
+																<!-- Image -->
+																<div class="col-xl-3">
+																	<img class="rounded" src="{% static 'images/property/grid-list/02.jpg' %}" alt="">
+																</div>
+																<!-- Info -->
+																<div class="col-xl-9 pt-2 pt-xl-0 text-start">
+																	<h6 class="mb-1">에어컨청소</h6>
+																	<p class="mb-1 text-body">스탠드형</p>
+																	<span class="text-success">₱5,000 / 1개</span>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<!-- Content -->
-												<div class="col-xxl-6 pt-2 pt-xxl-0">
-													<div class="row">
+													<!-- Content -->
+													<div class="col-xxl-6 pt-2 pt-xxl-0">
+														<div class="row">
+															<!-- Date -->
+															<div class="col-md-4 align-middle text-body">
+																08 July 2018
+															</div>
+															<!-- Badge -->
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<div class="badge bg-warning-soft text-danger"></i>취소 완료</div>
+															</div>		
+															<!-- Buttons -->
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<a class="btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#cancelDetailModal"><i class="fas fa-fw fa-eye"></i>&nbsp;취소상세</a>
+																<!-- <a class="btn btn-sm btn-success-soft me-1 mb-1"><i class="far fa-fw fa-edit"></i>교환</a>
+																<button class="btn btn-sm btn-danger-soft mb-1"><i class="far fa-fw fa-trash-alt"></i>환불</button> -->
+															</div>
+														</div>
+													</div>
+												</div> <!-- Row END -->
+											</div>
+										</div>
+										<hr> <!-- Divider -->
+
+										<!-- Property -->
+										<div class="row">
+											<div class="col-12 align-middle text-center py-4">
+												<div class="row">
+													<div class="col-xxl-6">
+														<div class="card bg-transparent">
+															<div class="row">
+																<!-- Image -->
+																<div class="col-xl-3">
+																	<img class="rounded" src="assets/images/property/grid-list/03.jpg" alt="">
+																</div>
+																<!-- Info -->
+																<div class="col-xl-9 pt-2 pt-xl-0 text-start">
+																	<h6 class="mb-1">157485 Camino Codorniz</h6>
+																	<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
+																	<span class="text-success">$160,000</span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- Content -->
+													<div class="col-xxl-6 pt-2 pt-xxl-0">
 														<!-- Date -->
-														<div class="col-md-4 align-middle text-body">
-															08 July 2018
-														</div>
-														<!-- Badge -->
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<div class="badge bg-warning-soft text-danger"></i>취소 완료</div>
-														</div>		
-														<!-- Buttons -->
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<a class="btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#cancelDetailModal"><i class="fas fa-fw fa-eye"></i>&nbsp;취소상세</a>
-															<!-- <a class="btn btn-sm btn-success-soft me-1 mb-1"><i class="far fa-fw fa-edit"></i>교환</a>
-															<button class="btn btn-sm btn-danger-soft mb-1"><i class="far fa-fw fa-trash-alt"></i>환불</button> -->
-														</div>
-													</div>
-												</div>
-											</div> <!-- Row END -->
-										</div>
-									</div>
-									<hr> <!-- Divider -->
-
-									<!-- Property -->
-									<div class="row">
-										<div class="col-12 align-middle text-center py-4">
-											<div class="row">
-												<div class="col-xxl-6">
-													<div class="card bg-transparent">
 														<div class="row">
-															<!-- Image -->
-															<div class="col-xl-3">
-																<img class="rounded" src="assets/images/property/grid-list/03.jpg" alt="">
+															<div class="col-md-4 align-middle text-body">
+																08 July 2018
 															</div>
-															<!-- Info -->
-															<div class="col-xl-9 pt-2 pt-xl-0 text-start">
-																<h6 class="mb-1">157485 Camino Codorniz</h6>
-																<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
-																<span class="text-success">$160,000</span>
+															<!-- Badge -->
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<div class="badge bg-warning-soft text-warning"><i class="fas fa-rupee-sign pe-1"></i>변경완료</div>
+															</div>
+															<!-- Buttons -->
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<a class="btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#changeDetailModal"><i class="fas fa-fw fa-eye"></i>&nbsp;변경 상세</a>
+																<!-- <button class="btn btn-sm btn-danger-soft mb-1"><i class="far fa-fw fa-trash-alt"></i>&nbsp;취소</button> -->
 															</div>
 														</div>
 													</div>
-												</div>
-												<!-- Content -->
-												<div class="col-xxl-6 pt-2 pt-xxl-0">
-													<!-- Date -->
-													<div class="row">
-														<div class="col-md-4 align-middle text-body">
-															08 July 2018
-														</div>
-														<!-- Badge -->
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<div class="badge bg-warning-soft text-warning"><i class="fas fa-rupee-sign pe-1"></i>변경완료</div>
-														</div>
-														<!-- Buttons -->
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<a class="btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#changeDetailModal"><i class="fas fa-fw fa-eye"></i>&nbsp;변경 상세</a>
-															<!-- <button class="btn btn-sm btn-danger-soft mb-1"><i class="far fa-fw fa-trash-alt"></i>&nbsp;취소</button> -->
-														</div>
-													</div>
-												</div>
-											</div> <!-- Row END -->
+												</div> <!-- Row END -->
+											</div>
 										</div>
-									</div>
-									<hr> <!-- Divider -->
+										<hr> <!-- Divider -->
 
-									<!-- Property -->
-									<div class="row">
-										<div class="col-12 align-middle text-center py-4">
-											<div class="row">
-												<div class="col-xxl-6">
-													<div class="card bg-transparent">
-														<div class="row">
-															<!-- Image -->
-															<div class="col-xl-3">
-																<img class="rounded" src="assets/images/property/grid-list/04.jpg" alt="">
-															</div>
-															<!-- Info -->
-															<div class="col-xl-9 pt-2 pt-xl-0 text-start">
-																<h6 class="mb-1">Store in Woodside, San Francisco</h6>
-																<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
-																<span class="text-success">$160,000</span>
-															</div>
-														</div>
-													</div>
-												</div>
-												<!-- Content -->
-												<div class="col-xxl-6 pt-2 pt-xxl-0">
-													<!-- Date -->
-													<div class="row">
-														<div class="col-md-4 align-middle text-body">
-															08 July 2018
-														</div>
-														<!-- Badge -->
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<div class="badge bg-danger-soft text-primary"><i class="fas fa-rupee-sign pe-1"></i>구매 완료</div>
-														</div>
-														<!-- Buttons -->
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<a class="btn btn-sm btn-info-soft me-1 mb-1"><i class="fa fa-arrow-right-arrow-left"></i>&nbsp;변경</a>
-															<button class="btn btn-sm btn-danger-soft mb-1"><i class="far fa-fw fa-trash-alt"></i>&nbsp;취소</button>
-														</div>
-													</div>
-												</div>
-											</div> <!-- Row END -->
-										</div>
-									</div>
-									<hr> <!-- Divider -->
-
-									<!-- Property -->
-									<div class="row">
-										<div class="col-12 align-middle text-center py-4">
-											<div class="row">
-												<div class="col-xxl-6">
-													<div class="card bg-transparent">
-														<div class="row">
-															<!-- Image -->
-															<div class="col-xl-3">
-																<img class="rounded" src="assets/images/property/grid-list/08.jpg" alt="">
-															</div>
-															<!-- Info -->
-															<div class="col-xl-9 pt-2 pt-xl-0 text-start">
-																<h6 class="mb-1">5620 morningstar Avenue</h6>
-																<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
-																<span class="text-success">$160,000</span>
+										<!-- Property -->
+										<div class="row">
+											<div class="col-12 align-middle text-center py-4">
+												<div class="row">
+													<div class="col-xxl-6">
+														<div class="card bg-transparent">
+															<div class="row">
+																<!-- Image -->
+																<div class="col-xl-3">
+																	<img class="rounded" src="assets/images/property/grid-list/04.jpg" alt="">
+																</div>
+																<!-- Info -->
+																<div class="col-xl-9 pt-2 pt-xl-0 text-start">
+																	<h6 class="mb-1">Store in Woodside, San Francisco</h6>
+																	<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
+																	<span class="text-success">$160,000</span>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<!-- Content -->
-												<div class="col-xxl-6 pt-2 pt-xxl-0">
-													<div class="row">
+													<!-- Content -->
+													<div class="col-xxl-6 pt-2 pt-xxl-0">
 														<!-- Date -->
-														<div class="col-md-4 align-middle text-body">
-															08 July 2018
-														</div>
-														<!-- Badge -->
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<div class="badge bg-danger-soft text-primary"><i class="fas fa-rupee-sign pe-1"></i>구매 완료</div>
-														</div>
-														<!-- Buttons -->
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<a class="btn btn-sm btn-info-soft me-1 mb-1"><i class="fa fa-arrow-right-arrow-left"></i>&nbsp;변경</a>
-															<button class="btn btn-sm btn-danger-soft mb-1"><i class="far fa-fw fa-trash-alt"></i>&nbsp;취소</button>
+														<div class="row">
+															<div class="col-md-4 align-middle text-body">
+																08 July 2018
+															</div>
+															<!-- Badge -->
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<div class="badge bg-danger-soft text-primary"><i class="fas fa-rupee-sign pe-1"></i>구매 완료</div>
+															</div>
+															<!-- Buttons -->
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<a class="btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#changeModal"><i class="fa fa-arrow-right-arrow-left"></i>&nbsp;변경</a>
+																<a class="btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#cancelModal"><i class="fa fa-arrow-right-arrow-left"></i>&nbsp;취소</a>
+															</div>
+
+															
+															<div class="modal fade" id="changeModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="changeLabel" aria-hidden="true">
+																<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+																	<div class="modal-content">
+																	<div class="modal-header p-4">
+																		<h4 class="mb-0 text-center" id="cancelDetail">변경 상세정보</h4>
+																		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																	</div>
+																	<div class="modal-body p-4" id="cancelDetailBody">
+																		<div class="cancelCatalog">
+																			<div class="cancelphoto">
+																				<img class="rounded" src="{% static 'images/property/grid-list/02.jpg' %}" alt="">
+																			</div>
+																			<div class="cancel-list text-start">
+																				<h6>에어컨 청소</h6>
+																				<p>스탠드형</p>
+																				<span>₱5,000 / 1개</span>
+																			</div>
+																			<span class="calce-notice">이전주문</span>
+																		</div>
+																		<div class="downarrow">
+																			<i class="fa-solid fa-down-long"></i>
+																		</div>
+																		<div class="cancelCatalog">
+																			<div class="cancelphoto">
+																				<img class="rounded" src="{% static 'images/property/grid-list/02.jpg' %}" alt="">
+																			</div>
+																			<div class="cancel-list text-start">
+																				<h6>에어컨 청소</h6>
+																				<p>벽걸이형</p>
+																				<span>₱3,500 / 1개</span>
+																			</div>
+																			<span class="calce-notice">변경완료</span>
+																		</div>
+																
+																	<div class="modal-footer">
+																			<button type="button" class="btn btn-primary btn-md" data-bs-dismiss="modal">확인</button>
+																			<!-- id="" data-before-modal="" onclick="" -->
+																	</div>
+																	</div>
+																</div>
+															</div>
+
+
 														</div>
 													</div>
-												</div>
-											</div> <!-- Row END -->
+												</div> <!-- Row END -->
+											</div>
+										</div>
+										<hr> <!-- Divider -->
+
+										<!-- Property -->
+										<div class="row">
+											<div class="col-12 align-middle text-center py-4">
+												<div class="row">
+													<div class="col-xxl-6">
+														<div class="card bg-transparent">
+															<div class="row">
+																<!-- Image -->
+																<div class="col-xl-3">
+																	<img class="rounded" src="assets/images/property/grid-list/08.jpg" alt="">
+																</div>
+																<!-- Info -->
+																<div class="col-xl-9 pt-2 pt-xl-0 text-start">
+																	<h6 class="mb-1">5620 morningstar Avenue</h6>
+																	<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
+																	<span class="text-success">$160,000</span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- Content -->
+													<div class="col-xxl-6 pt-2 pt-xxl-0">
+														<div class="row">
+															<!-- Date -->
+															<div class="col-md-4 align-middle text-body">
+																08 July 2018
+															</div>
+															<!-- Badge -->
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<div class="badge bg-danger-soft text-primary"><i class="fas fa-rupee-sign pe-1"></i>구매 완료</div>
+															</div>
+															<!-- Buttons -->
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<a class="btn btn-sm btn-info-soft me-1 mb-1"><i class="fa fa-arrow-right-arrow-left"></i>&nbsp;변경</a>
+																<button class="btn btn-sm btn-danger-soft mb-1"><i class="far fa-fw fa-trash-alt"></i>&nbsp;취소</button>
+															</div>
+														</div>
+													</div>
+												</div> <!-- Row END -->
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+							<!-- Property list END -->
 						</div>
-						<!-- Property list END -->
-					</div>
-				</div> <!-- Row END -->
+					</div> <!-- Row END -->
+				</div>
 			</div>
 		</div>
-		
 	</div>
 </section>
 
@@ -309,4 +355,10 @@
 		</div>
 	</div>
 </div>
+
+
+
+<script>
+document.getElementById("myModal");
+</script>
 {% endblock %}
