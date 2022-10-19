@@ -49,8 +49,8 @@ def get_cart_info(request):
 
 def add_cart(request):
 	cart = get_user_cart(request)
-
 	item_list = json.loads(request.POST.get('data'))
+
 	for item in item_list:
 
 		product = Product.objects.get(pk=item["product_id"])

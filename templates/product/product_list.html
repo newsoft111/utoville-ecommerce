@@ -3,222 +3,312 @@
 {% load static %}
 {% load humanize %}
 
-<!-- PAGE TITLE
-        ================================================== -->
-        <section class="page-title-section bg-img cover-background d-lg-none" data-overlay-dark="7" data-background="img/bg/bg5.jpg">
-            <div class="container">
 
-                <div class="row">
-                    <div class="col-md-7">
-                        <h1>Shop Product Grid</h1>
-                    </div>
-                    <div class="col-md-5">
-                        <ul class="text-md-end text-start mt-2 mt-lg-0 ps-0">
-                            <li><a href="home-default.html">Home</a></li>
-                            <li><a href="#!">Shop Product Grid</a></li>
-                        </ul>
-                    </div>
-                </div>
+<!--Page header start-->
+<section class="position-relative overflow-hidden">
+	<div class="container-fluid">
+		<div class="py-8 py-lg-11 bg-dark text-white position-relative">
+			<!--background image-->
+			<img src="assets/img/shop/banners/06.jpg" class="bg-image bg-top-center opacity-75" alt="">
+		
+			<div class="row align-items-center position-relative">
+			<div class="col-lg-10 mx-auto text-center">
+				<nav class="d-flex justify-content-center" aria-label="breadcrumb">
+				<ol class="breadcrumb mb-3">
+					<li class="breadcrumb-item">
+					<a href="#!">Home</a>
+					</li>
+					<li class="breadcrumb-item active">
+					Shop
+					</li>
+				</ol>
+				</nav>
+				<h1 class="mb-0 display-3">Shop
+				</h1>
+			</div>
+			</div>
+			<!--/.row-->
+		</div>
+	</div>
+</section>
 
-            </div>
-        </section>
 
-        <!-- SHOP GRID
-        ================================================== -->
-                        
-        <section>
-            <div class="container">
-                <div class="row">
-                    <!-- product grid left panel -->
-					<div class="col-lg-3">
-						<div class="categories mb-1-9">
-							<h3 class="bg-primary text-white m-0 h5 px-3 py-2 font-weight-600 d-none d-lg-block">Homcare</h3>
-							<h3 class="bg-primary text-white collapse-sm m-0 h5 px-3 py-2 font-weight-600 d-block d-lg-none">Homcare</h3>
-							<ul class="list-style-5 shop-category">
-								{% for categoryFirst in category_first_list %}
-								<li>
-									<a href="{% url 'product:list' %}?category1={{categoryFirst.id}}">{{categoryFirst.name}}</a>
-								</li>
-								{% endfor %}
-							</ul>
-						</div>
-						<div class="offer-banner bg-primary text-center d-none d-lg-block">
-							<a href="#!"><img src="img/shop/left-panel-banner.png" alt="배너광고"></a>
-						</div>
-						
-						<!--작업 다하고 징루것-->
-						<!-- 
-                        <div id="accordion" class="accordion-style2 mb-4">
-							{% for categoryFirst in category_first_list %}
-                            <div class="card">
-                                <div class="card-header" id="heading{{categoryFirst.id}}">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapse{{categoryFirst.id}}" aria-expanded="true" aria-controls="collapse{{categoryFirst.id}}">{{categoryFirst.name}}</button>
-                                    </h5>
-                                </div> -->
-
-								<!--<div class="card-header">
-									<h5 class="mb-0">
-										<a class="btn btn-link" href="?category1={{categoryFirst.id}}">{{categoryFirst.name}}</a>
-									</h5>
-								</div>-->
-								
-                                <!-- <div id="collapse{{categoryFirst.id}}" class="collapse {% if not categoryFirst.categorysecond_set.all is None and request.GET.category1|slugify == categoryFirst.id|slugify %}show{% endif %}" aria-labelledby="heading{{categoryFirst.id}}" data-bs-parent="#accordion">
-                                    <div class="card-body">
-                                        <ul class="list-style-5">
-											<li><a href="?category1={{categoryFirst.id}}">전체보기</a></li>
-											{% for categorySecond in categoryFirst.categorysecond_set.all %}
-                                            <li><a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}">{{categorySecond.name}}</a></li>
-											{% endfor %}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div> -->
-						<!--여기까지-->
-                        <div class="offer-banner bg-primary text-center d-none d-lg-block">
-                            <a href="#!"><img src="{% static 'img/shop/left-panel-banner.png' %}" alt="..."></a>
-                        </div>
-                    </div>
-                    <!-- end product grid left panel -->
-
-                    <!-- right panel section -->
-                    <div class="col-lg-9 ps-lg-1-9">											
-                        <!-- <div id="accordion" class="accordion-style2 mb-4"> -->
-							<!-- {% for categoryFirst in category_first_list %} -->
-                            <!-- <div class="card"> -->
-                                <!-- <div id="collapse{{categoryFirst.id}}" class="collapse {% if not categoryFirst.categorysecond_set.all is None and request.GET.category1|slugify == categoryFirst.id|slugify %}show{% endif %}" aria-labelledby="heading{{categoryFirst.id}}" data-bs-parent="#accordion"> -->
-                                    <!-- <div class="card-body">
-                                        <ul class="list-style-5">
-											<li><a href="?category1={{categoryFirst.id}}">전체보기</a></li>
-											{% for categorySecond in categoryFirst.categorysecond_set.all %}
-                                            <li><a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}">{{categorySecond.name}}</a></li>
-											{% endfor %}
-                                        </ul>
-                                    </div> -->
-                                <!-- </div> -->
-                            <!-- </div> -->
-                            <!-- {% endfor %} -->
-                        <!-- </div> -->
-                        <div class="row g-0 align-items-center bg-light rounded p-3 mb-1-9">
-
-                            <div class="col-12 col-md mb-2 mb-md-0 text-center text-md-start">Showing 1–9 of 27 results</div>
-
-                            <div class="col-12 col-md-auto">
-
-                                <div class="row justify-content-center">
-
-                                    <div class="col-auto my-2 my-md-0">
-                                        <label class="m-0">Sort By:</label>
-                                        <select class="w-auto d-inline-block bg-white form-control form-select">
-                                            <option value="#?sort=p.sort_order&amp;order=ASC">Default</option>
-                                            <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-                                            <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                                            <option value="#?sort=p.price&amp;order=ASC" selected="">Price (Low &gt; High)</option>
-                                            <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-                                            <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
-                                            <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
-                                            <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
-                                            <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-auto my-2 my-md-0">
-                                        <label class="m-0">Show:</label>
-                                        <select class="w-auto d-inline-block bg-white form-control form-select">
-                                            <option value="#?limit=24" selected="selected">24</option>
-                                            <option value="#?limit=25">25</option>
-                                            <option value="#?limit=50">50</option>
-                                            <option value="#?limit=75">75</option>
-                                            <option value="#?limit=100">100</option>
-                                        </select>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="row product-grid mb-1-9 mb-lg-6 mt-n1-9">
-							{% for productList in product_list %}
-                            <div class="col-xl-4 col-md-6 mt-1-9">
-                                <div class="border">
-                                    <a href="{% url 'product:detail' productList.id %}" class="product-block">
-         								<img src="{% static 'img/shop/product-01.jpg' %}" alt="...">
-                                    </a>
-                                    <div class="product-info">
-                                        <a href="{% url 'product:detail' productList.id %}">{{productList.name}}</a>
-                                        <p class="price text-center m-0">
-                                            <span class="red line-through me-2">₱{{productList.price}}</span>
-                                            <span>₱{{productList.price}}</span>
-                                        </p>
-                                    </div>
-                                    <div class="buttons">
-                                        <a href="{% url 'cart:detail' %}" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
-                                    </div>
-
-                                </div>
-                            </div>
+<section class="position-relative bg-white">
+	<div class="container py-9 py-lg-11 position-relative">
+		<div class="row justify-content-between">
+			<div class="col-md-3">
+				<!--:Sidebar widget card-->
+				<div class="mt-5">
+				<!--:Title-->
+				<h6 class="mb-4">Categories</h6>
+				<!--:Collapse categories-->
+				<div class="collapse-group collapse d-flex flex-column">
+					<div class="collapse d-block">
+					<div class="nav flex-column">
+						{% for categoryFirst in category_first_list %}
+						<a href="#category{{categoryFirst.id}}" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">{{categoryFirst.name}}</a>
+						<div class="collapse" id="category{{categoryFirst.id}}">
+						<div class="nav nav-level-2 flex-column">
+							{% for categorySecond in categoryFirst.categorysecond_set.all %}
+							<a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}" class="nav-link small">{{categorySecond.name}}</a>
 							{% endfor %}
-                        </div>
+						</div>
+						</div>
+						{% endfor %}
+					</div>
+					</div>
+				</div>
+			</div>
+				<!--:Sidebar widget card-->
+			
+			<div class="mt-5">
+			<!--:Title-->
+			<h6 class="mb-4">Size</h6>
+			<!--:Size list-->
+			<ul class="list-unstyled mb-0 pe-2 ps-1 py-1" data-simplebar style="max-height: 13rem;">
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-xs">
+					<label class="form-check-label widget-filter-item-text" for="size-xs">XS</label>
+				</div><span class="small text-muted">21</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-s">
+					<label class="form-check-label widget-filter-item-text" for="size-s">S</label>
+				</div><span class="small text-muted">22</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-m">
+					<label class="form-check-label widget-filter-item-text" for="size-m">M</label>
+				</div><span class="small text-muted">54</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-l">
+					<label class="form-check-label widget-filter-item-text" for="size-l">L</label>
+				</div><span class="small text-muted">32</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-xl">
+					<label class="form-check-label widget-filter-item-text" for="size-xl">XL</label>
+				</div><span class="small text-muted">74</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-39">
+					<label class="form-check-label widget-filter-item-text" for="size-39">39</label>
+				</div><span class="small text-muted">48</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="width-3x height-3x">
+					<label class="form-check-label widget-filter-item-text" for="width-3x height-3x">40</label>
+				</div><span class="small text-muted">24</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-41">
+					<label class="form-check-label widget-filter-item-text" for="size-41">41</label>
+				</div><span class="small text-muted">86</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-42">
+					<label class="form-check-label widget-filter-item-text" for="size-42">42</label>
+				</div><span class="small text-muted">98</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-43">
+					<label class="form-check-label widget-filter-item-text" for="size-43">43</label>
+				</div><span class="small text-muted">31</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-44">
+					<label class="form-check-label widget-filter-item-text" for="size-44">44</label>
+				</div><span class="small text-muted">42</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="s50">
+					<label class="form-check-label widget-filter-item-text" for="s50">45</label>
+				</div><span class="small text-muted">62</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-46">
+					<label class="form-check-label widget-filter-item-text" for="size-46">46</label>
+				</div><span class="small text-muted">19</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-47">
+					<label class="form-check-label widget-filter-item-text" for="size-47">47</label>
+				</div><span class="small text-muted">97</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-48">
+					<label class="form-check-label widget-filter-item-text" for="size-48">48</label>
+				</div><span class="small text-muted">8</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="size-49">
+					<label class="form-check-label widget-filter-item-text" for="size-49">49</label>
+				</div><span class="small text-muted">16</span>
+				</li>
+				<li class="widget-filter-item d-flex justify-content-between align-items-center">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="s50">
+					<label class="form-check-label widget-filter-item-text" for="s50">50</label>
+				</div><span class="small text-muted">9</span>
+				</li>
+			</ul>
+			</div>
+			<!--:Sidebar widget card-->
+<div class="mt-5">
+  <!--:Title-->
+  <h6 class="mb-4">Price</h6>
+  <div>
+	<div class="range-slider mx-2"
+	  data-range='{"decimals": 0,"step": 1,"connect": true, "start" : [10,100], "range" : {"min": 0, "max" :1000}}'>
+	</div>
+	<div class="range-slider-selection">
+	  <span>$ <span class="range-slider-value" id="range-min"></span></span>
+	  &mdash; <span>$ <span class="range-slider-value" id="range-max"></span></span>
+	</div>
+  </div>
+</div>
+<!--:Sidebar widget card-->
+<div class="mt-5">
+  <!--:Title-->
+  <h6 class="mb-4">Colors</h6>
+  <!--:list-->
+  <ul class="list-unstyled mb-0">
+	<li class="btn-group mb-2">
+	  <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic radio toggle button group">
+		<input type="checkbox" class="btn-check" name="btnradio" id="color_black">
+		<label
+		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-white product-black"
+		  for="color_black"></label>
+		<input type="checkbox" class="btn-check" name="btnradio" id="color_blue">
+		<label
+		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-white product-blue"
+		  for="color_blue"></label>
+		<input type="checkbox" class="btn-check" name="btnradio" id="color_brown">
+		<label
+		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-white product-brown"
+		  for="color_brown"></label>
+		<input type="checkbox" class="btn-check" name="btnradio" id="color_red">
+		<label
+		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-white product-red"
+		  for="color_red"></label>
+		<input type="checkbox" class="btn-check" name="btnradio" id="color_yellow">
+		<label
+		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-dark product-yellow"
+		  for="color_yellow"></label>
+		<input type="checkbox" class="btn-check" name="btnradio" id="color_pink">
+		<label
+		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-dark product-pink"
+		  for="color_pink"></label>
+		<input type="checkbox" class="btn-check" name="btnradio" id="color_purple">
+		<label
+		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-white product-purple"
+		  for="color_purple"></label>
 
-                        <div class="row">
-                            <div class="col-12 px-lg-0">
-                                <div class="pagination text-small text-uppercase text-extra-dark-gray">
-                                    <ul>
-										{% if product_list.has_previous %}
-                                        <li class="">
-											<a href="?p={{page_number }}
-													{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
-													{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">
-												<i class="fas fa-long-arrow-alt-left me-1 d-none d-md-inline-block"></i> Prev
-											</a>
-										</li>
-										{% else %}
-										<li>
-											<a href="#">
-												<i class="fas fa-long-arrow-alt-left me-1 d-none d-md-inline-block"></i> Prev
-											</a>
-										</li>
-										{% endif %}
+		<input type="checkbox" class="btn-check" name="btnradio" id="color_white">
+		<label
+		  class="shop-product-color btn p-0 shadow-sm border-0 me-2 width-3x height-3x flex-center rounded-circle text-dark border product-white"
+		  for="color_white"></label>
+	  </div>
+	</li>
+  </ul>
+</div>
+</div>
 
-										{% for page_number in product_list.paginator.page_range %}
-											{% if page_number >= product_list.number|add:-2 and page_number <= product_list.number|add:2 %}
-												{% if page_number == product_list.number %}
-												<li class="active"><a href="#">{{ page_number }}</a></li>
-												{% else %}
-                                        <li><a href="?p={{page_number }}
-													{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
-													{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">{{ page_number }}</a></li>
-												{% endif %}
-											{% endif %}
-										{% endfor %}
+<!--Products column-->
+<div class="col-md-9 pt-5">
+<!--Products top bar-->
+<div class="row mb-5 align-items-center">
+  <div class="col-md-5 mb-3 mb-md-0">
+	<small>Showing 1-9 of 190 items</small>
+  </div>
+  <div class="col-md-6 ms-auto">
+	<div class="d-flex align-items-center">
+	  <span class="small text-muted d-none d-lg-block">Short by</span>
+	  <div class="flex-grow-1 ps-2">
+		<select name="shortBy" class="form-control"
+		  data-choices='{"searchEnabled":false,"itemSelectText":""}' id="product-shortby">
+		  <option value="Best selling" selected> Best selling</option>
+		  <option value="Best rated"> Best rated</option>
+		  <option value="Most recent"> Most recent</option>
+		  <option value="Price - Low to High"> Price - Low to High</option>
+		  <option value="Price - High to Low">Price - High to Low</option>
+		</select>
+	  </div>
+	</div>
+  </div>
+</div>
+<div class="row mb-5">
+	{% for productList in product_list %}
+	<div class="col-md-6 col-xl-4 mb-4">
+		<!--:card-hover-expand-->
+		<div class="card overflow-hidden hover-lift card-product">
+		<div class="card-product-header p-3 d-block overflow-hidden position-relative">
+			<a href="{% url 'product:detail' productList.id %}">
+				<img src="{% static 'img/shop/products/03.jpg' %}" class="img-fluid" alt="Product">
+			</a>
+		</div>
+		<div class="card-product-body p-3 pt-0 text-center">
+			<a href="{% url 'product:detail' productList.id %}" class="h5 text-dark d-block position-relative mb-2">{{productList.name}}</a>
+			<div class="card-product-body-overlay">
+			<span class="card-product-price">
+				<span>₱{{productList.price|intcomma}}</span>
+			</span>
+			<span class="card-product-view-btn">
+				<a href="{% url 'product:detail' productList.id %}" class="link-underline mb-1 fw-semibold text-dark">View Details</a>
+			</span>
+			</div>
+		</div>
+		</div>
+		<!--:/card product end-->
+	</div>
+	{% endfor %}
+</div>
 
-										{% if product_list.has_previous %}
-										<li>
-											<a href="?p={{page_number }}
-													{% if 'category1' in request.GET %}&category1={{request.GET.category1}}{% endif %}
-													{% if 'category2' in request.GET %}&category2={{request.GET.category2}}{% endif %}">
-												Next <i class="fas fa-long-arrow-alt-right ms-1 d-none d-md-inline-block"></i>
-											</a>
-										</li>
-										{% else %}
-										<li>
-											<a href="#!">
-												Next <i class="fas fa-long-arrow-alt-right ms-1 d-none d-md-inline-block"></i>
-											</a>
-										</li>
-										{% endif %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+</div>
+</div>
+</div>
+</section>
+<section class="border-top position-relative overflow-hidden">
+<div class="container py-9 position-relative">
+<div class="row align-items-center">
+<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
+<div class="mb-3">
+  <i class="bx bx-store fs-1"></i>
+</div>
+<h6 class="mb-0">30 Day Returns</h6>
+</div>
+<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
+<div class="mb-3">
+  <i class="bx bx-purchase-tag fs-1"></i>
+</div>
+<h6 class="mb-0">100% Handpicked</h6>
+</div>
+<div class="col-md-4 text-center">
+<div class="mb-3">
+  <i class="bx bx-package fs-1"></i>
+</div>
+<h6 class="mb-0">Assured Quality</h6>
+</div>
+</div>
+</div>
+</section>
 
-                    </div>
-                    <!-- end right panel section -->
 
-                </div>
-            </div>
-        </section>
 {% endblock %}

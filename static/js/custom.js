@@ -1,17 +1,3 @@
-$(document).ready(function() {
-	// a href='#' 클릭 무시 스크립트
-	$('a[href="#"]').click(function(ignore) {
-	   ignore.preventDefault();
-	});
- });
- 
-window.onbeforeunload = function () { $('#my-spinner').show(); }  //현재 페이지에서 다른 페이지로 넘어갈 때 표시해주는 기능
-
-$(window).load(function () {          //페이지가 로드 되면 로딩 화면을 없애주는 것
-	$('#my-spinner').hide();
-});
-
-
 function isEmpty(str){
 		  
 	if(typeof str == "undefined" || str == null || str == "")
@@ -21,23 +7,23 @@ function isEmpty(str){
  }
  
  function openModal(subject, content, before_modal, option) {
-	$("#modal_subject").text(subject);
-	$("#modal_content").html(content);
+	document.querySelector("[id=modal_subject]").innerHTML = subject;
+	document.querySelector("[id=modal_content]").innerHTML = content;
 	if (!isEmpty(before_modal)) {
 	   $('#closeModalBtn').attr('data-before-modal',before_modal);
 	}
 	if (option == 'reload') {
-	   document.querySelectorAll('#closeModalBtn').forEach(function(close_btn) {
+	   document.querySelectorAll('closeModalBtn').forEach(function(close_btn) {
 		  close_btn.setAttribute( "onClick", "window.location.reload();" );
 	   });
 	} else if (option == 'back') {
-	   document.querySelectorAll('#closeModalBtn').forEach(function(close_btn) {
+	   document.querySelectorAll('closeModalBtn').forEach(function(close_btn) {
 		  close_btn.setAttribute( "onClick", "history.back();" );
 	   });
 	} else if (isEmpty(option)) {
 	   console.log('ok');
 	} else {
-	   document.querySelectorAll('#closeModalBtn').forEach(function(close_btn) {
+	   document.querySelectorAll('closeModalBtn').forEach(function(close_btn) {
 		  close_btn.setAttribute( "onClick", `${option}` );
 	   });
 	}
@@ -47,26 +33,18 @@ function isEmpty(str){
  }
  
 function closeModal() {
-	var before_modal = $('#closeModalBtn').attr('data-before-modal');
-	$("#modal_subject").text('');
-	$("#modal_content").html('');
-	if (before_modal) {
-		$(before_modal).modal('show');
+	var before_modal = document.querySelector('[id=closeModalBtn]').dataset.beforeModal;
+	document.querySelector("[id=modal_subject]").innerHTML = '';
+	document.querySelector("[id=modal_content]").innerHTML = '';
+	if (!isEmpty(before_modal)) {
+		before_modal = new bootstrap.Modal(document.querySelector('before_modal'));
+		before_modal.show();
 	}
 	
-	$('#closeModalBtn').attr('data-before-modal','');
+	document.querySelector('[id=closeModalBtn]').dataset.beforeModal = '';
 	var modal = new bootstrap.Modal(document.getElementById('globalModal'));
 	modal.hide();
 }
 
- $(document).ready(function(){
-
-	$('.input-daterange').datepicker({
-		format: 'dd-mm-yyyy',
-		todayHighlight: true,
-		startDate: '0d'
-	});
-	
-});
 
 
