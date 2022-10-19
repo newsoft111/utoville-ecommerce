@@ -7,6 +7,7 @@ from category.models import *
 from decimal import Decimal
 
 
+
 class ModelDeleteManager(models.Manager):
 	def get_queryset(self):
 		return super(ModelDeleteManager, self).get_queryset().filter(is_deleted=False)
