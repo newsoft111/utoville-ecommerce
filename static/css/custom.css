@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ul ,li { list-style: none; }
 .row { --bs-gutter-x: 0 !important;}
 
@@ -108,4 +109,25 @@ p.uploded_img { margin: 10px 0 0 0; font-size: 16px; }
 }
 @media only screen and (max-width: 360px) {
 	.ques_btn_area li a { font-size: 12px; padding: 0 5px; }
+=======
+.optionAdd {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.optionAdd span {
+	font-size: 20px;
+}
+.product_title {
+	display: flex;
+	justify-content: space-between;
+}
+.product_title .option_title,
+.product_title a.close {
+	font-size: 20px;
+}
+.totalPrice p.total_price_part {
+	font-size: 22px;
+	font-weight: bold;
+>>>>>>> Stashed changes
 }

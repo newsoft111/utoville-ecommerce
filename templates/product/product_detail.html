@@ -70,6 +70,7 @@
 					</div>
 
 					
+<<<<<<< Updated upstream
 					<div class="buy_area">
 						<div class="btn_row">
 							<div class="btn_area col-lg-12">					
@@ -80,6 +81,10 @@
 							</div>
 						</div>
 					</div>
+=======
+					<div class="optionAdd d-flex">
+						<input type="number" class="form-control w-25" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
+>>>>>>> Stashed changes
 
 				</div>
 			</div>
@@ -142,12 +147,23 @@
 		</div>
 		<!-- end product description -->
 
+<<<<<<< Updated upstream
 		<!-- related product -->
 		<div class="row">
 			<div class="col-12">
 				<div class="section-heading title-style3">
 					<h3 class="h4">Related Products</h3>
 				</div>
+=======
+			<div class="totalPrice d-flex align-items-center">
+				{% if product_detail.productvariant_set.all %}
+				<p>총 상품금액(<span id="totalQty">0개</span>)</p> 
+				<p id="totalPrice" class="ms-auto">₱0</p>
+				{% else %}
+				<p>총 상품금액(<span id="totalQty">1개</span>)</p>
+				<p class="total_price_part ms-auto" id="totalPrice">₱{{product_detail.price|intcomma}}</p>
+				{% endif %}
+>>>>>>> Stashed changes
 			</div>
 
 			<div class="carousel-style4 col-12">
@@ -363,6 +379,7 @@ function add_item(e) {
 	let option_second_price = '{{product_detail.price}}' + e.options[e.selectedIndex].dataset.price;
 	option_second_price = option_second_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
+<<<<<<< Updated upstream
 	let key = e.options[e.selectedIndex].value;
 	let json_data = JSON.parse("{{variant_data|escapejs}}");
 
@@ -384,6 +401,33 @@ function add_item(e) {
 
 	while (newstuff.firstChild) {
 		parent.appendChild(newstuff.firstChild);
+=======
+	let my_item_id = document.querySelector(`span[data-id="${option_second_id}"]`);
+	if (my_item_id == null) {
+		html = '<div id="productDom" class="optionTotal">';
+		html += '<div class="product_title" id="optionTitle">';	
+		html += `<div class="option_title">${option_first_value} / ${option_second_value}</div>`;
+		html += '<a class="close" href="#test" onclick="remove_item(this)">X</a>';
+		html += '</div>';
+		html += '<div class="optionAdd">';
+		html += `<input type="number" onchange="cal_item_price(this);" data-option-price='${option_second_price}' class="order_num form-control w-25 text-center" value="1" min="1">`;
+		html += `<span class="price" data-id="${option_second_id}" id="itemPrice">₱${option_second_price}</span>`;
+		html += '</div>';
+		html += '</div>';
+
+		var newstuff = document.createElement('div');
+		newstuff.innerHTML = html
+		let parent = document.querySelector("#selectedList");
+
+		while (newstuff.firstChild) {
+			parent.appendChild(newstuff.firstChild);
+		}
+	} else {
+		alert("이미 선택된 옵션입니다.")
+		// let sibling = my_item_id.previousSibling
+		// sibling.value = Number(sibling.value) + 1
+		cal_item_price(sibling)
+>>>>>>> Stashed changes
 	}
 
 	reset_variant(e, '옵션2');
