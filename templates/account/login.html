@@ -3,62 +3,58 @@
 {% load static %}
 {% load humanize %}
 
-<section>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-10 col-lg-7 col-xl-6">
-				<div class="bg-white p-4 border border-width-5">
-					<div class="text-center section-heading">
-						<h2>Login</h2>
+<section class="bg-white position-relative">
+	<div class="bg-pattern text-light w-100 h-100 start-0 top-0 position-absolute"></div>
+	<div class="container pt-11 pt-lg-14 pb-9 pb-lg-11 position-relative z-index-1">
+		<div class="row align-items-center justify-content-center">
+			<div class=" col-xl-4 col-lg-5 col-md-6 col-sm-8 z-index-2">
+				
+				<h2 class="mb-1 display-6">
+					Welcome back!
+				   </h2>
+				   <p class="mb-4 text-muted">
+					  Please Sign In with details...
+				   </p>
+				<div class="position-relative">
+					<div>
+						<form name="loginForm">
+							{% csrf_token %}
+
+							<div class="input-icon-group mb-3">
+								<span class="input-icon">
+							  <i class="bx bx-envelope"></i>
+							</span>
+						  <input type="text" name="username" class="form-control" required autofocus placeholder="Username">
+						</div>
+						  <div class="input-icon-group mb-3">
+							<span class="input-icon">
+								<i class="bx bx-lock-open"></i>
+							</span>
+						  <input type="password" name="password" class="form-control" required placeholder="Password">
+						</div>
+							<div class="mb-3 d-flex justify-content-between">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+									<label class="form-check-label" for="flexCheckDefault">
+									 Remember me
+									</label>
+								  </div>
+								  <div>
+									<label class="text-end d-block small mb-0"><a href="page-account-forget-password.html" class="text-muted link-decoration">Forget Password?</a></label>
+								  </div>
+							</div>
+							
+							<div class="d-grid">
+								<button class="btn btn-primary" type="button" onclick="login_submit();">
+									Sign in
+								</button>
+							</div>
+						</form>
 
 					</div>
-					<form name="loginForm">
-						{% csrf_token %}
-						<div class="row">
-
-							<div class="col-sm-12">
-
-								<div class="form-group">
-									<label>Username</label>
-									<input type="text" class="form-control" name="username" placeholder="Your Username here">
-								</div>
-
-							</div>
-
-							<div class="col-sm-12">
-
-								<div class="form-group">
-									<label>Password </label>
-									<input type="password" class="form-control" name="password" placeholder="Your password here">
-								</div>
-
-							</div>
-
-						</div>
-
-						<div class="row">
-							<div class="col-sm-6 mb-2">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="login-remember">
-									<label class="custom-control-label" for="login-remember">Keep me signed in</label>
-								</div>
-							</div>
-							<div class="col-sm-6 text-start text-sm-end">
-								<a href="forgot-password.html" class="m-link-muted">Forgot password?</a>
-							</div>
-
-						</div>
-
-						<button type="button" class="butn primary w-100 mt-4" onclick="login_submit();"><span>Login</span></button>
-						<div class="text-center text-small mt-4">
-							<span>Don't have an account yet? <a href="registration.html">Register</a></span>
-						</div>
-
-					</form>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </section>
 
