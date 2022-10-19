@@ -50,14 +50,13 @@
 						<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-lg mb-3">
 							<option selected>옵션2</option>
 						</select>
-					{% endif %}
+						{% endif %}
 					</div>
 					<div class="selectedList">
 						{% if not product_detail.productvariant_set.all %}
 						<div id="productDom" class="optionTotal">
 							<div class="title" id="optionTitle">
-								<h6>테스트1</h6>
-								<a class="close" href="#" onclick="remove_item(this);">X</a>
+								<h6>Qty:</h6>
 							</div>
 
 							
@@ -69,12 +68,21 @@
 						{% endif %}
 					</div>
 
+					<div class="totalPrice">
+						{% if product_detail.productvariant_set.all %}
+						<p>총 상품금액(<span id="totalQty">0개</span>)</p> <span id="totalPrice">₱0</span>
+						{% else %}
+						<p>총 상품금액(<span id="totalQty">1개</span>)</p> <span id="totalPrice">₱{{product_detail.price|intcomma}}</span>
+						{% endif %}
+					</div>
+
 					
 					<div class="buy_area">
 						<div class="btn_row">
 							<div class="btn_area col-lg-12">					
 								<div class="bd-example mb-2">
-									<a href="#!" class="cart_btn butn-style3"><span><i class="fas fa-shopping-cart me-1"></i> Add to Cart</span></a>
+									<input type="hidden" name="obj_data" value='[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]'>
+									<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="cart_btn butn-style3"><span><i class="fas fa-shopping-cart me-1"></i> Add to Cart</span></a>
 									<a href="#!" class="buy_btn butn-style3"><span><i class="fas fa-shopping-cart me-1"></i> Buy Now!</span></a>
 								</div>
 							</div>
@@ -302,44 +310,36 @@ function set_variant_value(e) {
 		html+=`<option value="${value['value']}" data-id="${value['id']}" data-value="${value['value']}" data-price="${value['price']}">${value['value']} + ${value['price']}원</option>`;
 	}
 	document.getElementById("optionSecond").innerHTML = html;
-	// let option_second = document.getElementById("optionSecond");
-
-
-	// for(var i=0; i<option_second.length; i++){
-	// 	if(json_data[key][i].value == option_second.options[option_second.selectedIndex+(i+1)].value){
-	// 		alert("같은 상품입니다.");
-	// 	}
-	// }
 }
 
 
-// function cal_total_value() {
-// 	let total_price = document.getElementById("totalPrice");
-// 	let item_list = document.querySelectorAll("span[id=itemPrice]");
-// 	let arr = [];
+function cal_total_value() {
+	let total_price = document.getElementById("totalPrice");
+ 	let item_list = document.querySelectorAll("span[id=itemPrice]");
+ 	let arr = [];
 
-// 	let total = 0;
-// 	let count = 0;
+ 	let total = 0;
+ 	let count = 0;
 
-// 	for (i=0; i<item_list.length; i++) {
-// 		let item = item_list[i];
+ 	for (i=0; i<item_list.length; i++) {
+ 		let item = item_list[i];
 
-// 		total += Number(item.innerHTML.replace(/[^0-9]/g, ""));
-// 		count += Number(item.previousSibling.value);
+ 		total += Number(item.innerHTML.replace(/[^0-9]/g, ""));
+ 		count += Number(item.previousSibling.value);
 		
-// 		let objData = new Object();
-// 		objData.product_id = "{{product_detail.id}}";
-// 		objData.variant_value_id = item.dataset.id;
-// 		objData.qty = item.previousSibling.value;
+ 		let objData = new Object();
+ 		objData.product_id = "{{product_detail.id}}";
+ 		objData.variant_value_id = item.dataset.id;
+ 		objData.qty = item.previousSibling.value;
 
-// 		arr.push(objData);
-// 	}
+ 		arr.push(objData);
+	}
 
-	// document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
+	document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
 
-	// document.getElementById("totalQty").innerHTML = String(count)+'개';
-	// total_price.innerHTML = '₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-// }
+	document.getElementById("totalQty").innerHTML = String(count)+'개';
+	total_price.innerHTML = '₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
 
 function cal_item_price(e) {
 	let qty = Number(e.value);
@@ -351,7 +351,7 @@ function cal_item_price(e) {
 	total_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
 	total_price_span.innerHTML = `₱${total_price}`;
-	// cal_total_value();
+	cal_total_value();
 }
 
 function add_item(e) {
@@ -363,42 +363,41 @@ function add_item(e) {
 	let option_second_price = '{{product_detail.price}}' + e.options[e.selectedIndex].dataset.price;
 	option_second_price = option_second_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-	let key = e.options[e.selectedIndex].value;
-	let json_data = JSON.parse("{{variant_data|escapejs}}");
+	let my_item_id = document.querySelector(`span[data-id="${option_second_id}"]`);
+	if (my_item_id == null) {
+		html = '<div id="productDom" class="optionTotal">';
+		html += '<div class="product_title" id="optionTitle">';
+		html += `<h6>{{product_detail.name}}</h6>`;
+		html += '<a class="close" href="#test" onclick="remove_item(this)">X</a>';
+		html += '</div>';
+		html += `<div>${option_first_value} / ${option_second_value}</div>`;
+		html += '<div class="optionAdd">';
+		html += `<input type="number" onchange="cal_item_price(this);" data-option-price='${option_second_price}' class="order_num form-control text-center" value="1" min="1">`;
+		html += `<span class="price" data-id="${option_second_id}" id="itemPrice">₱${option_second_price}</span>`;
+		html += '</div>';
+		html += '</div>';
 
-	html = '<div id="productDom" class="optionTotal">';
-	html += '<div class="product_title" id="optionTitle">';
-	html += `<h6>{{product_detail.name}}</h6>`;
-	html += '<a class="close" href="#test" onclick="remove_item(this)">X</a>';
-	html += '</div>';
-	html += `<div>${option_first_value} / ${option_second_value}</div>`;
-	html += '<div class="optionAdd">';
-	html += `<input type="number" onchange="cal_item_price(this);" data-option-price='${option_second_price}' class="order_num form-control text-center" value="1" min="1">`;
-	html += `<span class="price" data-id="${option_second_id}" id="itemPrice">₱${option_second_price}</span>`;
-	html += '</div>';
-	html += '</div>';
+		var newstuff = document.createElement('div');
+		newstuff.innerHTML = html
+		let parent = document.querySelector(".selectedList");
 
-	var newstuff = document.createElement('div');
-	newstuff.innerHTML = html
-	let parent = document.querySelector(".selectedList");
-
-	while (newstuff.firstChild) {
-		parent.appendChild(newstuff.firstChild);
+		while (newstuff.firstChild) {
+			parent.appendChild(newstuff.firstChild);
+		}
+	} else {
+		let sibling = my_item_id.previousSibling
+		sibling.value = Number(sibling.value) + 1
+		cal_item_price(sibling)
 	}
+	
 
 	reset_variant(e, '옵션2');
-
-	let optionSecond = document.getElementById("optionSecond");
-	let optionSecondList = optionSecond.children;
-
-	console.log(optionSecond, optionSecondList[1])
-
-	// cal_total_value();
+	cal_total_value();
 }
 
 function remove_item(e) {
 	e.parentNode.parentNode.remove();
-	// cal_total_value();
+	cal_total_value();
 }
 
 function reset_variant(e, val) {
