@@ -4,264 +4,466 @@
 {% load humanize %}
 {% load product_filter %}
 
+<section class="position-relative bg-white">
+	<div class="container pt-7 pt-lg-9 pb-9 pb-lg-11 position-relative">
+	  <div class="row justify-content-between">
+		<div class="col-xl-6 col-lg-7 col-md-8 mx-auto mx-lg-0 mb-5 mb-lg-0">
+		  <div class="row g-1 justify-content-center">
+			<div class="col-2">
 
-<!-- Section -->
-<!-- SHOP DETAILS
-================================================== -->
-<section>
-	<div class="container">
+			  <!--Thumbnails for main slider(just above)-->
+			  <div class="swiper-container swiper-thumbnails overflow-hidden">
+				<!-- Additional required wrapper -->
+				<div class="swiper-wrapper d-flex flex-column">
+				  <!-- Slides -->
+				  <div class="swiper-slide w-100">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide w-100">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide w-100">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide w-100">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+				  </div>
 
-		<!-- product section -->
-		<div class="row mb-6 mb-md-7 mb-lg-9">
-			<div class="col-lg-5 text-center text-lg-start mb-1-9 mb-lg-0">
-
-				<!-- product left start -->
-				<div class="xzoom-container">
-					<img class="xzoom5 mb-1-9" id="xzoom-magnific" src="img/shop/preview/01_product.jpg" xoriginal="img/shop/original/01_product.jpg" />
-					<div class="xzoom-thumbs m-0">
-						<a href="img/shop/original/01_product.jpg"><img class="xzoom-gallery5" width="80" src="img/shop/thumbs/01_product.jpg" xpreview="img/shop/preview/01_product.jpg" title="The description goes here"></a>
-						<a href="img/shop/original/02_product.jpg"><img class="xzoom-gallery5" width="80" src="img/shop/preview/02_product.jpg" title="The description goes here"></a>
-						<a href="img/shop/original/03_product.jpg"><img class="xzoom-gallery5" width="80" src="img/shop/preview/03_product.jpg" title="The description goes here"></a>
-						<a href="img/shop/original/04_product.jpg"><img class="xzoom-gallery5" width="80" src="img/shop/preview/04_product.jpg" title="The description goes here"></a>
-					</div>
 				</div>
-				<!-- product left end -->
-
+			  </div>
 			</div>
-			<div class="col-lg-7 ps-lg-2-7">
-				<div class="product-detail">
-					<h3 class="mb-2">서비스 제목</h3>
-					<div class="bg-primary separator-line-horrizontal-full mb-4"></div>
-					<p class="rating-text display-30"><span>지역:</span> <span>더 좋은 아이디어 있으면 그걸로 대체</span></p>
-					<p >서비스의 간략한 설명 1~3줄</p>
-					<div class="mb-3">
-						<span class="me-3 display-26 font-weight-600 offer-price">$499.00</span>
-						<span class="display-26 font-weight-700 text-primary">$299.00</span>
-					</div>
+			<div class="col-10">
+			  <!--Thumbnails main slider-->
+			  <div class="swiper-container overflow-hidden position-relative swiper-thumbnails-main">
+				<!-- Additional required wrapper -->
+				<div class="swiper-wrapper">
+				  <!-- Slides -->
+				  <div class="swiper-slide">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+				  </div>
+				</div>
+				<!-- Swiper Navigation buttons (Remove it if you have to) -->
+				<div class="swiper-button-prev swiperThumb-prev text-white bg-dark">
+				</div>
+				<div class="swiper-button-next  swiperThumb-next text-white bg-dark">
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<!--/.col-->
+		<div class="col-md-8 mx-auto col-lg-5 ms-xl-auto">
+		  <!--Breadcrumbs-->
+		  <nav class="d-md-flex" aria-label="breadcrumb">
+			<ol class="breadcrumb mb-3">
+			  <li class="breadcrumb-item">
+				<a href="#!">Home</a>
+			  </li>
+			  <li class="breadcrumb-item active">
+				Shop
+			  </li>
+			  <li class="breadcrumb-item active">
+				Products
+			  </li>
+			  <li class="breadcrumb-item active">
+				Women's Husky Vest
+			  </li>
+			</ol>
+		  </nav>
+		  <!-- Product Description -->
+		  <div class="mb-3 pb-3 border-bottom">
+			<div class="mb-3">
+			  <h2 class="mb-4 display-4">FOSFO LONG – Women’s down puffer jacket</h2>
+			  <div class="d-flex justify-content-between align-items-center">
+				<div>
+				  <p class="fs-5 mb-0">$320.00</p>
+				</div>
+			  </div>
+			</div>
+			<p class="mb-4">Lorem ipsum dolor sit amet adipiscing euismod tincidunt
+			  laoreet dolore magna aliquam erat volutpat.</p>
+		  </div>
 
-					<div class="row">
-						{% if product_detail.productvariant_set.all %}
-						<select id="optionFirst" class="form-select form-select-lg mb-3" onchange="set_variant_value(this)">
-							<option selected>옵션1</option>
-							{% for variant in product_detail.productvariant_set.all %}
-							<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
-							{% endfor %}
-						</select>
-						<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-lg mb-3">
-							<option selected>옵션2</option>
-						</select>
-						{% endif %}
-					</div>
-					<div class="selectedList">
-						{% if not product_detail.productvariant_set.all %}
-						<div id="productDom" class="optionTotal">
-							<div class="title" id="optionTitle">
-								<h6>Qty:</h6>
-							</div>
-
-							
-							<div class="optionAdd">
-								<input type="number" onchange="cal_item_price(this);" data-option-price="{{product_detail.price}}" class="order_num form-control text-center" value="1" min="1"><span class="price" data-id="" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
-							</div>
-						</div>
-
-						{% endif %}
-					</div>
-
-					<div class="totalPrice">
-						{% if product_detail.productvariant_set.all %}
-						<p>총 상품금액(<span id="totalQty">0개</span>)</p> <span id="totalPrice">₱0</span>
-						{% else %}
-						<p>총 상품금액(<span id="totalQty">1개</span>)</p> <span id="totalPrice">₱{{product_detail.price|intcomma}}</span>
-						{% endif %}
+		  	{% if product_detail.productvariant_set.all %}
+		  	<div class="mb-3 pb-3 border-bottom">
+				<h6 class="mb-3">Option</h6>
+				
+				
+				<select id="optionFirst" class="form-select form-select-md mb-3" onchange="set_variant_value(this)">
+					<option selected>옵션1</option>
+					{% for variant in product_detail.productvariant_set.all %}
+					<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
+					{% endfor %}
+				</select>
+				<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-md mb-3">
+					<option selected>옵션2</option>
+				</select>
+				
+			</div>
+			{% endif %}
+			<div class="mb-3 pb-3 {% if not product_detail.productvariant_set.all %}border-bottom{% endif %}" id="selectedList">
+				{% if not product_detail.productvariant_set.all %}
+				<div id="productDom" class="optionTotal">
+					<div class="title" id="optionTitle">
+						<h6>Qty:</h6>
 					</div>
 
 					
-					<div class="buy_area">
-						<div class="btn_row">
-							<div class="btn_area col-lg-12">					
-								<div class="bd-example mb-2">
-									<input type="hidden" name="obj_data" value='[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]'>
-									<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="cart_btn butn-style3"><span><i class="fas fa-shopping-cart me-1"></i> Add to Cart</span></a>
-									<a href="#!" class="buy_btn butn-style3"><span><i class="fas fa-shopping-cart me-1"></i> Buy Now!</span></a>
-								</div>
-							</div>
-						</div>
-					</div>
+					<div class="optionAdd d-flex">
+						<input type="text" class="form-control w-25" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
 
-				</div>
-			</div>
-		</div>
-		<!-- end product section -->
-
-		<!-- product description -->
-		<div class="row mb-6 mb-lg-8">
-			<div class="col-12">
-				<div class="horizontaltab tab-style5">
-					<ul class="resp-tabs-list hor_1 text-start">
-						<li>Description</li>
-						<li>Service Info</li>
-						<li>Q&A</li>
-					</ul>
-					<div class="resp-tabs-container hor_1">
-						<div class="text-start">
-							{{product_detail.content|safe}}
-						</div>
-						<div class="row align-items-center">
-							<div class="col-lg-12 mb-4 mb-lg-0">
-								<ul class="service_info list-style-5">	
-									<li><strong>업체명 :</strong> <span>유토빌홈케어</span></li>
-									<li><strong>이용조건 :</strong> <span>홈케어 서비스 가능 지역 - 출장서비스 운영시간 (월~토 09시 ~ 18시) *서비스 가능지역은 상세페이지를 참고해주시기 바랍니다. *품목이 상이한 경우 추가금액이 발생할 수 있습니다.</span></li>
-									<li><strong>취소, 중도해약/해지 조건 및 환불 기준 :</strong> <span>홈케어 서비스를 받으시기 전 취소가 가능하며 콜 센터로 연락해주시기 바랍니다. 사정에 의해 희망예약일자가 변경되거나 홈케어 서비스가 불가능한 상품일 수 있습니다. 신청하신 품목과 실제 서비스대상 품목이 상이한 경우 서비스가 불가할 수 있습니다.</span></li>
-									<li><strong>취소 및 환불 방법(필수) :</strong> <span>홈케어 서비스를 받으시기 전 취소가 가능하며 콜 센터로 연락해주시기 바랍니다. 사정에 의해 희망예약일자가 변경되거나 홈케어 서비스가 불가능한 상품일 수 있습니다. 신청하신 품목과 실제 서비스대상 품목이 상이한 경우 서비스가 불가할 수 있습니다.</span></li>
-									<li><strong>소비자상담관련 전화번호 :</strong> <span>xxxx-xxxx</span></li>
-								</ul>
-							</div>
-						</div>
-						<div class="row align-items-center" style="overflow-x:auto;">	
-							<table class="table text-center">
-								<thead class="ques_title">
-									<tr>
-										<th class="col-1">번호</th>
-										<th class="col-9">문의/답변</th>
-										<th class="col-1">작성자</th>
-										<th class="col-1">작성일</th>
-									</tr>
-								</thead>
-								<tbody class="ques_list">
-									<tr>
-										<td>1</td>
-										<td>질문입니다.</td>
-										<td>작성자입니다.</td>
-										<td>2022.mm.dd 00:24</td>
-									</tr>
-								</tbody>
-							</table>				
-							<div class="bd-example mb-2">
-								<ul class="ques_btn_area">
-									<li><a href="#!" class="btn-style2">고객센터 문의하기</a></li>
-									<li><a href="#!" class="btn-style2">상품 문의하기</a></li>
-								</ul>
-							</div>
-						</div>
+						<span class="price ms-auto" data-id="" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
 					</div>
 				</div>
-			</div>
-		</div>
-		<!-- end product description -->
 
-		<!-- related product -->
-		<div class="row">
-			<div class="col-12">
-				<div class="section-heading title-style3">
-					<h3 class="h4">Related Products</h3>
-				</div>
+				{% endif %}
 			</div>
 
-			<div class="carousel-style4 col-12">
-				<div class="product-grid control-top owl-carousel owl-theme">
-
-					<div class="border">
-						<div class="product-info">
-							<a href="#!">Party Dresses</a>
-							<p class="price text-center m-0">
-								<span class="red line-through me-2">$600</span>
-								<span>$599</span>
-							</p>
-						</div>
-						<div class="buttons">
-							<a href="#!" class="bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
-						</div>
-
-					</div>
-					<div class="border">
-
-						<a href="#!" class="product-block"><img src="img/shop/product-11.jpg" alt="..."></a>
-						<div class="product-info">
-							<a href="#!">Women Bandage</a>
-							<p class="price text-center m-0">
-								<span class="red line-through me-2">$500</span>
-								<span>$300</span>
-							</p>
-						</div>
-						<div class="buttons">
-							<a href="#!" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
-						</div>
-
-					</div>
-					<div class="border">
-
-						<a href="#!" class="product-block">
-							<div class="label-offer bg-primary">New</div><img src="img/shop/product-12.jpg" alt="...">
-						</a>
-						<div class="product-info">
-							<a href="#!">Short Red Dress</a>
-							<p class="price text-center m-0">
-								<span class="red line-through me-2">$200</span>
-								<span>$100</span>
-							</p>
-						</div>
-						<div class="buttons">
-							<a href="#!" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
-						</div>
-
-					</div>
-					<div class="border">
-
-						<a href="#!" class="product-block">
-							<div class="label-offer bg-red">Sale</div><img src="img/shop/product-13.jpg" alt="...">
-						</a>
-						<div class="product-info">
-							<a href="#!">Short Flower Print</a>
-							<p class="price text-center m-0">
-								<span class="red line-through me-2">$1200</span>
-								<span>$900</span>
-							</p>
-						</div>
-						<div class="buttons">
-							<a href="#!" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
-						</div>
-
-					</div>
-					<div class="border">
-
-						<a href="#!" class="product-block"><img src="img/shop/product-14.jpg" alt="..."></a>
-						<div class="product-info">
-							<a href="#!">Black fly Design</a>
-							<p class="price text-center m-0">
-								<span class="red line-through me-2">$399</span>
-								<span>$199</span>
-							</p>
-						</div>
-						<div class="buttons">
-							<a href="#!" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
-						</div>
-
-					</div>
-					<div class="border">
-						<a href="#!" class="product-block">
-							<div class="label-offer bg-primary">New</div><img src="img/shop/product-15.jpg" alt="...">
-						</a>
-						<div class="product-info">
-							<a href="#!">Black Flower Print</a>
-							<p class="price text-center m-0">
-								<span class="red line-through me-2">$800</span>
-								<span>$699</span>
-							</p>
-						</div>
-						<div class="buttons">
-							<a href="#!" class="list_cart_btn bg-primary text-white"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</a>
-						</div>
-
-					</div>
-				</div>
+			<div class="totalPrice d-flex">
+				{% if product_detail.productvariant_set.all %}
+				<p>총 상품금액(<span id="totalQty">0개</span>)</p> 
+				<p id="totalPrice" class="ms-auto">₱0</p>
+				{% else %}
+				<p>총 상품금액(<span id="totalQty">1개</span>)</p>
+				<p class="ms-auto" id="totalPrice">₱{{product_detail.price|intcomma}}</p>
+				{% endif %}
 			</div>
+			
+
+		  <div class="d-grid">
+			<input type="hidden" name="obj_data" value='[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]'>
+			<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-primary hover-lift">
+			  <i class="bx bx-shopping-bag fs-5 me-2"></i>
+			  Add to Cart
+			</a>
+		  </div>
+		  <!--/.cart-action-->
 
 		</div>
-		<!-- end related product -->
-
+		<!--/.col-->
+	  </div>
 	</div>
-</section>
+  </section>
+  <section class="bg-light">
+	<div class="container py-9 py-lg-11">
+	  <div class="row justify-content-center">
+		<div class="col-lg-9 mb-5">
+		  <nav class="nav nav-tabs">
+			<a href="#description" class="nav-link active" data-bs-toggle="tab" aria-haspopup="false"
+			  aria-expanded="true">
+			  Description
+			</a>
+			<a href="#information" class="nav-link" data-bs-toggle="tab" aria-haspopup="false"
+			  aria-expanded="false">
+			  Information
+			</a>
+			<a href="#reviews" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">
+			  Reviews
+			</a>
+			<a href="#product-qa" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">
+			  Q&amp;A
+			</a>
+		  </nav>
+		</div>
+		<!--/.col-->
+		<div class="col-lg-9 col-md-8">
+		  <div class="tab-content">
+			<div class="tab-pane fade active show" id="description">
+			  <h5>Lorem Ipsum is simply</h5>
+			  <p class="mb-5">
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+				Lorem
+				Ipsum has been the industry's standard dummy text ever since the 1500s, when
+				an
+				unknown printer took a galley of type and scrambled it to make a type
+				specimen
+				book. It has survived not only five centuries, remaining essentially
+				unchanged,
+				but also the leap into electronic typesetting, remaining essentially
+				unchanged.
+			  </p>
+			  <div class="text-end">
+				<a href="#!" class="btn  btn-outline-secondary rounded-pill">Visit
+				  Store</a>
+			  </div>
+			</div>
+			<!--Tab-pane-->
+			<div class="tab-pane fade" id="information">
+			  <ul class="list-group list-group-flush">
+				<li class="list-group-item bg-transparent px-0 py-3">MATERIAL: 100% POLYESTER
+				</li>
+				<li class="list-group-item bg-transparent px-0 py-3">Durable water repellent to
+				  protect against light drizzles</li>
+				<li class="list-group-item bg-transparent px-0 py-3">Insulated quilted vest to
+				  protect in light winters
+				</li>
+				<li class="list-group-item bg-transparent px-0 py-3">Made in Germany</li>
+			  </ul>
+			</div>
+			<!--Tab-pane-->
+			<div class="tab-pane fade" id="reviews">
+			  <div
+				class="bg-gradient-secondary text-white d-flex justify-content-between align-items-center p-3 mb-5">
+				<div>
+				  <span class="text-warning small d-block mb-2">
+					<i class="bx bx-star"></i>
+					<i class="bx bx-star"></i>
+					<i class="bx bx-star"></i>
+					<i class="bx bx-star"></i>
+					<i class="bx bx-star"></i>
+				  </span>
+				  <p class="mb-0"><span class="reviews small fw-normal">4.69 / 5</span>
+					<small class="text-muted">( 4.5 K - Reviews)</small>
+				  </p>
+
+				</div>
+				<div>
+				  <a href="#!" class="link-underline fw-semibold pb-0">View all
+					Reviews</a>
+				</div>
+			  </div>
+			  <h5 class="mb-4 mb-lg-5">Latest Reviews</h5>
+			  <div class="d-flex mb-4">
+				<div>
+				  <img src="assets/img/avatar/3.jpg" alt="" class="avatar sm me-3 rounded-circle shadow">
+				</div>
+				<div class="media-body">
+				  <span class="text-warning small d-block mb-2">
+					<i class="bx bx-star"></i><i class="bx bx-star"></i><i class="bx bx-star"></i><i
+					  class="bx bx-star"></i><i class="bx bx-star"></i>
+				  </span>
+				  <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+					sed
+					do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				  <div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
+					<h6 class="mb-0">Emma Patrik</h6>
+					<small class="text-muted">5 July 2021</small>
+				  </div>
+				</div>
+			  </div>
+			  <!--Review-item-->
+			  <div class="d-flex mb-4">
+				<div>
+				  <img src="assets/img/avatar/6.jpg" alt="" class="avatar sm me-3 rounded-circle shadow">
+				</div>
+				<div class="media-body">
+				  <span class="text-warning small d-block mb-2">
+					<i class="bx bx-star"></i><i class="bx bx-star"></i><i class="bx bx-star"></i><i
+					  class="bx bx-star"></i><i class="bx bx-star"></i>
+				  </span>
+				  <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+					sed
+					do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				  <div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
+					<h6 class="mb-0">Juan Doe</h6>
+					<small class="text-muted">23 May 2021</small>
+				  </div>
+				</div>
+			  </div>
+			  <!--Review-item-->
+			  <div class="d-flex mb-4">
+				<div>
+				  <img src="assets/img/avatar/9.jpg" alt="" class="avatar sm me-3 rounded-circle shadow">
+				</div>
+				<div class="media-body">
+				  <span class="text-warning small d-block mb-2">
+					<i class="bx bx-star"></i><i class="bx bx-star"></i><i class="bx bx-star"></i><i
+					  class="bx bx-star"></i><i class="bx bx-star"></i>
+				  </span>
+				  <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+					sed
+					do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				  <div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
+					<h6 class="mb-0">Adam Voges</h6>
+					<small class="text-muted">12 June 2021</small>
+				  </div>
+				</div>
+			  </div>
+			  <!--Review-item-->
+			  <div class="pt-3">
+				<div class="d-flex justify-content-end mb-3">
+				  <a href="#" data-bs-target="#review-collapse" data-bs-toggle="collapse" aria-expanded="false"
+					aria-haspopup="false" class="h6 collapse-link mb-0 link-underline">
+					<i class="bx bx-plus-fill align-middle me-1"></i>Add Review</a>
+				</div>
+				<div class="collapse" id="review-collapse">
+				  <div class="card card-body p-4">
+					<form class="needs-validation" novalidate>
+					  <div class="row">
+						<div class="col-12 col-sm-6">
+						  <div class="mb-3">
+							<label class="form-label" for="rating-name">Name</label>
+							<input type="text" required id="rating-name" class="form-control">
+						  </div>
+						</div>
+						<div class="col-12 col-sm-6">
+						  <div class="mb-3">
+							<label class="form-label" for="rating-mail">Email
+							  Address</label>
+							<input type="email" required class="form-control" id="rating-mail">
+						  </div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-12">
+						  <div class="mb-3">
+							<label class="form-label">Select your Rating</label>
+							<div>
+							  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+								<input type="radio" class="btn-check" name="btnradio" id="btnrating1">
+								<label class="btn btn-outline-warning btn-sm" for="btnrating1"><i
+									class="bx bx-star"></i></label>
+
+								<input type="radio" class="btn-check" name="btnradio" id="btnrating2">
+								<label class="btn btn-outline-warning btn-sm" for="btnrating2"><i
+									class="bx bx-star"></i><i class="bx bx-star"></i></label>
+
+								<input type="radio" class="btn-check" name="btnradio" id="btnrating3">
+								<label class="btn btn-outline-warning btn-sm" for="btnrating3"><i
+									class="bx bx-star"></i><i class="bx bx-star"></i><i
+									class="bx bx-star"></i></label>
+								<input type="radio" class="btn-check" name="btnradio" id="btnrating4">
+								<label class="btn btn-outline-warning btn-sm" for="btnrating4"><i
+									class="bx bx-star"></i><i class="bx bx-star"></i><i class="bx bx-star"></i><i
+									class="bx bx-star"></i></label>
+								<input type="radio" class="btn-check" name="btnradio" id="btnrating5" checked>
+								<label class="btn btn-outline-warning btn-sm" for="btnrating5"><i
+									class="bx bx-star"></i><i class="bx bx-star"></i><i class="bx bx-star"></i><i
+									class="bx bx-star"></i><i class="bx bx-star"></i></label>
+
+							  </div>
+							</div>
+						  </div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-12">
+						  <div class="mb-3">
+							<label class="form-label" for="rating-message">Review
+							  Message <small>(Optional)</small></label>
+							<textarea class="form-control" id="rating-message"></textarea>
+						  </div>
+						</div>
+					  </div>
+					  <div class="text-end">
+						<button type="submit" class="btn btn-primary hover-translate-3d">
+						  Submit review
+						</button>
+					  </div>
+					</form>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<!--Tab-pane-->
+			<div class="tab-pane fade" id="product-qa">
+			  <div class="card border card-body mb-2 bg-transparent">
+				<h5><i class="bx bx-question-mark me-2"></i>Is the item
+				  durable?</h5>
+				<p class="mb-0 d-flex align-items-stretch">
+				  <strong class="small d-inline-block me-2 text-muted">Ans.</strong>
+				  <span class="mb-0">
+					Durability of shoes minimum 1 year if u used on daily basis. I think
+					this is best at this price range as compare to all other popular
+					brands.
+				  </span>
+				</p>
+			  </div>
+			  <div class="card border card-body mb-2 bg-transparent">
+				<h5><i class="bx bx-question-mark me-2"></i>Is the item
+				  durable?</h5>
+				<p class="mb-0 d-flex align-items-stretch">
+				  <strong class="small d-inline-block me-2 text-muted">Ans.</strong>
+				  <span class="mb-0">
+					Durability of shoes minimum 1 year if u used on daily basis. I think
+					this is best at this price range as compare to all other popular
+					brands.
+				  </span>
+				</p>
+			  </div>
+			  <div class="card border card-body mb-5 bg-transparent">
+				<h5><i class="bx bx-question-mark me-2"></i>Is the item
+				  durable?</h5>
+				<p class="mb-0 d-flex align-items-stretch">
+				  <strong class="small d-inline-block me-2 text-muted">Ans.</strong>
+				  <span class="mb-0">
+					Durability of shoes minimum 1 year if u used on daily basis. I think
+					this is best at this price range as compare to all other popular
+					brands.
+				  </span>
+				</p>
+			  </div>
+			  <h5 class="mb-4">Feel free to Ask questions</h5>
+			  <form class="needs-validation" novalidate>
+				<div class="row">
+				  <div class="col-12 col-sm-6">
+					<div class="mb-3">
+					  <input type="text" required class="form-control" placeholder="Enter your Name">
+					</div>
+				  </div>
+				  <div class="col-12 col-sm-6">
+					<div class="mb-3">
+					  <input type="email" required class="form-control" placeholder="Enter your Email">
+					</div>
+				  </div>
+				  <div class="w-100"></div>
+				  <div class="col-12">
+					<div class="mb-3">
+					  <textarea required class="form-control" placeholder="Type your question here"></textarea>
+					</div>
+				  </div>
+				</div>
+				<div class="text-end">
+				  <button type="submit" class="btn btn-primary hover-translate-3d">
+					Send question <i class="bx bx-right-top-arrow-circle ms-1"></i>
+				  </button>
+				</div>
+			  </form>
+			</div>
+		  </div>
+		  <!--Tab-pane-->
+		</div>
+	  </div>
+	</div>
+  </section>
+  <section class="bg-white position-relative overflow-hidden">
+	<div class="container py-9 py-lg-11 position-relative">
+	  <div class="row align-items-center">
+		<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
+		  <div class="mb-3">
+			<i class="bx bx-store fs-1"></i>
+		  </div>
+		  <h6 class="mb-0">30 Day Returns</h6>
+		</div>
+		<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
+		  <div class="mb-3">
+			<i class="bx bx-purchase-tag fs-1"></i>
+		  </div>
+		  <h6 class="mb-0">100% Handpicked</h6>
+		</div>
+		<div class="col-md-4 text-center">
+		  <div class="mb-3">
+			<i class="bx bx-package fs-1"></i>
+		  </div>
+		  <h6 class="mb-0">Assured Quality</h6>
+		</div>
+	  </div>
+	</div>
+  </section>
+
 
 <script>
 is_run = false;
@@ -269,35 +471,40 @@ is_run = false;
 function add_cart_submit(product_id) {
 	is_run = true;
 
-	let data = document.querySelector("input[name=obj_data]").value;
+	let arr = document.querySelector("input[name=obj_data]").value;
 
-	if (isEmpty(data)) {
+	if (isEmpty(arr)) {
 		openModal('알림','옵션을 선택해주세요.');
 		return false;
 	}
 
-    $.ajax({
-        type : 'POST',
-        url : "{% url 'cart:add' %}",
-		headers: { "X-CSRFToken": '{{csrf_token}}' },
-        data : {
-			data: data,
-		},
-        dataType : 'json',
-        success: function(data){
-			if(data.result==200){
+	var url = "{% url 'cart:add' %}";
+	var xhr = new XMLHttpRequest();
+
+	xhr.open("POST", url, true);
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200){
 				openModal("알림", data.result_text,'', 'reload');
-			}else{
-				openModal("알림", data.result_text);
-			}
-			is_run  = false;
-        },
-        error: function (request, status, error){
-          var msg = "ERROR : " + request.status + "<br>"
-			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
-			    console.log(msg);
-        }
-    });
+			} else if (xhr.status == 201) {
+				openModal("알림", data.result_text,'', 'reload');
+			} else {
+				console.log("[status] : " + xhr.status);
+				console.log("[response] : " + "[fail]");    				   				    				
+				console.log("[response] : " + xhr.responseText);
+				console.log("");        				
+			}    				
+		}
+		is_run  = false;
+		//document.getElementById("my-spinner").style.display = "none";
+	}
+
+	var data = new FormData();
+	data.append('data', arr);
+
+	xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+	xhr.send(data);
 }
 
 function set_variant_value(e) {
@@ -325,7 +532,7 @@ function cal_total_value() {
  		let item = item_list[i];
 
  		total += Number(item.innerHTML.replace(/[^0-9]/g, ""));
- 		count += Number(item.previousSibling.value);
+ 		count += Number(item.previousElementSibling.value);
 		
  		let objData = new Object();
  		objData.product_id = "{{product_detail.id}}";
@@ -345,7 +552,8 @@ function cal_item_price(e) {
 	let qty = Number(e.value);
 	let ori_price = Number(e.dataset.optionPrice.replace(/[^0-9]/g, ""));
 
-	let total_price_span = e.nextSibling;
+	let total_price_span = e.nextElementSibling;
+	console.log(qty)
 
 	let total_price = qty * ori_price;
 	total_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -372,14 +580,14 @@ function add_item(e) {
 		html += '</div>';
 		html += `<div>${option_first_value} / ${option_second_value}</div>`;
 		html += '<div class="optionAdd">';
-		html += `<input type="number" onchange="cal_item_price(this);" data-option-price='${option_second_price}' class="order_num form-control text-center" value="1" min="1">`;
+		html += `<input type="text" class="form-control w-25" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
 		html += `<span class="price" data-id="${option_second_id}" id="itemPrice">₱${option_second_price}</span>`;
 		html += '</div>';
 		html += '</div>';
 
 		var newstuff = document.createElement('div');
 		newstuff.innerHTML = html
-		let parent = document.querySelector(".selectedList");
+		let parent = document.querySelector("#selectedList");
 
 		while (newstuff.firstChild) {
 			parent.appendChild(newstuff.firstChild);
