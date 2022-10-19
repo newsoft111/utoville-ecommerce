@@ -1,0 +1,19 @@
+.optionAdd {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.optionAdd span {
+	font-size: 20px;
+}
+.product_title {
+	display: flex;
+	justify-content: space-between;
+}
+.product_title .option_title,
+.product_title a.close {
+	font-size: 20px;
+}
+.totalPrice p.total_price_part {
+	font-size: 22px;
+	font-weight: bold;
