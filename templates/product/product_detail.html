@@ -93,7 +93,6 @@
 					<ul class="resp-tabs-list hor_1 text-start">
 						<li>Description</li>
 						<li>Service Info</li>
-						<li>Reviews (2)</li>
 						<li>Q&A</li>
 					</ul>
 					<div class="resp-tabs-container hor_1">
@@ -109,64 +108,6 @@
 									<li><strong>취소 및 환불 방법(필수) :</strong> <span>홈케어 서비스를 받으시기 전 취소가 가능하며 콜 센터로 연락해주시기 바랍니다. 사정에 의해 희망예약일자가 변경되거나 홈케어 서비스가 불가능한 상품일 수 있습니다. 신청하신 품목과 실제 서비스대상 품목이 상이한 경우 서비스가 불가할 수 있습니다.</span></li>
 									<li><strong>소비자상담관련 전화번호 :</strong> <span>xxxx-xxxx</span></li>
 								</ul>
-							</div>
-						</div>
-						<div class="row">
-							<div class="review_content">
-								<form name="reviewWriteForm">
-									{% csrf_token %}
-									<input type="hidden" name="order_id" value="">
-									<div class="modal-body p-4 text-center">			
-										<h5 class="review_title">만족하셨나요?</h5>
-										<div class="rating">
-											<input type="radio" name="rating" value="5" id="review-start-5"><label for="review-start-5">☆</label>
-											<input type="radio" name="rating" value="4" id="review-start-4"><label for="review-start-4">☆</label>
-											<input type="radio" name="rating" value="3" id="review-start-3"><label for="review-start-3">☆</label>
-											<input type="radio" name="rating" value="2" id="review-start-2"><label for="review-start-2">☆</label>
-											<input type="radio" name="rating" value="1" id="review-start-1"><label for="review-start-1">☆</label>
-										</div>
-									</div>
-									<div class="upload_photo p-4 text-center">
-										<h5 class="review_title">사진을 첨부해주세요.</h5>
-										<div class="form-control" id="preview">
-											<input type="file" accept="image/gif, image/jpeg, image/png" class="form-control" id="inputGroupFile04" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-										</div>
-			
-									</div>
-									<div class="review_area p-4 text-center">
-										<h5 class="review_title">리뷰를 작성해주세요.</h5>
-										<textarea class="form-control" style="resize:none"></textarea>		
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-outline-primary ms-1" onclick="review_write_submit()">완료</button>
-										<button type="button" class="btn btn-primary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">취소</button>
-									</div>
-								</form>
-							</div>
-							<div class="col-lg-12 ps-lg-4">
-								<div class="mb-3">
-									<p class="p-0 mb-0"><strong>Nathan Ford,</strong> Sep 15, 2018</p>
-									<div class="mb-3 display-30">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star-half-alt"></i>
-									</div>
-									<p >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.</p>
-									<div class="bg-medium-light-gray separator-line-horrizontal-full"></div>
-								</div>
-								<div>
-									<p class="m-0"><strong>Mac Still,</strong> Aug 08, 2018</p>
-									<div class="mb-3 display-30">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star-half-alt"></i>
-									</div>
-									<p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.</p>
-								</div>
 							</div>
 						</div>
 						<div class="row align-items-center" style="overflow-x:auto;">	
@@ -355,43 +296,50 @@ function set_variant_value(e) {
 	let key = e.options[e.selectedIndex].value;
 	let json_data = JSON.parse("{{variant_data|escapejs}}");
 	let html='<option selected>옵션2</optimPriceon>';
-
+	
 	for (idx in json_data[key]) {
 		value = json_data[key][idx];
 		html+=`<option value="${value['value']}" data-id="${value['id']}" data-value="${value['value']}" data-price="${value['price']}">${value['value']} + ${value['price']}원</option>`;
 	}
-
 	document.getElementById("optionSecond").innerHTML = html;
+	// let option_second = document.getElementById("optionSecond");
+
+
+	// for(var i=0; i<option_second.length; i++){
+	// 	if(json_data[key][i].value == option_second.options[option_second.selectedIndex+(i+1)].value){
+	// 		alert("같은 상품입니다.");
+	// 	}
+	// }
 }
 
 
-function cal_total_value() {
-	let total_price = document.getElementById("totalPrice");
-	let item_list = document.querySelectorAll("span[id=itemPrice]");
-	let arr = [];
+// function cal_total_value() {
+// 	let total_price = document.getElementById("totalPrice");
+// 	let item_list = document.querySelectorAll("span[id=itemPrice]");
+// 	let arr = [];
 
-	let total = 0;
-	let count = 0;
+// 	let total = 0;
+// 	let count = 0;
 
-	for (i=0; i<item_list.length; i++) {
-		let item = item_list[i];
+// 	for (i=0; i<item_list.length; i++) {
+// 		let item = item_list[i];
 
-		total += Number(item.innerHTML.replace(/[^0-9]/g, ""));
-		count += Number(item.previousSibling.value);
+// 		total += Number(item.innerHTML.replace(/[^0-9]/g, ""));
+// 		count += Number(item.previousSibling.value);
 		
-		let objData = new Object();
-		objData.product_id = "{{product_detail.id}}";
-		objData.variant_value_id = item.dataset.id;
-		objData.qty = item.previousSibling.value;
+// 		let objData = new Object();
+// 		objData.product_id = "{{product_detail.id}}";
+// 		objData.variant_value_id = item.dataset.id;
+// 		objData.qty = item.previousSibling.value;
 
-		arr.push(objData);
-	}
+// 		arr.push(objData);
+// 	}
 
-	document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
+	// document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
 
-	document.getElementById("totalQty").innerHTML = String(count)+'개';
-	total_price.innerHTML = '₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
+	// document.getElementById("totalQty").innerHTML = String(count)+'개';
+	// total_price.innerHTML = '₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+// }
 
 function cal_item_price(e) {
 	let qty = Number(e.value);
@@ -403,7 +351,7 @@ function cal_item_price(e) {
 	total_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
 	total_price_span.innerHTML = `₱${total_price}`;
-	cal_total_value();
+	// cal_total_value();
 }
 
 function add_item(e) {
@@ -415,10 +363,13 @@ function add_item(e) {
 	let option_second_price = '{{product_detail.price}}' + e.options[e.selectedIndex].dataset.price;
 	option_second_price = option_second_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
+	let key = e.options[e.selectedIndex].value;
+	let json_data = JSON.parse("{{variant_data|escapejs}}");
+
 	html = '<div id="productDom" class="optionTotal">';
 	html += '<div class="product_title" id="optionTitle">';
 	html += `<h6>{{product_detail.name}}</h6>`;
-	html += '<a class="close" href="#" onclick="remove_item(this);">X</a>';
+	html += '<a class="close" href="#test" onclick="remove_item(this)">X</a>';
 	html += '</div>';
 	html += `<div>${option_first_value} / ${option_second_value}</div>`;
 	html += '<div class="optionAdd">';
@@ -429,8 +380,6 @@ function add_item(e) {
 
 	var newstuff = document.createElement('div');
 	newstuff.innerHTML = html
-
-	let order_num = document.query;
 	let parent = document.querySelector(".selectedList");
 
 	while (newstuff.firstChild) {
@@ -438,12 +387,18 @@ function add_item(e) {
 	}
 
 	reset_variant(e, '옵션2');
-	cal_total_value();
+
+	let optionSecond = document.getElementById("optionSecond");
+	let optionSecondList = optionSecond.children;
+
+	console.log(optionSecond, optionSecondList[1])
+
+	// cal_total_value();
 }
 
 function remove_item(e) {
 	e.parentNode.parentNode.remove();
-	cal_total_value();
+	// cal_total_value();
 }
 
 function reset_variant(e, val) {
@@ -492,66 +447,6 @@ function review_write_submit() {
         }
     });
 }
-
-document.getElementById('inputGroupFile04').onchange = function() {
-	let this_modal = "#gigOrderReviewModal";
-	var fileTypes = ['jpg', 'jpeg', 'png', 'gif'];  //acceptable file types
-
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var extension = input.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
-					isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
-			if (isSuccess) {         
-				var reader = new FileReader();
-				///reader.onload = function(e) {
-				///   $('.gig-image-preview').removeClass("d-none");
-				///   $('.gig-image-preview img').attr("src", e.target.result);
-				///}
-				reader.readAsDataURL(input.files[0]);
-				
-			} else {
-				document.querySelector("[id=reviewModalCloseBtn]").click();
-				openModal('알림','이미지 파일이 아닙니다.',this_modal);
-				input.value='';
-			}
-		}
-	}
-	readURL(this);
-}
-
-let fileEle = document.getElementById("inputGroupFile04");
-let preview = document.getElementById("preview");
-
-fileEle.addEventListener("change", () => {
-	const files = Array.from(fileEle.files)
-
-	files.forEach(file => {
-		var html = `
-			<p id="${file.lastModified}" class="uploded_img text-start">
-				${file.name}
-				<button data-index='${file.lastModified}' class="file-remove">X</button>
-			</p>`;
-		preview.insertAdjacentHTML("beforeend", html);
-	});
-});
-
-document.addEventListener('click', (e) => {
-	if(e.target.className !== 'file-remove') return;
-	const removeTargetId = e.target.dataset.index;
-	const removeTarget = document.getElementById(removeTargetId);
-	const files = document.querySelector('#inputGroupFile04').files;
-	const dataTranster = new DataTransfer();
-
-	Array.from(files)
-		.filter(file => file.lastModified != removeTargetId)
-		.forEach(file => {
-		dataTranster.items.add(file);
-		});
-
-	document.querySelector('#inputGroupFile04').files = dataTranster.files;
-
-	removeTarget.remove();	
-});		
 </script>
 
 {% endblock %}
