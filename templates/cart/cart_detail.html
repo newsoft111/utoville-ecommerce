@@ -37,10 +37,10 @@
 	</div>
   </section>
 
-<section class="position-relative bg-white">
-	<div class="container pb-7 pb-lg-12 pt-7 position-relative" id="cart-container">
+<section class="position-relative bg-white" id="cart-section">
+	<div class="container pb-7 pb-lg-12 pt-7 position-relative">
 		<div class="row justify-content-between">
-			<div class="col-lg-10 mx-auto">
+			<div class="col-lg-10 mx-auto" id="cart-div">
 
 				<!--Cart table start-->
 				<div class="table-responsive">
@@ -60,7 +60,7 @@
 						<tbody>
 							{% if not cart_items %}
 							<tr>
-								<td class="border-bottom-0" colspan="6">상품이 없습니다.</td>
+								<td class="border-bottom-0 text-center p-5" colspan="6">상품이 없습니다.</td>
 							</tr>
 							{% endif%}
 
@@ -189,7 +189,7 @@ function remove_cart_submit(cart_item_id) {
         dataType : 'json',
         success: function(data){
 			if(data.result==200){
-				$("#cart-container").load(location.href + " #cart-container");
+				$("#cart-div").load(" #cart-div > *");
 			}else{
 				openModal("알림", data.result_text);
 			}
@@ -225,7 +225,7 @@ function update_cart_submit(e) {
         dataType : 'json',
         success: function(data){
 			if(data.result==200){
-				$("#cart-container").load(location.href + " #cart-container");
+				$("#cart-div").load(" #cart-div > *");
 			}else{
 				openModal("알림", data.result_text);
 			}

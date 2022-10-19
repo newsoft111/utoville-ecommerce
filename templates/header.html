@@ -55,8 +55,8 @@
      <!--begin:Header shop-->
      <nav class="navbar navbar-search-w-icons position-sticky shadow top-0 z-index-fixed navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid position-relative">
-            <a class="navbar-brand" href="index.html">
-                <img src="assets/img/logo/logo-shop.svg" alt="" class="img-fluid">
+            <a class="navbar-brand" href="{% url 'main:index' %}">
+                <img src="{% static 'img/logo/logo-shop.svg' %}" alt="" class="img-fluid">
             </a>
             <div class="d-flex align-items-center navbar-no-collapse-items navbar-nav flex-row order-lg-last">
                 <button class="navbar-toggler order-last" type="button" data-bs-toggle="collapse"
@@ -66,13 +66,9 @@
                         <i></i>
                     </span>
                 </button>
-                <div class="nav-item ms-0 me-4 me-lg-2">
-                    <a href="demo-shop-wishlist.html" class="nav-link lh-1 position-relative">
-                        <i class="bx bx-heart fs-4"></i>
-                    </a>
-                </div>
+
                 <div class="nav-item me-4 me-lg-2 ms-0">
-                    <a href="#offcanvasCart" data-bs-toggle="offcanvas" class="nav-link lh-1 position-relative">
+                    <a href="{% url 'cart:detail' %}" data-bs-toggle="offcanvas" class="nav-link lh-1 position-relative">
                         <i class="bx bx-shopping-bag fs-4"></i>
                         <!--card badge-->
                         <span
@@ -143,295 +139,28 @@
             </div>
             <div class="collapse navbar-collapse" id="mainNavbarTheme">
                 <ul class="navbar-nav me-lg-auto ms-xl-5 ms-lg-2">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle  " href="#" role="button" data-bs-toggle="dropdown"
-                            aria-haspopup="false" aria-expanded="false">
-                            Home
+				{% for categoryFirst in category_first_list %}
+					{% if categoryFirst.categorysecond_set.all.count > 0 %}
+					<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                            {{categoryFirst.name}}
                         </a>
+
                         <div class="dropdown-menu">
-                            <a href="demo-shop.html" class="dropdown-item">01 Default</a>
-                            <a href="demo-shop-home-02.html" class="dropdown-item">02 Home Option</a>
+							{% for categorySecond in categoryFirst.categorysecond_set.all %}
+                            <a href="demo-shop.html" class="dropdown-item">{{categorySecond.name}}</a>
+                            {% endfor %}
                         </div>
                     </li>
-
-                    <li class="nav-item nav-item dropdown position-lg-static">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Mens
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-fw py-lg-0 px-lg-0">
-                          <div class="overflow-hidden">
-                            <div class="row mx-0">
-
-                                <div class="col-lg-4 pe-lg-0 order-lg-4 pe-lg-0 ms-lg-auto d-none d-lg-flex">
-                                    <div
-                                        class="d-flex bg-dark flex-column h-100 w-100 py-4 py-md-5 position-relative">
-                                        <img alt="" src="assets/img/shop/banners/03.jpg"
-                                            class="bg-image opacity-50">
-                                        <div
-                                            class="position-absolute text-center d-flex flex-column justify-content-center align-items-center text-white left-0 top-0 w-100 h-100 p-4">
-                                            <div>
-                                                <div
-                                                    class="d-md-flex mb-2 justify-content-center align-items-center">
-                                                    <span style="height: 1px"
-                                                        class="d-none d-md-block bg-light width-7x"></span>
-                                                    <h5 class="mb-0 mx-3 text-white">
-                                                        Limited Discount
-                                                    </h5>
-                                                    <span style="height: 1px"
-                                                        class="d-none d-md-block bg-light width-7x"></span>
-                                                </div>
-                                                <h3 class="display-5">New Arrivals
-                                                </h3>
-                                                <p class="mb-4">Order over $100 and get 30% Off</p>
-                                                <a href="#!" class="btn btn-hover-text btn-outline-white">
-                                                    <span class="btn-hover-label label-default">Shop
-                                                        Now</span>
-                                                    <span class="btn-hover-label label-hover">Shop
-                                                        Now</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/.col-->
-                                <div class="col-lg-3 py-lg-5 mb-lg-0 mb-4">
-                                    <div class="d-flex flex-column mb-3">
-                                        <h5 class="dropdown-header mb-2">Topwear</h5>
-
-                                        <a class="dropdown-item" href="#!">
-                                            T-shirts
-                                            <span
-                                                class="badge badge-pill bg-success py-0 small d-inline-block ms-1">New</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Casual Shirts
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Formal Shirts
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Sweatshirts
-
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Jackets
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Blazers & Coats
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Sweaters
-                                        </a>
-                                    </div>
-                                </div>
-                                <!--/.col-->
-                                <div class="col-lg-3 py-lg-5 mb-lg-0 mb-4">
-                                    <div class="d-flex flex-column">
-                                        <h5 class="dropdown-header mb-2">Bottomwear</h5>
-
-                                        <a class="dropdown-item" href="#!">
-                                            Jeans
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Trousers & Pants
-                                            <span
-                                                class="badge badge-pill bg-primary py-0 small d-inline-block ms-1">-20%</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Shorts & Track Pants
-                                        </a>
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <div class="d-flex flex-column">
-                                        <h5 class="dropdown-header mb-2">Footwear</h5>
-
-                                        <a class="dropdown-item" href="#!">
-                                            Shoes
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Sandals & Floaters
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Flip Flops & Socks
-                                        </a>
-                                    </div>
-                                </div>
-                                <!--/.col-->
-                                <div class="col-lg-2 py-lg-5">
-                                    <div class="d-flex flex-column">
-                                        <h5 class="dropdown-header mb-2">Accessories</h5>
-                                        <a class="dropdown-item" href="#!">
-                                            Face mask
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Wallets & Belts
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Backpacks
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Headphones
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Sunglasses
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Belts
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Socks
-                                        </a>
-                                        <a class="dropdown-item" href="#!">
-                                            Watches
-                                        </a>
-                                    </div>
-                                </div>
-                                <!--/.col-->
-                            </div>
-                            <!--/.row-->
-                          </div>
-                        </div>
-                    </li>
-                    <li class="nav-item nav-item dropdown position-static ">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Womens
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-fw px-lg-0 py-lg-0">
-                            <div class="overflow-hidden">
-                                <div class="row mx-0">
-                                    <div class="col-lg-5 me-lg-auto d-none d-lg-flex ps-lg-0">
-                                        <div
-                                            class="d-flex bg-shade-info flex-column h-100 w-100 py-4 py-lg-5 position-relative">
-                                            <img alt="" src="assets/img/shop/banners/02.jpg"
-                                                class="bg-image opacity-50">
-                                            <div
-                                                class="position-absolute text-center d-flex flex-column justify-content-end align-items-center text-white left-0 top-0 w-100 h-100 px-4">
-                                                <div class="mb-4 py-4 px-4">
-                                                    <div
-                                                        class="d-md-flex mb-2 justify-content-center align-items-center">
-                                                        <span style="height: 1px"
-                                                            class="d-none d-lg-block bg-white width-7x"></span>
-                                                        <h5 class="mb-0 fw-normal mx-2">
-                                                            Limited Discount
-                                                        </h5>
-                                                        <span style="height: 1px"
-                                                            class="d-none d-lg-block bg-white width-7x"></span>
-                                                    </div>
-                                                    <h3 class="display-5">New Arrivals
-                                                    </h3>
-                                                    <p class="mb-4">Order over $100 and get 30% Off</p>
-                                                    <a href="#!" class="btn btn-hover-text btn-outline-white">
-                                                        <span class="btn-hover-label label-default">Shop
-                                                            Now</span>
-                                                        <span class="btn-hover-label label-hover">Shop
-                                                            Now</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--/.col-->
-                                    <div class="col-lg-3 py-lg-5 mb-lg-0 ms-lg-auto mb-4">
-                                        <div class="d-flex flex-column">
-                                            <h5 class="dropdown-header mb-2">Clothes</h5>
-                                            <a class="dropdown-item" href="#!">
-                                                T-Shirts & Tops
-                                                <span
-                                                    class="badge badge-pill bg-success py-0 small d-inline-block ms-1">New</span>
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Shorts
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                T-Shirts
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Jeans & Skirts
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Shoes & Sandals
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Jackets
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Sweatshirts & Hoodies
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!--/.col-->
-                                    <div class="col-lg-3 py-lg-5 mb-lg-0 ms-lg-auto mb-4">
-                                        <div class="d-flex flex-column">
-                                            <h5 class="dropdown-header mb-2">Accessories</h5>
-                                            <a class="dropdown-item" href="#!">
-                                                Face mask
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Handbags
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Backpacks
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Sunglasses
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Watches
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Wallets
-                                            </a>
-                                            <a class="dropdown-item" href="#!">
-                                                Caps & Hats
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!--/.col-->
-                                </div>
-                                <!--/.row-->
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" data-bs-auto-close="outside" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop
-
-                        </a>
-                        <div class="dropdown-menu">
-                            <div class="dropend">
-                                <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="false" href="#">Products</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="demo-shop-products.html">Sidebar</a>
-                                    <a class="dropdown-item" href="demo-shop-products-full-width.html">Full
-                                        width</a>
-                                    <a class="dropdown-item" href="demo-shop-product-category.html">Product
-                                        category</a>
-                                </div>
-                            </div>
-                            <div class="dropend">
-                                <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown"
-                                    aria-expanded="false">Product</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="demo-shop-product-default.html">Product
-                                        Default</a>
-                                    <a class="dropdown-item" href="demo-shop-single-product-option.html">Product
-                                        Option</a>
-                                </div>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="demo-shop-wishlist.html">Wishlist</a>
-                            <a class="dropdown-item" href="demo-shop-cart.html">Cart</a>
-                            <a class="dropdown-item" href="demo-shop-checkout.html">Checkout</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!">
-                            Blog
-                        </a>
-                    </li>
+					{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="#!">
+							{{categoryFirst.name}}
+						</a>
+					</li>
+					{% endif %}
+				{% endfor %}
+					
                 </ul>
             </div>
         
