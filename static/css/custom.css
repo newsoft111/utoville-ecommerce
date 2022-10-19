@@ -1,3 +1,4 @@
+/*Product detail*/
 .optionAdd {
 	display: flex;
 	justify-content: space-between;
@@ -17,4 +18,129 @@
 .totalPrice p.total_price_part {
 	font-size: 22px;
 	font-weight: bold;
+}
+
+
+.newordertitle h3 {
+	padding: 32px;
+	font-size: 22px;
+}
+.subs-pills {
+	margin-left: 12px;
+}
+.nav-pills .nav-link, 
+.subs-pills .nav-link {
+  background: none;
+  border: 0;
+  border-radius: 5px;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #e3e3e3 !important;
+}
+.subs-pills .nav-link.active,
+.subs-pills .show > .nav-link {
+	color: #000;
+	background-color: #e3e3e3 !important;
+}
+.subs-table {
+	margin-top: 50px;
+	text-align: center;
+}
+.sub-banner {
+	margin-bottom: 30px;
+}
+.subs-view {
+	display: none;
+}
+.subs-view.show {
+	display: block;
+}
+.subs-cancel {
+	margin-top: 50px !important;
+	padding: 50px;
+	text-align: center;
+	background-color: #e3e3e3;
+	display: none;
+}
+.subs-cancel.show {
+	display: block;
+}
+
+@media only screen and (max-width: 1200px) {
+	.subs_contents {
+		width: 100% !important;
+	}
+}
+@media only screen and (max-width: 575px) {
+	.sub-banner {
+		margin-bottom: 10px;
+	}
+}
+
+
+/*cancel*/
+#cancelDetail {
+	font-size: 16px;
+	color: #28a7e1;
+	font-weight: bold;
+}
+.cancelCatalog {
+	padding: 20px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	border-bottom: 1px solid #dee2e6;
+	font-size: 13px;
+}
+.cancelCatalog .cancelphoto img{
+	width: 100px;
+	height: 100px;
+}
+.cancelreason {
+	padding: 25px 15px 0;
+}
+.cancelreason > h6 {
+	margin-bottom: 20px;
+	font-size: 13px;
+	font-weight: bold;;
+} 
+.cancelreason ul {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1rem;
+	padding-left: 0 !important;
+}
+.cancelreason ul:last-child {
+	border-bottom: none;
+}
+.cancelreason ul li {
+	display: inline-block;
+	font-size: 13px;
+}
+.reasoninner {
+	border-top: 1px solid #dee2e6;
+	border-bottom: 1px solid #dee2e6;
+}
+.downarrow {
+	margin-top: 20px;
+	text-align: center;
+}
+.form-label {
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+.previous_order {
+	border: 1px solid #dec48f;
+}
+.changed_order {
+	margin-top: 50px;
+	border: 1px solid #dec48f;	
+}
+.cancel_status {
+	font-size: 14px;
+}
+.cancel_detail {
+	padding: 0;
 }
