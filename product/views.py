@@ -25,7 +25,12 @@ def product_list(request):
 	if request.GET.get("keyword"): #검색 필터
 		q &= Q(name__icontains = request.GET.get("keyword"))
 
-	product_list =  Product.objects.filter(q).order_by( "-id")
+	ordering_list = ["rating_count", "rating", "id", "price", "-price"]
+	if request.GET.get("sort") in ordering_list:
+		ordering = request.GET.get("sort")
+	else:
+		ordering = "-id"
+	product_list =  Product.objects.filter(q).order_by(ordering)
 
 	page        = int(request.GET.get('p', 1))
 	pagenator   = Paginator(product_list, 12)

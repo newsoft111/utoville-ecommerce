@@ -240,17 +240,16 @@
   </div>
   <div class="col-md-6 ms-auto">
 	<div class="d-flex align-items-center">
-	  <span class="small text-muted d-none d-lg-block">Short by</span>
-	  <div class="flex-grow-1 ps-2">
-		<select name="shortBy" class="form-control"
-		  data-choices='{"searchEnabled":false,"itemSelectText":""}' id="product-shortby">
-		  <option value="Best selling" selected> Best selling</option>
-		  <option value="Best rated"> Best rated</option>
-		  <option value="Most recent"> Most recent</option>
-		  <option value="Price - Low to High"> Price - Low to High</option>
-		  <option value="Price - High to Low">Price - High to Low</option>
+		<span class="small text-muted text-end me-3 d-none d-lg-block w-100">Short by</span>
+		
+		<select name="sort_by" class="form-control" id="sort-by">
+			<option value="id" selected> Most recent</option>
+			<option value="rating_count"> Best selling</option>
+			<option value="rating"> Best rated</option>
+			<option value="price"> Price - Low to High</option>
+			<option value="-price">Price - High to Low</option>
 		</select>
-	  </div>
+
 	</div>
   </div>
 </div>
@@ -310,5 +309,27 @@
 </div>
 </section>
 
+<script>
+$(document).ready(function() {
+	const urlParams = new URLSearchParams(window.location.search);
+	let sort = '';
+	if (isEmpty(urlParams)) {
+		sort = 'id';
+	} else {
+		sort = urlParams.get('sort');
+	}
+	console.log(urlParams);
+
+	let element = document.getElementById("sort-by");
+    element.value = sort;
+});
+
+const sort = document.querySelector('select[name=sort_by]');
+
+sort.addEventListener('change', (event) => {
+	var link = `{{request.path}}?sort=${event.target.value}`;
+	location.href=link;
+});
+</script>
 
 {% endblock %}
