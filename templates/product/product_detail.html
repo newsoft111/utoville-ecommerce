@@ -67,31 +67,14 @@
 		  </div>
 		</div>
 		<!--/.col-->
-		<div class="col-md-8 mx-auto col-lg-5 ms-xl-auto">
-		  <!--Breadcrumbs-->
-		  <nav class="d-md-flex" aria-label="breadcrumb">
-			<ol class="breadcrumb mb-3">
-			  <li class="breadcrumb-item">
-				<a href="#!">Home</a>
-			  </li>
-			  <li class="breadcrumb-item active">
-				Shop
-			  </li>
-			  <li class="breadcrumb-item active">
-				Products
-			  </li>
-			  <li class="breadcrumb-item active">
-				Women's Husky Vest
-			  </li>
-			</ol>
-		  </nav>
+		<div class="col-md-8 mx-auto col-lg-5 ms-xl-auto">		  
 		  <!-- Product Description -->
 		  <div class="mb-3 pb-3 border-bottom">
 			<div class="mb-3">
-			  <h2 class="mb-4 display-4">FOSFO LONG – Women’s down puffer jacket</h2>
+			  <h2 class="mb-4 display-4">{{product_detail.name}}</h2>
 			  <div class="d-flex justify-content-between align-items-center">
 				<div>
-				  <p class="fs-5 mb-0">$320.00</p>
+				  <p class="fs-5 mb-0">₱{{product_detail.price|intcomma}}</p>
 				</div>
 			  </div>
 			</div>
@@ -165,9 +148,9 @@
 	  <div class="row justify-content-center">
 		<div class="col-lg-9 mb-5">
 		  <nav class="nav nav-tabs">
-			<a href="#description" class="nav-link active" data-bs-toggle="tab" aria-haspopup="false"
+			<a href="#detail" class="nav-link active" data-bs-toggle="tab" aria-haspopup="false"
 			  aria-expanded="true">
-			  Description
+			  Detail
 			</a>
 			<a href="#information" class="nav-link" data-bs-toggle="tab" aria-haspopup="false"
 			  aria-expanded="false">
@@ -184,24 +167,8 @@
 		<!--/.col-->
 		<div class="col-lg-9 col-md-8">
 		  <div class="tab-content">
-			<div class="tab-pane fade active show" id="description">
-			  <h5>Lorem Ipsum is simply</h5>
-			  <p class="mb-5">
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-				Lorem
-				Ipsum has been the industry's standard dummy text ever since the 1500s, when
-				an
-				unknown printer took a galley of type and scrambled it to make a type
-				specimen
-				book. It has survived not only five centuries, remaining essentially
-				unchanged,
-				but also the leap into electronic typesetting, remaining essentially
-				unchanged.
-			  </p>
-			  <div class="text-end">
-				<a href="#!" class="btn  btn-outline-secondary rounded-pill">Visit
-				  Store</a>
-			  </div>
+			<div class="tab-pane fade active show" id="detail">
+				{{product_detail.content|safe}}
 			</div>
 			<!--Tab-pane-->
 			<div class="tab-pane fade" id="information">
@@ -222,80 +189,41 @@
 				class="bg-gradient-secondary text-white d-flex justify-content-between align-items-center p-3 mb-5">
 				<div>
 				  <span class="text-warning small d-block mb-2">
-					<i class="bx bx-star"></i>
-					<i class="bx bx-star"></i>
-					<i class="bx bx-star"></i>
-					<i class="bx bx-star"></i>
-					<i class="bx bx-star"></i>
+					{% for i in 5|times %}
+						{% if i < product_detail.rating %}
+							<i class="bx bxs-star"></i>
+						{% else %}
+							<i class="bx bx-star"></i>
+						{% endif %}
+					{% endfor %}
 				  </span>
-				  <p class="mb-0"><span class="reviews small fw-normal">4.69 / 5</span>
-					<small class="text-muted">( 4.5 K - Reviews)</small>
+				  <p class="mb-0"><span class="reviews small fw-normal">{{product_detail.rating}} / 5</span>
+					<small class="text-muted">( {{product_detail.rating_count}}개 - Reviews)</small>
 				  </p>
 
 				</div>
-				<div>
-				  <a href="#!" class="link-underline fw-semibold pb-0">View all
-					Reviews</a>
-				</div>
 			  </div>
 			  <h5 class="mb-4 mb-lg-5">Latest Reviews</h5>
-			  <div class="d-flex mb-4">
-				<div>
-				  <img src="assets/img/avatar/3.jpg" alt="" class="avatar sm me-3 rounded-circle shadow">
-				</div>
+			  {% for review in product_detail.productreview_set.all %}
 				<div class="media-body">
 				  <span class="text-warning small d-block mb-2">
-					<i class="bx bx-star"></i><i class="bx bx-star"></i><i class="bx bx-star"></i><i
-					  class="bx bx-star"></i><i class="bx bx-star"></i>
+					{% for i in 5|times %}
+						{% if i < review.rating %}
+							<i class="bx bxs-star"></i>
+						{% else %}
+							<i class="bx bx-star"></i>
+						{% endif %}
+					{% endfor %}
+
 				  </span>
-				  <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-					sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				  <p class="mb-2">{{review.review}}</p>
 				  <div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
-					<h6 class="mb-0">Emma Patrik</h6>
-					<small class="text-muted">5 July 2021</small>
+					<h6 class="mb-0">{{review.user.username}}</h6>
+					<small class="text-muted ms-auto">{{product_detail.created_at}}</small>
 				  </div>
 				</div>
-			  </div>
-			  <!--Review-item-->
-			  <div class="d-flex mb-4">
-				<div>
-				  <img src="assets/img/avatar/6.jpg" alt="" class="avatar sm me-3 rounded-circle shadow">
-				</div>
-				<div class="media-body">
-				  <span class="text-warning small d-block mb-2">
-					<i class="bx bx-star"></i><i class="bx bx-star"></i><i class="bx bx-star"></i><i
-					  class="bx bx-star"></i><i class="bx bx-star"></i>
-				  </span>
-				  <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-					sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-				  <div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
-					<h6 class="mb-0">Juan Doe</h6>
-					<small class="text-muted">23 May 2021</small>
-				  </div>
-				</div>
-			  </div>
-			  <!--Review-item-->
-			  <div class="d-flex mb-4">
-				<div>
-				  <img src="assets/img/avatar/9.jpg" alt="" class="avatar sm me-3 rounded-circle shadow">
-				</div>
-				<div class="media-body">
-				  <span class="text-warning small d-block mb-2">
-					<i class="bx bx-star"></i><i class="bx bx-star"></i><i class="bx bx-star"></i><i
-					  class="bx bx-star"></i><i class="bx bx-star"></i>
-				  </span>
-				  <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-					sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-				  <div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
-					<h6 class="mb-0">Adam Voges</h6>
-					<small class="text-muted">12 June 2021</small>
-				  </div>
-				</div>
-			  </div>
-			  <!--Review-item-->
+			  {% endfor %}
+			  
 			  <div class="pt-3">
 				<div class="d-flex justify-content-end mb-3">
 				  <a href="#" data-bs-target="#review-collapse" data-bs-toggle="collapse" aria-expanded="false"
