@@ -6,29 +6,27 @@
 
 <!--Page header start-->
 <section class="position-relative overflow-hidden">
-	<div class="container-fluid">
-		<div class="py-8 py-lg-11 bg-dark text-white position-relative">
-			<!--background image-->
-			<img src="assets/img/shop/banners/06.jpg" class="bg-image bg-top-center opacity-75" alt="">
-		
-			<div class="row align-items-center position-relative">
-			<div class="col-lg-10 mx-auto text-center">
-				<nav class="d-flex justify-content-center" aria-label="breadcrumb">
-				<ol class="breadcrumb mb-3">
-					<li class="breadcrumb-item">
-					<a href="#!">Home</a>
-					</li>
-					<li class="breadcrumb-item active">
-					Shop
-					</li>
-				</ol>
-				</nav>
-				<h1 class="mb-0 display-3">Shop
-				</h1>
-			</div>
-			</div>
-			<!--/.row-->
+	<div class="py-8 py-lg-11 bg-dark text-white position-relative">
+		<!--background image-->
+		<img src="{% static 'img/shop/banners/06.jpg' %}" class="bg-image bg-top-center opacity-75" alt="">
+	
+		<div class="row align-items-center position-relative">
+		<div class="col-lg-10 mx-auto text-center">
+			<nav class="d-flex justify-content-center" aria-label="breadcrumb">
+			<ol class="breadcrumb mb-3">
+				<li class="breadcrumb-item">
+				<a href="#!">Home</a>
+				</li>
+				<li class="breadcrumb-item active">
+				Shop
+				</li>
+			</ol>
+			</nav>
+			<h1 class="mb-0 display-3">Shop
+			</h1>
 		</div>
+		</div>
+		<!--/.row-->
 	</div>
 </section>
 
@@ -39,197 +37,28 @@
 			<div class="col-md-3">
 				<!--:Sidebar widget card-->
 				<div class="mt-5">
-				<!--:Title-->
-				<h6 class="mb-4">Categories</h6>
-				<!--:Collapse categories-->
-				<div class="collapse-group collapse d-flex flex-column">
-					<div class="collapse d-block">
-					<div class="nav flex-column">
-						{% for categoryFirst in category_first_list %}
-						<a href="#category{{categoryFirst.id}}" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">{{categoryFirst.name}}</a>
-						<div class="collapse" id="category{{categoryFirst.id}}">
-						<div class="nav nav-level-2 flex-column">
-							{% for categorySecond in categoryFirst.categorysecond_set.all %}
-							<a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}" class="nav-link small">{{categorySecond.name}}</a>
-							{% endfor %}
+					<!--:Title-->
+					<h6 class="mb-4">Categories</h6>
+					<!--:Collapse categories-->
+					<div class="collapse-group collapse d-flex flex-column">
+						<div class="collapse d-block">
+							<div class="nav flex-column">
+								{% for categoryFirst in category_first_list %}
+								<a href="#category{{categoryFirst.id}}" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">{{categoryFirst.name}}</a>
+								<div class="collapse" id="category{{categoryFirst.id}}">
+								<div class="nav nav-level-2 flex-column">
+									{% for categorySecond in categoryFirst.categorysecond_set.all %}
+									<a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}" class="nav-link small">{{categorySecond.name}}</a>
+									{% endfor %}
+								</div>
+								</div>
+								{% endfor %}
+							</div>
 						</div>
-						</div>
-						{% endfor %}
-					</div>
 					</div>
 				</div>
-			</div>
 				<!--:Sidebar widget card-->
-			
-			<div class="mt-5">
-			<!--:Title-->
-			<h6 class="mb-4">Size</h6>
-			<!--:Size list-->
-			<ul class="list-unstyled mb-0 pe-2 ps-1 py-1" data-simplebar style="max-height: 13rem;">
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-xs">
-					<label class="form-check-label widget-filter-item-text" for="size-xs">XS</label>
-				</div><span class="small text-muted">21</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-s">
-					<label class="form-check-label widget-filter-item-text" for="size-s">S</label>
-				</div><span class="small text-muted">22</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-m">
-					<label class="form-check-label widget-filter-item-text" for="size-m">M</label>
-				</div><span class="small text-muted">54</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-l">
-					<label class="form-check-label widget-filter-item-text" for="size-l">L</label>
-				</div><span class="small text-muted">32</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-xl">
-					<label class="form-check-label widget-filter-item-text" for="size-xl">XL</label>
-				</div><span class="small text-muted">74</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-39">
-					<label class="form-check-label widget-filter-item-text" for="size-39">39</label>
-				</div><span class="small text-muted">48</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="width-3x height-3x">
-					<label class="form-check-label widget-filter-item-text" for="width-3x height-3x">40</label>
-				</div><span class="small text-muted">24</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-41">
-					<label class="form-check-label widget-filter-item-text" for="size-41">41</label>
-				</div><span class="small text-muted">86</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-42">
-					<label class="form-check-label widget-filter-item-text" for="size-42">42</label>
-				</div><span class="small text-muted">98</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-43">
-					<label class="form-check-label widget-filter-item-text" for="size-43">43</label>
-				</div><span class="small text-muted">31</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-44">
-					<label class="form-check-label widget-filter-item-text" for="size-44">44</label>
-				</div><span class="small text-muted">42</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="s50">
-					<label class="form-check-label widget-filter-item-text" for="s50">45</label>
-				</div><span class="small text-muted">62</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-46">
-					<label class="form-check-label widget-filter-item-text" for="size-46">46</label>
-				</div><span class="small text-muted">19</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-47">
-					<label class="form-check-label widget-filter-item-text" for="size-47">47</label>
-				</div><span class="small text-muted">97</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-48">
-					<label class="form-check-label widget-filter-item-text" for="size-48">48</label>
-				</div><span class="small text-muted">8</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="size-49">
-					<label class="form-check-label widget-filter-item-text" for="size-49">49</label>
-				</div><span class="small text-muted">16</span>
-				</li>
-				<li class="widget-filter-item d-flex justify-content-between align-items-center">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="s50">
-					<label class="form-check-label widget-filter-item-text" for="s50">50</label>
-				</div><span class="small text-muted">9</span>
-				</li>
-			</ul>
 			</div>
-			<!--:Sidebar widget card-->
-<div class="mt-5">
-  <!--:Title-->
-  <h6 class="mb-4">Price</h6>
-  <div>
-	<div class="range-slider mx-2"
-	  data-range='{"decimals": 0,"step": 1,"connect": true, "start" : [10,100], "range" : {"min": 0, "max" :1000}}'>
-	</div>
-	<div class="range-slider-selection">
-	  <span>$ <span class="range-slider-value" id="range-min"></span></span>
-	  &mdash; <span>$ <span class="range-slider-value" id="range-max"></span></span>
-	</div>
-  </div>
-</div>
-<!--:Sidebar widget card-->
-<div class="mt-5">
-  <!--:Title-->
-  <h6 class="mb-4">Colors</h6>
-  <!--:list-->
-  <ul class="list-unstyled mb-0">
-	<li class="btn-group mb-2">
-	  <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic radio toggle button group">
-		<input type="checkbox" class="btn-check" name="btnradio" id="color_black">
-		<label
-		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-white product-black"
-		  for="color_black"></label>
-		<input type="checkbox" class="btn-check" name="btnradio" id="color_blue">
-		<label
-		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-white product-blue"
-		  for="color_blue"></label>
-		<input type="checkbox" class="btn-check" name="btnradio" id="color_brown">
-		<label
-		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-white product-brown"
-		  for="color_brown"></label>
-		<input type="checkbox" class="btn-check" name="btnradio" id="color_red">
-		<label
-		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-white product-red"
-		  for="color_red"></label>
-		<input type="checkbox" class="btn-check" name="btnradio" id="color_yellow">
-		<label
-		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-dark product-yellow"
-		  for="color_yellow"></label>
-		<input type="checkbox" class="btn-check" name="btnradio" id="color_pink">
-		<label
-		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-dark product-pink"
-		  for="color_pink"></label>
-		<input type="checkbox" class="btn-check" name="btnradio" id="color_purple">
-		<label
-		  class="shop-product-color btn p-0 border-0 me-2 width-3x height-3x flex-center rounded-circle text-white product-purple"
-		  for="color_purple"></label>
-
-		<input type="checkbox" class="btn-check" name="btnradio" id="color_white">
-		<label
-		  class="shop-product-color btn p-0 shadow-sm border-0 me-2 width-3x height-3x flex-center rounded-circle text-dark border product-white"
-		  for="color_white"></label>
-	  </div>
-	</li>
-  </ul>
-</div>
-</div>
 
 <!--Products column-->
 <div class="col-md-9 pt-5">
@@ -312,13 +141,11 @@
 <script>
 $(document).ready(function() {
 	const urlParams = new URLSearchParams(window.location.search);
-	let sort = '';
-	if (isEmpty(urlParams)) {
+	let sort = urlParams.get('sort');
+	if (isEmpty(sort)) {
 		sort = 'id';
-	} else {
-		sort = urlParams.get('sort');
 	}
-	console.log(urlParams);
+	console.log(sort);
 
 	let element = document.getElementById("sort-by");
     element.value = sort;
