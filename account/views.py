@@ -266,3 +266,6 @@ def subscription(request):
 
 def cancel(request):
 	return render(request, 'account/mypage/cancel.html')
+
+def ask(request):
+	return render(request, 'account/mypage/ask.html')

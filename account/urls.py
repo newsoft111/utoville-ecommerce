@@ -16,6 +16,7 @@ urlpatterns = [
 			path('orders/', views.my_order, name='my_order'),
 			path('subs/', views.subscription, name='subscription'),
 			path('cancel/', views.cancel, name='cancel'),
+			path('ask/', views.ask, name='ask'),
 		])
 	)
 ]
