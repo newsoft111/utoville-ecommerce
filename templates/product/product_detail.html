@@ -159,66 +159,131 @@
 						</div>
 					</div>
 				</div>
+			  </div>
+			</div>
+			<div class="col-10">
+			  <!--Thumbnails main slider-->
+			  <div class="swiper-container overflow-hidden position-relative swiper-thumbnails-main">
+				<!-- Additional required wrapper -->
+				<div class="swiper-wrapper">
+				  <!-- Slides -->
+				  <div class="swiper-slide">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+				  </div>
+				</div>
+				<!-- Swiper Navigation buttons (Remove it if you have to) -->
+				<div class="swiper-button-prev swiperThumb-prev text-white bg-dark">
+				</div>
+				<div class="swiper-button-next  swiperThumb-next text-white bg-dark">
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<!--/.col-->
+		<div class="col-md-8 mx-auto col-lg-5 ms-xl-auto">		  
+		  <!-- Product Description -->
+		  <div class="mb-3 pb-3 border-bottom">
+			<div class="mb-3">
+			  <h2 class="mb-4 display-4">{{product_detail.name}}</h2>
+			  <div class="d-flex justify-content-between align-items-center">
+				<div>
+				  <p class="fs-5 mb-0">₱{{product_detail.price|intcomma}}</p>
+				</div>
+			  </div>
+			</div>
+			<p class="mb-4">Lorem ipsum dolor sit amet adipiscing euismod tincidunt
+			  laoreet dolore magna aliquam erat volutpat.</p>
+		  </div>
+
+		  	{% if product_detail.productvariant_set.all %}
+		  	<div class="mb-3 pb-3 border-bottom">
+				<h6 class="mb-3">Option</h6>
+				
+				
+				<select id="optionFirst" class="form-select form-select-md mb-3" onchange="set_variant_value(this)">
+					<option selected>옵션1</option>
+					{% for variant in product_detail.productvariant_set.all %}
+					<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
+					{% endfor %}
+				</select>
+				<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-md mb-3">
+					<option selected>옵션2</option>
+				</select>
+				
 			</div>
 		</div>
 	</div>
-</section>
-<!-- =======================
-Main Banner END -->
-
-<!-- =======================
-Inner part START -->
-<section class="py-0">
-	<div class="container position-relative" data-sticky-container="">
-		<div class="row">
-			<!-- Main content START -->
-			<div class="col-lg-12 mb-5">
-				<!-- Navbar START -->
-				<nav id="navbar-example" class="navbar navbar-dark bg-dark rounded">
-					<ul class="nav p-2">
-							<!-- Item 1 -->
-						<li class="nav-item">
-							<a class="nav-link" href="#">서비스 설명</a>
-						</li>
-							<!-- Item 2 -->
-						<li class="nav-item">
-							<a class="nav-link" href="#">서비스 정보</a>
-						</li>
-							<!-- Item 3 -->
-						<li class="nav-item">
-							<a class="nav-link" href="#">서비스 평(999)</a>
-						</li>
-							<!-- Item 4 -->
-						<li class="nav-item">
-							<a class="nav-link" href="#">Q&A(999)</a>
-						</li>
-					</ul>
-				</nav>
-				<!-- Navbar END -->
-			
-				<!-- Description START -->
-				<div class="row g-0 mt-5" id="description">
-					<div class="col-12 border rounded p-4">
-						<div class="row">
-							<!-- Title -->
-							<div class="mb-4">
-								<h3>서비스 설명</h3>
-							</div>
-							<div class="text-start">
-								{{product_detail.content|safe}}
-							</div>
-							<!-- Description item -->
-							<!-- <div class="col-sm-6 col-xl-3 mb-4">
-								<div class="d-flex align-items-center">
-									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
-										<i class="fas fa-fw fa-bed text-primary"></i>
-									</div>
-									<div class="ms-2">
-										<span class="text-dark small">Bedroom</span>
-										<h5 class="mb-0 font-base">4</h5>
-									</div>
-								</div>
-							</div>
+  </section>
+  <section class="bg-light">
+	<div class="container py-9 py-lg-11">
+	  <div class="row justify-content-center">
+		<div class="col-lg-9 mb-5">
+		  <nav class="nav nav-tabs">
+			<a href="#detail" class="nav-link active" data-bs-toggle="tab" aria-haspopup="false"
+			  aria-expanded="true">
+			  Detail
+			</a>
+			<a href="#information" class="nav-link" data-bs-toggle="tab" aria-haspopup="false"
+			  aria-expanded="false">
+			  Information
+			</a>
+			<a href="#reviews" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">
+			  Reviews
+			</a>
+			<a href="#product-qa" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">
+			  Q&amp;A
+			</a>
+		  </nav>
+		</div>
+		<!--/.col-->
+		<div class="col-lg-9 col-md-8">
+		  <div class="tab-content">
+			<div class="tab-pane fade active show" id="detail">
+				{{product_detail.content|safe}}
+			</div>
+			<!--Tab-pane-->
+			<div class="tab-pane fade" id="information">
+			  <ul class="list-group list-group-flush">
+				<li class="list-group-item bg-transparent px-0 py-3">MATERIAL: 100% POLYESTER
+				</li>
+				<li class="list-group-item bg-transparent px-0 py-3">Durable water repellent to
+				  protect against light drizzles</li>
+				<li class="list-group-item bg-transparent px-0 py-3">Insulated quilted vest to
+				  protect in light winters
+				</li>
+				<li class="list-group-item bg-transparent px-0 py-3">Made in Germany</li>
+			  </ul>
+			</div>
+			<!--Tab-pane-->
+			<div class="tab-pane fade" id="reviews">
+			  <div
+				class="bg-gradient-secondary text-white d-flex justify-content-between align-items-center p-3 mb-5">
+				<div>
+				  <span class="text-warning small d-block mb-2">
+					{% for i in 5|times %}
+						{% if i < product_detail.rating %}
+							<i class="bx bxs-star"></i>
+						{% else %}
+							<i class="bx bx-star"></i>
+						{% endif %}
+					{% endfor %}
+				  </span>
+				  <p class="mb-0"><span class="reviews small fw-normal">{{product_detail.rating}} / 5</span>
+					<small class="text-muted">( {{product_detail.rating_count}}개 - Reviews)</small>
+				  </p>
 
 							<div class="col-sm-6 col-xl-3 mb-4">
 								<div class="d-flex align-items-center">
@@ -296,31 +361,73 @@ Inner part START -->
 						</div> <!-- Row END -->
 					</div>
 				</div>
-				<!-- Description End -->
+			  </div>
+			  <h5 class="mb-4 mb-lg-5">Latest Reviews</h5>
+			  {% for review in product_detail.productreview_set.all %}
+				<div class="media-body">
+				  <span class="text-warning small d-block mb-2">
+					{% for i in 5|times %}
+						{% if i < review.rating %}
+							<i class="bx bxs-star"></i>
+						{% else %}
+							<i class="bx bx-star"></i>
+						{% endif %}
+					{% endfor %}
 
-				<!-- Details START -->
-				<div class="row g-0 mt-5" id="detail">
-					<div class="col-12 border rounded p-4">
-						<div class="row">
-							<!-- Title -->
-							<div class="primary-line mb-4">
-								<h3>서비스 정보</h3>
-								<div class="desc">
-									<div class="title">
-										<h2>V-CLEAN-WM(업체 이름)</h2>
-										<small>세탁기 청소 - 일반세탁기(16kg 이하)/분해청소 전문CS마스터
-											(업체 간략 설명)</small>										
-									</div>
-									<div class="info">
-										<p>서비스 제공 사업자 <span>""</span></p>
-										<p>이용조건<span>""</span></p>
-										<p>취소, 중도해약/해지 조건 및 환불 기준<span>""</span></p>
-										<p>취소 및 환불 방법(필수)<span>""</span></p>
-										<p>소비자상담관련 전화번호<span>""</span></p>
-									</div>
-								</div>							
-							</div>
-						</div>
+				  </span>
+				  <p class="mb-2">{{review.review}}</p>
+				  <div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
+					<h6 class="mb-0">{{review.user.username}}</h6>
+					<small class="text-muted ms-auto">{{product_detail.created_at}}</small>
+				  </div>
+				</div>
+			  {% endfor %}
+
+			</div>
+			<!--Tab-pane-->
+			<div class="tab-pane fade" id="product-qa">
+			  <div class="card border card-body mb-2 bg-transparent">
+				<h5><i class="bx bx-question-mark me-2"></i>Is the item
+				  durable?</h5>
+				<p class="mb-0 d-flex align-items-stretch">
+				  <strong class="small d-inline-block me-2 text-muted">Ans.</strong>
+				  <span class="mb-0">
+					Durability of shoes minimum 1 year if u used on daily basis. I think
+					this is best at this price range as compare to all other popular
+					brands.
+				  </span>
+				</p>
+			  </div>
+			  <div class="card border card-body mb-2 bg-transparent">
+				<h5><i class="bx bx-question-mark me-2"></i>Is the item
+				  durable?</h5>
+				<p class="mb-0 d-flex align-items-stretch">
+				  <strong class="small d-inline-block me-2 text-muted">Ans.</strong>
+				  <span class="mb-0">
+					Durability of shoes minimum 1 year if u used on daily basis. I think
+					this is best at this price range as compare to all other popular
+					brands.
+				  </span>
+				</p>
+			  </div>
+			  <div class="card border card-body mb-5 bg-transparent">
+				<h5><i class="bx bx-question-mark me-2"></i>Is the item
+				  durable?</h5>
+				<p class="mb-0 d-flex align-items-stretch">
+				  <strong class="small d-inline-block me-2 text-muted">Ans.</strong>
+				  <span class="mb-0">
+					Durability of shoes minimum 1 year if u used on daily basis. I think
+					this is best at this price range as compare to all other popular
+					brands.
+				  </span>
+				</p>
+			  </div>
+			  <h5 class="mb-4">Feel free to Ask questions</h5>
+			  <form class="needs-validation" novalidate>
+				<div class="row">
+				  <div class="col-12 col-sm-6">
+					<div class="mb-3">
+					  <input type="text" required class="form-control" placeholder="Enter your Name">
 					</div>
 				</div>
 				<!-- Details END -->
