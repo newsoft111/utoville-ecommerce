@@ -109,7 +109,7 @@
 	
 				   
 				   <div class="optionAdd d-flex">
-					  <input type="text" class="form-control w-25" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
+					  <input type="number" onKeyDown="return false" class="form-control w-25" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
 	
 					  <span class="price ms-auto" data-id="" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
 				   </div>
@@ -508,7 +508,7 @@ function add_item(e) {
 		html += '<a class="close" href="#test" onclick="remove_item(this)">X</a>';
 		html += '</div>';
 		html += '<div class="optionAdd">';
-		html += `<input type="text" readonly class="form-control w-25 text-center" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
+		html += `<input type="number" onKeyDown="return false" class="form-control w-25 text-center" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
 		html += `<span class="price" data-id="${option_second_id}" id="itemPrice">₱${option_second_price}</span>`;
 		html += '</div>';
 		html += '</div>';
