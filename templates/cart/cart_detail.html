@@ -3,126 +3,166 @@
 {% load static %}
 {% load humanize %}
 {% load mathfilters %}
+{% load product_filter %}
 
+<!--Page header start-->
+<section class="position-relative overflow-hidden">
+        
+	<div class="container-fluid">
+	  <div class="py-8 py-lg-11 bg-dark text-white position-relative">
+		<!--background image-->
+		<img src="assets/img/shop/banners/06.jpg" class="bg-image bg-top-center opacity-75" alt="">
+	  
+		<div class="row align-items-center position-relative">
+		  <div class="col-lg-10 mx-auto text-center">
+			<nav class="d-flex justify-content-center" aria-label="breadcrumb">
+			  <ol class="breadcrumb mb-3">
+				<li class="breadcrumb-item">
+				  <a href="#!">Home</a>
+				</li>
+				<li class="breadcrumb-item active">
+				  Shop
+				</li>
+				<li class="breadcrumb-item active">
+				  Cart
+				</li>
+			  </ol>
+			</nav>
+			<h1 class="mb-0 display-3">Cart
+			</h1>
+		  </div>
+		</div>
+		<!--/.row-->
+	  </div>
+	</div>
+  </section>
 
-<!-- Section -->
-<section class="section">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="bg-secondary-soft p-3 p-md-5 rounded">
-				<!-- Title -->
-				<div class="row d-none d-md-block">
-					<div class="col-12 align-middle py-3">
-						<div class="row border-bottom">
-							<div class="col-6 text-start arrange_title">
-								<h5>Product</h5>
-							</div>
-							<div class="col-6">
-								<div class="row">
-									<div class="col-3 align-middle text-center py-2">
-										<h5>Price</h5>
-									</div>
-									<div class="col-3 align-middle text-center py-2">
-										<h5>Quantity</h5>
-									</div>
-									<div class="col-3 align-middle text-center py-2">
-										<h5>Subtotal</h5>
-									</div>
-									<div class="col-2 align-middle text-center py-2">
-									</div>
-								</div>
-							</div>
+<section class="position-relative bg-white" id="cart-section">
+	<div class="container pb-7 pb-lg-12 pt-7 position-relative">
+		<div class="row justify-content-between">
+			<div class="col-lg-10 mx-auto" id="cart-div">
+
+				<!--Cart table start-->
+				<div class="table-responsive">
+					<table class="table table-striped align-middle">
+						<thead>
+							<tr>
+								<th></th>
+								<th class="small text-muted">
+									<div style="min-width:180px">Product</div>
+								</th>
+								<th class="small text-muted">Price</th>
+								<th class="small text-muted">Quantity</th>
+								<th class="small text-muted">Subtotal</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% if not cart_items %}
+							<tr>
+								<td class="border-bottom-0 text-center p-5" colspan="6">상품이 없습니다.</td>
+							</tr>
+							{% endif%}
+
+							{% for cart_item in cart_items %}
+							<tr>
+								<td class="position-relative">
+									<input type="checkbox" class="position-absolute top-0 start-0" name="cart_item_id" value="{{cart_item.pk}}">
+									<img src="{% static 'img/shop/backpack2.jpg' %}" class="width-7x rounded-3">
+								</td>
+								<td>
+									<a href="#!" class="text-dark h5">
+										{{cart_item.product.name}}
+									</a>
+									{% if cart_item.variant_value is not None %}
+									<span class="text-uppercase d-block">
+										{{cart_item.variant_value.variant}}: {{cart_item.variant_value.value}}
+									</span>
+									
+									<span class="text-uppercase d-block">+₱{{cart_item.variant_value.price}}</span>
+									{% endif %}
+								</td>
+								<td>
+									{% if variant_value is not None %}
+									₱{{cart_item.product.price|add:cart_item.variant_value.price|intcomma}}
+									{% else %}
+									₱{{cart_item.product.price|intcomma}}
+									{% endif %}
+								</td>
+								<td>
+									<input type="number" min="1" onchange="update_cart_submit(this)" value="{{cart_item.quantity}}" max="5"  data-cart-item-id="{{cart_item.id}}" value="{{cart_item.quantity}}" class="form-control border-0 shadow-none rounded-0 bg-transparent">
+								</td>
+								<td>
+									{% if variant_value is not None %}
+									₱{{cart_item.product.price|add:cart_item.variant_value.price|mul:cart_item.quantity|intcomma}}
+									{% else %}
+									₱{{cart_item.product.price|mul:cart_item.quantity|intcomma}}
+									{% endif %}
+								</td>
+								<td><button class="btn-close text-center" onclick="remove_cart_submit('{{cart_item.id}}');">
+										<svg xmlns="http://www.w3.org/2000/svg" height="16"
+											viewBox="0 0 24 24" width="20" fill="currentColor">
+											<path
+												d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+										</svg>
+									</button></td>
+							</tr>
+
+							{% endfor %}
+							
+						</tbody>
+					</table>
+				</div>
+
+				<!--Update cart button-->
+				<div class="text-center d-md-flex align-items-center border-bottom pb-4 mb-4">
+					<div class="col-md-7 mb-4 mb-md-0 text-start">
+						<button class="btn btn-primary small ms-2" onclick="checkbox_manager();"><span>전체선택</span></button>
+                        <button class="btn small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span>선택삭제</span></button>
+					</div>
+					<div class="col-md-5 text-end">
+						<div class="d-flex flex-column h-100 justify-content-end">
+							<strong class="text-muted d-block mb-2 fs-6">Cart total</strong>
+							<h5 class="mb-0 ms-3 h2">₱{{total_price|intcomma}}</h5>
 						</div>
 					</div>
 				</div>
-	
-				<!-- Property -->
-				<div class="select_btn_ara">
-					<label>
-						<button type="button" onclick="checkbox_manager();" class="btn btn-secondary">전체 선택</button>
-						<button type="button" onclick="remove_checked_item();" class="btn btn-dark">선택 삭제</button>
-					</label>		
-				</div>
-				{% for cart_item in cart_items %}
-				<!-- Property -->
-				<div class="row">
-					<div class="col-12 align-middle py-4">
-						<div class="row item_catalog">
-							<div class="col-xxl-1 text-center">
-								<input type="checkbox" name="cart_item_id" value="{{cart_item.pk}}">
-							</div>
-							<div class="col-xxl-5">
-								<div class="card bg-transparent">
-									<div class="row p-2">
-										<!-- Image -->
-										<div class="col-xl-4 text-center">
-											<img class="rounded" src="{% static 'images/property/grid-list/08.jpg' %}" alt="">
-										</div>
-										<!-- Info -->
-										<div class="col-xl-8 pt-2 pt-xl-0 arrange_center">
-											<h6 class="mb-1">{{cart_item.product.name}}</h6>
-											<p class="mb-1 text-body">
-												{% if cart_item.variant_value is not None %}
-												{{cart_item.variant_value.value}} + ₱{{cart_item.variant_value.price}}
-												{% endif %}
-											</p>
-											<!-- <span class="text-success">
-												{% if variant_value is not None %}
-												₱{{cart_item.product.price|add:cart_item.variant_value.price|intcomma}}
-												{% else %}
-												₱{{cart_item.product.price|intcomma}}
-												{% endif %}
-											</span> -->
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- Content -->
-							<div class="col-xxl-6 pt-2 pt-xxl-0 text-center">
-								<div class="row">
-									<!-- Price -->
-									<div class="col-md-3 align-middle arrange_center">
-										{% if variant_value is not None %}
-										₱{{cart_item.product.price|add:cart_item.variant_value.price|intcomma}}
-										{% else %}
-										₱{{cart_item.product.price|intcomma}}
-										{% endif %}
-									</div>
-									<!-- Quantity -->
-									<div class="col-md-3 align-middle pt-2 pt-md-0 arrange_center">
-										<input type="number" class="form-control text-center" min="0" onfocusout="update_cart_submit(this)" data-cart-item-id="{{cart_item.id}}" value="{{cart_item.quantity}}">
-									</div>
-									<!-- Subtotal-->
-									<div class="col-md-3 align-middle pt-2 pt-md-0 arrange_center">
-										{% if variant_value is not None %}
-										₱{{cart_item.product.price|add:cart_item.variant_value.price|mul:cart_item.quantity|intcomma}}
-										{% else %}
-										₱{{cart_item.product.price|mul:cart_item.quantity|intcomma}}
-										{% endif %}
-										
-									</div>
-									<!-- Trash -->
-									<div class="col-md-2 align-middle pt-2 pt-md-0 arrange_center">
-										<button class="btn btn-sm btn-danger-soft mb-1" type="button" onclick="remove_cart_submit('{{cart_item.id}}');"><i class="far fa-fw fa-trash-alt"></i></button>
-									</div>
-								</div>
-							</div>
-						</div> <!-- Row END -->
+				<!--Cart checkout-->
+				<div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center">
+					<div class="mb-3 mb-sm-0">
+						<a href="demo-shop-products.html" class="link-hover-underline text-body"><i
+								class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
+						</a>
+					</div>
+					<div>
+						<a href="demo-shop-checkout.html" class="btn btn-primary">proceed to Checkout
+						</a>
 					</div>
 				</div>
-				{% endfor %}
-				<div class="Checkout">
-					<table id="cart" class="table table-hover table-condensed">
-						<tfoot>
-						<tr>
-							<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-							<td colspan="3" class="hidden-xs"></td>
-							<td class="hidden-xs" style="text-align:right !important;"><strong id="total_price">Total ₱{{total_price|intcomma}}</strong></td>
-							<td style="text-align: right;"><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
-						</tr>
-						</tfoot>
-					</table>
-				</div>	
+			</div>
+		</div>
+	</div>
+</section>
+<section class="border-top bg-white position-relative overflow-hidden">
+	<div class="container py-9 py-lg-11 position-relative">
+		<div class="row align-items-center">
+			<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
+				<div class="mb-3">
+					<i class="bx bx-store fs-1"></i>
+				</div>
+				<h6 class="mb-0">30 Day Returns</h6>
+			</div>
+			<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
+				<div class="mb-3">
+					<i class="bx bx-purchase-tag fs-1"></i>
+				</div>
+				<h6 class="mb-0">100% Handpicked</h6>
+			</div>
+			<div class="col-md-4 text-center">
+				<div class="mb-3">
+					<i class="bx bx-package fs-1"></i>
+				</div>
+				<h6 class="mb-0">Assured Quality</h6>
 			</div>
 		</div>
 	</div>
@@ -135,6 +175,9 @@ is_run = false;
 
 function remove_cart_submit(cart_item_id) {
 	is_run = true;
+	
+
+	$('#my-spinner').show();
 
     $.ajax({
         type : 'POST',
@@ -146,7 +189,7 @@ function remove_cart_submit(cart_item_id) {
         dataType : 'json',
         success: function(data){
 			if(data.result==200){
-				openModal("알림", data.result_text,'','reload');
+				$("#cart-div").load(" #cart-div > *");
 			}else{
 				openModal("알림", data.result_text);
 			}
@@ -156,7 +199,10 @@ function remove_cart_submit(cart_item_id) {
           var msg = "ERROR : " + request.status + "<br>"
 			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
 			    console.log(msg);
-        }
+        },
+		complete: function () {
+			$('#my-spinner').hide();
+		}
     });
 }
 
@@ -165,6 +211,8 @@ function update_cart_submit(e) {
 
 	let cart_item_id = e.dataset.cartItemId;
 	let qty = e.value;
+
+	$('#my-spinner').show();
 
     $.ajax({
         type : 'POST',
@@ -177,7 +225,7 @@ function update_cart_submit(e) {
         dataType : 'json',
         success: function(data){
 			if(data.result==200){
-				openModal("알림", data.result_text,'','reload');
+				$("#cart-div").load(" #cart-div > *");
 			}else{
 				openModal("알림", data.result_text);
 			}
@@ -187,7 +235,10 @@ function update_cart_submit(e) {
           var msg = "ERROR : " + request.status + "<br>"
 			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
 			    console.log(msg);
-        }
+        },
+		complete: function () {
+			$('#my-spinner').hide();
+		}
     });
 }
 

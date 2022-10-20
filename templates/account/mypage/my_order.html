@@ -5,180 +5,133 @@
 
 
 <!-- Section -->
-<section class="pt-0 pb-0">
-	<div class="container px-0">
-		<div class="row">
-			{% include "account/mypage/sidemenu.html" with active_tab="주문조회" %}
-			<div class="order_search_area col-lg-9">
-				<div class="row">
-					<div class="col-12">
-						<!-- Page title -->
-						<div class="my-5 newordertitle">
-							<h3>주문 조회</h3>
-						</div>
-						<!-- Table -->
-						<div class="row main_contents">
-							<div class="col-md-12">
-								<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
-									<div class="table-responsive" style="text-align: center;">
-										<table class="table">
-											<!-- Data -->
-											<tbody>
-												<tr>
-													<td class="order-tb-left">기간별</td>
-													<td colspan="3" class="  order-tb-right">
-														<button type="button" class="btn btn-outline-secondary order-tb-button">6개월</button>
-														<button type="button" class="btn btn-outline-secondary order-tb-button">1년</button>
-													</td>
-												</tr>
-												<tr>
-													<td class="order-tb-left">날짜</td>
-													<td colspan="3" class="  order-tb-right">
-														<div class="container px-1 px-sm-5 mx-auto" style="padding-left: 0 !important;">
-															<form autocomplete="off">
-																<div class="flex-sm-row flex-column d-flex">
-																	<div class="col-sm-9 col-12 px-0 mb-2">
-																		<div class="input-group input-daterange">
-																			<input type="text" class="form-control" placeholder="시작 날짜 선택" readonly>
-																			&nbsp;&nbsp;~&nbsp;&nbsp;
-																			<input type="text" class="form-control" placeholder="종료 날짜 선택" readonly>
-																		</div>
-																	</div>
-																	<div class="col-sm-3 col-12 px-0 order-tb-search">
-																		<button type="submit" class="btn btn-black">Search</button>
-																	</div>
-																</div>
-															</form>
-														</div>	
-													</td>
-												</tr>
-												<tr>
-													<td class="order-tb-left">주문 구분</td>
-													<td class="order-tb-right">
-														<input type="checkbox" value=""> 일반주문
-														<input type="checkbox" value=""> 휴대폰 주문
-													</td>
-													<td class="order-tb-left">주문 상태</td>
-													<td class="order-tb-right">
-														<select class="form-select" aria-label="Default select example">
-															<option selected>전체</option>
-															<option value="1">입금대기</option>
-															<option value="2">결제완료</option>
-															<option value="3">서비스 대기</option>
-															<option value="3">서비스 완료</option>
-														</select>
-													</td>
-												</tr>											
-												<tr>
-													<td class="order-tb-left">서비스명</td>
-													<td colspan="3" class="  order-tb-right">
-														<form class="row g-3">
-															<div class="col-auto">
-															<input type="text" size=60 maxlength=15 class="form-control"  id="inputservicename" placeholder="주문하신 서비스명을 검색하세요">
-															</div>
-															<div class="col-auto">
-															<button type="submit" class="btn btn-secondary mb-3">검색</button>
-															</div>
-														</form>
-													</td>
-												</tr>											
-											</tbody>
-										</table>
+<section class="position-relative">
+	<div class="container position-relative">
+		<!--Profile info header-->
+		<div class="position-relative pt-9 pb-9 pb-lg-11">
+			<div class="row">
+				{% include "account/mypage/sidemenu.html" with active_tab="주문 조회"%}	
+				<div class="col-lg-9">
+					<div class="d-flex flex-column">
+						<nav class="nav mb-5 nav-pills">
+							<a href="page-profile.html" class="nav-link active"> <i
+									class="bx bx-user-circle me-2"></i>주문 조회</a>
+							<a href="page-profile-settings.html" class="nav-link"><i
+									class="bx bx-cog me-2"></i>정기구독 관리</a>
+							<a href="#" class="nav-link disabled"><i
+									class="bx bx-layer me-2"></i>취소/변경</a>
+							<a href="#" class="nav-link disabled"><i
+									class="bx bx-credit-card me-2"></i>1:1 문의</a>
+							<a href="#" class="nav-link disabled"><i
+									class="bx bx-group me-2"></i>정보 수정</a>
+						</nav>
+
+						<div class="h-100">
+							<h5 class="mb-4">Profile Details</h5>
+
+							<div class="row align-items-center">
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Name</label>
+									<div class="form-control">Emily Doe
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Email address</label>
+									<div class="form-control">info@emilydoe.com</a>
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Phone</label>
+									<div class="form-control">+34 1234 567 890
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Company</label>
+									<div class="form-control">Assan inc.
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Country</label>
+									<div class="form-control">Spain
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Gender</label>
+									<div class="form-control">Male
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Date of birth</label>
+									<div class="form-control">19 August 1993</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Plan</label>
+									<div class="form-control"><span
+											class="badge px-2 bg-primary rounded-pill">Starter</span>
+									</div>
+								</div>
+								<div class="col-12 mb-3">
+									<label class="form-label">Communication</label>
+									<div>
+										<span
+											class="badge px-2 bg-light border text-dark rounded-pill">Phone</span>
+										<span
+											class="badge px-2 bg-light border text-dark rounded-pill">Email</span>
+									</div>
+								</div>
+								<div class="col-12">
+									<label class="form-label">Address</label>
+									<div class="form-control">
+										1355 Market St, Suite 900
+										San Francisco
+										CA 94103
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div> 
-				<!-- Oder list START -->
-				<div class="row">
-					<!-- Table -->
-					<div class="row">
-						<div class="col-md-12">
-							<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
-								<div class="table-responsive" style="text-align: center;">
-									<table class="table">
-										<!-- Title -->
-										<thead>
-											<tr>
-												<th scope="col">주문일/주문번호</th>
-												<th scope="col">서비스 정보</th>
-												<th scope="col">수량</th>
-												<th scope="col">주문금액</th>
-												<th scope="col">진행상태</th>
-											</tr>
-										</thead>
-										<!-- Data -->
-										<tbody>
-											<tr>
-												<td>2022/10/10</td>
-												<td>에어컨 청소</td>
-												<td>1</td>
-												<td>₱3000</td>
-												<td>
-													완료
-													<div class="mt-1">
-														<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>	
-														
-													</div>	
-												</td>
-												
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
-				<!-- Order list END -->
-			</div>	
-			<!-- Main content END -->
+			</div>
 		</div>
 	</div>
 </section>
 
 
+
 <div class="modal fade" data-bs-backdrop="static" id="reviewWriteModal" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered modal-md">
 		<div class="modal-content">
-			<div class="modal-header p-4">
-				<h4 class="mb-0 text-center">리뷰쓰기</h4>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<form name="reviewWriteForm">
-				{% csrf_token %}
-				<input type="hidden" name="order_id" value="">
-				<div class="modal-body p-4 text-center">			
-					<h5>만족하셨나요?</h5>
-					<div class="rating">
-						<input type="radio" name="rating" value="5" id="review-start-5"><label for="review-start-5">☆</label>
-						<input type="radio" name="rating" value="4" id="review-start-4"><label for="review-start-4">☆</label>
-						<input type="radio" name="rating" value="3" id="review-start-3"><label for="review-start-3">☆</label>
-						<input type="radio" name="rating" value="2" id="review-start-2"><label for="review-start-2">☆</label>
-						<input type="radio" name="rating" value="1" id="review-start-1"><label for="review-start-1">☆</label>
+			<div class="review_content">
+				<form name="reviewWriteForm">
+					{% csrf_token %}
+					<input type="hidden" name="order_id" value="">
+					<div class="modal-body p-4 text-center">			
+						<h5 class="review_title">만족하셨나요?</h5>
+						<div class="rating">
+							<input type="radio" name="rating" value="5" id="review-start-5"><label for="review-start-5">☆</label>
+							<input type="radio" name="rating" value="4" id="review-start-4"><label for="review-start-4">☆</label>
+							<input type="radio" name="rating" value="3" id="review-start-3"><label for="review-start-3">☆</label>
+							<input type="radio" name="rating" value="2" id="review-start-2"><label for="review-start-2">☆</label>
+							<input type="radio" name="rating" value="1" id="review-start-1"><label for="review-start-1">☆</label>
+						</div>
 					</div>
-				</div>
-				<div class="py-3">
-					<h5>어떤 점이 좋았나요?</h5>
-					<textarea type="text" name="review" class="form-control" rows="5"></textarea>
-				</div>	
-				<div class="upload_photo p-4 text-center">
-					<h5>사진을 첨부해주세요.</h5>
-					<div class="input-group" id="preview">
-						<input type="file" accept="image/gif, image/jpeg, image/png" class="form-control" id="inputGroupFile04" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-					</div>
-				</div>
-				<div class="review_area p-4 text-center">
-					<h5>리뷰를 작성해주세요.</h5>
-					<textarea class="form-control" style="resize:none"></textarea>		
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-primary ms-1" onclick="review_write_submit()">완료</button>
-					<button type="button" class="btn btn-primary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">취소</button>
-				</div>
+					<div class="upload_photo p-4 text-center">
+						<h5 class="review_title">사진을 첨부해주세요.</h5>
+						<div class="form-control" id="preview">
+							<input type="file" accept="image/gif, image/jpeg, image/png" class="form-control" id="inputGroupFile04" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+						</div>
 
-			</form>
+					</div>
+					<div class="review_area p-4 text-center">
+						<h5 class="review_title">리뷰를 작성해주세요.</h5>
+						<textarea class="form-control" style="resize:none"></textarea>		
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-primary ms-1" onclick="review_write_submit()">완료</button>
+						<button type="button" class="btn btn-primary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">취소</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
@@ -250,7 +203,65 @@ document.getElementById('inputGroupFile04').onchange = function() {
 	readURL(this);
 }
 
+document.getElementById('inputGroupFile04').onchange = function() {
+	let this_modal = "#gigOrderReviewModal";
+	var fileTypes = ['jpg', 'jpeg', 'png', 'gif'];  //acceptable file types
 
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var extension = input.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
+					isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
+			if (isSuccess) {         
+				var reader = new FileReader();
+				///reader.onload = function(e) {
+				///   $('.gig-image-preview').removeClass("d-none");
+				///   $('.gig-image-preview img').attr("src", e.target.result);
+				///}
+				reader.readAsDataURL(input.files[0]);
+				
+			} else {
+				document.querySelector("[id=reviewModalCloseBtn]").click();
+				openModal('알림','이미지 파일이 아닙니다.',this_modal);
+				input.value='';
+			}
+		}
+	}
+	readURL(this);
+}
+
+let fileEle = document.getElementById("inputGroupFile04");
+let preview = document.getElementById("preview");
+
+fileEle.addEventListener("change", () => {
+	const files = Array.from(fileEle.files)
+
+	files.forEach(file => {
+		var html = `
+			<p id="${file.lastModified}" class="uploded_img text-start">
+				${file.name}
+				<button data-index='${file.lastModified}' class="file-remove">X</button>
+			</p>`;
+		preview.insertAdjacentHTML("beforeend", html);
+	});
+});
+
+document.addEventListener('click', (e) => {
+	if(e.target.className !== 'file-remove') return;
+	const removeTargetId = e.target.dataset.index;
+	const removeTarget = document.getElementById(removeTargetId);
+	const files = document.querySelector('#inputGroupFile04').files;
+	const dataTranster = new DataTransfer();
+
+	Array.from(files)
+		.filter(file => file.lastModified != removeTargetId)
+		.forEach(file => {
+		dataTranster.items.add(file);
+		});
+
+	document.querySelector('#inputGroupFile04').files = dataTranster.files;
+
+	removeTarget.remove();	
+});		
 
 </script>
 {% endblock %}

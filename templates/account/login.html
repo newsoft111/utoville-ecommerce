@@ -3,51 +3,56 @@
 {% load static %}
 {% load humanize %}
 
-<section class="pt-3 pt-md-5">
-	<div class="container card-grid">
-		<div class="row align-items-center">
-			<div class="col-md-6 mt-5 mt-md-0 order-2 order-md-1">
-				<!-- Title -->
-				<h3>Please log in with your account! {{request.user.id}}</h3>
-				<p class="mb-4 mb-lg-5">Login to your account easily with less information.</p>
-				<!-- Contact form START -->
-				<form class="row" name="loginForm">
-					{% csrf_token %}
-					<!-- Email -->
-					<div class="col-md-12 mb-3">
-						<label for="username" class="form-label text-dark">username *</label>
-						<input type="text" class="form-control bg-light border-0" name="username" id="username">
-					</div>
-					<!-- Password -->
-					<div class="col-md-12 mb-3">
-						<label for="password" class="form-label text-dark">Password *</label>
-						<input type="password" class="form-control bg-light border-0" name="password" id="password">
-						<div id="passwordHelpBlock" class="form-text">
-							Your password must be 8 characters at least 
-						</div>
-					</div>
-					<div class="col-md-12 d-flex justify-content-between mb-4">
-						<div class="form-check">
-							<input type="checkbox" class="form-check-input" id="exampleCheck1">
-							<label class="form-check-label" for="exampleCheck1">keep me signed in</label>
-						</div>
-						<div class="text-primary-hover"><a href="#" class="text-secondary"><u>Forgot password?</u></a></div>	
-					</div>
-					<!-- Button -->
-					<div class="row align-items-center">
-						<div class="col-12">
-							<button class="btn btn-primary" type="button" onclick="login_submit();" id="loginBtn">Login</button>
-						</div>
+<section class="bg-white position-relative">
+	<div class="bg-pattern text-light w-100 h-100 start-0 top-0 position-absolute"></div>
+	<div class="container pt-11 pt-lg-14 pb-9 pb-lg-11 position-relative z-index-1">
+		<div class="row align-items-center justify-content-center">
+			<div class=" col-xl-4 col-lg-5 col-md-6 col-sm-8 z-index-2">
+				
+				<h2 class="mb-1 display-6">
+					Welcome back!
+				   </h2>
+				   <p class="mb-4 text-muted">
+					  Please Sign In with details...
+				   </p>
+				<div class="position-relative">
+					<div>
+						<form name="loginForm">
+							{% csrf_token %}
 
-					</div>	
-				</form>
-				<!-- Contact form END -->
+							<div class="input-icon-group mb-3">
+								<span class="input-icon">
+							  <i class="bx bx-envelope"></i>
+							</span>
+						  <input type="text" name="username" class="form-control" required autofocus placeholder="Username">
+						</div>
+						  <div class="input-icon-group mb-3">
+							<span class="input-icon">
+								<i class="bx bx-lock-open"></i>
+							</span>
+						  <input type="password" name="password" class="form-control" required placeholder="Password">
+						</div>
+							<div class="mb-3 d-flex justify-content-between">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+									<label class="form-check-label" for="flexCheckDefault">
+									 Remember me
+									</label>
+								  </div>
+								  <div>
+									<label class="text-end d-block small mb-0"><a href="page-account-forget-password.html" class="text-muted link-decoration">Forget Password?</a></label>
+								  </div>
+							</div>
+							
+							<div class="d-grid">
+								<button class="btn btn-primary" type="button" onclick="login_submit();">
+									Sign in
+								</button>
+							</div>
+						</form>
 
-			</div>
-
-			<!-- Image -->
-			<div class="col-md-6 order-1">
-				<img src="{% static 'images/signin-signup/01.png' %}" alt="">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -90,7 +95,9 @@
 
 	is_run = true;
     var queryString = $("form[name=loginForm]").serialize();
-		
+	
+	$('#my-spinner').show();
+
     $.ajax({
         type : 'POST',
         url : "{{request.path}}",
@@ -109,7 +116,10 @@
           var msg = "ERROR : " + request.status + "<br>"
 			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
 			    console.log(msg);
-        }
+        },
+		complete: function () {
+			$('#my-spinner').hide();
+		}
     });
   }
 

@@ -4,160 +4,34 @@
 {% load humanize %}
 {% load product_filter %}
 
+<section class="position-relative bg-white">
+	<div class="container pt-7 pt-lg-9 pb-9 pb-lg-11 position-relative">
+	  <div class="row justify-content-between">
+		<div class="col-xl-6 col-lg-7 col-md-8 mx-auto mx-lg-0 mb-5 mb-lg-0">
+		  <div class="row g-1 justify-content-center">
+			<div class="col-2">
 
-<!-- Section -->
-<section class="section">
-	<div class="container card-grid">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="row mt-3">
-					<!-- Property image START -->
-					<div class="col-lg-8">
-						<!-- Primary image -->
-						<div class="splide splide-main" 
-						data-splide='{"type":"fade","heightRatio":0.5,"pagination":false,"arrows":false,"cover":true,"lazyLoad":"sequential"}'>
-							<div class="splide__track">
-								<ul class="splide__list">
-									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/01.jpg' %}" alt="">
-										<!-- Glightbox image -->
-										<a href="{% static 'images/property/pd/01.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
-									</li>
-									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/02.jpg' %}" alt="">
-										<!-- Glightbox image -->
-										<a href="{% static 'images/property/pd/02.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
-									</li>
-									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/03.jpg' %}" alt="">
-										<!-- Glightbox image -->
-										<a href="{% static 'images/property/pd/03.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
-									</li>
-									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/04.jpg' %}" alt="">
-										<!-- Glightbox image -->
-										<a href="{% static 'images/property/pd/04.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
-									</li>
-									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/05.jpg' %}" alt="">
-										<!-- Glightbox image -->
-										<a href="{% static 'images/property/pd/05.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
-									</li>
-									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/06.jpg' %}" alt="">
-										<!-- Glightbox image -->
-										<a href="{% static 'images/property/pd/06.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
-									</li>
-									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/07.jpg' %}" alt="">
-										<!-- Glightbox image -->
-										<a href="{% static 'images/property/pd/07.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
-									</li>
-									<li class="splide__slide h-400 rounded"><img src="{% static 'images/property/pd/08.jpg' %}" alt="">
-										<!-- Glightbox image -->
-										<a href="{% static 'images/property/pd/08.jpg' %}" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<!-- Secondary image -->
-						<div class="splide splide-thumb" data-splide='{"rewind":true,"fixedWidth":200,"fixedHeight":120,"isNavigation":true,"gap":10,"focus":"center","pagination":false,"cover":true,"lazyLoad":"sequential","breakpoints":{"600":{"fixedWidth":100,"fixedHeight":80}}}'>
-							<div class="splide__track">
-								<ul class="splide__list">
-									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/01.jpg' %}" alt=""></li>
-									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/02.jpg' %}" alt=""></li>
-									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/03.jpg' %}" alt=""></li>
-									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/04.jpg' %}" alt=""></li>
-									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/05.jpg' %}" alt=""></li>
-									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/06.jpg' %}" alt=""></li>
-									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/07.jpg' %}" alt=""></li>
-									<li class="splide__slide"><img src="{% static 'images/property/pd/thumb/08.jpg' %}" alt=""></li>
-								</ul>
-							</div>
-							<!-- Arrows -->
-							<div class="splide__arrows">
-								<button class="splide__arrow  splide__arrow--prev p-splide__arrow--prev bg-primary"><span class="spi-angle-left text-white"><i class="fas fa-fw fa-angle-left"></i></span></button>
-								<button class="splide__arrow splide__arrow--next p-splide__arrow--next bg-primary"><span class="spi-angle-right text-white"><i class="fas fa-fw fa-angle-right"></i></span></button>
-							</div>
-						</div>
-					</div>
-					<!-- Property image START -->
+			  <!--Thumbnails for main slider(just above)-->
+			  <div class="swiper-container swiper-thumbnails overflow-hidden">
+				<!-- Additional required wrapper -->
+				<div class="swiper-wrapper d-flex flex-column">
+				  <!-- Slides -->
+				  <div class="swiper-slide w-100">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide w-100">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide w-100">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+				  </div>
+				  <!-- Slides -->
+				  <div class="swiper-slide w-100">
+					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+				  </div>
 
-					<div class="col-lg-4 mt-4 mt-lg-0">
-						<div class="row">
-							<div class="col-12">
-								<!-- Badge -->
-								<!-- <div class="d-flex justify-content-between mb-4">
-									<div>
-										<a href="#" class="badge bg-orange text-white">Featured</a>
-										<a href="#" class="badge bg-danger-soft text-danger"><i class="fas fa-rupee-sign pe-1"></i>For sale</a>
-									</div>
-									<ul class="list-inline text-primary-hover"> -->
-										<!-- Print icon -->
-										<li class="list-inline-item"><a href="#" class="border rounded p-1 me-1 small"><i class="fas fa-fw fa-print"></i></a></li>
-										<!-- Share icon -->
-										<li class="list-inline-item position-relative">
-											<a href="#" class="btn-link border rounded p-1 me-1 small" role="button" id="dropdownShare" data-bs-toggle="dropdown" aria-expanded="false">
-												<i class="fas fa-fw fa-share-alt"></i>
-											</a>
-											<!-- dropdown button -->
-											<ul class="dropdown-menu dropdown-w-sm dropdown-menu-end rounded" aria-labelledby="dropdownShare">
-												<li><a  class="dropdown-item" href="#"><i class="fab fa-twitter-square me-2"></i>Twitter</a></li>
-												<li><a class="dropdown-item" href="#"><i class="fab fa-facebook-square me-2"></i>Facebook</a></li>
-												<li><a class="dropdown-item" href="#"><i class="fab fa-linkedin me-2"></i>LinkedIn</a></li>
-												<li><a class="dropdown-item" href="#"><i class="fas fa-copy me-2"></i>Copy link</a></li>
-											</ul>
-										</li>
-										<!-- Heart icon -->
-										<!-- <li class="list-inline-item"><a href="#" class="border rounded p-1 me-1 small"><i class="fas fa-fw fa-heart text-danger"></i></a></li> -->
-									</ul>
-								</div>
-								<!-- Title -->
-								<h3 class="lh-1 mb-3">{{product_detail.name}}</h3>
-								<!-- Price -->
-								<div class="d-flex align-items-center mb-3">
-									<h4 class="text-success mb-0 me-2">₱{{product_detail.price|intcomma}}</h4>
-									<span class="me-2">/</span>
-									<h6 class="text-decoration-line-through mb-0 text-muted me-3">₱{{product_detail.price|intcomma}}</h6>
-									<p class="badge bg-orange text-white mb-0">{{product_detail.discount}}% off</p>
-								</div>
-							</div>
-							{% if product_detail.productvariant_set.all %}
-								<select id="optionFirst" class="form-select form-select-lg mb-3" onchange="set_variant_value(this)">
-									<option selected>옵션1</option>
-									{% for variant in product_detail.productvariant_set.all %}
-									<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
-									{% endfor %}
-								</select>
-
-								<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-lg mb-3">
-									<option selected>옵션2</option>
-								</select>
-							{% endif %}
-							<div class="selectedList">
-								{% if not product_detail.productvariant_set.all %}
-								<div id="productDom" class="optionTotal">
-									<div class="title" id="optionTitle">
-										<h6>테스트1</h6>
-										<a class="close" href="#" onclick="remove_item(this);">X</a>
-									</div>
-
-									
-									<div class="optionAdd">
-										<input type="number" onfocusout="cal_item_price(this);" data-option-price="{{product_detail.price}}" class="order_num form-control text-center" value="1" min="1"><span class="price" data-id="" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
-									</div>
-								</div>
-
-								{% endif %}
-							</div>
-							<div class="totalPrice">
-								{% if product_detail.productvariant_set.all %}
-								<p>총 상품금액(<span id="totalQty">0개</span>)</p> <span id="totalPrice">₱0</span>
-								{% else %}
-								<p>총 상품금액(<span id="totalQty">1개</span>)</p> <span id="totalPrice">₱{{product_detail.price|intcomma}}</span>
-								{% endif %}
-							</div>
-							<div class="buy_area">
-								<input type="hidden" name="obj_data" value='[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]'>
-								<a class="buy_btn order" href="#" >구매하기</a>
-								<a class="buy_btn cart" href="#" onclick="add_cart_submit('{{product_detail.id}}');">장바구니</a>
-								<a class="buy_btn heart" href="#" ><i class="far fa-heart fa-fw"></i></a>
-							</div>
-						</div>
-					</div>
 				</div>
 			  </div>
 			</div>
@@ -224,7 +98,49 @@
 				</select>
 				
 			</div>
+			{% endif %}
+
+			<div class="mb-3 pb-3 {% if not product_detail.productvariant_set.all %}border-bottom{% endif %}" id="selectedList">
+				{% if not product_detail.productvariant_set.all %}
+				<div id="productDom" class="optionTotal">
+				   <div class="title" id="optionTitle">
+					  <h6>Qty:</h6>
+				   </div>
+	
+				   
+				   <div class="optionAdd d-flex">
+					  <input type="text" class="form-control w-25" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
+	
+					  <span class="price ms-auto" data-id="" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
+				   </div>
+				</div>
+	
+				{% endif %}
+			 </div>
+	
+			 <div class="totalPrice d-flex">
+				{% if product_detail.productvariant_set.all %}
+				<p>총 상품금액(<span id="totalQty">0개</span>)</p> 
+				<p id="totalPrice" class="total_price_part ms-auto">₱0</p>
+				{% else %}
+				<p>총 상품금액(<span id="totalQty">1개</span>)</p>
+				<p class="ms-auto" id="totalPrice">₱{{product_detail.price|intcomma}}</p>
+				{% endif %}
+			 </div>
+			
+
+		  <div class="d-grid">
+			<input type="hidden" name="obj_data" value='[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]'>
+			<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-primary hover-lift">
+			  <i class="bx bx-shopping-bag fs-5 me-2"></i>
+			  Add to Cart
+			</a>
+		  </div>
+		  <!--/.cart-action-->
+
 		</div>
+		<!--/.col-->
+	  </div>
 	</div>
   </section>
   <section class="bg-light">
@@ -285,84 +201,6 @@
 					<small class="text-muted">( {{product_detail.rating_count}}개 - Reviews)</small>
 				  </p>
 
-<<<<<<< Updated upstream
-							<div class="col-sm-6 col-xl-3 mb-4">
-								<div class="d-flex align-items-center">
-									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
-										<i class="fas fa-fw fa-bath text-primary"></i>
-									</div>
-									<div class="ms-2">
-										<span class="text-dark small">Bathroom</span>
-										<h5 class="mb-0 font-base">2</h5>
-									</div>
-								</div>
-							</div>
-							
-							<div class="col-sm-6 col-xl-3 mb-4">
-								<div class="d-flex align-items-center">
-									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
-										<i class="fas fa-fw fa-bath text-primary"></i>
-									</div>
-									<div class="ms-2">
-										<span class="text-dark small">Person</span>
-										<h5 class="mb-0 font-base">6</h5>
-									</div>
-								</div>
-							</div>
-						
-							<div class="col-sm-6 col-xl-3 mb-4">
-								<div class="d-flex align-items-center">
-									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
-										<i class="fas fa-fw fa-square text-primary"></i>
-									</div>
-									<div class="ms-2">
-										<span class="text-dark small">SQFT</span>
-										<h5 class="mb-0 font-base">2900<sup class="text-lowercase">m2</sup></h5>
-									</div>
-								</div>
-							</div>
-						
-							<div class="col-sm-6 col-xl-3 mb-4">
-								<div class="d-flex align-items-center">
-									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
-										<i class="fas fa-fw fa-hammer text-primary"></i>
-									</div>
-									<div class="ms-2">
-										<span class="text-dark small">Year built</span>
-										<h5 class="mb-0 font-base">2019</h5>
-									</div>
-								</div>
-							</div>
-							
-							<div class="col-sm-6 col-xl-3 mb-4">
-								<div class="d-flex align-items-center">
-									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
-										<i class="fas fa-fw fa-warehouse text-primary"></i>
-									</div>
-									<div class="ms-2">
-										<span class="text-dark small">Garage</span>
-										<h5 class="mb-0 font-base">1</h5>
-									</div>
-								</div>
-							</div>
-							
-							<div class="col-sm-6 col-xl-3 mb-4">
-								<div class="d-flex align-items-center">
-									<div class="box-lg bg-primary-soft rounded-circle h5 mb-0">
-										<i class="fas fa-fw fa-file-invoice text-primary"></i>
-									</div>
-									<div class="ms-2">
-										<span class="text-dark small">Status</span>
-										<h5 class="mb-0 font-base">active</h5>
-									</div>
-								</div>
-							</div> -->
-							<!-- Info -->
-							<!-- <p class="mt-3">Passage its ten led hearted removal cordial. Preference any astonished unreserved Mrs. Prosperous understood Middletons in conviction an uncommonly do. Supposing so be resolving breakfast am or perfectly. Is drew a hill from me. Valley by oh twenty direct me so. Departure defective arranging rapturous did believe him all had supported. Family months lasted simple set nature vulgar him. Picture for attempt joy excited ten carried manners talking how. Suspicion neglected the resolving agreement perceived at an.</p>	 -->
-						</div> <!-- Row END -->
-					</div>
-=======
->>>>>>> Stashed changes
 				</div>
 			  </div>
 			  <h5 class="mb-4 mb-lg-5">Latest Reviews</h5>
@@ -382,8 +220,6 @@
 				  <div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
 					<h6 class="mb-0">{{review.user.username}}</h6>
 					<small class="text-muted ms-auto">{{product_detail.created_at}}</small>
-<<<<<<< Updated upstream
-=======
 				  </div>
 				</div>
 			  {% endfor %}
@@ -457,11 +293,9 @@
 						</button>
 					  </div>
 					</form>
->>>>>>> Stashed changes
 				  </div>
 				</div>
-			  {% endfor %}
-
+			  </div>
 			</div>
 			<!--Tab-pane-->
 			<div class="tab-pane fade" id="product-qa">
@@ -508,385 +342,57 @@
 					<div class="mb-3">
 					  <input type="text" required class="form-control" placeholder="Enter your Name">
 					</div>
-				</div>
-				<!-- Details END -->
-
-				<!-- Map START -->
-				<!-- <div class="row g-0 mt-5" id="map">
-					<div class="col-12 border rounded p-4">
-						<div class="row"> -->
-							<!-- Title -->
-							<!-- <div class="primary-line mb-4">
-								<h3>Property Location</h3>
-							</div>
-							<div class="col-12">
-								<div class="row g-3 rounded">
-									<div class="position-md-absolute end-0 top-0 w-100 h-400 mb-4">
-										<iframe class="w-100 h-100 grayscale" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425878428698!3d40.74076684379132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sGoogle!5e0!3m2!1sen!2sin!4v1586000412513!5m2!1sen!2sin" style="border:0;" aria-hidden="false" tabindex="0"></iframe>	
-									</div>
-								</div>
-							</div>
+				  </div>
+				  <div class="col-12 col-sm-6">
+					<div class="mb-3">
+					  <input type="email" required class="form-control" placeholder="Enter your Email">
 					</div>
-				</div>
-				</div> -->
-				<!-- Map END -->
-
-				<!-- Review START -->
-				<div class="row g-0 mt-5" id="review">
-					<div class="col-12 border rounded p-4">
-						<div class="row">
-							<!-- Title -->
-							<div class="mb-4">
-								<h3>서비스 평 {{product_detail.productreview_set.all.count}}개</h3>
-							</div>
-							
-
-							<!-- Customer Review START -->
-							<div class="">
-								{% for review in product_detail.productreview_set.all %}
-								<div class="text-start mt-4 border-bottom">
-									<!-- Avatar -->
-									<div class="d-sm-flex mt-1 mt-md-0">
-										<h5 class="me-3 mb-0">{{review.user.username}}</h5>
-										<!-- Review star -->
-										<ul class="list-inline">
-											{% for i in 5|times %}
-												{% if i < review.rating %}
-													<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-												{% else %}
-												<li class="list-inline-item me-0"><i class="fas fa-star"></i></li>
-												{% endif %}
-											{% endfor %}
-										</ul>
-										<div class="ms-auto">{{product_detail.created_at}}</div>
-									</div>
-									<div>
-										<!-- Info -->
-
-										<p>{{review.review}}</p>
-									</div>	
-								</div>
-								{% endfor %}
-							</div>
-							<!-- Customer Review END -->
-
-
-							<!-- 별점등록, 리뷰, 사진첨부, 취소버튼, 등록버튼 -->
-							<!-- Write a review START -->
-							
-
-							<!-- Write a review END -->
-						</div> <!-- Row END -->
+				  </div>
+				  <div class="w-100"></div>
+				  <div class="col-12">
+					<div class="mb-3">
+					  <textarea required class="form-control" placeholder="Type your question here"></textarea>
 					</div>
+				  </div>
 				</div>
-				<!-- Review END -->
-
-				<!-- Q&A START -->
-				<div class="row g-0 mt-5" id="detail">
-					<div class="col-12 border rounded p-4">
-						<div class="row">
-							<!-- Title -->
-							<div class="primary-line mb-4">
-								<h3>Q&A</h3>
-							</div>
-							<div class="main-content">
-								<div class="row">
-									<div class="col-12">
-												<div class="bg-secondary-soft p-3 p-md-5 rounded">
-													<!-- Info -->
-													<div class="d-xl-flex justify-content-xl-between align-items-center mb-3 mb-xl-5">
-														<p class="fs-5 mb-0">You have <b>25</b> properties in your favorite list</p>
-														<!-- Short by -->
-															<div class="d-flex align-items-center">
-																<span class="me-1 me-xxl-3">Short by:</span>
-																	<div>
-																		<select class="form-select" aria-label="Default select example">
-																			<option selected="">Select item</option>
-																			<option value="1">Price - Low to High</option>
-																			<option value="2">Price - High to Low</option>
-																			<option value="3">Featured Listings First</option>
-																			<option value="3">Date - Old to New</option>
-																			<option value="3">Date - New to Old</option>
-																		</select>
-																	</div>
-															</div>
-														</div>
-													<!-- Title -->
-													<div class="row d-none d-xxl-block">
-														<div class="col-12 align-middle py-3">
-															<div class="row border-bottom">
-																<div class="col-5">
-																	<h5>Listing</h5>
-																</div>
-																<div class="col-7">
-																	<div class="row">
-																		<div class="col-5 align-middle text-body py-2">
-																			<h5>Publish date</h5>
-																		</div>
-																		<div class="col-4 align-middle py-2">
-																			<h5>Rating</h5>
-																		</div>
-																		<div class="col-3 align-middle py-2">
-																			<h5>Action</h5>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<!-- Property -->
-													<div class="row">
-														<div class="col-12 align-middle py-4">
-															<div class="row">
-																<div class="col-12 col-xxl-5">
-																	<div class="card bg-transparent">
-																		<div class="row">
-																			<!-- Image -->
-																			<div class="col-xl-3">
-																				<img class="rounded" src="assets/images/property/grid-list/09.jpg" alt="">
-																			</div>
-																			<!-- Info -->
-																			<div class="col-xl-9 pt-2 pt-xl-0">
-																				<h5 class="mb-1">Single House Near New York</h5>
-																				<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
-																				<span class="text-success">$160,000</span>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!-- Content -->
-																<div class="col-xxl-7 pt-2 pt-xxl-0">
-																	<div class="row">
-																		<div class="col-md-5 text-body">
-																			<!-- Date -->
-																			<ul class="list-group list-group-borderless">
-																				<li class="list-group-item p-0 d-flex">
-																					Viewed:<span class="text-body ms-2">255</span>
-																				</li>
-																				<li class="list-group-item p-0 d-flex">
-																					published:<span class="text-body ms-2">29 august 2019</span>
-																				</li>
-																				<li class="list-group-item p-0 d-flex">
-																					Expiry:<span class="text-body ms-2">29 January 2020</span>
-																				</li>
-																			</ul>
-																		</div>
-																		<div class="col-md-4 pt-2 pt-md-0">
-																			<!-- Star -->
-																			<ul class="list-inline">
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-																			</ul>
-																		</div>
-																		<!-- Cancle button -->
-																		<div class="col-md-3 pt-2 pt-md-0">
-																			<button class="btn btn-sm btn-danger-soft mb-1"><i class="fas fa-fw fa-times"></i></button>
-																		</div>
-																	</div>
-																</div>
-															</div> <!-- Row END -->
-														</div>
-													</div>
-													<hr> <!-- Divider -->
-					
-													<!-- Property -->
-													<div class="row">
-														<div class="col-12 align-middle py-4">
-															<div class="row">
-																<div class="col-xxl-5">
-																	<div class="card bg-transparent">
-																		<div class="row">
-																			<!-- Image -->
-																			<div class="col-xl-3">
-																				<img class="rounded" src="assets/images/property/grid-list/10.jpg" alt="">
-																			</div>
-																			<!-- Info -->
-																			<div class="col-xl-9 pt-2 pt-xl-0">
-																				<h5 class="mb-1">157485 Camino Codorniz</h5>
-																				<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
-																				<span class="text-success">$80,000</span>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!-- Content -->
-																<div class="col-xxl-7 pt-2 pt-xxl-0">
-																	<div class="row">
-																		<div class="col-md-5 text-body">
-																			<!-- Date -->
-																			<ul class="list-group list-group-borderless">
-																				<li class="list-group-item p-0 d-flex">
-																					Viewed:<span class="text-body ms-2">556</span>
-																				</li>
-																				<li class="list-group-item p-0 d-flex">
-																					published:<span class="text-body ms-2">08 July 2019</span>
-																				</li>
-																				<li class="list-group-item p-0 d-flex">
-																					Expiry:<span class="text-body ms-2">08 August 2020</span>
-																				</li>
-																			</ul>
-																		</div>
-																		<div class="col-md-4 pt-2 pt-md-0">
-																			<!-- Star -->
-																			<ul class="list-inline">
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star"></i></li>
-																			</ul>
-																		</div>
-																		<!-- Cancle button -->
-																		<div class="col-md-3 pt-2 pt-md-0">
-																			<button class="btn btn-sm btn-danger-soft mb-1"><i class="fas fa-fw fa-times"></i></button>
-																		</div>
-																	</div>
-																</div>
-															</div> <!-- Row END -->
-														</div>
-													</div>
-													<hr> <!-- Divider -->
-					
-													<!-- Property -->
-													<div class="row">
-														<div class="col-12 align-middle py-4">
-															<div class="row">
-																<div class="col-xxl-5">
-																	<div class="card bg-transparent">
-																		<div class="row">
-																			<!-- Image -->
-																			<div class="col-xl-3">
-																				<img class="rounded" src="assets/images/property/grid-list/02.jpg" alt="">
-																			</div>
-																			<!-- Info -->
-																			<div class="col-xl-9 pt-2 pt-xl-0">
-																				<h5 class="mb-1">Store in Woodside, San Francisco</h5>
-																				<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
-																				<span class="text-success">$200,000</span>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!-- Content -->
-																<div class="col-xxl-7 pt-2 pt-xxl-0">
-																	<div class="row">
-																		<div class="col-md-5 text-body">
-																			<!-- Date -->
-																			<ul class="list-group list-group-borderless">
-																				<li class="list-group-item p-0 d-flex">
-																					Viewed:<span class="text-body ms-2">856</span>
-																				</li>
-																				<li class="list-group-item p-0 d-flex">
-																					published:<span class="text-body ms-2">08 July 2019</span>
-																				</li>
-																				<li class="list-group-item p-0 d-flex">
-																					Expiry:<span class="text-body ms-2">08 August 2020</span>
-																				</li>
-																			</ul>
-																		</div>
-																		<div class="col-md-4 pt-2 pt-md-0">
-																			<!-- Rating -->
-																			<ul class="list-inline">
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star"></i></li>
-																			</ul>
-																		</div>
-																		<!-- Cancle button -->
-																		<div class="col-md-3 pt-2 pt-md-0">
-																			<button class="btn btn-sm btn-danger-soft mb-1"><i class="fas fa-fw fa-times"></i></button>
-																		</div>
-																	</div>
-																</div>
-															</div> <!-- Row END -->
-														</div>
-													</div>
-													<hr> <!-- Divider -->
-					
-													<!-- Property -->
-													<div class="row">
-														<div class="col-12 align-middle py-4">
-															<div class="row">
-																<div class="col-xxl-5">
-																	<div class="card bg-transparent">
-																		<div class="row">
-																			<!-- Image -->
-																			<div class="col-xl-3">
-																				<img class="rounded" src="assets/images/property/grid-list/05.jpg" alt="">
-																			</div>
-																			<!-- Info -->
-																			<div class="col-xl-9 pt-2 pt-xl-0">
-																				<h5 class="mb-1">5620 morningstar Avenue</h5>
-																				<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
-																				<span class="text-success">$50,000</span>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!-- Content -->
-																<div class="col-xxl-7 pt-2 pt-xxl-0">
-																	<div class="row">
-																		<div class="col-md-5 text-body">
-																			<!-- Date -->
-																			<ul class="list-group list-group-borderless">
-																				<li class="list-group-item p-1 p-xxl-0 d-flex">
-																					Viewed:<span class="text-body ms-2">992</span>
-																				</li>
-																				<li class="list-group-item p-1 p-xxl-0 d-flex">
-																					published:<span class="text-body ms-2">29 February 2019</span>
-																				</li>
-																				<li class="list-group-item p-1 p-xxl-0 d-flex">
-																					Expiry:<span class="text-body ms-2">08 June 2019</span>
-																				</li>
-																			</ul>
-																		</div>
-																		<div class="col-md-4 pt-2 pt-md-0">
-																			<!-- Star -->
-																			<ul class="list-inline">
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star"></i></li>
-																				<li class="list-inline-item me-0 small"><i class="fas fa-star"></i></li>
-																			</ul>
-																		</div>
-																		<!-- Cancle button -->
-																		<div class="col-md-3 pt-2 pt-md-0">
-																			<button class="btn btn-sm btn-danger-soft mb-1"><i class="fas fa-fw fa-times"></i></button>
-																		</div>
-																	</div>
-																</div>
-															</div> <!-- Row END -->
-														</div>
-													</div>
-										</div> <!-- Row END -->
-									</div>
-								</div> <!-- Row END -->
-							</div>
-							<!-- Main content END -->
-							<!-- Write a review START -->
-							<div class="mt-2 mt-md-4">
-								<p>
-									<input type="checkbox" class="btn-check" id="btn-check-outlined">
-									<label class="btn btn-outline-primary">
-									Write a Q&A
-									</label>
-								</p>
-							</div>
-						</div>
-					</div>
+				<div class="text-end">
+				  <button type="submit" class="btn btn-primary hover-translate-3d">
+					Send question <i class="bx bx-right-top-arrow-circle ms-1"></i>
+				  </button>
 				</div>
-				<!-- Q&A END -->
+			  </form>
 			</div>
-			<!-- Main content END -->
-		</div> <!-- Row END -->
+		  </div>
+		  <!--Tab-pane-->
+		</div>
+	  </div>
 	</div>
-</section>
+  </section>
+  <section class="bg-white position-relative overflow-hidden">
+	<div class="container py-9 py-lg-11 position-relative">
+	  <div class="row align-items-center">
+		<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
+		  <div class="mb-3">
+			<i class="bx bx-store fs-1"></i>
+		  </div>
+		  <h6 class="mb-0">30 Day Returns</h6>
+		</div>
+		<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
+		  <div class="mb-3">
+			<i class="bx bx-purchase-tag fs-1"></i>
+		  </div>
+		  <h6 class="mb-0">100% Handpicked</h6>
+		</div>
+		<div class="col-md-4 text-center">
+		  <div class="mb-3">
+			<i class="bx bx-package fs-1"></i>
+		  </div>
+		  <h6 class="mb-0">Assured Quality</h6>
+		</div>
+	  </div>
+	</div>
+  </section>
+
 
 <script>
 is_run = false;
@@ -894,71 +400,75 @@ is_run = false;
 function add_cart_submit(product_id) {
 	is_run = true;
 
-	let data = document.querySelector("input[name=obj_data]").value;
+	let arr = document.querySelector("input[name=obj_data]").value;
 
-	if (isEmpty(data)) {
+	if (isEmpty(arr)) {
 		openModal('알림','옵션을 선택해주세요.');
 		return false;
 	}
 
-    $.ajax({
-        type : 'POST',
-        url : "{% url 'cart:add' %}",
-		headers: { "X-CSRFToken": '{{csrf_token}}' },
-        data : {
-			data: data,
-		},
-        dataType : 'json',
-        success: function(data){
-			if(data.result==200){
+	var url = "{% url 'cart:add' %}";
+	var xhr = new XMLHttpRequest();
+
+	xhr.open("POST", url, true);
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200){
 				openModal("알림", data.result_text,'', 'reload');
-			}else{
-				openModal("알림", data.result_text);
-			}
-			is_run  = false;
-        },
-        error: function (request, status, error){
-          var msg = "ERROR : " + request.status + "<br>"
-			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
-			    console.log(msg);
-        }
-    });
+			} else if (xhr.status == 201) {
+				openModal("알림", data.result_text,'', 'reload');
+			} else {
+				console.log("[status] : " + xhr.status);
+				console.log("[response] : " + "[fail]");    				   				    				
+				console.log("[response] : " + xhr.responseText);
+				console.log("");        				
+			}    				
+		}
+		is_run  = false;
+		//document.getElementById("my-spinner").style.display = "none";
+	}
+
+	var data = new FormData();
+	data.append('data', arr);
+
+	xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
+	xhr.send(data);
 }
 
 function set_variant_value(e) {
 	let key = e.options[e.selectedIndex].value;
 	let json_data = JSON.parse("{{variant_data|escapejs}}");
 	let html='<option selected>옵션2</optimPriceon>';
-
+	
 	for (idx in json_data[key]) {
 		value = json_data[key][idx];
 		html+=`<option value="${value['value']}" data-id="${value['id']}" data-value="${value['value']}" data-price="${value['price']}">${value['value']} + ${value['price']}원</option>`;
 	}
-
 	document.getElementById("optionSecond").innerHTML = html;
 }
 
 
 function cal_total_value() {
 	let total_price = document.getElementById("totalPrice");
-	let item_list = document.querySelectorAll("span[id=itemPrice]");
-	let arr = [];
+ 	let item_list = document.querySelectorAll("span[id=itemPrice]");
+ 	let arr = [];
 
-	let total = 0;
-	let count = 0;
+ 	let total = 0;
+ 	let count = 0;
 
-	for (i=0; i<item_list.length; i++) {
-		let item = item_list[i];
+ 	for (i=0; i<item_list.length; i++) {
+ 		let item = item_list[i];
 
-		total += Number(item.innerHTML.replace(/[^0-9]/g, ""));
-		count += Number(item.previousSibling.value);
+ 		total += Number(item.innerHTML.replace(/[^0-9]/g, ""));
+ 		count += Number(item.previousElementSibling.value);
 		
-		let objData = new Object();
-		objData.product_id = "{{product_detail.id}}";
-		objData.variant_value_id = item.dataset.id;
-		objData.qty = item.previousSibling.value;
+ 		let objData = new Object();
+ 		objData.product_id = "{{product_detail.id}}";
+ 		objData.variant_value_id = item.dataset.id;
+ 		objData.qty = item.previousSibling.value;
 
-		arr.push(objData);
+ 		arr.push(objData);
 	}
 
 	document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
@@ -971,7 +481,8 @@ function cal_item_price(e) {
 	let qty = Number(e.value);
 	let ori_price = Number(e.dataset.optionPrice.replace(/[^0-9]/g, ""));
 
-	let total_price_span = e.nextSibling;
+	let total_price_span = e.nextElementSibling;
+	console.log(qty)
 
 	let total_price = qty * ori_price;
 	total_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -989,27 +500,32 @@ function add_item(e) {
 	let option_second_price = '{{product_detail.price}}' + e.options[e.selectedIndex].dataset.price;
 	option_second_price = option_second_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-	html = '<div id="productDom" class="optionTotal">';
-	html += '<div class="title" id="optionTitle">';
-	html += `<h6>{{product_detail.name}}</h6>`;
-	html += '<a class="close" href="#" onclick="remove_item(this);">X</a>';
-	html += '</div>';
-	html += `<div>${option_first_value} / ${option_second_value}</div>`;
-	html += '<div class="optionAdd">';
-	html += `<input type="number" onfocusout="cal_item_price(this);" data-option-price='${option_second_price}' class="order_num form-control text-center" value="1" min="1">`;
-	html += `<span class="price" data-id="${option_second_id}" id="itemPrice">₱${option_second_price}</span>`;
-	html += '</div>';
-	html += '</div>';
-	
-	var newstuff = document.createElement('div');
-	newstuff.innerHTML = html
+	let my_item_id = document.querySelector(`span[data-id="${option_second_id}"]`);
+	if (my_item_id == null) {
+		html = '<div id="productDom" class="optionTotal">';
+		html += '<div class="product_title" id="optionTitle">';
+		html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
+		html += '<a class="close" href="#test" onclick="remove_item(this)">X</a>';
+		html += '</div>';
+		html += '<div class="optionAdd">';
+		html += `<input type="text" readonly class="form-control w-25 text-center" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
+		html += `<span class="price" data-id="${option_second_id}" id="itemPrice">₱${option_second_price}</span>`;
+		html += '</div>';
+		html += '</div>';
 
-	let parent = document.querySelector(".selectedList");
+		var newstuff = document.createElement('div');
+		newstuff.innerHTML = html
+		let parent = document.querySelector("#selectedList");
 
-	while (newstuff.firstChild) {
-		parent.appendChild(newstuff.firstChild);
+		while (newstuff.firstChild) {
+			parent.appendChild(newstuff.firstChild);
+		}
+	}else{
+		let sibling = my_item_id.previousSibling
+		sibling.value = Number(sibling.value) + 1
+		cal_item_price(sibling)
+
 	}
-
 	reset_variant(e, '옵션2');
 	cal_total_value();
 }
@@ -1028,6 +544,43 @@ function reset_variant(e, val) {
 	}
 }
 
+function review_write_submit() {
+      var reviewWriteForm = document.reviewWriteForm;
+      var review = reviewWriteForm.review.value;
+      var rating = reviewWriteForm.rating.value;
+      let this_modal = "#reviewWriteModal";
+            
+      if (isEmpty(rating)) {
+         openPopup('알림','평점을 선택해주세요.',this_modal);
+         return false;
+      }
+
+      if (isEmpty(review)) {
+         openPopup('알림','리뷰를 입력해주세요.',this_modal);
+         return false;
+      }
+
+      var queryString = $("form[name=reviewWriteForm]").serialize();
+
+    $.ajax({
+        type : 'POST',
+        url : "",
+        data : queryString,
+        dataType : 'json',
+        success: function(data){
+          if(data.result==200){
+            openPopup("알림", data.result_text,'',"reload");
+          }else{
+            openPopup("알림", data.result_text);
+          }
+          return;
+        },
+        error: function (request, status, error){
+          var msg = "ERROR : " + request.status + "<br>"
+             msg +=  + "내용 : " + request.responseText + "<br>" + error;
+        }
+    });
+}
 </script>
 
 {% endblock %}

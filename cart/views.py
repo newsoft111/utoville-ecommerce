@@ -49,8 +49,8 @@ def get_cart_info(request):
 
 def add_cart(request):
 	cart = get_user_cart(request)
-
 	item_list = json.loads(request.POST.get('data'))
+
 	for item in item_list:
 
 		product = Product.objects.get(pk=item["product_id"])
@@ -87,8 +87,11 @@ def remove_cart(request):
 
 	cart_item_id=request.POST.getlist('cart_item_id[]')
 
-	cart_item = CartItem.objects.filter(pk__in=cart_item_id, cart=cart)
-	cart_item.delete()
+	cart_items = CartItem.objects.filter(pk__in=cart_item_id, cart=cart)
+	for cart_item in cart_items:
+		cart_item.is_deleted = True
+		cart_item.deleted_at = datetime.now()
+		cart_item.save()
 	
 	result = '200'
 	result_text = '장바구니 삭제함.'

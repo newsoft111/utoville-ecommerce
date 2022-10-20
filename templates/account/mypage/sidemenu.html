@@ -1,73 +1,39 @@
-<div class="mypage_sidebar col-lg-3 bg-light">
-	<div class="p-3">
-		<h2 class="mb-5">My Page</h2>
-		<ul class="newsidebar p-0">
-			<li class="nav-item">
-				<a href="#" class="nav-link link-dark my-4 {% if active_tab == '주문 조회' %}active{% endif %}" aria-current="page">
-					<i class="fa-solid fa-house-user"></i>
-					주문 조회
-				</a>
-			</li>
-			<li>
-				<a href="#" class="nav-link link-dark my-4">
-					<i class="fa-solid fa-calendar-days"></i>
-					정기구독 관리
-				</a>
-			</li>
-			<li>
-				<a href="#" class="nav-link link-dark my-4">
-					<i class="fa-solid fa-arrow-right-arrow-left"></i>
-					취소/변경
-				</a>
-			</li>
-			<li>
-				<a href="#" class="nav-link link-dark my-4">
-					<i class="fa-brands fa-wirsindhandwerk"></i>
-					1:1 문의
-				</a>
-			</li>
-			<li>
-				<a href="#" class="nav-link link-dark my-4">
-					<i class="fa-solid fa-user"></i>
-					정보 수정
-				</a>
-			</li>
-		</ul>
+<div class="col-lg-3 mb-5 mb-lg-0">
+	<div class="mt-lg-n16 position-relative z-index-1">
+		<div class="card shadow p-3">
+			<div>
+				<!--profile image-->
+				<div class="width-15x height-15x mb-5 rounded-circle shadow bg-no-repat overflow-hidden bg-contain"
+					style="background-image: url(assets/img/avatar/4.jpg);">
+				</div>
+				<h4 class="mb-2">Emily Doe</h4>
+				<small class="d-block mb-3">Senior Software developer</small>
+				<ul class="list-group list-group-flush mb-0">
+					<li class="list-group-item px-0">
+						<i class="bx bx-check fs-5 lh-1 text-success me-2 align-middle"></i>
+						<a href="#!" class="small link-hover-decoration">주문 조회</a>
+					</li>
+					<li class="list-group-item px-0">
+						<i class="bx bx-globe me-2 align-middle text-muted"></i>
+						<a href="#!" class="small link-hover-decoration">정기구독 관리</a>
+					</li>
+					<li class="list-group-item px-0">
+						<i class="bx bxl-twitter me-2 align-middle text-muted"></i>
+						<a href="#!" class="small link-hover-decoration">서비스 취소신청</a>
+					</li>
+					<li class="list-group-item px-0">
+						<i class="bx bxl-linkedin me-2 align-middle text-muted"></i>
+						<a href="#!" class="small link-hover-decoration">1:1 문의</a>
+					</li>
+					<li class="list-group-item px-0">
+						<i class="bx bxl-instagram me-2 align-middle text-muted"></i>
+						<a href="#!" class="small link-hover-decoration">정보 수정</a>
+					</li>
+				</ul>
+				<div class="d-grid pt-3">
+					<button class="btn btn-primary shadow-sm py-1" type="button"><i class="bx bx-envelope me-2 lh-1"></i>Message</button>
+				</div>	
+			</div>
+		</div>
 	</div>
 </div>
-
-<!-- Responsive Sidebar START -->
-<nav id="navbar-example2" class="navbar navbar-dark bg-light rounded resp_sidebar">
-	<ul class="nav p-2" style="justify-content: space-evenly;">
-		<!-- Dropdown item -->
-		<li>
-			<a class="order-nav-link" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				주문조회
-			</a>
-		</li>
-			<!-- Dropdown item -->
-		<li>
-			<a class="order-nav-link" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				정기구독 관리
-			</a>
-		</li>
-			<!-- Dropdown item -->
-		<li>
-			<a class="order-nav-link" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-			취소/교환/환불
-			</a>
-		</li>
-			<!-- Dropdown item -->
-		<li>
-			<a class="order-nav-link" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				1:1 문의
-			</a>
-		</li>
-			<!-- Dropdown item -->
-		<li>
-			<a class="order-nav-link" href="#" id="navbarDropdown6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				정보 수정
-			</a>
-		</li>
-	</ul>
-</nav>
