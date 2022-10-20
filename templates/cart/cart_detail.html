@@ -47,13 +47,13 @@
 					<table class="table table-striped align-middle">
 						<thead>
 							<tr>
-								<th></th>
-								<th class="small text-muted" style="width:5%">
-									<div style="min-width:180px" style="width:30%">Product</div>
+								<th style="width:15%"></th>
+								<th class="small text-muted">
+									<div style="min-width:280px">Product</div>
 								</th>
-								<th class="small text-muted">Price</th>
-								<th class="small text-muted" style="width:10%">Quantity</th>
-								<th class="small text-muted">Subtotal</th>
+								<th class="small text-muted" style="width:15%">Price</th>
+								<th class="small text-muted" style="width:20%">Quantity</th>
+								<th class="small text-muted" style="width:15%">Subtotal</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -133,7 +133,7 @@
 				<!--Cart checkout-->
 				<div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center">
 					<div class="mb-3 mb-sm-0">
-						<a href="demo-shop-products.html" class="link-hover-underline text-body"><i
+						<a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
 								class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
 						</a>
 					</div>
