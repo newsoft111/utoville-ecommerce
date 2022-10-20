@@ -1,4 +1,11 @@
-function isEmpty(str){
+$(document).ready(function() {
+	// a href='#' 클릭 무시 스크립트
+	$('a[href="#"]').click(function(ignore) {
+	   ignore.preventDefault();
+	});
+ });
+ 
+ function isEmpty(str){
 		  
 	if(typeof str == "undefined" || str == null || str == "")
 		  return true;
@@ -7,23 +14,23 @@ function isEmpty(str){
  }
  
  function openModal(subject, content, before_modal, option) {
-	document.querySelector("[id=modal_subject]").innerHTML = subject;
-	document.querySelector("[id=modal_content]").innerHTML = content;
+	$("#modal_subject").text(subject);
+	$("#modal_content").html(content);
 	if (!isEmpty(before_modal)) {
 	   $('#closeModalBtn').attr('data-before-modal',before_modal);
 	}
 	if (option == 'reload') {
-	   document.querySelectorAll('closeModalBtn').forEach(function(close_btn) {
+	   document.querySelectorAll('#closeModalBtn').forEach(function(close_btn) {
 		  close_btn.setAttribute( "onClick", "window.location.reload();" );
 	   });
 	} else if (option == 'back') {
-	   document.querySelectorAll('closeModalBtn').forEach(function(close_btn) {
+	   document.querySelectorAll('#closeModalBtn').forEach(function(close_btn) {
 		  close_btn.setAttribute( "onClick", "history.back();" );
 	   });
 	} else if (isEmpty(option)) {
 	   console.log('ok');
 	} else {
-	   document.querySelectorAll('closeModalBtn').forEach(function(close_btn) {
+	   document.querySelectorAll('#closeModalBtn').forEach(function(close_btn) {
 		  close_btn.setAttribute( "onClick", `${option}` );
 	   });
 	}
@@ -33,18 +40,14 @@ function isEmpty(str){
  }
  
 function closeModal() {
-	var before_modal = document.querySelector('[id=closeModalBtn]').dataset.beforeModal;
-	document.querySelector("[id=modal_subject]").innerHTML = '';
-	document.querySelector("[id=modal_content]").innerHTML = '';
-	if (!isEmpty(before_modal)) {
-		before_modal = new bootstrap.Modal(document.querySelector('before_modal'));
-		before_modal.show();
+	var before_modal = $('#closeModalBtn').attr('data-before-modal');
+	$("#modal_subject").text('');
+	$("#modal_content").html('');
+	if (before_modal) {
+		$(before_modal).modal('show');
 	}
 	
-	document.querySelector('[id=closeModalBtn]').dataset.beforeModal = '';
+	$('#closeModalBtn').attr('data-before-modal','');
 	var modal = new bootstrap.Modal(document.getElementById('globalModal'));
 	modal.hide();
 }
-
-
-

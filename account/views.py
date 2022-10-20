@@ -132,7 +132,7 @@ def join_confirm(request, uidb64, token):
 
 def re_verify(request):
 	if request.user.is_authenticated:
-		HttpResponseRedirect(resolve_url('main:index'))
+		return HttpResponseRedirect(resolve_url('main:index'))
 	if request.method == 'POST':
 		email=request.POST.get('email')
 
@@ -159,7 +159,7 @@ def find_passwd(request):
 		'title': "비밀번호 재설정 - 유토빌",
 	}
 	if request.user.is_authenticated: #로그인 상태면
-		HttpResponseRedirect(resolve_url('main:index'))
+		return HttpResponseRedirect(resolve_url('main:index'))
 	if request.method == 'POST':
 		email = request.POST.get('email')
 		try:

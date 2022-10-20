@@ -6,81 +6,77 @@
 
 <section class="position-relative bg-white">
 	<div class="container pt-7 pt-lg-9 pb-9 pb-lg-11 position-relative">
-	  <div class="row justify-content-between">
-		<div class="col-xl-6 col-lg-7 col-md-8 mx-auto mx-lg-0 mb-5 mb-lg-0">
-		  <div class="row g-1 justify-content-center">
-			<div class="col-2">
+	  	<div class="row justify-content-between">
+			<div class="col-xl-6 col-lg-7 col-md-8 mx-auto mx-lg-0 mb-5 mb-lg-0">
+		  		<div class="row g-1 justify-content-center">
+					<div class="col-2">
 
-			  <!--Thumbnails for main slider(just above)-->
-			  <div class="swiper-container swiper-thumbnails overflow-hidden">
-				<!-- Additional required wrapper -->
-				<div class="swiper-wrapper d-flex flex-column">
-				  <!-- Slides -->
-				  <div class="swiper-slide w-100">
-					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
-				  </div>
-				  <!-- Slides -->
-				  <div class="swiper-slide w-100">
-					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
-				  </div>
-				  <!-- Slides -->
-				  <div class="swiper-slide w-100">
-					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
-				  </div>
-				  <!-- Slides -->
-				  <div class="swiper-slide w-100">
-					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
-				  </div>
+						<!--Thumbnails for main slider(just above)-->
+						<div class="swiper-container swiper-thumbnails overflow-hidden">
+							<!-- Additional required wrapper -->
+							<div class="swiper-wrapper d-flex flex-column">
+								<div class="swiper-slide w-100">
+									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+								</div>
+								<div class="swiper-slide w-100">
+									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+								</div>
+								<div class="swiper-slide w-100">
+									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+								</div>
+								<div class="swiper-slide w-100">
+									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+								</div>
 
-				</div>
-			  </div>
+							</div>
+			  			</div>
+					</div>
+
+					<div class="col-10">
+					<!--Thumbnails main slider-->
+						<div class="swiper-container overflow-hidden position-relative swiper-thumbnails-main">
+							<!-- Additional required wrapper -->
+							<div class="swiper-wrapper">
+							<!-- Slides -->
+								<div class="swiper-slide">
+									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+								</div>
+								<!-- Slides -->
+								<div class="swiper-slide">
+									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+								</div>
+								<!-- Slides -->
+								<div class="swiper-slide">
+									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+								</div>
+								<!-- Slides -->
+								<div class="swiper-slide">
+									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+								</div>
+							</div>
+								<!-- Swiper Navigation buttons (Remove it if you have to) -->
+							<div class="swiper-button-prev swiperThumb-prev text-white bg-dark"></div>
+							<div class="swiper-button-next  swiperThumb-next text-white bg-dark"></div>
+						</div>
+					</div>
+		  		</div>
 			</div>
-			<div class="col-10">
-			  <!--Thumbnails main slider-->
-			  <div class="swiper-container overflow-hidden position-relative swiper-thumbnails-main">
-				<!-- Additional required wrapper -->
-				<div class="swiper-wrapper">
-				  <!-- Slides -->
-				  <div class="swiper-slide">
-					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
-				  </div>
-				  <!-- Slides -->
-				  <div class="swiper-slide">
-					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
-				  </div>
-				  <!-- Slides -->
-				  <div class="swiper-slide">
-					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
-				  </div>
-				  <!-- Slides -->
-				  <div class="swiper-slide">
-					<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
-				  </div>
-				</div>
-				<!-- Swiper Navigation buttons (Remove it if you have to) -->
-				<div class="swiper-button-prev swiperThumb-prev text-white bg-dark">
-				</div>
-				<div class="swiper-button-next  swiperThumb-next text-white bg-dark">
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
-		<!--/.col-->
-		<div class="col-md-8 mx-auto col-lg-5 ms-xl-auto">		  
+
+			<!--/.col-->
+			<div class="col-md-8 mx-auto col-lg-5 ms-xl-auto">		  
 		  <!-- Product Description -->
-		  <div class="mb-3 pb-3 border-bottom">
-			<div class="mb-3">
-			  <h2 class="mb-4 display-4">{{product_detail.name}}</h2>
-			  <div class="d-flex justify-content-between align-items-center">
-				<div>
-				  <p class="fs-5 mb-0">₱{{product_detail.price|intcomma}}</p>
+			<div class="mb-3 pb-3 border-bottom">
+				<div class="mb-3">
+				<h2 class="mb-4 display-4">{{product_detail.name}}</h2>
+					<div class="d-flex justify-content-between align-items-center">
+						<div>
+							<p class="fs-5 mb-0">₱{{product_detail.price|intcomma}}</p>
+						</div>
+					</div>
 				</div>
-			  </div>
+				<p class="mb-4">Lorem ipsum dolor sit amet adipiscing euismod tincidunt
+				laoreet dolore magna aliquam erat volutpat.</p>
 			</div>
-			<p class="mb-4">Lorem ipsum dolor sit amet adipiscing euismod tincidunt
-			  laoreet dolore magna aliquam erat volutpat.</p>
-		  </div>
 
 		  	{% if product_detail.productvariant_set.all %}
 		  	<div class="mb-3 pb-3 border-bottom">
@@ -102,9 +98,9 @@
 			<div class="mb-3 pb-3 {% if not product_detail.productvariant_set.all %}border-bottom{% endif %}" id="selectedList">
 				{% if not product_detail.productvariant_set.all %}
 				<div id="productDom" class="optionTotal">
-				   <div class="title" id="optionTitle">
+				   	<div class="title" id="optionTitle">
 					  <h6>Qty:</h6>
-				   </div>
+				   	</div>
 	
 				   
 				   <div class="optionAdd d-flex">
@@ -128,245 +124,140 @@
 			 </div>
 			
 
-		  <div class="d-grid">
-			<input type="hidden" name="obj_data" value='[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]'>
-			<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-primary hover-lift">
-			  <i class="bx bx-shopping-bag fs-5 me-2"></i>
-			  Add to Cart
-			</a>
-		  </div>
-		  <!--/.cart-action-->
-
+			<div class="d-grid">
+				<input type="hidden" name="obj_data" value='[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]'>
+				<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-primary hover-lift">
+				<i class="bx bx-shopping-bag fs-5 me-2"></i>
+				Add to Cart
+				</a>
+			</div>
 		</div>
-		<!--/.col-->
-	  </div>
 	</div>
-  </section>
-  <section class="bg-light">
+</section>
+
+<section class="bg-light">
 	<div class="container py-9 py-lg-11">
-	  <div class="row justify-content-center">
-		<div class="col-lg-9 mb-5">
-		  <nav class="nav nav-tabs">
-			<a href="#detail" class="nav-link active" data-bs-toggle="tab" aria-haspopup="false"
-			  aria-expanded="true">
-			  Detail
-			</a>
-			<a href="#information" class="nav-link" data-bs-toggle="tab" aria-haspopup="false"
-			  aria-expanded="false">
-			  Information
-			</a>
-			<a href="#reviews" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">
-			  Reviews
-			</a>
-			<a href="#product-qa" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">
-			  Q&amp;A
-			</a>
-		  </nav>
-		</div>
-		<!--/.col-->
-		<div class="col-lg-9 col-md-8">
-		  <div class="tab-content">
-			<div class="tab-pane fade active show" id="detail">
-				{{product_detail.content|safe}}
+	  	<div class="row justify-content-center">
+			<div class="col-lg-9 mb-5">
+		  		<nav class="nav nav-tabs">
+					<a href="#detail" class="nav-link active" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="true">Detail</a>
+					<a href="#information" class="nav-link" data-bs-toggle="tab" aria-haspopup="false"aria-expanded="false">Information</a>
+					<a href="#reviews" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">Reviews</a>
+					<a href="#product-qa" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">Q&amp;A</a>
+		  		</nav>
 			</div>
-			<!--Tab-pane-->
-			<div class="tab-pane fade" id="information">
-			  <ul class="list-group list-group-flush">
-				<li class="list-group-item bg-transparent px-0 py-3">MATERIAL: 100% POLYESTER
-				</li>
-				<li class="list-group-item bg-transparent px-0 py-3">Durable water repellent to
-				  protect against light drizzles</li>
-				<li class="list-group-item bg-transparent px-0 py-3">Insulated quilted vest to
-				  protect in light winters
-				</li>
-				<li class="list-group-item bg-transparent px-0 py-3">Made in Germany</li>
-			  </ul>
-			</div>
-			<!--Tab-pane-->
-			<div class="tab-pane fade" id="reviews">
-			  <div
-				class="bg-gradient-secondary text-white d-flex justify-content-between align-items-center p-3 mb-5">
-				<div>
-				  <span class="text-warning small d-block mb-2">
-					{% for i in 5|times %}
-						{% if i < product_detail.rating %}
-							<i class="bx bxs-star"></i>
-						{% else %}
-							<i class="bx bx-star"></i>
-						{% endif %}
-					{% endfor %}
-				  </span>
-				  <p class="mb-0"><span class="reviews small fw-normal">{{product_detail.rating}} / 5</span>
-					<small class="text-muted">( {{product_detail.rating_count}}개 - Reviews)</small>
-				  </p>
 
+			<div class="col-lg-9 col-md-8">
+		  		<div class="tab-content">
+					<div class="tab-pane fade active show" id="detail">
+					{{product_detail.content|safe}}
 				</div>
-			  </div>
-			  <h5 class="mb-4 mb-lg-5">Latest Reviews</h5>
-			  {% for review in product_detail.productreview_set.all %}
-				<div class="media-body">
-				  <span class="text-warning small d-block mb-2">
-					{% for i in 5|times %}
-						{% if i < review.rating %}
-							<i class="bx bxs-star"></i>
-						{% else %}
-							<i class="bx bx-star"></i>
-						{% endif %}
-					{% endfor %}
 
-				  </span>
-				  <p class="mb-2">{{review.review}}</p>
-				  <div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
-					<h6 class="mb-0">{{review.user.username}}</h6>
-					<small class="text-muted ms-auto">{{product_detail.created_at}}</small>
-				  </div>
+				<!--Tab-pane-->
+				<div class="tab-pane fade" id="information">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item bg-transparent px-0 py-3">MATERIAL: 100% POLYESTER
+						</li>
+						<li class="list-group-item bg-transparent px-0 py-3">Durable water repellent to
+						protect against light drizzles</li>
+						<li class="list-group-item bg-transparent px-0 py-3">Insulated quilted vest to
+						protect in light winters
+						</li>
+						<li class="list-group-item bg-transparent px-0 py-3">Made in Germany</li>
+					</ul>
 				</div>
-			  {% endfor %}
-			  
-			  <div class="pt-3">
-				<div class="d-flex justify-content-end mb-3">
-				  <a href="#" data-bs-target="#review-collapse" data-bs-toggle="collapse" aria-expanded="false"
-					aria-haspopup="false" class="h6 collapse-link mb-0 link-underline">
-					<i class="bx bx-plus-fill align-middle me-1"></i>Add Review</a>
+
+				<!--Tab-pane-->
+				<div class="tab-pane fade" id="reviews">
+					<div class="bg-gradient-secondary text-white d-flex justify-content-between align-items-center p-3 mb-5">
+						<div>
+							<span class="text-warning small d-block mb-2">
+								{% for i in 5|times %}
+									{% if i < product_detail.rating %}
+										<i class="bx bxs-star"></i>
+									{% else %}
+										<i class="bx bx-star"></i>
+									{% endif %}
+								{% endfor %}
+							</span>
+							<p class="mb-0"><span class="reviews small fw-normal">{{product_detail.rating}} / 5</span>
+								<small class="text-muted">( {{product_detail.rating_count}}개 - Reviews)</small>
+							</p>
+
+						</div>
+					</div>
+					<h5 class="mb-4 mb-lg-5">Latest Reviews</h5>
+					{% for review in product_detail.productreview_set.all %}
+					<div class="media-body">
+						<span class="text-warning small d-block mb-2">
+							{% for i in 5|times %}
+								{% if i < review.rating %}
+									<i class="bx bxs-star"></i>
+								{% else %}
+									<i class="bx bx-star"></i>
+								{% endif %}
+							{% endfor %}
+
+						</span>
+						<p class="mb-2">{{review.review}}</p>
+						<div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
+							<h6 class="mb-0">{{review.user.username}}</h6>
+							<small class="text-muted ms-auto">{{product_detail.created_at}}</small>
+						</div>
+					</div>
+					{% endfor %}
 				</div>
-				<div class="collapse" id="review-collapse">
-				  <div class="card card-body p-4">
-					<form class="needs-validation" novalidate>
-					  <div class="row">
-						<div class="col-12 col-sm-6">
-						  <div class="mb-3">
-							<label class="form-label" for="rating-name">Name</label>
-							<input type="text" required id="rating-name" class="form-control">
-						  </div>
-						</div>
-						<div class="col-12 col-sm-6">
-						  <div class="mb-3">
-							<label class="form-label" for="rating-mail">Email
-							  Address</label>
-							<input type="email" required class="form-control" id="rating-mail">
-						  </div>
-						</div>
+
+				<!--Tab-pane-->
+				<div class="tab-pane fade" id="product-qa">
+
+					<div class="card border card-body mb-5 bg-transparent">
+						<h5><i class="bx bx-question-mark me-2"></i>Is the item
+						durable?</h5>
+						<p class="mb-0 d-flex align-items-stretch">
+						<strong class="small d-inline-block me-2 text-muted">Ans.</strong>
+						<span class="mb-0">
+							Durability of shoes minimum 1 year if u used on daily basis. I think
+							this is best at this price range as compare to all other popular
+							brands.
+						</span>
+						</p>
+					</div>
+					
+					<div class="card border card-body mb-5 bg-transparent">
+						<h5><i class="bx bx-question-mark me-2"></i>Is the item
+						durable?</h5>
+						<p class="mb-0 d-flex align-items-stretch">
+						<strong class="small d-inline-block me-2 text-muted">Ans.</strong>
+						<span class="mb-0">
+							Durability of shoes minimum 1 year if u used on daily basis. I think
+							this is best at this price range as compare to all other popular
+							brands.
+						</span>
+						</p>
+					</div>
+					{% if user.is_authenticated %}
+					<h5 class="mb-4">Feel free to Ask questions</h5>
+					<div class="row">
 						<div class="w-100"></div>
 						<div class="col-12">
-						  <div class="mb-3">
-							<label class="form-label">Select your Rating</label>
-							<div>
-							  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-								<input type="radio" class="btn-check" name="btnradio" id="btnrating1">
-								<label class="btn btn-outline-warning btn-sm" for="btnrating1"><i
-									class="bx bx-star"></i></label>
-
-								<input type="radio" class="btn-check" name="btnradio" id="btnrating2">
-								<label class="btn btn-outline-warning btn-sm" for="btnrating2"><i
-									class="bx bx-star"></i><i class="bx bx-star"></i></label>
-
-								<input type="radio" class="btn-check" name="btnradio" id="btnrating3">
-								<label class="btn btn-outline-warning btn-sm" for="btnrating3"><i
-									class="bx bx-star"></i><i class="bx bx-star"></i><i
-									class="bx bx-star"></i></label>
-								<input type="radio" class="btn-check" name="btnradio" id="btnrating4">
-								<label class="btn btn-outline-warning btn-sm" for="btnrating4"><i
-									class="bx bx-star"></i><i class="bx bx-star"></i><i class="bx bx-star"></i><i
-									class="bx bx-star"></i></label>
-								<input type="radio" class="btn-check" name="btnradio" id="btnrating5" checked>
-								<label class="btn btn-outline-warning btn-sm" for="btnrating5"><i
-									class="bx bx-star"></i><i class="bx bx-star"></i><i class="bx bx-star"></i><i
-									class="bx bx-star"></i><i class="bx bx-star"></i></label>
-
-							  </div>
-							</div>
-						  </div>
+						<div class="mb-3">
+							<textarea class="form-control" name="answer"></textarea>
 						</div>
-						<div class="w-100"></div>
-						<div class="col-12">
-						  <div class="mb-3">
-							<label class="form-label" for="rating-message">Review
-							  Message <small>(Optional)</small></label>
-							<textarea class="form-control" id="rating-message"></textarea>
-						  </div>
 						</div>
-					  </div>
-					  <div class="text-end">
-						<button type="submit" class="btn btn-primary hover-translate-3d">
-						  Submit review
+					</div>
+					<div class="text-end">
+						<button type="button" onclick="product_qna_answer_submit();" class="btn btn-primary hover-translate-3d">
+						Send question <i class="bx bx-right-top-arrow-circle ms-1"></i>
 						</button>
-					  </div>
-					</form>
-				  </div>
+					</div>
+					{% endif %}
 				</div>
-			  </div>
-			</div>
 			<!--Tab-pane-->
-			<div class="tab-pane fade" id="product-qa">
-			  <div class="card border card-body mb-2 bg-transparent">
-				<h5><i class="bx bx-question-mark me-2"></i>Is the item
-				  durable?</h5>
-				<p class="mb-0 d-flex align-items-stretch">
-				  <strong class="small d-inline-block me-2 text-muted">Ans.</strong>
-				  <span class="mb-0">
-					Durability of shoes minimum 1 year if u used on daily basis. I think
-					this is best at this price range as compare to all other popular
-					brands.
-				  </span>
-				</p>
-			  </div>
-			  <div class="card border card-body mb-2 bg-transparent">
-				<h5><i class="bx bx-question-mark me-2"></i>Is the item
-				  durable?</h5>
-				<p class="mb-0 d-flex align-items-stretch">
-				  <strong class="small d-inline-block me-2 text-muted">Ans.</strong>
-				  <span class="mb-0">
-					Durability of shoes minimum 1 year if u used on daily basis. I think
-					this is best at this price range as compare to all other popular
-					brands.
-				  </span>
-				</p>
-			  </div>
-			  <div class="card border card-body mb-5 bg-transparent">
-				<h5><i class="bx bx-question-mark me-2"></i>Is the item
-				  durable?</h5>
-				<p class="mb-0 d-flex align-items-stretch">
-				  <strong class="small d-inline-block me-2 text-muted">Ans.</strong>
-				  <span class="mb-0">
-					Durability of shoes minimum 1 year if u used on daily basis. I think
-					this is best at this price range as compare to all other popular
-					brands.
-				  </span>
-				</p>
-			  </div>
-			  <h5 class="mb-4">Feel free to Ask questions</h5>
-			  <form class="needs-validation" novalidate>
-				<div class="row">
-				  <div class="col-12 col-sm-6">
-					<div class="mb-3">
-					  <input type="text" required class="form-control" placeholder="Enter your Name">
-					</div>
-				  </div>
-				  <div class="col-12 col-sm-6">
-					<div class="mb-3">
-					  <input type="email" required class="form-control" placeholder="Enter your Email">
-					</div>
-				  </div>
-				  <div class="w-100"></div>
-				  <div class="col-12">
-					<div class="mb-3">
-					  <textarea required class="form-control" placeholder="Type your question here"></textarea>
-					</div>
-				  </div>
-				</div>
-				<div class="text-end">
-				  <button type="submit" class="btn btn-primary hover-translate-3d">
-					Send question <i class="bx bx-right-top-arrow-circle ms-1"></i>
-				  </button>
-				</div>
-			  </form>
-			</div>
-		  </div>
-		  <!--Tab-pane-->
+	  		</div>
 		</div>
-	  </div>
 	</div>
-  </section>
+</section>
   <section class="bg-white position-relative overflow-hidden">
 	<div class="container py-9 py-lg-11 position-relative">
 	  <div class="row align-items-center">
@@ -398,41 +289,40 @@ is_run = false;
 
 function add_cart_submit(product_id) {
 	is_run = true;
+	var modal = new bootstrap.Modal(document.getElementById("loading"), {});
+	let data = document.querySelector("input[name=obj_data]").value;
 
-	let arr = document.querySelector("input[name=obj_data]").value;
-
-	if (isEmpty(arr)) {
+	if (isEmpty(data)) {
 		openModal('알림','옵션을 선택해주세요.');
 		return false;
 	}
+	modal.show();
 
-	var url = "{% url 'cart:add' %}";
-	var xhr = new XMLHttpRequest();
-
-	xhr.open("POST", url, true);
-
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4) {
-			if (xhr.status == 200){
+    $.ajax({
+        type : 'POST',
+        url : "{% url 'cart:add' %}",
+		headers: { "X-CSRFToken": '{{csrf_token}}' },
+        data : {
+			data: data,
+		},
+        dataType : 'json',
+        success: function(data){
+			if(data.result==200){
 				openModal("알림", data.result_text,'', 'reload');
-			} else if (xhr.status == 201) {
-				openModal("알림", data.result_text,'', 'reload');
-			} else {
-				console.log("[status] : " + xhr.status);
-				console.log("[response] : " + "[fail]");    				   				    				
-				console.log("[response] : " + xhr.responseText);
-				console.log("");        				
-			}    				
+			}else{
+				openModal("알림", data.result_text);
+			}
+			is_run  = false;
+        },
+        error: function (request, status, error){
+          var msg = "ERROR : " + request.status + "<br>"
+			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
+			    console.log(msg);
+        },
+		complete : function() {
+			modal.hide();
 		}
-		is_run  = false;
-		//document.getElementById("my-spinner").style.display = "none";
-	}
-
-	var data = new FormData();
-	data.append('data', arr);
-
-	xhr.setRequestHeader("X-CSRFToken", '{{csrf_token}}');
-	xhr.send(data);
+    });
 }
 
 function set_variant_value(e) {
@@ -543,34 +433,30 @@ function reset_variant(e, val) {
 	}
 }
 
-function review_write_submit() {
-      var reviewWriteForm = document.reviewWriteForm;
-      var review = reviewWriteForm.review.value;
-      var rating = reviewWriteForm.rating.value;
-      let this_modal = "#reviewWriteModal";
+
+function product_qna_answer_submit() {
+      var answer = document.querySelector("[name=answer]").value;
             
-      if (isEmpty(rating)) {
-         openPopup('알림','평점을 선택해주세요.',this_modal);
+      if (isEmpty(answer)) {
+		openModal('알림','질문을 입력해주세요.');
          return false;
       }
-
-      if (isEmpty(review)) {
-         openPopup('알림','리뷰를 입력해주세요.',this_modal);
-         return false;
-      }
-
-      var queryString = $("form[name=reviewWriteForm]").serialize();
 
     $.ajax({
         type : 'POST',
-        url : "",
-        data : queryString,
+        url : "{% url 'product:qna_answer' %}",
+		headers: { "X-CSRFToken": '{{csrf_token}}' },
+        data : {
+			answer: answer,
+			product_id: "{{product_detail.pk}}"
+		},
         dataType : 'json',
         success: function(data){
           if(data.result==200){
-            openPopup("알림", data.result_text,'',"reload");
+			document.querySelector("[name=answer]").value = '';
+            openModal("알림", data.result_text);
           }else{
-            openPopup("알림", data.result_text);
+            openModal("알림", data.result_text);
           }
           return;
         },

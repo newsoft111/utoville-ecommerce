@@ -154,3 +154,24 @@ class ProductReview(models.Model):
 			pass
 
 		super().save(*args, **kwargs)
+
+
+class ProductQnA(models.Model):
+	product = models.ForeignKey(
+			Product,
+			on_delete=models.CASCADE
+	)
+	user = models.ForeignKey(
+				settings.AUTH_USER_MODEL,
+				on_delete=models.CASCADE,
+	)
+	question = models.TextField()
+	answer = models.TextField()
+	questioned_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+	answered_at = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+	class Meta:
+		db_table = 'ecommerce_product_qna'
+
+	def __str__(self) :
+		return self.variant

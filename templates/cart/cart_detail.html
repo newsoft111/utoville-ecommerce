@@ -177,9 +177,9 @@ is_run = false;
 
 function remove_cart_submit(cart_item_id) {
 	is_run = true;
-	
+	var modal = new bootstrap.Modal(document.getElementById("loading"), {});
 
-	$('#my-spinner').show();
+	modal.show();
 
     $.ajax({
         type : 'POST',
@@ -203,18 +203,20 @@ function remove_cart_submit(cart_item_id) {
 			    console.log(msg);
         },
 		complete: function () {
-			$('#my-spinner').hide();
+			setTimeout(function() {
+				modal.hide();
+			}, 2000);
 		}
     });
 }
 
 function update_cart_submit(e) {
 	is_run = true;
-
+	var modal = new bootstrap.Modal(document.getElementById("loading"), {});
 	let cart_item_id = e.dataset.cartItemId;
 	let qty = e.value;
 
-	$('#my-spinner').show();
+	modal.show();
 
     $.ajax({
         type : 'POST',
@@ -239,7 +241,9 @@ function update_cart_submit(e) {
 			    console.log(msg);
         },
 		complete: function () {
-			$('#my-spinner').hide();
+			setTimeout(function() {
+				modal.hide();
+			}, 2000);
 		}
     });
 }

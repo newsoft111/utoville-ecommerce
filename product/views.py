@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse, HttpResponseRedirect
 from django.db.models import Q
 from django.core.paginator import Paginator
 from .models import *
@@ -72,3 +73,37 @@ def product_detail(request, product_id):
 		"product_detail": product_detail,
 		'variant_data': json.dumps(variant_data)
 	})
+
+
+def product_qna_answer(request):
+	if request.method == 'POST':
+		answer = request.POST.get("answer")
+		product_id = request.POST.get("product_id")
+
+		try:
+			product_obj = Product.objects.get(pk=product_id)
+		except:
+			result = {
+				'result': "201", 
+				'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+			}
+			return JsonResponse(result)
+
+		try:
+			product_qna = ProductQnA()
+			product_qna.answer = answer
+			product_qna.user = request.user
+			product_qna.product = product_obj
+			product_qna.save()
+
+			result = '200'
+			result_text = "등록이 완료되었습니다."
+		except Exception as e:
+			print(e)
+			result = '201'
+			result_text = '알수없는 오류입니다. 다시시도 해주세요.'
+
+		result = {'result': result, 'result_text': result_text}
+		return JsonResponse(result)
+	else:
+		return redirect("product:list")
