@@ -79,6 +79,203 @@
 	}
 }
 
+/*-------------------------Mypage--------------------------*/
+/* my page - order_search_area */
+.table td {
+	vertical-align: middle;
+}
+.order-tb-left {
+	white-space: nowrap;
+	background-color: #f3f3f3 !important;
+	text-align: center;
+    font-size: 15px;
+}
+.order-tb-right {
+	text-align: left;
+	vertical-align: middle;
+	font-size: 14px;
+}
+.order-tb-search {
+	margin-left: 40px;
+}
+.order-tb-button {
+	width: 80px;
+}
+button[type="submit"], button[type="button"], select.form-select  {
+	font-size: 14px;
+}
+
+@media only screen and (max-width: 991px) {
+	.mypage_sidebar {
+		display: none;
+	}
+	.order-tb-left {
+		font-size: 14px;
+		text-align: center;
+	}
+}
+@media only screen and (max-width: 767px) {
+	.order-tb-search {
+		margin-left: 50px;
+	}
+	button[type="submit"], button[type="button"], select.form-select {
+		font-size: 13px;
+	}
+	.row {
+		font-size: 13px;
+	}
+}
+@media only screen and (max-width: 575px) {
+	.order-tb-search {
+		margin-left: 0;
+	}
+	.row {
+		font-size: 12px;
+	}
+}
+@media only screen and (max-width: 400px) {
+	button[type="submit"], button[type="button"], select.form-select, input::placeholder {
+		font-size: 1px;
+	}
+	.row {
+		font-size: 10px;
+	}
+}
+
+input {
+    padding: 10px 15px !important;
+    border: 1px solid lightgrey !important;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: #fff !important;
+    color: #2C3E50;
+    font-size: 14px;
+    letter-spacing: 1px;
+    position: relative;
+}
+input:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #512DA8;
+    outline-width: 0;
+}
+::placeholder {
+    color: #BDBDBD;
+    opacity: 1;
+	font-size: 14px;
+}
+:-ms-input-placeholder {
+    color: #BDBDBD;
+}
+::-ms-input-placeholder {
+    color: #BDBDBD;
+}
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0;
+}
+.datepicker {
+  background-color: #fff;
+  border: none;
+  border-radius: 0 !important;
+}
+.datepicker-dropdown {
+  top: 0;
+  left: 0;
+}
+.datepicker table tr td.today, span.focused {
+  border-radius: 50% !important;
+  background-image: linear-gradient(#FFF3E0, #FFE0B2);
+}
+.datepicker table tr td.today.range {
+  background-image: linear-gradient(#eeeeee, #eeeeee) !important;
+  border-radius: 0 !important;
+}
+
+/*Weekday title*/
+thead tr:nth-child(3) th {
+  font-weight: bold !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.dow, .old-day, .day, .new-day {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 0px !important;
+}
+.old-day:hover, .day:hover, .new-day:hover, .month:hover, .year:hover, .decade:hover, .century:hover {
+  border-radius: 50% !important;
+  background-color: #eee;
+}
+.range-start, .range-end {
+  border-radius: 50% !important;
+  background-image: linear-gradient(#FFA726, #FFA726) !important;
+}
+.prev, .next, .datepicker-switch {
+  border-radius: 0 !important;
+  padding: 10px 10px 10px 10px !important;
+  text-transform: uppercase;
+  font-size: 14px;
+  opacity: 0.8;
+}
+.prev:hover, .next:hover, .datepicker-switch:hover {
+  background-color: inherit !important;
+  opacity: 1;
+}
+.btn-black {
+  background-color: #37474F !important;
+  color: #fff !important;
+  width: 100%;
+}
+.btn-black:hover {
+  color: #fff !important;
+  background-color: #000 !important;
+}
+
+.order_view {
+	text-align: center;
+	font-size: 15px;
+}
+/*review_modal*/
+.rating {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: center
+} 
+.rating>input {
+	display: none
+}
+.rating>label {
+	position: relative;
+	width: 1em;
+	font-size: 30px;
+	font-weight: 300;
+	color: #FFD600;
+	cursor: pointer
+}
+.rating>label::before {
+	content: "\2605";
+	position: absolute;
+	opacity: 0
+}
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+	opacity: 1 !important
+}
+.rating>input:checked~label:before {
+	opacity: 1
+}
+.rating:hover>input:checked~label:before {
+	opacity: 0.4
+}
+/*file_upload*/
+.file-remove {
+	border: none;
+	background-color: #fff;
+}
 
 /*cancel*/
 #cancelDetail {

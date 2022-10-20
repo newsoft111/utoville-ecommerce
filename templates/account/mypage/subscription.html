@@ -10,6 +10,20 @@
 			<div class="row">
 				{% include "account/mypage/sidemenu.html" with active_tab="정기구독 관리"%}
 				<div class="col-lg-9 subs_contents">
+					<div class="d-flex flex-column">
+						<nav class="nav mb-5 nav-pills">
+							<a href="/account/mypage/orders/" class="nav-link active"> <i
+									class="bx bx-user-circle me-2"></i>주문 조회</a>
+							<a href="/account/mypage/subs/" class="nav-link"><i
+									class="bx bx-cog me-2"></i>정기구독 관리</a>
+							<a href="#" class="/account/mypage/cancel/"><i
+									class="bx bx-layer me-2"></i>취소/변경</a>
+							<a href="#" class="nav-link disabled"><i
+									class="bx bx-credit-card me-2"></i>1:1 문의</a>
+							<a href="#" class="nav-link disabled"><i
+									class="bx bx-group me-2"></i>정보 수정</a>
+						</nav>
+					</div>
 					<div class="col-12">
 						<!-- Page title -->
 						<div class="my-5 newordertitle">
