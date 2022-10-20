@@ -347,7 +347,7 @@ thead tr:nth-child(3) th {
 	padding: 0;
 }
 
-/*ask*/
+/*qna*/
 .ask_table {
 	text-align: center;
 }
@@ -368,4 +368,16 @@ thead tr:nth-child(3) th {
 	padding: 5px 20px;	
 	font-size: 14px;
 	color: #fff;
+}
+
+/*qna write*/
+.btn_group {
+	float: right;
+	margin-top: 10px;
+}
+.btn_group a {
+	margin-left: 5px;
+	padding: 5px 20px;
+	border-radius: 30px;
+	font-size: 14px;
 }
