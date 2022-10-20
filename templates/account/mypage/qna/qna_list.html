@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<!-- Section -->
+<section class="position-relative">
+	<div class="container position-relative">
+		<div class="position-relative pt-9 pb-9 pb-lg-11">
+			<div class="row">
+				{% include "account/mypage/sidemenu.html" with active_tab="취소/변경" %}
+				<div class="col-lg-9">
+					{% include "account/mypage/topmenu.html" %}
+					<div class="row">
+						<div class="col-12">
+							<!-- Page title -->
+							<div class="newordertitle">
+								<h3>1:1 문의게시판 </h3>
+							</div>
+							<!-- Ask Content START -->
+							<div class="row main_contents">
+								<div class="col-md-12">
+									<div class="bg-secondary-soft p-3 p-md-5 rounded">
+										<table class="ask_table table">
+											<thead>
+											<tr>
+												<th scope="col" class="col-1">번호</th>
+												<th scope="col" class="col-7">제목</th>
+												<th scope="col" class="col-2">작성자</th>
+												<th scope="col" class="col-2">날짜</th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr>
+												<th scope="row">1</th>
+											<td>제목입니다.</td>
+												<td>Otto</td>
+												<td>2022-10-20</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+									<!-- Details -->
+									<div class="ask_btn">
+										<a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#askDetailModal">문의 작성</a>
+									</div>
+								</div>
+							</div>
+							<!-- Ask Content END  -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="modal fade" id="askDetailModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="cancelDetailLabel" aria-hidden="true">
+	<div class="modal-dialog modal-fullscreen">
+		<div class="modal-content">
+		<div class="modal-header p-4">
+			<h4 class="mb-0 text-center" id="cancelDetail">Q&A</h4>
+			<div class="btn_group">
+				<button type="button" class="ask_detail_btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">취소</button>
+				<button type="button" class="ask_detail_btn btn btn-danger btn-md" data-bs-dismiss="modal">작성</button>				
+			</div>
+		</div>
+		<div class="modal-body p-4" id="askDetailBody">
+			<div id="quill-editor">
+				<p><strong style="color: rgb(250, 66, 56);">해당 가이드라인은 삭제후 작성해주시기 바랍니다.</strong></p>
+				<p>서비스 구매자들이 리뷰어님의 서비스를 믿고 구매하실 수 있도록 상세한 소개와 명확한 서비스 제공 범위를 적어주시면 좋아요!</p>
+				<p>예시 )</p>
+				<p>뷰티/코스메틱 제품을 전문으로 하는 모델/리뷰어 입니다!</p>
+				<p>협찬, 광고 경험이 많아서 제품의 장점을 잘 살릴 수 있는 리뷰/콘텐츠를 제공해드려요!</p>
+				<p><strong>서비스 구성</strong></p>
+				<p>기본적으로 10장의 사진 및 영상 콘텐츠를 제공해드립니다</p>
+				<p>- 제품 상세 사진 3~4장 원하시는 컨셉에 최대한 맞춰서 제공</p>
+				<p>- 제품과 함께 찍은 사진 3~4장 ( 얼굴 노출 가능 )</p>
+				<p>- 제품 사용하는 짧은 영상 1~2개</p>
+				<p>평균적으로 리뷰/콘텐츠 완성까지 5일 정도 소요됩니다!</p>
+				<p>요청사항에 가이드라인 및 원하시는 컨셉을 같이 적어주세요.</p>
+				<p>그 외에 협의 사항도 전달 주시면 협의 가능합니다!</p>
+			 </div>		
+		</div>
+	</div>
+</div>
+
+<script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script>
+	var quill = new Quill('#quill-editor', {
+	   modules: {
+		  toolbar: [
+			 [{ 'size': ['small', false, 'large', 'huge'] }],
+			 ['bold', 'italic', 'underline', 'strike'],
+			 ['blockquote', 'code-block'],
+			 [{ 'color': [] }, { 'background': [] }],
+			 [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+			 ['link', 'image'],
+			 ['clean'],
+		  ]
+	   },
+	   placeholder: 'Compose an epic...',
+	   theme: 'snow'
+	});
+ </script>
+{% endblock %}
