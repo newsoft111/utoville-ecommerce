@@ -80,6 +80,11 @@
 }
 
 /*-------------------------Mypage--------------------------*/
+/*top menu*/
+.nav-pills {
+	justify-content: space-around;
+}
+
 /* my page - order_search_area */
 .table td {
 	vertical-align: middle;
@@ -340,4 +345,27 @@ thead tr:nth-child(3) th {
 }
 .cancel_detail {
 	padding: 0;
+}
+
+/*ask*/
+.ask_table {
+	text-align: center;
+}
+.ask_table thead {
+	border-bottom: 2px solid #ddd;
+	font-size: 15px;
+	font-weight: bold;
+}
+.ask_table tbody {
+	font-size: 14px;
+}
+.ask_btn {
+    margin-right: 32px;
+    float: right;
+}
+.ask_btn .btn {        
+	border-radius: 30px;
+	padding: 5px 20px;	
+	font-size: 14px;
+	color: #fff;
 }

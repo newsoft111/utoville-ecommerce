@@ -152,13 +152,13 @@
 <script src="{% static 'vendor/node_modules/js/swiper-bundle.min.js' %}"></script>
 <script>
   //Swiper thumbnail demo
-  var swiperThumbnails = new Swiper(".swiper-thumbnails", {
+var swiperThumbnails = new Swiper(".swiper-thumbnails", {
 	spaceBetween: 8,
 	slidesPerView: 4,
 	freeMode: true,
 	watchSlidesProgress: true,
-  });
-  var swiperThumbnailsMain = new Swiper(".swiper-thumbnails-main", {
+});
+var swiperThumbnailsMain = new Swiper(".swiper-thumbnails-main", {
 	spaceBetween: 0,
 	navigation: {
 	  nextEl: ".swiperThumb-next",
@@ -167,27 +167,27 @@
 	thumbs: {
 	  swiper: swiperThumbnails
 	}
-  });
-  var el = document.querySelectorAll("[data-choices]");
-  el.forEach(e => {
+});
+var el = document.querySelectorAll("[data-choices]");
+	el.forEach(e => {
 	const t = {
-	  ...e.dataset.choices ? JSON.parse(e.dataset.choices) : {},
-	  ...{
-		classNames: {
-		  containerInner: e.className,
-		  input: "form-control",
-		  inputCloned: "form-control-xs",
-		  listDropdown: "dropdown-menu",
-		  itemChoice: "dropdown-item",
-		  activeState: "show",
-		  selectedState: "active"
+		...e.dataset.choices ? JSON.parse(e.dataset.choices) : {},
+		...{
+			classNames: {
+			containerInner: e.className,
+			input: "form-control",
+			inputCloned: "form-control-xs",
+			listDropdown: "dropdown-menu",
+			itemChoice: "dropdown-item",
+			activeState: "show",
+			selectedState: "active"
+			}
 		}
-	  }
 	}
 	new Choices(e, t)
-  });
-
+});
 </script>
+
 <script src="{% static 'vendor/node_modules/js/simplebar.min.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
 
