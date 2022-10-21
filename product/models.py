@@ -169,9 +169,10 @@ class ProductQnA(models.Model):
 	answer = models.TextField()
 	questioned_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	answered_at = models.DateTimeField(auto_now_add=False, auto_now=True)
+	is_deleted = models.BooleanField(default=False)
+	deleted_at = models.DateTimeField(null=True)
+
+	objects = ModelDeleteManager()
 
 	class Meta:
 		db_table = 'ecommerce_product_qna'
-
-	def __str__(self) :
-		return self.variant
