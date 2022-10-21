@@ -51,3 +51,13 @@ function closeModal() {
 	var modal = new bootstrap.Modal(document.getElementById('globalModal'));
 	modal.hide();
 }
+
+/*mypage datepicker*/
+$(document).ready(function(){
+	$('.input-daterange').datepicker({
+		format: 'dd-mm-yyyy',
+		todayHighlight: true,
+		startDate: '0d'
+	});
+	
+});

@@ -1,3 +1,18 @@
+.clearfix:before, .clearfix:after {
+    display: block;
+    content: '';
+    line-height: 0;
+}
+.clearfix:after {
+    clear:both;
+}
+ul, li {
+	list-style: none;
+}
+a {
+	color: #000;
+}
+
 /*Product detail*/
 .optionAdd {
 	display: flex;
@@ -21,6 +36,7 @@
 }
 
 .mypage_main_title {
+	margin-top: 30px;
 	padding: 10px 32px;	
 }
 .mypage_main_title h3 {
@@ -41,8 +57,8 @@
 }
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #e3e3e3 !important;
+  color: #0099db;
+  background-color: transparent !important;
 }
 .subs-pills .nav-link.active,
 .subs-pills .show > .nav-link {
@@ -85,18 +101,28 @@
 }
 
 /*-------------------------Mypage--------------------------*/
-.my_page_main {
-	height: 100vh;
-}
-
 /*top menu*/
+.mypage_top_menu {
+	padding: 10px 0;
+	background-color: #f7f7f7;
+}
 .nav-pills {
 	justify-content: space-around;
 }
 
 /* side menu */
-.sidebar_body {
-	height: 100vh;
+.list-group-item {
+	margin-bottom: 20px;
+}
+.list-group-item.active {
+	background: #8cb808 !important;
+}
+/* .sidebar_body {
+	 height: 100vh;
+} */
+.side_menu_msg {
+	background: transparent !important;
+    border: 1px solid #ddd;
 }
 
 /* my page - order_search_area */
@@ -118,7 +144,8 @@
 	margin-left: 40px;
 }
 .order-tb-button {
-	width: 80px;
+	padding: 5px 15px;
+	border-radius: 10px;
 }
 button[type="submit"], button[type="button"], select.form-select  {
 	font-size: 14px;
@@ -153,11 +180,8 @@ button[type="submit"], button[type="button"], select.form-select  {
 	}
 }
 @media only screen and (max-width: 400px) {
-	button[type="submit"], button[type="button"], select.form-select, input::placeholder {
-		font-size: 1px;
-	}
 	.row {
-		font-size: 10px;
+		font-size: 13px;
 	}
 }
 
@@ -359,6 +383,67 @@ thead tr:nth-child(3) th {
 }
 .cancel_detail {
 	padding: 0;
+}
+
+/*cancel-form*/
+.form-label {
+	font-size: 18px;
+}
+.left_side, .right_side {
+	float: left;
+	padding: 32px;
+}
+#message-text {
+	min-height: 240px !important;
+}
+.right_side .select_service {
+	margin-bottom: 30px;
+}
+.right_side .select_service .select_list {
+	max-height: 200px;
+	overflow: hidden;
+	overflow-y: auto !important;
+}
+.right_side .select_service .cancel_item {
+	margin-left: 10px;
+}
+.right_side .refund_sum, .right_side .execpt_sale {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 30px;
+}
+.right_side .refund_sum h6, 
+.right_side .execpt_sale h6, .right_side .execpt_sale span,
+.right_side .refund_total h6, .right_side .refund_total span {
+	display: flex;
+	justify-content: space-between;
+	font-size:17px;
+}
+.right_side .execpt_sale h6, .right_side .execpt_sale span {
+	font-size: 14px;
+}
+@media only screen and (max-width: 991px){
+	.left_side, .right_side {
+		float: none;
+		margin: 0 auto;
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 575px){
+	.left_side, .right_side {
+		float: none;
+		margin: 0 auto;
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 400px){
+	.right_side .refund_sum h6, 
+	.right_side .execpt_sale h6, .right_side .execpt_sale span,
+	.right_side .refund_total h6, .right_side .refund_total span {
+		font-size:15px;
+	}
+	.right_side .execpt_sale h6, .right_side .execpt_sale span {
+		font-size: 12px;
+	}
 }
 
 /*qna*/
