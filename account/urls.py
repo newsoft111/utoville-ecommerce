@@ -15,14 +15,19 @@ urlpatterns = [
 		include([
 			path('orders/', views.my_order, name='my_order'),
 			path('subs/', views.subscription, name='subscription'),
-			path('cancel/', views.cancel, name='cancel'),
+			path('cancel/',
+				include([
+					path('', views.cancel, name='cancel'),
+					path('form/', views.cancel_form, name='cancel_form'),			
+				]),
+			),
 			path('qna/',
 				include([
 					path('', views.qna_list, name='list'),
 					path('write/', views.qna_write, name='qna_write'),
 					path('detail/', views.qna_detail, name='qna_detail'),
 				])
-			)
+			),
 		])
 	)
 ]
