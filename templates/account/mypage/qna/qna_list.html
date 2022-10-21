@@ -7,14 +7,14 @@
 <section class="position-relative">
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
-			<div class="row">
+			<div class="my_page_main row">
 				{% include "account/mypage/sidemenu.html" with active_tab="취소/변경" %}
 				<div class="col-lg-9">
 					{% include "account/mypage/topmenu.html" %}
 					<div class="row">
 						<div class="col-12">
 							<!-- Page title -->
-							<div class="newordertitle">
+							<div class="mypage_main_title">
 								<h3>1:1 문의게시판 </h3>
 							</div>
 							<!-- Ask Content START -->
@@ -33,7 +33,7 @@
 											<tbody>
 											<tr>
 												<th scope="row">1</th>
-											<td>제목입니다.</td>
+											<td><a href="/account/mypage/qna/detail">제목입니다.</a></td>
 												<td>Otto</td>
 												<td>2022-10-20</td>
 											</tr>

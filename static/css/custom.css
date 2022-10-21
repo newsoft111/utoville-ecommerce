@@ -20,10 +20,15 @@
 	font-weight: bold;
 }
 
-
-.newordertitle h3 {
-	padding: 32px;
-	font-size: 22px;
+.mypage_main_title {
+	padding: 10px 32px;	
+}
+.mypage_main_title h3 {
+	font-size: 20px;
+	font-weight: bold;
+}
+.mypage_main_title p {
+	font-size: 14px;
 }
 .subs-pills {
 	margin-left: 12px;
@@ -80,9 +85,18 @@
 }
 
 /*-------------------------Mypage--------------------------*/
+.my_page_main {
+	height: 100vh;
+}
+
 /*top menu*/
 .nav-pills {
 	justify-content: space-around;
+}
+
+/* side menu */
+.sidebar_body {
+	height: 100vh;
 }
 
 /* my page - order_search_area */
@@ -371,6 +385,15 @@ thead tr:nth-child(3) th {
 }
 
 /*qna write*/
+.ql-container {
+	height: auto !important;
+}
+.ql-editor {
+	min-height: 400px;
+	max-height: 400px;
+	overflow: hidden;
+	overflow-y: scroll !important;
+}
 .btn_group {
 	float: right;
 	margin-top: 10px;
@@ -380,4 +403,9 @@ thead tr:nth-child(3) th {
 	padding: 5px 20px;
 	border-radius: 30px;
 	font-size: 14px;
+}
+
+/*qna detail*/
+.previous_content {
+	border-bottom: 2px solid #ddd;
 }
