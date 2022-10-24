@@ -70,6 +70,15 @@ a {
 	color: #000;
 	background-color: #e3e3e3 !important;
 }
+.chart-view {
+	padding: 20px;
+	background-color: #fafbfb;
+}
+.chart-view h6 {	
+	margin-bottom: 20px;
+	font-size: 17px;
+	font-weight: bold;
+}
 .subs-table {
 	margin-top: 50px;
 	text-align: center;
@@ -98,10 +107,21 @@ a {
 	.subs_contents {
 		width: 100% !important;
 	}
+	.sub_menu {
+		display: none;
+	}
+}
+@media only screen and (max-width: 766px) {
+	.chart-view h6 {
+		font-size: 15px;
+	}
 }
 @media only screen and (max-width: 575px) {
 	.sub-banner {
 		margin-bottom: 10px;
+	}
+	.chart-view h6 {
+		font-size: 13px;
 	}
 }
 
@@ -122,9 +142,6 @@ a {
 .list-group-item.active {
 	background: #8cb808 !important;
 }
-/* .sidebar_body {
-	 height: 100vh;
-} */
 .side_menu_msg {
 	background: transparent !important;
     border: 1px solid #ddd;
@@ -156,7 +173,12 @@ button[type="submit"], button[type="button"], select.form-select  {
 	font-size: 14px;
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1200px) {
+	.mypage_sidebar {
+		display: none;
+	}
+}
+@media only screen and (max-width: 1000px) {
 	.mypage_sidebar {
 		display: none;
 	}
