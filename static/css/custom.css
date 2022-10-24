@@ -37,7 +37,7 @@ a {
 
 .mypage_main_title {
 	margin-top: 30px;
-	padding: 10px 32px;	
+	padding: 10px;	
 }
 .mypage_main_title h3 {
 	font-size: 20px;
@@ -321,6 +321,10 @@ thead tr:nth-child(3) th {
 }
 
 /*cancel*/
+.order_info {
+	display: flex;
+	align-items: center;
+}
 #cancelDetail {
 	font-size: 16px;
 	color: #28a7e1;
