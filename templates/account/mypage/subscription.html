@@ -3,16 +3,19 @@
 {% load static %}
 {% load humanize %}
 
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"> 
+
 <!-- Section -->
 <section class="position-relative">
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
-			<div class="row">
+			<div class="my_page_main row">
 				{% include "account/mypage/sidemenu.html" with active_tab="정기구독 관리"%}
 				<div class="col-lg-9 subs_contents">
+					{% include "account/mypage/topmenu.html" with active_tab="정기구독 관리"%}
 					<div class="col-12">
 						<!-- Page title -->
-						<div class="my-5 newordertitle">
+						<div class="my-5 mypage_main_title">
 							<h3>정기구독 관리</h3>
 						</div>	
 						<div class="row main_contents">
@@ -24,24 +27,28 @@
 									<button class="nav-link btn-sm shadow" id="pills-rent-tab" data-bs-toggle="pill" data-bs-target="#pills-rent" type="button" role="tab" aria-controls="pills-rent" aria-selected="false">해지내역 0</button>
 								</li>
 							</ul>
-							<!-- Table -->
+							<!-- banner-view start -->
 							<div class="mt-5 subs-view show">
 								<div class="col-md-12">
 									<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
 										<div class="row">
 											<!-- Item -->
 											<div class="col-sm-6 col-xxl-3 mb-xxl-0 sub-banner">
-												<div class="bg-white-flex justify-content-between align-items-center p-3 rounded">
+												<div class=" d-flex justify-content-center align-items-center p-3">
 													<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
-													<div class="text-center">
-														<h2 data-countup='{"startVal": 0,"prefix":"D-"}' data-to="21" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
-														<div class="text-muted">다음 서비스까지</div>
+													<div class="text-center position-relative">
+														<a href="#">
+															<h2 data-countup='{"startVal": 0,"prefix":"D-"}' data-to="21" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+															<span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
+															<div class="text-muted">다음 서비스까지</div>
+														</a>
+
 													</div>
 												</div>
 											</div>
 											<!-- Item -->
 											<div class="col-sm-6 col-xxl-3 mb-xxl-0 sub-banner">
-												<div class="bg-white d-flex justify-content-between align-items-center p-3 rounded">
+												<div class=" d-flex justify-content-center align-items-center p-3">
 													<span class="display-5 text-white opacity-5"><i class="far fa-fw fa-comment-dots"></i></span>
 													<div class="text-center">
 														<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="3" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
@@ -51,7 +58,7 @@
 											</div>											
 											<!-- Item -->
 											<div class="col-sm-6 col-xxl-3 mb-xxl-0 sub-banner">
-												<div class="bg-white d-flex justify-content-between align-items-center p-3 rounded">
+												<div class="d-flex justify-content-center align-items-center p-3">
 													<span class="display-5 text-white opacity-5"><i class="fab fa-fw fa-gratipay"></i></span>
 													<div class="text-center">
 														<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="55" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
@@ -61,7 +68,7 @@
 											</div>
 											<!-- Item -->
 											<div class="col-sm-6 col-xxl-3 mb-xxl-0 sub-banner">
-												<div class="bg-white d-flex justify-content-between align-items-center p-3 rounded">
+												<div class="d-flex justify-content-center align-items-center p-3">
 													<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-eye"></i></span>
 													<div class="text-center">
 														<h2 data-countup='{"startVal": 0,"prefix":""}' data-to="30" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
@@ -69,36 +76,33 @@
 													</div>
 												</div>
 											</div>
-										</div> <!-- Row END -->
-										<div class="table-responsive subs-table" style="text-align: center;">
-											<table class="table">
-												<!-- Title -->
-												<thead>
-													<tr>
-														<th scope="col">서비스 시작일</th>
-														<th scope="col">서비스 종료일</th>
-														<th scope="col">서비스 정보</th>
-														<th scope="col">수량</th>
-														<th scope="col">주문금액</th>
-														<th scope="col">진행상태</th>
-													</tr>
-												</thead>
-												<!-- Data -->
-												<tbody>
-													<tr>
-														<td>2022/10/10</td>
-														<td>2022/4/10</td>
-														<td>에어컨 청소(6개월)</td>
-														<td>1</td>
-														<td>₱12,000</td>
-														<td>미진행</td>
-													</tr>
-												</tbody>
-											</table>
+										</div> <!-- banner-view END -->
+
+										<!-- chart-view START -->
+										<div class="chart-view mt-5">
+											<h6>구독 진행률(%)</h6>
+											<canvas id="myChart"></canvas>	
 										</div>
+				
+										<!-- chart-view END -->
 									</div>
 								</div>
 							</div>
+							<div class="col-12 mb-3">
+                                <label for="p_description" class="form-label">Upload images</label>
+                                <!--Listing Images-->
+                                <div class="p-4 border rounded-3" data-dropzone-area="">
+                                    <div class="dz-preview" id="dz-preview-row" data-horizontal-scroll="">
+                                    </div>
+                                    <div class="chat-form rounded-pill" data-emoji-form="">
+                                        <button type="button"
+                                        class="btn btn-outline-secondary dz-clickable"
+                                        id="dz-btn">
+                                        <i class="bx bx-cloud-upload fs-4 me-1"></i> Upload
+                                    </button>
+                                    </div>
+                                </div>
+                            </div>
 							<div class="subs-cancel">
 								구독 취소 내역이 없습니다.
 							</div>
@@ -107,10 +111,12 @@
 				</div>	
 				<!-- Main content END -->
 			</div>
-		</div>>
-	</div>
+		</div>
 </section>
 
+<!-- apexcharts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
 <script>
 window.addEventListener("load", () => {
 	let btn = document.getElementById("pills-tab");
@@ -127,6 +133,73 @@ window.addEventListener("load", () => {
 		view.classList.remove("show");
 	});
 });
+
+
+var context = document
+                .getElementById('myChart')
+                .getContext('2d');
+            var myChart = new Chart(context, {
+                type: 'bar', // 차트의 형태
+                data: { // 차트에 들어갈 데이터
+                    labels: [
+                        //x 축
+                        '구독 서비스1','구독 서비스2','구독 서비스3','구독 서비스4','구독 서비스5'
+                    ],
+                    datasets: [
+                        { //데이터
+                            data: [
+                                40,50,50,70,100 //x축 label에 대응되는 데이터 값
+                            ],
+                            backgroundColor: [
+                                //색상
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                //경계선 색상
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1 //경계선 굵기
+                        },
+                        // {
+                        //     label: 'test2',
+                        //     fill: false,
+                        //     data: [
+                        //         8, 34, 12, 24
+                        //     ],
+                        //     backgroundColor: 'rgb(157, 109, 12)',
+                        //     borderColor: 'rgb(157, 109, 12)'
+                        // }
+                    ]
+                },
+                options: {
+					legend: {
+						display: false
+					},
+                    scales: {
+						xAxes: [{
+							barPercentage: 0.4
+						}],
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true,
+									max: 100,
+                                }
+                            }
+                        ]
+                    }
+                }
+            });			
 </script>
 
 {% endblock %}

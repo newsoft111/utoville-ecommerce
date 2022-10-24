@@ -265,4 +265,16 @@ def subscription(request):
 	return render(request, 'account/mypage/subscription.html')
 
 def cancel(request):
-	return render(request, 'account/mypage/cancel.html')
+	return render(request, 'account/mypage/cancel/req_cancel.html')
+
+def cancel_form(request):
+	return render(request, 'account/mypage/cancel/cancel_form.html')
+
+def qna_list(request):
+	return render(request, 'account/mypage/qna/qna_list.html')
+
+def qna_write(request):
+	return render(request, 'account/mypage/qna/write.html')
+
+def qna_detail(request):
+	return render(request, 'account/mypage/qna/detail.html')
