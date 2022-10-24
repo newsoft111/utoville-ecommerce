@@ -1,5 +1,6 @@
 from django.db import models
 from product.models import *
+from account.models import UserShippingAddress
 
 # Create your models here.
 class Order(models.Model):
@@ -10,14 +11,20 @@ class Order(models.Model):
 	pg_uid = models.CharField(max_length=255)
 	ordered_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	shpping_address = models.ForeignKey(
-			Product,
-			on_delete=models.CASCADE
+			UserShippingAddress,
+			on_delete=models.CASCADE,
+			null=True
 	)
-	status = models.CharField(max_length=255)
+	is_paid=models.BooleanField(default=False)
+	paid_at = models.DateTimeField(null=True)
+	is_cancelled=models.BooleanField(default=False)
+	cancelled_at = models.DateTimeField(null=True)
+	is_refunded=models.BooleanField(default=False)
+	refunded_at = models.DateTimeField(null=True)
 	item = models.ManyToManyField(
 				ProductVariantValue,
 				related_name="my_item",
-				through='ProductArea'
+				through='OrderItem'
 	)
 
 	class Meta:
