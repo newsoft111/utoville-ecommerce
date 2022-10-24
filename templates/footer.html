@@ -77,16 +77,16 @@
 				<div class="d-flex justify-content-start">
 
 					<div class="d-block me-2 my-1">
-						<img src="{% static 'img/payment/american_express.svg' %}" alt="">
+						<img src="{% static 'img/shop/payment/american_express.svg' %}" alt="">
 					</div>
 					<div class="d-block me-2 my-1">
-						<img src="{% static 'img/payment/paypal.svg' %}" alt="paypal">
+						<img src="{% static 'img/shop/payment/paypal.svg' %}" alt="paypal">
 					</div>
 					<div class="d-block me-2 my-1">
-						<img src="{% static 'img/payment/rupay.svg' %}" alt="rupay">
+						<img src="{% static 'img/shop/payment/rupay.svg' %}" alt="rupay">
 					</div>
 					<div class="d-block my-1">
-						<img src="{% static 'img/payment/visa.svg' %}" alt="visa">
+						<img src="{% static 'img/shop/payment/visa.svg' %}" alt="visa">
 					</div>
 				</div>
 				<!--:/payment options-->
@@ -143,15 +143,18 @@
 <!--scripts-->
 <script src="{% static 'vendor/node_modules/js/choices.min.js' %}"></script>
 <script src="{% static 'vendor/node_modules/js/swiper-bundle.min.js' %}"></script>
+<!-- datepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+
 <script>
   //Swiper thumbnail demo
-  var swiperThumbnails = new Swiper(".swiper-thumbnails", {
+var swiperThumbnails = new Swiper(".swiper-thumbnails", {
 	spaceBetween: 8,
 	slidesPerView: 4,
 	freeMode: true,
 	watchSlidesProgress: true,
-  });
-  var swiperThumbnailsMain = new Swiper(".swiper-thumbnails-main", {
+});
+var swiperThumbnailsMain = new Swiper(".swiper-thumbnails-main", {
 	spaceBetween: 0,
 	navigation: {
 	  nextEl: ".swiperThumb-next",
@@ -160,27 +163,27 @@
 	thumbs: {
 	  swiper: swiperThumbnails
 	}
-  });
-  var el = document.querySelectorAll("[data-choices]");
-  el.forEach(e => {
+});
+var el = document.querySelectorAll("[data-choices]");
+	el.forEach(e => {
 	const t = {
-	  ...e.dataset.choices ? JSON.parse(e.dataset.choices) : {},
-	  ...{
-		classNames: {
-		  containerInner: e.className,
-		  input: "form-control",
-		  inputCloned: "form-control-xs",
-		  listDropdown: "dropdown-menu",
-		  itemChoice: "dropdown-item",
-		  activeState: "show",
-		  selectedState: "active"
+		...e.dataset.choices ? JSON.parse(e.dataset.choices) : {},
+		...{
+			classNames: {
+			containerInner: e.className,
+			input: "form-control",
+			inputCloned: "form-control-xs",
+			listDropdown: "dropdown-menu",
+			itemChoice: "dropdown-item",
+			activeState: "show",
+			selectedState: "active"
+			}
 		}
-	  }
 	}
 	new Choices(e, t)
-  });
-
+});
 </script>
+
 <script src="{% static 'vendor/node_modules/js/simplebar.min.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
 

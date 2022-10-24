@@ -50,8 +50,6 @@ function closeModal() {
 	$('#closeModalBtn').attr('data-before-modal','');
 	var modal = new bootstrap.Modal(document.getElementById('globalModal'));
 	modal.hide();
-<<<<<<< Updated upstream
-=======
 }
 
 
@@ -70,5 +68,4 @@ function getCookie(name) {
         }
     }
     return cookieValue;
->>>>>>> Stashed changes
 }

@@ -8,13 +8,14 @@
 <section class="position-relative">
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
-			<div class="row">
-				{% include "account/mypage/sidemenu.html" with active_tab="취소/변경" %}
+			<div class="my_page_main row">
+				{% include "account/mypage/sidemenu.html" with active_tab="서비스 취소신청" %}
 				<div class="col-lg-9">
+					{% include "account/mypage/topmenu.html" with active_tab="서비스 취소신청" %}
 					<div class="row">
 						<div class="col-12">
 							<!-- Page title -->
-							<div class="newordertitle">
+							<div class="mypage_main_title">
 								<h3>서비스 취소신청</h3>
 							</div>
 							<!-- Service Cancel START -->
@@ -46,7 +47,7 @@
 										</div>
 
 										<!-- List -->
-										<div class="row">
+										<div class="order_info row">
 											<div class="col-12 align-middle text-center py-4">
 												<div class="row">
 													<div class="col-xxl-6">
@@ -74,7 +75,7 @@
 															</div>
 															<!-- Status -->
 															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<div class="cancel_status badge bg-warning-soft text-danger">취소 완료</div>
+																<div class="cancel_status text-danger">취소 완료</div>
 															</div>		
 															<!-- Details -->
 															<div class="col-md-4 align-middle pt-2 pt-md-0">
@@ -86,9 +87,7 @@
 											</div>
 										</div>
 										<hr>
-
-						
-										<div class="row">
+										<div class="order_info row">
 											<div class="col-12 align-middle text-center py-4">
 												<div class="row">
 													<div class="col-xxl-6">
@@ -114,50 +113,13 @@
 															<div class="purchase_date col-md-4 align-middle text-body">
 																08 July 2018
 															</div>
-													
 															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<div class="cancel_status badge bg-danger-soft text-primary">구매 완료</div>
-															</div>
-														
+																<div class="cancel_status text-primary">구매 완료</div>
+																<!-- <div class="cancel_status text-success">취소 신청</div> -->
+															</div>			
 															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<a class="btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#cancelModal">&nbsp;취소</a>
+																<a href="{% url 'account:cancel_form' %}" class="btn btn-sm btn-info-soft me-1 mb-1">&nbsp;취소</a>
 															</div>
-
-															<!-- Modal Start -->										
-															<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
-																<div class="modal-dialog">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<h5 class="modal-title" id="exampleModalLabel">주문 취소요청</h5>
-																			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-																		</div>
-																		<div class="modal-body">
-																			<form>
-																				<div class="mb-3">
-																					<label for="chBasic" class="form-label">취소사유 선택</label>
-																					<select id="chBasic" class="form-control text-start" data-choices='{"searchEnabled":false, "allowHTML":true,"itemSelectText":""}' required>
-																						<option value="" class="text-start" selected disabled>구매 취소사유를 선택해주세요</option>
-																						<option value="">단순 변심</option>
-																						<option value="">다른 서비스 잘못 주문</option>
-																						<option value="">서비스 및 상품 불만족</option>
-																						<option value="">서비스 정보 상이</option>			
-																						<option value="">해피콜 지연</option>
-																					</select>
-																					</div>
-																				<div class="mb-3">
-																				<textarea class="form-control" id="message-text" placeholder="상세 사유 입력(선택사항)"></textarea>
-																				</div>
-																			</form>
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-																			<button type="button" class="btn btn-primary">주문 취소</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<!-- Modal End -->
-														</div>
 													</div>
 												</div> <!-- Row END -->
 											</div>
@@ -215,50 +177,6 @@
 		</div>
 	</div>
 </div>
-
-<div class="modal fade" id="changeDetailModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="changeDetailLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered modal-md" role="document">
-		<div class="modal-content">
-		<div class="modal-header p-4">
-			<h4 class="mb-0 text-center" id="cancelDetail">변경 상세정보</h4>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body p-4" id="cancelDetailBody">
-			<div class="previous_order">
-				<div class="cancelCatalog">
-					<div class="cancelphoto">
-						<img class="rounded" src="{% static 'images/property/grid-list/02.jpg' %}" alt="">
-					</div>
-					<div class="cancel-list text-start">
-						<h6>에어컨 청소</h6>
-						<p>스탠드형</p>
-						<span>₱5,000 / 1개</span>
-					</div>
-					<span class="calce-notice">이전주문</span>
-				</div>				
-			</div>
-			<div class="changed_order">
-				<div class="cancelCatalog">
-					<div class="cancelphoto">
-						<img class="rounded" src="{% static 'images/property/grid-list/02.jpg' %}" alt="">
-					</div>
-					<div class="cancel-list text-start">
-						<h6>에어컨 청소</h6>
-						<p>벽걸이형</p>
-						<span>₱3,500 / 1개</span>
-					</div>
-					<span class="calce-notice">변경완료</span>
-				</div>	
-			</div>
-		<div class="modal-footer">
-				<button type="button" class="btn btn-primary btn-md" data-bs-dismiss="modal">확인</button>
-				<!-- id="" data-before-modal="" onclick="" -->
-		</div>
-		</div>
-	</div>
-</div>
-
-
 
 <script>
 var cSelect = document.querySelectorAll("[data-choices]");
