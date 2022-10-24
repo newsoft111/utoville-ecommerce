@@ -1,3 +1,8 @@
+.form-check-input{height:1.5rem}
+.form-control.is-valid:focus,.was-validated 
+.form-control:valid:focus{box-shadow:0 0 .75rem rgba(96,190,134,.0875)}
+.form-control.is-invalid:focus,.was-validated 
+.form-control:invalid:focus{box-shadow:0 0 .75rem rgba(249,71,112,.0875)}
 .clearfix:before, .clearfix:after {
     display: block;
     content: '';
