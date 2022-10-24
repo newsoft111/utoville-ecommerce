@@ -8,129 +8,130 @@
 <section class="position-relative">
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
-			{% include "account/mypage/sidemenu.html" with active_tab="서비스 취소신청" %}
-			<div class="col-lg-9">
-				{% include "account/mypage/topmenu.html" with active_tab="서비스 취소신청" %}
-				<div class="row">
-					<div class="col-12">
-						<!-- Page title -->
-						<div class="mypage_main_title">
-							<h3>서비스 취소신청</h3>
-						</div>
-						<!-- Service Cancel START -->
-						<div class="row main_contents">
-							<div class="col-md-12">
-								<div class="bg-secondary-soft p-3 p-md-5 rounded">
-									<!-- Title -->
-									<div class="row d-none d-xxl-block">
-										<div class="col-12 align-middle py-3">
-											<div class="row border-bottom">
-												<div class="col-6 align-middle text-center py-2">
-													<h5>Listing</h5>
-												</div>
-												<div class="col-6">
-													<div class="row">
-														<div class="col-4 align-middle text-center py-2">
-															<h5>Purchase date</h5>
-														</div>
-														<div class="col-4 align-middle text-center py-2">
-															<h5>Status</h5>
-														</div>
-														<div class="col-4 align-middle text-center py-2">
-															<h5>Details</h5>
+			<div class="my_page_main row">
+				{% include "account/mypage/sidemenu.html" with active_tab="서비스 취소신청" %}
+				<div class="col-lg-9">
+					{% include "account/mypage/topmenu.html" with active_tab="서비스 취소신청" %}
+					<div class="row">
+						<div class="col-12">
+							<!-- Page title -->
+							<div class="mypage_main_title">
+								<h3>서비스 취소신청</h3>
+							</div>
+							<!-- Service Cancel START -->
+							<div class="row main_contents">
+								<div class="col-md-12">
+									<div class="bg-secondary-soft p-3 p-md-5 rounded">
+										<!-- Title -->
+										<div class="row d-none d-xxl-block">
+											<div class="col-12 align-middle py-3">
+												<div class="row border-bottom">
+													<div class="col-6 align-middle text-center py-2">
+														<h5>Listing</h5>
+													</div>
+													<div class="col-6">
+														<div class="row">
+															<div class="col-4 align-middle text-center py-2">
+																<h5>Purchase date</h5>
+															</div>
+															<div class="col-4 align-middle text-center py-2">
+																<h5>Status</h5>
+															</div>
+															<div class="col-4 align-middle text-center py-2">
+																<h5>Details</h5>
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
 
-									<!-- List -->
-									<div class="row">
-										<div class="col-12 align-middle text-center py-4">
-											<div class="row">
-												<div class="col-xxl-6">
-													<div class="card bg-transparent">
-														<div class="row">
-															<!-- Image -->
-															<div class="col-xl-3">
-																<img class="rounded" src="{% static 'images/property/grid-list/02.jpg' %}" alt="">
-															</div>
-															<!-- Info -->
-															<div class="col-xl-9 pt-2 pt-xl-0 text-start">
-																<h6 class="mb-1">에어컨청소</h6>
-																<p class="mb-1 text-body">스탠드형</p>
-																<span class="text-success">₱5,000 / 1개</span>
+										<!-- List -->
+										<div class="order_info row">
+											<div class="col-12 align-middle text-center py-4">
+												<div class="row">
+													<div class="col-xxl-6">
+														<div class="card bg-transparent">
+															<div class="row">
+																<!-- Image -->
+																<div class="col-xl-3">
+																	<img class="rounded" src="{% static 'images/property/grid-list/02.jpg' %}" alt="">
+																</div>
+																<!-- Info -->
+																<div class="col-xl-9 pt-2 pt-xl-0 text-start">
+																	<h6 class="mb-1">에어컨청소</h6>
+																	<p class="mb-1 text-body">스탠드형</p>
+																	<span class="text-success">₱5,000 / 1개</span>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<!-- Contents -->
-												<div class="col-xxl-6 pt-2 pt-xxl-0">
-													<div class="row">
+													<!-- Contents -->
+													<div class="col-xxl-6 pt-2 pt-xxl-0">
+														<div class="row">
+															<!-- Date -->
+															<div class="purchase_date col-md-4 align-middle text-body">
+																08 July 2018
+															</div>
+															<!-- Status -->
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<div class="cancel_status text-danger">취소 완료</div>
+															</div>		
+															<!-- Details -->
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<a class="cancel_detail btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#cancelDetailModal">&nbsp;취소상세</a>
+															</div>
+														</div>
+													</div>
+												</div> <!-- Row END -->
+											</div>
+										</div>
+										<hr>
+										<div class="order_info row">
+											<div class="col-12 align-middle text-center py-4">
+												<div class="row">
+													<div class="col-xxl-6">
+														<div class="card bg-transparent">
+															<div class="row">
+																<!-- Image -->
+																<div class="col-xl-3">
+																	<img class="rounded" src="assets/images/property/grid-list/04.jpg" alt="">
+																</div>
+																<!-- Info -->
+																<div class="col-xl-9 pt-2 pt-xl-0 text-start">
+																	<h6 class="mb-1">Store in Woodside, San Francisco</h6>
+																	<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
+																	<span class="text-success">$160,000</span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- Content -->
+													<div class="col-xxl-6 pt-2 pt-xxl-0">
 														<!-- Date -->
-														<div class="purchase_date col-md-4 align-middle text-body">
-															08 July 2018
-														</div>
-														<!-- Status -->
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<div class="cancel_status badge bg-warning-soft text-danger">취소 완료</div>
-														</div>		
-														<!-- Details -->
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<a class="cancel_detail btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#cancelDetailModal">&nbsp;취소상세</a>
-														</div>
-													</div>
-												</div>
-											</div> <!-- Row END -->
-										</div>
-									</div>
-									<hr>
-
-					
-									<div class="row">
-										<div class="col-12 align-middle text-center py-4">
-											<div class="row">
-												<div class="col-xxl-6">
-													<div class="card bg-transparent">
 														<div class="row">
-															<!-- Image -->
-															<div class="col-xl-3">
-																<img class="rounded" src="assets/images/property/grid-list/04.jpg" alt="">
+															<div class="purchase_date col-md-4 align-middle text-body">
+																08 July 2018
 															</div>
-															<!-- Info -->
-															<div class="col-xl-9 pt-2 pt-xl-0 text-start">
-																<h6 class="mb-1">Store in Woodside, San Francisco</h6>
-																<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
-																<span class="text-success">$160,000</span>
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<div class="cancel_status text-primary">구매 완료</div>
+																<!-- <div class="cancel_status text-success">취소 신청</div> -->
+															</div>			
+															<div class="col-md-4 align-middle pt-2 pt-md-0">
+																<a href="{% url 'account:cancel_form' %}" class="btn btn-sm btn-info-soft me-1 mb-1">&nbsp;취소</a>
 															</div>
-														</div>
 													</div>
-												</div>
-												<!-- Content -->
-												<div class="col-xxl-6 pt-2 pt-xxl-0">
-													<!-- Date -->
-													<div class="row">
-														<div class="purchase_date col-md-4 align-middle text-body">
-															08 July 2018
-														</div>
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<div class="cancel_status badge bg-danger-soft text-primary">구매 완료</div>
-														</div>			
-														<div class="col-md-4 align-middle pt-2 pt-md-0">
-															<a href="{% url 'account:cancel_form' %}" class="btn btn-sm btn-info-soft me-1 mb-1">&nbsp;취소</a>
-														</div>
-												</div>
-											</div> <!-- Row END -->
+												</div> <!-- Row END -->
+											</div>
 										</div>
+										<hr> <!-- Divider -->
 									</div>
-									<hr> <!-- Divider -->
 								</div>
 							</div>
+							<!-- Property list END -->
 						</div>
-						<!-- Property list END -->
-					</div>
-				</div> <!-- Row END -->
+					</div> <!-- Row END -->
+				</div>
 			</div>
 		</div>
 	</div>
