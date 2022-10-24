@@ -3,6 +3,8 @@
 {% load static %}
 {% load humanize %}
 
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"> 
+
 <!-- Section -->
 <section class="position-relative">
 	<div class="container position-relative">
@@ -83,36 +85,24 @@
 										</div>
 				
 										<!-- chart-view END -->
-
-										<div class="table-responsive subs-table" style="text-align: center;">
-											<table class="table">
-												<!-- Title -->
-												<thead>
-													<tr>
-														<th scope="col">서비스 시작일</th>
-														<th scope="col">서비스 종료일</th>
-														<th scope="col">서비스 정보</th>
-														<th scope="col">수량</th>
-														<th scope="col">주문금액</th>
-														<th scope="col">진행상태</th>
-													</tr>
-												</thead>
-												<!-- Data -->
-												<tbody>
-													<tr>
-														<td>2022/10/10</td>
-														<td>2022/4/10</td>
-														<td>에어컨 청소(6개월)</td>
-														<td>1</td>
-														<td>₱12,000</td>
-														<td>미진행</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
 									</div>
 								</div>
 							</div>
+							<div class="col-12 mb-3">
+                                <label for="p_description" class="form-label">Upload images</label>
+                                <!--Listing Images-->
+                                <div class="p-4 border rounded-3" data-dropzone-area="">
+                                    <div class="dz-preview" id="dz-preview-row" data-horizontal-scroll="">
+                                    </div>
+                                    <div class="chat-form rounded-pill" data-emoji-form="">
+                                        <button type="button"
+                                        class="btn btn-outline-secondary dz-clickable"
+                                        id="dz-btn">
+                                        <i class="bx bx-cloud-upload fs-4 me-1"></i> Upload
+                                    </button>
+                                    </div>
+                                </div>
+                            </div>
 							<div class="subs-cancel">
 								구독 취소 내역이 없습니다.
 							</div>
@@ -121,12 +111,12 @@
 				</div>	
 				<!-- Main content END -->
 			</div>
-		</div>>
-	</div>
+		</div>
 </section>
 
 <!-- apexcharts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
 <script>
 window.addEventListener("load", () => {
 	let btn = document.getElementById("pills-tab");
