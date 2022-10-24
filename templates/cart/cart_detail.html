@@ -68,7 +68,7 @@
 							<tr>
 								<td>
 									<div class="position-relative">
-										<input type="checkbox" class="position-absolute top-0 start-0" id="cart{{cart_item.pk}}" name="cart_item_id" value="{{cart_item.pk}}">
+										<input type="checkbox" onchange="cal_checked_item_price();" data-product-id="{{cart_item.product.id}}" data-variant-value-id="{{cart_item.variant_value.id}}" data-qty="{{cart_item.quantity}}" class="position-absolute top-0 start-0" id="cart{{cart_item.pk}}" name="cart_item_id" value="{{cart_item.pk}}">
 										<label for="cart{{cart_item.pk}}"><img src="{% static 'img/shop/backpack2.jpg' %}" class="width-7x rounded-3"></label>
 									</div>
 								</td>
@@ -94,7 +94,7 @@
 								<td>
 									<input type="number" min="1" onKeyDown="return false" onchange="update_cart_submit(this)" value="{{cart_item.quantity}}" data-cart-item-id="{{cart_item.id}}" value="{{cart_item.quantity}}" class="form-control border-0 shadow-none rounded-0 bg-transparent">
 								</td>
-								<td>
+								<td id="sub-total">
 									{% if cart_item.variant_value is not None %}
 									₱{{cart_item.product.price|add:cart_item.variant_value.price|mul:cart_item.quantity|intcomma}}
 									{% else %}
@@ -126,7 +126,7 @@
 					<div class="col-md-5 text-end">
 						<div class="d-flex flex-column h-100 justify-content-end">
 							<strong class="text-muted d-block mb-2 fs-6">Cart total</strong>
-							<h5 class="mb-0 ms-3 h2">₱{{total_price|intcomma}}</h5>
+							<h5 class="mb-0 ms-3 h2" id="total-price">₱0</h5>
 						</div>
 					</div>
 				</div>
@@ -138,8 +138,8 @@
 						</a>
 					</div>
 					<div>
-						<a href="demo-shop-checkout.html" class="btn btn-primary">proceed to Checkout
-						</a>
+						<a href="#!" onclick="order_submit();" class="btn btn-primary">proceed to Checkout</a>
+						<input type="hidden" name="obj_data" value=''>
 					</div>
 				</div>
 			</div>
@@ -263,6 +263,7 @@ function checkbox_manager() {
 	} else{
 		allboxes.forEach(item => item.checked = true);
 	}
+	cal_checked_item_price();
 }
 
 function remove_checked_item() {
@@ -274,5 +275,64 @@ function remove_checked_item() {
 
 	remove_cart_submit(arr);
 }
+
+
+function cal_checked_item_price() {
+	let cart_items = document.querySelectorAll("input[name=cart_item_id]:checked");
+
+	let total = 0;
+	let arr = [];
+	
+	cart_items.forEach((item) => {
+		const tr = item.parentElement.parentElement.parentElement;
+		let sub_total = String(tr.querySelector('#sub-total').innerHTML).replace(/[^0-9]/g, "");
+		
+		total += Number(sub_total);
+
+		let objData = new Object();
+ 		objData.product_id = item.dataset.productId;
+ 		objData.variant_value_id = item.dataset.variantValueId;
+ 		objData.qty = item.dataset.qty;
+
+ 		arr.push(objData);
+	});	
+
+	document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
+	document.querySelector("#total-price").innerHTML = '₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+
+async function order_submit() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+	let order_item_list = document.querySelector("input[name=obj_data]").value;
+
+    const response = await fetch("{% url 'order:create' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: JSON.stringify({
+			'order_item_list': order_item_list
+		}),
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		is_run  = false;
+		if (data.result == '200') {
+			window.history.pushState("", "", `{% url 'order:view' %}?id=${data.result_text}`);
+			window.location.reload();
+		} else {
+			openModal("알림", data.result_text);
+		}
+	});
+}
+
 </script>
 {% endblock %}

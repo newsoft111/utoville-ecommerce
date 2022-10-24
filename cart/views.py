@@ -3,6 +3,7 @@ from product.models import *
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 import json
 
 def get_user_cart(request):
@@ -136,16 +137,14 @@ def cart_detail(request, total_price=0, counter=0, cart_items=None):
 	except ObjectDoesNotExist:
 		pass
 
-	cart_info = get_cart_info(request)
+	'''cart_info = get_cart_info(request)
 	total_price = cart_info['total_price']
-	total_quantity = cart_info['total_quantity']
+	total_quantity = cart_info['total_quantity']'''
 
 	return render(request, 'cart/cart_detail.html' ,
 		dict(
 			seo = seo,
 			cart_items = cart_items,
-			total_price = total_price,
-			total_quantity = total_quantity
 		)
 	)
 
