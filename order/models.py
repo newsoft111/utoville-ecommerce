@@ -8,7 +8,7 @@ class Order(models.Model):
 			settings.AUTH_USER_MODEL,
 			on_delete=models.CASCADE,
 	)
-	pg_uid = models.CharField(max_length=255)
+	pg_uid = models.CharField(max_length=255, blank=True)
 	ordered_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	shpping_address = models.ForeignKey(
 			UserShippingAddress,
@@ -21,9 +21,9 @@ class Order(models.Model):
 	cancelled_at = models.DateTimeField(null=True)
 	is_refunded=models.BooleanField(default=False)
 	refunded_at = models.DateTimeField(null=True)
-	item = models.ManyToManyField(
-				ProductVariantValue,
-				related_name="my_item",
+	order_item = models.ManyToManyField(
+				Product,
+				related_name="order_orderitem_set",
 				through='OrderItem'
 	)
 
@@ -36,12 +36,17 @@ class OrderItem(models.Model):
 			Order,
 			on_delete=models.CASCADE
 	)
-	variant_value = models.ForeignKey(
-			ProductVariantValue,
-			on_delete=models.CASCADE
+	product = models.ForeignKey(
+			Product,
+			on_delete=models.CASCADE,
 	)
+	product_name = models.CharField(max_length=255)
+	product_price = models.PositiveIntegerField()
+	variant = models.CharField(max_length=255, null=True)
+	variant_value = models.CharField(max_length=255, null=True)
+	variant_price = models.PositiveIntegerField(null=True)
 	quantity = models.PositiveIntegerField()
-	total_price = models.PositiveIntegerField()
+	
 
 	class Meta:
 		db_table = 'ecommerce_order_item'

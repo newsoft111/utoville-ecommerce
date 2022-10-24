@@ -105,7 +105,6 @@
 				   
 				   <div class="optionAdd d-flex">
 					  <input type="number" onKeyDown="return false" class="form-control w-25" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
-	
 					  <span class="price ms-auto" data-id="" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
 				   </div>
 				</div>
@@ -130,9 +129,8 @@
 				<i class="bx bx-shopping-bag fs-5 me-2"></i>
 				Add to Cart
 				</a>
-				<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-primary hover-lift mt-3">
-				<i class="bx bx-shopping-bag fs-5 me-2"></i>
-				Buy Now
+				<a href="#!" onclick="order_submit();" class="btn btn-primary hover-lift mt-3">
+					<i class="bx bx-shopping-bag fs-5 me-2"></i>Buy Now
 				</a>
 			</div>
 		</div>
@@ -293,7 +291,7 @@ is_run = false;
 
 function add_cart_submit(product_id) {
 	is_run = true;
-	var modal = new bootstrap.Modal(document.getElementById("loading"), {});
+	var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#loading'));
 	let data = document.querySelector("input[name=obj_data]").value;
 
 	if (isEmpty(data)) {
@@ -359,7 +357,7 @@ function cal_total_value() {
  		let objData = new Object();
  		objData.product_id = "{{product_detail.id}}";
  		objData.variant_value_id = item.dataset.id;
- 		objData.qty = item.previousSibling.value;
+ 		objData.qty = item.previousElementSibling.value;
 
  		arr.push(objData);
 	}
@@ -470,6 +468,41 @@ function product_qna_answer_submit() {
         }
     });
 }
+
+async function order_submit() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+	let order_item_list = document.querySelector("input[name=obj_data]").value;
+
+    const response = await fetch("{% url 'order:create' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: JSON.stringify({
+			'order_item_list': order_item_list,
+		}),
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		is_run  = false;
+		if (data.result == '200') {
+			window.history.pushState("", "", `{% url 'order:view' %}?id=${data.result_text}`);
+			window.location.reload();
+		} else {
+			openModal("알림", data.result_text);
+		}
+	});
+}
+
+
+
 </script>
 
 {% endblock %}

@@ -20,60 +20,49 @@
 								<th class="small text-muted" style="width:15%">Price</th>
 								<th class="small text-muted" style="width:20%">Quantity</th>
 								<th class="small text-muted" style="width:15%">Subtotal</th>
-								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							{% if not cart_items %}
+							{% if not order_items %}
 							<tr>
 								<td class="border-bottom-0 text-center p-5" colspan="6">상품이 없습니다.</td>
 							</tr>
 							{% endif%}
 
-							{% for cart_item in cart_items %}
+							{% for order_item in order_items %}
+							
 							<tr>
 								<td>
-									<div class="position-relative">
-										<input type="checkbox" class="position-absolute top-0 start-0" id="cart{{cart_item.pk}}" name="cart_item_id" value="{{cart_item.pk}}">
-										<label for="cart{{cart_item.pk}}"><img src="{% static 'img/shop/backpack2.jpg' %}" class="width-7x rounded-3"></label>
-									</div>
+									<img src="{% static 'img/shop/backpack2.jpg' %}" class="width-7x rounded-3">
 								</td>
 								<td>
-									<a href="#!" class="text-dark h5">
-										{{cart_item.product.name}}
-									</a>
-									{% if cart_item.variant_value is not None %}
+									<span class="text-dark h5">
+										{{order_item.product_name}}
+									</span>
+									{% if order_item.variant_value is not None %}
 									<span class="text-uppercase d-block">
-										{{cart_item.variant_value.variant}}: {{cart_item.variant_value.value}}
+										{{order_item.variant}}: {{order_item.variant_value}}
 									</span>
 									
-									<span class="text-uppercase d-block">+₱{{cart_item.variant_value.price}}</span>
+									<span class="text-uppercase d-block">+₱{{order_item.variant_price}}</span>
 									{% endif %}
 								</td>
 								<td>
-									{% if cart_item.variant_value is not None %}
-									₱{{cart_item.product.price|add:cart_item.variant_value.price|intcomma}}
+									{% if order_item.variant is not None %}
+									₱{{order_item.product_price|add:order_item.variant_price|intcomma}}
 									{% else %}
-									₱{{cart_item.product.price|intcomma}}
+									₱{{order_item.product_price|intcomma}}
 									{% endif %}
 								</td>
 								<td>
-									<input type="number" min="1" onKeyDown="return false" onchange="update_cart_submit(this)" value="{{cart_item.quantity}}" data-cart-item-id="{{cart_item.id}}" value="{{cart_item.quantity}}" class="form-control border-0 shadow-none rounded-0 bg-transparent">
+									<span class="text-uppercase d-block">{{order_item.quantity}}</span>
 								</td>
 								<td>
-									{% if cart_item.variant_value is not None %}
-									₱{{cart_item.product.price|add:cart_item.variant_value.price|mul:cart_item.quantity|intcomma}}
+									{% if order_item.variant is not None %}
+									₱{{order_item.product_price|add:order_item.variant_price|mul:order_item.quantity|intcomma}}
 									{% else %}
-									₱{{cart_item.product.price|mul:cart_item.quantity|intcomma}}
+									₱{{order_item.product_price|mul:order_item.quantity|intcomma}}
 									{% endif %}
-								</td>
-								<td><button class="btn-close text-center" onclick="remove_cart_submit('{{cart_item.id}}');">
-										<svg xmlns="http://www.w3.org/2000/svg" height="16"
-											viewBox="0 0 24 24" width="20" fill="currentColor">
-											<path
-												d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
-										</svg>
-									</button>
 								</td>
 							</tr>
 
@@ -104,15 +93,12 @@
 				<div class="payment-area col">
 					<h4 class="mb-4">Method of payment</h4>
 					<div class="mb-4 form-check">
-						<input required type="checkbox" class="form-check-input" id="conditions_before_order" name="">
+						<input type="checkbox" class="" id="conditions_before_order" name="">
 						<label class="form-check-label" for="conditions_before_order"> 
 							I accept the <a href="#" class="text-dark link-decoration">Terms</a> and
 							<a href="#" class="text-dark link-decoration">conditions</a> and the
 							<a href="#" class="text-dark link-decoration">data protection guidelines.</a>
 						</label>
-						<div class="invalid-feedback">
-							You must agree before submitting.
-						</div>
 					</div>
 					<div class="d-grid">
 						<button type="submit" class="btn btn-lg hover-lift btn-hover-text btn-primary">
