@@ -6,9 +6,6 @@ from django.db.models import Q
 import json
 
 
-<<<<<<< Updated upstream
-# Create your views here.
-=======
 def order_view(request):
 	order_id = request.GET.get("id")
 	q = Q()
@@ -81,4 +78,3 @@ def order_create(request):
 
 def cal_order_item_total_price():
 	pass
->>>>>>> Stashed changes
