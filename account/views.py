@@ -285,9 +285,10 @@ def my_order(request):
 	# else:
 	# 	ordering = "-id"
 	my_order_list =  OrderItem.objects.order_by("-id")
+	#select * from OrderItem order by "-id";
 
 	page        = int(request.GET.get('p', 1))
-	pagenator   = Paginator(my_order_list, 12)
+	pagenator   = Paginator(my_order_list, 6)
 	my_order_list = pagenator.get_page(page)
 
 	return render(request, 'account/mypage/my_order.html' ,{
