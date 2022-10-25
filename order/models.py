@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 from product.models import *
 from account.models import UserShippingAddress
 
@@ -8,7 +9,8 @@ class Order(models.Model):
 			settings.AUTH_USER_MODEL,
 			on_delete=models.CASCADE,
 	)
-	pg_uid = models.CharField(max_length=255, blank=True)
+	order_uid = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True, editable=False)
+	pg_uid = models.CharField(max_length=255, null=True)
 	ordered_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	shpping_address = models.ForeignKey(
 			UserShippingAddress,
