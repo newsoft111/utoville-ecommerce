@@ -5,21 +5,38 @@ from .models import *
 from django.db.models import Q
 import json
 
-
+@login_required(login_url="account:login")
 def order_view(request):
 	order_id = request.GET.get("id")
+	if order_id is None:
+		return redirect('main:index')
+
 	q = Q()
 	q &= Q(order=order_id)
 	q &= Q(order__user=request.user)
 	order_items = OrderItem.objects.filter(q).order_by("-pk")
+
+	total_price=0
+	
+	for order_item in order_items:
+		if order_item.variant_value is not None:
+			total_price += (order_item.product_price + order_item.variant_price ) * order_item.ordered_quantity
+		else:
+			total_price += order_item.product_price * order_item.ordered_quantity
+
 	return render(request, 'order/order_view.html' ,{
-		"order_items": order_items
+		"order_items": order_items,
+		"total_price": total_price
 	})
 
-
-@login_required(login_url="acount:login")
 def order_create(request):
 	if request.method == 'POST':
+		if not request.user.is_authenticated:
+			return JsonResponse({
+				'result': '201', 
+				'result_text': '로그인을 해주세요.'
+			})
+
 		jsonData = json.loads(request.body)
 		order_item_list = json.loads(jsonData.get('order_item_list'))
 
@@ -28,7 +45,7 @@ def order_create(request):
 		for order_item in order_item_list:
 			product = order_item['product_id']
 			variant_value = order_item['variant_value_id']
-			quantity = order_item['qty']
+			ordered_quantity = order_item['qty']
 
 			try:
 				product_obj = Product.objects.get(pk=product)
@@ -52,7 +69,7 @@ def order_create(request):
 
 			if product_obj is not None:
 				try:
-					order_item_obj = OrderItem.objects.create(
+					OrderItem.objects.create(
 						order = order_obj,
 						product = product_obj,
 						product_name = product_obj.name,
@@ -60,12 +77,11 @@ def order_create(request):
 						variant = variant,
 						variant_value = variant_value,
 						variant_price = variant_price,
-						quantity = quantity,
+						ordered_quantity = ordered_quantity,
 						
 					)
-					print(order_item_obj)
-				except Exception as e:
-					print(e)
+
+				except:
 					pass
 			
 		return JsonResponse({
@@ -75,6 +91,3 @@ def order_create(request):
 	else:
 		return redirect("main:index")
 
-
-def cal_order_item_total_price():
-	pass

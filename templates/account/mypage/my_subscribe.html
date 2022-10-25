@@ -9,14 +9,14 @@
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
 			<div class="my_page_main row">
-				{% include "account/mypage/sidemenu.html" with active_tab="서비스 취소신청" %}
+				{% include "account/mypage/sidemenu.html" with active_tab="구독관리" %}
 				<div class="col-lg-9">
-					{% include "account/mypage/topmenu.html" with active_tab="서비스 취소신청" %}
+					{% include "account/mypage/topmenu.html" with active_tab="구독관리" %}
 					<div class="row">
 						<div class="col-12">
 							<!-- Page title -->
 							<div class="mypage_main_title">
-								<h3>서비스 취소신청</h3>
+								<h3>구독관리</h3>
 							</div>
 							<!-- Service Cancel START -->
 							<div class="row main_contents">
@@ -118,7 +118,7 @@
 																<!-- <div class="cancel_status text-success">취소 신청</div> -->
 															</div>			
 															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<a href="{% url 'account:cancel_form' %}" class="btn btn-sm btn-info-soft me-1 mb-1">&nbsp;취소</a>
+																<a href="{% url 'account:my_subscribe_cancel' %}" class="btn btn-sm btn-info-soft me-1 mb-1">&nbsp;취소</a>
 															</div>
 													</div>
 												</div> <!-- Row END -->
