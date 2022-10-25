@@ -17,9 +17,9 @@ def order_view(request):
 	
 	for order_item in order_items:
 		if order_item.variant_value is not None:
-			total_price += (order_item.product_price + order_item.variant_price ) * order_item.quantity
+			total_price += (order_item.product_price + order_item.variant_price ) * order_item.ordered_quantity
 		else:
-			total_price += order_item.product_price * order_item.quantity
+			total_price += order_item.product_price * order_item.ordered_quantity
 
 	return render(request, 'order/order_view.html' ,{
 		"order_items": order_items,
@@ -42,7 +42,7 @@ def order_create(request):
 		for order_item in order_item_list:
 			product = order_item['product_id']
 			variant_value = order_item['variant_value_id']
-			quantity = order_item['qty']
+			ordered_quantity = order_item['qty']
 
 			try:
 				product_obj = Product.objects.get(pk=product)
@@ -74,7 +74,7 @@ def order_create(request):
 						variant = variant,
 						variant_value = variant_value,
 						variant_price = variant_price,
-						quantity = quantity,
+						ordered_quantity = ordered_quantity,
 						
 					)
 					print(order_item_obj)
