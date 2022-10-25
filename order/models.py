@@ -44,7 +44,7 @@ class OrderItem(models.Model):
 	variant_value = models.CharField(max_length=255, null=True)
 	variant_price = models.PositiveIntegerField(null=True)
 	ordered_quantity = models.PositiveIntegerField()
-	shipped_quantity = models.PositiveIntegerField()
+	shipped_quantity = models.PositiveIntegerField(default=0)
 	
 
 	class Meta:
