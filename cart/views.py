@@ -147,5 +147,3 @@ def cart_detail(request, total_price=0, counter=0, cart_items=None):
 			cart_items = cart_items,
 		)
 	)
-
-
