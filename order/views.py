@@ -5,7 +5,7 @@ from .models import *
 from django.db.models import Q
 import json
 
-@login_required(login_url="acount:login")
+@login_required(login_url="account:login")
 def order_view(request):
 	order_id = request.GET.get("id")
 	q = Q()
@@ -26,10 +26,14 @@ def order_view(request):
 		"total_price": total_price
 	})
 
-
-@login_required(login_url="acount:login")
 def order_create(request):
 	if request.method == 'POST':
+		if not request.user.is_authenticated:
+			return JsonResponse({
+				'result': '201', 
+				'result_text': '로그인을 해주세요.'
+			})
+
 		jsonData = json.loads(request.body)
 		order_item_list = json.loads(jsonData.get('order_item_list'))
 
@@ -85,6 +89,3 @@ def order_create(request):
 	else:
 		return redirect("main:index")
 
-
-def cal_order_item_total_price():
-	pass
