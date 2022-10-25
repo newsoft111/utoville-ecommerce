@@ -293,8 +293,11 @@ function add_cart_submit(product_id) {
 	is_run = true;
 	var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#loading'));
 	let data = document.querySelector("input[name=obj_data]").value;
+	let optionFirst = document.getElementById("optionFirst");
+	let itemPrice = document.getElementById("itemPrice");
 
-	if (isEmpty(data)) {
+	// if (isEmpty(data)) {
+	if(optionFirst.value == '옵션1' || itemPrice == null){
 		openModal('알림','옵션을 선택해주세요.');
 		return false;
 	}
