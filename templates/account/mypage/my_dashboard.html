@@ -193,9 +193,6 @@ document.addEventListener("DOMContentLoaded", function() {
             var t = c();
             m.changeView(t)
         },
-        eventDidMount: function(e) {
-            "done" === e.event.extendedProps.status && (e.el.style.backgroundColor = "red", (e = e.el.getElementsByClassName("fc-event-dot")[0]) && (e.style.backgroundColor = "white"))
-        },
         events: e
     });
     m.render();
