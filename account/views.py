@@ -257,18 +257,17 @@ def send_auth_mail(email):
 	else:
 		return False
 
+def my_dashboard(request):
+	return render(request, 'account/mypage/my_dashboard.html')
 
 def my_order(request):
 	return render(request, 'account/mypage/my_order.html')
 
-def subscription(request):
-	return render(request, 'account/mypage/subscription.html')
+def my_subscribe(request):
+	return render(request, 'account/mypage/my_subscribe.html')
 
-def cancel(request):
-	return render(request, 'account/mypage/cancel/req_cancel.html')
-
-def cancel_form(request):
-	return render(request, 'account/mypage/cancel/cancel_form.html')
+def my_subscribe_cancel(request):
+	return render(request, 'account/mypage/my_subscribe_cancel.html')
 
 def qna_list(request):
 	return render(request, 'account/mypage/qna/qna_list.html')

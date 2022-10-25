@@ -8,6 +8,9 @@ import json
 @login_required(login_url="account:login")
 def order_view(request):
 	order_id = request.GET.get("id")
+	if order_id is None:
+		return redirect('main:index')
+
 	q = Q()
 	q &= Q(order=order_id)
 	q &= Q(order__user=request.user)
@@ -66,7 +69,7 @@ def order_create(request):
 
 			if product_obj is not None:
 				try:
-					order_item_obj = OrderItem.objects.create(
+					OrderItem.objects.create(
 						order = order_obj,
 						product = product_obj,
 						product_name = product_obj.name,

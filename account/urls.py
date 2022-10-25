@@ -13,12 +13,12 @@ urlpatterns = [
 	#path('re/verify/email/', views.re_verify, name='re_verify'),
 	path('mypage/',
 		include([
+			path('', views.my_dashboard, name='my_dashboard'),
 			path('orders/', views.my_order, name='my_order'),
-			path('subs/', views.subscription, name='subscription'),
-			path('cancel/',
+			path('subs/',
 				include([
-					path('', views.cancel, name='cancel'),
-					path('form/', views.cancel_form, name='cancel_form'),			
+					path('', views.my_subscribe, name='my_subscribe'),
+					path('cancel/', views.my_subscribe_cancel, name='my_subscribe_cancel'),			
 				]),
 			),
 			path('qna/',
