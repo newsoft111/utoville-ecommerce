@@ -81,7 +81,8 @@ def order_create(request):
 						
 					)
 
-				except:
+				except Exception as e:
+					print(e)
 					pass
 			
 		return JsonResponse({
