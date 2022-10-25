@@ -57,7 +57,7 @@
 								<td>
 									<span class="text-uppercase d-block">{{order_item.quantity}}</span>
 								</td>
-								<td>
+								<td id="sub-total">
 									{% if order_item.variant is not None %}
 									₱{{order_item.product_price|add:order_item.variant_price|mul:order_item.quantity|intcomma}}
 									{% else %}
@@ -76,7 +76,7 @@
 					<table class="table mb-5 table-bordered">
 						<tr class="bg-light">
 							<th>상품금액</th>
-							<td class="fw-bold fs-5 text-dark">Free Shipping</td>
+							<td class="fw-bold fs-5 text-dark">₱{{total_price|intcomma}}</td>
 						</tr>
 						<tr>
 							<th>포인트사용</th>
@@ -85,8 +85,8 @@
 							</td>
 						</tr>
 						<tr class="bg-light">
-							<th>총금액</th>
-							<td class="fw-bold fs-5 text-dark">Free Shipping</td>
+							<th>결제예정금액</th>
+							<td class="fw-bold fs-5 text-dark">₱{{total_price|intcomma}}</td>
 						</tr>
 					</table>
 				</div>
