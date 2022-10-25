@@ -77,9 +77,8 @@ def order_create(request):
 						ordered_quantity = ordered_quantity,
 						
 					)
-					print(order_item_obj)
-				except Exception as e:
-					print(e)
+
+				except:
 					pass
 			
 		return JsonResponse({
