@@ -28,12 +28,13 @@ class OrderItem(models.Model):
 			Order,
 			on_delete=models.CASCADE
 	)
-	order_uid = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True, editable=False)
+	order_uid = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True, editable=True)
 	is_cancelled=models.BooleanField(default=False)
 	cancelled_at = models.DateTimeField(null=True)
-	is_refunded=models.BooleanField(default=False)
+	is_refunded = models.BooleanField(default=False)
 	refunded_at = models.DateTimeField(null=True)
-
+	is_visited = models.BooleanField(default=False)
+	visit_at = models.DateTimeField(null=True)
 	product = models.ForeignKey(
 			Product,
 			on_delete=models.CASCADE,
@@ -45,6 +46,7 @@ class OrderItem(models.Model):
 	variant_price = models.PositiveIntegerField(null=True)
 	ordered_quantity = models.PositiveIntegerField()
 	shipped_quantity = models.PositiveIntegerField(default=0)
+	is_subscribe = models.BooleanField(default=False)
 	
 
 	class Meta:
