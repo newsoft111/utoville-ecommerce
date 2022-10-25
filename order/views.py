@@ -12,8 +12,18 @@ def order_view(request):
 	q &= Q(order=order_id)
 	q &= Q(order__user=request.user)
 	order_items = OrderItem.objects.filter(q).order_by("-pk")
+
+	total_price=0
+	
+	for order_item in order_items:
+		if order_item.variant_value is not None:
+			total_price += (order_item.product_price + order_item.variant_price ) * order_item.quantity
+		else:
+			total_price += order_item.product_price * order_item.quantity
+
 	return render(request, 'order/order_view.html' ,{
-		"order_items": order_items
+		"order_items": order_items,
+		"total_price": total_price
 	})
 
 
