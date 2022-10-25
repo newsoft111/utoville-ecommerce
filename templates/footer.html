@@ -137,12 +137,15 @@
 
 
  <!-- scripts -->
- <script src="{% static 'js/theme.bundle.js' %}"></script>
-
+<script src="{% static 'js/theme.bundle.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
 
 <!--scripts-->
 <script src="{% static 'vendor/node_modules/js/choices.min.js' %}"></script>
-<script src="{% static 'vendor/node_modules/js/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'vendor/node_modules/js/nouislider.min.js' %}"></script>
+<script src="{% static 'vendor/node_modules/js/swiper-bundle.min.js' %}"></script> 
+<script src="{% static 'vendor/node_modules/js/simplebar.min.js' %}"></script>
+
 <!-- datepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 
@@ -184,8 +187,7 @@ var el = document.querySelectorAll("[data-choices]");
 });
 </script>
 
-<script src="{% static 'vendor/node_modules/js/simplebar.min.js' %}"></script>
-<script src="{% static 'js/custom.js' %}"></script>
+
 
 
 <div class="modal fade" id="globalModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="globalModalLabel" aria-hidden="true">
