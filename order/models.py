@@ -9,7 +9,6 @@ class Order(models.Model):
 			settings.AUTH_USER_MODEL,
 			on_delete=models.CASCADE,
 	)
-	order_uid = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True, editable=False)
 	pg_uid = models.CharField(max_length=255, null=True)
 	ordered_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	shpping_address = models.ForeignKey(
@@ -19,15 +18,6 @@ class Order(models.Model):
 	)
 	is_paid=models.BooleanField(default=False)
 	paid_at = models.DateTimeField(null=True)
-	is_cancelled=models.BooleanField(default=False)
-	cancelled_at = models.DateTimeField(null=True)
-	is_refunded=models.BooleanField(default=False)
-	refunded_at = models.DateTimeField(null=True)
-	order_item = models.ManyToManyField(
-				Product,
-				related_name="order_orderitem_set",
-				through='OrderItem'
-	)
 
 	class Meta:
 		db_table = 'ecommerce_order'
@@ -38,6 +28,12 @@ class OrderItem(models.Model):
 			Order,
 			on_delete=models.CASCADE
 	)
+	order_uid = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True, editable=False)
+	is_cancelled=models.BooleanField(default=False)
+	cancelled_at = models.DateTimeField(null=True)
+	is_refunded=models.BooleanField(default=False)
+	refunded_at = models.DateTimeField(null=True)
+
 	product = models.ForeignKey(
 			Product,
 			on_delete=models.CASCADE,

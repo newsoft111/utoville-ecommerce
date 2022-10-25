@@ -5,7 +5,7 @@ from .models import *
 from django.db.models import Q
 import json
 
-
+@login_required(login_url="acount:login")
 def order_view(request):
 	order_id = request.GET.get("id")
 	q = Q()
