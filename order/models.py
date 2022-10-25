@@ -1,7 +1,8 @@
 from django.db import models
-import uuid
+import time
 from product.models import *
 from account.models import UserShippingAddress
+
 
 # Create your models here.
 class Order(models.Model):
@@ -28,7 +29,11 @@ class OrderItem(models.Model):
 			Order,
 			on_delete=models.CASCADE
 	)
-	order_uid = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True, editable=True)
+
+	order_uid = models.CharField(
+		max_length=255,
+	)#여기 컬럼 만들어 주어야한다 동준아
+	
 	is_cancelled=models.BooleanField(default=False)
 	cancelled_at = models.DateTimeField(null=True)
 	is_refunded = models.BooleanField(default=False)
@@ -52,8 +57,22 @@ class OrderItem(models.Model):
 	class Meta:
 		db_table = 'ecommerce_order_item'
 
+	def sub_price(self):
+		if self.variant is not None:
+			return self.product_price + self.variant_price
+		else:
+			return self.product_price
+
 	def sub_total_price(self):
 		if self.variant is not None:
 			return (self.product_price + self.variant_price) * self.ordered_quantity
 		else:
 			return self.product_price * self.ordered_quantity
+
+	def save(self, *args, **kwargs):
+		self.order_uid = str(time.time())+str(self.pk)
+		super().save(*args, **kwargs)  # 실제 save() 를 호출 
+
+	
+
+
