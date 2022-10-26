@@ -24,8 +24,8 @@ urlpatterns = [
 			path('qna/',
 				include([
 					path('', views.qna_list, name='list'),
-					path('write/', views.qna_write, name='qna_write'),
-					path('detail/', views.qna_detail, name='qna_detail'),
+					path('write/', views.qna_write, name='write'),
+					path('detail/', views.qna_detail, name='detail'),
 				])
 			),
 		])

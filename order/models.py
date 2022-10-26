@@ -1,4 +1,5 @@
 from django.db import models
+import calendar
 import time
 from product.models import *
 from account.models import UserShippingAddress
@@ -29,17 +30,16 @@ class OrderItem(models.Model):
 			Order,
 			on_delete=models.CASCADE
 	)
-
 	order_uid = models.CharField(
 		max_length=255,
-	)#여기 컬럼 만들어 주어야한다 동준아
-	
+		null=True
+	)
 	is_cancelled=models.BooleanField(default=False)
 	cancelled_at = models.DateTimeField(null=True)
 	is_refunded = models.BooleanField(default=False)
 	refunded_at = models.DateTimeField(null=True)
-	is_visited = models.BooleanField(default=False)
-	visit_at = models.DateTimeField(null=True)
+	is_delivered = models.BooleanField(default=False)
+	delivered_at = models.DateTimeField(null=True)
 	product = models.ForeignKey(
 			Product,
 			on_delete=models.CASCADE,
@@ -52,6 +52,7 @@ class OrderItem(models.Model):
 	ordered_quantity = models.PositiveIntegerField()
 	shipped_quantity = models.PositiveIntegerField(default=0)
 	is_subscribe = models.BooleanField(default=False)
+	schedule_date= models.DateTimeField()
 	
 
 	class Meta:
@@ -70,9 +71,6 @@ class OrderItem(models.Model):
 			return self.product_price * self.ordered_quantity
 
 	def save(self, *args, **kwargs):
-		self.order_uid = str(time.time())+str(self.pk)
-		super().save(*args, **kwargs)  # 실제 save() 를 호출 
-
-	
-
-
+		super().save(*args, **kwargs)
+		order_uid = str(calendar.timegm(time.gmtime()))+str(self.pk)
+		OrderItem.objects.filter(id=self.pk).update(order_uid=order_uid)
