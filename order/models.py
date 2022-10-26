@@ -38,8 +38,8 @@ class OrderItem(models.Model):
 	cancelled_at = models.DateTimeField(null=True)
 	is_refunded = models.BooleanField(default=False)
 	refunded_at = models.DateTimeField(null=True)
-	is_visited = models.BooleanField(default=False)
-	visited_at = models.DateTimeField(null=True)
+	is_delivered = models.BooleanField(default=False)
+	delivered_at = models.DateTimeField(null=True)
 	product = models.ForeignKey(
 			Product,
 			on_delete=models.CASCADE,
