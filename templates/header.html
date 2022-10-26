@@ -128,9 +128,9 @@
             </div>
         
             <div class="collapse collapse-search ms-xl-auto ms-lg-3 me-lg-1 d-lg-block" style="--navbar-search-width:280px;" id="searchCollapse">
-                <form action="{% url 'product:list' %}" method="GET">
+                <form class="mb-0" action="{% url 'product:list' %}" method="GET">
                     <div class="position-relative mt-3 mt-lg-0">
-                        <span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50" style="z-index:999;">
+                        <span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50 pt-1" style="z-index:999;">
 							<i class="bx bx-search-alt-2"></i>
                         </span>
                         <input type="text" placeholder="Search Products..." name="keyword" class="form-control ps-6 rounded-pill">
