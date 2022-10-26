@@ -79,7 +79,6 @@ def order_create(request):
 						variant_price = variant_price,
 						ordered_quantity = ordered_quantity,
 						schedule_date = datetime.now()
-						
 					)
 
 				except Exception as e:
