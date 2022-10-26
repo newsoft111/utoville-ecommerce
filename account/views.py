@@ -11,6 +11,8 @@ from django.contrib.auth.hashers import check_password
 from datetime import datetime, timedelta
 from django.conf import settings
 from util.views import EmailSender
+from order.models import *
+from django.core.paginator import Paginator
 User = get_user_model()
 
 def user_login(request):
@@ -261,7 +263,38 @@ def my_dashboard(request):
 	return render(request, 'account/mypage/my_dashboard.html')
 
 def my_order(request):
-	return render(request, 'account/mypage/my_order.html')
+	seo = {
+		'title': "상품 리스트 - 유토빌",
+	}
+
+	# q = Q()
+	# if request.GET.get("category1"): #카테고리1 필터
+	# 	q &= Q(category_first = int(request.GET.get("category1")))
+	# if request.GET.get("category2"): #카테고리2 필터
+	# 	q &= Q(category_second = int(request.GET.get("category2")))
+	# if request.GET.get("category3"): #카테고리3 필터
+	# 	q &= Q(category_third = int(request.GET.get("category3")))
+	# if request.GET.get("area"): #지역 필터
+	# 	q &= Q(productarea__area = request.GET.get("area"))
+	# if request.GET.get("keyword"): #검색 필터
+	# 	q &= Q(name__icontains = request.GET.get("keyword"))
+
+	# ordering_list = ["rating_count", "rating", "id", "price", "-price"]
+	# if request.GET.get("sort") in ordering_list:
+	# 	ordering = request.GET.get("sort")
+	# else:
+	# 	ordering = "-id"
+	my_order_list =  OrderItem.objects.order_by("-id")
+	#select * from OrderItem order by "-id";
+
+	page        = int(request.GET.get('p', 1))
+	pagenator   = Paginator(my_order_list, 6)
+	my_order_list = pagenator.get_page(page)
+
+	return render(request, 'account/mypage/my_order.html' ,{
+		"seo":seo,
+		"my_order_list":my_order_list,
+	})
 
 def my_subscribe(request):
 	return render(request, 'account/mypage/my_subscribe.html')
@@ -270,6 +303,37 @@ def my_subscribe_cancel(request):
 	return render(request, 'account/mypage/my_subscribe_cancel.html')
 
 def qna_list(request):
+	# seo = {
+	# 	'title': "상품 리스트 - 유토빌",
+	# }
+
+	# q = Q()
+	# if request.GET.get("category1"): #카테고리1 필터
+	# 	q &= Q(category_first = int(request.GET.get("category1")))
+	# if request.GET.get("category2"): #카테고리2 필터
+	# 	q &= Q(category_second = int(request.GET.get("category2")))
+	# if request.GET.get("category3"): #카테고리3 필터
+	# 	q &= Q(category_third = int(request.GET.get("category3")))
+	# if request.GET.get("area"): #지역 필터
+	# 	q &= Q(productarea__area = request.GET.get("area"))
+	# if request.GET.get("keyword"): #검색 필터
+	# 	q &= Q(name__icontains = request.GET.get("keyword"))
+
+	# ordering_list = ["rating_count", "rating", "id", "price", "-price"]
+	# if request.GET.get("sort") in ordering_list:
+	# 	ordering = request.GET.get("sort")
+	# else:
+	# 	ordering = "-id"
+	# product_list =  Product.objects.filter(q).order_by(ordering)
+
+	# page        = int(request.GET.get('p', 1))
+	# pagenator   = Paginator(product_list, 12)
+	# product_list = pagenator.get_page(page)
+
+	# return render(request, 'account/mypage/qna/qna_list.html' ,{
+	# 	"seo":seo,
+	# 	"product_list":product_list,
+	# })
 	return render(request, 'account/mypage/qna/qna_list.html')
 
 def qna_write(request):
