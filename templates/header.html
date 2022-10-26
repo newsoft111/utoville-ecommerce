@@ -121,8 +121,8 @@
             <div class="collapse collapse-search ms-xl-auto ms-lg-3 me-lg-1 d-lg-block" style="--navbar-search-width:280px;" id="searchCollapse">
                 <form action="{% url 'product:list' %}" method="GET">
                     <div class="position-relative mt-3 mt-lg-0">
-                        <span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50">
-                            <i class="bx bx-search-alt-2"></i>
+                        <span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50" style="z-index:999;">
+							<i class="bx bx-search-alt-2"></i>
                         </span>
                         <input type="text" placeholder="Search Products..." name="keyword" class="form-control ps-6 rounded-pill">
                         <!--With Submit button-->
@@ -138,131 +138,6 @@
     </nav>
     <!--/end:Header shop-->
 
-    <!--begin:Search bar modal-->
-    <div id="modal-search-bar-2" class="modal fade" tabindex="-1" aria-labelledby="modal-search-bar-2"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-top modal-md">
-            <div class="modal-content position-relative border-0">
-                <div class="position-relative px-4">
-                    <div
-                        class="position-absolute end-0 width-7x top-0 d-flex me-4 align-items-center h-100 justify-content-center">
-                        <button type="button" class="btn-close w-auto small" data-bs-dismiss="modal"
-                            aria-label="Close">Cancel</button>
-                    </div>
-                    <form class="mb-0">
-                        <div class="d-flex align-items-center">
-                            <div class="d-flex flex-grow-1 align-items-center">
-                                <i class="bx bx-search fs-4"></i>
-                                <input type="text" placeholder="Search...."
-                                    class="form-control shadow-none border-0 flex-grow-1 form-control-lg">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="p-4 border-top">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bx bx-trending-up fs-4"></i>
-                        <h6 class="mb-0 ms-2">
-                            Top searches
-                        </h6>
-                    </div>
-                    <div class="d-flex flex-wrap align-items-center">
-                        <span><a href="#!"
-                                class="badge badge-pill border text-muted me-1 mb-1 px-3 py-1">Jeans</a></span>
-                        <span><a href="#!"
-                                class="badge badge-pill border text-muted me-1 mb-1 px-3 py-1">Shoes</a></span>
-                        <span><a href="#!"
-                                class="badge badge-pill border text-muted me-1 mb-1 px-3 py-1">Watches</a></span>
-                        <span><a href="#!"
-                                class="badge badge-pill border text-muted me-1 mb-1 px-3 py-1">Men's</a></span>
-                        <span><a href="#!"
-                                class="badge badge-pill border text-muted me-1 mb-1 px-3 py-1">Sneakers</a></span>
-                        <span><a href="#!"
-                                class="badge badge-pill border text-muted me-1 mb-1 px-3 py-1">Casual</a></span>
-                        <span><a href="#!"
-                                class="badge badge-pill border text-muted me-1 mb-1 px-3 py-1">Shirts</a></span>
-                        <span><a href="#!"
-                                class="badge badge-pill border text-muted me-1 mb-1 px-3 py-1">T-shirts</a></span>
-                        <span><a href="#!"
-                                class="badge badge-pill border text-muted me-1 mb-1 px-3 py-1">Lowers</a></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--/end:Search bar modal-->
-
-    <!--begin:Cart offcanvas-->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCart">
-        <div class="border-bottom offcanvas-header align-items-center justify-content-between">
-            <h5 class="mb-0">Your Cart (3)</h5>
-            <button type="button" class="btn-close text-reset p-0 m-0 width-3x height-3x flex-center ms-auto"
-                data-bs-dismiss="offcanvas" aria-label="Close">
-                <button type="button"
-                    class="btn-close shadow-none text-reset p-0 m-0 width-3x height-3x flex-center ms-auto"
-                    data-bs-dismiss="offcanvas" aria-label="Close">
-                    <i class="bx bx-x fs-4"></i>
-                </button>
-        </div>
-        <div class="offcanvas-body p-4">
-            <ul class="list-unstyled no-animation mb-0">
-                <li class="d-flex py-3 border-bottom">
-                    <div class="me-1">
-                        <a href="#!"><img src="assets/img/shop/backpack2.jpg"
-                                class="height-10x hover-lift hover-shadow w-auto" alt=""></a>
-                    </div>
-                    <div class="flex-grow-1 px-4 mb-3">
-                        <a href="#!" class="text-dark d-block lh-sm fw-semibold mb-2">Laptop backpack water
-                            proof</a>
-                        <p class="mb-0 small"><strong>$36.00</strong> x
-                            <strong>1</strong>
-                        </p>
-                    </div>
-                    <div class="d-block text-end">
-                        <a href="#!" class="text-muted small text-decoration-underline">
-                            Remove
-                        </a>
-                    </div>
-                </li>
-                <li class="d-flex py-3">
-                    <div class="me-1">
-                        <a href="#!"><img src="assets/img/shop/jacket1.jpg"
-                                class="height-10x hover-lift hover-shadow w-auto" alt=""></a>
-                    </div>
-                    <div class="flex-grow-1 px-4 mb-3">
-                        <a href="#!" class="text-dark d-block lh-sm fw-semibold mb-2">Brown denim jacket for
-                            mens</a>
-                        <p class="mb-0 small"><strong>$59.00</strong> x
-                            <strong>2</strong>
-                        </p>
-                    </div>
-                    <div class="d-block text-end">
-                        <a href="#!" class="text-muted small text-decoration-underline">
-                            Remove
-                        </a>
-                    </div>
-                </li>
-                <li class="d-flex p-3 mb-3 border-top justify-content-between align-items-center">
-                    <span class="fw-normal">Subtotal</span>
-                    <span class="text-dark fw-bold">$154.00</span>
-                </li>
-            </ul>
-        </div>
-        <div class="offcanvas-footer p-4 border-top">
-            <ul class="list-unstyled mb-0">
-
-                <li class="pb-2 d-grid">
-                    <a href="#" class="btn btn-secondary btn-hover-arrow"><span>View
-                            shopping cart</span></a>
-                </li>
-                <li class="d-grid">
-                    <a href="#" class="btn btn-primary btn-hover-arrow"><span>Checkout</span></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!--/end:Cart offcanvas-->
-
+    
     <!--Main content-->
     <main>
