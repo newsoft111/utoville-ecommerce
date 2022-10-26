@@ -39,7 +39,7 @@ class OrderItem(models.Model):
 	is_refunded = models.BooleanField(default=False)
 	refunded_at = models.DateTimeField(null=True)
 	is_visited = models.BooleanField(default=False)
-	visit_at = models.DateTimeField(null=True)
+	visited_at = models.DateTimeField(null=True)
 	product = models.ForeignKey(
 			Product,
 			on_delete=models.CASCADE,
@@ -52,6 +52,7 @@ class OrderItem(models.Model):
 	ordered_quantity = models.PositiveIntegerField()
 	shipped_quantity = models.PositiveIntegerField(default=0)
 	is_subscribe = models.BooleanField(default=False)
+	schedule_date= models.DateTimeField()
 	
 
 	class Meta:
@@ -73,7 +74,3 @@ class OrderItem(models.Model):
 		super().save(*args, **kwargs)
 		order_uid = str(calendar.timegm(time.gmtime()))+str(self.pk)
 		OrderItem.objects.filter(id=self.pk).update(order_uid=order_uid)
-
-	
-
-
