@@ -53,17 +53,8 @@
 								<td>
 									<span class="text-uppercase d-block">{{order_item.ordered_quantity}}</span>
 								</td>
-<<<<<<< Updated upstream
-								<td id="sub-total">
-									{% if order_item.variant is not None %}
-									₱{{order_item.product_price|add:order_item.variant_price|mul:order_item.ordered_quantity|intcomma}}
-									{% else %}
-									₱{{order_item.product_price|mul:order_item.ordered_quantity|intcomma}}
-									{% endif %}
-=======
 								<td>
 									₱{{order_item.sub_total_price|intcomma}}
->>>>>>> Stashed changes
 								</td>
 							</tr>
 
