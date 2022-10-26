@@ -201,21 +201,17 @@
 					</div>
 					<div class="upload_photo p-4">
 						<h5 class="review_title">Upload images</h5>
-							<!--Listing Images-->
-							<div class="p-4 border rounded-3" data-dropzone-area="">
-								<div class="dz-preview" id="dz-preview-row" data-horizontal-scroll="">
-								</div>
-								<div class="chat-form rounded-pill" data-emoji-form="">
-									<button type="button"
-									class="btn btn-outline-secondary dz-clickable"
-									id="dz-btn">
-									<i class="bx bx-cloud-upload fs-4 me-1"></i> Upload
-								</button>
-								</div>
+						<!--Listing Images-->
+						<div class="p-4 border rounded-3" data-dropzone-area="">
+							<div class="dz-preview" id="dz-preview-row" data-horizontal-scroll="">
 							</div>
-						<div class="form-control" id="preview">
-							<input type="file" accept="image/gif, image/jpeg, image/png" class="form-control" 
-							id="inputGroupFile04" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+							<div class="chat-form rounded-pill" data-emoji-form="">
+								<button type="button"
+								class="btn btn-outline-secondary dz-clickable"
+								id="dz-btn">
+								<i class="bx bx-cloud-upload fs-4 me-1"></i> Upload
+							</button>
+							</div>
 						</div>
 
 					</div>
@@ -273,32 +269,6 @@ function review_write_submit() {
     });
 }
 
-document.getElementById('inputGroupFile04').onchange = function() {
-	let this_modal = "#gigOrderReviewModal";
-	var fileTypes = ['jpg', 'jpeg', 'png', 'gif'];  //acceptable file types
-
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var extension = input.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
-				isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
-			if (isSuccess) {         
-				var reader = new FileReader();
-				///reader.onload = function(e) {
-				///   $('.gig-image-preview').removeClass("d-none");
-				///   $('.gig-image-preview img').attr("src", e.target.result);
-				///}
-				reader.readAsDataURL(input.files[0]);
-				
-			} else {
-				// document.querySelector("[id=reviewModalCloseBtn]").click();
-				openModal('알림','이미지 파일이 아닙니다.',this_modal);
-				input.value='';
-			}
-		}
-	}
-	readURL(this);
-}
-
 
 let e = new Dropzone("[data-dropzone-area]", {
 	url: "#",
@@ -308,24 +278,21 @@ let e = new Dropzone("[data-dropzone-area]", {
 	previewTemplate: '\n<div class="listing-img-preview position-relative">\n\n\n<div class="height-12x dropzone-image-preview position-relative">\n<img src="#" class="img-fluid rounded-3 file-title" data-dz-thumbnail="" alt="" >\n    </div>\n\n    <a class="badge p-0 bg-dark text-white bg-opacity-75 rounded-circle position-absolute top-0 end-0 m-1" href="#" data-dz-remove="">\n       <i class="bx bx-x fs-5 lh-1"></i>\n    </a>\n</div>\n',
 	init: function () {
 		// 최초 dropzone 설정시 init을 통해 호출
-		console.log('최초 실행');
 		let myDropzone = this; // closure 변수 (화살표 함수 쓰지않게 주의)
-		console.log(this);
+
 		// 서버에 제출 submit 버튼 이벤트 등록
 		document.querySelector('#dz-btn').addEventListener('click', function () {
-			console.log('업로드');
 
 			// 거부된 파일이 있다면
 			if (myDropzone.getRejectedFiles().length > 0) {
-			let files = myDropzone.getRejectedFiles();
-			console.log('거부된 파일이 있습니다.', files);
-			return;++
+				let files = myDropzone.getRejectedFiles();
+				console.log('거부된 파일이 있습니다.', files);
+				return;
 			}
 
 			myDropzone.processQueue(); // autoProcessQueue: false로 해주었기 때문에, 메소드 api로 파일을 서버로 제출
 		});
 
-		// 파일이 업로드되면 실행
 		this.on('addedfile', function (file) {
 			// 중복된 파일의 제거
 			if (this.files.length) {
@@ -342,67 +309,19 @@ let e = new Dropzone("[data-dropzone-area]", {
 					}
 				}
 			}
-			// console.log(this.files.length)
-			var extension = this.files[0].name.split('.').pop().toLowerCase();
-			if(extension != 'jpg' || extension != 'jpeg' || extension != 'png' || extension != 'gif'){
-				alert('이미지 파일이 아닙니다.');		
-			}
 
+
+			for(var i=0; i< this.files.length; i++){
+				var extension = this.files[i].name.split('.').pop().toLowerCase();		
+				if(extension != 'jpg' && extension != 'jpeg' && extension != 'png' && extension != 'gif'){
+					alert('이미지 파일이 아닙니다.');
+					this.removeFile(file);
+				}
+			}
 		});
    },
 });
 // 파일이 업로드되면 실행
-
-e.on("addedfile", (function (e) {
-		let o = document.querySelectorAll(".listing-img-preview");
-		o = o[o.length - 1].querySelectorAll(".file-title");
-		for (let i = 0; i < o.length; i++) o[i].title = e.name
-	})),
-e.on("addedfiles",
-	(function (o) {
-		e.previewsContainer.classList.add("dz-preview-moved", "border-bottom", "pb-2", "mb-3")
-	})),
-e.on("reset",
-	(function (o) {
-		e.previewsContainer.classList.remove("dz-preview-moved", "border-bottom", "pb-2", "mb-3")
-}))
-
-
-
-
-let fileEle = document.getElementById("inputGroupFile04");
-let preview = document.getElementById("preview");
-
-fileEle.addEventListener("change", () => {
-	const files = Array.from(fileEle.files)
-
-	files.forEach(file => {
-		var html = `
-			<p id="${file.lastModified}" class="uploded_img text-start">
-				${file.name}
-				<button data-index='${file.lastModified}' class="file-remove">X</button>
-			</p>`;
-		preview.insertAdjacentHTML("beforeend", html);
-	});
-});
-
-document.addEventListener('click', (e) => {
-	if(e.target.className !== 'file-remove') return;
-	const removeTargetId = e.target.dataset.index;
-	const removeTarget = document.getElementById(removeTargetId);
-	const files = document.querySelector('#inputGroupFile04').files;
-	const dataTranster = new DataTransfer();
-
-	Array.from(files)
-		.filter(file => file.lastModified != removeTargetId)
-		.forEach(file => {
-		dataTranster.items.add(file);
-		});
-
-	document.querySelector('#inputGroupFile04').files = dataTranster.files;
-
-	removeTarget.remove();	
-});		
 
 </script>
 {% endblock %}
