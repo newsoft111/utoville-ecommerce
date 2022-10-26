@@ -162,9 +162,6 @@ a {
 	vertical-align: middle;
 	font-size: 14px;
 }
-.order-tb-search {
-	margin-left: 40px;
-}
 .order-tb-button {
 	padding: 5px 15px;
 	border-radius: 10px;
@@ -205,6 +202,9 @@ button[type="submit"], button[type="button"], select.form-select  {
 	.row {
 		font-size: 12px;
 	}
+	.od-search-btn {
+		width: 100%;
+	}
 }
 @media only screen and (max-width: 400px) {
 	.row {
@@ -222,6 +222,13 @@ input {
     font-size: 14px;
     letter-spacing: 1px;
     position: relative;
+}
+.form-radius {
+	border-radius: 40px !important;
+}
+.input-group {
+	display: flex;
+	align-items: center;
 }
 input:focus {
     -moz-box-shadow: none !important;
