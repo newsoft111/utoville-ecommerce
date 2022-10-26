@@ -334,10 +334,10 @@ def qna_list(request):
 	# 	"seo":seo,
 	# 	"product_list":product_list,
 	# })
-	return render(request, 'account/mypage/qna/qna_list.html')
+	return render(request, 'account/mypage/qna_list.html')
 
 def qna_write(request):
-	return render(request, 'account/mypage/qna/write.html')
+	return render(request, 'account/mypage/qna_write.html')
 
 def qna_detail(request):
-	return render(request, 'account/mypage/qna/detail.html')
+	return render(request, 'account/mypage/qna_detail.html')
