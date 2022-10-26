@@ -39,33 +39,42 @@
 														</tr>
 														<tr>
 															<td class="order-tb-left">날짜</td>
-															<td colspan="3" class="  order-tb-right">
-																<div class="container px-1 px-sm-5 mx-auto" style="padding-left: 0 !important;">
-																	<form autocomplete="off">
-																		<div class="flex-sm-row flex-column d-flex">
-																			<div class="col-sm-9 col-12 px-0 mb-2">
-																				<div class="input-group input-daterange">
-																					<input type="text" class="form-control" placeholder="시작 날짜 선택" readonly>
-																					&nbsp;&nbsp;~&nbsp;&nbsp;
-																					<input type="text" class="form-control" placeholder="종료 날짜 선택" readonly>
-																				</div>
-																			</div>
-																			<div class="col-sm-3 col-12 px-0 order-tb-search">
-																				<button type="submit" class="btn btn-black">Search</button>
-																			</div>
+															<td colspan="3" class=" order-tb-right">
+																<div class="flex-sm-row flex-column d-flex">
+																	<div class="text-start">
+																		<div class="input-group input-daterange">
+																			<input type="text" class="form-control form-radius" placeholder="시작 날짜 선택" readonly>
+																			&nbsp;&nbsp;~&nbsp;&nbsp;
+																			<input type="text" class="form-control form-radius" placeholder="종료 날짜 선택" readonly>
 																		</div>
-																	</form>
-																</div>	
+																	</div>
+																	<div class="order-tb-search">
+																		<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																			<span class="btn-hover-label label-default">Search</span>
+																			<span class="btn-hover-label label-hover">Search</span>
+																		</button>
+																	</div>
+																</div>
 															</td>
 														</tr>
 														<tr>
-															<td class="order-tb-left">주문 구분</td>
-															<td class="order-tb-right">
-																<input type="checkbox" value=""> 일반주문
-																<input type="checkbox" value=""> 휴대폰 주문
+															<td class="order-tb-left">서비스명</td>
+															<td class="order-tb-right col-6">					
+																<div class="row">
+																	<div class="col-md mb-2 mb-md-0">
+																		<input type="text" class="form-control form-radius " required
+																			placeholder="주문하신 서비스명을 검색하세요.">
+																	</div>
+																	<div class="order-tb-search">
+																		<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																			<span class="btn-hover-label label-default">Search</span>
+																			<span class="btn-hover-label label-hover">Search</span>
+																		</button>
+																	</div>
+																</div>
 															</td>
 															<td class="order-tb-left">주문 상태</td>
-															<td class="order-tb-right">
+															<td class="order-tb-right col-6">
 																<select class="form-select" aria-label="Default select example">
 																	<option selected>전체</option>
 																	<option value="1">입금대기</option>
@@ -73,19 +82,6 @@
 																	<option value="3">서비스 대기</option>
 																	<option value="3">서비스 완료</option>
 																</select>
-															</td>
-														</tr>											
-														<tr>
-															<td class="order-tb-left">서비스명</td>
-															<td colspan="3" class="  order-tb-right">
-																<form class="row g-3">
-																	<div class="col-auto">
-																	<input type="text" size=60 maxlength=15 class="form-control"  id="inputservicename" placeholder="주문하신 서비스명을 검색하세요">
-																	</div>
-																	<div class="col-auto">
-																	<button type="submit" class="btn btn-secondary mb-3">검색</button>
-																	</div>
-																</form>
 															</td>
 														</tr>											
 													</tbody>
