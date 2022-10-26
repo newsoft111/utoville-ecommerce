@@ -108,7 +108,6 @@
 					  <span class="price ms-auto" data-id="" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
 				   </div>
 				</div>
-	
 				{% endif %}
 			 </div>
 	
@@ -126,8 +125,7 @@
 			<div class="d-grid">
 				<input type="hidden" name="obj_data" value='[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]'>
 				<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-primary hover-lift">
-				<i class="bx bx-shopping-bag fs-5 me-2"></i>
-				Add to Cart
+					<i class="bx bx-shopping-bag fs-5 me-2"></i>Add to Cart
 				</a>
 				<a href="#!" onclick="order_submit();" class="btn btn-primary hover-lift mt-3">
 					<i class="bx bx-shopping-bag fs-5 me-2"></i>Buy Now
@@ -158,13 +156,9 @@
 				<!--Tab-pane-->
 				<div class="tab-pane fade" id="information">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item bg-transparent px-0 py-3">MATERIAL: 100% POLYESTER
-						</li>
-						<li class="list-group-item bg-transparent px-0 py-3">Durable water repellent to
-						protect against light drizzles</li>
-						<li class="list-group-item bg-transparent px-0 py-3">Insulated quilted vest to
-						protect in light winters
-						</li>
+						<li class="list-group-item bg-transparent px-0 py-3">MATERIAL: 100% POLYESTER</li>
+						<li class="list-group-item bg-transparent px-0 py-3">Durable water repellent to protect against light drizzles</li>
+						<li class="list-group-item bg-transparent px-0 py-3">Insulated quilted vest to protect in light winters</li>
 						<li class="list-group-item bg-transparent px-0 py-3">Made in Germany</li>
 					</ul>
 				</div>
