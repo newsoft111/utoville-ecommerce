@@ -24,65 +24,79 @@
 									<div class="col-md-12">
 										<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
 											<div class="table-responsive" style="text-align: center;">
-												<table class="table">
+												<table class="table row">
 													<!-- Data -->
 													<tbody>
 														<tr>
 															<td class="order-tb-left">기간별</td>
-															<td colspan="3" class="  order-tb-right">
-																<button type="button" class="btn btn-outline-secondary order-tb-button">하루</button>
+															<td class="col-6 order-tb-right">
 																<button type="button" class="btn btn-outline-secondary order-tb-button">1주일</button>
 																<button type="button" class="btn btn-outline-secondary order-tb-button">1개월</button>
 																<button type="button" class="btn btn-outline-secondary order-tb-button">6개월</button>
 																<button type="button" class="btn btn-outline-secondary order-tb-button">1년</button>
 															</td>
-														</tr>
-														<tr>
-															<td class="order-tb-left">날짜</td>
-															<td colspan="3" class=" order-tb-right">
-																<div class="flex-sm-row flex-column d-flex">
-																	<div class="text-start">
-																		<div class="input-group input-daterange">
-																			<input type="text" class="form-control form-radius" placeholder="시작 날짜 선택" readonly>
-																			&nbsp;&nbsp;~&nbsp;&nbsp;
-																			<input type="text" class="form-control form-radius" placeholder="종료 날짜 선택" readonly>
-																		</div>
-																	</div>
-																	<div class="order-tb-search">
-																		<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
-																			<span class="btn-hover-label label-default">Search</span>
-																			<span class="btn-hover-label label-hover">Search</span>
-																		</button>
-																	</div>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td class="order-tb-left">서비스명</td>
-															<td class="order-tb-right col-6">					
-																<div class="row">
-																	<div class="col-md mb-2 mb-md-0">
-																		<input type="text" class="form-control form-radius " required
-																			placeholder="주문하신 서비스명을 검색하세요.">
-																	</div>
-																	<div class="order-tb-search">
-																		<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
-																			<span class="btn-hover-label label-default">Search</span>
-																			<span class="btn-hover-label label-hover">Search</span>
-																		</button>
-																	</div>
-																</div>
-															</td>
-															<td class="order-tb-left">주문 상태</td>
-															<td class="order-tb-right col-6">
+															<td class="order-tb-left">카테고리별</td>
+															<td class="col-6 order-tb-right">
 																<select class="form-select" aria-label="Default select example">
-																	<option selected>전체</option>
-																	<option value="1">입금대기</option>
-																	<option value="2">결제완료</option>
-																	<option value="3">서비스 대기</option>
-																	<option value="3">서비스 완료</option>
+																	<option selected>선택</option>
+																	<option value="1">청소</option>
+																	<option value="2">소독</option>
+																	<option value="3">수리</option>
+																	<option value="3">가전케어</option>
+																	<option value="3">이사</option>
+																	<option value="3">차 서비스</option>
+																	<option value="3">생수 배달</option>
 																</select>
 															</td>
+														</tr>
+														<tr>
+															<div class="row">
+																<td class="order-tb-left">날짜</td>
+																<td colspan="3" class="order-tb-right">
+																	<div class="row">
+																		<div class="col-md-10 input_group input-daterange">
+																			<input class="form-control form-radius" type="date" id="start-date-input">
+																			&nbsp;&nbsp;~&nbsp;&nbsp;
+																			<input class="form-control form-radius" type="date" id="end-date-input">
+																		</div>	
+																		<div class="col-md-2 order-tb-search text-end">
+																			<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																				<span class="btn-hover-label label-default">Search</span>
+																				<span class="btn-hover-label label-hover">Search</span>
+																			</button>
+																		</div>
+																	</div>			
+																</td>
+															</div>
+														</tr>
+														<tr>
+															<div class="row">
+																<td class="col-1 order-tb-left">서비스명</td>
+																<td class="col-5 order-tb-right">					
+																	<div class="row">
+																		<div class="col-md-9 mb-2 mb-md-0">
+																			<input type="text" class="form-control form-radius " required
+																				placeholder="주문하신 서비스명을 검색하세요.">
+																		</div>
+																		<div class="col-md-3 order-tb-search">
+																			<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																				<span class="btn-hover-label label-default">Search</span>
+																				<span class="btn-hover-label label-hover">Search</span>
+																			</button>
+																		</div>
+																	</div>
+																</td>						
+																<td class="col-1 order-tb-left">주문 상태</td>							
+																<td class="col-5 order-tb-right">
+																	<select class="form-select" aria-label="Default select example">
+																		<option selected>선택</option>
+																		<option value="1">입금대기</option>
+																		<option value="2">결제완료</option>
+																		<option value="3">서비스 대기</option>
+																		<option value="3">서비스 완료</option>
+																	</select>
+																</td>
+															</div>
 														</tr>											
 													</tbody>
 												</table>
@@ -318,6 +332,10 @@ let e = new Dropzone("[data-dropzone-area]", {
    },
 });
 // 파일이 업로드되면 실행
+
+/*오늘 날짜, 시간 셋팅*/
+document.getElementById("start-date-input").value = new Date().toISOString().slice(0,10);
+document.getElementById("end-date-input").value = new Date().toISOString().slice(0,10);
 
 </script>
 {% endblock %}

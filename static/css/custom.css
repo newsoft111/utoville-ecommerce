@@ -162,6 +162,19 @@ a {
 	vertical-align: middle;
 	font-size: 14px;
 }
+.order-tb-search {
+	padding-left: 0;
+	padding-right: 0;
+}
+.od-search-btn {
+	border-radius: 30px;	
+}
+
+
+.input_group {
+	display: flex;
+	align-items: center;
+}
 .order-tb-button {
 	padding: 5px 15px;
 	border-radius: 10px;
