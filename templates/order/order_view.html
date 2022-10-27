@@ -124,52 +124,44 @@ let pointBtn = document.querySelector(".point-btn");
 let payment = document.querySelector(".payment");
 let usingPoint = document.querySelector(".using-point");
 
+
 const regex = /[^0-9]/g;
 const result = totalPrice.innerHTML.replace(regex, "");
 
-pointForm.addEventListener("focusout", function(){
-	let removeZero = pointForm.value.replace(/(^0+)/, "");
-	pointForm.value = removeZero;
-	let check = /^[0-9]+$/;
+"propertychange change keyup paste input".split("").forEach(function(e){ 
+	  pointForm.addEventListener(e, function(){
+		let removeZero = pointForm.value.replace(/(^0+)/, "");
+		pointForm.value = removeZero;
+		let check = /^[0-9]+$/;
 
+		if(!check.test(pointForm.value) && pointForm.value != ''){
+			alert("숫자만 입력하세요.")
+			pointForm.value = 0;
+			payment.innerHTML = "₱" + sumPrice;
+			return false;	
+		}
+		if(Number(pointForm.value) > Number('{{request.user.point}}')){ 
+			alert("보유금액 이상 사용은 불가능합니다.");
+			pointForm.value = '{{request.user.point}}';
+			return false;
+		}
 
+		let calcPrice = result - pointForm.value;
+		let sumPrice= calcPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-	if(!check.test(pointForm.value) && pointForm.value != ''){
-		alert("숫자만 입력하세요.")
-		pointForm.value = 0;
-		payment.innerHTML = "₱" + sumPrice;
-		return false;	
-	}
-	if(Number(pointForm.value) > Number('{{request.user.point}}')){ 
-		alert("보유금액 이상 사용은 불가능합니다.");
-		return false;
-	}
-
-	let calcPrice = result - pointForm.value;
-	let sumPrice= calcPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-	payment.innerHTML = "₱" + sumPrice;				
-	
+		payment.innerHTML = "₱" + sumPrice;				
+		
+	});
 });
 
 pointBtn.addEventListener("click", function(){
 	pointForm.value = '{{request.user.point}}';
+
+	let calcPrice = result - pointForm.value;
+	let sumPrice= calcPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+	payment.innerHTML = "₱" + sumPrice;			
 });
 
-// pointBtn.addEventListener("click", function(){
-// 	if(pointForm.value == ''){
-// 		alert("포인트를 입력하세요.")
-// 	}else{
-// 		if(count == 0){
-// 			let calcPrice = result - pointForm.value;
-// 			let sumPrice= calcPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-			
-// 			payment.innerHTML = "₱" + sumPrice;		
-// 		}else{
-// 			alert("이미 적용되었습니다.")
-// 		}	
-// 		count ++;		
-// 	}
-// });
 </script>
 {% endblock %}
