@@ -1,140 +1,152 @@
 {% load static %}
 {% load humanize %}
-<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Sign In | Dashonic - Admin & Dashboard Template</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Pichforest" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
-		<link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" /> 
-        <!-- Icons Css -->
-         <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
-        <!-- App Css-->
-        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />  
-        <link href="{% static 'libs/fullcalendar/main.min.css' %}" rel="stylesheet" type="text/css" />
-    </head>
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/ico">
+
+	<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
+
+	<!-- Node_Modules -->
+	<link rel="stylesheet" href="{% static 'vendor/node_modules/css/choices.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/node_modules/css/simplebar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/node_modules/css/swiper-bundle.min.css' %}">
+	<link rel="stylesheet" href="{% static 'vendor/node_modules/css/theme-teal.min.css' %}">
+	
+    <!--Icons-->
+    <link href="{% static 'fonts/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <!--Google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+	<!-- Assan Select css -->
+
+	<!-- Main CSS -->
+    <link href="{% static 'css/theme-shop.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>	
+
+	<!-- DatePicker -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+
+    <!--:Simplebar css ()-->
+    <style type="text/css">
+      .simplebar-track.simplebar-vertical {
+        width: 7px;
+      }
+
+      .simplebar-scrollbar:before {
+        background: currentColor;
+      }
+
+    </style>
+    <title>Assan Shop</title>
+  </head>
+
+  <body>
+	<!--:Preloader Spinner-->
+       <!--begin:message-->
+       <div class="position-relative px-4 text-center py-2 bg-dark text-white">
+        <small>Worldwide shipping available</small>
+      </div>
+      <!--/end:message-->
+     <!--begin:Header shop-->
+     <nav class="navbar navbar-search-w-icons position-sticky shadow top-0 z-index-fixed navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid position-relative">
+            <a class="navbar-brand" href="{% url 'main:index' %}">
+                <img src="{% static 'img/logo/logo-shop.svg' %}" alt="" class="img-fluid">
+            </a>
+            <div class="d-flex align-items-center navbar-no-collapse-items navbar-nav flex-row order-lg-last">
+                <button class="navbar-toggler order-last" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbarTheme" aria-controls="mainNavbarTheme" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <i></i>
+                    </span>
+                </button>
+
+                <div class="nav-item me-4 me-lg-2 ms-0">
+                    <a href="{% url 'cart:detail' %}" class="nav-link lh-1 position-relative">
+                        <i class="bx bx-shopping-bag fs-4"></i>
+                        <!--card badge-->
+                        <span
+                            class="badge d-none d-lg-flex p-0 position-absolute end-0 top-0 me-n2 mt-n1 lh-1 fw-semibold width-1x height-1x bg-white shadow-sm rounded-circle flex-center text-dark">3</span>
+                    </a>
+                </div>
+                <!--Search collapse trigger(hidden in desktop laptop)-->
+                <div class="nav-item ms-0 me-4 d-lg-none">
+                    <a href="#searchCollapse" data-bs-target="#" data-bs-toggle="collapse" class="nav-link search-link lh-1">
+                        <i class="bx bx-search-alt-2 fs-4"></i>
+                    </a>
+                </div>
+
+				
+                <div class="nav-item me-4 me-lg-0">
+					{% if not user.is_authenticated %}
+                    <a href="{% url 'account:login' %}" class="nav-link p-0">
+                        <i class="bx bx-user fs-4"></i>
+                    </a>
+					{% else %}
+					<a href="{% url 'account:my_dashboard' %}" class="nav-link p-0">
+                        <i class="bx bx-user fs-4"></i>
+                    </a>
+					{% endif %}
+                </div>
+				
+				
+            </div>
+            <div class="collapse navbar-collapse" id="mainNavbarTheme">
+                <ul class="navbar-nav me-lg-auto ms-xl-5 ms-lg-2">
+				{% for categoryFirst in category_first_list %}
+					{% if categoryFirst.categorysecond_set.all.count > 0 %}
+					<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'product:list' %}?category1={{categoryFirst.id}}">
+                            {{categoryFirst.name}}
+                        </a>
+
+                        <div class="dropdown-menu">
+							{% for categorySecond in categoryFirst.categorysecond_set.all %}
+                            <a href="{% url 'product:list' %}?category1={{categoryFirst.id}}&category2={{categorySecond.id}}" class="dropdown-item">{{categorySecond.name}}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+					{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'product:list' %}?category1={{categoryFirst.id}}">
+							{{categoryFirst.name}}
+						</a>
+					</li>
+					{% endif %}
+				{% endfor %}
+					
+                </ul>
+            </div>
+        
+            <div class="collapse collapse-search ms-xl-auto ms-lg-3 me-lg-1 d-lg-block" style="--navbar-search-width:280px;" id="searchCollapse">
+                <form class="mb-0" action="{% url 'product:list' %}" method="GET">
+                    <div class="position-relative mt-3 mt-lg-0">
+                        <span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50 pt-1" style="z-index:999;">
+							<i class="bx bx-search-alt-2"></i>
+                        </span>
+                        <input type="text" placeholder="Search Products..." name="keyword" class="form-control ps-6 rounded-pill">
+                        <!--With Submit button-->
+                        <!-- <button class="btn position-absolute end-0 top-0 flex-center p-0 width-4x h-100 rounded-pill btn-white">
+                            <i class="bx bx-search-alt-2"></i>
+                        </button> 
+                        <input type="text" placeholder="Search here..." class="form-control border-0 shadow-none ps-4 pe-6 rounded-pill">
+                   -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!--/end:Header shop-->
 
     
-    <body data-sidebar-size="lg" data-layout-mode="light">
-		<div id="layout-wrapper">
-			<header id="page-topbar">
-				<div class="navbar-header">
-					<div class="d-flex">
-						<!-- LOGO -->
-						<div class="navbar-brand-box">
-							<a href="{% url 'main:index' %}" class="logo">
-								<span class="logo-sm">
-									<img src="{% static 'images/logo-dark.png' %}" alt="" height="22">
-								</span>
-								<span class="logo-lg">
-									<img src="{% static 'images/logo-sm-dark.png' %}" alt="" height="22">
-								</span>
-							</a>
-						</div>
-		
-						<button type="button" class="btn btn-sm px-3 font-size-16 header-item vertical-menu-btn">
-							<i class="fa fa-fw fa-bars"></i>
-						</button>
-					</div>
-		
-					<div>
-						<a href="{% url 'account:logout' %}" class="btn header-item user text-start d-flex align-items-center">
-							<span class="ms-2 d-none d-sm-block user-item-desc">
-								<span class="user-name">로그아웃</span>
-							</span>
-                        </a>
-					</div>
-				</div>
-			</header>
-			<!-- ========== Left Sidebar Start ========== -->
-			<div class="vertical-menu">
-		
-				<!-- LOGO -->
-				<div class="navbar-brand-box">
-		
-					<a href="index.html" class="logo">
-						<span class="logo-lg">
-							<img src="{% static 'images/logo-dark.png' %}" alt="" height="22">
-						</span>
-						<span class="logo-sm">
-							<img src="{% static 'images/logo-sm-dark.png' %}" alt="" height="22">
-						</span>
-					</a>
-				</div>
-		
-				<button type="button" class="btn btn-sm px-3 font-size-16 header-item vertical-menu-btn">
-					<i class="fa fa-fw fa-bars"></i>
-				</button>
-		
-				<div data-simplebar class="sidebar-menu-scroll">
-		
-					<!--- Sidemenu -->
-					<div id="sidebar-menu">
-						<!-- Left Menu Start -->
-						<ul class="metismenu list-unstyled" id="side-menu">
-							<li class="menu-title" data-key="t-components">Main</li>
-							<li>
-								<a href="{% url 'main:index' %}">
-									<i class="icon nav-icon" data-feather="monitor"></i>
-									<span class="menu-item">Dashboard</span>
-								</a>
-							</li>
-
-							<li class="menu-title" data-key="t-components">Account</li>
-							<li>
-								<a href="javascript: void(0);">
-									<i class="icon nav-icon" data-feather="user"></i>
-									<span class="menu-item">회원</span>
-								</a>
-							</li>
-
-							<li class="menu-title" data-key="t-components">QnA</li>
-							<li>
-								<a href="{% url 'qna:list' %}">
-									<i class="icon nav-icon" data-feather="message-square"></i>
-									<span class="menu-item">문의</span>
-									<span class="badge rounded-pill badge-soft-secondary">5+</span>
-								</a>
-							</li>
-
-							<li class="menu-title" data-key="t-components">Profit</li>
-							<li>
-								<a href="javascript: void(0);">
-									<i class="icon nav-icon" data-feather="tag"></i>
-									<span class="menu-item">정산</span>
-								</a>
-							</li>
-
-							<li class="menu-title" data-key="t-components">Product</li>
-							<li>
-								<a href="{% url 'product:list' %}">
-									<i class="icon nav-icon" data-feather="briefcase"></i>
-									<span class="menu-item">상품</span>
-								</a>
-							</li>
-							
-							<li class="menu-title" data-key="t-components">Order</li>
-							<li>
-								<a href="{% url 'order:list' %}">
-									<i class="icon nav-icon" data-feather="briefcase"></i>
-									<span class="menu-item">주문</span>
-								</a>
-							</li>
-		
-						</ul>
-					</div>
-					<!-- Sidebar -->
-				</div>
-			</div>
-			<!-- Left Sidebar End -->
-		
-			
-		
-			<!-- ============================================================== -->
-			<!-- Start right Content here -->
-			<!-- ============================================================== -->
-			<div class="main-content">
+    <!--Main content-->
+    <main>
