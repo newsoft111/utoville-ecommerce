@@ -7,4 +7,3 @@ def index(request):
 		'title': "유토빌",
 	}
 	return render(request, 'main/index.html',{"seo":seo})
-	return redirect("product:list")
