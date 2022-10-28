@@ -35,7 +35,7 @@ class Product(models.Model):
 				CategoryThird,
 				on_delete=models.CASCADE,
 	)
-	name = models.CharField(max_length=255)
+	name = models.CharField(max_length=255, db_column='product_name')
 	content = models.TextField()
 	price = models.PositiveIntegerField(default=0)
 	discount = models.PositiveIntegerField(default=0)
