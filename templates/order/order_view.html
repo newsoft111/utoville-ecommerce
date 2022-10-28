@@ -128,7 +128,7 @@ let usingPoint = document.querySelector(".using-point");
 const regex = /[^0-9]/g;
 const result = totalPrice.innerHTML.replace(regex, "");
 
-"propertychange change keyup paste input".split("").forEach(function(e){ 
+"propertychange change keyup paste input".split(" ").forEach(function(e){ 
 	  pointForm.addEventListener(e, function(){
 		let removeZero = pointForm.value.replace(/(^0+)/, "");
 		pointForm.value = removeZero;
