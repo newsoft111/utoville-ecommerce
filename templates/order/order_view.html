@@ -48,13 +48,21 @@
 									{% endif %}
 								</td>
 								<td>
-									₱{{order_item.sub_price|intcomma}}
+									{% if order_item.variant is not None %}
+									₱{{order_item.product_price|add:order_item.variant_price|intcomma}}
+									{% else %}
+									₱{{order_item.product_price|intcomma}}
+									{% endif %}
 								</td>
 								<td>
 									<span class="text-uppercase d-block">{{order_item.ordered_quantity}}</span>
 								</td>
 								<td>
-									₱{{order_item.sub_total_price|intcomma}}
+									{% if order_item.variant is not None %}
+									₱{{order_item.product_price|add:order_item.variant_price|mul:order_item.ordered_quantity|intcomma}}
+									{% else %}
+									₱{{order_item.product_price|mul:order_item.ordered_quantity|intcomma}}
+									{% endif %}
 								</td>
 							</tr>
 
@@ -65,20 +73,25 @@
 
 
 					<!--Checkout product info table-->
-					<table class="table mb-5 table-bordered">
+					<table class="table mb-5 table-bordered od-list-table">
 						<tr class="bg-light">
-							<th>상품금액</th>
-							<td class="fw-bold fs-5 text-dark">₱{{total_price|intcomma}}</td>
+							<th class="pd text-center">상품금액</th>
+							<td class="pd fw-bold fs-5 text-dark total-price">₱{{total_price|intcomma}}</td>
 						</tr>
 						<tr>
-							<th>포인트사용</th>
-							<td class="fw-bold fs-5 text-dark">
-								<input type="text" class="use-point">
+							<th class="pd text-center">포인트사용</th>
+							<td class="pd text-center fw-bold fs-5 text-dark">
+								<div class="point-input text-start">
+									<input type="text" name="points" step="100" min="0" value="0" class="use-point">
+									<button class="btn btn-primary point-btn">전액사용</button>									
+								</div>	
 							</td>
 						</tr>
 						<tr class="bg-light">
-							<th>결제예정금액</th>
-							<td class="fw-bold fs-5 text-dark">₱{{total_price|intcomma}}</td>
+							<th class="pd text-center">결제예정금액</th>
+							<td class="pd fw-bold fs-5 text-dark">
+								<span class="payment">₱{{total_price|intcomma}}</span>
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -105,7 +118,50 @@
 </section>
 
 <script>
-let usePoint = document.querySelector(".use-point");
-console.log(usePoint);
+let pointForm = document.querySelector(".use-point");
+let totalPrice = document.querySelector(".total-price");
+let pointBtn = document.querySelector(".point-btn");
+let payment = document.querySelector(".payment");
+let usingPoint = document.querySelector(".using-point");
+
+
+const regex = /[^0-9]/g;
+const result = totalPrice.innerHTML.replace(regex, "");
+
+"propertychange change keyup paste input".split(" ").forEach(function(e){ 
+	  pointForm.addEventListener(e, function(){
+		let removeZero = pointForm.value.replace(/(^0+)/, "");
+		pointForm.value = removeZero;
+		let check = /^[0-9]+$/;
+
+		if(!check.test(pointForm.value) && pointForm.value != ''){
+			alert("숫자만 입력하세요.")
+			pointForm.value = 0;
+			payment.innerHTML = "₱" + sumPrice;
+			return false;	
+		}
+		if(Number(pointForm.value) > Number('{{request.user.point}}')){ 
+			alert("보유금액 이상 사용은 불가능합니다.");
+			pointForm.value = '{{request.user.point}}';
+			return false;
+		}
+
+		let calcPrice = result - pointForm.value;
+		let sumPrice= calcPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+		payment.innerHTML = "₱" + sumPrice;				
+		
+	});
+});
+
+pointBtn.addEventListener("click", function(){
+	pointForm.value = '{{request.user.point}}';
+
+	let calcPrice = result - pointForm.value;
+	let sumPrice= calcPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+	payment.innerHTML = "₱" + sumPrice;			
+});
+
 </script>
 {% endblock %}
