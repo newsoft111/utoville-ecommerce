@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
         r = e.getMonth(),
         e = e.getFullYear();
     
-		e = [order_data], r = document.getElementById("calendar");
+		e = order_data, r = document.getElementById("calendar");
 
     function c() {
         return 768 <= window.innerWidth && window.innerWidth < 1200 ? "timeGridWeek" : window.innerWidth <= 768 ? "listMonth" : "dayGridMonth"

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, resolve_url
 from django.contrib import auth
+from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
@@ -263,16 +264,22 @@ def send_auth_mail(email):
 def my_dashboard(request):
 	"""Here we are preparing data to show order detail on user's calender"""
 	all_order = {"orders": [{'title': '', 'start': '', 'className': ' '}]}
+
+
 	if request.user.is_authenticated and not request.user.is_anonymous:
 		order_data = []
-		order_objs = Order.objects.filter(user=request.user)
-		for order in order_objs:
-			order_items = OrderItem.objects.filter(order=order)
-			for items in order_items:
-				item_data = {'title': items.product_name, 'start': str(items.schedule_date), 'className': 'bg-success'
-				if items.is_delivered else 'bg-info'}
-				order_data.append(item_data)
-		all_order = {"orders": order_data}
+
+		q = Q()
+		q &= Q(order__user=request.user)
+
+		order_items = OrderItem.objects.filter(q)
+		for items in order_items:
+			item_data = {'title': items.product_name, 'start': str(items.schedule_date), 'className': 'bg-success'
+			if items.is_delivered else 'bg-info'}
+			order_data.append(item_data)
+
+	all_order = {"orders": order_data}
+	
 	return render(request, 'account/mypage/my_dashboard.html', context=all_order)
 
 
