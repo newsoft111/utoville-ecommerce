@@ -8,7 +8,7 @@
 <section class="position-relative">
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
-			<div class="my_page_main row">
+			<div class="row my_page_main ">
 				{% include "account/mypage/sidemenu.html" with active_tab="대쉬보드"%}
 				<div class="col-lg-9 subs_contents">
 					{% include "account/mypage/topmenu.html" with active_tab="대쉬보드"%}
@@ -16,7 +16,6 @@
 					<div class="mt-5 mypage_main_title">
 						<h3>대쉬보드</h3>
 					</div>	
-						
 
 					<div class="my-5 subs-view show">
 						<!-- banner-view start -->
@@ -27,45 +26,150 @@
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
 									<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
 									<div class="text-center position-relative">
-										<a href="#">
+										<a href="#!" id="next-service">
 											<h2 data-countup='{"startVal": 0,"prefix":"D-"}' data-to="21" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
 											<span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
 											<div class="text-muted">다음 서비스까지</div>
 										</a>
-
 									</div>
 								</div>
 								<!-- Item -->
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
 									<span class="display-5 text-white opacity-5"><i class="far fa-fw fa-comment-dots"></i></span>
-									<div class="text-center">
+									<div class="text-center position-relative">
 										<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="3" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+										<span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
 										<div class="text-muted">구독한 서비스 수</div>
 									</div>
 								</div>											
 								<!-- Item -->
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
 									<span class="display-5 text-white opacity-5"><i class="fab fa-fw fa-gratipay"></i></span>
-									<div class="text-center">
+									<div class="text-center position-relative">
 										<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="55" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+										<span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
 										<div class="text-muted">완료된 서비스 수</div>
 									</div>
 								</div>
 								<!-- Item -->
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
 									<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-eye"></i></span>
-									<div class="text-center">
+									<div class="text-center position-relative">
 										<h2 data-countup='{"startVal": 0,"prefix":""}' data-to="30" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+										<span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
 										<div class="text-muted">남은 생수 개수</div>
 									</div>
 								</div>
 							</div> <!-- banner-view END -->	
 						</div>
 					</div>
-
 					<div class="pt-5 col-12">
 						<div id="calendar"></div>
 					</div>
+					<!-- end col -->
+					<div class="col-xl-3 col-md-6">
+						<div class="card card-h-100">
+							<div class="card-header border-bottom-0">
+								<div class="d-flex align-items-start">
+									<div class="flex-grow-1">
+										<h5 class="card-title">Visitors by Browser</h5>
+									</div>
+
+									<div class="flex-shrink-0">
+										<div class="dropdown">
+											<a class="font-size-16 text-muted dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="mdi mdi-dots-horizontal"></i>
+											</a>
+										
+											<div class="dropdown-menu">
+												<a class="dropdown-item" href="#">Action</a>
+												<a class="dropdown-item" href="#">Another action</a>
+												<a class="dropdown-item" href="#">Something else here</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div data-simplebar style="max-height: 230px;">
+								<ul class="list-unstyled unstyled mb-0">
+									<li class="px-4 py-3">
+										<div class="d-flex align-items-center">
+											<div class="flex-shrink-0 me-3">
+												<div class="avatar-sm">
+													<div class="avatar-title bg-light text-primary rounded-circle font-size-18">
+														<i class="fab fa-chrome"></i>
+													</div>
+												</div>
+											</div>
+											<div class="flex-grow-1">
+												<p class="text-muted mb-2">Chrome <span class="float-end fw-medium">82 %</span></p>
+												<div class="progress animated-progess custom-progress">
+													<div class="progress-bar" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li class="px-4 py-3">
+										<div class="d-flex align-items-center">
+											<div class="flex-shrink-0 me-3">
+												<div class="avatar-sm">
+													<div class="avatar-title bg-light text-primary rounded-circle font-size-18">
+														<i class="fab fa-firefox-browser"></i>
+													</div>
+												</div>
+											</div>
+											<div class="flex-grow-1">
+												<p class="text-muted mb-2">Firefox <span class="float-end fw-medium">70 %</span></p>
+												<div class="progress animated-progess custom-progress">
+													<div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li class="px-4 py-3">
+										<div class="d-flex">
+											<div class="flex-shrink-0 me-3">
+												<div class="avatar-sm">
+													<div class="avatar-title bg-light text-primary rounded-circle font-size-18">
+														<i class="fab fa-safari"></i>
+													</div>
+												</div>
+											</div>
+											<div class="flex-grow-1">
+												<p class="text-muted mb-2">Safari <span class="float-end fw-medium">76 %</span></p>
+												<div class="progress animated-progess custom-progress">
+													<div class="progress-bar" role="progressbar" style="width: 76%" aria-valuenow="76" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li class="px-4 py-3">
+										<div class="d-flex">
+											<div class="flex-shrink-0 me-3">
+												<div class="avatar-sm">
+													<div class="avatar-title bg-light text-primary rounded-circle font-size-18">
+														<i class="fab fa-edge"></i>
+													</div>
+												</div>
+											</div>
+											<div class="flex-grow-1">
+												<p class="text-muted mb-2">Edge <span class="float-end fw-medium">67 %</span></p>
+												<div class="progress animated-progess custom-progress">
+													<div class="progress-bar" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+										</div>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+						<!-- end card -->
+					</div>
+					<!-- end col -->
 				</div>
 			</div>	
 			<!-- Main content END -->
@@ -75,6 +179,7 @@
 <script src="{% static 'vendor/node_modules/js/fullcalendar.min.js' %}"></script>
 
 <script>
+var order_data = {{ orders|safe }}
 document.addEventListener("DOMContentLoaded", function() {
 
     var l = null,
@@ -86,94 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
         r = e.getMonth(),
         e = e.getFullYear();
     
-		e = [{
-        title: "All Day Event",
-        start: new Date(e, r, 1),
-        className: "bg-primary"
-    }, {
-        title: "Long Event",
-        start: new Date(e, r, s - 5),
-        end: new Date(e, r, s - 2),
-        className: "bg-warning"
-    }, {
-        id: 999,
-        title: "Repeating Event",
-        start: new Date(e, r, s - 3, 16, 0),
-        allDay: !1,
-        className: "bg-info"
-    }, {
-        id: 999,
-        title: "Repeating Event",
-        start: new Date(e, r, s + 4, 16, 0),
-        allDay: !1,
-        className: "bg-primary"
-    }, {
-        title: "Meeting",
-        start: new Date(e, r, s, 10, 30),
-        allDay: !1,
-        className: "bg-success"
-    }, {
-        title: "Lunch",
-        start: new Date(e, r, s, 12, 0),
-        end: new Date(e, r, s, 14, 0),
-        allDay: !1,
-        className: "bg-danger"
-    }, {
-        title: "Birthday Party",
-        start: new Date(e, r, s + 1, 19, 0),
-        end: new Date(e, r, s + 1, 22, 30),
-        allDay: !1,
-        className: "bg-success"
-	}, {
-        title: "Birthday Party",
-        start: new Date(e, r, s + 1, 19, 0),
-        end: new Date(e, r, s + 1, 22, 30),
-        allDay: !1,
-        className: "bg-success"
-	}, {
-        title: "Birthday Party",
-        start: new Date(e, r, s + 1, 19, 0),
-        end: new Date(e, r, s + 1, 22, 30),
-        allDay: !1,
-        className: "bg-success"
-	}, {
-        title: "Birthday Party",
-        start: new Date(e, r, s + 1, 19, 0),
-        end: new Date(e, r, s + 1, 22, 30),
-        allDay: !1,
-        className: "bg-success"
-	}, {
-        title: "Birthday Party",
-        start: new Date(e, r, s + 1, 19, 0),
-        end: new Date(e, r, s + 1, 22, 30),
-        allDay: !1,
-        className: "bg-success"
-	}, {
-        title: "Birthday Party",
-        start: new Date(e, r, s + 1, 19, 0),
-        end: new Date(e, r, s + 1, 22, 30),
-        allDay: !1,
-        className: "bg-success"
-	}, {
-        title: "Birthday Party",
-        start: new Date(e, r, s + 1, 19, 0),
-        end: new Date(e, r, s + 1, 22, 30),
-        allDay: !1,
-        className: "bg-success"
-	}, {
-        title: "Birthday Party",
-        start: new Date(e, r, s + 1, 19, 0),
-        end: new Date(e, r, s + 1, 22, 30),
-        allDay: !1,
-        className: "bg-success"
-	
-    }, {
-        title: "Click for Google",
-        start: new Date(e, r, 28),
-        end: new Date(e, r, 29),
-        url: "http://google.com/",
-        className: "bg-dark"
-    }], r = document.getElementById("calendar");
+		e = order_data, r = document.getElementById("calendar");
 
     function c() {
         return 768 <= window.innerWidth && window.innerWidth < 1200 ? "timeGridWeek" : window.innerWidth <= 768 ? "listMonth" : "dayGridMonth"
@@ -196,6 +214,12 @@ document.addEventListener("DOMContentLoaded", function() {
         events: e
     });
     m.render();
+
+	let nextService = document.getElementById("next-service");
+
+	nextService.addEventListener("click" , function(){
+		window.scrollTo({top: 400, behavior: "smooth"});
+	});
 });
 
 </script>

@@ -24,69 +24,79 @@
 									<div class="col-md-12">
 										<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
 											<div class="table-responsive" style="text-align: center;">
-												<table class="table">
+												<table class="table row">
 													<!-- Data -->
 													<tbody>
 														<tr>
 															<td class="order-tb-left">기간별</td>
-															<td colspan="3" class="  order-tb-right">
-																<button type="button" class="btn btn-outline-secondary order-tb-button">하루</button>
+															<td class="col-6 order-tb-right">
 																<button type="button" class="btn btn-outline-secondary order-tb-button">1주일</button>
 																<button type="button" class="btn btn-outline-secondary order-tb-button">1개월</button>
 																<button type="button" class="btn btn-outline-secondary order-tb-button">6개월</button>
 																<button type="button" class="btn btn-outline-secondary order-tb-button">1년</button>
 															</td>
-														</tr>
-														<tr>
-															<td class="order-tb-left">날짜</td>
-															<td colspan="3" class="  order-tb-right">
-																<div class="container px-1 px-sm-5 mx-auto" style="padding-left: 0 !important;">
-																	<form autocomplete="off">
-																		<div class="flex-sm-row flex-column d-flex">
-																			<div class="col-sm-9 col-12 px-0 mb-2">
-																				<div class="input-group input-daterange">
-																					<input type="text" class="form-control" placeholder="시작 날짜 선택" readonly>
-																					&nbsp;&nbsp;~&nbsp;&nbsp;
-																					<input type="text" class="form-control" placeholder="종료 날짜 선택" readonly>
-																				</div>
-																			</div>
-																			<div class="col-sm-3 col-12 px-0 order-tb-search">
-																				<button type="submit" class="btn btn-black">Search</button>
-																			</div>
-																		</div>
-																	</form>
-																</div>	
-															</td>
-														</tr>
-														<tr>
-															<td class="order-tb-left">주문 구분</td>
-															<td class="order-tb-right">
-																<input type="checkbox" value=""> 일반주문
-																<input type="checkbox" value=""> 휴대폰 주문
-															</td>
-															<td class="order-tb-left">주문 상태</td>
-															<td class="order-tb-right">
+															<td class="order-tb-left">카테고리별</td>
+															<td class="col-6 order-tb-right">
 																<select class="form-select" aria-label="Default select example">
-																	<option selected>전체</option>
-																	<option value="1">입금대기</option>
-																	<option value="2">결제완료</option>
-																	<option value="3">서비스 대기</option>
-																	<option value="3">서비스 완료</option>
+																	<option selected>선택</option>
+																	<option value="1">청소</option>
+																	<option value="2">소독</option>
+																	<option value="3">수리</option>
+																	<option value="3">가전케어</option>
+																	<option value="3">이사</option>
+																	<option value="3">차 서비스</option>
+																	<option value="3">생수 배달</option>
 																</select>
 															</td>
-														</tr>											
+														</tr>
 														<tr>
-															<td class="order-tb-left">서비스명</td>
-															<td colspan="3" class="  order-tb-right">
-																<form class="row g-3">
-																	<div class="col-auto">
-																	<input type="text" size=60 maxlength=15 class="form-control"  id="inputservicename" placeholder="주문하신 서비스명을 검색하세요">
+															<div class="row">
+																<td class="order-tb-left">날짜</td>
+																<td colspan="3" class="order-tb-right">
+																	<div class="row">
+																		<div class="col-md-10 input_group input-daterange">
+																			<input class="form-control form-radius" type="date" id="start-date-input">
+																			&nbsp;&nbsp;~&nbsp;&nbsp;
+																			<input class="form-control form-radius" type="date" id="end-date-input">
+																		</div>	
+																		<div class="col-md-2 order-tb-search text-end">
+																			<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																				<span class="btn-hover-label label-default">Search</span>
+																				<span class="btn-hover-label label-hover">Search</span>
+																			</button>
+																		</div>
+																	</div>			
+																</td>
+															</div>
+														</tr>
+														<tr>
+															<div class="row">
+																<td class="col-1 order-tb-left">서비스명</td>
+																<td class="col-5 order-tb-right">					
+																	<div class="row">
+																		<div class="col-md-9 mb-2 mb-md-0">
+																			<input type="text" class="form-control form-radius " required
+																				placeholder="주문하신 서비스명을 검색하세요.">
+																		</div>
+																		<div class="col-md-3 order-tb-search">
+																			<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																				<span class="btn-hover-label label-default">Search</span>
+																				<span class="btn-hover-label label-hover">Search</span>
+																			</button>
+																		</div>
 																	</div>
-																	<div class="col-auto">
-																	<button type="submit" class="btn btn-secondary mb-3">검색</button>
-																	</div>
-																</form>
-															</td>
+																</td>						
+																<td class="col-1 order-tb-left">주문 상태</td>							
+																<td class="col-5 order-tb-right">
+																	<select class="form-select" aria-label="Default select example">
+																		<option selected>선택</option>
+																		<option value="1">입금대기</option>
+																		<option value="2">결제완료</option>
+																		<option value="3">서비스 대기</option>
+																		<option value="3">서비스 완료</option>
+																	</select>
+																</td>
+															</div>
 														</tr>											
 													</tbody>
 												</table>
@@ -201,21 +211,17 @@
 					</div>
 					<div class="upload_photo p-4">
 						<h5 class="review_title">Upload images</h5>
-							<!--Listing Images-->
-							<div class="p-4 border rounded-3" data-dropzone-area="">
-								<div class="dz-preview" id="dz-preview-row" data-horizontal-scroll="">
-								</div>
-								<div class="chat-form rounded-pill" data-emoji-form="">
-									<button type="button"
-									class="btn btn-outline-secondary dz-clickable"
-									id="dz-btn">
-									<i class="bx bx-cloud-upload fs-4 me-1"></i> Upload
-								</button>
-								</div>
+						<!--Listing Images-->
+						<div class="p-4 border rounded-3" data-dropzone-area="">
+							<div class="dz-preview" id="dz-preview-row" data-horizontal-scroll="">
 							</div>
-						<div class="form-control" id="preview">
-							<input type="file" accept="image/gif, image/jpeg, image/png" class="form-control" 
-							id="inputGroupFile04" multiple aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+							<div class="chat-form rounded-pill" data-emoji-form="">
+								<button type="button"
+								class="btn btn-outline-secondary dz-clickable"
+								id="dz-btn">
+								<i class="bx bx-cloud-upload fs-4 me-1"></i> Upload
+							</button>
+							</div>
 						</div>
 
 					</div>
@@ -273,89 +279,63 @@ function review_write_submit() {
     });
 }
 
-document.getElementById('inputGroupFile04').onchange = function() {
-	let this_modal = "#gigOrderReviewModal";
-	var fileTypes = ['jpg', 'jpeg', 'png', 'gif'];  //acceptable file types
-
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var extension = input.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
-					isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
-			if (isSuccess) {         
-				var reader = new FileReader();
-				///reader.onload = function(e) {
-				///   $('.gig-image-preview').removeClass("d-none");
-				///   $('.gig-image-preview img').attr("src", e.target.result);
-				///}
-				reader.readAsDataURL(input.files[0]);
-				
-			} else {
-				// document.querySelector("[id=reviewModalCloseBtn]").click();
-				openModal('알림','이미지 파일이 아닙니다.',this_modal);
-				input.value='';
-			}
-		}
-	}
-	readURL(this);
-}
-
 
 let e = new Dropzone("[data-dropzone-area]", {
 	url: "#",
 	clickable: "#dz-btn",
+	acceptedFiles: '.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF',
 	previewsContainer: "#dz-preview-row",
-	previewTemplate: '\n<div class="listing-img-preview position-relative">\n\n\n<div class="height-12x dropzone-image-preview position-relative">\n<img src="#" class="img-fluid rounded-3 file-title" data-dz-thumbnail="" alt="" >\n    </div>\n\n    <a class="badge p-0 bg-dark text-white bg-opacity-75 rounded-circle position-absolute top-0 end-0 m-1" href="#" data-dz-remove="">\n       <i class="bx bx-x fs-5 lh-1"></i>\n    </a>\n</div>\n'
+	previewTemplate: '\n<div class="listing-img-preview position-relative">\n\n\n<div class="height-12x dropzone-image-preview position-relative">\n<img src="#" class="img-fluid rounded-3 file-title" data-dz-thumbnail="" alt="" >\n    </div>\n\n    <a class="badge p-0 bg-dark text-white bg-opacity-75 rounded-circle position-absolute top-0 end-0 m-1" href="#" data-dz-remove="">\n       <i class="bx bx-x fs-5 lh-1"></i>\n    </a>\n</div>\n',
+	init: function () {
+		// 최초 dropzone 설정시 init을 통해 호출
+		let myDropzone = this; // closure 변수 (화살표 함수 쓰지않게 주의)
+
+		// 서버에 제출 submit 버튼 이벤트 등록
+		document.querySelector('#dz-btn').addEventListener('click', function () {
+
+			// 거부된 파일이 있다면
+			if (myDropzone.getRejectedFiles().length > 0) {
+				let files = myDropzone.getRejectedFiles();
+				console.log('거부된 파일이 있습니다.', files);
+				return;
+			}
+
+			myDropzone.processQueue(); // autoProcessQueue: false로 해주었기 때문에, 메소드 api로 파일을 서버로 제출
+		});
+
+		this.on('addedfile', function (file) {
+			// 중복된 파일의 제거
+			if (this.files.length) {
+				// -1 to exclude current file
+				var hasFile = false;
+				for (var i = 0; i < this.files.length - 1; i++) {
+					if (
+						this.files[i].name === file.name &&
+						this.files[i].size === file.size &&
+						this.files[i].lastModifiedDate.toString() === file.lastModifiedDate.toString()
+					) {
+						hasFile = true;
+						this.removeFile(file);
+					}
+				}
+			}
+
+
+			for(var i=0; i< this.files.length; i++){
+				var extension = this.files[i].name.split('.').pop().toLowerCase();		
+				if(extension != 'jpg' && extension != 'jpeg' && extension != 'png' && extension != 'gif'){
+					alert('이미지 파일이 아닙니다.');
+					this.removeFile(file);
+				}
+			}
+		});
+   },
 });
-e.on("addedfile", (function (e) {
-		let o = document.querySelectorAll(".listing-img-preview");
-		o = o[o.length - 1].querySelectorAll(".file-title");
-		for (let i = 0; i < o.length; i++) o[i].title = e.name
-	})),
-e.on("addedfiles",
-	(function (o) {
-		e.previewsContainer.classList.add("dz-preview-moved", "border-bottom", "pb-2", "mb-3")
-	})),
-e.on("reset",
-	(function (o) {
-		e.previewsContainer.classList.remove("dz-preview-moved", "border-bottom", "pb-2", "mb-3")
-}))
+// 파일이 업로드되면 실행
 
-
-
-
-// let fileEle = document.getElementById("inputGroupFile04");
-// let preview = document.getElementById("preview");
-
-// fileEle.addEventListener("change", () => {
-// 	const files = Array.from(fileEle.files)
-
-// 	files.forEach(file => {
-// 		var html = `
-// 			<p id="${file.lastModified}" class="uploded_img text-start">
-// 				${file.name}
-// 				<button data-index='${file.lastModified}' class="file-remove">X</button>
-// 			</p>`;
-// 		preview.insertAdjacentHTML("beforeend", html);
-// 	});
-// });
-
-// document.addEventListener('click', (e) => {
-// 	if(e.target.className !== 'file-remove') return;
-// 	const removeTargetId = e.target.dataset.index;
-// 	const removeTarget = document.getElementById(removeTargetId);
-// 	const files = document.querySelector('#inputGroupFile04').files;
-// 	const dataTranster = new DataTransfer();
-
-// 	Array.from(files)
-// 		.filter(file => file.lastModified != removeTargetId)
-// 		.forEach(file => {
-// 		dataTranster.items.add(file);
-// 		});
-
-// 	document.querySelector('#inputGroupFile04').files = dataTranster.files;
-
-// 	removeTarget.remove();	
-// });		
+/*오늘 날짜, 시간 셋팅*/
+document.getElementById("start-date-input").value = new Date().toISOString().slice(0,10);
+document.getElementById("end-date-input").value = new Date().toISOString().slice(0,10);
 
 </script>
 {% endblock %}
