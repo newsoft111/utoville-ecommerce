@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, resolve_url
 from django.contrib import auth
+from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
@@ -43,7 +44,7 @@ def user_login(request):
 			result_text = '로그인 성공'
 		else:
 			result = '201'
-			result_text = '탈퇴한 계정입니다.'	
+			result_text = '탈퇴한 계정입니다.'
 
 		return JsonResponse({'result': result, 'result_text': result_text})
 	else:
@@ -90,14 +91,14 @@ def user_join(request):
 			result = '201'
 			result_text = '비밀번호가 일치하지 않습니다.'
 			return JsonResponse({'result': result, 'result_text': result_text})
-		
+
 
 		user = User.objects.create_user(
 								email=email,
 								nickname=nickname,
 								password=password,
 							)
-		
+
 		if send_auth_mail(email):
 			result = '200'
 			result_text = "회원가입이 완료되었습니다.<br>가입하신 이메일 주소로 인증 메일을 보내드렸습니다.<br>이메일 인증을 한 후에 정상적인 서비스 이용이 가능합니다."
@@ -188,16 +189,16 @@ def find_passwd(request):
 			message = emailContent,
 			mailType = 'html'
 		)
-		
+
 		if _result:
 			result = '200'
 			result_text = '비밀번호 재설정 메일이 전송되었습니다.<br>메일함을 확인해주세요.'
 		else:
 			result = '201'
 			result_text = '알수없는 오류입니다. 다시시도 해주세요.'
-			
+
 		result = {'result': result, 'result_text': result_text}
-		return JsonResponse(result)   
+		return JsonResponse(result)
 	else:
 		return render(request, 'account/find_passwd.html', {"seo":seo})
 
@@ -212,7 +213,7 @@ def reset_passwd(request, uidb64, token):
 
 	if user is None:
 		return render(request, 'main/index.html', {"message":"알수없는 오류입니다. 다시시도 해주세요."})
-		
+
 	if not PasswordResetTokenGenerator().check_token(user, token):
 		return render(request, 'main/index.html', {"message":"이미 사용된 인증메일 입니다."})
 
@@ -240,7 +241,7 @@ def send_auth_mail(email):
 		user = User.objects.get(email=email)
 	except:
 		user = None
-	
+
 	if user is not None:
 		message = render_to_string('email/auth_email.html', {
 			'user': user,
@@ -259,8 +260,27 @@ def send_auth_mail(email):
 	else:
 		return False
 
+
 def my_dashboard(request):
-	return render(request, 'account/mypage/my_dashboard.html')
+	"""Here we are preparing data to show order detail on user's calender"""
+	all_order = {"orders": [{'title': '', 'start': '', 'className': ' '}]}
+
+	if request.user.is_authenticated and not request.user.is_anonymous:
+		order_data = []
+
+		q = Q()
+		q &= Q(order__user=request.user)
+
+		order_items = OrderItem.objects.filter(q)
+		for items in order_items:
+			item_data = {'title': items.product_name, 'start': str(items.schedule_date), 'className': 'bg-success'
+			if items.is_delivered else 'bg-info'}
+			order_data.append(item_data)
+
+	all_order = {"orders": order_data}
+
+	return render(request, 'account/mypage/my_dashboard.html', context=all_order)
+
 
 def my_order(request):
 	seo = {
@@ -341,3 +361,7 @@ def qna_write(request):
 
 def qna_detail(request):
 	return render(request, 'account/mypage/qna_detail.html')
+
+
+
+
