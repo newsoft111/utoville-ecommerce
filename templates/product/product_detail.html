@@ -206,44 +206,30 @@
 
 				<!--Tab-pane-->
 				<div class="tab-pane fade" id="product-qa">
-
+					{% for product_qna_obj in product_qna_objs %}
 					<div class="card border card-body mb-5 bg-transparent">
-						<h5><i class="bx bx-question-mark me-2"></i>Is the item
-						durable?</h5>
+						<h5><i class="bx bx-question-mark me-2"></i>{{product_qna_obj.question}}</h5>
 						<p class="mb-0 d-flex align-items-stretch">
 						<strong class="small d-inline-block me-2 text-muted">Ans.</strong>
 						<span class="mb-0">
-							Durability of shoes minimum 1 year if u used on daily basis. I think
-							this is best at this price range as compare to all other popular
-							brands.
+							{{product_qna_obj.answer}}
 						</span>
 						</p>
 					</div>
+					{% endfor %}
 					
-					<div class="card border card-body mb-5 bg-transparent">
-						<h5><i class="bx bx-question-mark me-2"></i>Is the item
-						durable?</h5>
-						<p class="mb-0 d-flex align-items-stretch">
-						<strong class="small d-inline-block me-2 text-muted">Ans.</strong>
-						<span class="mb-0">
-							Durability of shoes minimum 1 year if u used on daily basis. I think
-							this is best at this price range as compare to all other popular
-							brands.
-						</span>
-						</p>
-					</div>
 					{% if user.is_authenticated %}
 					<h5 class="mb-4">Feel free to Ask questions</h5>
 					<div class="row">
 						<div class="w-100"></div>
 						<div class="col-12">
 						<div class="mb-3">
-							<textarea class="form-control" name="answer"></textarea>
+							<textarea class="form-control" name="question"></textarea>
 						</div>
 						</div>
 					</div>
 					<div class="text-end">
-						<button type="button" onclick="product_qna_answer_submit();" class="btn btn-primary hover-translate-3d">
+						<button type="button" onclick="product_qna_question_submit();" class="btn btn-primary hover-translate-3d">
 						Send question <i class="bx bx-right-top-arrow-circle ms-1"></i>
 						</button>
 					</div>
@@ -433,26 +419,26 @@ function reset_variant(e, val) {
 }
 
 
-function product_qna_answer_submit() {
-      var answer = document.querySelector("[name=answer]").value;
+function product_qna_question_submit() {
+      var question = document.querySelector("[name=question]").value;
             
-      if (isEmpty(answer)) {
+      if (isEmpty(question)) {
 		openModal('알림','질문을 입력해주세요.');
          return false;
       }
 
     $.ajax({
         type : 'POST',
-        url : "{% url 'product:qna_answer' %}",
+        url : "{% url 'product:qna_question' %}",
 		headers: { "X-CSRFToken": '{{csrf_token}}' },
         data : {
-			answer: answer,
+			question: question,
 			product_id: "{{product_detail.pk}}"
 		},
         dataType : 'json',
         success: function(data){
           if(data.result==200){
-			document.querySelector("[name=answer]").value = '';
+			document.querySelector("[name=question]").value = '';
             openModal("알림", data.result_text);
           }else{
             openModal("알림", data.result_text);
