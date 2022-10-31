@@ -1,3 +1,4 @@
+from itertools import product
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponseRedirect
 from django.db.models import Q
@@ -67,17 +68,24 @@ def product_detail(request, product_id):
 		tmp_dict['price'] = variant_value.price
 
 		variant_data[key].append(tmp_dict)
+	
+	q = Q()
+	q &= Q(product = product_id)
+	q &= ~Q(answer = None)
+	q &= ~Q(answer = '')
+	product_qna_objs = ProductQnA.objects.filter(q).order_by("-id")
 
 	return render(request, 'product/product_detail.html' ,{
 		"seo":seo,
 		"product_detail": product_detail,
+		"product_qna_objs": product_qna_objs,
 		'variant_data': json.dumps(variant_data)
 	})
 
 
-def product_qna_answer(request):
+def product_qna_question(request):
 	if request.method == 'POST':
-		answer = request.POST.get("answer")
+		question = request.POST.get("question")
 		product_id = request.POST.get("product_id")
 
 		try:
@@ -91,7 +99,7 @@ def product_qna_answer(request):
 
 		try:
 			product_qna = ProductQnA()
-			product_qna.answer = answer
+			product_qna.question = question
 			product_qna.user = request.user
 			product_qna.product = product_obj
 			product_qna.save()
