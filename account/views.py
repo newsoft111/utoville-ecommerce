@@ -262,7 +262,7 @@ def send_auth_mail(email):
 
 def my_dashboard(request):
 	"""Here we are preparing data to show order detail on user's calender"""
-	all_order = {"orders": [{'title': '', 'start': '', 'className': ' '}]}
+	order_data = {"orders": [{'title': '', 'start': '', 'className': ' '}]}
 
 	if request.user.is_authenticated and not request.user.is_anonymous:
 		order_data = []
