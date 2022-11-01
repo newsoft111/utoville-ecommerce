@@ -15,13 +15,11 @@
 					<div class="row">
 						<div class="col-12">
 							<!-- Page title -->
-							<div class="mypage_main_title">
-								<h3>1:1 문의게시판 </h3>
-							</div>
+							<h4 class="my-4">1:1 문의게시판 </h4>
 							<!-- Ask Content START -->
 							<div class="row main_contents">
 								<div class="col-md-12">
-									<div class="bg-secondary-soft p-3 p-md-5 rounded">
+									<div class="bg-secondary-soft rounded">
 										<table class="ask_table table">
 											<thead>
 											<tr>
@@ -43,7 +41,7 @@
 											</tbody>
 										</table>
 									</div>
-									<div class="row mb-5">
+									<div class="row mb-1">
 										<ul class="pagination justify-content-center m-0">
 											{% if qna_objs.has_previous %}
 											<li class="page-item ">
@@ -79,11 +77,13 @@
 											</li>
 											{% endif %}
 										</ul>
+
+										<div class="text-end">
+											<a href="{% url 'account:my_qna_write' %}" class="btn btn-secondary">문의 작성</a>
+										</div>
 									</div>
 									<!-- Details -->
-									<div class="ask_btn">
-										<a href="{% url 'account:my_qna_write' %}" class="btn btn-secondary">문의 작성</a>
-									</div>
+									
 								</div>
 							</div>
 							<!-- Ask Content END  -->
