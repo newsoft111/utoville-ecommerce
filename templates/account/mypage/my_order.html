@@ -35,7 +35,7 @@
 															</td>
 															<td class="order-tb-left">카테고리별</td>
 															<td class="col-6 order-tb-right">
-																<select class="form-select" aria-label="Default select example">
+																<select class="form-select" name="category_by" aria-label="Default select example">
 																	<option selected>선택</option>
 																	<option value="1">청소</option>
 																	<option value="2">소독</option>
@@ -52,17 +52,19 @@
 																<td class="order-tb-left">날짜</td>
 																<td colspan="3" class="order-tb-right">
 																	<div class="row">
-																		<div class="col-md-10 input_group input-daterange">
-																			<input class="form-control form-radius" type="date" id="start-date-input">
-																			&nbsp;&nbsp;~&nbsp;&nbsp;
-																			<input class="form-control form-radius" type="date" id="end-date-input">
-																		</div>	
-																		<div class="col-md-2 order-tb-search text-end">
-																			<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
-																				<span class="btn-hover-label label-default">Search</span>
-																				<span class="btn-hover-label label-hover">Search</span>
-																			</button>
-																		</div>
+																		<form action="{{request.path}}" method="GET" name="dateSearchForm">
+																			<div class="col-md-10 input_group input-daterange">
+																				<input class="form-control form-radius" name="start_date" type="date" id="start-date-input">
+																				&nbsp;&nbsp;~&nbsp;&nbsp;
+																				<input class="form-control form-radius" name="end_date" type="date" id="end-date-input">
+																			</div>	
+																			<div class="col-md-2 order-tb-search text-end">
+																				<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																					<span class="btn-hover-label label-default">Search</span>
+																					<span class="btn-hover-label label-hover">Search</span>
+																				</button>
+																			</div>
+																		</form>
 																	</div>			
 																</td>
 															</div>
@@ -72,21 +74,23 @@
 																<td class="col-1 order-tb-left">서비스명</td>
 																<td class="col-5 order-tb-right">					
 																	<div class="row">
-																		<div class="col-md-9 mb-2 mb-md-0">
-																			<input type="text" class="form-control form-radius " required
-																				placeholder="주문하신 서비스명을 검색하세요.">
-																		</div>
-																		<div class="col-md-3 order-tb-search">
-																			<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
-																				<span class="btn-hover-label label-default">Search</span>
-																				<span class="btn-hover-label label-hover">Search</span>
-																			</button>
-																		</div>
+																		<form action="{{request.path}}" method="GET" name="keywordSearchForm">
+																			<div class="col-md-9 mb-2 mb-md-0">
+																				<input type="text" class="form-control form-radius" name="keyword"
+																					placeholder="주문하신 서비스명을 검색하세요.">
+																			</div>
+																			<div class="col-md-3 order-tb-search">
+																				<button type="submit"class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																					<span class="btn-hover-label label-default">Search</span>
+																					<span class="btn-hover-label label-hover">Search</span>
+																				</button>
+																			</div>
+																		</form>
 																	</div>
 																</td>						
 																<td class="col-1 order-tb-left">주문 상태</td>							
 																<td class="col-5 order-tb-right">
-																	<select class="form-select" aria-label="Default select example">
+																	<select class="form-select" name="status_by" aria-label="Default select example">
 																		<option selected>선택</option>
 																		<option value="1">입금대기</option>
 																		<option value="2">결제완료</option>
@@ -124,12 +128,12 @@
 												</thead>
 												<!-- Data -->
 												<tbody>
-													{% for myOrder in my_order_list %}
+													{% for my_order_obj in my_order_objs %}
 													<tr>
-														<td>{{myOrder.order.ordered_at}}</td>
-														<td>{{myOrder.product_name}}</td>
-														<td>{{myOrder.ordered_quantity}}</td>
-														<td>₱{{myOrder.sub_total_price|intcomma}}</td>
+														<td>{{my_order_obj.order.ordered_at}}</td>
+														<td>{{my_order_obj.product_name}}</td>
+														<td>{{my_order_obj.ordered_quantity}}</td>
+														<td>₱{{my_order_obj.sub_total_price|intcomma}}</td>
 														<td>
 															완료
 															<div class="mt-1">
@@ -147,9 +151,9 @@
 						</div>
 						<div class="row mb-5">
 							<ul class="pagination justify-content-center m-0">
-								{% if my_order_list.has_previous %}
+								{% if my_order_objs.has_previous %}
 								<li class="page-item ">
-									<a class="page-link" href="?p={{my_order_list.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">이전</a>
+									<a class="page-link" href="?p={{my_order_objs.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">이전</a>
 								</li>
 								{% else %}
 								<li class="page-item disabled">
@@ -157,9 +161,9 @@
 								</li>
 								{% endif %}
 						
-								{% for page_number in my_order_list.paginator.page_range %}
-									{% if page_number >= my_order_list.number|add:-2 and page_number <= my_order_list.number|add:2 %}
-										{% if page_number == my_order_list.number %}
+								{% for page_number in my_order_objs.paginator.page_range %}
+									{% if page_number >= my_order_objs.number|add:-2 and page_number <= my_order_objs.number|add:2 %}
+										{% if page_number == my_order_objs.number %}
 										<li class="page-item active">
 											<span class="page-link">{{ page_number }}</span>
 										</li>
@@ -171,9 +175,9 @@
 									{% endif %}
 								{% endfor %}
 						
-								{% if my_order_list.has_next  %}
+								{% if my_order_objs.has_next  %}
 								<li class="page-item">
-									<a class="page-link" href="?p={{my_order_list.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">다음</a> 
+									<a class="page-link" href="?p={{my_order_objs.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">다음</a> 
 								</li>
 								{% else %}
 								<li class="page-item disabled">
@@ -334,6 +338,20 @@ let e = new Dropzone("[data-dropzone-area]", {
 /*오늘 날짜, 시간 셋팅*/
 document.getElementById("start-date-input").value = new Date().toISOString().slice(0,10);
 document.getElementById("end-date-input").value = new Date().toISOString().slice(0,10);
+
+const category_by = document.querySelector('select[name=category_by]');
+
+category_by.addEventListener('change', (event) => {
+	var link = `{{request.path}}?category=${event.target.value}`;
+	location.href=link;
+});
+
+const status_by = document.querySelector('select[name=status_by]');
+
+status_by.addEventListener('change', (event) => {
+	var link = `{{request.path}}?status=${event.target.value}`;
+	location.href=link;
+});
 
 </script>
 {% endblock %}

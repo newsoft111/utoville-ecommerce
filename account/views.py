@@ -290,11 +290,19 @@ def my_order(request):
 		'title': "상품 리스트 - 유토빌",
 	}
 
-	# q = Q()
-	# if request.GET.get("category1"): #카테고리1 필터
-	# 	q &= Q(category_first = int(request.GET.get("category1")))
-	# if request.GET.get("category2"): #카테고리2 필터
-	# 	q &= Q(category_second = int(request.GET.get("category2")))
+	q = Q()
+	q &= Q(product__user = request.user)
+	if request.GET.get("start_date"):
+		start_date = datetime.strptime(request.GET.get("start_date"), "%Y-%m-%d")
+		if request.GET.get("end_date"):
+			end_date = request.GET.get("end_date")
+		else:
+			end_date = datetime.now()
+
+		q &= Q(order__paid_at__range = [start_date, end_date])
+
+	if request.GET.get("keyword"):
+		q &= Q(product_name__icontains = request.GET.get("keyword"))
 	# if request.GET.get("category3"): #카테고리3 필터
 	# 	q &= Q(category_third = int(request.GET.get("category3")))
 	# if request.GET.get("area"): #지역 필터
@@ -307,16 +315,16 @@ def my_order(request):
 	# 	ordering = request.GET.get("sort")
 	# else:
 	# 	ordering = "-id"
-	my_order_list =  OrderItem.objects.order_by("-id")
-	#select * from OrderItem order by "-id";
+	my_order_objs =  OrderItem.objects.filter(q).order_by("-id")
+	print(str(my_order_objs.query))
 
 	page        = int(request.GET.get('p', 1))
-	pagenator   = Paginator(my_order_list, 6)
-	my_order_list = pagenator.get_page(page)
+	pagenator   = Paginator(my_order_objs, 6)
+	my_order_objs = pagenator.get_page(page)
 
 	return render(request, 'account/mypage/my_order.html' ,{
 		"seo":seo,
-		"my_order_list":my_order_list,
+		"my_order_objs":my_order_objs,
 	})
 
 @login_required(login_url="account:login")
@@ -352,6 +360,7 @@ def qna_write(request):
 		jsonData = json.loads(request.body)
 		subject = jsonData.get('subject')
 		question = jsonData.get('question')
+		qna_type = jsonData.get('question')
 
 		if subject is None or subject == '':
 			result = {'result': '201', 'result_text': '제목을 입력해주세요.'}
@@ -361,11 +370,16 @@ def qna_write(request):
 			result = {'result': '201', 'result_text': '질문을 입력해주세요.'}
 			return JsonResponse(result)
 
+		if qna_type is None or qna_type == '':
+			result = {'result': '201', 'result_text': '문의유형을 선택해주세요.'}
+			return JsonResponse(result)
+
 		try:
 			qna_obj = QnA()
 			qna_obj.user = request.user
 			qna_obj.subject = subject
 			qna_obj.question = question
+			qna_type.qna_type = qna_type
 			qna_obj.save()
 
 			result = {'result': '200', 'result_text': '등록이 완료되었습니다.'}
