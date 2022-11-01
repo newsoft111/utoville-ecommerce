@@ -15,21 +15,23 @@
 					<div class="row">
 						<div class="col-12">
 							<!-- Page title -->
-							<div class="mypage_main_title">
-								<h3>1:1 문의게시판 </h3>
-							</div>
-							<div class="py-3">
-								<h6>제목</h6>
-								<input type="text" name="subject" class="form-control" placeholder="제목을 입력하세요.">
-							</div>
-							<div class="py-3">
-								<h6>내용</h6>
-								<div id="quill-editor"></div>
-								<div class="btn_group">
-									<a href="/account/mypage/qna/" class="btn btn-secondary">목록</a>
-									<a href="/account/mypage/qna/" class="btn btn-danger">작성</a>
+							<h4 class="my-4">1:1 문의게시판 </h4>
+
+							<form name="qnaWriteForm">
+								<div class="py-3">
+									<h6>제목</h6>
+									<input type="text" name="subject" class="form-control" placeholder="제목을 입력하세요.">
 								</div>
-							</div>		
+								<div class="py-3">
+									<h6>내용</h6>
+									<input type="hidden" name="question">
+									<div id="quill-editor"></div>
+									<div class="btn_group">
+										<a href="{% url 'account:my_qna_list' %}" class="btn btn-secondary">목록</a>
+										<a href="#!" onclick="qna_write_submit();" class="btn btn-danger">작성</a>
+									</div>
+								</div>
+							</form>	
 						</div>
 					</div>
 				</div>
@@ -40,20 +42,59 @@
 
 <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
-	var quill = new Quill('#quill-editor', {
-	   modules: {
-		  toolbar: [
-			 [{ 'size': ['small', false, 'large', 'huge'] }],
-			 ['bold', 'italic', 'underline', 'strike'],
-			 ['blockquote', 'code-block'],
-			 [{ 'color': [] }, { 'background': [] }],
-			 [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-			 ['link', 'image'],
-			 ['clean'],
-		  ]
-	   },
-	   placeholder: '내용을 입력해주세요.',
-	   theme: 'snow'
-	});
+let is_run = false;
+
+var quill = new Quill('#quill-editor', {
+	modules: {
+		toolbar: [
+			[{ 'size': ['small', false, 'large', 'huge'] }],
+			['bold', 'italic', 'underline', 'strike'],
+			['blockquote', 'code-block'],
+			[{ 'color': [] }, { 'background': [] }],
+			[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+			['link', 'image'],
+			['clean'],
+		]
+	},
+	placeholder: '내용을 입력해주세요.',
+	theme: 'snow'
+});
+
+quill.getModule('toolbar').addHandler('image', function() {
+	upload_content_image();
+});
+
+
+async function qna_write_submit() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+    is_run = true;
+
+	document.querySelector('input[name=question]').value = quill.root.innerHTML;
+	let form_data = new FormData(document.querySelector('form[name=qnaWriteForm]'));
+
+    const response = await fetch("{{request.path}}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: JSON.stringify(
+            Object.fromEntries(form_data)
+        ),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        is_run  = false;
+        if (data.result == '200') {
+            openModal("알림", data.result_text, '', "location.replace(`{% url 'account:my_qna_list' %}`);");
+        } else {
+            openModal("알림", data.result_text, '');
+        }
+    });
+}
  </script>
  {% endblock %}

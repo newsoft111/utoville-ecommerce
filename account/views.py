@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, resolve_url
+from django.shortcuts import render, redirect, resolve_url, get_object_or_404
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse, HttpResponseRedirect
@@ -16,6 +16,7 @@ from qna.models import *
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+import json
 User = get_user_model()
 
 def user_login(request):
@@ -347,7 +348,47 @@ def qna_list(request):
 	})
 
 def qna_write(request):
-	return render(request, 'account/mypage/my_qna_write.html')
+	if request.method == 'POST':
+		jsonData = json.loads(request.body)
+		subject = jsonData.get('subject')
+		question = jsonData.get('question')
+
+		if subject is None or subject == '':
+			result = {'result': '201', 'result_text': '제목을 입력해주세요.'}
+			return JsonResponse(result)
+
+		if question is None or question == '':
+			result = {'result': '201', 'result_text': '질문을 입력해주세요.'}
+			return JsonResponse(result)
+
+		try:
+			qna_obj = QnA()
+			qna_obj.user = request.user
+			qna_obj.subject = subject
+			qna_obj.question = question
+			qna_obj.save()
+
+			result = {'result': '200', 'result_text': '등록이 완료되었습니다.'}
+			return JsonResponse(result)
+
+		except Exception as e:
+			print(e)
+			result = {'result': '201', 'result_text': '알수없는 오류입니다. 관리자에게 문의해주세요.'}
+			return JsonResponse(result)
+	else:
+		return render(request, 'account/mypage/my_qna_write.html')
 
 def qna_detail(request, qna_id):
-	return render(request, 'account/mypage/my_qna_detail.html')
+	seo = {
+		'title': "상품 리스트 - 유토빌",
+	}
+	
+	q = Q()
+	q &= Q(user = request.user)
+	q &= Q(pk = qna_id)
+
+	qna_obj =  get_object_or_404(QnA, q)
+	return render(request, 'account/mypage/my_qna_detail.html' ,{
+	 	"seo":seo,
+	 	"qna_obj":qna_obj,
+	})
