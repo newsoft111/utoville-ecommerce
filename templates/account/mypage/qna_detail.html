@@ -32,31 +32,35 @@
 											</thead>
 											<tbody>
 												<td colspan="2" class="text-end">
+<<<<<<< Updated upstream:templates/account/mypage/qna_detail.html
 													<span class="qna_name">작성자: name</span>
 													<span class="bar">l</span>
 													<span class="qna date">작성일: 2022-00-00</span>
+=======
+													<span class="qna date">작성일: {{qna_obj.questioned_at}}</span>
+>>>>>>> Stashed changes:templates/account/mypage/my_qna_detail.html
 												</td>
 											</tbody>
 											<tbody>
 												<td colspan="2" class="ques_contnet text-start">
+<<<<<<< Updated upstream:templates/account/mypage/qna_detail.html
 													질문한 내용
+=======
+													<p class="fs-6 fw-bold">질문 내용:</p>
+													{{qna_obj.question|safe}}
+>>>>>>> Stashed changes:templates/account/mypage/my_qna_detail.html
 												</td>		
 											</tbody>
 											<tbody>
 												<td colspan="2" class="anw_content text-start">
+<<<<<<< Updated upstream:templates/account/mypage/qna_detail.html
 													답변 내용
+=======
+													<p class="fs-6 fw-bold">관리자 답변:</p>
+													{{qna_obj.answer}}
+>>>>>>> Stashed changes:templates/account/mypage/my_qna_detail.html
 												</td>		
-											</tbody>			
-											<tbody>
-												<td class="col-2 text-center">이전글<i class='bx bx-up-arrow-alt'></i></td>
-												<td><a href="#">이전글 제목</a></td>
-											</tbody>	
-											<tbody>
-												<tr class="previous_content">
-													<td class="col-2 text-center">다음글<i class='bx bx-down-arrow-alt'></i></td>	
-													<td><a href="#">다음글 제목</a></td>													
-												</tr>
-											</tbody>									
+											</tbody>											
 										</table>
 									</div>
 									<!-- Details -->
