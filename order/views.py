@@ -72,7 +72,7 @@ def order_create(request):
 					OrderItem.objects.create(
 						order = order_obj,
 						product = product_obj,
-						product_name = product_obj.name,
+						product_name = product_obj.product_name,
 						product_price = product_obj.price,
 						variant = variant,
 						variant_value = variant_value,

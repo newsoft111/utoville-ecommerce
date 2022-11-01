@@ -27,25 +27,27 @@
 											<tr>
 												<th scope="col" class="col-1">번호</th>
 												<th scope="col" class="col-7">제목</th>
-												<th scope="col" class="col-2">작성자</th>
+												<th scope="col" class="col-2">상태</th>
 												<th scope="col" class="col-2">날짜</th>
 											</tr>
 											</thead>
 											<tbody>
-											<tr>
-												<th scope="row">1</th>
-											<td><a href="/account/mypage/qna/detail">제목입니다.</a></td>
-												<td>Otto</td>
-												<td>2022-10-20</td>
-											</tr>
+											{% for qna_obj in qna_objs %}
+												<tr>
+													<th scope="row">{{forloop.counter}}</th>
+													<td><a href="{% url 'account:my_qna_detail' qna_obj.id %}">{{qna_obj.subject}}</a></td>
+													<td>Otto</td>
+													<td>{{qna_obj.questioned_at}}</td>
+												</tr>
+											{% endfor %}
 											</tbody>
 										</table>
 									</div>
 									<div class="row mb-5">
 										<ul class="pagination justify-content-center m-0">
-											{% if product_list.has_previous %}
+											{% if qna_objs.has_previous %}
 											<li class="page-item ">
-												<a class="page-link" href="?p={{product_list.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">이전</a>
+												<a class="page-link" href="?p={{qna_objs.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">이전</a>
 											</li>
 											{% else %}
 											<li class="page-item disabled">
@@ -53,9 +55,9 @@
 											</li>
 											{% endif %}
 									
-											{% for page_number in product_list.paginator.page_range %}
-												{% if page_number >= product_list.number|add:-2 and page_number <= product_list.number|add:2 %}
-													{% if page_number == product_list.number %}
+											{% for page_number in qna_objs.paginator.page_range %}
+												{% if page_number >= qna_objs.number|add:-2 and page_number <= qna_objs.number|add:2 %}
+													{% if page_number == qna_objs.number %}
 													<li class="page-item active">
 														<span class="page-link">{{ page_number }}</span>
 													</li>
@@ -67,9 +69,9 @@
 												{% endif %}
 											{% endfor %}
 									
-											{% if product_list.has_next  %}
+											{% if qna_objs.has_next  %}
 											<li class="page-item">
-												<a class="page-link" href="?p={{product_list.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">다음</a> 
+												<a class="page-link" href="?p={{qna_objs.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">다음</a> 
 											</li>
 											{% else %}
 											<li class="page-item disabled">
@@ -80,7 +82,7 @@
 									</div>
 									<!-- Details -->
 									<div class="ask_btn">
-										<a href="{% url 'account:write' %}" class="btn btn-secondary">문의 작성</a>
+										<a href="{% url 'account:my_qna_write' %}" class="btn btn-secondary">문의 작성</a>
 									</div>
 								</div>
 							</div>
