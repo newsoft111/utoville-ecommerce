@@ -25,7 +25,7 @@ def product_list(request):
 	if request.GET.get("area"): #지역 필터
 		q &= Q(productarea__area = request.GET.get("area"))
 	if request.GET.get("keyword"): #검색 필터
-		q &= Q(name__icontains = request.GET.get("keyword"))
+		q &= Q(product_name__icontains = request.GET.get("keyword"))
 
 	ordering_list = ["rating_count", "rating", "id", "price", "-price"]
 	if request.GET.get("sort") in ordering_list:

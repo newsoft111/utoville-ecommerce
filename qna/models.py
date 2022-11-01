@@ -7,6 +7,7 @@ class QnA(models.Model):
 				settings.AUTH_USER_MODEL,
 				on_delete=models.CASCADE,
 	)
+	subject = models.CharField(max_length=255)
 	question = models.TextField()
 	answer = models.TextField()
 	questioned_at = models.DateTimeField(auto_now_add=True, auto_now=False)
