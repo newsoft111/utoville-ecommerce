@@ -30,31 +30,21 @@
 											</thead>
 											<tbody>
 												<td colspan="2" class="text-end">
-													<span class="qna_name">작성자: {{requset.user.username}}</span>
-													<span class="bar">l</span>
 													<span class="qna date">작성일: {{qna_obj.questioned_at}}</span>
 												</td>
 											</tbody>
 											<tbody>
 												<td colspan="2" class="ques_contnet text-start">
+													<p class="fs-6 fw-bold">질문 내용:</p>
 													{{qna_obj.question|safe}}
 												</td>		
 											</tbody>
 											<tbody>
 												<td colspan="2" class="anw_content text-start">
+													<p class="fs-6 fw-bold">관리자 답변:</p>
 													{{qna_obj.answer}}
 												</td>		
-											</tbody>			
-											<tbody>
-												<td class="col-2 text-center">이전글<i class='bx bx-up-arrow-alt'></i></td>
-												<td><a href="#">이전글 제목</a></td>
-											</tbody>	
-											<tbody>
-												<tr class="previous_content">
-													<td class="col-2 text-center">다음글<i class='bx bx-down-arrow-alt'></i></td>	
-													<td><a href="#">다음글 제목</a></td>													
-												</tr>
-											</tbody>									
+											</tbody>											
 										</table>
 									</div>
 									<!-- Details -->
