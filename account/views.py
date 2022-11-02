@@ -8,7 +8,7 @@ from django.utils.encoding import force_bytes, force_str
 from .tokens import account_activation_token
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.hashers import check_password
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from django.conf import settings
 from util.views import EmailSender
 from order.models import *
@@ -280,9 +280,22 @@ def my_dashboard(request):
 			if items.is_delivered else 'bg-info'}
 			order_data.append(item_data)
 
-	all_order = {"orders": order_data}
+	q = Q()
+	q &= Q(order__user=request.user)
+	next_service_day_count = OrderItem.objects.filter(q).order_by('-schedule_date')[0].schedule_date
+	next_service_day_count = next_service_day_count.replace(tzinfo=None) - (datetime.today() - timedelta(1))
+	print(next_service_day_count)
+	
+	q &= Q(is_delivered=True)
+	delivered_service_count = OrderItem.objects.filter(q).count()
 
-	return render(request, 'account/mypage/my_dashboard.html', context=all_order)
+	
+
+	return render(request, 'account/mypage/my_dashboard.html', {
+		"orders": order_data,
+		'delivered_service_count':delivered_service_count,
+		"next_service_day_count": next_service_day_count.days,
+	})
 
 @login_required(login_url="account:login")
 def my_order(request):
@@ -316,14 +329,7 @@ def my_order(request):
 
 	if request.GET.get("status"): #지역 필터
 		q &= Q(order_status = order_status_dict[request.GET.get("status")])
-	# if request.GET.get("keyword"): #검색 필터
-	# 	q &= Q(name__icontains = request.GET.get("keyword"))
 
-	# ordering_list = ["rating_count", "rating", "id", "price", "-price"]
-	# if request.GET.get("sort") in ordering_list:
-	# 	ordering = request.GET.get("sort")
-	# else:
-	# 	ordering = "-id"
 	my_order_objs =  OrderItem.objects.filter(q).order_by("-id")
 	print(str(my_order_objs.query))
 
@@ -332,6 +338,9 @@ def my_order(request):
 	my_order_objs = pagenator.get_page(page)
 
 	category_objs = CategoryFirst.objects.all().order_by("id")
+
+	q = Q()
+	q &= Q(product__user = request.user)
 
 	return render(request, 'account/mypage/my_order.html' ,{
 		"seo":seo,
