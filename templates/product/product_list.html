@@ -3,7 +3,6 @@
 {% load static %}
 {% load humanize %}
 
-
 <!--Page header start-->
 <section class="position-relative overflow-hidden">
 	<div class="py-8 py-lg-11 bg-dark text-white position-relative">
@@ -30,9 +29,8 @@
 	</div>
 </section>
 
-
 <section class="position-relative bg-white">
-	<div class="container py-9 py-lg-11 position-relative">
+	<div class="container position-relative">
 		<div class="row justify-content-between">
 			<div class="col-md-3">
 				<!--:Sidebar widget card-->
@@ -69,8 +67,7 @@
   </div>
   <div class="col-md-6 ms-auto">
 	<div class="d-flex align-items-center">
-		<span class="small text-muted text-end me-3 d-none d-lg-block w-100">Short by</span>
-		
+		<span class="small text-muted text-end me-3 d-none d-lg-block w-100">Short by</span>		
 		<select name="sort_by" class="form-control" id="sort-by">
 			<option value="id" selected> Most recent</option>
 			<option value="rating_count"> Best selling</option>
@@ -78,7 +75,6 @@
 			<option value="price"> Price - Low to High</option>
 			<option value="-price">Price - High to Low</option>
 		</select>
-
 	</div>
   </div>
 </div>
@@ -147,35 +143,6 @@
 	</ul>
 </div>
 
-</div>
-</div>
-</div>
-</section>
-<section class="border-top position-relative overflow-hidden">
-<div class="container py-9 position-relative">
-<div class="row align-items-center">
-<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
-<div class="mb-3">
-  <i class="bx bx-store fs-1"></i>
-</div>
-<h6 class="mb-0">30 Day Returns</h6>
-</div>
-<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
-<div class="mb-3">
-  <i class="bx bx-purchase-tag fs-1"></i>
-</div>
-<h6 class="mb-0">100% Handpicked</h6>
-</div>
-<div class="col-md-4 text-center">
-<div class="mb-3">
-  <i class="bx bx-package fs-1"></i>
-</div>
-<h6 class="mb-0">Assured Quality</h6>
-</div>
-</div>
-</div>
-</section>
-
 <script>
 $(document).ready(function() {
 	const urlParams = new URLSearchParams(window.location.search);
@@ -195,6 +162,7 @@ sort.addEventListener('change', (event) => {
 	var link = `{{request.path}}?sort=${event.target.value}`;
 	location.href=link;
 });
+
 </script>
 
 {% endblock %}

@@ -7,3 +7,9 @@ def index(request):
 		'title': "유토빌",
 	}
 	return render(request, 'main/index.html',{"seo":seo})
+
+def contact(request):
+	return render(request, 'main/contact.html')
+
+def faq(request):
+	return render(request, 'main/faq.html')
