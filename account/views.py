@@ -284,17 +284,26 @@ def my_dashboard(request):
 	q &= Q(order__user=request.user)
 	next_service_day_count = OrderItem.objects.filter(q).order_by('-schedule_date')[0].schedule_date
 	next_service_day_count = next_service_day_count.replace(tzinfo=None) - (datetime.today() - timedelta(1))
-	print(next_service_day_count)
-	
+		
 	q &= Q(is_delivered=True)
 	delivered_service_count = OrderItem.objects.filter(q).count()
 
+	water_derivery_category = CategoryFirst.objects.get(name=settings.WATER_DELIVERY_SERVICE_NAME)
+	q = Q()
+	q &= Q(order__user=request.user)
+	q &= Q(product__category_first=water_derivery_category.id)
+	q &= Q(is_delivered=False)
 	
+	water_delivered_service_list = OrderItem.objects.values('ordered_quantity', 'shipped_quantity').filter(q)
+	water_delivered_service_count = 0
+	for water_delivered_service in water_delivered_service_list:
+		water_delivered_service_count += water_delivered_service["ordered_quantity"] - water_delivered_service["shipped_quantity"]
 
 	return render(request, 'account/mypage/my_dashboard.html', {
 		"orders": order_data,
 		'delivered_service_count':delivered_service_count,
 		"next_service_day_count": next_service_day_count.days,
+		"water_delivered_service_count": water_delivered_service_count,
 	})
 
 @login_required(login_url="account:login")
