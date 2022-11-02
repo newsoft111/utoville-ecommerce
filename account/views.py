@@ -265,8 +265,7 @@ def send_auth_mail(email):
 
 @login_required(login_url="account:login")
 def my_dashboard(request):
-	"""Here we are preparing data to show order detail on user's calendar"""
-	order_data = {"orders": [{'title': '', 'start': '', 'className': ' '}]}
+	"""Here we are preparing data to show order detail on user's calender"""
 
 	if request.user.is_authenticated and not request.user.is_anonymous:
 		order_data = []
