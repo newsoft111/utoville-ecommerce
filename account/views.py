@@ -290,6 +290,13 @@ def my_order(request):
 		'title': "상품 리스트 - 유토빌",
 	}
 
+	order_status_dict = {
+		"1":"결제대기",
+		"2":"결제완료",
+		"3":"서비스대기",
+		"4":"서비스완료",
+	}
+
 	q = Q()
 	q &= Q(product__user = request.user)
 	if request.GET.get("start_date"):
@@ -303,10 +310,12 @@ def my_order(request):
 
 	if request.GET.get("keyword"):
 		q &= Q(product_name__icontains = request.GET.get("keyword"))
-	# if request.GET.get("category3"): #카테고리3 필터
-	# 	q &= Q(category_third = int(request.GET.get("category3")))
-	# if request.GET.get("area"): #지역 필터
-	# 	q &= Q(productarea__area = request.GET.get("area"))
+
+	if request.GET.get("category"):
+		q &= Q(product__category_first = int(request.GET.get("category")))
+
+	if request.GET.get("status"): #지역 필터
+		q &= Q(order_status = order_status_dict[request.GET.get("status")])
 	# if request.GET.get("keyword"): #검색 필터
 	# 	q &= Q(name__icontains = request.GET.get("keyword"))
 
@@ -322,9 +331,13 @@ def my_order(request):
 	pagenator   = Paginator(my_order_objs, 6)
 	my_order_objs = pagenator.get_page(page)
 
+	category_objs = CategoryFirst.objects.all().order_by("id")
+
 	return render(request, 'account/mypage/my_order.html' ,{
 		"seo":seo,
 		"my_order_objs":my_order_objs,
+		"category_objs": category_objs,
+		'order_status_dict': order_status_dict.items(),
 	})
 
 @login_required(login_url="account:login")

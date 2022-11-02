@@ -36,14 +36,11 @@
 															<td class="order-tb-left">카테고리별</td>
 															<td class="col-6 order-tb-right">
 																<select class="form-select" name="category_by" aria-label="Default select example">
-																	<option selected>선택</option>
-																	<option value="1">청소</option>
-																	<option value="2">소독</option>
-																	<option value="3">수리</option>
-																	<option value="3">가전케어</option>
-																	<option value="3">이사</option>
-																	<option value="3">차 서비스</option>
-																	<option value="3">생수 배달</option>
+																	
+																	<option value="" {% if not request.GET.category %}selected{% endif %}>선택</option>
+																	{% for category_obj in category_objs %}
+																	<option value="{{category_obj.pk}}" {% if request.GET.category|slugify == category_obj.pk|slugify %}selected{% endif %}>{{category_obj.name}}</option>
+																	{% endfor %}
 																</select>
 															</td>
 														</tr>
@@ -91,11 +88,11 @@
 																<td class="col-1 order-tb-left">주문 상태</td>							
 																<td class="col-5 order-tb-right">
 																	<select class="form-select" name="status_by" aria-label="Default select example">
-																		<option selected>선택</option>
-																		<option value="1">입금대기</option>
-																		<option value="2">결제완료</option>
-																		<option value="3">서비스 대기</option>
-																		<option value="3">서비스 완료</option>
+																		<option value="">선택</option>
+
+																		{% for k, v in order_status_dict %}
+																		<option value="{{k}}">{{v}}</option>
+																		{% endfor %}
 																	</select>
 																</td>
 															</div>

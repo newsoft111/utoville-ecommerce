@@ -53,6 +53,7 @@ class OrderItem(models.Model):
 	shipped_quantity = models.PositiveIntegerField(default=0)
 	is_subscribe = models.BooleanField(default=False)
 	schedule_date= models.DateTimeField()
+	order_status = models.CharField(max_length=255)
 	
 
 	class Meta:
