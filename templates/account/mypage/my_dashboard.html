@@ -25,7 +25,7 @@
 									<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
 									<div class="text-center position-relative">
 										<a href="#!" id="next-service">
-											<h2 data-countup='{"startVal": 0,"prefix":"D-"}' data-to="21" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+											<h2 data-countup='{"startVal": 0,"prefix":"D-"}' data-to="{{next_service_day_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
 											<div class="text-muted">다음 서비스까지</div>
 										</a>
 									</div>
@@ -44,10 +44,9 @@
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
 									<span class="display-5 text-white opacity-5"><i class="fab fa-fw fa-gratipay"></i></span>
 									<div class="text-center position-relative">
-										<a href="#!" id="complete-service-num">
-											<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="{{delivered_service_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
-											<div class="text-muted">완료된 서비스 수</div>
-										</a>
+										<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="{{delivered_service_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+										<div class="text-muted">완료된 서비스 수</div>
+
 									</div>
 								</div>
 								<!-- Item -->
@@ -63,6 +62,7 @@
 					</div>
 					<div class="pt-5 col-12">
 						<div id="calendar"></div>
+
 					</div>	
 					<div class="row">
 						<div class="col-lg-6 col-md-6 pt-5">
@@ -189,6 +189,7 @@
 							</div>
 						</div>		
 					</div>		
+					</div>				
 				</div>
 			</div>	
 			<!-- Main content END -->

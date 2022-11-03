@@ -78,7 +78,8 @@ def order_create(request):
 						variant_value = variant_value,
 						variant_price = variant_price,
 						ordered_quantity = ordered_quantity,
-						schedule_date = datetime.now()
+						schedule_date = datetime.now(),
+						order_status = '결제대기',
 					)
 
 				except Exception as e:
