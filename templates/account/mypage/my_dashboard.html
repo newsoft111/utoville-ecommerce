@@ -26,7 +26,6 @@
 									<div class="text-center position-relative">
 										<a href="#!" id="next-service">
 											<h2 data-countup='{"startVal": 0,"prefix":"D-"}' data-to="21" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
-											<span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
 											<div class="text-muted">다음 서비스까지</div>
 										</a>
 									</div>
@@ -35,26 +34,27 @@
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
 									<span class="display-5 text-white opacity-5"><i class="far fa-fw fa-comment-dots"></i></span>
 									<div class="text-center position-relative">
-										<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="3" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
-										<span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
-										<div class="text-muted">구독한 서비스 수</div>
+										<a href="#!" id="subs-num">
+											<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="3" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+											<div class="text-muted">구독한 서비스 수</div>
+										</a>
 									</div>
 								</div>											
 								<!-- Item -->
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
 									<span class="display-5 text-white opacity-5"><i class="fab fa-fw fa-gratipay"></i></span>
 									<div class="text-center position-relative">
-										<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="55" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
-										<span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
-										<div class="text-muted">완료된 서비스 수</div>
+										<a href="#!" id="complete-service-num">
+											<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="{{delivered_service_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+											<div class="text-muted">완료된 서비스 수</div>
+										</a>
 									</div>
 								</div>
 								<!-- Item -->
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
 									<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-eye"></i></span>
 									<div class="text-center position-relative">
-										<h2 data-countup='{"startVal": 0,"prefix":""}' data-to="30" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
-										<span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success p-1"><span class="visually-hidden">unread messages</span></span>
+										<h2 data-countup='{"startVal": 0,"prefix":""}' data-to="{{water_delivered_service_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
 										<div class="text-muted">남은 생수 개수</div>
 									</div>
 								</div>
@@ -63,111 +63,132 @@
 					</div>
 					<div class="pt-5 col-12">
 						<div id="calendar"></div>
-					</div>
-					<!-- end col -->
-					<div class="col-xl-3 col-md-6">
-						<div class="card card-h-100">
-							<div class="card-header border-bottom-0">
-								<div class="d-flex align-items-start">
-									<div class="flex-grow-1">
-										<h5 class="card-title">Visitors by Browser</h5>
-									</div>
+					</div>	
+					<div class="row">
+						<div class="col-lg-6 col-md-6 pt-5">
+							<div class="card card-h-100">
+								<div class="card-header border-bottom-0">
+									<div class="d-flex align-items-start">
+										<div class="flex-grow-1">
+											<h5 class="card-title">Subscribed Services</h5>
+										</div>
 
-									<div class="flex-shrink-0">
-										<div class="dropdown">
-											<a class="font-size-16 text-muted dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												<i class="mdi mdi-dots-horizontal"></i>
-											</a>
-										
-											<div class="dropdown-menu">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
+										<div class="flex-shrink-0">
+											<div class="dropdown">
+												<a class="font-size-16 text-muted dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="mdi mdi-dots-horizontal"></i>
+												</a>
+											
+												<div class="dropdown-menu">
+													<a class="dropdown-item" href="#">Action</a>
+													<a class="dropdown-item" href="#">Another action</a>
+													<a class="dropdown-item" href="#">Something else here</a>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+
+								<div data-simplebar style="max-height: 230px;">
+									<ul class="list-unstyled mb-0">
+										<li class="px-4 py-3">
+											<div class="d-flex align-items-center">
+												<div class="flex-shrink-0 me-3">
+													<div class="avatar-sm">
+														<div class="avatar-title bg-light text-primary rounded-circle">
+															#1
+														</div>
+													</div>
+												</div>
+												<div class="flex-grow-1 overflow-hidden">
+													<p class="text-muted mb-1 text-truncate">www.abc.com</p>
+													<h5 class="font-size-16 mb-0 text-truncate">3.82 k</h5>
+												</div>
+												<div class="flex-shrink-0 align-self-start">
+													<div class="badge badge-soft-success ms-2">1.2 % <i class="uil uil-arrow-up-right text-success ms-1"></i></div>
+												</div>
+											</div>
+										</li>
+										<li class="px-4 py-3">
+											<div class="d-flex align-items-center">
+												<div class="flex-shrink-0 me-3">
+													<div class="avatar-sm">
+														<div class="avatar-title bg-light text-primary rounded-circle">
+															#2
+														</div>
+													</div>
+												</div>
+												<div class="flex-grow-1 overflow-hidden">
+													<p class="text-muted mb-1 text-truncate">www.xyz.com</p>
+													<h5 class="font-size-16 mb-0 text-truncate">3.04 k</h5>
+												</div>
+												<div class="flex-shrink-0 align-self-start">
+													<div class="badge badge-soft-success ms-2">1.1 % <i class="uil uil-arrow-up-right text-success ms-1"></i></div>
+												</div>
+											</div>
+										</li>
+										<li class="px-4 py-3">
+											<div class="d-flex align-items-center">
+												<div class="flex-shrink-0 me-3">
+													<div class="avatar-sm">
+														<div class="avatar-title bg-light text-primary rounded-circle">
+															#3
+														</div>
+													</div>
+												</div>
+												<div class="flex-grow-1 overflow-hidden">
+													<p class="text-muted mb-1 text-truncate">www.abc123.com</p>
+													<h5 class="font-size-16 mb-0 text-truncate">2.64 k</h5>
+												</div>
+												<div class="flex-shrink-0 align-self-start">
+													<div class="badge badge-soft-success ms-2">0.8 % <i class="uil uil-arrow-up-right text-success ms-1"></i></div>
+												</div>
+											</div>
+										</li>
+										<li class="px-4 py-3">
+											<div class="d-flex align-items-center">
+												<div class="flex-shrink-0 me-3">
+													<div class="avatar-sm">
+														<div class="avatar-title bg-light text-primary rounded-circle">
+															#4
+														</div>
+													</div>
+												</div>
+												<div class="flex-grow-1 overflow-hidden">
+													<p class="text-muted mb-1 text-truncate">www.xyz.com</p>
+													<h5 class="font-size-16 mb-0 text-truncate">2.06 k</h5>
+												</div>
+												<div class="flex-shrink-0 align-self-start">
+													<div class="badge badge-soft-success ms-2">0.5 % <i class="uil uil-arrow-up-right text-success ms-1"></i></div>
+												</div>
+											</div>
+										</li>                                                
+									</ul>
+								</div>
 							</div>
-							<div data-simplebar style="max-height: 230px;">
-								<ul class="list-unstyled unstyled mb-0">
-									<li class="px-4 py-3">
-										<div class="d-flex align-items-center">
-											<div class="flex-shrink-0 me-3">
-												<div class="avatar-sm">
-													<div class="avatar-title bg-light text-primary rounded-circle font-size-18">
-														<i class="fab fa-chrome"></i>
-													</div>
-												</div>
-											</div>
-											<div class="flex-grow-1">
-												<p class="text-muted mb-2">Chrome <span class="float-end fw-medium">82 %</span></p>
-												<div class="progress animated-progess custom-progress">
-													<div class="progress-bar" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</div>
-										</div>
-									</li>
-
-									<li class="px-4 py-3">
-										<div class="d-flex align-items-center">
-											<div class="flex-shrink-0 me-3">
-												<div class="avatar-sm">
-													<div class="avatar-title bg-light text-primary rounded-circle font-size-18">
-														<i class="fab fa-firefox-browser"></i>
-													</div>
-												</div>
-											</div>
-											<div class="flex-grow-1">
-												<p class="text-muted mb-2">Firefox <span class="float-end fw-medium">70 %</span></p>
-												<div class="progress animated-progess custom-progress">
-													<div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</div>
-										</div>
-									</li>
-
-									<li class="px-4 py-3">
-										<div class="d-flex">
-											<div class="flex-shrink-0 me-3">
-												<div class="avatar-sm">
-													<div class="avatar-title bg-light text-primary rounded-circle font-size-18">
-														<i class="fab fa-safari"></i>
-													</div>
-												</div>
-											</div>
-											<div class="flex-grow-1">
-												<p class="text-muted mb-2">Safari <span class="float-end fw-medium">76 %</span></p>
-												<div class="progress animated-progess custom-progress">
-													<div class="progress-bar" role="progressbar" style="width: 76%" aria-valuenow="76" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</div>
-										</div>
-									</li>
-
-									<li class="px-4 py-3">
-										<div class="d-flex">
-											<div class="flex-shrink-0 me-3">
-												<div class="avatar-sm">
-													<div class="avatar-title bg-light text-primary rounded-circle font-size-18">
-														<i class="fab fa-edge"></i>
-													</div>
-												</div>
-											</div>
-											<div class="flex-grow-1">
-												<p class="text-muted mb-2">Edge <span class="float-end fw-medium">67 %</span></p>
-												<div class="progress animated-progess custom-progress">
-													<div class="progress-bar" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</div>
-										</div>
-									</li>
-
-								</ul>
-							</div>
+							<!-- end card -->
 						</div>
-						<!-- end card -->
-					</div>
-					<!-- end col -->
+						<div class="col-lg-6 col-md-6 pt-5">
+							<div class="card card-h-100">
+								<div class="card-body">
+									<div class="d-flex align-items-start">
+										<div class="flex-grow-1">
+											<h5 class="card-title mb-4">Visitors Source</h5>
+										</div>
+										<div class="flex-shrink-0">
+											<div class="dropdown">
+												<a class="font-size-16 text-muted dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="mdi mdi-dots-horizontal"></i>
+												</a>		
+											</div>
+										</div>
+									</div>
+									<div id="chart-donut" class="apex-charts" dir="ltr"></div>
+								</div>
+								<!-- end card body -->
+							</div>
+						</div>		
+					</div>		
 				</div>
 			</div>	
 			<!-- Main content END -->
@@ -175,6 +196,7 @@
 	</div>
 </section>
 <script src="{% static 'vendor/node_modules/js/fullcalendar.min.js' %}"></script>
+<script src="{% static 'vendor/node_modules/js/apexcharts.min.js' %}"></script>
 
 <script>
 var order_data = {{ orders|safe }}
@@ -213,10 +235,45 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     m.render();
 
+	options={
+		chart:{
+			height:245,type:"donut"
+		},
+		plotOptions:{
+			pie:{donut:{size:"70%"}}
+		},
+		dataLabels:{
+			enabled:!1
+		},
+		series:[44,25,19],
+		labels:["Social","Direct","Others"],
+		colors:["#038edc","#f5f6f8","#5fd0f3"],
+		legend:{
+			show:!0,
+			position:"bottom",
+			horizontalAlign:"center",
+			verticalAlign:"middle",
+			floating:!1,
+			fontSize:"14px",
+			offsetX:0}
+	};
+	(chart=new ApexCharts(document.querySelector("#chart-donut"),options)).render();
+
 	let nextService = document.getElementById("next-service");
+	let subsNum = document.getElementById("subs-num");
+	let completeNum = document.getElementById("complete-service-num");
+	// window.addEventListener("scroll", function(){
+	// 	console.log(pageYOffset)
+	// });
 
 	nextService.addEventListener("click" , function(){
 		window.scrollTo({top: 400, behavior: "smooth"});
+	});
+	subsNum.addEventListener("click" , function(){
+		window.scrollTo({top: 1000, behavior: "smooth"});
+	});
+	completeNum.addEventListener("click" , function(){
+		window.scrollTo({top: 1000, behavior: "smooth"});
 	});
 });
 
