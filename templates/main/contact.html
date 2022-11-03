@@ -3,19 +3,18 @@
 {% load static %}
 {% load humanize %}
 	<section class="position-relative bg-white">
-		<div class="container position-relative pt-12 pt-lg-15">
+		<div class="container position-relative pt-12 pt-lg-15 text-center">
 			<div class="row">
-				<div class="col-lg-8 col-md-10">
+				<div class="col-lg-12 col-md-12 text-center">
 					<h1 class="display-2 mb-3">
 						Get in touch with us
 					</h1>
 					<p class="mb-7 pe-lg-9 lead">Do you have questions about our products or need a quote? Use
-						the
-						contact form below and we will get back to you.</p>
+						the contact form below and we will get back to you.</p>
 				</div>
+				<img src="{% static 'img/contact_bg.jpg' %}" class="img-fluid rounded-block" alt="">
 			</div>
 			<!--/.row-->
-			<img src="{% static 'img/contact_bg.jpg' %}" class="img-fluid rounded-block" alt="">
 		</div>
 		<!--/.content-->
 	</section>
@@ -27,7 +26,7 @@
 				<div class="col-lg-6 mb-5 mb-lg-0 text-center">
 					<h5 class="mb-2">Customer support</h5>
 					<p class="mb-3 small">
-						If you are already a customer with us, we will be happy to help you in our
+						If you are already a customer with us,<br>we will be happy to help you in our
 						Customer Support.
 					</p>
 					<a href="{% url 'account:my_qna_write' %}" class="btn btn-sm btn-light border shadow-sm">
