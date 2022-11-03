@@ -3,55 +3,55 @@
 {% load static %}
 {% load humanize %}
 
-<link rel="stylesheet" href="{% static 'vendor/node_modules/css/mermaid.min.css' %}">
-
-<!--/section-->
+<style>
+.accordion-button:not(.collapsed) {
+	color: #23233d;
+}
+</style>
 <section>
 	<div class="container position-relative pt-12 pt-lg-15">
 		<div class="row">
-			<div class="col-lg-12 col-md-10">
+			<div class="col-lg-12 col-md-10 text-center">
 				<h1 class="display-2 mb-3">
 					FAQ
 				</h1>
-				<p class="mb-7 pe-lg-9 lead">Do you have questions about our products or need a quote? Use
+				<p class="mb-7 px-lg-9 lead">Do you have questions about our products or need a quote? Use
 					the Frequently Asked Questions. We believe you'll be able to get help.</p>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="card">
-				<div class="card-body">
-					<div id="table-gridjs" class="table"></div>
+				
+		<div class="accordion accordion-flush mb-5" id="faqAccordion">
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingOne">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false">
+						<span id="faq-num" class="me-5">1</span>
+						<span id="faq=title"> Q. 타이틀이 올 자리입니다.</span>
+					</button>
+				</h2>
+				<div id="flush-collapseOne" class="accordion-collapse collapse">
+					<div class="accordion-body">자주 묻는 질문에 대한 답변이 오는 자리입니다.<br>자주 묻는 질문에 대한 답변이 오는 자리입니다.<br>자주 묻는 질문에 대한 답변이 오는 자리입니다.</div>
 				</div>
-				<!-- end card body -->
 			</div>
-			<!-- end card -->
+	
+			<!-- <div class="accordion-item">
+				<h2 class="accordion-header" id="flush-headingTwo">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+						<span id="faq-num" class="me-5">2</span>
+						<span id="faq=title"> Q. 타이틀이 올 자리입니다.</span>
+					</button>
+				</h2>
+				<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#faqAccordion">
+					<div class="accordion-body">자주 묻는 질문에 대한 답변이 오는 자리입니다.<br>자주 묻는 질문에 대한 답변이 오는 자리입니다.<br>자주 묻는 질문에 대한 답변이 오는 자리입니다.</div>
+				</div>
+			</div> -->
 		</div>
-		<!-- end col -->
+	
 	</div>
-
-
-<script src="{% static 'vendor/node_modules/js/gridjs.umd.js' %}"></script>
+</section>
 
 <script>
-	new gridjs.Grid({
-		columns:["Name","Email","Position","Company","Country"],
-		pagination:{limit:10},
-		sort:!0,
-		search:!0,
-		data:[
-			["Jonathan","jonathan@example.com","Senior Implementation Architect","Hauck Inc","Holy See"],
-			["Harold","harold@example.com","Forward Creative Coordinator","Metz Inc","Iran"],
-			["Shannon","shannon@example.com","Legacy Functionality Associate","Zemlak Group","South Georgia"],
-			["Robert","robert@example.com","Product Accounts Technician","Hoeger","San Marino"],
-			["Noel","noel@example.com","Customer Data Director","Howell - Rippin","Germany"],
-			["Traci","traci@example.com","Corporate Identity Director","Koelpin - Goldner","Vanuatu"],
-			["Kerry","kerry@example.com","Lead Applications Associate","Feeney, Langworth and Tremblay","Niger"],
-			["Patsy","patsy@example.com","Dynamic Assurance Director","Streich Group","Niue"],
-			["Cathy","cathy@example.com","Customer Data Director","Ebert, Schamberger and Johnston","Mexico"],
-			["Tyrone","tyrone@example.com","Senior Response Liaison","Raynor, Rolfson and Daugherty","Qatar"]
-		]
-	}).render(document.getElementById("table-gridjs"))
+
 </script>
+
 {% endblock %}
