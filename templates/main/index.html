@@ -4,6 +4,28 @@
 {% load humanize %}
 
 
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<style>
+	@media only screen and (max-width: 767px){
+		.supportText {
+			font-size: 1.5em !important;
+		}
+		.supportImg {
+			width: 150px;
+			height: 150px;
+		}
+	}
+	@media only screen and (max-width: 400px){
+		.supportText {
+			font-size: 1.3em !important;
+		}
+		.supportImg {
+			width: 100px;
+			height: 100px;
+		}
+	}
+</style>
+
 <!-- Section -->
 <section>
 	<div class="container-fluid position-relative z-index-1 mt-3">
@@ -14,11 +36,11 @@
 				<div class="swiper-wrapper rounded-5">
 					<!-- Slides -->
 					<div class="swiper-slide bg-cover bg-center bg-no-repeat"
-						style="background-image: url(../static/img/backgrounds/bg1.jpg);"></div>
+						style="background-image: url(../static/img/main/backgrounds/bg1.jpg);"></div>
 					<div class="swiper-slide bg-cover bg-center bg-no-repeat"
-						style="background-image: url(../static/img/backgrounds/bg2.jpg);"></div>
+						style="background-image: url(../static/img/main/backgrounds/bg2.jpg);"></div>
 					<div class="swiper-slide bg-cover bg-center bg-no-repeat"
-						style="background-image: url(../static/img/backgrounds/bg3.jpg);"></div>
+						style="background-image: url(../static/img/main/backgrounds/bg3.jpg);"></div>
 				</div>
 			</div>
 			<div class="position-relative text-white w-md-75 px-4 w-lg-60 mx-auto text-center z-index-1 py-12 py-lg-15">
@@ -120,6 +142,34 @@
 				</div>
 			</div>
 		</div>
+		<div class="container py-9 py-lg-11">
+			<div class="row pt-5 pt-lg-9">
+				<div class="col-md-5 col-lg-4 mb-5 mb-lg-0">
+					<div class="sticky-top pt-lg-3">
+						<div class="ms-xl-auto ms-lg-3 me-lg-1 mt-12" style="--navbar-search-width:280px;" id="searchCollapse">
+							<h6 class="mb-3 text-muted">HIGH-QUALITY SERVICE</h6>
+							<h2 class="mb-4 display-4">유토빌 홈케어 베스트 상품</h2>
+							<form class="mb-0" action="{% url 'product:list' %}" method="GET">
+								<div class="position-relative mt-3 mt-lg-0 me-3">
+									<span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50 pt-1" style="z-index:999;">
+										<i class="bx bx-search-alt-2"></i>
+									</span>
+									<input type="text" placeholder="Search Services..." name="keyword" class="form-control ps-6 rounded-pill">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-7 ms-auto">
+					<img src="{% static 'img/main/services/case6.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-once="false" style="width: 732px;">
+					<img src="{% static 'img/main/services/case2.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
+					<img src="{% static 'img/main/services/case3.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false">
+					<img src="{% static 'img/main/services/case4.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
+					<img src="{% static 'img/main/services/case5.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
+					<img src="{% static 'img/main/services/case1.jpg' %}" class="img-fluid" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
 
@@ -149,7 +199,6 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-
 				<!--Swiper slider testimonials-->
 				<div class="swiper-container swiper-testimonials">
 					<div class="swiper-wrapper">
@@ -358,56 +407,22 @@
 				</div>
 			</div>
 		</div>
-
+	</div>
+	<div class="row w-100 h-25 bg-light align-items-center">
+		<div class="col-6 text-end">
+			<span class="fs-3 supportText">평일 9:00 - 18:00</span>
+			<p class="fs-2 fw-bold supportText">유토빌 홈케어 전화 상담 1111-1111</p>
+		</div>
+		<div class="col-6 text-center">
+			<img class="supportImg" src="{% static 'img/main/customer_service.jpg' %}" alt="">
+		</div>
 	</div>
 </section>
 <!--/end: Testimonials section-->
-            <!--begin:Newsletter-->
-            <section class="position-relative bg-white">
-                <div class="container py-9 py-lg-11">
-                    <div class="row justify-content-between">
 
-                        <!--Nesletter col-->
-                        <div class="col-lg-10 col-xl-9 mx-auto">
-                            <h2 class="mb-5 display-6 text-center">
-                                Don't Miss Any News!
-                            </h2>
-                            <form class="needs-validation w-lg-75 mx-auto" novalidate>
-                                <div class="row g-md-1 mb-4">
-                                    <div class="col-md mb-2 mb-md-0">
-                                        <input type="email" class="form-control form-control-lg" required
-                                            placeholder="Your email address">
-                                        <div class="invalid-feedback">
-                                            Please enter a valid email address.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-auto col-12">
-                                        <button type="submit" class="btn btn-lg btn-hover-text btn-secondary w-100">
-                                            <span class="btn-hover-label label-default"> Subscribe</span>
-                                            <span class="btn-hover-label label-hover"> Subscribe</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" required id="newsletterCheck">
-                                    <label class="form-label small text-secondary" for="newsletterCheck">I accept the <a
-                                            href="#" class="text-dark link-decoration">Terms</a> and <a href="#"
-                                            class="text-dark link-decoration">conditions</a> and the <a href="#"
-                                            class="text-dark link-decoration">data protection guidelines.</a></label>
-
-                                    <div class="invalid-feedback">
-                                        You must agree before subscribe.
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!--End col-->
-                    </div>
-                </div>
-            </section>
-            <!--/end:Newsletter-->
 
 <script src="{% static 'vendor/node_modules/js/swiper-bundle.min.js' %}"></script> 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
 
 <script>
 /*Main Swiper*/
