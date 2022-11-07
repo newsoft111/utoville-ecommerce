@@ -41,7 +41,9 @@
 .status-main .contnets {
 	margin: 10px 0;
 }
-
+.resp-od-list-main {
+	display: none;
+}
 @media only screen and (max-width: 768px){
 	.formFlex {
 		flex-wrap: wrap;
@@ -69,6 +71,10 @@
 	}
 	.inputBlock {
 		margin-right: 0;
+	}
+
+	.resp-od-list-main {
+		display: block;
 	}
 }
 
@@ -151,7 +157,7 @@
 															</td>																			
 														</tr>							
 														<tr>
-															<td class="order-tb-left">진행상태</td>							
+															<td class="order-tb-left">진행 상태</td>							
 															<td colspan="3" class="order-tb-right">
 																<select class="form-select" name="status_by" aria-label="Default select example">
 																	<option value="">선택</option>
@@ -168,7 +174,7 @@
 									</div>
 								</div>
 
-								<!-- responsive-->
+								<!-- Responsive  Order Search -->
 								<div class="row resp-order-main">
 									<div class="col-md-12">
 										<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
@@ -241,7 +247,7 @@
 											</div>
 											<div class="status-main">
 												<div class="title">
-													<span>진행상태</span>
+													<span>진행 상태</span>
 												</div>	
 												<div class="contnets">
 													<select class="form-select" name="status_by" aria-label="Default select example">
@@ -258,20 +264,21 @@
 							</div>
 						</div> 
 
-						<!-- Oder list START -->
-						<div class="row">
+						<!-- Order list -->
+						<div class="row main_contents">
 							<div class="col-md-12 mt-5">
 								<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
 									<div class="table-responsive" style="text-align: center;">
 										<table class="table order_view">
 											<!-- Title -->
+											<h4 class="text-start mb-3">주문 목록</h4>
 											<thead>
 												<tr>
 													<th scope="col">주문일/주문번호</th>
 													<th scope="col">서비스 정보</th>
 													<th scope="col">수량</th>
-													<th scope="col">주문금액</th>
-													<th scope="col">진행상태</th>
+													<th scope="col">주문 금액</th>
+													<th scope="col">진행 상태</th>
 												</tr>
 											</thead>
 											<!-- Data -->
@@ -296,7 +303,87 @@
 								</div>
 							</div>
 						</div>
-	
+
+						<!-- Responsive Order list -->
+						<div class="row resp-od-list-main">
+							<div class="col-md-12">
+									<div class="order_info row">
+										<div class="col-12 align-middle text-center py-4">
+											<div class="row">
+												<div class="col-xxl-6">
+													<div class="row border-0">
+														<h4 class="text-start mb-3">주문 목록</h4>
+														<!-- Image -->
+														{% for my_order_obj in my_order_objs %}
+														<div class="col-xl-3 text-center">
+															<img class="rounded w-100" src="{% static 'img/mypage/subs01.jpg' %}" alt="Listing image1">
+														</div>
+														<!-- Info -->
+														<div class="col-xl-9 pt-2 pt-xl-0 text-center">
+															<h6 class="mb-1 fs-1">{{my_order_obj.product_name}}</h6>
+															<p class="mb-1 fs-4 text-success">₱{{my_order_obj.sub_total_price|intcomma}} / {{my_order_obj.ordered_quantity}}</p>
+															<span class="fs-4 text-secondary">{{my_order_obj.order.ordered_at}}</span>
+														</div>
+														<div class="list-status-main mb-5">
+															<span class="fs-4">진행 상태</span>
+															<div class="contnets">
+																<span class="text-danger fs-5">완료</span>
+																<div class="mt-1">
+																	<button type="button" class="btn btn-sm btn-primary w-100 fs-5" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
+																</div>	
+															</div>
+														</div>
+														<hr>
+														{% endfor %}
+													</div>
+												</div>
+											</div> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="row text-center">
+							<div class="col-md-12 mt-5">
+								<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
+									{% for my_order_obj in my_order_objs %}
+									<div class="ordered-at-main">
+										<span>주문일/주문번호</span>
+										<div class="contnets">
+											<p>{{my_order_obj.order.ordered_at}}</p>
+										</div>
+									</div>
+									<div class="service-info-main">
+										<span>서비스 정보</span>
+										<div class="contnets">
+											<p>{{my_order_obj.product_name}}</p>
+										</div>
+									</div>
+									<div class="quantity-main">
+										<span>수량</span>
+										<div class="contnets">
+											<p>{{my_order_obj.ordered_quantity}}</p>
+										</div>
+									</div>
+									<div class="subtotal-price-main">
+										<span>주문 금액</span>
+										<div class="contnets">
+											<p>₱{{my_order_obj.sub_total_price|intcomma}}</p>
+										</div>
+									</div>
+									<div class="list-status-main">
+										<span>진행 상태</span>
+										<div class="contnets">
+											<p>완료</p>
+											<div class="mt-1">
+												<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
+											</div>	
+										</div>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div> -->
 
 						
 						<div class="row mb-5">
