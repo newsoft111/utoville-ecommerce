@@ -49,7 +49,7 @@ INSTALLED_APPS = [
 	'category',
 	'order',
 	'qna',
-	'payment',
+	'charge',
 ]
 
 AUTH_USER_MODEL = 'account.User'

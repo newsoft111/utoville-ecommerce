@@ -23,8 +23,6 @@ def payment_create(request):
 		})
 
 	payment_obj = Payment.objects.create()
-	payment_obj.used_point = used_point
-	payment_obj.save()
 
 	order_obj.payment = payment_obj
 	order_obj.save()
