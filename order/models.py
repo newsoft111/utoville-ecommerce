@@ -38,7 +38,9 @@ class OrderItem(models.Model):
 		max_length=255,
 		null=True
 	)
-	is_refund_requested=models.BooleanField(default=False)
+	is_accepted = models.BooleanField(default=False)
+	accepted_at = models.DateTimeField(null=True)
+	is_refund_requested = models.BooleanField(default=False)
 	refund_requested_at = models.DateTimeField(null=True)
 	refund = models.ForeignKey(
 		Refund,
