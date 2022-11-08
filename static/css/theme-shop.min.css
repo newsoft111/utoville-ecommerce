@@ -2883,7 +2883,7 @@ textarea.form-control-lg {
 }
 .btn-brand {
 	--bs-btn-color:#fff;
-	--bs-btn-bg:#2ebcff;
+	--bs-btn-bg:#2ea7e0;
 
 	--bs-btn-hover-color:#fff;
 	--bs-btn-hover-bg:#60c9fb;
@@ -2896,7 +2896,7 @@ textarea.form-control-lg {
 	--bs-btn-active-shadow:inset 0 3px 5px rgba(19,19,19,0.125);
 
 	--bs-btn-disabled-color:#fff;
-	--bs-btn-disabled-bg:#2ebcff;
+	--bs-btn-disabled-bg:#2ea7e0;
 }
 .btn-primary {
 	--bs-btn-color:#131313;
@@ -3629,7 +3629,7 @@ textarea.form-control-lg {
 	}
 }
 .nav-link:focus,.nav-link:hover {
-	color: #8cb808;
+	
 }
 .nav-link.disabled {
 	color:var(--bs-nav-link-disabled-color);
@@ -3683,8 +3683,9 @@ textarea.form-control-lg {
 	border-color:transparent
 }
 .nav-pills .nav-link.active,.nav-pills .show>.nav-link {
-	color:var(--bs-nav-pills-link-active-color);
-	background-color:var(--bs-nav-pills-link-active-bg)
+	color: #000;
+	font-weight: bold;
+	background-color: transparent !important;
 }
 .nav-fill .nav-item,.nav-fill>.nav-link {
 	flex:1 1 auto;
@@ -4645,7 +4646,7 @@ textarea.form-control-lg {
 	--bs-list-group-disabled-color:#555;
 	--bs-list-group-disabled-bg:#fff;
 	--bs-list-group-active-color:#fff;
-	--bs-list-group-active-bg:#d8b97b;
+	--bs-list-group-active-bg:#f7f7f7;
 	--bs-list-group-active-border-color:#d8b97b;
 	display:flex;
 	flex-direction:column;
@@ -4667,13 +4668,13 @@ textarea.form-control-lg {
 }
 .list-group-item-action:focus,.list-group-item-action:hover {
 	z-index:1;
-	color:var(--bs-list-group-action-hover-color);
+	
 	text-decoration:none;
 	background-color:var(--bs-list-group-action-hover-bg)
 }
 .list-group-item-action:active {
 	color:var(--bs-list-group-action-active-color);
-	background-color:var(--bs-list-group-action-active-bg)
+	
 }
 .list-group-item {
 	position:relative;
@@ -4691,8 +4692,7 @@ textarea.form-control-lg {
 .list-group-item.active {
 	z-index:2;
 	color:var(--bs-list-group-active-color);
-	background-color:var(--bs-list-group-active-bg);
-	border-color:var(--bs-list-group-active-border-color)
+	border: none;
 }
 .list-group-item+.list-group-item {
 	border-top-width:0
