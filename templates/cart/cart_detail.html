@@ -119,7 +119,7 @@
 				<!--Update cart button-->
 				<div class="text-center d-md-flex align-items-center border-bottom pb-4 mb-4">
 					<div class="col-md-7 mb-4 mb-md-0 text-start">
-						<button class="btn btn-primary small ms-2" onclick="checkbox_manager();"><span>전체선택</span></button>
+						<button class="btn btn-brand small ms-2" onclick="checkbox_manager();"><span>전체선택</span></button>
                         <button class="btn small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span>선택삭제</span></button>
 					</div>
 					<div class="col-md-5 text-end">
@@ -137,7 +137,7 @@
 						</a>
 					</div>
 					<div>
-						<a href="#!" onclick="order_create_submit();" class="btn btn-primary">proceed to Checkout</a>
+						<a href="#!" onclick="order_submit();" class="btn btn-brand">proceed to Checkout</a>
 						<input type="hidden" name="obj_data" value=''>
 					</div>
 				</div>
@@ -145,31 +145,6 @@
 		</div>
 	</div>
 </section>
-<section class="border-top bg-white position-relative overflow-hidden">
-	<div class="container py-9 py-lg-11 position-relative">
-		<div class="row align-items-center">
-			<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
-				<div class="mb-3">
-					<i class="bx bx-store fs-1"></i>
-				</div>
-				<h6 class="mb-0">30 Day Returns</h6>
-			</div>
-			<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
-				<div class="mb-3">
-					<i class="bx bx-purchase-tag fs-1"></i>
-				</div>
-				<h6 class="mb-0">100% Handpicked</h6>
-			</div>
-			<div class="col-md-4 text-center">
-				<div class="mb-3">
-					<i class="bx bx-package fs-1"></i>
-				</div>
-				<h6 class="mb-0">Assured Quality</h6>
-			</div>
-		</div>
-	</div>
-</section>
-
 
 <script>
 is_run = false;
