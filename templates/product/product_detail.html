@@ -123,7 +123,7 @@
 			
 
 			<div class="d-grid">
-				<input type="hidden" name="obj_data" value='[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]'>
+				<input type="hidden" name="obj_data" value='{% if product_detail.productvariant_set.all.count < 1 %}[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]{% endif %}'>
 				<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-primary hover-lift">
 					<i class="bx bx-shopping-bag fs-5 me-2"></i>Add to Cart
 				</a>
@@ -265,8 +265,7 @@ function add_cart_submit(product_id) {
 	let optionFirst = document.getElementById("optionFirst");
 	let itemPrice = document.getElementById("itemPrice");
 
-	// if (isEmpty(data)) {
-	if(optionFirst.value == '옵션1' || itemPrice == null){
+	if (isEmpty(data) || data == '[]') {
 		openModal('알림','옵션을 선택해주세요.');
 		return false;
 	}
@@ -368,7 +367,7 @@ function add_item(e) {
 		html = '<div id="productDom" class="optionTotal">';
 		html += '<div class="product_title" id="optionTitle">';
 		html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
-		html += '<a class="close" href="#test" onclick="remove_item(this)">X</a>';
+		html += '<a class="close" href="#!" onclick="remove_item(this)">X</a>';
 		html += '</div>';
 		html += '<div class="optionAdd">';
 		html += `<input type="number" onKeyDown="return false" class="form-control w-25 text-center" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
