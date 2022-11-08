@@ -106,7 +106,7 @@
 						</label>
 					</div>
 					<div class="d-grid">
-						<button type="submit" class="btn btn-lg hover-lift btn-hover-text btn-primary">
+						<button type="button" class="btn btn-lg hover-lift btn-hover-text btn-primary">
 							<span class="btn-hover-label label-default">Place your order</span>
 							<span class="btn-hover-label label-hover">Place your order</span>
 						</button>
@@ -135,14 +135,18 @@ const result = totalPrice.innerHTML.replace(regex, "");
 		let check = /^[0-9]+$/;
 
 		if(!check.test(pointForm.value) && pointForm.value != ''){
-			alert("숫자만 입력하세요.")
 			pointForm.value = 0;
 			payment.innerHTML = "₱" + sumPrice;
 			return false;	
 		}
+		
 		if(Number(pointForm.value) > Number('{{request.user.point}}')){ 
-			alert("보유금액 이상 사용은 불가능합니다.");
 			pointForm.value = '{{request.user.point}}';
+			return false;
+		}
+
+		if(Number(pointForm.value) > Number('{{total_price}}')){ 
+			pointForm.value = '{{total_price}}';
 			return false;
 		}
 
@@ -162,6 +166,38 @@ pointBtn.addEventListener("click", function(){
 
 	payment.innerHTML = "₱" + sumPrice;			
 });
+
+
+async function order_submit() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+	let form_data = new FormData();
+	form_data.append('order_id', '{{request.GET.id}}')
+
+    const response = await fetch("{% url 'payment:create' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: form_data,
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		is_run  = false;
+		if (data.result == '200') {
+			openModal("알림", data.result_text);
+		} else {
+			openModal("알림", data.result_text);
+		}
+	});
+}
+
 
 </script>
 {% endblock %}

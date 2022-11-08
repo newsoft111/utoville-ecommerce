@@ -3,6 +3,7 @@ import calendar
 import time
 from product.models import *
 from account.models import UserShippingAddress
+from payment.models import *
 
 
 # Create your models here.
@@ -11,15 +12,18 @@ class Order(models.Model):
 			settings.AUTH_USER_MODEL,
 			on_delete=models.CASCADE,
 	)
-	pg_uid = models.CharField(max_length=255, null=True)
+	payment = models.ForeignKey(
+			Payment,
+			on_delete=models.CASCADE,
+			null=True
+	)
 	ordered_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	shpping_address = models.ForeignKey(
 			UserShippingAddress,
 			on_delete=models.CASCADE,
 			null=True
 	)
-	is_paid=models.BooleanField(default=False)
-	paid_at = models.DateTimeField(null=True)
+
 
 	class Meta:
 		db_table = 'ecommerce_order'
