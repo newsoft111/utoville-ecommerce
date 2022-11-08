@@ -62,11 +62,6 @@ a {
   border: 0;
   border-radius: 5px;
 }
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  color: #8cb808;
-  background-color: transparent !important;
-}
 .subs-pills .nav-link.active,
 .subs-pills .show > .nav-link {
 	color: #000;
@@ -140,9 +135,6 @@ a {
 /* side menu */
 .list-group-item {
 	margin-bottom: 20px;
-}
-.list-group-item.active {
-	background: #2ea7e0 !important;
 }
 .side_menu_msg {
 	background: transparent !important;
@@ -429,12 +421,6 @@ thead tr:nth-child(3) th {
 .changed_order {
 	margin-top: 50px;
 	border: 1px solid #dec48f;	
-}
-.cancel_status {
-	font-size: 14px;
-}
-.cancel_detail {
-	padding: 0;
 }
 
 /*cancel-form*/

@@ -70,12 +70,12 @@
 																08 July 2018
 															</div>
 															<!-- Status -->
-															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<div class="cancel_status text-danger">취소 완료</div>
+															<div class="col-md-4 align-middle pt-2 my-2">
+																<span class="text-danger border border-danger p-2 my-2" style="font-size: 13px;">취소 완료</span>
 															</div>		
 															<!-- Details -->
 															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<a class="cancel_detail btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#cancelDetailModal">&nbsp;취소상세</a>
+																<div class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#cancelDetailModal">&nbsp;취소 상세</div>
 															</div>
 														</div>
 													</div>
@@ -107,12 +107,12 @@
 															<div class="purchase_date col-md-4 align-middle text-body">
 																08 July 2018
 															</div>
-															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<div class="cancel_status text-primary">구매 완료</div>
+															<div class="col-md-4 align-middle pt-2 my-2">
+																<span class="text-success border border-success p-2" style="font-size: 14px;">구매 완료</span>
 																<!-- <div class="cancel_status text-success">취소 신청</div> -->
 															</div>			
 															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<a href="{% url 'account:my_subscribe_cancel' %}" class="btn btn-sm btn-info-soft me-1 mb-1">&nbsp;취소</a>
+																<a href="{% url 'account:my_subscribe_cancel' %}" class="btn btn-sm btn-brand">&nbsp;취소</a>
 															</div>
 													</div>
 												</div> <!-- Row END -->
@@ -165,7 +165,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-				<button type="button" class="btn btn-primary btn-md" data-bs-dismiss="modal">확인</button>
+				<button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">확인</button>
 				<!-- id="" data-before-modal="" onclick="" -->
 		</div>
 		</div>
