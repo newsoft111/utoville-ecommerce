@@ -16,18 +16,12 @@ def order_view(request):
 	q &= Q(order__user=request.user)
 	order_items = OrderItem.objects.filter(q).order_by("-pk")
 
-	total_price=0
 	
-	for order_item in order_items:
-		if order_item.variant_value is not None:
-			total_price += (order_item.product_price + order_item.variant_price ) * order_item.ordered_quantity
-		else:
-			total_price += order_item.product_price * order_item.ordered_quantity
-
 	return render(request, 'order/order_view.html' ,{
 		"order_items": order_items,
-		"total_price": total_price
+		"total_price": order_items[0].order.total_price
 	})
+
 
 def order_create(request):
 	if request.method == 'POST':
@@ -40,20 +34,30 @@ def order_create(request):
 		jsonData = json.loads(request.body)
 		order_item_list = json.loads(jsonData.get('order_item_list'))
 
-		order_obj = Order.objects.create(user=request.user)
+		payment_obj = Order.objects.create()
+		order_obj = Order.objects.create(
+			user=request.user,
+			payment=payment_obj
+		)
+
+		total_price = 0
 
 		for order_item in order_item_list:
-			product = order_item['product_id']
-			variant_value = order_item['variant_value_id']
+			product_id = order_item['product_id']
+			variant_value_id = order_item['variant_value_id']
 			ordered_quantity = order_item['qty']
 
 			try:
-				product_obj = Product.objects.get(pk=product)
-			except:
-				product_obj = None
+				product_obj = Product.objects.get(pk=product_id)
+				
+			except Exception as e:
+				return JsonResponse({
+					'result': '201', 
+					'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+				})
 
 			try:
-				variant_value_obj = ProductVariantValue.objects.get(pk=variant_value)
+				variant_value_obj = ProductVariantValue.objects.get(pk=variant_value_id)
 			except:
 				variant_value_obj = None
 			
@@ -69,7 +73,7 @@ def order_create(request):
 
 			if product_obj is not None:
 				try:
-					OrderItem.objects.create(
+					order_item_obj = OrderItem.objects.create(
 						order = order_obj,
 						product = product_obj,
 						product_name = product_obj.product_name,
@@ -81,10 +85,14 @@ def order_create(request):
 						schedule_date = datetime.now(),
 						order_status = '결제대기',
 					)
+					total_price += int(order_item_obj.sub_total_price())
 
 				except Exception as e:
 					print(e)
 					pass
+		
+		order_obj.total_price = total_price
+		order_obj.save()
 			
 		return JsonResponse({
 			'result': '200', 

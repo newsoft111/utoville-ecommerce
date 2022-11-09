@@ -178,8 +178,9 @@ async function order_submit() {
 
 	let form_data = new FormData();
 	form_data.append('order_id', '{{request.GET.id}}')
+	form_data.append('used_point', pointForm.value)
 
-    const response = await fetch("{% url 'payment:create' %}", {
+    const response = await fetch("{% url 'charge:payment' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),

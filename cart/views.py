@@ -133,7 +133,10 @@ def cart_detail(request, total_price=0, counter=0, cart_items=None):
 	}
 
 	try:
-		cart_items = CartItem.objects.filter(cart=get_user_cart(request))
+		cart_items = CartItem.objects.filter(
+			cart=get_user_cart(request),
+			product__is_deleted=False
+		)
 	except ObjectDoesNotExist:
 		pass
 
