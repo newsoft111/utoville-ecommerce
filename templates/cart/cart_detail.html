@@ -67,8 +67,10 @@
 							<tr>
 								<td>
 									<div class="position-relative">
-										<input type="checkbox" onchange="cal_checked_item_price();" data-product-id="{{cart_item.product.id}}" data-variant-value-id="{{cart_item.variant_value.id}}" data-qty="{{cart_item.quantity}}" class="position-absolute top-0 start-0" id="cart{{cart_item.pk}}" name="cart_item_id" value="{{cart_item.pk}}">
-										<label for="cart{{cart_item.pk}}"><img src="{% static 'img/shop/backpack2.jpg' %}" class="width-7x rounded-3"></label>
+										<input type="checkbox" onchange="cal_checked_item_price();" data-product-id="{{cart_item.product.id}}" data-variant-value-id="{{cart_item.variant_value.id}}" data-qty="{{cart_item.quantity}}"
+										 class="position-absolute top-50 start-0" id="cart{{cart_item.pk}}" name="cart_item_id" value="{{cart_item.pk}}">
+
+										<label for="cart{{cart_item.pk}}"><img src="{% static 'img/shop/backpack2.jpg' %}" class="width-7x rounded-3 ms-3"></label>
 									</div>
 								</td>
 								<td>
