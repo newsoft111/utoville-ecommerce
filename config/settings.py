@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 	'order',
 	'qna',
 	'charge',
+	'revenue',
 ]
 
 AUTH_USER_MODEL = 'account.User'

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import *
+from charge.models import *
 from django.db.models import Q
 import json
 
@@ -34,7 +35,7 @@ def order_create(request):
 		jsonData = json.loads(request.body)
 		order_item_list = json.loads(jsonData.get('order_item_list'))
 
-		payment_obj = Order.objects.create()
+		payment_obj = Payment.objects.create()
 		order_obj = Order.objects.create(
 			user=request.user,
 			payment=payment_obj

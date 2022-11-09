@@ -5,4 +5,5 @@ app_name = 'charge'
 
 urlpatterns = [
 	path('', views.payment, name='payment'),
+	path('call_back', views.call_back, name='call_back'),
 ]

@@ -106,7 +106,7 @@
 						</label>
 					</div>
 					<div class="d-grid">
-						<button type="button" class="btn btn-lg hover-lift btn-hover-text btn-primary">
+						<button type="button" onclick="order_submit();" class="btn btn-lg hover-lift btn-hover-text btn-primary">
 							<span class="btn-hover-label label-default">Place your order</span>
 							<span class="btn-hover-label label-hover">Place your order</span>
 						</button>
@@ -118,6 +118,8 @@
 </section>
 
 <script>
+let is_run = false;
+
 let pointForm = document.querySelector(".use-point");
 let totalPrice = document.querySelector(".total-price");
 let pointBtn = document.querySelector(".point-btn");
@@ -181,6 +183,38 @@ async function order_submit() {
 	form_data.append('used_point', pointForm.value)
 
     const response = await fetch("{% url 'charge:payment' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: form_data,
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		is_run  = false;
+		if (data.result == '200') {
+			temp_call_back();
+		} else {
+			openModal("알림", data.result_text);
+		}
+	});
+}
+
+
+async function temp_call_back() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+	let form_data = new FormData();
+	form_data.append('order_id', '1')
+	form_data.append('used_point', pointForm.value)
+
+    const response = await fetch("{% url 'charge:call_back' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),
