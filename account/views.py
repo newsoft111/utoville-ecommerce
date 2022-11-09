@@ -281,8 +281,14 @@ def my_dashboard(request):
 
 	q = Q()
 	q &= Q(order__user=request.user)
-	next_service_day_count = OrderItem.objects.filter(q).order_by('-schedule_date')[0].schedule_date
-	next_service_day_count = next_service_day_count.replace(tzinfo=None) - (datetime.today() - timedelta(1))
+	try:
+		next_service_day_count = OrderItem.objects.filter(q).order_by('-schedule_date')[0].schedule_date
+		next_service_day_count = (next_service_day_count.replace(tzinfo=None) - (datetime.today() - timedelta(1))).days
+
+		if next_service_day_count < 1:
+			next_service_day_count = 0
+	except:
+		next_service_day_count = 0
 		
 	q &= Q(is_delivered=True)
 	delivered_service_count = OrderItem.objects.filter(q).count()
