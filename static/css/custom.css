@@ -545,4 +545,9 @@ thead tr:nth-child(3) th {
 	padding: 5px 10px;
 	font-size: 14px;
 }
-
+.fc-button-primary {
+	border: none !important;
+}
+.fc-button-primary:hover {
+	background-color: #90c31f !important;
+}

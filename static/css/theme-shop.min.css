@@ -36,7 +36,8 @@
 .text-white .grid-separator>* {
 	box-shadow:-1px -1px 0 0 rgba(255,255,255,.075)
 }
-/*! * Bootstrap v5.2.1 (https://getbootstrap.com/) * Copyright 2011-2022 The Bootstrap Authors * Copyright 2011-2022 Twitter,Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */:root {
+/*! * Bootstrap v5.2.1 (https://getbootstrap.com/) * Copyright 2011-2022 The Bootstrap Authors * Copyright 2011-2022 Twitter,Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
+:root {
 	--bs-blue:#0061ff;
 	--bs-indigo:#7360f2;
 	--bs-purple:#6f42c1;
@@ -234,13 +235,7 @@ sub {
 sup {
 	top:-.5em
 }
-a {
-	color:var(--bs-link-color);
-	text-decoration:none
-}
-a:hover {
-	color:var(--bs-link-hover-color)
-}
+
 a:not([href]):not([class]),a:not([href]):not([class]):hover {
 	color:inherit;
 	text-decoration:none
@@ -3252,7 +3247,7 @@ textarea.form-control-lg {
 }
 .btn-link {
 	--bs-btn-font-weight:400;
-	--bs-btn-color:var(--bs-link-color);
+
 	--bs-btn-bg:transparent;
 	--bs-btn-border-color:transparent;
 	--bs-btn-hover-color:var(--bs-link-hover-color);
@@ -3607,7 +3602,7 @@ textarea.form-control-lg {
 .nav {
 	--bs-nav-link-padding-x:1rem;
 	--bs-nav-link-padding-y:0.5rem;
-	--bs-nav-link-color:var(--bs-link-color);
+
 	--bs-nav-link-hover-color: #2ea7e0;
 	--bs-nav-link-disabled-color:#555;
 	display:flex;
@@ -19343,4 +19338,8 @@ th {
 	padding-top:1.25rem;
 	font-weight:500;
 	font-size: .875rem
+}
+
+.fc-button-active {
+	background-color: #90c31f !important;
 }
