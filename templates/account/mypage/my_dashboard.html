@@ -4,6 +4,13 @@
 {% load humanize %}
 <link href="{% static 'vendor/node_modules/css/fullcalendar.min.css' %}" rel="stylesheet" type="text/css" />
 
+<style>
+.subs-list {
+	max-height: 220px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+</style>
 <!-- Section -->
 <section class="position-relative">
 	<div class="container position-relative">
@@ -63,137 +70,119 @@
 					</div>
 					<div class="pt-5 col-12">
 						<div id="calendar"></div>
-
 					</div>	
 					<div class="row">
-						<div class="col-lg-6 col-md-6 pt-5">
-							<div class="card card-h-100">
-								<div class="card-header border-bottom-0">
+						<div class="col-lg-8 pt-5">
+							<div class="card">
+								<div class="card-body">
 									<div class="d-flex align-items-start">
-										<div class="flex-grow-1">
-											<h5 class="card-title">Subscribed Services</h5>
+										<div class="flex-grow-1 overflow-hidden">
+											<h5 class="card-title text-truncate mb-3">구독 목록</h5>
 										</div>
-
 										<div class="flex-shrink-0">
 											<div class="dropdown">
-												<a class="font-size-16 text-muted dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													<i class="mdi mdi-dots-horizontal"></i>
+												<a class="dropdown-toggle text-reset" href="#"
+													data-bs-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<span class="fw-semibold">Report By: </span> <span class="text-muted">최신 순<i class="mdi mdi-chevron-down ms-1"></i></span>
 												</a>
-											
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Action</a>
-													<a class="dropdown-item" href="#">Another action</a>
-													<a class="dropdown-item" href="#">Something else here</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item" href="#">최신 순</a>
+													<a class="dropdown-item" href="#">오래된 순</a>
+													<a class="dropdown-item" href="#">가나다 순</a>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+									<div class="table-responsive subs-list">
+										<table class="table mt-3 text-center">
+											<thead>
+												<tr>
+													<th scope="col">시작 일자</th>
+													<th scope="col">종료 일자</th>
+													<th scope="col">서비스명</th>
+													<th scope="col">진행 회차 / 남은 회차</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">2022-11-10</th>
+													<td>2023-11-10</td>
+													<td>에어컨 청소</td>
+													<td>
+														<span class="text-success fw-bold">1회차</span>/
+														<span class="text-secondary">12회차</span>
+													</td>
+												</tr>
 
-								<div data-simplebar style="max-height: 230px;">
-									<ul class="list-unstyled mb-0">
-										<li class="px-4 py-3">
-											<div class="d-flex align-items-center">
-												<div class="flex-shrink-0 me-3">
-													<div class="avatar-sm">
-														<div class="avatar-title bg-light text-primary rounded-circle">
-															#1
-														</div>
-													</div>
-												</div>
-												<div class="flex-grow-1 overflow-hidden">
-													<p class="text-muted mb-1 text-truncate">www.abc.com</p>
-													<h5 class="font-size-16 mb-0 text-truncate">3.82 k</h5>
-												</div>
-												<div class="flex-shrink-0 align-self-start">
-													<div class="badge badge-soft-success ms-2">1.2 % <i class="uil uil-arrow-up-right text-success ms-1"></i></div>
-												</div>
-											</div>
-										</li>
-										<li class="px-4 py-3">
-											<div class="d-flex align-items-center">
-												<div class="flex-shrink-0 me-3">
-													<div class="avatar-sm">
-														<div class="avatar-title bg-light text-primary rounded-circle">
-															#2
-														</div>
-													</div>
-												</div>
-												<div class="flex-grow-1 overflow-hidden">
-													<p class="text-muted mb-1 text-truncate">www.xyz.com</p>
-													<h5 class="font-size-16 mb-0 text-truncate">3.04 k</h5>
-												</div>
-												<div class="flex-shrink-0 align-self-start">
-													<div class="badge badge-soft-success ms-2">1.1 % <i class="uil uil-arrow-up-right text-success ms-1"></i></div>
-												</div>
-											</div>
-										</li>
-										<li class="px-4 py-3">
-											<div class="d-flex align-items-center">
-												<div class="flex-shrink-0 me-3">
-													<div class="avatar-sm">
-														<div class="avatar-title bg-light text-primary rounded-circle">
-															#3
-														</div>
-													</div>
-												</div>
-												<div class="flex-grow-1 overflow-hidden">
-													<p class="text-muted mb-1 text-truncate">www.abc123.com</p>
-													<h5 class="font-size-16 mb-0 text-truncate">2.64 k</h5>
-												</div>
-												<div class="flex-shrink-0 align-self-start">
-													<div class="badge badge-soft-success ms-2">0.8 % <i class="uil uil-arrow-up-right text-success ms-1"></i></div>
-												</div>
-											</div>
-										</li>
-										<li class="px-4 py-3">
-											<div class="d-flex align-items-center">
-												<div class="flex-shrink-0 me-3">
-													<div class="avatar-sm">
-														<div class="avatar-title bg-light text-primary rounded-circle">
-															#4
-														</div>
-													</div>
-												</div>
-												<div class="flex-grow-1 overflow-hidden">
-													<p class="text-muted mb-1 text-truncate">www.xyz.com</p>
-													<h5 class="font-size-16 mb-0 text-truncate">2.06 k</h5>
-												</div>
-												<div class="flex-shrink-0 align-self-start">
-													<div class="badge badge-soft-success ms-2">0.5 % <i class="uil uil-arrow-up-right text-success ms-1"></i></div>
-												</div>
-											</div>
-										</li>                                                
-									</ul>
+												<!-- 복사 -->
+												<tr>
+													<th scope="row">2022-11-10</th>
+													<td>2023-11-10</td>
+													<td>에어컨 청소</td>
+													<td>
+														<span class="text-success fw-bold">1회차</span>/
+														<span class="text-secondary">12회차</span>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row">2022-11-10</th>
+													<td>2023-11-10</td>
+													<td>에어컨 청소</td>
+													<td>
+														<span class="text-success fw-bold">1회차</span>/
+														<span class="text-secondary">12회차</span>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row">2022-11-10</th>
+													<td>2023-11-10</td>
+													<td>에어컨 청소</td>
+													<td>
+														<span class="text-success fw-bold">1회차</span>/
+														<span class="text-secondary">12회차</span>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row">2022-11-10</th>
+													<td>2023-11-10</td>
+													<td>에어컨 청소</td>
+													<td>
+														<span class="text-success fw-bold">1회차</span>/
+														<span class="text-secondary">12회차</span>
+													</td>
+												</tr>
+												<tr>
+													<th scope="row">2022-11-10</th>
+													<td>2023-11-10</td>
+													<td>에어컨 청소</td>
+													<td>
+														<span class="text-success fw-bold">1회차</span>/
+														<span class="text-secondary">12회차</span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
-							<!-- end card -->
 						</div>
-						<div class="col-lg-6 col-md-6 pt-5">
-							<div class="card card-h-100">
+						<div class="col-lg-4 col-md-3 pt-5">
+							<div class="card">
 								<div class="card-body">
 									<div class="d-flex align-items-start">
 										<div class="flex-grow-1">
-											<h5 class="card-title mb-4">Visitors Source</h5>
-										</div>
-										<div class="flex-shrink-0">
-											<div class="dropdown">
-												<a class="font-size-16 text-muted dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													<i class="mdi mdi-dots-horizontal"></i>
-												</a>		
-											</div>
+											<h5 class="card-title mb-4">완료된 서비스</h5>
 										</div>
 									</div>
 									<div id="chart-donut" class="apex-charts" dir="ltr"></div>
 								</div>
 								<!-- end card body -->
 							</div>
-						</div>		
-					</div>		
-					</div>				
+						</div>
+					</div>
 				</div>
-			</div>	
-			<!-- Main content END -->
+			</div>
 		</div>
 	</div>
 </section>
@@ -203,7 +192,6 @@
 <script>
 var order_data = {{ orders|safe }}
 document.addEventListener("DOMContentLoaded", function() {
-
     var l = null,
         d = null,
         l = null,
@@ -248,8 +236,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			enabled:!1
 		},
 		series:[44,25,19],
-		labels:["Social","Direct","Others"],
-		colors:["#038edc","#f5f6f8","#5fd0f3"],
+		labels:["에어컨 청소","세탁기 청소","소독"],
+		colors:["#038edc","#777","#5fd0f3"],
 		legend:{
 			show:!0,
 			position:"bottom",

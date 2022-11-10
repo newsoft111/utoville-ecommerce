@@ -307,7 +307,7 @@ def my_dashboard(request):
 	return render(request, 'account/mypage/my_dashboard.html', {
 		"orders": order_data,
 		'delivered_service_count':delivered_service_count,
-		"next_service_day_count": next_service_day_count.days,
+		"next_service_day_count": next_service_day_count,
 		"water_delivered_service_count": water_delivered_service_count,
 	})
 
