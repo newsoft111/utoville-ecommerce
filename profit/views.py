@@ -1,21 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from .models import *
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 from order.models import *
-from datetime import date
+import json, re
 
-class Revenue:
-	def __init__(self, order_item_id, amount, event_type):
+class Profit:
+	def __init__(self, order_item_id):
 		self.order_item_objs = OrderItem.objects.filter(pk__in=order_item_id)
-		self.amount = amount
-		print(type(self.amount))
-		self.event_type = event_type
 	
-
-	def new_data(self):
-		self.admin_update()
-		self.seller_update()
-
-		
 	def admin_update(self):
 		revenue_admin_obj, created = RevenueAdmin.objects.get_or_create(date=date.today())
 		if self.event_type == 'payment':
