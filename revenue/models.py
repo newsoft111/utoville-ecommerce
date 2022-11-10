@@ -5,7 +5,7 @@ from django.conf import settings
 class RevenueAdmin(models.Model):
 	date = models.DateField()
 	payment_amount = models.PositiveIntegerField(default=0)
-	refunt_amount = models.PositiveIntegerField(default=0)
+	refund_amount = models.PositiveIntegerField(default=0)
 	order_count = models.PositiveIntegerField(default=0)
 
 	class Meta:
@@ -19,7 +19,7 @@ class RevenueSeller(models.Model):
 	)
 	date = models.DateField()
 	payment_amount = models.PositiveIntegerField(default=0)
-	refunt_amount = models.PositiveIntegerField(default=0)
+	refund_amount = models.PositiveIntegerField(default=0)
 	order_count = models.PositiveIntegerField(default=0)
 
 	class Meta:

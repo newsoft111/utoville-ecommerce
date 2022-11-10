@@ -20,7 +20,7 @@ class Revenue:
 			revenue_admin_obj.order_count += self.order_item_objs.count()
 
 		elif self.event_type == 'refund':
-			revenue_admin_obj.refunt_amount += self.amount
+			revenue_admin_obj.refund_amount += self.amount
 
 		else:
 			print('오류')
@@ -35,7 +35,7 @@ class Revenue:
 				revenue_admin_obj.order_count += order_item_obj.ordered_quantity
 
 			elif self.event_type == 'refund':
-				revenue_admin_obj.refunt_amount += self.amount
+				revenue_admin_obj.refund_amount += self.amount
 				
 			else:
 				print('오류')
