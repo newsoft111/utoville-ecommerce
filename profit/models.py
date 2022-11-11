@@ -17,6 +17,8 @@ class Profit(models.Model):
 	shipping_fee = models.PositiveIntegerField()
 	profit_done = models.BooleanField(default=False)
 
+	objects = models.Manager()
+	
 	class Meta:
 		db_table = 'ecommerce_profit'
 
