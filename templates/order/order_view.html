@@ -127,33 +127,34 @@ let payment = document.querySelector(".payment");
 let usingPoint = document.querySelector(".using-point");
 
 
-const regex = /[^0-9]/g;
+const regex = /[^0-9.]/g;
 const result = totalPrice.innerHTML.replace(regex, "");
 
 "propertychange change keyup paste input".split(" ").forEach(function(e){ 
 	  pointForm.addEventListener(e, function(){
 		let removeZero = pointForm.value.replace(/(^0+)/, "");
 		pointForm.value = removeZero;
-		let check = /^[0-9]+$/;
+		let check = /^[0-9.]+$/;
 
 		if(!check.test(pointForm.value) && pointForm.value != ''){
 			pointForm.value = 0;
-			payment.innerHTML = "₱" + sumPrice;
+			payment.innerHTML = "₱" + "{{total_price|intcomma}}";
 			return false;	
 		}
 		
-		if(Number(pointForm.value) > Number('{{request.user.point}}')){ 
+		if(parseFloat(pointForm.value) > parseFloat('{{request.user.point}}')){ 
 			pointForm.value = '{{request.user.point}}';
 			return false;
 		}
 
-		if(Number(pointForm.value) > Number('{{total_price}}')){ 
+		if(parseFloat(pointForm.value) > parseFloat('{{total_price}}')){ 
 			pointForm.value = '{{total_price}}';
 			return false;
 		}
 
-		let calcPrice = result - pointForm.value;
-		let sumPrice= calcPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		let calcPrice = (result - pointForm.value).toFixed(2);
+
+		let sumPrice= numberWithCommas(calcPrice);
 
 		payment.innerHTML = "₱" + sumPrice;				
 		
