@@ -4,7 +4,7 @@ import time
 from product.models import *
 from account.models import UserShippingAddress
 from charge.models import *
-
+from decimal import Decimal
 
 # Create your models here.
 class Order(models.Model):
@@ -77,9 +77,10 @@ class OrderItem(models.Model):
 
 	def sub_total_price(self):
 		if self.variant is not None:
-			return (self.product_price + self.variant_price) * (self.ordered_quantity)
+			print((self.product_price + self.variant_price))
+			return Decimal(self.product_price + self.variant_price) * Decimal(self.ordered_quantity)
 		else:
-			return (self.product_price) * (self.ordered_quantity)
+			return Decimal(self.product_price) * Decimal(self.ordered_quantity)
 
 	def save(self, *args, **kwargs):
 		super().save(*args, **kwargs)
