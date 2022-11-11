@@ -37,8 +37,8 @@ class Product(models.Model):
 	)
 	product_name = models.CharField(max_length=255)
 	content = models.TextField()
-	price = models.PositiveIntegerField(default=0)
-	discount = models.PositiveIntegerField(default=0)
+	price = models.DecimalField(max_digits=14, decimal_places=2)
+	discount = models.DecimalField(max_digits=3, decimal_places=1)
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
 	is_deleted = models.BooleanField(default=False)
@@ -93,7 +93,7 @@ class ProductVariantValue(models.Model):
 			on_delete=models.CASCADE
 	)
 	value = models.CharField(max_length=255)
-	price = models.IntegerField(default=0)
+	price = models.DecimalField(max_digits=14, decimal_places=2)
 
 	class Meta:
 		db_table = 'ecommerce_product_variant_value'

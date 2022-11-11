@@ -19,7 +19,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 	ctl_seq2 = models.PositiveIntegerField(null=True)
 	ctl_seq3 = models.PositiveIntegerField(null=True)
 	ctl_seq4 = models.PositiveIntegerField(null=True)
-	point = models.PositiveIntegerField()
+	point = models.DecimalField(max_digits=14, decimal_places=2)
 	mb_name = models.CharField(max_length=100)
 	mb_type = models.CharField(max_length=1)
 	mb_status = models.CharField(max_length=1)

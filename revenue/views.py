@@ -4,10 +4,8 @@ from order.models import *
 from datetime import date
 
 class Revenue:
-	def __init__(self, order_item_id, amount, event_type):
+	def __init__(self, order_item_id, event_type):
 		self.order_item_objs = OrderItem.objects.filter(pk__in=order_item_id)
-		self.amount = amount
-		print(type(self.amount))
 		self.event_type = event_type
 	
 
@@ -18,12 +16,14 @@ class Revenue:
 		
 	def admin_update(self):
 		revenue_admin_obj, created = RevenueAdmin.objects.get_or_create(date=date.today())
-		if self.event_type == 'payment':
-			revenue_admin_obj.payment_amount += self.amount
-			revenue_admin_obj.order_count += self.order_item_objs.count()
+		for order_item_obj in self.order_item_objs:
+			if self.event_type == 'payment':
+				revenue_admin_obj.payment_amount += order_item_obj.sub_total_price()
+				revenue_admin_obj.order_count += 1
 
-		elif self.event_type == 'refund':
-			revenue_admin_obj.refund_amount += self.amount
+			elif self.event_type == 'refund':
+				revenue_admin_obj.refund_amount += order_item_obj.sub_total_price()
+				revenue_admin_obj.order_count -= 1
 
 		else:
 			print('오류')
