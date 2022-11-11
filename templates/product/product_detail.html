@@ -312,17 +312,19 @@ function set_variant_value(e) {
 
 
 function cal_total_value() {
-	let total_price = document.getElementById("totalPrice");
+	let total_price_obj = document.getElementById("totalPrice");
  	let item_list = document.querySelectorAll("span[id=itemPrice]");
  	let arr = [];
 
- 	let total = 0;
+ 	let total_price = parseFloat(0)
  	let count = 0;
 
  	for (i=0; i<item_list.length; i++) {
  		let item = item_list[i];
+		item_price = parseFloat(item.innerHTML.replace(/[^0-9.]+/g, ''));
 
- 		total += Number(item.innerHTML.replace(/[^0-9]/g, ""));
+ 		total_price = (total_price + item_price).toFixed(2);
+
  		count += Number(item.previousElementSibling.value);
 		
  		let objData = new Object();
@@ -336,32 +338,30 @@ function cal_total_value() {
 	document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
 
 	document.getElementById("totalQty").innerHTML = String(count)+'개';
-	total_price.innerHTML = '₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	total_price_obj.innerHTML = '₱'+numberWithCommas(total_price);
 }
 
+//옵션 아이템 한개 가격 계산해주는것
 function cal_item_price(e) {
 	let qty = Number(e.value);
-	let ori_price = Number(e.dataset.optionPrice.replace(/[^0-9]/g, ""));
-
+	let ori_price = parseFloat(e.dataset.optionPrice)
 	let total_price_span = e.nextElementSibling;
-	console.log(qty)
 
-	let total_price = qty * ori_price;
-	console.log(total_price);
+	let total_price = (qty * ori_price).toFixed(2);
 	total_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
 	total_price_span.innerHTML = `₱${total_price}`;
 	cal_total_value();
 }
 
+//옵션 선택하면 옵션리스트에 추가해주는것
 function add_item(e) {
 	let option_first = document.getElementById("optionFirst");
 	let option_first_value = option_first.options[option_first.selectedIndex].dataset.value;
 
 	let option_second_value = e.options[e.selectedIndex].dataset.value;
 	let option_second_id = e.options[e.selectedIndex].dataset.id;
-	let option_second_price = '{{product_detail.price}}' + e.options[e.selectedIndex].dataset.price;
-	option_second_price = option_second_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	let option_second_price = (parseFloat('{{product_detail.price}}') + parseFloat(e.options[e.selectedIndex].dataset.price)).toFixed(2);
 
 	let my_item_id = document.querySelector(`span[data-id="${option_second_id}"]`);
 	if (my_item_id == null) {
@@ -462,7 +462,6 @@ async function order_submit() {
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
 		is_run  = false;
 		if (data.result == '200') {
 			window.history.pushState("", "", `{% url 'order:view' %}?id=${data.result_text}`);
