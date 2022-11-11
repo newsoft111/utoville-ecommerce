@@ -3,6 +3,7 @@ from .models import *
 from order.models import *
 from django.http import JsonResponse
 from revenue.views import Revenue
+from profit.views import Profit
 # Create your views here.
 
 def call_back(request):
@@ -10,7 +11,8 @@ def call_back(request):
 	order_item_id =  OrderItem.objects.filter(order=1).values_list('id', flat=True).order_by( "-id")
 	amount = 50000
 	Revenue(order_item_id, amount, 'payment').new_data()
-	
+	Profit(order_item_id, amount).new_data()
+
 	return JsonResponse({
 		'result': '200', 
 		'result_text': '성공'
