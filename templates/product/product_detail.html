@@ -300,7 +300,7 @@ function add_cart_submit(product_id) {
 
 function set_variant_value(e) {
 	let key = e.options[e.selectedIndex].value;
-	let json_data = JSON.parse("{{variant_data|escapejs}}");
+	let json_data = {{variant_data|safe}};
 	let html='<option selected>옵션2</optimPriceon>';
 	
 	for (idx in json_data[key]) {
@@ -347,6 +347,7 @@ function cal_item_price(e) {
 	console.log(qty)
 
 	let total_price = qty * ori_price;
+	console.log(total_price);
 	total_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
 	total_price_span.innerHTML = `₱${total_price}`;

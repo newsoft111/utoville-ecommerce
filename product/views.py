@@ -58,17 +58,19 @@ def product_detail(request, product_id):
 	
 	variant_value_list = ProductVariantValue.objects.filter(variant__in=variant_list)
 
-	variant_data = defaultdict(list)
+	variant_data = {}
 	for variant_value in variant_value_list:
 		key = variant_value.variant.variant
-		
-		tmp_dict = {}
-		tmp_dict['id'] = variant_value.pk
-		tmp_dict['value'] = variant_value.value
-		tmp_dict['price'] = variant_value.price
+		if key not in variant_data:
+			variant_data[key] = []
 
-		variant_data[key].append(tmp_dict)
+		variant_data[key].append({
+			'id':variant_value.pk, 
+			'value':variant_value.value, 
+			'price':str(variant_value.price)
+		})
 	
+	print(variant_data)
 	q = Q()
 	q &= Q(product = product_id)
 	q &= ~Q(answer = None)
@@ -79,7 +81,7 @@ def product_detail(request, product_id):
 		"seo":seo,
 		"product_detail": product_detail,
 		"product_qna_objs": product_qna_objs,
-		'variant_data': json.dumps(variant_data)
+		'variant_data': variant_data
 	})
 
 

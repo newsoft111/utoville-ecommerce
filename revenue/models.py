@@ -4,8 +4,9 @@ from django.conf import settings
 # Create your models here.
 class RevenueAdmin(models.Model):
 	date = models.DateField()
-	payment_amount = models.PositiveIntegerField(default=0)
-	refund_amount = models.PositiveIntegerField(default=0)
+	payment_amount = models.DecimalField(max_digits=14, decimal_places=2)
+	refund_amount = models.DecimalField(max_digits=14, decimal_places=2)
+	used_point_amount = models.DecimalField(max_digits=14, decimal_places=2)
 	order_count = models.PositiveIntegerField(default=0)
 
 	class Meta:
@@ -18,8 +19,8 @@ class RevenueSeller(models.Model):
 			on_delete=models.CASCADE,
 	)
 	date = models.DateField()
-	payment_amount = models.PositiveIntegerField(default=0)
-	refund_amount = models.PositiveIntegerField(default=0)
+	payment_amount = models.DecimalField(max_digits=14, decimal_places=2)
+	refund_amount = models.DecimalField(max_digits=14, decimal_places=2)
 	order_count = models.PositiveIntegerField(default=0)
 
 	class Meta:
