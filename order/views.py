@@ -38,7 +38,9 @@ def order_create(request):
 		payment_obj = Payment.objects.create()
 		order_obj = Order.objects.create(
 			user=request.user,
-			payment=payment_obj
+			payment=payment_obj,
+			total_price=0,
+			used_point=0
 		)
 
 		total_price = 0
@@ -86,12 +88,13 @@ def order_create(request):
 						schedule_date = datetime.now(),
 						order_status = '결제대기',
 					)
-					total_price += int(order_item_obj.sub_total_price())
-
+					total_price += order_item_obj.sub_total_price()
+					print(order_item_obj.sub_total_price())
 				except Exception as e:
 					print(e)
 					pass
 		
+		print(total_price)
 		order_obj.total_price = total_price
 		order_obj.save()
 			

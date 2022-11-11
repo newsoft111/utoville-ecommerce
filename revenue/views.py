@@ -15,7 +15,7 @@ class Revenue:
 
 		
 	def admin_update(self):
-		revenue_admin_obj, created = RevenueAdmin.objects.get_or_create(date=date.today())
+		revenue_admin_obj, created = RevenueAdmin.objects.get_or_create(date=date.today(), )
 		for order_item_obj in self.order_item_objs:
 			if self.event_type == 'payment':
 				revenue_admin_obj.payment_amount += order_item_obj.sub_total_price()
