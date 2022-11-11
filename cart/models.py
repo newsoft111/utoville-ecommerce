@@ -2,6 +2,7 @@ from django.db import models
 from product.models import Product, ProductVariantValue
 from datetime import datetime
 from django.conf import settings
+from decimal import Decimal
 
 class ModelDeleteManager(models.Manager):
 	def get_queryset(self):
@@ -42,3 +43,17 @@ class CartItem(models.Model):
 
 	def __str__(self):
 		return self.product
+
+	
+	def sub_price(self):
+		if self.variant_value is not None:
+			return self.product.price + self.variant_value.price
+		else:
+			return self.product.price
+
+	def sub_total_price(self):
+		if self.variant_value is not None:
+			print((self.product.price + self.variant_value.price))
+			return Decimal(self.product.price + self.variant_value.price) * Decimal(self.quantity)
+		else:
+			return Decimal(self.product.price) * Decimal(self.quantity)
