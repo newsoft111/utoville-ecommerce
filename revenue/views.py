@@ -25,8 +25,8 @@ class Revenue:
 				revenue_admin_obj.refund_amount += order_item_obj.sub_total_price()
 				revenue_admin_obj.order_count -= 1
 
-		else:
-			print('오류')
+			else:
+				print('오류')
 		revenue_admin_obj.save()
 
 	def seller_update(self):
