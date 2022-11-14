@@ -111,10 +111,10 @@
 				</div>
 
 				<!--Update cart button-->
-				<div class="text-center d-md-flex align-items-center border-bottom pb-4 mb-4">
+				<div class="text-center d-flex justify-content-between align-items-center border-bottom py-4 mb-4">
 					<div class="col-md-7 mb-4 mb-md-0 text-start">
-						<button class="btn btn-brand small ms-2" onclick="checkbox_manager();"><span>전체선택</span></button>
-                        <button class="btn small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span>선택삭제</span></button>
+						<button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="checkbox_manager();"><span style="font-size: 14px;">전체선택</span></button>
+                        <button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span style="font-size: 14px;">선택삭제</span></button>
 					</div>
 					<div class="col-md-5 text-end">
 						<div class="d-flex flex-column h-100 justify-content-end">
@@ -131,7 +131,12 @@
 						</a>
 					</div>
 					<div>
-						<a href="#!" onclick="order_submit();" class="btn btn-brand">proceed to Checkout</a>
+						<a href="#!" onclick="order_create_submit();" class="btn btn-outline-brandGreen btn-rise">
+							<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+							<div class="btn-rise-text">
+								proceed to Checkout
+							</div>
+						</a>
 						<input type="hidden" name="obj_data" value=''>
 					</div>
 				</div>

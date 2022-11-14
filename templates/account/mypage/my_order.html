@@ -131,7 +131,7 @@
 																		</div>	
 																	</div>
 																	<div class="submitBlock">
-																		<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																		<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-outline-secondary">
 																			<span class="btn-hover-label label-default">Search</span>
 																			<span class="btn-hover-label label-hover">Search</span>
 																		</button>
@@ -140,6 +140,31 @@
 															</td>		
 														</tr>
 														<tr>
+<<<<<<< Updated upstream
+=======
+															<td class="order-tb-left">카테고리</td>
+															<td class="order-tb-right">
+																<select class="form-select" name="category_by" aria-label="Default select example" style="border-color: #ddd">
+																	<option value="" {% if not request.GET.category %}selected{% endif %}>선택</option>
+																	{% for category_obj in category_objs %}
+																	<option value="{{category_obj.pk}}" {% if request.GET.category|slugify == category_obj.pk|slugify %}selected{% endif %}>{{category_obj.name}}</option>
+																	{% endfor %}
+																</select>
+															</td>
+															
+																<td class="order-tb-left">진행 상태</td>							
+																<td class="order-tb-right">
+																	<select class="form-select" name="status_by" aria-label="Default select example" style="border-color: #ddd">
+																		<option value="">선택</option>
+																		{% for k, v in order_status_dict %}
+																		<option value="{{k}}">{{v}}</option>
+																		{% endfor %}
+																	</select>
+																</td>
+															
+														</tr>
+														<tr>
+>>>>>>> Stashed changes
 															<td class="order-tb-left">서비스명</td>
 															<td colspan="3" class="order-tb-right">						
 																<form action="{{request.path}}" method="GET" name="keywordSearchForm" class="mb-0 formFlex">
@@ -148,7 +173,7 @@
 																			placeholder="서비스명을 검색하세요.">
 																	</div>
 																	<div class="submitBlock">
-																		<button type="submit"class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																		<button type="submit"class="od-search-btn btn btn-lg btn-hover-text btn-outline-secondary">
 																			<span class="btn-hover-label label-default">Search</span>
 																			<span class="btn-hover-label label-hover">Search</span>
 																		</button>
@@ -196,7 +221,7 @@
 													<span>카테고리별</span>
 												</div>		
 												<div class="contents">
-													<select class="form-select" name="category_by" aria-label="Default select example">
+													<select class="form-select" name="category_by" aria-label="Default select example" style="border-color: #ddd;">
 														<option value="" {% if not request.GET.category %}selected{% endif %}>선택</option>
 														{% for category_obj in category_objs %}
 														<option value="{{category_obj.pk}}" {% if request.GET.category|slugify == category_obj.pk|slugify %}selected{% endif %}>{{category_obj.name}}</option>
@@ -206,6 +231,7 @@
 											</div>
 											<div class="datesearch-main">
 												<div class="title">
+<<<<<<< Updated upstream
 													<span>날짜</span>
 												</div>		
 												<div class="contents">
@@ -225,6 +251,18 @@
 														</div>
 													</form>
 												</div>										
+=======
+													<span>진행 상태</span>
+												</div>	
+												<div class="contnets">
+													<select class="form-select" name="status_by" aria-label="Default select example" style="border-color: #ddd;">
+														<option value="">선택</option>
+														{% for k, v in order_status_dict %}
+														<option value="{{k}}">{{v}}</option>
+														{% endfor %}
+													</select>
+												</div>											
+>>>>>>> Stashed changes
 											</div>
 											<div class="kewordsearch-main">
 												<div class="title">
@@ -292,11 +330,17 @@
 													<td>
 														완료
 														<div class="mt-1">
-															<button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
+															<button type="button" class="btn btn-outline-secondary btn-rise" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">
+																<div class="btn-rise-bg bg-secondary"></div>
+																<div class="btn-rise-text"  style="font-size: 14px;">
+																	Write Review
+																</div>
+															</button>			
 														</div>	
 													</td>			
 												</tr>
 												{% endfor %}
+												</a>
 											</tbody>
 										</table>
 									</div>
@@ -329,7 +373,7 @@
 															<div class="contnets">
 																<span class="text-danger fs-5">완료</span>
 																<div class="mt-1">
-																	<button type="button" class="btn btn-sm btn-primary w-100 fs-5" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
+																	<button type="button" class="btn btn-sm btn-brand w-100 fs-5" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
 																</div>	
 															</div>
 														</div>
