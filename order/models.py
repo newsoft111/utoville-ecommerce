@@ -65,6 +65,7 @@ class OrderItem(models.Model):
 	schedule_date= models.DateTimeField()
 	order_status = models.CharField(max_length=255)
 	status = models.CharField(max_length=255, default='결제대기')
+	shipping_fee = models.DecimalField(max_digits=14, decimal_places=2, default=0.0)
 
 	class Meta:
 		db_table = 'ecommerce_order_item'
