@@ -278,7 +278,7 @@
 													<th scope="col">진행 상태</th>
 												</tr>
 											</thead>
-											<!-- Data -->
+											
 											<tbody>
 												{% for my_order_obj in my_order_objs %}
 												<tr>
@@ -289,7 +289,12 @@
 													<td>
 														완료
 														<div class="mt-1">
-															<button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
+															<button type="button" class="btn btn-outline-secondary btn-rise" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">
+																<div class="btn-rise-bg bg-secondary"></div>
+																<div class="btn-rise-text">
+																	Write Review
+																</div>
+															</button>			
 														</div>	
 													</td>			
 												</tr>
@@ -340,48 +345,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- <div class="row text-center">
-							<div class="col-md-12 mt-5">
-								<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
-									{% for my_order_obj in my_order_objs %}
-									<div class="ordered-at-main">
-										<span>주문일/주문번호</span>
-										<div class="contnets">
-											<p>{{my_order_obj.order.ordered_at}}</p>
-										</div>
-									</div>
-									<div class="service-info-main">
-										<span>서비스 정보</span>
-										<div class="contnets">
-											<p>{{my_order_obj.product_name}}</p>
-										</div>
-									</div>
-									<div class="quantity-main">
-										<span>수량</span>
-										<div class="contnets">
-											<p>{{my_order_obj.ordered_quantity}}</p>
-										</div>
-									</div>
-									<div class="subtotal-price-main">
-										<span>주문 금액</span>
-										<div class="contnets">
-											<p>₱{{my_order_obj.sub_total_price|intcomma}}</p>
-										</div>
-									</div>
-									<div class="list-status-main">
-										<span>진행 상태</span>
-										<div class="contnets">
-											<p>완료</p>
-											<div class="mt-1">
-												<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
-											</div>	
-										</div>
-									</div>
-									{% endfor %}
-								</div>
-							</div>
-						</div> -->
-
 						
 						<div class="row mb-5">
 							<ul class="pagination justify-content-center m-0">
@@ -420,7 +383,6 @@
 								{% endif %}
 							</ul>
 						</div>
-						<!-- Order list END -->
 					</div>	
 				</div>
 			</div>
@@ -556,7 +518,6 @@ let e = new Dropzone("[data-dropzone-area]", {
 				}
 			}
 
-
 			for(var i=0; i< this.files.length; i++){
 				var extension = this.files[i].name.split('.').pop().toLowerCase();		
 				if(extension != 'jpg' && extension != 'jpeg' && extension != 'png' && extension != 'gif'){
@@ -572,14 +533,14 @@ let e = new Dropzone("[data-dropzone-area]", {
 const category_by = document.querySelector('select[name=category_by]');
 
 category_by.addEventListener('change', (event) => {
-	var link = `{{request.path}}?category=${event.target.value}`;
+	var link = `{{request.path}}?category=${event.target.value}`;
 	location.href=link;
 });
 
 const status_by = document.querySelector('select[name=status_by]');
 
 status_by.addEventListener('change', (event) => {
-	var link = `{{request.path}}?status=${event.target.value}`;
+	var link = `{{request.path}}?status=${event.target.value}`;
 	location.href=link;
 });
 

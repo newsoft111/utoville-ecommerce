@@ -43,18 +43,19 @@
 				<video id="my_video" src="{% static 'video/video1.mp4' %}"></video>
 				<div class="position-absolute top-50 start-50 translate-middle text-white w-md-75 px-4 w-lg-60 mx-auto text-center z-index-1 py-12 py-lg-15">
 				<!--Hero title-->
-					<h1 class="display-1 mb-3 mb-md-4 position-relative">Welcome to<br>New Smart Life</h1>
+					<h1 class="display-1 mb-3 mb-md-4 position-relative">Welcome to<br><span class="text-gradient">Utoville House Care</span></h1>
 
 					<!--Hero text-->
 					<p class="lead w-lg-60 mx-auto mb-5">Enjoy a comfortable residential life with Utoville Homecare Service.</p>
 
 					<!--Hero buttons-->
-					<div class="d-flex flex-column">
-						<div>
-							<a href="{% url 'product:list' %}" class="btn btn-brand btn-lg" style="border: none;">
+					<div class="d-inline-block">
+						<a href="{% url 'product:list' %}" class="btn btn-outline-white btn-rise">
+							<div class="btn-rise-bg bg-white"></div>
+							<div class="btn-rise-text">
 								Shop Now
-							</a>
-						</div>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -69,7 +70,7 @@
 			<div class="col-lg-6 col-xl-5 order-lg-last mb-7 mb-lg-0">
 				<!--Heading-->
 				<h2 class="position-relative mb-5 display-5" data-aos="fade-up">
-					We make <span class="text-gradient">UTOPIA LIFE</span> with Utoville homecare service.
+					We make UTOPIA LIFE with Utoville homecare service.
 				</h2>
 				<!--text-->
 				<p class="mb-0 lead" data-aos="fade-up" data-aos-delay="100">
