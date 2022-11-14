@@ -415,7 +415,7 @@ def qna_write(request):
 			qna_obj.user = request.user
 			qna_obj.subject = subject
 			qna_obj.question = question
-			qna_type.qna_type = qna_type
+			qna_obj.qna_type = qna_type
 			qna_obj.save()
 
 			result = {'result': '200', 'result_text': '등록이 완료되었습니다.'}
