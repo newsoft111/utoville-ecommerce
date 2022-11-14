@@ -12,7 +12,7 @@ class QnA(models.Model):
 	question = models.TextField()
 	answer = models.TextField()
 	questioned_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-	answered_at = models.DateTimeField(auto_now_add=False, auto_now=True)
+	answered_at = models.DateTimeField(null=True)
 
 	class Meta:
 		db_table = 'ecommerce_qna'
