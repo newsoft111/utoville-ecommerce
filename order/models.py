@@ -39,9 +39,9 @@ class OrderItem(models.Model):
 		max_length=255,
 		null=True
 	)
-	is_accepted = models.BooleanField(default=False)
-	accepted_at = models.DateTimeField(null=True)
-	is_refund_requested = models.BooleanField(default=False)
+	is_responded = models.BooleanField(default=False, verbose_name="셀러가 주문에 응답했는지")
+	responded_at = models.DateTimeField(null=True)
+	is_refund_requested = models.BooleanField(default=False, verbose_name="셀러에게 환불요청 했는지")
 	refund_requested_at = models.DateTimeField(null=True)
 	refund = models.ForeignKey(
 		Refund,
@@ -54,6 +54,7 @@ class OrderItem(models.Model):
 			Product,
 			on_delete=models.CASCADE,
 	)
+	order_item_status = models.CharField(max_length=255)
 	product_name = models.CharField(max_length=255)
 	product_price = models.DecimalField(max_digits=14, decimal_places=2)
 	variant = models.CharField(max_length=255, null=True)
@@ -63,8 +64,6 @@ class OrderItem(models.Model):
 	shipped_quantity = models.PositiveIntegerField(default=0)
 	is_subscribe = models.BooleanField(default=False)
 	schedule_date= models.DateTimeField()
-	order_status = models.CharField(max_length=255)
-	status = models.CharField(max_length=255, default='결제대기')
 	shipping_fee = models.DecimalField(max_digits=14, decimal_places=2, default=0.0)
 
 	class Meta:
