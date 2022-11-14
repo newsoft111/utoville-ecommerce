@@ -2,18 +2,20 @@ from django.db import models
 from datetime import date
 from django.conf import settings
 from datetime import datetime
+from order.models import OrderItem
 # Create your models here.
 
 
 class ProfitDone(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-	paid_amount = models.DecimalField(max_digits=14, decimal_places=2)
+	total_profit_amount=models.DecimalField(max_digits=14, decimal_places=2)
 	seller = models.ForeignKey(
 			settings.AUTH_USER_MODEL,
 			on_delete=models.CASCADE,
 	)
-	payment_fee = models.DecimalField(max_digits = 2, decimal_places = 1, default=0.0)
-	shipping_fee = models.DecimalField(max_digits=14, decimal_places=2)
+	total_payment_fee = models.DecimalField(max_digits=14, decimal_places=2)
+	profit_done_amount=models.DecimalField(max_digits=14, decimal_places=2)
+	total_shipping_fee = models.DecimalField(max_digits=14, decimal_places=2)
 
 	class Meta:
 		db_table = 'ecommerce_profit_done'
@@ -21,19 +23,22 @@ class ProfitDone(models.Model):
 
 class ProfitManager(models.Manager):
 	def get_queryset(self):
-		return super(ProfitManager, self).get_queryset().filter(is_done=False)
+		return super(ProfitManager, self).get_queryset().filter(profit_done=None)
 
 class Profit(models.Model):
+	order_item = models.ForeignKey(
+			OrderItem,
+			on_delete=models.CASCADE,
+	)
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
-	paid_amount = models.DecimalField(max_digits=14, decimal_places=2)
+	charge_amount = models.DecimalField(max_digits=14, decimal_places=2)
+	payment_fee = models.DecimalField(max_digits=14, decimal_places=2)
+	profit_amount = models.DecimalField(max_digits=14, decimal_places=2)
 	seller = models.ForeignKey(
 			settings.AUTH_USER_MODEL,
 			on_delete=models.CASCADE,
 	)
-	payment_fee = models.DecimalField(max_digits = 2, decimal_places = 1, default=0.0)
-	shipping_fee = models.DecimalField(max_digits=14, decimal_places=2)
-	is_done = models.BooleanField(default=False)
 	profit_done = models.ForeignKey(
 			ProfitDone,
 			on_delete=models.CASCADE,
@@ -44,5 +49,3 @@ class Profit(models.Model):
 	class Meta:
 		db_table = 'ecommerce_profit'
 	
-	def get_profit_amount(self):
-		return round((self.paid_amount*(1-self.payment_fee)), 2)
