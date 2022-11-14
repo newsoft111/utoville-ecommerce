@@ -45,4 +45,4 @@ class Profit(models.Model):
 		db_table = 'ecommerce_profit'
 	
 	def get_profit_amount(self):
-		return (self.paid_amount*(1-self.payment_fee))
+		return round((self.paid_amount*(1-self.payment_fee)), 2)
