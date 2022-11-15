@@ -320,29 +320,37 @@ def my_order(request):
 	order_status_dict = {
 		"1":"결제대기",
 		"2":"결제완료",
-		"3":"서비스대기",
-		"4":"서비스완료",
+		"3":"배달대기",
+		"4":"배달완료",
 	}
 
 	q = Q()
-	q &= Q(product__user = request.user)
-	if request.GET.get("start_date"):
-		start_date = datetime.strptime(request.GET.get("start_date"), "%Y-%m-%d")
-		if request.GET.get("end_date"):
-			end_date = request.GET.get("end_date")
+	q &= Q(order__user = request.user)
+	q &= ~Q(order__payment__is_paid = True)
+	start_date = request.GET.get("start_date")
+	if start_date is not None and start_date != '':
+		start_date = datetime.strptime(start_date, "%Y-%m-%d")
+
+		end_date = request.GET.get("end_date")
+		if end_date is not None and end_date != '':
+			end_date = datetime.strptime(end_date, "%Y-%m-%d")
 		else:
 			end_date = datetime.now()
+		end_date = end_date + timedelta(days=1)
 
-		q &= Q(order__paid_at__range = [start_date, end_date])
+		q &= Q(order__payment__paid_at__range = [start_date, end_date])
 
-	if request.GET.get("keyword"):
-		q &= Q(product_name__icontains = request.GET.get("keyword"))
+	keyword = request.GET.get("keyword")
+	if keyword is not None and keyword != '':
+		q &= Q(product_name__icontains = keyword)
 
-	if request.GET.get("category"):
-		q &= Q(product__category_first = int(request.GET.get("category")))
+	category = request.GET.get("category_by")
+	if category is not None and category != '':
+		q &= Q(product__category_first = category)
 
-	if request.GET.get("status"): #지역 필터
-		q &= Q(order_status = order_status_dict[request.GET.get("status")])
+	order_item_status = request.GET.get("status_by")
+	if order_item_status is not None and order_item_status != '':
+		q &= Q(order_item_status = order_status_dict[order_item_status])
 
 	my_order_objs =  OrderItem.objects.filter(q).order_by("-id")
 	print(str(my_order_objs.query))
