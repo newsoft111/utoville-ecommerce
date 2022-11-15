@@ -4,14 +4,9 @@
 {% load humanize %}
 
 <style>
-.formFlex {
-	display: flex;
-	justify-content: space-between;
-}
 .inputBlock {
 	display: inline-block; 
 	width: 100%;
-	margin-right: 10px;
 }
 .submitBlock {
 	display: inline-block;
@@ -93,24 +88,36 @@
 							<div class="col-12">
 								<!-- Page title -->
 								<h4 class="my-4">주문 조회</h4>
-								<!-- Table -->
 								<div class="row main_contents">
 									<div class="col-md-12">
 										<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
 											<div class="table-responsive" style="text-align: center;">
-												<table class="table row">
-													<!-- Data -->
+												<table class="table">
 													<tbody>
+														<form action="{{request.path}}" method="GET" name="dateSearchForm" class="mb-0 formFlex">
 														<tr>
-															<td class="order-tb-left">기간별</td>
-															<td class="col-6 order-tb-right">
-																<button type="button" class="btn btn-outline-secondary order-tb-button">1주일</button>
-																<button type="button" class="btn btn-outline-secondary order-tb-button">1개월</button>
-																<button type="button" class="btn btn-outline-secondary order-tb-button">6개월</button>
-																<button type="button" class="btn btn-outline-secondary order-tb-button">1년</button>
-															</td>
-															<td class="order-tb-left">카테고리별</td>
-															<td class="col-6 order-tb-right">
+															<td class="order-tb-left">날짜</td>
+															<td colspan="3">
+																<div class="btn-group w-100 mb-3">
+																	<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastWeekBtn();">1주일</button>
+																	<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneMonthBtn();">1개월</button>
+																	<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastThreeMonthBtn();">3개월</button>
+																	<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastSixMonthBtn();">6개월</button>
+																	<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneYearBtn();">1년</button>
+																</div>		
+															
+																<div class="inputBlock">
+																	<div class="input_group input-daterange">
+																		<input class="form-control form-radius start-date-input" name="start_date" type="date">
+																		&nbsp;&nbsp;~&nbsp;&nbsp;
+																		<input class="form-control form-radius end-date-input" name="end_date" type="date">
+																	</div>	
+																</div>
+															</td>		
+														</tr>
+														<tr>
+															<td class="order-tb-left">카테고리</td>
+															<td class="order-tb-right">
 																<select class="form-select" name="category_by" aria-label="Default select example">
 																	<option value="" {% if not request.GET.category %}selected{% endif %}>선택</option>
 																	{% for category_obj in category_objs %}
@@ -118,32 +125,23 @@
 																	{% endfor %}
 																</select>
 															</td>
-														</tr>
-														<tr>
-															<td class="order-tb-left">날짜</td>
-															<td colspan="3">
-																<form action="{{request.path}}" method="GET" name="dateSearchForm" class="mb-0 formFlex">
-																	<div class="inputBlock">
-																		<div class="input_group input-daterange">
-																			<input class="form-control form-radius" name="start_date" type="date" id="start-date-input">
-																			&nbsp;&nbsp;~&nbsp;&nbsp;
-																			<input class="form-control form-radius" name="end_date" type="date" id="end-date-input">
-																		</div>	
-																	</div>
-																	<div class="submitBlock">
-																		<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
-																			<span class="btn-hover-label label-default">Search</span>
-																			<span class="btn-hover-label label-hover">Search</span>
-																		</button>
-																	</div>
-																</form>
-															</td>		
+															
+																<td class="order-tb-left">진행 상태</td>							
+																<td class="order-tb-right">
+																	<select class="form-select" name="status_by" aria-label="Default select example">
+																		<option value="">선택</option>
+																		{% for k, v in order_status_dict %}
+																		<option value="{{k}}">{{v}}</option>
+																		{% endfor %}
+																	</select>
+																</td>
+															
 														</tr>
 														<tr>
 															<td class="order-tb-left">서비스명</td>
-															<td colspan="3" class="order-tb-right">						
-																<form action="{{request.path}}" method="GET" name="keywordSearchForm" class="mb-0 formFlex">
-																	<div class="inputBlock">
+															<td colspan="3" class="order-tb-right">
+																<div class="d-flex">
+																	<div class="inputBlock me-2">
 																		<input type="text" class="form-control form-radius" name="keyword"
 																			placeholder="서비스명을 검색하세요.">
 																	</div>
@@ -153,20 +151,10 @@
 																			<span class="btn-hover-label label-hover">Search</span>
 																		</button>
 																	</div>
-																</form>
+																</div>				
 															</td>																			
 														</tr>							
-														<tr>
-															<td class="order-tb-left">진행 상태</td>							
-															<td colspan="3" class="order-tb-right">
-																<select class="form-select" name="status_by" aria-label="Default select example">
-																	<option value="">선택</option>
-																	{% for k, v in order_status_dict %}
-																	<option value="{{k}}">{{v}}</option>
-																	{% endfor %}
-																</select>
-															</td>
-														</tr>				
+													</form>
 													</tbody>
 												</table>
 											</div>
@@ -177,23 +165,34 @@
 								<!-- Responsive  Order Search -->
 								<div class="row resp-order-main">
 									<div class="col-md-12">
-										<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
-											<div class="period-main">
+										<form action="{{request.path}}" method="GET" name="keywordSearchForm" class="mb-0 formFlex">
+										<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">	
+											<div class="datesearch-main">
 												<div class="title">
-													<span>기간별</span>
-												</div>
+													<span>날짜</span>
+												</div>		
 												<div class="contents">
-													<ul>
-														<li><button type="button" class="btn btn-outline-secondary order-tb-button">1주일</button></li>
-														<li><button type="button" class="btn btn-outline-secondary order-tb-button">1개월</button></li>
-														<li><button type="button" class="btn btn-outline-secondary order-tb-button">6개월</button></li>
-														<li><button type="button" class="btn btn-outline-secondary order-tb-button">1년</button></li>
-													</ul>
-												</div>
+													<div class="btn-group mb-3">
+														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastWeekBtn();">1주일</button>
+														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneMonthBtn();">1개월</button>
+														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastThreeMonthBtn();">3개월</button>
+														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastSixMonthBtn();">6개월</button>
+														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneYearBtn();">1년</button>
+													</div>
+													<div class="datasearch-body">
+														<div class="inputBlock">
+															<div class="input_group input-daterange">
+																<input class="form-control form-radius start-date-input" name="start_date" type="date">
+																&nbsp;&nbsp;~&nbsp;&nbsp;
+																<input class="form-control form-radius end-date-input" name="end_date" type="date">
+															</div>	
+														</div>
+													</div>
+												</div>										
 											</div>
 											<div class="category-main">
 												<div class="title">
-													<span>카테고리별</span>
+													<span>카테고리</span>
 												</div>		
 												<div class="contents">
 													<select class="form-select" name="category_by" aria-label="Default select example">
@@ -203,47 +202,6 @@
 														{% endfor %}
 													</select>
 												</div>										
-											</div>
-											<div class="datesearch-main">
-												<div class="title">
-													<span>날짜</span>
-												</div>		
-												<div class="contents">
-													<form action="{{request.path}}" method="GET" name="dateSearchForm" class="mb-0 formFlex">
-														<div class="inputBlock">
-															<div class="input_group input-daterange">
-																<input class="form-control form-radius" name="start_date" type="date" id="start-date-input">
-																&nbsp;&nbsp;~&nbsp;&nbsp;
-																<input class="form-control form-radius" name="end_date" type="date" id="end-date-input">
-															</div>	
-														</div>
-														<div class="submitBlock">
-															<button type="submit" class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
-																<span class="btn-hover-label label-default">Search</span>
-																<span class="btn-hover-label label-hover">Search</span>
-															</button>
-														</div>
-													</form>
-												</div>										
-											</div>
-											<div class="kewordsearch-main">
-												<div class="title">
-													<span>서비스명</span>
-												</div>	
-												<div class="contents">
-													<form action="{{request.path}}" method="GET" name="keywordSearchForm" class="mb-0 formFlex">
-														<div class="inputBlock">
-															<input type="text" class="form-control form-radius" name="keyword"
-																placeholder="서비스명을 검색하세요.">
-														</div>
-														<div class="submitBlock">
-															<button type="submit"class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
-																<span class="btn-hover-label label-default">Search</span>
-																<span class="btn-hover-label label-hover">Search</span>
-															</button>
-														</div>
-													</form>
-												</div>
 											</div>
 											<div class="status-main">
 												<div class="title">
@@ -258,7 +216,25 @@
 													</select>
 												</div>											
 											</div>
+											<div class="kewordsearch-main">
+												<div class="title">
+													<span>서비스명</span>
+												</div>	
+												<div class="contents">
+													<div class="inputBlock">
+														<input type="text" class="form-control form-radius" name="keyword"
+															placeholder="서비스명을 검색하세요.">
+													</div>
+													<div class="submitBlock">
+														<button type="submit"class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+															<span class="btn-hover-label label-default">Search</span>
+															<span class="btn-hover-label label-hover">Search</span>
+														</button>
+													</div>
+												</div>
+											</div>
 										</div>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -281,7 +257,7 @@
 													<th scope="col">진행 상태</th>
 												</tr>
 											</thead>
-											<!-- Data -->
+											
 											<tbody>
 												{% for my_order_obj in my_order_objs %}
 												<tr>
@@ -292,7 +268,12 @@
 													<td>
 														완료
 														<div class="mt-1">
-															<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
+															<button type="button" class="btn btn-outline-secondary btn-rise" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">
+																<div class="btn-rise-bg bg-secondary"></div>
+																<div class="btn-rise-text">
+																	Write Review
+																</div>
+															</button>			
 														</div>	
 													</td>			
 												</tr>
@@ -343,48 +324,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- <div class="row text-center">
-							<div class="col-md-12 mt-5">
-								<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
-									{% for my_order_obj in my_order_objs %}
-									<div class="ordered-at-main">
-										<span>주문일/주문번호</span>
-										<div class="contnets">
-											<p>{{my_order_obj.order.ordered_at}}</p>
-										</div>
-									</div>
-									<div class="service-info-main">
-										<span>서비스 정보</span>
-										<div class="contnets">
-											<p>{{my_order_obj.product_name}}</p>
-										</div>
-									</div>
-									<div class="quantity-main">
-										<span>수량</span>
-										<div class="contnets">
-											<p>{{my_order_obj.ordered_quantity}}</p>
-										</div>
-									</div>
-									<div class="subtotal-price-main">
-										<span>주문 금액</span>
-										<div class="contnets">
-											<p>₱{{my_order_obj.sub_total_price|intcomma}}</p>
-										</div>
-									</div>
-									<div class="list-status-main">
-										<span>진행 상태</span>
-										<div class="contnets">
-											<p>완료</p>
-											<div class="mt-1">
-												<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
-											</div>	
-										</div>
-									</div>
-									{% endfor %}
-								</div>
-							</div>
-						</div> -->
-
 						
 						<div class="row mb-5">
 							<ul class="pagination justify-content-center m-0">
@@ -423,7 +362,6 @@
 								{% endif %}
 							</ul>
 						</div>
-						<!-- Order list END -->
 					</div>	
 				</div>
 			</div>
@@ -559,7 +497,6 @@ let e = new Dropzone("[data-dropzone-area]", {
 				}
 			}
 
-
 			for(var i=0; i< this.files.length; i++){
 				var extension = this.files[i].name.split('.').pop().toLowerCase();		
 				if(extension != 'jpg' && extension != 'jpeg' && extension != 'png' && extension != 'gif'){
@@ -570,25 +507,106 @@ let e = new Dropzone("[data-dropzone-area]", {
 		});
    },
 });
-// 파일이 업로드되면 실행
 
-/*오늘 날짜, 시간 셋팅*/
-document.getElementById("start-date-input").value = new Date().toISOString().slice(0,10);
-document.getElementById("end-date-input").value = new Date().toISOString().slice(0,10);
 
 const category_by = document.querySelector('select[name=category_by]');
 
 category_by.addEventListener('change', (event) => {
-	var link = `{{request.path}}?category=${event.target.value}`;
+	var link = `{{request.path}}?category=${event.target.value}`;
 	location.href=link;
 });
 
 const status_by = document.querySelector('select[name=status_by]');
 
 status_by.addEventListener('change', (event) => {
-	var link = `{{request.path}}?status=${event.target.value}`;
+	var link = `{{request.path}}?status=${event.target.value}`;
 	location.href=link;
 });
 
+
+document.getElementsByClassName("start-date-input")[0].value = new Date().toISOString().slice(0,10);
+document.getElementsByClassName("end-date-input")[0].value = new Date().toISOString().slice(0,10);
+
+function lastWeekBtn(){
+	let nowDate = new Date();
+	let weekDate = nowDate.getTime() - (7*24*60*60*1000);
+	nowDate.setTime(weekDate);
+
+	let weekYear = nowDate.getFullYear();
+	let weekMonth = nowDate.getMonth() + 1;
+	let weekDay = nowDate.getDate();
+
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+
+  document.getElementsByClassName("start-date-input")[0].value = resultDate;
+}  
+
+function lastOneMonthBtn(){
+	let nowDate = new Date();
+	let monthDate = nowDate.getTime() - (30*24*60*60*1000);
+	nowDate.setTime(monthDate);
+
+	let weekYear = nowDate.getFullYear();
+	let weekMonth = nowDate.getMonth() + 1;
+	let weekDay = nowDate.getDate() - 1;
+
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+
+  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+}
+function lastThreeMonthBtn(){
+	let nowDate = new Date();
+	let threeMonthDate = nowDate.getTime() - (3*30*24*60*60*1000);
+	nowDate.setTime(threeMonthDate);
+
+	let weekYear = nowDate.getFullYear();
+	let weekMonth = nowDate.getMonth() + 1;
+	let weekDay = nowDate.getDate() - 2;
+
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+
+  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+}
+function lastSixMonthBtn(){
+	let nowDate = new Date();
+	let sixMonthDte = nowDate.getTime() - (6*30*24*60*60*1000);
+	nowDate.setTime(sixMonthDte);
+
+	let weekYear = nowDate.getFullYear();
+	let weekMonth = nowDate.getMonth() + 1;
+	let weekDay = nowDate.getDate() -4;
+
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+
+  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+}
+function lastOneYearBtn(){
+	let nowDate = new Date();
+	let sixMonthDte = nowDate.getTime() - (12*30*24*60*60*1000);
+	nowDate.setTime(sixMonthDte);
+
+	let weekYear = nowDate.getFullYear();
+	let weekMonth = nowDate.getMonth() + 1;
+	let weekDay = nowDate.getDate() -5;
+
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+
+  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+}
 </script>
 {% endblock %}

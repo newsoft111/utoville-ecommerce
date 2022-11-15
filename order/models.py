@@ -77,7 +77,6 @@ class OrderItem(models.Model):
 
 	def sub_total_price(self):
 		if self.variant is not None:
-			print((self.product_price + self.variant_price))
 			return Decimal(self.product_price + self.variant_price) * Decimal(self.ordered_quantity)
 		else:
 			return Decimal(self.product_price) * Decimal(self.ordered_quantity)
