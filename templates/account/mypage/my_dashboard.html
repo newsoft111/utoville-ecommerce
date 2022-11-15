@@ -18,18 +18,12 @@
 			<div class="row my_page_main ">
 				{% include "account/mypage/sidemenu.html" with active_tab="대쉬보드"%}
 				<div class="col-lg-9 subs_contents">
-					{% include "account/mypage/topmenu.html" with active_tab="대쉬보드"%}
-				<!-- Page title -->
-					<h4 class="my-4">대쉬보드</h4>		
-
+					{% include "account/mypage/topmenu.html" with active_tab="대쉬보드"%}		
 					<div class="my-5 subs-view show">
-						<!-- banner-view start -->
-
+						<h4 class="my-4 page-title-box">My Dashboard</h4>
 						<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
 							<div class="row">
-								<!-- Item -->
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
-									<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
 									<div class="text-center position-relative">
 										<span id="next-service" style="cursor: pointer;">
 											<h2 data-countup='{"startVal": 0,"prefix":"D-"}' data-to="{{next_service_day_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
@@ -37,9 +31,7 @@
 										</span>
 									</div>
 								</div>
-								<!-- Item -->
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
-									<span class="display-5 text-white opacity-5"><i class="far fa-fw fa-comment-dots"></i></span>
 									<div class="text-center position-relative">
 										<span id="subs-num" style="cursor: pointer;">
 											<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="3" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
@@ -47,9 +39,7 @@
 										</span>
 									</div>
 								</div>											
-								<!-- Item -->
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
-									<span class="display-5 text-white opacity-5"><i class="fab fa-fw fa-gratipay"></i></span>
 									<div class="text-center position-relative">
 										<span id="complete-service-num" style="cursor: pointer;">
 											<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="{{delivered_service_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
@@ -57,22 +47,21 @@
 										</span>
 									</div>
 								</div>
-								<!-- Item -->
 								<div class="col-6 col-md-3 mb-md-0 sub-banner">
-									<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-eye"></i></span>
 									<div class="text-center position-relative">
 										<h2 data-countup='{"startVal": 0,"prefix":""}' data-to="{{water_delivered_service_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
 										<div class="text-muted">남은 생수 개수</div>
 									</div>
 								</div>
-							</div> <!-- banner-view END -->	
+							</div>
 						</div>
 					</div>
+				
 					<div class="pt-5 col-12">
 						<div id="calendar"></div>
 					</div>	
 					<div class="row">
-						<div class="col-lg-8 pt-5">
+						<div class="col-lg-8 pt-5" id="subs-list">
 							<div class="card">
 								<div class="card-body">
 									<div class="d-flex align-items-start">
@@ -252,18 +241,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	let nextService = document.getElementById("next-service");
 	let subsNum = document.getElementById("subs-num");
 	let completeNum = document.getElementById("complete-service-num");
-	// window.addEventListener("scroll", function(){
-	// 	console.log(pageYOffset)
-	// });
+	let subsList = document.getElementById("subs-list");
 
 	nextService.addEventListener("click" , function(){
 		window.scrollTo({top: 400, behavior: "smooth"});
 	});
 	subsNum.addEventListener("click" , function(){
-		window.scrollTo({top: 1000, behavior: "smooth"});
+		window.scrollTo({top: subsList.offsetTop, behavior: "smooth"});
 	});
 	completeNum.addEventListener("click" , function(){
-		window.scrollTo({top: 1000, behavior: "smooth"});
+		window.scrollTo({top: subsList.offsetTop, behavior: "smooth"});
 	});
 });
 
