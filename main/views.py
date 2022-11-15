@@ -6,7 +6,10 @@ def index(request):
 	seo = {
 		'title': "유토빌",
 	}
-	return render(request, 'main/index.html',{"seo":seo})
+	if request.user.is_authenticated: #로그인 상태면
+		return redirect('account:my_dashboard')
+	else:
+		return render(request, 'main/index.html',{"seo":seo})
 
 def contact(request):
 	return render(request, 'main/contact.html')

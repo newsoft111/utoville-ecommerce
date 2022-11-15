@@ -267,23 +267,26 @@ def send_auth_mail(email):
 def my_dashboard(request):
 	"""Here we are preparing data to show order detail on user's calender"""
 
-	order_data = []
+	if request.user.is_authenticated and not request.user.is_anonymous:
+		order_data = []
 
-	q = Q()
-	q &= Q(order__user=request.user)
-	q &= Q(order__payment__is_paid=True)
+		q = Q()
+		q &= Q(order__user=request.user)
 
-	order_items = OrderItem.objects.filter(q)
-	for items in order_items:
-		item_data = {'title': items.product_name, 'start': str(items.schedule_date), 'className': 'bg-success'
-		if items.is_delivered else 'bg-info'}
-		order_data.append(item_data)
+		order_items = OrderItem.objects.filter(q)
+		for items in order_items:
+			item_data = {'title': items.product_name, 'start': str(items.schedule_date), 'className': 'bg-success'
+			if items.is_delivered else 'bg-info'}
+			order_data.append(item_data)
 
 	q = Q()
 	q &= Q(order__user=request.user)
 	try:
 		next_service_day_count = OrderItem.objects.filter(q).order_by('-schedule_date')[0].schedule_date
 		next_service_day_count = (next_service_day_count.replace(tzinfo=None) - (datetime.today() - timedelta(1))).days
+
+		if next_service_day_count < 1:
+			next_service_day_count = 0
 	except:
 		next_service_day_count = 0
 		
@@ -350,6 +353,7 @@ def my_order(request):
 		q &= Q(order_item_status = order_status_dict[order_item_status])
 
 	my_order_objs =  OrderItem.objects.filter(q).order_by("-id")
+	print(str(my_order_objs.query))
 
 	page        = int(request.GET.get('p', 1))
 	pagenator   = Paginator(my_order_objs, 6)

@@ -3,7 +3,16 @@
 {% load static %}
 {% load humanize %}
 
-
+<!-- Sweet Alert-->
+<link href="{% static 'vendor/node_modules/css/sweetalert2.min.css' %}" rel="stylesheet" type="text/css" />
+<style>
+@media only screen and (max-width: 767px) {
+	.subs-status {
+		display: inline-block;
+		margin-bottom: 10px;
+	}
+}
+</style>
 <!-- Section -->
 <section class="position-relative">
 	<div class="container position-relative">
@@ -66,16 +75,19 @@
 													<div class="col-xxl-6 mt-5">
 														<div class="row">
 															<!-- Date -->
-															<div class="purchase_date col-md-4 align-middle text-body">
+															<div class="col-md-4">
 																08 July 2018
 															</div>
 															<!-- Status -->
-															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<div class="cancel_status text-danger">취소 완료</div>
+															<div class="col-md-4 pt-2">
+																<span class="text-danger border border-danger p-2" style="font-size: 13px;">취소 완료</span>
 															</div>		
 															<!-- Details -->
-															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<a class="cancel_detail btn btn-sm btn-info-soft me-1 mb-1" data-bs-toggle="modal" data-bs-target="#cancelDetailModal">&nbsp;취소상세</a>
+															<div class="col-md-4">
+																<div class="btn btn-outline-brandGreen btn-rise" data-bs-toggle="modal" data-bs-target="#cancelDetailModal" style="font-size: 14px;">
+																	<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+																	<div class="btn-rise-text" style="font-size: 14px;">취소 상세</div>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -88,11 +100,9 @@
 												<div class="row">
 													<div class="col-xxl-6">	
 														<div class="row">
-															<!-- Image -->
 															<div class="col-xl-3 text-center">
 																<img class="rounded mw-100" src="{% static 'img/mypage/subs01.jpg' %}" alt="Listing image2">
 															</div>
-															<!-- Info -->
 															<div class="col-xl-9 pt-2 pt-xl-0 text-center">
 																<h6 class="mb-1">Store in Woodside, San Francisco</h6>
 																<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
@@ -100,31 +110,67 @@
 															</div>
 														</div>
 													</div>
-													<!-- Content -->
 													<div class="col-xxl-6 mt-5">
-														<!-- Date -->
 														<div class="row">
-															<div class="purchase_date col-md-4 align-middle text-body">
+															<div class="col-md-4">
 																08 July 2018
 															</div>
-															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<div class="cancel_status text-primary">구매 완료</div>
-																<!-- <div class="cancel_status text-success">취소 신청</div> -->
+															<div class="col-md-4 pt-2">
+																<span class="text-success border border-success p-2" style="font-size: 13px;">구매 완료</span>
 															</div>			
-															<div class="col-md-4 align-middle pt-2 pt-md-0">
-																<a href="{% url 'account:my_subscribe_cancel' %}" class="btn btn-sm btn-info-soft me-1 mb-1">&nbsp;취소</a>
+															<div class="col-md-4">
+																<a href="{% url 'account:my_subscribe_cancel' %}" class="btn btn-outline-brandGreen btn-rise">
+																	<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+																	<div class="btn-rise-text" style="font-size: 14px;">취소</div>
+																</a>
 															</div>
+														</div>
 													</div>
-												</div> <!-- Row END -->
+												</div> 
 											</div>
 										</div>
-										<hr> <!-- Divider -->
+										<hr> 
+										<div class="order_info row">
+											<div class="col-12 text-center py-4">
+												<div class="row">
+													<div class="col-xxl-6">	
+														<div class="row">
+															<div class="col-xl-3 text-center">
+																<img class="rounded mw-100" src="{% static 'img/mypage/subs01.jpg' %}" alt="Listing image2">
+															</div>
+															<div class="col-xl-9 pt-2 pt-xl-0 text-center">
+																<h6 class="mb-1">Store in Woodside, San Francisco</h6>
+																<p class="mb-1">Chicago HQ Estica Cop. 8573 Livingston </p>
+																<span class="text-success">$160,000</span>
+															</div>
+														</div>
+													</div>
+													<div class="col-xxl-6 mt-5">
+														<div class="row">
+															<div class="col-md-4 align-middle">
+																08 July 2018
+															</div>
+															<div class="col-md-4 align-middle pt-2">
+																<span class="text-info border border-info p-2" style="font-size: 13px;">취소 신청</span>
+															</div>			
+															<div class="col-md-4 align-middle">
+																<button type="button" class="btn btn-outline-brandGreen btn-rise" id="sa-warning">
+																	<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+																	<div class="btn-rise-text"  style="font-size: 14px;">
+																		취소 철회
+																	</div>
+																</button>
+															</div>
+														</div>
+													</div>
+												</div> 
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							<!-- Property list END -->
 						</div>
-					</div> <!-- Row END -->
+					</div>
 				</div>
 			</div>
 		</div>
@@ -165,14 +211,18 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-				<button type="button" class="btn btn-primary btn-md" data-bs-dismiss="modal">확인</button>
+				<button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">확인</button>
 				<!-- id="" data-before-modal="" onclick="" -->
 		</div>
 		</div>
 	</div>
 </div>
 
+<!-- Sweet Alerts js -->
+<script src="{% static 'vendor/node_modules/js/sweetalert2.min.js' %}"></script>
+
 <script>
+	
 var cSelect = document.querySelectorAll("[data-choices]");
 
 cSelect.forEach(el => {
@@ -191,6 +241,20 @@ cSelect.forEach(el => {
 }
 new Choices(el, t)
 });
+
+document.getElementById("sa-warning").addEventListener("click", function() {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: !0,
+        confirmButtonColor: "#51d28c",
+        cancelButtonColor: "#f34e4e",
+        confirmButtonText: "Yes"
+    }).then(function(e) {
+        e.value && Swal.fire("Done!", "취소 철회가 완료되었습니다.", "success")
+    })
+})
 
 </script>
 {% endblock %}
