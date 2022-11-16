@@ -67,8 +67,10 @@
 							<tr>
 								<td>
 									<div class="position-relative">
-										<input type="checkbox" onchange="cal_checked_item_price();" data-product-id="{{cart_item.product.id}}" data-variant-value-id="{{cart_item.variant_value.id}}" data-qty="{{cart_item.quantity}}" class="position-absolute top-0 start-0" id="cart{{cart_item.pk}}" name="cart_item_id" value="{{cart_item.pk}}">
-										<label for="cart{{cart_item.pk}}"><img src="{% static 'img/shop/backpack2.jpg' %}" class="width-7x rounded-3"></label>
+										<input type="checkbox" onchange="cal_checked_item_price();" data-product-id="{{cart_item.product.id}}" data-variant-value-id="{{cart_item.variant_value.id}}" data-qty="{{cart_item.quantity}}"
+										 class="position-absolute top-50 start-0" id="cart{{cart_item.pk}}" name="cart_item_id" value="{{cart_item.pk}}">
+
+										<label for="cart{{cart_item.pk}}"><img src="{% static 'img/shop/backpack2.jpg' %}" class="width-7x rounded-3 ms-3"></label>
 									</div>
 								</td>
 								<td>
@@ -109,10 +111,10 @@
 				</div>
 
 				<!--Update cart button-->
-				<div class="text-center d-md-flex align-items-center border-bottom pb-4 mb-4">
+				<div class="text-center d-flex justify-content-between align-items-center border-bottom py-4 mb-4">
 					<div class="col-md-7 mb-4 mb-md-0 text-start">
-						<button class="btn btn-primary small ms-2" onclick="checkbox_manager();"><span>전체선택</span></button>
-                        <button class="btn small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span>선택삭제</span></button>
+						<button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="checkbox_manager();"><span style="font-size: 14px;">전체선택</span></button>
+                        <button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span style="font-size: 14px;">선택삭제</span></button>
 					</div>
 					<div class="col-md-5 text-end">
 						<div class="d-flex flex-column h-100 justify-content-end">
@@ -129,7 +131,12 @@
 						</a>
 					</div>
 					<div>
-						<a href="#!" onclick="order_create_submit();" class="btn btn-primary">proceed to Checkout</a>
+						<a href="#!" onclick="order_create_submit();" class="btn btn-outline-brandGreen btn-rise">
+							<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+							<div class="btn-rise-text">
+								proceed to Checkout
+							</div>
+						</a>
 						<input type="hidden" name="obj_data" value=''>
 					</div>
 				</div>
@@ -137,31 +144,6 @@
 		</div>
 	</div>
 </section>
-<section class="border-top bg-white position-relative overflow-hidden">
-	<div class="container py-9 py-lg-11 position-relative">
-		<div class="row align-items-center">
-			<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
-				<div class="mb-3">
-					<i class="bx bx-store fs-1"></i>
-				</div>
-				<h6 class="mb-0">30 Day Returns</h6>
-			</div>
-			<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
-				<div class="mb-3">
-					<i class="bx bx-purchase-tag fs-1"></i>
-				</div>
-				<h6 class="mb-0">100% Handpicked</h6>
-			</div>
-			<div class="col-md-4 text-center">
-				<div class="mb-3">
-					<i class="bx bx-package fs-1"></i>
-				</div>
-				<h6 class="mb-0">Assured Quality</h6>
-			</div>
-		</div>
-	</div>
-</section>
-
 
 <script>
 is_run = false;
