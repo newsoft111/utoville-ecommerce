@@ -15,19 +15,12 @@
 						<div class="swiper-container swiper-thumbnails overflow-hidden">
 							<!-- Additional required wrapper -->
 							<div class="swiper-wrapper d-flex flex-column">
+								{% for thumbnail in product_detail.productthumbnail_set.all %}
 								<div class="swiper-slide w-100">
-									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
+									<img src="{{thumbnail.thumbnail.url}}" alt="" class="w-100 rounded-0 h-auto">
 								</div>
-								<div class="swiper-slide w-100">
-									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
-								</div>
-								<div class="swiper-slide w-100">
-									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
-								</div>
-								<div class="swiper-slide w-100">
-									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="w-100 rounded-0 h-auto">
-								</div>
-
+								{% endfor %}
+							
 							</div>
 			  			</div>
 					</div>
@@ -38,21 +31,12 @@
 							<!-- Additional required wrapper -->
 							<div class="swiper-wrapper">
 							<!-- Slides -->
+								{% for thumbnail in product_detail.productthumbnail_set.all %}
 								<div class="swiper-slide">
-									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
+									<img src="{{thumbnail.thumbnail.url}}" alt="" class="img-fluid">
 								</div>
-								<!-- Slides -->
-								<div class="swiper-slide">
-									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
-								</div>
-								<!-- Slides -->
-								<div class="swiper-slide">
-									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
-								</div>
-								<!-- Slides -->
-								<div class="swiper-slide">
-									<img src="{% static 'img/shop/single1.jpg' %}" alt="" class="img-fluid">
-								</div>
+								{% endfor %}
+								
 							</div>
 								<!-- Swiper Navigation buttons (Remove it if you have to) -->
 							<div class="swiper-button-prev swiperThumb-prev text-white bg-dark"></div>

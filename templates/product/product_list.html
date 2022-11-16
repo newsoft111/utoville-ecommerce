@@ -85,7 +85,9 @@
 		<div class="card overflow-hidden hover-lift card-product">
 		<div class="card-product-header p-3 d-block overflow-hidden position-relative">
 			<a href="{% url 'product:detail' productList.id %}">
-				<img src="{% static 'img/shop/products/03.jpg' %}" class="img-fluid" alt="Product">
+				{% for thumbnail in productList.productthumbnail_set.all %}
+				<img src="{{thumbnail.thumbnail.url}}" class="img-fluid" alt="Product">
+				{% endfor %}
 			</a>
 		</div>
 		<div class="card-product-body p-3 pt-0 text-center">
