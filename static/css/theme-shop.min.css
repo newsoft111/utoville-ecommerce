@@ -8444,6 +8444,14 @@ textarea.form-control-lg {
 	--bs-bg-opacity:1;
 	background-color: #2ea7e0;
 }
+.bg-brandGreen {
+	--bs-bg-opacity:1;
+	background-color: #90c31f;
+}
+.bg-brandBlue {
+	--bs-bg-opacity:1;
+	background-color: #2ea7e0;
+}
 .bg-primary {
 	--bs-bg-opacity:1;
 	background-color:rgba(var(--bs-primary-rgb),var(--bs-bg-opacity))!important

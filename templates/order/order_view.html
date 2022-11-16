@@ -3,9 +3,333 @@
 {% load static %}
 {% load humanize %}
 {% load mathfilters %}
+
+<link href="{% static 'css/borex.app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+<style>
+.point-btn {
+	border: 1px solid #232323 !important;
+    color: #232323;
+    background: #fff;
+}
+.point-btn:hover {
+	background-color: #232323 !important;
+	color: #fff !important;
+}
+
+</style>
 <!--Form billing information-->
 <section class="position-relative bg-white" id="order-view-section">
 	<div class="container pb-7 pb-lg-12 pt-7 position-relative">
+		<div class="row">
+			<div class="col-xl-8">
+
+				<div class="card">
+					<div class="card-body">
+						<ol class="activity-checkout mb-0 px-4 mt-3">
+							<li class="checkout-item">
+								<div class="avatar checkout-icon p-1">
+									<div class="avatar-title rounded-circle bg-brandBlue">
+										<i class="bx bxs-receipt text-white font-size-20"></i>
+									</div>
+								</div>
+								<div class="feed-item-list">
+									<div>
+										<h5 class="font-size-16 mb-1">Billing Info</h5>
+										<p class="text-muted text-truncate mb-4">Sed ut perspiciatis unde omnis iste</p>
+										<div class="mb-3">
+											<form>
+												<div>
+													<div class="row">
+														<div class="col-lg-4">
+															<div class="mb-3">
+																<label class="form-label" for="billing-name">Name</label>
+																<input type="text" class="form-control" id="billing-name" placeholder="Enter name">
+															</div>
+														</div>
+														<div class="col-lg-4">
+															<div class="mb-3">
+																<label class="form-label" for="billing-email-address">Email Address</label>
+																<input type="email" class="form-control" id="billing-email-address" placeholder="Enter email">
+															</div>
+														</div>
+														<div class="col-lg-4">
+															<div class="mb-3">
+																<label class="form-label" for="billing-phone">Phone</label>
+																<input type="text" class="form-control" id="billing-phone" placeholder="Enter Phone no.">
+															</div>
+														</div>
+													</div>
+
+													<div class="mb-3">
+														<label class="form-label" for="billing-address">Address</label>
+														<textarea class="form-control" id="billing-address" rows="3" placeholder="Enter full address"></textarea>
+													</div>
+
+													<div class="row">
+														<div class="col-lg-4">
+															<div class="mb-4 mb-lg-0">
+																<label class="form-label">City</label>
+																<select class="form-control form-select" title="City">
+																	<option value="0">Select City</option>
+																</select>
+															</div>
+														</div>
+
+														<div class="col-lg-4">
+															<div class="mb-4 mb-lg-0">
+																<label class="form-label" for="billing-state">State</label>
+																<input type="text" class="form-control" id="billing-state" placeholder="Enter State">
+															</div>
+														</div>
+
+														<div class="col-lg-4">
+															<div class="mb-0">
+																<label class="form-label" for="zip-code">Zip / Postal code</label>
+																<input type="text" class="form-control" id="zip-code" placeholder="Enter Postal code">
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="checkout-item">
+								<div class="avatar checkout-icon p-1">
+									<div class="avatar-title rounded-circle bg-brandBlue">
+										<i class="bx bxs-truck text-white font-size-20"></i>
+									</div>
+								</div>
+								<div class="feed-item-list">
+									<div>
+										<h5 class="font-size-16 mb-1">Shipping Info</h5>
+										<p class="text-muted text-truncate mb-4">Neque porro quisquam est</p>
+										<div class="mb-3">
+											<div class="row">
+												<div class="col-lg-4 col-sm-6 position-relative">
+													<div data-bs-toggle="collapse">
+														<label class="card-radio-label mb-0">
+															<input type="radio" name="address" id="info-address1" class="card-radio-input" checked>
+															<div class="card-radio text-truncate p-3">
+																<span class="fs-14 mb-4 d-block">Address 1</span>
+																<span class="fs-14 mb-2 d-block">Bradley McMillian</span>
+																<span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>	   
+																<span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
+															</div>
+														</label>
+														<div class="edit-btn bg-light rounded">
+															<a href="#"  data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
+																<i class="bx bx-pencil font-size-16"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-4 col-sm-6 position-relative">
+													<div>
+														<label class="card-radio-label mb-0">
+															<input type="radio" name="address" id="info-address2" class="card-radio-input">
+															<div class="card-radio text-truncate p-3">
+																<span class="fs-14 mb-4 d-block">Address 2</span>
+																<span class="fs-14 mb-2 d-block">Bradley McMillian</span>
+																<span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
+																<span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
+															</div>
+														</label>
+														<div class="edit-btn bg-light rounded">
+															<a href="#"  data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
+																<i class="bx bx-pencil font-size-16"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="checkout-item">
+								<div class="avatar checkout-icon p-1">
+									<div class="avatar-title rounded-circle bg-brandBlue">
+										<i class="bx bxs-wallet-alt text-white font-size-20"></i>
+									</div>
+								</div>
+								<div class="feed-item-list">
+									<div>
+										<h5 class="font-size-16 mb-1">Payment Info</h5>
+										<p class="text-muted text-truncate mb-4">Duis arcu tortor, suscipit eget</p>
+									</div>
+									<div class="mb-4">
+										<span class="font-size-14 d-block mb-2">Use Point</span>
+											<div class="point-input text-start">
+												<input type="number" name="points" step="100" min="0" value="0" class="use-point">
+												<button class="btn point-btn">전액사용</button>									
+											</div>	
+							
+									</div>
+									<div>
+										<h5 class="font-size-14 mb-3">Payment method :</h5>
+										<div class="row">
+											<div class="col-lg-3 col-sm-6">
+												<div data-bs-toggle="collapse">
+													<label class="card-radio-label">
+														<input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input">
+														<span class="card-radio py-3 text-center text-truncate">
+															<i class="bx bx-credit-card d-block h2 mb-3"></i>
+															Credit / Debit Card
+														</span>
+													</label>
+												</div>
+											</div>
+											
+											<div class="col-lg-3 col-sm-6">
+												<div>
+													<label class="card-radio-label">
+														<input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input">
+														<span class="card-radio py-3 text-center text-truncate">
+															<i class="bx bxl-paypal d-block h2 mb-3"></i>
+															Paypal
+														</span>
+													</label>
+												</div>
+											</div>
+
+											<div class="col-lg-3 col-sm-6">
+												<div>
+													<label class="card-radio-label">
+														<input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked>
+
+														<span class="card-radio py-3 text-center text-truncate">
+															<i class="bx bx-money d-block h2 mb-3"></i>
+															<span>Cash on Delivery</span>
+														</span>
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ol>
+					</div>
+				</div>
+
+			
+				<div class="row my-4">
+					<div class="col">
+						<a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
+							class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
+					</a>
+					</div> <!-- end col -->
+					<div class="col">
+						<div class="text-end mt-2 mt-sm-0">
+							<a href="#!" onclick="order_create_submit();" class="btn btn-outline-brandGreen btn-rise">
+								<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+								<div class="btn-rise-text">Procced</div>
+							</a>
+							<input type="hidden" name="obj_data" value=''>
+						</div>
+					</div> <!-- end col -->
+				</div> <!-- end row-->
+			</div>
+			<div class="col-xl-4">
+				<div class="card checkout-order-summary">
+					<div class="card-body">
+						<div class="p-3 bg-light mb-3">
+							<h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">#MN0124</span></h5>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-centered mb-0 table-nowrap">
+								<thead>
+									<tr>
+										<th class="border-top-0" style="width: 110px;" scope="col">Product</th>
+										<th class="border-top-0" scope="col">Product Desc</th>
+										<th class="border-top-0" scope="col">Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row"><img src="assets/images/product/img-3.jpg" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
+										<td>
+											<h5 class="font-size-16 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">Waterproof Mobile Phone</a></h5>
+											<p class="text-muted mb-0">
+												<i class="bx bxs-star text-warning"></i>
+												<i class="bx bxs-star text-warning"></i>
+												<i class="bx bxs-star text-warning"></i>
+												<i class="bx bxs-star text-warning"></i>
+												<i class="bx bxs-star-half text-warning"></i>
+											</p>
+											<p class="text-muted mb-0 mt-1">$ 260 x 2</p>
+										</td>
+										<td>$ 520</td>
+									</tr>
+									<tr>
+										<th scope="row"><img src="assets/images/product/img-5.jpg" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
+										<td>
+											<h5 class="font-size-16 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">Smartphone Dual Camera</a></h5>
+											<p class="text-muted mb-0">
+												<i class="bx bxs-star text-warning"></i>
+												<i class="bx bxs-star text-warning"></i>
+												<i class="bx bxs-star text-warning"></i>
+												<i class="bx bxs-star text-warning"></i>
+											</p>
+											<p class="text-muted mb-0 mt-1">$ 260 x 1</p>
+										</td>
+										<td>$ 260</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<h5 class="font-size-14 m-0">Sub Total :</h5>
+										</td>
+										<td>
+											$ 780
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<h5 class="font-size-14 m-0">Discount :</h5>
+										</td>
+										<td>
+											- $ 78
+										</td>
+									</tr>
+
+									<tr>
+										<td colspan="2">
+											<h5 class="font-size-14 m-0">Shipping Charge :</h5>
+										</td>
+										<td>
+											$ 25
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<h5 class="font-size-14 m-0">Estimated Tax :</h5>
+										</td>
+										<td>
+											$ 18.20
+										</td>
+									</tr>                              
+										
+									<tr class="bg-light">
+										<td colspan="2">
+											<h5 class="font-size-14 m-0">Total:</h5>
+										</td>
+										<td class="pd fw-bold fs-5 text-dark">
+											<span class="payment">₱{{total_price|intcomma}}</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end row -->
 		<div class="row">
 			<div class="col-12 mx-auto">
 				<div class="table-responsive">
@@ -82,8 +406,8 @@
 							<th class="pd text-center">포인트사용</th>
 							<td class="pd text-center fw-bold fs-5 text-dark">
 								<div class="point-input text-start">
-									<input type="text" name="points" step="100" min="0" value="0" class="use-point">
-									<button class="btn btn-primary point-btn">전액사용</button>									
+									<input type="number" name="points" step="100" min="0" value="0" class="use-point">
+									<button class="btn point-btn">전액사용</button>									
 								</div>	
 							</td>
 						</tr>
@@ -106,7 +430,7 @@
 						</label>
 					</div>
 					<div class="d-grid">
-						<button type="button" onclick="order_submit();" class="btn btn-lg hover-lift btn-hover-text btn-primary">
+						<button type="button" onclick="order_submit();" class="btn btn-lg hover-lift btn-hover-text btn-brand">
 							<span class="btn-hover-label label-default">Place your order</span>
 							<span class="btn-hover-label label-hover">Place your order</span>
 						</button>
@@ -135,6 +459,7 @@ const result = totalPrice.innerHTML.replace(regex, "");
 		// let removeZero = pointForm.value.replace(/(^0+)/, "");
 		// pointForm.value = removeZero;
 		let check = /^[0-9.]+$/;
+		pointForm.value = Number(pointForm.value).toFixed(2)
 
 		if(!check.test(pointForm.value) && pointForm.value != ''){
 			pointForm.value = 0;
