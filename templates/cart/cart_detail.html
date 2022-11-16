@@ -5,44 +5,156 @@
 {% load mathfilters %}
 {% load product_filter %}
 
+<link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
 <!--Page header start-->
 <section class="position-relative overflow-hidden">    
 	<div class="container-fluid">
-	  <div class="py-8 py-lg-11 bg-dark text-white position-relative">
-		<!--background image-->
-		<img src="assets/img/shop/banners/06.jpg" class="bg-image bg-top-center opacity-75" alt="">
-	  
-		<div class="row align-items-center position-relative">
-		  <div class="col-lg-10 mx-auto text-center">
-			<nav class="d-flex justify-content-center" aria-label="breadcrumb">
-			  <ol class="breadcrumb mb-3">
-				<li class="breadcrumb-item">
-				  <a href="#!">Home</a>
-				</li>
-				<li class="breadcrumb-item active">
-				  Shop
-				</li>
-				<li class="breadcrumb-item active">
-				  Cart
-				</li>
-			  </ol>
-			</nav>
-			<h1 class="mb-0 display-3">Cart
-			</h1>
-		  </div>
+		<div class="py-8 py-lg-11 bg-dark text-white position-relative">
+			<img src="assets/img/shop/banners/06.jpg" class="bg-image bg-top-center opacity-75" alt="">
+			<div class="row align-items-center position-relative">
+				<div class="col-lg-10 mx-auto text-center">
+					<h1 class="mb-0 display-3">Cart</h1>
+				</div>
+			</div>
 		</div>
-		<!--/.row-->
-	  </div>
 	</div>
-  </section>
+</section>
 
 <section class="position-relative bg-white" id="cart-section">
 	<div class="container pb-7 pb-lg-12 pt-7 position-relative">
-		<div class="row justify-content-between">
-			<div class="col-lg-10 mx-auto" id="cart-div">
+		<div class="row">
+			<div class="col-xl-8">
+				<div class="card border shadow-none">
+					<div class="card-body">
+						{% if not cart_items %}		
+							<h6 class="text-center mb-0 p-5 bg-light">상품이 없습니다.</h6>	
+						{% endif%}
+						
+						{% for cart_item in cart_items %}
+						<div class="d-flex align-items-start border-bottom pb-3">
+							<div class="item-list me-3">
+								<input type="checkbox" onchange="cal_checked_item_price();" data-product-id="{{cart_item.product.id}}" data-variant-value-id="{{cart_item.variant_value.id}}" data-qty="{{cart_item.quantity}}"
+									id="cart{{cart_item.pk}}" name="cart_item_id" value="{{cart_item.pk}}">
+								<label for="cart{{cart_item.pk}}"><img src="{% static 'img/shop/backpack2.jpg' %}" class="width-7x rounded-3 ms-2"></label>
+							</div>
+							<div class="item-details">
+								<h5 class="text-truncate font-size-18"><a href="ecommerce-product-detail" class="text-dark">{{cart_item.product.product_name}}</a></h5>
+								{% if cart_item.variant_value is not None %}
+								<span class="text-uppercase d-block">
+									{{cart_item.variant_value.variant}}: {{cart_item.variant_value.value}}
+								</span>
+								<span class="text-uppercase d-block">+₱{{cart_item.variant_value.price}}</span>
+								<p class="text-muted mb-0">
+									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star-half text-warning"></i>
+								</p>
+								{% endif %}
+							</div>	
+						</div>
+						{% endfor %}
+
+						<div class="row">
+							{% for cart_item in cart_items %}
+							<div class="col-md-4">
+								<div class="mt-3">
+									<p class="text-muted mb-2">Price</p>
+									<h5 class="mb-0 mt-2"><span class="text-muted me-2"></span>{{cart_item.sub_price}}</h5>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="mt-3">
+									<p class="text-muted mb-2">Quantity</p>
+									<input type="number" min="1" onKeyDown="return false" onchange="update_cart_submit(this)" value="{{cart_item.quantity}}" data-cart-item-id="{{cart_item.id}}" value="{{cart_item.quantity}}" class="form-control border-0 shadow-none rounded-0 bg-transparent">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="mt-3">
+									<p class="text-muted mb-2">Total</p>
+									<h5>{{cart_item.sub_total_price}}</h5>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				<div class="mt-3">
+						<button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="checkbox_manager();"><span style="font-size: 14px;">전체선택</span></button>
+						<button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span style="font-size: 14px;">선택삭제</span></button>
+				</div>
+				<!-- end card -->
+			</div>
+			
+			<div class="col-xl-4">
+				<div class="mt-5 mt-lg-0">
+					<div class="card border shadow-none">
+						<div class="card-header bg-transparent border-bottom py-3 px-4">
+							<h5 class="font-size-16 mb-0">Order Summary <span class="float-end">#MN0124</span></h5>
+						</div>
+						<div class="card-body p-4 pt-2">
+							<div class="table-responsive">
+								<table class="table mb-0">
+									<tbody>
+										{% for cart_item in cart_items %}
+										<tr>
+											<td>Sub Total :</td>
+											<td class="text-end">{{cart_item.sub_total_price}}</td>
+										</tr>
+										<tr>
+											<td>Discount : </td>
+											<td class="text-end">- $ 78</td>
+										</tr>
+										<tr>
+											<td>Shipping Charge :</td>
+											<td class="text-end">0</td>
+										</tr>
+										<tr class="bg-light">
+											<th>Total :</th>
+											<td class="text-end">
+												<span class="fw-bold" id="total-price">
+													₱0
+												</span>
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+							<!-- end table-responsive -->
+						</div>
+					</div>
+				</div>
+				<div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center mt-3">
+					<div class="mb-3 mb-sm-0">
+						<a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
+								class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
+						</a>
+					</div>
+					<div>
+						<a href="#!" onclick="order_create_submit();" class="btn btn-outline-brandGreen btn-rise">
+							<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+							<div class="btn-rise-text">
+								Checkout
+							</div>
+						</a>
+						<input type="hidden" name="obj_data" value=''>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+	
+		
+		<!-- end row -->
+		<!-- <div class="row justify-content-between">
+			<div class="col-lg-10 mx-auto" id="cart-div"> -->
 
 				<!--Cart table start-->
-				<div class="table-responsive">
+				<!-- <div class="table-responsive">
 					<table class="table table-striped align-middle">
 						<thead>
 							<tr>
@@ -108,42 +220,19 @@
 							
 						</tbody>
 					</table>
-				</div>
+				</div> -->
 
 				<!--Update cart button-->
-				<div class="text-center d-flex justify-content-between align-items-center border-bottom py-4 mb-4">
-					<div class="col-md-7 mb-4 mb-md-0 text-start">
-						<button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="checkbox_manager();"><span style="font-size: 14px;">전체선택</span></button>
-                        <button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span style="font-size: 14px;">선택삭제</span></button>
-					</div>
-					<div class="col-md-5 text-end">
+	
+					<!-- <div class="col-md-5 text-end">
 						<div class="d-flex flex-column h-100 justify-content-end">
 							<strong class="text-muted d-block mb-2 fs-6">Cart total</strong>
 							<h5 class="mb-0 ms-3 h2" id="total-price">₱0</h5>
 						</div>
 					</div>
-				</div>
-				<!--Cart checkout-->
-				<div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center">
-					<div class="mb-3 mb-sm-0">
-						<a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
-								class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
-						</a>
-					</div>
-					<div>
-						<a href="#!" onclick="order_create_submit();" class="btn btn-outline-brandGreen btn-rise">
-							<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-							<div class="btn-rise-text">
-								proceed to Checkout
-							</div>
-						</a>
-						<input type="hidden" name="obj_data" value=''>
-					</div>
-				</div>
+				</div>				
 			</div>
-		</div>
-	</div>
-</section>
+		</div> -->
 
 <script>
 is_run = false;
