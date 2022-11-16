@@ -52,7 +52,6 @@ class Product(models.Model):
 				through='ProductReview'
 	)
 
-
 	objects = ModelDeleteManager()
 
 	class Meta:
