@@ -16,6 +16,7 @@ from qna.models import *
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from dateutil.relativedelta import relativedelta
 import json
 User = get_user_model()
 
@@ -327,18 +328,20 @@ def my_order(request):
 	q = Q()
 	q &= Q(order__user = request.user)
 	q &= ~Q(order__payment__is_paid = True)
-	start_date = request.GET.get("start_date")
-	if start_date is not None and start_date != '':
-		start_date = datetime.strptime(start_date, "%Y-%m-%d")
 
-		end_date = request.GET.get("end_date")
-		if end_date is not None and end_date != '':
-			end_date = datetime.strptime(end_date, "%Y-%m-%d")
-		else:
-			end_date = datetime.now()
-		end_date = end_date + timedelta(days=1)
+	now = date.today()
+	start_date = now-relativedelta(months=1)
+	end_date = now
 
-		q &= Q(order__payment__paid_at__range = [start_date, end_date])
+	if request.GET.get("start_date") is not None and request.GET.get("start_date") != '':
+		start_date = datetime.strptime(request.GET.get("start_date"), "%Y-%m-%d")
+
+	if request.GET.get("end_date") is not None and request.GET.get("end_date") != '':
+		end_date = datetime.strptime(request.GET.get("end_date"), "%Y-%m-%d")
+
+	end_date = end_date + timedelta(days=1)
+
+	q &= Q(order__payment__paid_at__range = [start_date, end_date])
 
 	keyword = request.GET.get("keyword")
 	if keyword is not None and keyword != '':
