@@ -54,6 +54,7 @@ def order_create(request):
 				product_obj = Product.objects.get(pk=product_id)
 				
 			except Exception as e:
+				print(e)
 				return JsonResponse({
 					'result': '201', 
 					'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
@@ -86,10 +87,9 @@ def order_create(request):
 						variant_price = variant_price,
 						ordered_quantity = ordered_quantity,
 						schedule_date = datetime.now(),
-						order_status = '결제대기',
+						order_item_status = '결제대기',
 					)
 					total_price += order_item_obj.sub_total_price()
-					print(order_item_obj.sub_total_price())
 				except Exception as e:
 					print(e)
 					pass

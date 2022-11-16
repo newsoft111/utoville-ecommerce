@@ -34,7 +34,13 @@
 												<tr>
 													<th scope="row">{{forloop.counter}}</th>
 													<td><a href="{% url 'account:my_qna_detail' qna_obj.id %}">{{qna_obj.subject}}</a></td>
-													<td>Otto</td>
+													<td>
+														{% if qna_obj.answered_at %}
+														답변완료
+														{% else %}
+														답변대기
+														{% endif %}
+													</td>
 													<td>{{qna_obj.questioned_at}}</td>
 												</tr>
 											{% endfor %}
