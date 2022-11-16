@@ -108,11 +108,11 @@
 
 			<div class="d-grid">
 				<input type="hidden" name="obj_data" value='{% if product_detail.productvariant_set.all.count < 1 %}[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]{% endif %}'>
-				<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-primary hover-lift">
+				<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-brand hover-lift">
 					<i class="bx bx-shopping-bag fs-5 me-2"></i>Add to Cart
 				</a>
-				<a href="#!" onclick="order_submit();" class="btn btn-primary hover-lift mt-3">
-					<i class="bx bx-shopping-bag fs-5 me-2"></i>Buy Now
+				<a href="#!" onclick="order_submit();" class="btn btn-brand hover-lift mt-3">
+					<i class="bx bx-credit-card fs-5 me-2"></i>Buy Now
 				</a>
 			</div>
 		</div>

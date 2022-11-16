@@ -25,13 +25,13 @@
 	<div class="container pb-7 pb-lg-12 pt-7 position-relative">
 		<div class="row">
 			<div class="col-xl-8">
+				{% for cart_item in cart_items %}
 				<div class="card border shadow-none">
 					<div class="card-body">
 						{% if not cart_items %}		
 							<h6 class="text-center mb-0 p-5 bg-light">상품이 없습니다.</h6>	
 						{% endif%}
 						
-						{% for cart_item in cart_items %}
 						<div class="d-flex align-items-start border-bottom pb-3">
 							<div class="item-list me-3">
 								<input type="checkbox" onchange="cal_checked_item_price();" data-product-id="{{cart_item.product.id}}" data-variant-value-id="{{cart_item.variant_value.id}}" data-qty="{{cart_item.quantity}}"
@@ -45,42 +45,33 @@
 									{{cart_item.variant_value.variant}}: {{cart_item.variant_value.value}}
 								</span>
 								<span class="text-uppercase d-block">+₱{{cart_item.variant_value.price}}</span>
-								<p class="text-muted mb-0">
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star-half text-warning"></i>
-								</p>
 								{% endif %}
 							</div>	
 						</div>
-						{% endfor %}
-
+						
 						<div class="row">
-							{% for cart_item in cart_items %}
 							<div class="col-md-4">
 								<div class="mt-3">
 									<p class="text-muted mb-2">Price</p>
-									<h5 class="mb-0 mt-2"><span class="text-muted me-2"></span>{{cart_item.sub_price}}</h5>
+									<h5 class="mb-0 mt-2" id="item-price"><span class="text-muted me-2"></span>{{cart_item.sub_price}}</h5>
 								</div>
 							</div>
 							<div class="col-md-5">
 								<div class="mt-3">
 									<p class="text-muted mb-2">Quantity</p>
-									<input type="number" min="1" onKeyDown="return false" onchange="update_cart_submit(this)" value="{{cart_item.quantity}}" data-cart-item-id="{{cart_item.id}}" value="{{cart_item.quantity}}" class="form-control border-0 shadow-none rounded-0 bg-transparent">
+									<input id="item-quantity" type="number" min="1" onKeyDown="return false" onchange="cal_item_price(this)" value="{{cart_item.quantity}}" data-cart-item-id="{{cart_item.id}}" value="{{cart_item.quantity}}" class="form-control border-0 shadow-none rounded-0 bg-transparent">
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="mt-3">
 									<p class="text-muted mb-2">Total</p>
-									<h5>{{cart_item.sub_total_price}}</h5>
+									<h5 id="item-total-price">₱{{cart_item.sub_total_price |intcomma}}</h5>
 								</div>
 							</div>
-							{% endfor %}
 						</div>
 					</div>
-				</div>
+				</div>	
+				{% endfor %}
 				<div class="mt-3">
 						<button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="checkbox_manager();"><span style="font-size: 14px;">전체선택</span></button>
 						<button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span style="font-size: 14px;">선택삭제</span></button>
@@ -98,7 +89,6 @@
 							<div class="table-responsive">
 								<table class="table mb-0">
 									<tbody>
-										{% for cart_item in cart_items %}
 										<tr>
 											<td>Sub Total :</td>
 											<td class="text-end">{{cart_item.sub_total_price}}</td>
@@ -119,7 +109,6 @@
 												</span>
 											</td>
 										</tr>
-										{% endfor %}
 									</tbody>
 								</table>
 							</div>
@@ -136,9 +125,7 @@
 					<div>
 						<a href="#!" onclick="order_create_submit();" class="btn btn-outline-brandGreen btn-rise">
 							<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-							<div class="btn-rise-text">
-								Checkout
-							</div>
+							<div class="btn-rise-text">Checkout</div>
 						</a>
 						<input type="hidden" name="obj_data" value=''>
 					</div>
@@ -272,44 +259,6 @@ function remove_cart_submit(cart_item_id) {
     });
 }
 
-function update_cart_submit(e) {
-	is_run = true;
-	var modal = new bootstrap.Modal(document.getElementById("loading"), {});
-	let cart_item_id = e.dataset.cartItemId;
-	let qty = e.value;
-
-	modal.show();
-
-    $.ajax({
-        type : 'POST',
-        url : "{% url 'cart:update' %}",
-		headers: { "X-CSRFToken": '{{csrf_token}}' },
-        data : {
-			cart_item_id: cart_item_id,
-			qty: qty
-		},
-        dataType : 'json',
-        success: function(data){
-			if(data.result==200){
-				$("#cart-div").load(" #cart-div > *");
-			}else{
-				openModal("알림", data.result_text);
-			}
-			is_run  = false;
-        },
-        error: function (request, status, error){
-          var msg = "ERROR : " + request.status + "<br>"
-			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
-			    console.log(msg);
-        },
-		complete: function () {
-			setTimeout(function() {
-				modal.hide();
-			}, 2000);
-		}
-    });
-}
-
 function checkbox_manager() {
 	const allboxes = document.querySelectorAll("input[name=cart_item_id][type=checkbox]");
 	// if some of the checkbox is checked
@@ -338,33 +287,19 @@ function remove_checked_item() {
 	remove_cart_submit(arr);
 }
 
+/* 개별 아이템 가격 계산*/
 
-function cal_checked_item_price() {
-	let cart_items = document.querySelectorAll("input[name=cart_item_id]:checked");
 
-	let total_price = 0;
-	let arr = [];
-	
-	cart_items.forEach((item) => {
-		const tr = item.parentElement.parentElement.parentElement;
-		let sub_total = tr.querySelector('#sub-total').innerHTML.replace(/[^0-9.]+/g, '');
-		console.log(total_price,1);
-		console.log(sub_total,2);
-		
-		total_price = (parseFloat(total_price) + parseFloat(sub_total)).toFixed(2);
 
-		let objData = new Object();
- 		objData.product_id = item.dataset.productId;
- 		objData.variant_value_id = item.dataset.variantValueId;
- 		objData.qty = item.dataset.qty;
+function cal_item_price(e) {
+	let itemDom = e.parentElement.parentElement.parentElement;
+	let itemPrice = itemDom.querySelector("#item-price").innerText;
+	let itemQuantity = itemDom.querySelector("#item-quantity").value;
+	let itemTotalPrice = itemDom.querySelector("#item-total-price");
 
- 		arr.push(objData);
-	});	
+	itemTotalPrice.innerText = "₱" + parseFloat(itemPrice * itemQuantity).toFixed(2);
 
-	document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
-	document.querySelector("#total-price").innerHTML = '₱'+total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
-
 
 async function order_create_submit() {
 	if(is_run == true) {
