@@ -214,9 +214,7 @@
 							</li>
 						</ol>
 					</div>
-				</div>
-
-			
+				</div>	
 				<div class="row my-4">
 					<div class="col">
 						<a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
@@ -235,95 +233,48 @@
 				</div> <!-- end row-->
 			</div>
 			<div class="col-xl-4">
-				<div class="card checkout-order-summary">
-					<div class="card-body">
-						<div class="p-3 bg-light mb-3">
-							<h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">#MN0124</span></h5>
+				<div class="mt-5 mt-lg-0">
+					<div class="card-header bg-transparent border-bottom py-3 px-4">
+						<h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">#MN0124</span></h5>
+					</div>
+					<div class="card-body p-4 pt-2">
+						<div class="title d-flex justify-content-between p-2 mb-3">
+							<span>Product</span>
+							<span>Product Desc</span>
+							<span>Price</span>
 						</div>
-						<div class="table-responsive">
-							<table class="table table-centered mb-0 table-nowrap">
-								<thead>
-									<tr>
-										<th class="border-top-0" style="width: 110px;" scope="col">Product</th>
-										<th class="border-top-0" scope="col">Product Desc</th>
-										<th class="border-top-0" scope="col">Price</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row"><img src="assets/images/product/img-3.jpg" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
-										<td>
-											<h5 class="font-size-16 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">Waterproof Mobile Phone</a></h5>
-											<p class="text-muted mb-0">
-												<i class="bx bxs-star text-warning"></i>
-												<i class="bx bxs-star text-warning"></i>
-												<i class="bx bxs-star text-warning"></i>
-												<i class="bx bxs-star text-warning"></i>
-												<i class="bx bxs-star-half text-warning"></i>
-											</p>
-											<p class="text-muted mb-0 mt-1">$ 260 x 2</p>
-										</td>
-										<td>$ 520</td>
-									</tr>
-									<tr>
-										<th scope="row"><img src="assets/images/product/img-5.jpg" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
-										<td>
-											<h5 class="font-size-16 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">Smartphone Dual Camera</a></h5>
-											<p class="text-muted mb-0">
-												<i class="bx bxs-star text-warning"></i>
-												<i class="bx bxs-star text-warning"></i>
-												<i class="bx bxs-star text-warning"></i>
-												<i class="bx bxs-star text-warning"></i>
-											</p>
-											<p class="text-muted mb-0 mt-1">$ 260 x 1</p>
-										</td>
-										<td>$ 260</td>
-									</tr>
-									<tr>
-										<td colspan="2">
-											<h5 class="font-size-14 m-0">Sub Total :</h5>
-										</td>
-										<td>
-											$ 780
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2">
-											<h5 class="font-size-14 m-0">Discount :</h5>
-										</td>
-										<td>
-											- $ 78
-										</td>
-									</tr>
-
-									<tr>
-										<td colspan="2">
-											<h5 class="font-size-14 m-0">Shipping Charge :</h5>
-										</td>
-										<td>
-											$ 25
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2">
-											<h5 class="font-size-14 m-0">Estimated Tax :</h5>
-										</td>
-										<td>
-											$ 18.20
-										</td>
-									</tr>                              
-										
-									<tr class="bg-light">
-										<td colspan="2">
-											<h5 class="font-size-14 m-0">Total:</h5>
-										</td>
-										<td class="pd fw-bold fs-5 text-dark">
-											<span class="payment">₱{{total_price|intcomma}}</span>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							
+						<div class="contents">
+							<div class="d-flex justify-content-between">
+								<img src="assets/images/product/img-3.jpg" alt="product-img" title="product-img" class="avatar-lg rounded">
+								<div class="a ms-3">
+									<h5 class="font-size-16 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark" style="white-space: normal;">Waterproof Mobile Phone</a></h5>
+									<p class="text-muted mb-0 mt-1">$ 260 x 2</p>
+								</div>
+								<span style="white-space: nowrap;">$ 520</span>
+							</div>
+							<hr>
+							<div class="d-flex justify-content-between p-2 mb-2">
+								<h5 class="font-size-14 m-0">Sub Total :</h5>
+								<span>$ 780</span>
+							</div>
+							<div class="d-flex justify-content-between p-2 mb-2">  
+								<h5 class="font-size-14 m-0">Discount :</h5>
+								<span>- $ 78</span>
+							</div>
+							<div class="d-flex justify-content-between p-2 mb-2">
+								<h5 class="font-size-14 m-0">Shipping Charge :</h5>
+								<span>$ 25</span>
+							</div>
+							<div class="d-flex justify-content-between p-2 mb-2">
+								<h5 class="font-size-14 m-0">Estimated Tax :</h5>
+								<span>$ 18.20</span>
+							</div>                              	
+							<div class="d-flex justify-content-between align-items-center p-2 bg-light">
+								<h5 class="font-size-14 m-0">Total:</h5>
+								<span class="pd fw-bold fs-5 text-dark">
+									<span class="payment">₱{{total_price|intcomma}}</span>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
