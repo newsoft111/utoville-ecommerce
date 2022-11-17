@@ -126,7 +126,6 @@ def update_cart(request):
 	return JsonResponse(result)
 	
 
-
 def cart_detail(request, total_price=0, counter=0, cart_items=None):
 	seo = {
 		'title': "장바구니 - 유토빌",
