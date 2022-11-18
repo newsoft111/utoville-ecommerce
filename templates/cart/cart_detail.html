@@ -248,8 +248,6 @@ function cal_checked_item_price() {
 	cart_items.forEach((item) => {
 		const tr = item.parentElement.parentElement.parentElement;
 		let sub_total = tr.querySelector('#item-total-price').innerHTML.replace(/[^0-9.]+/g, '');
-		console.log(total_price,1);
-		console.log(sub_total,2);
 		
 		total_price = (parseFloat(total_price) + parseFloat(sub_total)).toFixed(2);
 
@@ -264,7 +262,6 @@ function cal_checked_item_price() {
 	document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
 	document.querySelector("#sub-total-price").innerHTML = '₱'+numberWithCommas(total_price);
 	document.querySelector("#total-price").innerHTML = '₱'+numberWithCommas(total_price);
-	
 }
 
 
