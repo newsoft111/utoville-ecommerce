@@ -16,7 +16,20 @@
 	background-color: #232323 !important;
 	color: #fff !important;
 }
-
+.order-product-name {
+	display: block;
+	width: 160px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.order-option-name {
+	display: block;
+	width: 160px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 </style>
 <!--Form billing information-->
 <section class="position-relative bg-white" id="order-view-section">
@@ -162,12 +175,11 @@
 										<p class="text-muted text-truncate mb-4">Duis arcu tortor, suscipit eget</p>
 									</div>
 									<div class="mb-4">
-										<span class="font-size-14 d-block mb-2">Use Point</span>
-											<div class="point-input text-start">
-												<input type="number" name="points" step="100" min="0" value="0" class="use-point">
-												<button class="btn point-btn">전액사용</button>									
-											</div>	
-							
+										<h5 class="font-size-14 mb-3">Use Point :</h5>
+										<div class="point-input text-start">
+											<input type="text" name="points" min="0" value="0" class="use-point">
+											<button class="btn point-btn">전액사용</button>									
+										</div>	
 									</div>
 									<div>
 										<h5 class="font-size-14 mb-3">Payment method :</h5>
@@ -215,6 +227,64 @@
 						</ol>
 					</div>
 				</div>	
+			</div>
+			<div class="col-xl-4">
+				<div class="mt-5 mt-lg-0">
+					<div class="card-header bg-transparent border-bottom py-3 px-4">
+						<h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">#MN0124</span></h5>
+					</div>
+					<div class="card-body p-4 pt-2">
+						<div class="contents">
+							{% for order_item in order_items %}
+							<div class="d-flex justify-content-between">
+								<img src="{% static 'img/shop/backpack2.jpg' %}" alt="product-img" title="product-img" class="avatar-lg rounded">
+								<div class="a ms-3">
+									<h5 class="font-size-16 text-truncate"><a href="{% url 'product:list' %}" class="text-dark order-product-name">{{order_item.product_name}}</a></h5>
+									{% if order_item.variant_value is not None %}
+									<span class="text-uppercase order-option-name">
+										{{order_item.variant}}: {{order_item.variant_value}}
+									</span>
+									<span class="text-uppercase d-block">+₱{{order_item.variant_price}}</span>
+									{% endif %}
+									<p class="text-muted mb-0 mt-1">
+										{% if order_item.variant is not None %}
+										₱{{order_item.product_price|add:order_item.variant_price|intcomma}} x {{order_item.ordered_quantity}}
+										{% else %}
+										₱{{order_item.product_price|intcomma}} x {{order_item.ordered_quantity}}
+										{% endif %}
+									</p>
+								</div>
+								<span>
+									{% if order_item.variant is not None %}
+									₱{{order_item.product_price|add:order_item.variant_price|mul:order_item.ordered_quantity|intcomma}}
+									{% else %}
+									₱{{order_item.product_price|mul:order_item.ordered_quantity|intcomma}}
+									{% endif %}
+								</span>
+							</div>
+							<hr>
+							{% endfor %}
+							<div class="d-flex justify-content-between p-2 mb-2">
+								<h5 class="font-size-14 m-0">Sub Total :</h5>
+								<span>₱{{total_price|intcomma}}</span>
+							</div>
+							<div class="d-flex justify-content-between p-2 mb-2">  
+								<h5 class="font-size-14 m-0">Discount :</h5>
+								<span>0</span>
+							</div>
+							<div class="d-flex justify-content-between p-2 mb-2">
+								<h5 class="font-size-14 m-0">Shipping Charge :</h5>
+								<span>0</span>
+							</div>                     	
+							<div class="d-flex justify-content-between align-items-center p-2 mb-5 bg-light">
+								<h5 class="font-size-14 m-0">Total:</h5>
+								<span class="pd fw-bold fs-5 text-dark">
+									<span class="payment">₱{{total_price|intcomma}}</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="row my-4">
 					<div class="col">
 						<a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
@@ -232,56 +302,11 @@
 					</div> <!-- end col -->
 				</div> <!-- end row-->
 			</div>
-			<div class="col-xl-4">
-				<div class="mt-5 mt-lg-0">
-					<div class="card-header bg-transparent border-bottom py-3 px-4">
-						<h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">#MN0124</span></h5>
-					</div>
-					<div class="card-body p-4 pt-2">
-						<div class="title d-flex justify-content-between p-2 mb-3">
-							<span>Product</span>
-							<span>Product Desc</span>
-							<span>Price</span>
-						</div>
-						<div class="contents">
-							<div class="d-flex justify-content-between">
-								<img src="assets/images/product/img-3.jpg" alt="product-img" title="product-img" class="avatar-lg rounded">
-								<div class="a ms-3">
-									<h5 class="font-size-16 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark" style="white-space: normal;">Waterproof Mobile Phone</a></h5>
-									<p class="text-muted mb-0 mt-1">$ 260 x 2</p>
-								</div>
-								<span style="white-space: nowrap;">$ 520</span>
-							</div>
-							<hr>
-							<div class="d-flex justify-content-between p-2 mb-2">
-								<h5 class="font-size-14 m-0">Sub Total :</h5>
-								<span>$ 780</span>
-							</div>
-							<div class="d-flex justify-content-between p-2 mb-2">  
-								<h5 class="font-size-14 m-0">Discount :</h5>
-								<span>- $ 78</span>
-							</div>
-							<div class="d-flex justify-content-between p-2 mb-2">
-								<h5 class="font-size-14 m-0">Shipping Charge :</h5>
-								<span>$ 25</span>
-							</div>
-							<div class="d-flex justify-content-between p-2 mb-2">
-								<h5 class="font-size-14 m-0">Estimated Tax :</h5>
-								<span>$ 18.20</span>
-							</div>                              	
-							<div class="d-flex justify-content-between align-items-center p-2 bg-light">
-								<h5 class="font-size-14 m-0">Total:</h5>
-								<span class="pd fw-bold fs-5 text-dark">
-									<span class="payment">₱{{total_price|intcomma}}</span>
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		<!-- end row -->
-		<div class="row">
+		
+		
+		<!-- <div class="row">
 			<div class="col-12 mx-auto">
 				<div class="table-responsive">
 					<h4 class="mb-4 pt-5">Order list</h4>
@@ -346,8 +371,6 @@
 						</tbody>
 					</table>
 
-
-					<!--Checkout product info table-->
 					<table class="table mb-5 table-bordered od-list-table">
 						<tr class="bg-light">
 							<th class="pd text-center">상품금액</th>
@@ -388,7 +411,7 @@
 					</div>
 				</div>	
 			</div>		
-		</div>
+		</div> -->
 	</div>
 </section>
 
@@ -407,10 +430,8 @@ const result = totalPrice.innerHTML.replace(regex, "");
 
 "propertychange change keyup paste input".split(" ").forEach(function(e){ 
 	  pointForm.addEventListener(e, function(){
-		// let removeZero = pointForm.value.replace(/(^0+)/, "");
-		// pointForm.value = removeZero;
 		let check = /^[0-9.]+$/;
-		pointForm.value = Number(pointForm.value).toFixed(2)
+		pointForm.value = Number(pointForm.value).toFixed(2);
 
 		if(!check.test(pointForm.value) && pointForm.value != ''){
 			pointForm.value = 0;
@@ -429,12 +450,11 @@ const result = totalPrice.innerHTML.replace(regex, "");
 		}
 
 		let calcPrice = (result - pointForm.value).toFixed(2);
-
 		let sumPrice= numberWithCommas(calcPrice);
-
 		payment.innerHTML = "₱" + sumPrice;				
 		
 	});
+
 });
 
 pointBtn.addEventListener("click", function(){
