@@ -66,13 +66,13 @@
 		  	<div class="mb-3 pb-3 border-bottom">
 				<h6 class="mb-3">Option</h6>
 				
-				<select id="optionFirst" class="form-select form-select-md mb-3" onchange="set_variant_value(this)">
+				<select id="optionFirst" class="form-select form-select-md mb-3" onchange="set_variant_value(this)" style="border-color : #ddd;">
 					<option selected>옵션1</option>
 					{% for variant in product_detail.productvariant_set.all %}
 					<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
 					{% endfor %}
 				</select>
-				<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-md mb-3">
+				<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-md mb-3" style="border-color : #ddd;">
 					<option selected>옵션2</option>
 				</select>
 				
@@ -108,11 +108,11 @@
 
 			<div class="d-grid">
 				<input type="hidden" name="obj_data" value='{% if product_detail.productvariant_set.all.count < 1 %}[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]{% endif %}'>
-				<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-primary hover-lift">
+				<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-outline-brandGreen hover-lift">
 					<i class="bx bx-shopping-bag fs-5 me-2"></i>Add to Cart
 				</a>
-				<a href="#!" onclick="order_submit();" class="btn btn-primary hover-lift mt-3">
-					<i class="bx bx-shopping-bag fs-5 me-2"></i>Buy Now
+				<a href="#!" onclick="order_submit();" class="btn btn-outline-brandGreen hover-lift mt-3">
+					<i class="bx bx-credit-card fs-5 me-2"></i>Buy Now
 				</a>
 			</div>
 		</div>
@@ -202,7 +202,7 @@
 						</div>
 					</div>
 					<div class="text-end">
-						<button type="button" onclick="product_qna_question_submit();" class="btn btn-primary hover-translate-3d">
+						<button type="button" onclick="product_qna_question_submit();" class="btn btn-outline-brandGreen hover-translate-3d">
 						Send question <i class="bx bx-right-top-arrow-circle ms-1"></i>
 						</button>
 					</div>
@@ -213,31 +213,6 @@
 		</div>
 	</div>
 </section>
-  <section class="bg-white position-relative overflow-hidden">
-	<div class="container py-9 py-lg-11 position-relative">
-	  <div class="row align-items-center">
-		<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
-		  <div class="mb-3">
-			<i class="bx bx-store fs-1"></i>
-		  </div>
-		  <h6 class="mb-0">30 Day Returns</h6>
-		</div>
-		<div class="col-md-4 border-end-md border-light text-center mb-7 mb-md-0">
-		  <div class="mb-3">
-			<i class="bx bx-purchase-tag fs-1"></i>
-		  </div>
-		  <h6 class="mb-0">100% Handpicked</h6>
-		</div>
-		<div class="col-md-4 text-center">
-		  <div class="mb-3">
-			<i class="bx bx-package fs-1"></i>
-		  </div>
-		  <h6 class="mb-0">Assured Quality</h6>
-		</div>
-	  </div>
-	</div>
-  </section>
-
 
 <script>
 is_run = false;
@@ -356,7 +331,7 @@ function add_item(e) {
 		html += '</div>';
 		html += '<div class="optionAdd">';
 		html += `<input type="number" onKeyDown="return false" class="form-control w-25 text-center" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
-		html += `<span class="price" data-id="${option_second_id}" id="itemPrice">₱${option_second_price}</span>`;
+		html += `<span class="price" data-id="${option_second_id}" id="itemPrice">₱${numberWithCommas(option_second_price)}</span>`;
 		html += '</div>';
 		html += '</div>';
 
