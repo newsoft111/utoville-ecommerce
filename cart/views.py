@@ -105,24 +105,23 @@ def update_cart(request):
 	cart = get_user_cart(request)
 
 	cart_item_id=request.POST.get('cart_item_id')
+	print(cart_item_id)
 	quantity = int(request.POST.get('qty')) or 1
 
-	cart_item = CartItem.objects.get(pk=cart_item_id, cart=cart)
-	cart_item.quantity = quantity
-	cart_item.save()
+	try:
+		cart_item = CartItem.objects.get(pk=cart_item_id, cart=cart)
+		cart_item.quantity = quantity
+		cart_item.save()
 
-	cart_info = get_cart_info(request)
-	total_price = cart_info['total_price']
-	total_quantity = cart_info['total_quantity']
 
-	result = '200'
-	result_text = '장바구니 업데이트 되었음.'
-	custom_data = {
-		"total_price": format(total_price, ','),
-		"total_quantity": total_quantity
-	}
+		result = '200'
+		result_text = '업데이트 성공'
+	except Exception as e:
+		print(e)
+		result = '201'
+		result_text = '알수없는 오류입니다. 다시시도 해주세요.'
 
-	result = {'result': result, 'result_text': result_text, "custom_data": custom_data}
+	result = {'result': result, 'result_text': result_text}
 	return JsonResponse(result)
 	
 
