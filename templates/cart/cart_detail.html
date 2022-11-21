@@ -242,8 +242,8 @@ function removeItem(e) {
 // 초기 금액 출력
 //==============================
 
-function initial_price() {	
-	let itemsTotalPrice = document.querySelectorAll("#item-total-price");	
+function initial_price() {   
+	let itemsTotalPrice = document.querySelectorAll("#item-total-price");   
 	let totalPrice = 0;
 
 	itemsTotalPrice.forEach(element => {
@@ -252,11 +252,10 @@ function initial_price() {
 		totalPrice = (parseFloat(totalPrice) + parseFloat(itemPrice)).toFixed(2);
 	});
 
-	document.getElementById("sub-total-price").innerHTML = "₱" + totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	document.getElementById("total-price").innerText = "₱" + totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	document.querySelector("#sub-total-price").innerHTML = '₱'+numberWithCommas(totalPrice);
+	document.querySelector("#total-price").innerHTML = '₱'+numberWithCommas(totalPrice);
 }
 
-initial_price();
 
 //==============================
 // 개별 아이템 가격 계산

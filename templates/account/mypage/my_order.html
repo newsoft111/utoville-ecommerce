@@ -108,9 +108,9 @@
 															
 																<div class="inputBlock">
 																	<div class="input_group input-daterange">
-																		<input class="form-control form-radius start-date-input" name="start_date" type="date">
+																		<input class="form-control form-radius" id="start-date-input" name="start_date" type="date">
 																		&nbsp;&nbsp;~&nbsp;&nbsp;
-																		<input class="form-control form-radius end-date-input" name="end_date" type="date">
+																		<input class="form-control form-radius" id="end-date-input" name="end_date" type="date">
 																	</div>	
 																</div>
 															</td>		
@@ -181,11 +181,13 @@
 													</div>
 													<div class="datasearch-body">
 														<div class="inputBlock">
+															<form action="{{request.path}}" method="GET" name="dateSearchForm">
 															<div class="input_group input-daterange">
-																<input class="form-control form-radius start-date-input" name="start_date" type="date">
+																<input class="form-control form-radius" id="start-date-input" name="start_date" type="date">
 																&nbsp;&nbsp;~&nbsp;&nbsp;
-																<input class="form-control form-radius end-date-input" name="end_date" type="date">
-															</div>	
+																<input class="form-control form-radius" id="end-date-input" name="end_date" type="date">
+															</div>
+															</form>	
 														</div>
 													</div>
 												</div>										
@@ -523,9 +525,27 @@ status_by.addEventListener('change', (event) => {
 	location.href=link;
 });
 
+//==============================
+// URL 파라미터 날짜 시작일에 적용
+//==============================
 
-document.getElementsByClassName("start-date-input")[0].value = new Date().toISOString().slice(0,10);
-document.getElementsByClassName("end-date-input")[0].value = new Date().toISOString().slice(0,10);
+const curUrl = window.location.href;
+const url = new URL(curUrl);
+const urlParams = url.searchParams;
+console.log(url, urlParams, urlParams.has('start_date'))
+/*종료 날짜 오늘 날짜로 지정*/
+document.getElementById("end-date-input").value = new Date().toISOString().slice(0,10);
+
+/*새로 페이지 들어올 시 시작 날짜를 오늘 날짜로 셋팅*/
+if (urlParams.has('start_date') == false) {
+	document.getElementById("start-date-input").value = new Date().toISOString().slice(0,10);
+}else{
+	document.getElementById("start-date-input").value = urlParams.get('start_date');
+}
+
+//==============================
+// 기간별 날짜 적용
+//==============================
 
 function lastWeekBtn(){
 	let nowDate = new Date();
@@ -541,7 +561,7 @@ function lastWeekBtn(){
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementsByClassName("start-date-input")[0].value = resultDate;
+  document.getElementById("start-date-input").value = resultDate;
 }  
 
 function lastOneMonthBtn(){
@@ -558,7 +578,7 @@ function lastOneMonthBtn(){
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+  document.getElementById("start-date-input").value = resultDate;	
 }
 function lastThreeMonthBtn(){
 	let nowDate = new Date();
@@ -574,7 +594,7 @@ function lastThreeMonthBtn(){
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+  document.getElementById("start-date-input").value = resultDate;	
 }
 function lastSixMonthBtn(){
 	let nowDate = new Date();
@@ -590,7 +610,7 @@ function lastSixMonthBtn(){
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+  document.getElementById("start-date-input").value = resultDate;	
 }
 function lastOneYearBtn(){
 	let nowDate = new Date();
@@ -606,7 +626,7 @@ function lastOneYearBtn(){
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+  document.getElementById("start-date-input").value = resultDate;	
 }
 </script>
 {% endblock %}
