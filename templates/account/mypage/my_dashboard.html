@@ -10,6 +10,58 @@
     overflow: hidden;
     overflow-y: auto;
 }
+@media only screen and (max-width: 496px){
+	.fc-header-toolbar {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+	.fc-toolbar-title {
+		margin: 10px 0 !important;
+	}
+}
+@media only screen and (max-width: 767px) {
+	table {
+		border: 0;
+	}
+
+	table caption {
+		font-size: 1.3em;
+	}
+
+	table thead {
+		border: none;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+
+	table tr {
+		border-bottom: 3px solid #ddd;
+		display: block;
+		margin-bottom: .625em;
+	}
+
+	table td {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		text-align: right;
+	}
+
+	table td::before {
+		content: attr(data-label);
+		float: left;
+		font-weight: bold;
+	}
+
+	table td:last-child {
+		border-bottom: 0;
+	}
+}
 </style>
 <!-- Section -->
 <section class="position-relative">
@@ -95,57 +147,10 @@
 											</thead>
 											<tbody>
 												<tr>
-													<th scope="row">2022-11-10</th>
-													<td>2023-11-10</td>
-													<td>에어컨 청소</td>
-													<td>
-														<span class="text-success fw-bold">1회차</span>/
-														<span class="text-secondary">12회차</span>
-													</td>
-												</tr>
-
-												<!-- 복사 -->
-												<tr>
-													<th scope="row">2022-11-10</th>
-													<td>2023-11-10</td>
-													<td>에어컨 청소</td>
-													<td>
-														<span class="text-success fw-bold">1회차</span>/
-														<span class="text-secondary">12회차</span>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row">2022-11-10</th>
-													<td>2023-11-10</td>
-													<td>에어컨 청소</td>
-													<td>
-														<span class="text-success fw-bold">1회차</span>/
-														<span class="text-secondary">12회차</span>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row">2022-11-10</th>
-													<td>2023-11-10</td>
-													<td>에어컨 청소</td>
-													<td>
-														<span class="text-success fw-bold">1회차</span>/
-														<span class="text-secondary">12회차</span>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row">2022-11-10</th>
-													<td>2023-11-10</td>
-													<td>에어컨 청소</td>
-													<td>
-														<span class="text-success fw-bold">1회차</span>/
-														<span class="text-secondary">12회차</span>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row">2022-11-10</th>
-													<td>2023-11-10</td>
-													<td>에어컨 청소</td>
-													<td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차 / 남은 회차">
 														<span class="text-success fw-bold">1회차</span>/
 														<span class="text-secondary">12회차</span>
 													</td>
@@ -196,12 +201,14 @@ document.addEventListener("DOMContentLoaded", function() {
         return 768 <= window.innerWidth && window.innerWidth < 1200 ? "timeGridWeek" : window.innerWidth <= 768 ? "listMonth" : "dayGridMonth"
     }
     var m = new FullCalendar.Calendar(r, {
+		dayMaxEvents: 5,
         timeZone: "local",
 		contentHeight: 'auto',
+		aspectRatio: 25,
         initialView: c(),
         themeSystem: "bootstrap5",
         headerToolbar: {
-            left: "prev,next today",
+            left: "prev today next",
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
         },
@@ -214,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     m.render();
 
+// 원형차트
 	options={
 		chart:{
 			height:245,type:"donut"
