@@ -532,18 +532,12 @@ thead tr:nth-child(3) th {
 .previous_content {
 	border-bottom: 2px solid #ddd;
 }
-
 /*order*/
 .od-list-table {
 	vertical-align: middle;
 }
 .od-list-table .pd {
 	padding: 20px !important;
-}
-.point-btn {
-	margin-left: 10px;
-	padding: 5px 10px;
-	font-size: 14px;
 }
 .fc-button-primary {
 	border: none !important;

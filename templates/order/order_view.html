@@ -11,6 +11,9 @@
 	border: 1px solid #232323 !important;
     color: #232323;
     background: #fff;
+	margin-left: 10px;
+	padding: 8px 10px;
+	font-size: 14px;
 }
 .point-btn:hover {
 	background-color: #232323 !important;
@@ -30,13 +33,55 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+@media only screen and (max-width: 442px) {
+	.point-btn {
+		margin-left: 0;
+		margin-top: 10px;
+	}
+} 
+@media only screen and (max-width: 400px) {
+	.order-item-list {
+		flex-direction: column;
+		text-align: center !important;
+	}
+	.order-item-details, .order-item-price {
+		width: 100% !important;
+		margin-left:  0 !important;
+	}
+	.order-item-price {
+		margin-top: 5px;
+		text-align: center !important;
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.order-product-name, .order-option-name {
+		width: 100%;
+	}
+	.avatar-lg {
+		width: 50%;
+		height: auto;
+	}
+	.use-point {
+		width: 100%;
+	}
+}
 </style>
 <!--Form billing information-->
+<section class="position-relative overflow-hidden">    
+	<div class="container-fluid">
+	   <div class="py-8 py-lg-11 bg-dark text-white position-relative">
+			<img src="assets/img/shop/banners/06.jpg" class="bg-image bg-top-center opacity-75" alt="">
+			<div class="col-lg-10 mx-auto text-center">
+			<h1 class="mb-0 display-3">Order View</h1>
+			</div>
+	   </div>
+	</div>
+ </section>
 <section class="position-relative bg-white" id="order-view-section">
 	<div class="container pb-7 pb-lg-12 pt-7 position-relative">
 		<div class="row">
 			<div class="col-xl-8">
-
 				<div class="card">
 					<div class="card-body">
 						<ol class="activity-checkout mb-0 px-4 mt-3">
@@ -229,16 +274,18 @@
 				</div>	
 			</div>
 			<div class="col-xl-4">
-				<div class="mt-5 mt-lg-0">
+				<div class="mt-5 mt-lg-0 position-sticky" style="top: 75px;">
 					<div class="card-header bg-transparent border-bottom py-3 px-4">
 						<h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">#MN0124</span></h5>
 					</div>
 					<div class="card-body p-4 pt-2">
 						<div class="contents">
 							{% for order_item in order_items %}
-							<div class="d-flex justify-content-between">
-								<img src="{% static 'img/shop/backpack2.jpg' %}" alt="product-img" title="product-img" class="avatar-lg rounded">
-								<div class="a ms-3">
+							<div class="d-flex justify-content-between order-item-list">
+								<div class="item-image">
+									<img src="{% static 'img/shop/backpack2.jpg' %}" alt="product-img" title="product-img" class="avatar-lg rounded">
+								</div>
+								<div class="ms-3 w-75 order-item-details">
 									<h5 class="font-size-16 text-truncate"><a href="{% url 'product:list' %}" class="text-dark order-product-name">{{order_item.product_name}}</a></h5>
 									{% if order_item.variant_value is not None %}
 									<span class="text-uppercase order-option-name">
@@ -247,26 +294,18 @@
 									<span class="text-uppercase d-block">+₱{{order_item.variant_price}}</span>
 									{% endif %}
 									<p class="text-muted mb-0 mt-1">
-										{% if order_item.variant is not None %}
-										₱{{order_item.product_price|add:order_item.variant_price|intcomma}} x {{order_item.ordered_quantity}}
-										{% else %}
-										₱{{order_item.product_price|intcomma}} x {{order_item.ordered_quantity}}
-										{% endif %}
+										₱{{order_item.sub_price|intcomma}} X {{order_item.ordered_quantity}}
 									</p>
 								</div>
-								<span>
-									{% if order_item.variant is not None %}
-									₱{{order_item.product_price|add:order_item.variant_price|mul:order_item.ordered_quantity|intcomma}}
-									{% else %}
-									₱{{order_item.product_price|mul:order_item.ordered_quantity|intcomma}}
-									{% endif %}
+								<span class="w-25 text-end order-item-price">
+									₱{{order_item.sub_total_price |intcomma}}
 								</span>
 							</div>
 							<hr>
 							{% endfor %}
 							<div class="d-flex justify-content-between p-2 mb-2">
 								<h5 class="font-size-14 m-0">Sub Total :</h5>
-								<span>₱{{total_price|intcomma}}</span>
+								<span class="total-price">₱{{total_price|intcomma}}</span>
 							</div>
 							<div class="d-flex justify-content-between p-2 mb-2">  
 								<h5 class="font-size-14 m-0">Discount :</h5>
@@ -284,23 +323,23 @@
 							</div>
 						</div>
 					</div>
+					<div class="row my-4">
+						<div class="col">
+							<a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
+								class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
+						</a>
+						</div> <!-- end col -->
+						<div class="col">
+							<div class="text-end mt-2 mt-sm-0">
+								<a href="#!" onclick="order_create_submit();" class="btn btn-outline-brandGreen btn-rise">
+									<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+									<div class="btn-rise-text">Procced</div>
+								</a>
+								<input type="hidden" name="obj_data" value=''>
+							</div>
+						</div> <!-- end col -->
+					</div> <!-- end row-->
 				</div>
-				<div class="row my-4">
-					<div class="col">
-						<a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
-							class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
-					</a>
-					</div> <!-- end col -->
-					<div class="col">
-						<div class="text-end mt-2 mt-sm-0">
-							<a href="#!" onclick="order_create_submit();" class="btn btn-outline-brandGreen btn-rise">
-								<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-								<div class="btn-rise-text">Procced</div>
-							</a>
-							<input type="hidden" name="obj_data" value=''>
-						</div>
-					</div> <!-- end col -->
-				</div> <!-- end row-->
 			</div>
 		</div>
 		<!-- end row -->
@@ -460,8 +499,8 @@ const result = totalPrice.innerHTML.replace(regex, "");
 pointBtn.addEventListener("click", function(){
 	pointForm.value = '{{request.user.point}}';
 
-	let calcPrice = result - pointForm.value;
-	let sumPrice= calcPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	let calcPrice = (result - pointForm.value).toFixed(2);
+	let sumPrice= numberWithCommas(calcPrice);
 
 	payment.innerHTML = "₱" + sumPrice;			
 });

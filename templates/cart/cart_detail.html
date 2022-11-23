@@ -11,12 +11,10 @@
 <section class="position-relative overflow-hidden">    
    <div class="container-fluid">
       <div class="py-8 py-lg-11 bg-dark text-white position-relative">
-         <img src="assets/img/shop/banners/06.jpg" class="bg-image bg-top-center opacity-75" alt="">
-         <div class="row align-items-center position-relative">
-            <div class="col-lg-10 mx-auto text-center">
-               <h1 class="mb-0 display-3">Cart</h1>
-            </div>
-         </div>
+        	<img src="assets/img/shop/banners/06.jpg" class="bg-image bg-top-center opacity-75" alt="">
+			<div class="col-lg-10 mx-auto text-center">
+				<h1 class="mb-0 display-3">Cart</h1>
+			</div>
       </div>
    </div>
 </section>
@@ -84,7 +82,7 @@
          </div>
          
          <div class="col-xl-4">
-            <div class="mt-5 mt-lg-0">
+            <div class="mt-5 mt-lg-0 position-sticky" style="top: 60px;">
                <div class="card-header bg-transparent border-bottom py-3 px-4">
                   <h5 class="font-size-16 mb-0">Order Summary <span class="float-end">#MN0124</span></h5>
                </div>
@@ -116,20 +114,20 @@
                      </table>
                   </div>
                </div>
-            </div>
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center mt-3">
-               <div class="mb-3 mb-sm-0">
-                  <a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
-                        class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
-                  </a>
-               </div>
-               <div>
-                  <a href="#!" onclick="order_create_submit();" class="btn btn-outline-brandGreen btn-rise">
-                     <div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-                     <div class="btn-rise-text">Checkout</div>
-                  </a>
-                  <input type="hidden" name="obj_data" value=''>
-               </div>
+			   <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center mt-3">
+				  <div class="mb-3 mb-sm-0">
+					 <a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
+						   class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
+					 </a>
+				  </div>
+				  <div>
+					 <a href="#!" onclick="order_create_submit();" class="btn btn-outline-brandGreen btn-rise">
+						<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+						<div class="btn-rise-text">Checkout</div>
+					 </a>
+					 <input type="hidden" name="obj_data" value=''>
+				  </div>
+			   </div>
             </div>
          </div>
       </div>
