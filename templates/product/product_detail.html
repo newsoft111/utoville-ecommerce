@@ -214,12 +214,34 @@
 	</div>
 </section>
 
+<div class="modal fade" id="addCartDoneModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="addCartDoneModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">
+		<div class="modal-header p-4">
+			<h4 class="mb-0 text-center">알림</h4>
+			<button type="button" class="btn-close" data-before-modal="" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body p-4">
+			<span>장바구니에 넣었습니다.</span>
+		</div>
+		<div class="modal-footer">
+			<a href="{% url 'product:detail' product_detail.pk %}">
+				<button type="button" class="btn btn-outline-brandGreen hover-lift" data-bs-dismiss="modal">쇼핑 계속하기</button>
+			</a>
+			<a href="{% url 'cart:detail' %}">
+				<button type="button" class="btn btn-outline-brandGreen hover-lift" data-bs-dismiss="modal">장바구니 가기</button>
+			</a>
+		</div>
+	</div>
+</div>
+
+
 <script>
 is_run = false;
 
 function add_cart_submit(product_id) {
 	is_run = true;
-	var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#loading'));
+	var loadingModal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#loading'));
 	let data = document.querySelector("input[name=obj_data]").value;
 	let optionFirst = document.getElementById("optionFirst");
 	let itemPrice = document.getElementById("itemPrice");
@@ -228,7 +250,7 @@ function add_cart_submit(product_id) {
 		openModal('알림','옵션을 선택해주세요.');
 		return false;
 	}
-	modal.show();
+	loadingModal.show();
 
     $.ajax({
         type : 'POST',
@@ -240,7 +262,9 @@ function add_cart_submit(product_id) {
         dataType : 'json',
         success: function(data){
 			if(data.result==200){
-				openModal("알림", data.result_text,'', 'reload');
+				// openModal("알림", data.result_text,'', 'reload');
+				var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector("#addCartDoneModal"));
+				modal.show();
 			}else{
 				openModal("알림", data.result_text);
 			}
@@ -252,7 +276,7 @@ function add_cart_submit(product_id) {
 			    console.log(msg);
         },
 		complete : function() {
-			modal.hide();
+			loadingModal.hide();
 		}
     });
 }
