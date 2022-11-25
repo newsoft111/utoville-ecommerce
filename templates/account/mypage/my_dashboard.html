@@ -221,38 +221,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		plotOptions:{
 			pie:{donut:{size:"70%"}}
 		},
-<<<<<<< Updated upstream
-		dataLabels:{
-			enabled:!1
-		},
-		series:[44,25,19],
-		labels:["에어컨 청소","세탁기 청소","소독"],
-		colors:["#038edc","#777","#5fd0f3"],
-		legend:{
-			show:!0,
-			position:"bottom",
-			horizontalAlign:"center",
-			verticalAlign:"middle",
-			floating:!1,
-			fontSize:"14px",
-			offsetX:0}
-	};
-	(chart=new ApexCharts(document.querySelector("#chart-donut"),options)).render();
-
-	let nextService = document.getElementById("next-service");
-	let subsNum = document.getElementById("subs-num");
-	let completeNum = document.getElementById("complete-service-num");
-	let subsList = document.getElementById("subs-list");
-
-	nextService.addEventListener("click" , function(){
-		window.scrollTo({top: 400, behavior: "smooth"});
-	});
-	subsNum.addEventListener("click" , function(){
-		window.scrollTo({top: subsList.offsetTop, behavior: "smooth"});
-	});
-	completeNum.addEventListener("click" , function(){
-		window.scrollTo({top: subsList.offsetTop, behavior: "smooth"});
-=======
 		legend: {
 			data: {{order_done_keys|safe}},
 			textStyle: {
@@ -290,7 +258,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	let echart = echarts.init(document.getElementById('doughnut-chart'));
 	window.addEventListener("resize", function(){
 		echart.resize();
->>>>>>> Stashed changes
 	});
 });
 

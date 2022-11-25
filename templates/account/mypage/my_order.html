@@ -95,37 +95,37 @@
 												<table class="table">
 													<tbody>
 														<form action="{{request.path}}" method="GET" name="dateSearchForm" class="mb-0 formFlex">
-														<tr>
-															<td class="order-tb-left">날짜</td>
-															<td colspan="3">
-																<div class="btn-group w-100 mb-3">
-																	<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastWeekBtn();">1주일</button>
-																	<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneMonthBtn();">1개월</button>
-																	<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastThreeMonthBtn();">3개월</button>
-																	<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastSixMonthBtn();">6개월</button>
-																	<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneYearBtn();">1년</button>
-																</div>		
-															
-																<div class="inputBlock">
-																	<div class="input_group input-daterange">
-																		<input class="form-control form-radius start-date-input" name="start_date" type="date">
-																		&nbsp;&nbsp;~&nbsp;&nbsp;
-																		<input class="form-control form-radius end-date-input" name="end_date" type="date">
-																	</div>	
-																</div>
-															</td>		
-														</tr>
-														<tr>
-															<td class="order-tb-left">카테고리</td>
-															<td class="order-tb-right">
-																<select class="form-select" name="category_by" aria-label="Default select example">
-																	<option value="" {% if not request.GET.category %}selected{% endif %}>선택</option>
-																	{% for category_obj in category_objs %}
-																	<option value="{{category_obj.pk}}" {% if request.GET.category|slugify == category_obj.pk|slugify %}selected{% endif %}>{{category_obj.name}}</option>
-																	{% endfor %}
-																</select>
-															</td>
-															
+															<tr>
+																<td class="order-tb-left">날짜</td>
+																<td colspan="3">
+																	<div class="btn-group w-100 mb-3">
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastWeekBtn();">1주일</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneMonthBtn();">1개월</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastThreeMonthBtn();">3개월</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastSixMonthBtn();">6개월</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneYearBtn();">1년</button>
+																	</div>		
+																
+																	<div class="inputBlock">
+																		<div class="input_group input-daterange">
+																			<input class="form-control form-radius" id="start-date-input" name="start_date" type="date">
+																			&nbsp;&nbsp;~&nbsp;&nbsp;
+																			<input class="form-control form-radius" id="end-date-input" name="end_date" type="date">
+																		</div>	
+																	</div>
+																</td>		
+															</tr>
+															<tr>
+																<td class="order-tb-left">카테고리</td>
+																<td class="order-tb-right">
+																	<select class="form-select" name="category_by" aria-label="Default select example">
+																		<option value="" {% if not request.GET.category %}selected{% endif %}>선택</option>
+																		{% for category_obj in category_objs %}
+																		<option value="{{category_obj.pk}}" {% if request.GET.category|slugify == category_obj.pk|slugify %}selected{% endif %}>{{category_obj.name}}</option>
+																		{% endfor %}
+																	</select>
+																</td>
+																
 																<td class="order-tb-left">진행 상태</td>							
 																<td class="order-tb-right">
 																	<select class="form-select" name="status_by" aria-label="Default select example">
@@ -135,26 +135,25 @@
 																		{% endfor %}
 																	</select>
 																</td>
-															
-														</tr>
-														<tr>
-															<td class="order-tb-left">서비스명</td>
-															<td colspan="3" class="order-tb-right">
-																<div class="d-flex">
-																	<div class="inputBlock me-2">
-																		<input type="text" class="form-control form-radius" name="keyword"
-																			placeholder="서비스명을 검색하세요.">
-																	</div>
-																	<div class="submitBlock">
-																		<button type="submit"class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
-																			<span class="btn-hover-label label-default">Search</span>
-																			<span class="btn-hover-label label-hover">Search</span>
-																		</button>
-																	</div>
-																</div>				
-															</td>																			
-														</tr>							
-													</form>
+															</tr>
+															<tr>
+																<td class="order-tb-left">서비스명</td>
+																<td colspan="3" class="order-tb-right">
+																	<div class="d-flex">
+																		<div class="inputBlock me-2">
+																			<input type="text" class="form-control form-radius" name="keyword"
+																				placeholder="서비스명을 검색하세요.">
+																		</div>
+																		<div class="submitBlock">
+																			<button type="submit"class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																				<span class="btn-hover-label label-default">Search</span>
+																				<span class="btn-hover-label label-hover">Search</span>
+																			</button>
+																		</div>
+																	</div>				
+																</td>																			
+															</tr>							
+														</form>
 													</tbody>
 												</table>
 											</div>
@@ -182,9 +181,9 @@
 													<div class="datasearch-body">
 														<div class="inputBlock">
 															<div class="input_group input-daterange">
-																<input class="form-control form-radius start-date-input" name="start_date" type="date">
+																<input class="form-control form-radius" id="start-date-input" name="start_date" type="date">
 																&nbsp;&nbsp;~&nbsp;&nbsp;
-																<input class="form-control form-radius end-date-input" name="end_date" type="date">
+																<input class="form-control form-radius" id="end-date-input" name="end_date" type="date">
 															</div>	
 														</div>
 													</div>
@@ -489,8 +488,27 @@ status_by.addEventListener('change', (event) => {
 });
 
 
-document.getElementsByClassName("start-date-input")[0].value = new Date().toISOString().slice(0,10);
-document.getElementsByClassName("end-date-input")[0].value = new Date().toISOString().slice(0,10);
+//==============================
+// URL 파라미터 날짜 시작일에 적용
+//==============================
+
+const curUrl = window.location.href;
+const url = new URL(curUrl);
+const urlParams = url.searchParams;
+
+/*종료 날짜 오늘 날짜로 지정*/
+document.getElementById("end-date-input").value = new Date().toISOString().slice(0,10);
+
+/*새로 페이지 들어올 시 한달 전 날짜로 셋팅*/
+if (urlParams.has('start_date') == false) {
+	document.getElementById("start-date-input").value = new Date().toISOString().slice(0,10);
+}else{
+	document.getElementById("start-date-input").value = urlParams.get('start_date');
+}
+
+//==============================
+// 기간별 날짜 적용
+//==============================
 
 function lastWeekBtn(){
 	let nowDate = new Date();
@@ -506,7 +524,7 @@ function lastWeekBtn(){
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementsByClassName("start-date-input")[0].value = resultDate;
+  document.getElementById("start-date-input").value = resultDate;
 }  
 
 function lastOneMonthBtn(){
@@ -523,7 +541,7 @@ function lastOneMonthBtn(){
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+  document.getElementById("start-date-input").value = resultDate;	
 }
 function lastThreeMonthBtn(){
 	let nowDate = new Date();
@@ -539,7 +557,7 @@ function lastThreeMonthBtn(){
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+  document.getElementById("start-date-input").value = resultDate;	
 }
 function lastSixMonthBtn(){
 	let nowDate = new Date();
@@ -555,7 +573,7 @@ function lastSixMonthBtn(){
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+  document.getElementById("start-date-input").value = resultDate;	
 }
 function lastOneYearBtn(){
 	let nowDate = new Date();
@@ -571,7 +589,7 @@ function lastOneYearBtn(){
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementsByClassName("start-date-input")[0].value = resultDate;	
+  document.getElementById("start-date-input").value = resultDate;	
 }
 
 function open_review_write_modal(product_id) {
