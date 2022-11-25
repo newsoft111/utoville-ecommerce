@@ -221,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		plotOptions:{
 			pie:{donut:{size:"70%"}}
 		},
+<<<<<<< Updated upstream
 		dataLabels:{
 			enabled:!1
 		},
@@ -251,6 +252,45 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 	completeNum.addEventListener("click" , function(){
 		window.scrollTo({top: subsList.offsetTop, behavior: "smooth"});
+=======
+		legend: {
+			data: {{order_done_keys|safe}},
+			textStyle: {
+				color: "#8791af"
+			}
+		},
+		color: barchartColors,
+		series: [{
+			name: "Completed Service",
+			type: "pie",
+			radius: ["50%", "70%"],
+			avoidLabelOverlap: !1,
+			label: {
+				normal: {
+					show: !1,
+					position: "center"
+				},
+				emphasis: {
+					show: !0,
+					textStyle: {
+						fontSize: "30",
+						fontWeight: "bold"
+					}
+				}
+			},
+			labelLine: {
+				normal: {
+					show: !1
+				}
+			},
+			data: {{order_done_data|safe}}
+		}]
+	}, option && "object" == typeof option && myChart.setOption(option, !0);
+	
+	let echart = echarts.init(document.getElementById('doughnut-chart'));
+	window.addEventListener("resize", function(){
+		echart.resize();
+>>>>>>> Stashed changes
 	});
 });
 
