@@ -105,3 +105,26 @@ def order_create(request):
 	else:
 		return redirect("main:index")
 
+
+#마이페이지 완료된 서비스 원형 그래프 api
+@login_required(login_url="account:login")
+def get_order_done(request):
+	q = Q()
+	q &= Q(order__user = request.user)
+	q &= Q(order__payment__is_paid = True)
+	q &= Q(is_delivered = True)
+	q &= Q(order__user = request.user)
+	
+
+	done_order_objs =  OrderItem.objects.filter(q).order_by("-id")
+	result_data = {}
+	for done_order_obj in done_order_objs:
+		category = done_order_obj.product.category_first.name
+		if result_data.get(category) == None:
+			result_data[category] = 0
+		else:
+			result_data[category] += 1
+	
+	return JsonResponse({
+		'done_service': result_data
+	})
