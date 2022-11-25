@@ -267,12 +267,12 @@
 													<td>
 														완료
 														<div class="mt-1">
-															<button type="button" class="btn btn-outline-secondary btn-rise" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">
+															<a href="#!" class="btn btn-outline-secondary btn-rise" onclick="open_review_write_modal();">
 																<div class="btn-rise-bg bg-secondary"></div>
 																<div class="btn-rise-text">
 																	Write Review
 																</div>
-															</button>			
+															</a>			
 														</div>	
 													</td>			
 												</tr>
@@ -403,7 +403,7 @@
 					</div>
 					<div class="review_area p-4 text-center">
 						<h5 class="review_title">리뷰를 작성해주세요.</h5>
-						<textarea class="form-control" style="resize:none"></textarea>		
+						<textarea class="form-control" name='review' style="resize:none"></textarea>		
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-outline-primary ms-1" onclick="review_write_submit()">완료</button>
@@ -417,43 +417,8 @@
 
 <script src="{% static 'vendor/node_modules/js/dropzone-min.js' %}"></script>
 <script>
-function review_write_submit() {
-      var reviewWriteForm = document.reviewWriteForm;
-      var review = reviewWriteForm.review.value;
-      var rating = reviewWriteForm.rating.value;
-      let this_modal = "#ReviewWriteModal";
-            
-      if (isEmpty(rating)) {
-         openPopup('알림','평점을 선택해주세요.',this_modal);
-         return false;
-      }
-
-      if (isEmpty(review)) {
-         openPopup('알림','리뷰를 입력해주세요.',this_modal);
-         return false;
-      }
-
-      var queryString = $("form[name=reviewWriteForm]").serialize();
-
-    $.ajax({
-        type : 'POST',
-        url : "",
-        data : queryString,
-        dataType : 'json',
-        success: function(data){
-          if(data.result==200){
-            openPopup("알림", data.result_text,'',"reload");
-          }else{
-            openPopup("알림", data.result_text);
-          }
-          return;
-        },
-        error: function (request, status, error){
-          var msg = "ERROR : " + request.status + "<br>"
-             msg +=  + "내용 : " + request.responseText + "<br>" + error;
-        }
-    });
-}
+let review_product_id = '';
+let is_run = false;
 
 
 let e = new Dropzone("[data-dropzone-area]", {
@@ -626,5 +591,66 @@ function lastOneYearBtn(){
 
   document.getElementById("start-date-input").value = resultDate;	
 }
+
+function open_review_write_modal(product_id) {
+	review_product_id = product_id;
+	var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#reviewWriteModal'));
+	modal.show();
+	console.log(1);
+}
+
+async function review_write_submit() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+
+	var reviewWriteForm = document.reviewWriteForm;
+	var review = reviewWriteForm.review.value;
+	var rating = reviewWriteForm.rating.value;
+
+	let this_modal = "#ReviewWriteModal";
+
+	if (isEmpty(review_product_id)) {
+		openPopup('알림','알수없는 오류입니다. 새로고침 후 다시시도 해주세요.',this_modal);
+		return false;
+	}
+		
+	if (isEmpty(rating)) {
+		openPopup('알림','평점을 선택해주세요.',this_modal);
+		return false;
+	}
+
+	if (isEmpty(review)) {
+		openPopup('알림','리뷰를 입력해주세요.',this_modal);
+		return false;
+	}
+
+	let form_data = new FormData(document.querySelector('form[name=reviewWriteForm]'));
+	form_data.append('review_product_id', review_product_id);
+
+    const response = await fetch("{% url 'product:review_write' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: form_data,
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		is_run  = false;
+		if (data.result == '200') {
+			openModal("알림", data.result_text, '', 'reload');
+		} else { 
+			openModal("알림", data.result_text, '');
+		}
+	});
+	review_product_id = '';
+}
+
 </script>
 {% endblock %}

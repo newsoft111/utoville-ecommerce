@@ -117,3 +117,43 @@ def product_qna_question(request):
 		return JsonResponse(result)
 	else:
 		return redirect("product:list")
+
+
+
+def product_review_write(request):
+	review = request.POST.get("review")
+	rating = request.POST.get("rating")
+	product_id = request.POST.get("review_product_id")
+	images = request.FILES.getlist('images')
+
+	try:
+		product_obj = Product.objects.get(pk=product_id)
+	except:
+		result = {
+			'result': "201", 
+			'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+		}
+		return JsonResponse(result)
+
+	try:
+		product_review_obj= ProductReview()
+		product_review_obj.user = request.user
+		product_review_obj.product = product_obj
+		product_review_obj.review = review
+		product_review_obj.rating = rating
+		product_review_obj.save()
+
+		for image in images:
+			product_review_image_obj = ProductReviewImage()
+			product_review_image_obj.product_review = product_review_obj
+			product_review_image_obj.image = image
+			product_review_image_obj.save()
+
+		result = '200'
+		result_text = "등록이 완료되었습니다."
+	except Exception as e:
+		result = '201'
+		result_text = '알수없는 오류입니다. 다시시도 해주세요.'
+
+	result = {'result': result, 'result_text': result_text}
+	return JsonResponse(result)

@@ -14,7 +14,8 @@ from util.views import EmailSender
 from order.models import *
 from qna.models import *
 from django.core.paginator import Paginator
-from django.db.models import Q
+from django.db.models import Q, Count, F
+from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.decorators import login_required
 from dateutil.relativedelta import relativedelta
 import json
@@ -305,11 +306,33 @@ def my_dashboard(request):
 	for water_delivered_service in water_delivered_service_list:
 		water_delivered_service_count += water_delivered_service["ordered_quantity"] - water_delivered_service["shipped_quantity"]
 
+
+	#완료된 서비스 시작
+	q = Q()
+	q &= Q(order__user = request.user)
+	q &= Q(order__payment__is_paid = True)
+	q &= Q(is_delivered = True)
+	
+
+	order_done_objs =  OrderItem.objects.filter(q).values(name=F('product__category_first__name')).annotate(
+		value=Count('pk')
+	)
+	order_done_data = []
+	order_done_keys = []
+	for order_done_objs in order_done_objs:
+		order_done_keys.append(order_done_objs['name'])
+		order_done_data.append({'value': order_done_objs['value'], 'name': order_done_objs['name']})
+
+
+	#완료된 서비스 끝
+
 	return render(request, 'account/mypage/my_dashboard.html', {
 		"orders": order_data,
 		'delivered_service_count':delivered_service_count,
 		"next_service_day_count": next_service_day_count,
 		"water_delivered_service_count": water_delivered_service_count,
+		"order_done_data": order_done_data,
+		"order_done_keys":order_done_keys
 	})
 
 @login_required(login_url="account:login")
