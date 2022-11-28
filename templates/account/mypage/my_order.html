@@ -511,13 +511,12 @@ if (urlParams.has('start_date') == false) {
 //==============================
 
 function lastWeekBtn(){
-	let nowDate = new Date();
-	let weekDate = nowDate.getTime() - (7*24*60*60*1000);
-	nowDate.setTime(weekDate);
+	let now = new Date();	// 현재 날짜 및 시간
+	let lastweek = new Date(now.setDate(now.getDate() - 7));	// 일주일 전
 
-	let weekYear = nowDate.getFullYear();
-	let weekMonth = nowDate.getMonth() + 1;
-	let weekDay = nowDate.getDate();
+	let weekYear = lastweek.getFullYear();
+	let weekMonth = lastweek.getMonth() + 1;
+	let weekDay = lastweek.getDate();
 
 	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
 	if(weekDay < 10) {weekDay = "0" + weekDay};
@@ -528,73 +527,64 @@ function lastWeekBtn(){
 }  
 
 function lastOneMonthBtn(){
-	let nowDate = new Date();
-	let monthDate = nowDate.getTime() - (30*24*60*60*1000);
-	nowDate.setTime(monthDate);
-
-	let weekYear = nowDate.getFullYear();
-	let weekMonth = nowDate.getMonth() + 1;
-	let weekDay = nowDate.getDate() - 1;
+	let now = new Date();
+	let oneMonthAgo = new Date(now.setMonth(now.getMonth() - 1));
+	
+	let weekYear = oneMonthAgo.getFullYear();
+	let weekMonth = oneMonthAgo.getMonth() + 1;
+	let weekDay = oneMonthAgo.getDate();
 
 	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
 	if(weekDay < 10) {weekDay = "0" + weekDay};
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementById("start-date-input").value = resultDate;	
+	document.getElementById("start-date-input").value = resultDate;	
 }
 function lastThreeMonthBtn(){
-	let nowDate = new Date();
-	let threeMonthDate = nowDate.getTime() - (3*30*24*60*60*1000);
-	nowDate.setTime(threeMonthDate);
-
-	let weekYear = nowDate.getFullYear();
-	let weekMonth = nowDate.getMonth() + 1;
-	let weekDay = nowDate.getDate() - 2;
+	let now = new Date();
+	let threeMonthAgo = new Date(now.setMonth(now.getMonth() - 3));
+	
+	let weekYear = threeMonthAgo.getFullYear();
+	let weekMonth = threeMonthAgo.getMonth() + 1;
+	let weekDay = threeMonthAgo.getDate();
 
 	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
 	if(weekDay < 10) {weekDay = "0" + weekDay};
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementById("start-date-input").value = resultDate;	
+	document.getElementById("start-date-input").value = resultDate;	
 }
 function lastSixMonthBtn(){
-	var now = new Date();	// 현재 날짜 및 시간
-
-	var oneMonthAgo = new Date(now.setMonth(now.getMonth() - 1));	// 한달 전
-	console.log("한달 전 : ", oneMonthAgo);
-	// let nowDate = new Date();
-	// let sixMonthDte = nowDate.getTime() - (6*31*24*60*60*1000);
-	// nowDate.setTime(sixMonthDte);
-
-	// let weekYear = nowDate.getFullYear();
-	// let weekMonth = nowDate.getMonth() + 1;
-	// let weekDay = nowDate.getDate();
-	// console.log(weekYear, weekMonth, weekDay)
-
-	// if(weekMonth < 10) {weekMonth = "0" + weekMonth};
-	// if(weekDay < 10) {weekDay = "0" + weekDay};
-
-	// let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
-
-	// document.getElementById("start-date-input").value = resultDate;	
-}
-function lastOneYearBtn(){
-	let nowDate = new Date();
-	let oneYearDte = nowDate.getTime() - (12*30*24*60*60*1000);
-	nowDate.setTime(oneYearDte);
-
-	let weekYear = nowDate.getFullYear();
-	let weekMonth = nowDate.getMonth() + 1;
-	let weekDay = nowDate.getDate() -5;
+	let now = new Date();
+	let sixMonthAgo = new Date(now.setMonth(now.getMonth() - 6));
+	
+	let weekYear = sixMonthAgo.getFullYear();
+	let weekMonth = sixMonthAgo.getMonth() + 1;
+	let weekDay = sixMonthAgo.getDate();
 
 	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
 	if(weekDay < 10) {weekDay = "0" + weekDay};
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-  document.getElementById("start-date-input").value = resultDate;	
+	document.getElementById("start-date-input").value = resultDate;	
+}
+function lastOneYearBtn(){
+	let now = new Date();
+	let oneYearAgo = new Date(now.setMonth(now.getMonth() - 12));
+	
+	let weekYear = oneYearAgo.getFullYear();
+	let weekMonth = oneYearAgo.getMonth() + 1;
+	let weekDay = oneYearAgo.getDate();
+
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+
+	document.getElementById("start-date-input").value = resultDate;		
 }
 
 function open_review_write_modal(product_id) {
