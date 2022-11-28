@@ -143,13 +143,11 @@
 					<div class="bg-gradient-secondary text-white d-flex justify-content-between align-items-center p-3 mb-5">
 						<div>
 							<span class="text-warning small d-block mb-2">
-								{% for i in 5|times %}
-									{% if i < product_detail.rating %}
-										<i class="bx bxs-star"></i>
-									{% else %}
-										<i class="bx bx-star"></i>
-									{% endif %}
-								{% endfor %}
+								<i class="bx {% if product_detail.rating < 0.5%}bx-star{% elif product_detail.rating >= 0.5 and product_detail.rating < 1 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
+								<i class="bx {% if product_detail.rating < 1.5%}bx-star{% elif product_detail.rating >= 1.5 and product_detail.rating < 2 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
+								<i class="bx {% if product_detail.rating < 2.5%}bx-star{% elif product_detail.rating >= 2.5 and product_detail.rating < 3 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
+								<i class="bx {% if product_detail.rating < 3.5%}bx-star{% elif product_detail.rating >= 3.5 and product_detail.rating < 4 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
+								<i class="bx {% if product_detail.rating < 4.5%}bx-star{% elif product_detail.rating >= 4.5 and product_detail.rating < 5 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
 							</span>
 							<p class="mb-0"><span class="reviews small fw-normal">{{product_detail.rating}} / 5</span>
 								<small class="text-muted">( {{product_detail.rating_count}}개 - Reviews)</small>

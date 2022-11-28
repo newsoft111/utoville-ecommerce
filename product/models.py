@@ -164,6 +164,21 @@ class ProductReview(models.Model):
 
 		super().save(*args, **kwargs)
 
+def review_img_upload_to(instance, filename):
+	nowDate = datetime.now().strftime("%Y/%m/%d")
+	return '/'.join([instance.folder, str(instance.review.product.id), nowDate, filename])
+
+class ProductReviewImage(models.Model):
+	image = models.FileField(upload_to=review_img_upload_to)
+	folder = 'ecommerce/product'
+	product_review = models.ForeignKey(
+			ProductReview,
+			on_delete=models.CASCADE
+	)
+	
+	class Meta:
+		db_table = 'ecommerce_product_review_image'
+
 
 class ProductQnA(models.Model):
 	product = models.ForeignKey(
