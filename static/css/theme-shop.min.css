@@ -3710,7 +3710,7 @@ textarea.form-control-lg {
 	background-color:transparent;
 	border-color:transparent
 }
-.nav-pills .nav-link.active,.nav-pills .show>.nav-link {
+.nav-pills .nav-link.active,.nav-pills .show>.nav-link, .link-hover-decoration.active {
 	color: #000;
 	font-weight: bold;
 	background-color: transparent !important;

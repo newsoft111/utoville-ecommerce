@@ -80,7 +80,7 @@
 		<!--Profile info header-->
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
 			<div class="row justify-content-center">
-				{% include "account/mypage/sidemenu.html" with active_tab="주문 조회"%}	
+				{% include "account/mypage/sidemenu.html" with active_tab="주문 조회"%}
 				<div class="col-lg-9">
 					{% include "account/mypage/topmenu.html" with active_tab="주문 조회"%}
 					<div class="order_search_area">
@@ -560,25 +560,30 @@ function lastThreeMonthBtn(){
   document.getElementById("start-date-input").value = resultDate;	
 }
 function lastSixMonthBtn(){
-	let nowDate = new Date();
-	let sixMonthDte = nowDate.getTime() - (6*30*24*60*60*1000);
-	nowDate.setTime(sixMonthDte);
+	var now = new Date();	// 현재 날짜 및 시간
 
-	let weekYear = nowDate.getFullYear();
-	let weekMonth = nowDate.getMonth() + 1;
-	let weekDay = nowDate.getDate() -4;
+	var oneMonthAgo = new Date(now.setMonth(now.getMonth() - 1));	// 한달 전
+	console.log("한달 전 : ", oneMonthAgo);
+	// let nowDate = new Date();
+	// let sixMonthDte = nowDate.getTime() - (6*31*24*60*60*1000);
+	// nowDate.setTime(sixMonthDte);
 
-	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
-	if(weekDay < 10) {weekDay = "0" + weekDay};
+	// let weekYear = nowDate.getFullYear();
+	// let weekMonth = nowDate.getMonth() + 1;
+	// let weekDay = nowDate.getDate();
+	// console.log(weekYear, weekMonth, weekDay)
 
-	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+	// if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	// if(weekDay < 10) {weekDay = "0" + weekDay};
 
-  document.getElementById("start-date-input").value = resultDate;	
+	// let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+
+	// document.getElementById("start-date-input").value = resultDate;	
 }
 function lastOneYearBtn(){
 	let nowDate = new Date();
-	let sixMonthDte = nowDate.getTime() - (12*30*24*60*60*1000);
-	nowDate.setTime(sixMonthDte);
+	let oneYearDte = nowDate.getTime() - (12*30*24*60*60*1000);
+	nowDate.setTime(oneYearDte);
 
 	let weekYear = nowDate.getFullYear();
 	let weekMonth = nowDate.getMonth() + 1;
