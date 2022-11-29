@@ -6,8 +6,6 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get -y update
 RUN apt-get -y install vim
 
-RUN useradd -r nginx
-RUN usermod -a -G root nginx
 
 RUN mkdir /srv/django
 ADD . /srv/django
