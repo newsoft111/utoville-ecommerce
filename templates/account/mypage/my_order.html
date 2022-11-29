@@ -99,11 +99,11 @@
 																<td class="order-tb-left">날짜</td>
 																<td colspan="3">
 																	<div class="btn-group w-100 mb-3">
-																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastWeekBtn();">1주일</button>
-																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneMonthBtn();">1개월</button>
-																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastThreeMonthBtn();">3개월</button>
-																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastSixMonthBtn();">6개월</button>
-																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneYearBtn();">1년</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastWeek();">1주일</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(1);">1개월</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(3);">3개월</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(6);">6개월</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(12);">1년</button>
 																	</div>		
 																
 																	<div class="inputBlock">
@@ -172,18 +172,18 @@
 												</div>		
 												<div class="contents">
 													<div class="btn-group mb-3">
-														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastWeekBtn();">1주일</button>
-														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneMonthBtn();">1개월</button>
-														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastThreeMonthBtn();">3개월</button>
-														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastSixMonthBtn();">6개월</button>
-														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="lastOneYearBtn();">1년</button>
+														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastWeek();">1주일</button>
+														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(1);">1개월</button>
+														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(3);">3개월</button>
+														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(6);">6개월</button>
+														<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(12);">1년</button>
 													</div>
 													<div class="datasearch-body">
 														<div class="inputBlock">
 															<div class="input_group input-daterange">
-																<input class="form-control form-radius" id="start-date-input" name="start_date" type="date">
+																<input class="form-control form-radius" id="resp-start-date-input" name="start_date" type="date">
 																&nbsp;&nbsp;~&nbsp;&nbsp;
-																<input class="form-control form-radius" id="end-date-input" name="end_date" type="date">
+																<input class="form-control form-radius" id="resp-end-date-input" name="end_date" type="date">
 															</div>	
 														</div>
 													</div>
@@ -498,21 +498,23 @@ const urlParams = url.searchParams;
 
 /*종료 날짜 오늘 날짜로 지정*/
 document.getElementById("end-date-input").value = new Date().toISOString().slice(0,10);
+document.getElementById("resp-end-date-input").value = new Date().toISOString().slice(0,10);
 
 /*새로 페이지 들어올 시 한달 전 날짜로 셋팅*/
 if (urlParams.has('start_date') == false) {
-	document.getElementById("start-date-input").value = new Date().toISOString().slice(0,10);
+	setLastMonth(1);
 }else{
 	document.getElementById("start-date-input").value = urlParams.get('start_date');
+	document.getElementById("resp-start-date-input").value = urlParams.get('start_date');
 }
 
 //==============================
 // 기간별 날짜 적용
 //==============================
 
-function lastWeekBtn(){
+function setLastWeek(){
 	let now = new Date();	// 현재 날짜 및 시간
-	let lastweek = new Date(now.setDate(now.getDate() - 7));	// 일주일 전
+	let lastweek = new Date(now.setDate(now.getDate() - 7)); // 일주일 전
 
 	let weekYear = lastweek.getFullYear();
 	let weekMonth = lastweek.getMonth() + 1;
@@ -524,68 +526,28 @@ function lastWeekBtn(){
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
   document.getElementById("start-date-input").value = resultDate;
-}  
+  document.getElementById("resp-start-date-input").value = resultDate;
+} 
 
-function lastOneMonthBtn(){
+function setLastMonth(numMonthAgo){
 	let now = new Date();
-	let oneMonthAgo = new Date(now.setMonth(now.getMonth() - 1));
-	
-	let weekYear = oneMonthAgo.getFullYear();
-	let weekMonth = oneMonthAgo.getMonth() + 1;
-	let weekDay = oneMonthAgo.getDate();
+	let setMonthAgo = new Date(now.setMonth(now.getMonth() - numMonthAgo))
+	let weekYear = setMonthAgo.getFullYear();
+	let weekMonth = setMonthAgo.getMonth() + 1;
+	let weekDay = setMonthAgo.getDate();
 
 	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
 	if(weekDay < 10) {weekDay = "0" + weekDay};
 
 	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
 
-	document.getElementById("start-date-input").value = resultDate;	
+	document.getElementById("start-date-input").value = resultDate;
+	document.getElementById("resp-start-date-input").value = resultDate;
 }
-function lastThreeMonthBtn(){
-	let now = new Date();
-	let threeMonthAgo = new Date(now.setMonth(now.getMonth() - 3));
-	
-	let weekYear = threeMonthAgo.getFullYear();
-	let weekMonth = threeMonthAgo.getMonth() + 1;
-	let weekDay = threeMonthAgo.getDate();
 
-	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
-	if(weekDay < 10) {weekDay = "0" + weekDay};
-
-	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
-
-	document.getElementById("start-date-input").value = resultDate;	
-}
-function lastSixMonthBtn(){
-	let now = new Date();
-	let sixMonthAgo = new Date(now.setMonth(now.getMonth() - 6));
-	
-	let weekYear = sixMonthAgo.getFullYear();
-	let weekMonth = sixMonthAgo.getMonth() + 1;
-	let weekDay = sixMonthAgo.getDate();
-
-	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
-	if(weekDay < 10) {weekDay = "0" + weekDay};
-
-	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
-
-	document.getElementById("start-date-input").value = resultDate;	
-}
-function lastOneYearBtn(){
-	let now = new Date();
-	let oneYearAgo = new Date(now.setMonth(now.getMonth() - 12));
-	
-	let weekYear = oneYearAgo.getFullYear();
-	let weekMonth = oneYearAgo.getMonth() + 1;
-	let weekDay = oneYearAgo.getDate();
-
-	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
-	if(weekDay < 10) {weekDay = "0" + weekDay};
-
-	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
-
-	document.getElementById("start-date-input").value = resultDate;		
-}
+//==============================
+// Write Review
+//==============================
 
 function open_review_write_modal(product_id) {
 	review_product_id = product_id;
