@@ -124,7 +124,19 @@ def product_review_write(request):
 	review = request.POST.get("review")
 	rating = request.POST.get("rating")
 	product_id = request.POST.get("review_product_id")
-	images = request.FILES.getlist('images')
+	images = request.FILES.getlist("thumbnail")
+
+	if review is None or review == '':
+		return JsonResponse({
+			'result': "201", 
+			'result_text': '리뷰를 입력해주세요.'
+		})
+
+	if rating is None or rating == '':
+		return JsonResponse({
+			'result': "201", 
+			'result_text': '별점을 입력해주세요.'
+		})
 
 	try:
 		product_obj = Product.objects.get(pk=product_id)
@@ -154,6 +166,6 @@ def product_review_write(request):
 	except Exception as e:
 		result = '201'
 		result_text = '알수없는 오류입니다. 다시시도 해주세요.'
-
+		print(e,5555555555)
 	result = {'result': result, 'result_text': result_text}
 	return JsonResponse(result)

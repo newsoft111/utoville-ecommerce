@@ -14,10 +14,14 @@ $(document).ready(function() {
  }
  
  function openModal(subject, content, before_modal, option) {
-	$("#modal_subject").text(subject);
-	$("#modal_content").html(content);
+	document.getElementById("modal_subject").innerText = subject;
+	document.getElementById("modal_content").innerHTML = content;
+	// $("#modal_subject").text(subject);
+	// $("#modal_content").html(content);
 	if (!isEmpty(before_modal)) {
-	   $('#closeModalBtn').attr('data-before-modal',before_modal);
+		document.querySelector('#closeModalBtn').dataset.beforeModal = before_modal;
+		var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector(before_modal));
+		modal.hide();
 	}
 	if (option == 'reload') {
 	   document.querySelectorAll('#closeModalBtn').forEach(function(close_btn) {
@@ -40,15 +44,16 @@ $(document).ready(function() {
  }
  
 function closeModal() {
-	var before_modal = $('#closeModalBtn').attr('data-before-modal');
-	$("#modal_subject").text('');
-	$("#modal_content").html('');
-	if (before_modal) {
-		$(before_modal).modal('show');
+	var before_modal = document.querySelector('[id=closeModalBtn]').dataset.beforeModal;
+	if (!isEmpty(before_modal)) {
+		bootstrap.Modal.getOrCreateInstance(document.querySelector(before_modal)).show();
 	}
+	document.querySelector("[id=modal_subject]").innerHTML = '';
+	document.querySelector("[id=modal_content]").innerHTML = '';
 	
-	$('#closeModalBtn').attr('data-before-modal','');
-	var modal = new bootstrap.Modal(document.getElementById('globalModal'));
+	document.querySelector('[id=closeModalBtn]').dataset.beforeModal = '';
+
+	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('globalModal'));
 	modal.hide();
 }
 
@@ -68,8 +73,15 @@ function getCookie(name) {
     return cookieValue;
 }
 
-
 function numberWithCommas(num) { 
 	var parts = num.toString().split("."); 
 	return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : ""); 
+}
+
+function isDuplicate(arr) {
+	const isDup = arr.some(function(x) {
+	  return arr.indexOf(x) !== arr.lastIndexOf(x);
+	});
+						   
+	return isDup;
 }

@@ -166,7 +166,7 @@ class ProductReview(models.Model):
 
 def review_img_upload_to(instance, filename):
 	nowDate = datetime.now().strftime("%Y/%m/%d")
-	return '/'.join([instance.folder, str(instance.review.product.id), nowDate, filename])
+	return '/'.join([instance.folder, str(instance.product_review.product.id), nowDate, filename])
 
 class ProductReviewImage(models.Model):
 	image = models.FileField(upload_to=review_img_upload_to)

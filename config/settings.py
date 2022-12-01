@@ -99,7 +99,7 @@ DATABASES = {
         'NAME': 'utoville2021',
         'USER': 'utoville2021',
         'PASSWORD': 'Dbutoville21!',
-        'HOST': 'utoville.cznhdsumbvrn.ap-southeast-1.rds.amazonaws.com',
+        'HOST': 'dbmyadmin.utoville.com',
         'PORT': '3306',
         'OPTIONS': {
             'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",

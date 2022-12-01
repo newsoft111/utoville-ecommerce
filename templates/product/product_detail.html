@@ -303,7 +303,7 @@ function cal_total_value() {
  	let item_list = document.querySelectorAll("span[id=itemPrice]");
  	let arr = [];
 
- 	let total_price = 0
+ 	let total_price = 0;
  	let count = 0;
 
  	for (i=0; i<item_list.length; i++) {
@@ -314,7 +314,7 @@ function cal_total_value() {
 
  		count += Number(item.previousElementSibling.value);
 		
- 		let objData = new Object();
+ 		let objData = {};
  		objData.product_id = "{{product_detail.id}}";
  		objData.variant_value_id = item.dataset.id;
  		objData.qty = item.previousElementSibling.value;
