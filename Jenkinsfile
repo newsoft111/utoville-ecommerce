@@ -4,7 +4,7 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build("https://hub.docker.com/r/mcfly17/utoville-homecare-user")
+        app = docker.build("mcfly17/utoville-homecare-user")
     }
 
     stage('Test image') {
