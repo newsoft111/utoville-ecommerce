@@ -28,7 +28,7 @@ node {
                         configName: "dev",
                         verbose: true,
                         transfers: [
-                            sshTransfer(execCommand: "make run")
+                            sshTransfer(execCommand: "make run-user")
                         ]
                     )
                 ]
