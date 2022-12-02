@@ -121,7 +121,7 @@
 
 													<div class="mb-3">
 														<label class="form-label" for="billing-address">Address</label>
-														<textarea class="form-control" id="billing-address" rows="3" placeholder="Enter full address"></textarea>
+														<textarea class="form-control" style="border-color: #ddd;" id="billing-address" rows="3" placeholder="Enter full address"></textarea>
 													</div>
 
 													<div class="row">
@@ -311,6 +311,10 @@
 								<h5 class="font-size-14 m-0">Discount :</h5>
 								<span>0</span>
 							</div>
+							<div class="d-flex justify-content-between p-2 mb-2">  
+								<h5 class="font-size-14 m-0">Point :</h5>
+								<span class="total-point">0</span>
+							</div>
 							<div class="d-flex justify-content-between p-2 mb-2">
 								<h5 class="font-size-14 m-0">Shipping Charge :</h5>
 								<span>0</span>
@@ -343,114 +347,6 @@
 			</div>
 		</div>
 		<!-- end row -->
-		
-		
-		<!-- <div class="row">
-			<div class="col-12 mx-auto">
-				<div class="table-responsive">
-					<h4 class="mb-4 pt-5">Order list</h4>
-					<table class="table table-striped align-middle">
-						<thead>
-							<tr>
-								<th style="width:15%"></th>
-								<th class="small text-muted">
-									<div style="min-width:280px">Product</div>
-								</th>
-								<th class="small text-muted" style="width:15%">Price</th>
-								<th class="small text-muted" style="width:20%">Quantity</th>
-								<th class="small text-muted" style="width:15%">Subtotal</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% if not order_items %}
-							<tr>
-								<td class="border-bottom-0 text-center p-5" colspan="6">상품이 없습니다.</td>
-							</tr>
-							{% endif%}
-
-							{% for order_item in order_items %}
-							
-							<tr>
-								<td>
-									<img src="{% static 'img/shop/backpack2.jpg' %}" class="width-7x rounded-3">
-								</td>
-								<td>
-									<span class="text-dark h5">
-										{{order_item.product_name}}
-									</span>
-									{% if order_item.variant_value is not None %}
-									<span class="text-uppercase d-block">
-										{{order_item.variant}}: {{order_item.variant_value}}
-									</span>
-									
-									<span class="text-uppercase d-block">+₱{{order_item.variant_price}}</span>
-									{% endif %}
-								</td>
-								<td>
-									{% if order_item.variant is not None %}
-									₱{{order_item.product_price|add:order_item.variant_price|intcomma}}
-									{% else %}
-									₱{{order_item.product_price|intcomma}}
-									{% endif %}
-								</td>
-								<td>
-									<span class="text-uppercase d-block">{{order_item.ordered_quantity}}</span>
-								</td>
-								<td>
-									{% if order_item.variant is not None %}
-									₱{{order_item.product_price|add:order_item.variant_price|mul:order_item.ordered_quantity|intcomma}}
-									{% else %}
-									₱{{order_item.product_price|mul:order_item.ordered_quantity|intcomma}}
-									{% endif %}
-								</td>
-							</tr>
-
-							{% endfor %}
-							
-						</tbody>
-					</table>
-
-					<table class="table mb-5 table-bordered od-list-table">
-						<tr class="bg-light">
-							<th class="pd text-center">상품금액</th>
-							<td class="pd fw-bold fs-5 text-dark total-price">₱{{total_price|intcomma}}</td>
-						</tr>
-						<tr>
-							<th class="pd text-center">포인트사용</th>
-							<td class="pd text-center fw-bold fs-5 text-dark">
-								<div class="point-input text-start">
-									<input type="number" name="points" step="100" min="0" value="0" class="use-point">
-									<button class="btn point-btn">전액사용</button>									
-								</div>	
-							</td>
-						</tr>
-						<tr class="bg-light">
-							<th class="pd text-center">결제예정금액</th>
-							<td class="pd fw-bold fs-5 text-dark">
-								<span class="payment">₱{{total_price|intcomma}}</span>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="payment-area col">
-					<h4 class="mb-4">Method of payment</h4>
-					<div class="mb-4 form-check">
-						<input type="checkbox" class="" id="conditions_before_order" name="">
-						<label class="form-check-label" for="conditions_before_order"> 
-							I accept the <a href="#" class="text-dark link-decoration">Terms</a> and
-							<a href="#" class="text-dark link-decoration">conditions</a> and the
-							<a href="#" class="text-dark link-decoration">data protection guidelines.</a>
-						</label>
-					</div>
-					<div class="d-grid">
-						<button type="button" onclick="order_submit();" class="btn btn-lg hover-lift btn-hover-text btn-brand">
-							<span class="btn-hover-label label-default">Place your order</span>
-							<span class="btn-hover-label label-hover">Place your order</span>
-						</button>
-					</div>
-				</div>	
-			</div>		
-		</div> -->
 	</div>
 </section>
 
@@ -501,8 +397,10 @@ pointBtn.addEventListener("click", function(){
 
 	let calcPrice = (result - pointForm.value).toFixed(2);
 	let sumPrice= numberWithCommas(calcPrice);
+	let totalPoint = document.querySelector(".total-point");
 
-	payment.innerHTML = "₱" + sumPrice;			
+	payment.innerHTML = "₱" + sumPrice;
+	totalPoint.innerHTML = "-₱" + pointForm.value;
 });
 
 
@@ -568,7 +466,6 @@ async function temp_call_back() {
 		}
 	});
 }
-
 
 </script>
 {% endblock %}
