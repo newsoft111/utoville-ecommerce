@@ -3,12 +3,6 @@ node {
         checkout scm
     }
 
-	stage('Install docker-cli') {
-        app.inside {
-            sh 'apt-get install -y docker-ce-cli'
-        }
-    }
-
     stage('Build image') {
         app = docker.build("mcfly17/utoville-homecare-user")
     }
