@@ -19,7 +19,7 @@ node {
         }
     }
 
-    stage('SSH docker run a') {
+    stage('SSH docker run') {
         script {
             sshPublisher(
                 continueOnError: false, failOnError: true,
