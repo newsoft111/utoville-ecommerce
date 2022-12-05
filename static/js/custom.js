@@ -85,3 +85,15 @@ function isDuplicate(arr) {
 						   
 	return isDup;
 }
+
+//공백포함 대소문자
+function name_check(name) {
+	let regex=/^[a-zA-Z ]*$/;
+	return (name != '' && name != 'undefined' && regex.test(name));
+}
+
+// 이메일 정규표현식
+function email_check(email) {
+    let regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    return (email != '' && email != 'undefined' && regex.test(email));   // 정규표현식 검사를 통과하면 true를 리턴
+}

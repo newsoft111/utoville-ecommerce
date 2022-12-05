@@ -2,109 +2,176 @@
 {% block content %}
 {% load static %}
 {% load humanize %}
-	<section class="position-relative bg-white">
-		<div class="container position-relative pt-12 pt-lg-15 text-center">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 text-center">
-					<h1 class="display-2 mb-3">
-						Get in touch with us
-					</h1>
-					<p class="mb-7 pe-lg-9 lead">Do you have questions about our products or need a quote? Use
-						the contact form below and we will get back to you.</p>
-				</div>
-				<img src="{% static 'img/contact_bg.jpg' %}" class="img-fluid rounded-block" alt="">
+<section class="position-relative bg-white">
+	<div class="container position-relative pt-12 pt-lg-15 text-center">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 text-center">
+				<h1 class="display-2 mb-3">
+					Get in touch with us
+				</h1>
+				<p class="mb-7 pe-lg-9 lead">Do you have questions about our products or need a quote? Use
+					the contact form below and we will get back to you.</p>
 			</div>
-			<!--/.row-->
+			<img src="{% static 'img/contact_bg.jpg' %}" class="img-fluid rounded-block" alt="">
 		</div>
-		<!--/.content-->
-	</section>
-	<!--/section-->
+		<!--/.row-->
+	</div>
+	<!--/.content-->
+</section>
+<!--/section-->
 
-	<section class="position-relative">
-		<div class="container py-9 py-lg-11">
-			<div class="row mb-9 mb-lg-11">
-				<div class="col-lg-6 mb-5 mb-lg-0 text-center">
-					<h5 class="mb-2">Customer support</h5>
-					<p class="mb-3 small">
-						If you are already a customer with us,<br>we will be happy to help you in our
-						Customer Support.
-					</p>
-					<a href="{% url 'account:my_qna_write' %}" class="btn btn-sm btn-light border shadow-sm">
-						<i class="bx bx-headphone align-middle fw-normal me-1"></i> Customer support
-					</a>
-				</div>
-				<div class="col-lg-6 text-center">
-					<h5 class="mb-2">Phone</h5>
-					<p class="mb-3 small">
-						Give us a call Monday to Friday<br> 10:AM to 5:PM
-					</p>
-					<a href="#!" class="btn btn-sm btn-light border shadow-sm">
-						<i class="bx bx-phone align-middle fw-normal me-1"></i> +01 1234-567-890
-					</a>
-				</div>
+<section class="position-relative">
+	<div class="container py-9 py-lg-11">
+		<div class="row mb-9 mb-lg-11">
+			<div class="col-lg-6 mb-5 mb-lg-0 text-center">
+				<h5 class="mb-2">Customer support</h5>
+				<p class="mb-3 small">
+					If you are already a customer with us,<br>we will be happy to help you in our
+					Customer Support.
+				</p>
+				<a href="{% url 'account:my_qna_write' %}" class="btn btn-sm btn-light border shadow-sm">
+					<i class="bx bx-headphone align-middle fw-normal me-1"></i> Customer support
+				</a>
 			</div>
-			<div class="row">
-				<div class="col-md-12 col-lg-12 mx-auto">
-					<div class="position-relative">
-						<h1>Contact Form</h1>
-						<p class="mb-3 lead w-lg-75">
-							Use the contact form if you have questions about our products. Our sales team will
-							be happy to help you:
-						</p>
-						<div class="width-7x pt-1 bg-primary mb-7"></div>
-						<!-- Contacts Form -->
-						<form action="#" method="post" role="form" class="needs-validation mb-5 mb-lg-7"
-							novalidate>
-							<div class="row">
-								<!-- Input -->
-								<div class="col-sm-6 mb-3">
-									<label class="form-label" for="name">Your name</label>
-									<input type="text" name="name" class="form-control" id="name"
-										placeholder="your name here">
-								</div>
-								<!-- End Input -->
-
-								<!-- Input -->
-								<div class="col-sm-6 mb-3">
-									<label class="form-label" for="email">Your email address</label>
-									<input type="email" class="form-control" name="email" id="email"
-										placeholder="email address here" id="email"
-										aria-label="jackwayley@gmail.com" required>
-									<div class="invalid-feedback">
-										Please enter a valid email address
-									</div>
-								</div>
-
-								<div class="w-100"></div>
-
-								<!-- Input -->
-
-								<!-- Services -->
-								<div class="col-sm-12 mb-3">
-									<label class="form-label" for="subject">Subject</label>
-									<input type="text" class="form-control" name="subject" id="subject"
-										placeholder="Please enter your subjects.">
-								</div>
-								<!-- End Input -->
-							</div>
-
-							<!-- Message -->
-							<div class="mb-3">
-								<label for="message" class="form-label">Message</label>
-								<textarea class="form-control" name="message" placeholder="Please enter your message."></textarea>
-							</div>
-
-							<div class="d-md-flex justify-content-md-between align-items-center">
-								<p class="small mb-4 text-muted mb-md-0">We'll get back to you in 1-2 business
-									days.</p>
-								<input type="submit" name="submit" value="Submit message" id="sendBtn"
-									class="btn btn-lg btn-primary">
-							</div>
-						</form>
-						<!-- End Contacts Form -->
-					</div>
-				</div>
+			<div class="col-lg-6 text-center">
+				<h5 class="mb-2">Phone</h5>
+				<p class="mb-3 small">
+					Give us a call Monday to Friday<br> 10:AM to 5:PM
+				</p>
+				<a href="#!" class="btn btn-sm btn-light border shadow-sm">
+					<i class="bx bx-phone align-middle fw-normal me-1"></i> +01 1234-567-890
+				</a>
 			</div>
 		</div>
-	</section>
+		<div class="row">
+			<div class="col-md-12 col-lg-12 mx-auto">
+				<div class="position-relative">
+					<h1>Contact Form</h1>
+					<p class="mb-3 lead w-lg-75">
+						Use the contact form if you have questions about our products. Our sales team will
+						be happy to help you:
+					</p>
+					<div class="width-7x pt-1 bg-primary mb-7"></div>
+					<!-- Contacts Form -->
+					<form class="mb-5 mb-lg-7" novalidate onSubmit="return false;">
+						<div class="row">
+							<!-- Input -->
+							<div class="col-sm-6 mb-3">
+								<label class="form-label" for="name">Your name</label>
+								<input type="text" name="name" class="form-control" id="name" placeholder="your name here" oninput="checkValidation(this)">
+								<div class="invalid-feedback">
+									Please enter a valid name
+								</div>
+							</div>
+							<!-- End Input -->
+
+							<!-- Input -->
+							<div class="col-sm-6 mb-3">
+								<label class="form-label" for="email">Your email address</label>
+								<input type="email" class="form-control" name="email" id="email" oninput="checkValidation(this)"
+									placeholder="email address here">
+								<div class="invalid-feedback">
+									Please enter a valid email address
+								</div>
+							</div>
+
+							<div class="w-100"></div>
+
+							<!-- Input -->
+
+							<!-- Services -->
+							<div class="col-sm-12 mb-3">
+								<label class="form-label" for="subject">Subject</label>
+								<input type="text" class="form-control" name="subject" id="subject"
+									placeholder="Please enter your subjects.">
+								<div class="invalid-feedback">
+									Please enter subject
+								</div>
+							</div>
+							<!-- End Input -->
+						</div>
+
+						<!-- Message -->
+						<div class="mb-3">
+							<label for="message" class="form-label">Message</label>
+							<textarea class="form-control" name="message" id="message" placeholder="Please enter your message."></textarea>
+							<div class="invalid-feedback">
+								Please enter message
+							</div>
+						</div>
+
+						<div class="d-md-flex justify-content-md-between align-items-center">
+							<p class="small mb-4 text-muted mb-md-0">We'll get back to you in 1-2 business
+								days.</p>
+							<input type="submit" name="submit" value="Submit message" id="sendBtn"
+								class="btn btn-lg btn-primary">
+						</div>
+					</form>
+					<!-- End Contacts Form -->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+let sendBtn = document.getElementById("sendBtn");
+
+function checkValidation(e) {
+	if(e.name == 'name') {
+		if(e.value == '') {
+			e.classList.remove("is-invalid");
+		}else if(!name_check(e.value)) {
+			e.classList.add("is-invalid");
+		}else{
+			e.classList.remove("is-invalid")
+		}
+	}
+	if(e.name == 'email'){
+		if(e.value == '') {
+			e.classList.remove("is-invalid");
+		}else if(!email_check(e.value)) {
+			e.classList.add("is-invalid");
+		}else{
+			e.classList.remove("is-invalid")
+		}
+	}
+}
+
+sendBtn.addEventListener("click", () => {
+	let count = 0;
+
+	if(document.querySelector("#name").value == ''){
+		document.querySelector("#name").classList.add("is-invalid");
+		count ++;
+	}
+
+	if(document.querySelector("#email").value == ''){
+		document.querySelector("#email").classList.add("is-invalid");
+		count ++;		
+	}
+
+	if(document.querySelector("#subject").value == ''){
+		document.querySelector("#subject").classList.add("is-invalid");	
+		
+		count ++;
+	}else{
+		document.querySelector("#subject").classList.remove("is-invalid")
+	}
+
+	if(document.querySelector("#message").value == ''){
+		document.querySelector("#message").classList.add("is-invalid");	
+		count ++;
+	}else {
+		document.querySelector("#message").classList.remove("is-invalid")
+	}
+
+	if(count == 0) {
+		return true;
+	}else {
+		return false;
+	}
+});
+</script>
+
 {% endblock%}
