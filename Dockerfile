@@ -7,10 +7,10 @@ RUN apt-get -y update
 RUN apt-get -y install vim
 
 
-RUN mkdir /var/django
-ADD . /var/django
+RUN mkdir /srv/django
+ADD . /srv/django
 
-WORKDIR /var/django
+WORKDIR /srv/django
 
 RUN pip install --upgrade pip
 RUN pip install poetry
