@@ -147,7 +147,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = ( os.path.join('static'), )
 
 
-MEDIA_URL = 'http://cdn.utoville.com/media/'
+MEDIA_URL = 'http://home-cdn1.utoville.com/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
