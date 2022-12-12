@@ -16,12 +16,12 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 User = get_user_model()
 
-def user_login(request):
+def admin_login(request):
 	seo = {
 		'title': "로그인 - 유토빌",
 	}
 	if request.user.is_authenticated: #로그인 상태면
-		return HttpResponseRedirect(resolve_url('main:index'))
+		return HttpResponseRedirect(resolve_url('main:admin_index'))
 	if request.method == 'POST':
 		username=request.POST.get('username')
 		password=request.POST.get('password')
@@ -50,12 +50,12 @@ def user_login(request):
 
 		return JsonResponse({'result': result, 'result_text': result_text})
 	else:
-		return render(request, 'account/login.html',{"seo":seo})
+		return render(request, 'admin/account/login.html',{"seo":seo})
 
 
-def user_logout(request):
+def admin_logout(request):
 	auth.logout(request)
-	return HttpResponseRedirect(resolve_url('main:index'))
+	return HttpResponseRedirect(resolve_url('main:admin_index'))
 
 
 def user_join(request):
@@ -63,7 +63,7 @@ def user_join(request):
 		'title': "회원가입 - 유토빌",
 	}
 	if request.user.is_authenticated:
-		return HttpResponseRedirect(resolve_url('main:index'))
+		return HttpResponseRedirect(resolve_url('main:admin_index'))
 	if request.method == 'POST':
 		email=request.POST.get('email')
 		nickname=request.POST.get('nickname')
@@ -112,7 +112,7 @@ def user_join(request):
 		return JsonResponse(result)
 
 	else:
-		return render(request, 'account/join.html', {"seo":seo})
+		return render(request, 'admin/account/join.html', {"seo":seo})
 
 
 def join_confirm(request, uidb64, token):
@@ -132,12 +132,12 @@ def join_confirm(request, uidb64, token):
 			message = "이미 인증을 완료했습니다."
 	else:
 		message = "알수없는 오류입니다. 다시시도 해주세요."
-	return render(request, 'main/index.html', {"message":message})
+	return render(request, 'admin/main/index.html', {"message":message})
 
 
 def re_verify(request):
 	if request.user.is_authenticated:
-		HttpResponseRedirect(resolve_url('main:index'))
+		HttpResponseRedirect(resolve_url('main:admin_index'))
 	if request.method == 'POST':
 		email=request.POST.get('email')
 
@@ -156,7 +156,7 @@ def re_verify(request):
 		return JsonResponse(result)
 
 	else:
-		return render(request, 'account/re_verify.html')
+		return render(request, 'admin/account/re_verify.html')
 
 
 def find_passwd(request):
@@ -164,7 +164,7 @@ def find_passwd(request):
 		'title': "비밀번호 재설정 - 유토빌",
 	}
 	if request.user.is_authenticated: #로그인 상태면
-		HttpResponseRedirect(resolve_url('main:index'))
+		HttpResponseRedirect(resolve_url('main:admin_index'))
 	if request.method == 'POST':
 		email = request.POST.get('email')
 		try:
@@ -178,7 +178,7 @@ def find_passwd(request):
 			return JsonResponse({'result': result, 'result_text': result_text})
 
 
-		emailContent = render_to_string('email/reset_passd.html',{
+		emailContent = render_to_string('admin/email/reset_passd.html',{
 				'user': user,
 				'domain': settings.CURRENT_URL,
 				'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -202,7 +202,7 @@ def find_passwd(request):
 		result = {'result': result, 'result_text': result_text}
 		return JsonResponse(result)   
 	else:
-		return render(request, 'account/find_passwd.html', {"seo":seo})
+		return render(request, 'admin/account/find_passwd.html', {"seo":seo})
 
 
 
@@ -214,10 +214,10 @@ def reset_passwd(request, uidb64, token):
 		user = None
 
 	if user is None:
-		return render(request, 'main/index.html', {"message":"알수없는 오류입니다. 다시시도 해주세요."})
+		return render(request, 'admin/main/index.html', {"message":"알수없는 오류입니다. 다시시도 해주세요."})
 		
 	if not PasswordResetTokenGenerator().check_token(user, token):
-		return render(request, 'main/index.html', {"message":"이미 사용된 인증메일 입니다."})
+		return render(request, 'admin/main/index.html', {"message":"이미 사용된 인증메일 입니다."})
 
 
 	if request.method == 'POST':
@@ -235,7 +235,7 @@ def reset_passwd(request, uidb64, token):
 		result = {'result': result, 'result_text': result_text}
 		return JsonResponse(result)
 	else:
-		return render(request, 'account/reset_passwd.html')
+		return render(request, 'admin/account/reset_passwd.html')
 
 
 def send_auth_mail(email):
@@ -245,7 +245,7 @@ def send_auth_mail(email):
 		user = None
 	
 	if user is not None:
-		message = render_to_string('email/auth_email.html', {
+		message = render_to_string('admin/email/auth_email.html', {
 			'user': user,
 			'domain': settings.CURRENT_URL,
 			'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -263,7 +263,7 @@ def send_auth_mail(email):
 		return False
 
 
-def account_list(request):
+def admin_account_manage_list(request):
 	seo = {
 		'title': "회원 리스트 - 유토빌",
 	}
@@ -286,13 +286,13 @@ def account_list(request):
 	pagenator   = Paginator(account_objs, 10)
 	account_objs = pagenator.get_page(page)
 
-	return render(request, 'account/account_list.html', {
+	return render(request, 'admin/account/account_list.html', {
 		"seo":seo,
 		'account_objs': account_objs
 	})
 
 
-def account_delete(request):
+def admin_account_manage_delete(request):
 	try:
 		user_obj = User.objects.get(pk=request.POST.get('user_id'))
 	except:
