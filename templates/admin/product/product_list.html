@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load util_filter %}
+{% load mathfilters %}
+
+<!-- Begin page -->
+
+<div class="page-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header justify-content-between d-flex align-items-center">
+						<h4 class="card-title">상품 관리</h4>
+						<div class="text-end">
+							<a href="#!" onclick="remove_checked_item();" class="remove-btn btn btn-light">체크삭제</a>
+							<a href="{% url 'product:write' %}" class="btn btn-primary">상품등록</a>
+						</div>
+					</div>
+					<div class="card-body">				
+						<div class="table-responsive text-center">
+							<table class="table table-bordered align-middle table-nowrap table-check">
+								<thead>
+									<tr>
+										<th scope="col" style="width: 50px;">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" id="checkAll">		
+											</div>
+										</th>
+										<th scope="col">상품명</th>
+										<th scope="col">옵션</th>
+										<th scope="col">판매가</th>
+										<th scope="col">상태</th>
+										<th scope="col" style="width: 100px">수정</th>
+									</tr><!-- end tr -->
+								</thead><!-- end thead -->
+								<tbody>
+									{% if not product_list %}
+									<tr>
+										<td class="border-bottom-0 text-center p-5" colspan="10">주문이 없습니다.</td>
+									</tr>
+									{% endif%}
+									
+									{% for productList in product_list %}
+									<tr>
+										<th scope="row">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" value="{{productList.pk}}" name="product_id">
+												<label class="form-check-label" for="contacusercheck1"></label>
+											</div>
+										</th>	
+										<td>
+											<span class="fw-medium">{{productList.product_name}}</span>
+										</td>
+										<td>
+											123
+										</td>
+										<td>
+											123
+										</td>
+										<td>
+											<span class="badge badge-soft-primary">취소</span>
+										</td>
+										<td>
+											<a href="{% url 'product:update' productList.pk %}" class="btn btn-outline-primary">수정하기</a>
+										</td>
+									</tr><!-- end tr -->
+									{% endfor %}
+								</tbody><!-- end tbody -->
+							</table><!-- end table -->
+						</div><!-- end table responsive -->
+
+						<div class="row g-0 text-center text-sm-start">
+							<!-- end col -->
+							<div class="col-12">
+								<ul class="pagination pagination-rounded justify-content-center mb-sm-0">
+									{% if product_list.has_previous %}
+									<li class="page-item">
+										<a href="?p={{product_list.previous_page_number }}" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-left"></i></span>
+									</li>
+									{% endif %}
+									
+									{% for page_number in product_list.paginator.page_range %}
+										{% if page_number >= product_list.number|add:-2 and page_number <= product_list.number|add:2 %}
+											{% if page_number == product_list.number %}
+											<li class="page-item active">
+												<span class="page-link">{{ page_number }}</span>
+											</li>
+											{% else %}
+											<li class="page-item">
+												<a href="?p={{page_number }}" class="page-link">{{ page_number }}</a>
+											</li>
+											{% endif %}
+										{% endif %}
+									{% endfor %}
+									
+									{% if product_list.has_next  %}
+									<li class="page-item">
+										<a href="?p={{product_list.next_page_number }}" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-right"></i></span>
+									</li>
+									{% endif %}
+								</ul>
+							</div><!-- end col -->
+						</div><!-- end row -->
+						
+					</div><!-- end card body -->
+				</div><!-- end card -->
+			</div><!-- end col -->
+		</div><!-- end row -->
+	</div>
+</div>
+
+<script>
+let is_run = false;
+
+/*체크박스 전체 선택, 전체 해제*/
+let checkAll = document.getElementById("listcheckAll");
+let checkOne = document.querySelectorAll(".list-check");
+var count = 0;
+
+checkAll.addEventListener("click", function(){
+	if(checkAll.checked == true){
+		for(var i=0; i<checkOne.length; i++){
+			checkOne[i].checked = true;	
+		}
+	}else{
+		for(var i=0; i<checkOne.length; i++){
+			checkOne[i].checked = false;	
+		}			
+	}
+
+});
+
+
+function remove_checked_item() {
+	const item_list = document.querySelectorAll("input[name=product_id][type=checkbox]:checked");
+
+	let arr = [];
+
+	item_list.forEach(ele => arr.push(ele.value));
+
+	remove_product_submit(arr);
+}
+
+
+async function remove_product_submit(cart_item_id) {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+    const response = await fetch("{% url 'product:delete' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: JSON.stringify({
+			'cart_item_id_arr':cart_item_id
+		}),
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		is_run  = false;
+		if (data.result == '200') {
+			window.location.reload();
+		} else {
+			openModal("알림", data.result_text);
+		}
+	});
+
+}
+</script>
+{% endblock %}

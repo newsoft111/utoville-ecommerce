@@ -1,0 +1,390 @@
+{% extends 'seller/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+.fc-daygrid-day-bottom {
+	margin-top: 3px !important;
+	margin-left: 3px;
+}
+a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000 !important;
+}
+</style>
+
+<div class="page-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="page-title-box d-flex align-items-center justify-content-between">
+					<h4 class="mb-0">Sales Analytics</h4>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="card">
+					<div class="card-body">
+						<div id="calendar"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-header d-flex align-items-center">
+						<h4 class="card-title">Orders</h4>
+
+						<button type="button" class="btn btn-primary bg-white border-0 ms-1" id="order-reload-btn" onclick="get_order_preview_data('reload');" data-order-value="">
+							<i class="icon nav-icon text-primary" data-feather="refresh-cw"></i>
+						</button>
+
+						<div class="dropdown ms-auto">
+							<a class="dropdown-toggle btn btn-light btn-sm" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="text-muted" id="order-preview-text">Weekly
+								<i class="mdi mdi-chevron-down ms-1"></i></span>
+							</a>
+
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#!" onclick="set_order_value('Monthly');">Monthly</a>
+								<a class="dropdown-item" href="#!" onclick="set_order_value('Weekly');">Weekly</a>
+							</div>
+						</div>
+					</div><!-- end card header --> 
+
+					<div class="card-body">
+						<div class="text-center d-none" id="order-preview-chart-spinner">
+							<div class="spinner-border text-primary" role="status">
+								<span class="visually-hidden">Loading...</span>
+							</div>
+						</div>
+						
+						<div id="order-preview-chart-div">
+							<div class="d-flex justify-content-between">
+								<div>
+									<h4 class="mt-2 font-weight-bold mb-2 d-flex align-items-center" id="order-preview-value"></h4>
+								</div>
+							</div>
+						
+
+							<div id="order-preview-chart" class="apex-charts"></div>                              
+						</div>
+					</div>
+				</div><!--end card-->
+				
+				<div class="card">
+					<div class="card-header d-flex align-items-center">
+						<h4 class="card-title">Profit</h4>
+
+						<button type="button" class="btn btn-primary bg-white border-0 ms-1" id="profit-reload-btn" onclick="get_profit_preview_data('reload');" data-profit-value="">
+							<i class="icon nav-icon text-primary" data-feather="refresh-cw"></i>
+						</button>
+
+						<div class="dropdown ms-auto">
+							<a class="dropdown-toggle btn btn-light btn-sm" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"><span class="text-muted">Monthly<i
+										class="mdi mdi-chevron-down ms-1"></i></span>
+							</a>
+
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#!" onclick="set_profit_value('Monthly');">Monthly</a>
+							</div>
+						</div>
+					</div><!-- end card header --> 
+					<div class="card-body">
+						<div class="text-center d-none" id="profit-preview-chart-spinner">
+							<div class="spinner-border text-primary" role="status">
+								<span class="visually-hidden">Loading...</span>
+							</div>
+						</div>
+						
+
+						<div id="profit-preview-chart-div">
+							<div class="d-flex justify-content-between">
+								<div>
+									<h4 class="mt-2 font-weight-bold mb-2 d-flex align-items-center" id="profit-preview-value"></h4>
+								</div>
+							</div>
+
+							<div id="profit-preview-chart" class="apex-charts"></div>
+						</div>
+					</div>
+				</div><!--end card-->
+			</div>
+		</div>
+	</div>
+			
+	<!-- Add New Event MODAL -->
+	<div class="modal fade" id="scheduleModal" data-bs-backdrop="static" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+			<div class="modal-content">
+			<div class="modal-header p-4">
+				<h4 class="mb-0 text-center" id="">스케쥴수정</h4>
+				<button type="button" class="btn-close" id="" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body p-4" id="">
+				<div>
+					<h6>유형</h6>
+					<select class="form-select" name="event_type">
+						<option value="">선택하세요.</option>
+						<option value="배달완료">배달완료</option>
+						<option value="배송일정수정">배송일정수정</option>
+						<option value="주문취소">주문취소</option>
+					</select>
+				</div>
+
+				<div class="mt-3 d-none" id="edit-schedule">
+					<h6>날짜</h6>
+					여기에 달력
+				</div>
+			</div>
+			<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-md" onclick="edit_order_status_sumit();" data-bs-dismiss="modal">확인</button>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+let is_run = false;
+
+let editSchedule = document.querySelector("div[id=edit-schedule]");
+document.querySelector("select[name=event_type]").addEventListener("change", function(){
+	if (this.value == '배송일정수정') {
+		editSchedule.classList.remove('d-none');
+	} else {
+		editSchedule.className += ' d-none';
+	}
+});
+
+
+async function edit_order_status_sumit() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+	let order_item_id = document.querySelector("#scheduleModal").dataset.orderItemId;
+	let event_type = document.querySelector("select[name=event_type]").value;
+
+    const response = await fetch("{% url 'order:edit_status' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: JSON.stringify({
+			'event_type':event_type,
+			'order_item_id':order_item_id,
+			'schedule_date' : event_type == '배송일정수정' ? schedule_date : undefined,
+		})
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		is_run  = false;
+		if (data.result == '200') {
+			openModal("알림", data.result_text, '#scheduleModal', 'reload');
+		} else { 
+			openModal("알림", data.result_text, '#scheduleModal');
+		}
+	});
+}
+
+/*Order Charts*/
+var order_chart_options={
+	series:[{
+		name:"주문수",
+		data:[]
+	}],
+	chart:{
+		height:200,
+		type:"line",
+		zoom:{enabled:!1},
+		toolbar:{show:!1}
+	},
+	markers:{size:4},
+	dataLabels:{enabled:!1},
+	stroke:{curve:"straight"},
+	xaxis:{categories:[]},
+	yaxis: {
+		labels: {
+			formatter: function (value) {
+			return value;
+			}
+		},
+	},
+}
+
+var order_chart = new ApexCharts(document.querySelector("#order-preview-chart"), order_chart_options);
+order_chart.render();
+
+function set_order_value(value) {
+	if (isEmpty(value)) {
+		value = 'Weekly';
+	}
+	document.querySelector("#order-reload-btn").dataset.value=value;
+	get_order_preview_data();
+}
+
+async function get_order_preview_data(cache) {
+	if (isEmpty(cache)) {
+		cache = '';
+	}
+
+	let value = document.querySelector("#order-reload-btn").dataset.value;
+
+	//드롭다운 엘리멘트
+	document.querySelector("span[id=order-preview-text]").innerHTML = `${value}<i class="mdi mdi-chevron-down ms-1"></i></span>`;
+
+	let preview_div = document.querySelector("#order-preview-chart-div")
+	preview_div.className += ' d-none';
+
+	spinner = document.querySelector("#order-preview-chart-spinner");
+	spinner.classList.remove('d-none');
+
+    const response = await fetch(`{% url 'order:preview' %}?standard=${value}&cache=${cache}`, 
+	{
+		method: "GET",
+	})
+	.then(response => response.json())
+	.then(data => {
+		preview_div.classList.remove('d-none');
+		document.querySelector('h4[id=order-preview-value]').innerHTML = '총:' + data.count + '건';
+		order_chart.updateSeries([{
+			data: data.chart_data
+		}])
+		
+	});
+	spinner.className += ' d-none';
+	
+	
+	
+}
+set_order_value();
+
+
+/*Profit Charts*/
+var profit_chart_options={
+	series:[{
+		name:"정산금액",
+		data:[]
+	}],
+	chart:{
+		height:200,
+		type:"line",
+		zoom:{enabled:!1},
+		toolbar:{show:!1}
+	},
+	markers:{size:4},
+	dataLabels:{enabled:!1},
+	stroke:{curve:"straight"},
+	xaxis:{categories:[]},
+	yaxis: {
+		labels: {
+			formatter: function (value) {
+				console.log(value);
+				return numberWithCommas(value);
+			}
+		},
+	},
+}
+
+var profit_chart = new ApexCharts(document.querySelector("#profit-preview-chart"), profit_chart_options);
+profit_chart.render();
+
+
+function set_profit_value(value) {
+	if (isEmpty(value)) {
+		value = 'Monthly';
+	}
+	document.querySelector("#profit-reload-btn").dataset.value=value;
+	get_profit_preview_data();
+}
+
+
+async function get_profit_preview_data(cache) {
+	if (isEmpty(cache)) {
+		cache = '';
+	}
+
+	let value = document.querySelector("#profit-reload-btn").dataset.value;
+
+	//document.querySelector("span[id=order-preview-text]").innerHTML = `${value}<i class="mdi mdi-chevron-down ms-1"></i></span>`;
+	let preview_div = document.querySelector("#profit-preview-chart-div")
+	preview_div.className += ' d-none';
+
+	document.querySelector("#profit-preview-chart-spinner").classList.remove('d-none');
+
+    const response = await fetch(`{% url 'profit:preview' %}?standard=${value}&cache=${cache}`, 
+	{
+		method: "GET",
+	})
+	.then(response => response.json())
+	.then(data => {
+		preview_div.classList.remove('d-none');
+		document.querySelector('h4[id=profit-preview-value]').innerHTML = '정산예정:' + data.profit_amount + '원';
+		profit_chart.updateSeries([{
+			data: data.chart_data
+		}])
+	});
+
+	document.querySelector("#profit-preview-chart-spinner").className += ' d-none';
+}
+get_profit_preview_data();
+
+/*Mainpage Caledar*/
+var order_data_calendar = {{ order_data_calendar|safe }}
+document.addEventListener("DOMContentLoaded", function() {
+	let my_modal = document.querySelector("#scheduleModal");
+    var n = bootstrap.Modal.getOrCreateInstance(my_modal);
+
+    var t = document.getElementById("modal-title"),
+        l = null,
+        d = null,
+        i = document.getElementsByClassName("needs-validation"),
+        l = null,
+        d = null,
+        e = new Date,
+        s = e.getDate(),
+        r = e.getMonth(),
+        e = e.getFullYear();
+    
+		e = order_data_calendar, r = document.getElementById("calendar");
+
+    function c() {
+        return 768 <= window.innerWidth && window.innerWidth < 1200 ? "timeGridWeek" : window.innerWidth <= 768 ? "listMonth" : "dayGridMonth"
+    }
+    var m = new FullCalendar.Calendar(r, {
+		dayMaxEvents: 5,
+		eventMaxStack: 2,
+        timeZone: "local",
+		contentHeight: 'auto',
+        initialView: c(),
+        themeSystem: "bootstrap",
+        headerToolbar: {
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+        },
+        windowResize: function(e) {
+            var t = c();
+            m.changeView(t)
+        },
+        eventClick: function(e) {
+			my_modal.dataset.orderItemId = e.event.id;
+            n.show();
+        },
+        events: e
+    });
+    m.render()
+});
+
+</script>
+
+{% endblock %}

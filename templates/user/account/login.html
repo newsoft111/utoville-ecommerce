@@ -1,0 +1,147 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+input[type="checkbox"]{
+        display: none;
+      }
+input[type="checkbox"] + label{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border:1px solid #707070;
+        position: relative;
+      }
+input[id="flexCheckDefault"]:checked + label::after{
+	content:'✔';
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	position: absolute;
+	left: -5px;
+	top: 0px;
+	font-size: 13px;
+}
+.remeber-text {
+	margin-left: 30px;
+	white-space: nowrap;
+}
+</style>
+
+<section class="bg-white position-relative">
+	<div class="bg-pattern text-light w-100 h-100 start-0 top-0 position-absolute"></div>
+	<div class="container pt-11 pt-lg-14 pb-9 pb-lg-11 position-relative z-index-1">
+		<div class="row align-items-center justify-content-center">
+			<div class=" col-xl-4 col-lg-5 col-md-6 col-sm-8 z-index-2">			
+				<h2 class="mb-1 display-6">
+					Welcome back!
+				   </h2>
+				   <p class="mb-4 text-muted">
+					  Please Sign In with details...
+				   </p>
+				<div class="position-relative">
+					<div>
+						<form name="loginForm">
+							{% csrf_token %}
+							<div class="input-icon-group mb-3">
+								<span class="input-icon">
+							  <i class="bx bx-envelope"></i>
+							</span>
+						  <input type="text" name="username" class="form-control" required autofocus placeholder="Username">
+						</div>
+						  <div class="input-icon-group mb-3">
+							<span class="input-icon">
+								<i class="bx bx-lock-open"></i>
+							</span>
+						  <input type="password" name="password" class="form-control" required placeholder="Password">
+						</div>
+							<div class="mb-3 d-flex justify-content-between">
+								<div>
+									<input type="checkbox" id="flexCheckDefault">
+									<label for="flexCheckDefault"><span class="remeber-text d-block small mb-0">Remember me.</span></label>
+								</div>
+								<div>
+									<label class="text-end d-block small mb-0"><a href="page-account-forget-password.html" class="text-muted link-decoration">Forget Password?</a></label>
+								</div>
+							</div>		
+							<div class="d-grid">
+								<button class="btn btn-primary" type="button" onclick="login_submit();">
+									Sign in
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>`
+		</div>
+	</div>
+</section>
+
+<script>
+	var is_run = false;
+
+	$(document).ready(function() {
+    $("form[name=loginForm]").keypress(function (e) {
+			if (e.keyCode === 13) {
+				login_submit();
+			}
+		});
+  	});
+	
+
+	function login_submit() {
+    var loginForm = document.loginForm;
+    var username = loginForm.username.value;
+    var password = loginForm.password.value;
+
+		var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        
+    if (isEmpty(username)) {
+      	openModal('알림','이메일을 입력해주세요.');
+		return false;
+
+    }
+	if (isEmpty(password)) {
+      	openModal('알림','비밀번호를 입력해주세요.');
+		return false;
+    }
+
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+    }
+
+	is_run = true;
+    var queryString = $("form[name=loginForm]").serialize();
+	
+	$('#my-spinner').show();
+
+    $.ajax({
+        type : 'POST',
+        url : "{{request.path}}",
+        data : queryString,
+        dataType : 'json',
+        success: function(data){
+          if(data.result==200){
+            location.replace("{% url 'main:index' %}");
+          }else{
+            openModal("알림", data.result_text);
+          }
+					is_run  = false;
+          return;
+        },
+        error: function (request, status, error){
+          var msg = "ERROR : " + request.status + "<br>"
+			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
+			    console.log(msg);
+        },
+		complete: function () {
+			$('#my-spinner').hide();
+		}
+    });
+  }
+
+</script>
+{% endblock %}

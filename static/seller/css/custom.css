@@ -1,0 +1,108 @@
+.custom-blockquote.blockquote.blockquote-outline-success {
+    border: 1px solid #51d28c;
+    border-left: 4px solid #51d28c;
+}
+.custom-blockquote.blockquote.blockquote-outline-primary {
+    border: 1px solid #038edc;
+    border-left: 4px solid #038edc;
+}
+.custom-blockquote.blockquote.blockquote-outline-danger {
+    border: 1px solid #f34e4e;
+    border-left: 4px solid #f34e4e;
+}
+.custom-blockquote.blockquote.blockquote-outline-purple {
+    border: 1px solid #564ab1;
+    border-left: 4px solid #564ab1;
+}
+.custom-blockquote.blockquote.blockquote-outline-secondary {
+    border: 1px solid #74788d;
+    border-left: 4px solid #74788d;
+}
+.custom-blockquote.blockquote.blockquote-outline-dark {
+    border: 1px solid #343a40;
+    border-left: 4px solid #343a40;
+}
+.custom-blockquote.blockquote.blockquote-outline-light {
+    border: 1px solid #f5f6f8;
+    border-left: 4px solid #f5f6f8;
+}
+.custom-blockquote.blockquote {
+	border-left: 3px solid;
+}
+
+.sales-all {
+	border-top: 13px solid #ef6866;
+	border-left: 1px solid #ef6866;
+	border-right: 1px solid #ef6866;
+	border-bottom: 1px solid #ef6866;
+}
+.pay-done {
+    border-top: 13px solid #51d28c;
+    border-left: 1px solid #51D28C;
+    border-right: 1px solid #51d28c;
+    border-bottom: 1px solid #51d28c;
+}
+.pay-refund {
+    border-top: 13px solid #ffc13f;
+    border-left: 1px solid #ffc13f;
+    border-right: 1px solid #ffc13f;
+    border-bottom: 1px solid #ffc13f;
+}
+.pay-calculate {
+	border-top: 13px solid #0d6efd;
+    border-left: 1px solid #0d6efd;
+    border-right: 1px solid #0d6efd;
+    border-bottom: 1px solid #0d6efd;
+}
+
+.underline {
+	text-decoration: underline;
+	text-underline-position: under;
+}
+
+@media only screen and (max-width: 767px) {
+	.responsiveTable {
+		border: 0;
+	}
+
+	.responsiveTable caption {
+		font-size: 1.3em;
+	}
+
+	.responsiveTable thead {
+		border: none;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+
+	.responsiveTable tr:first-child {
+		border-top: 3px solid #ddd;
+	}
+
+	.responsiveTable tr {
+		border-bottom: 3px solid #ddd;
+		display: block;
+		margin-bottom: .625em;
+	}
+
+	.responsiveTable td {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		text-align: right;
+	}
+
+	.responsiveTable td::before {
+		content: attr(data-label);
+		float: left;
+		font-weight: bold;
+	}
+
+	.responsiveTable td:last-child {
+		border-bottom: 0;
+	}
+}

@@ -1,0 +1,334 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<!-- Begin page -->
+
+<div class="page-content">
+	<div class="container-fluid">
+		<!-- start page title -->
+		<div class="row">
+			<div class="col-12">
+				<div class="page-title-box d-flex align-items-center justify-content-between">
+					<h4 class="mb-0">Sales Analytics</h4>
+				</div>
+			</div>
+		</div>
+		<!-- end page title -->
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="card">
+					<div class="card-body">
+						<div id="calendar"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-header justify-content-between d-flex align-items-center">
+						<h4 class="card-title">Orders</h4>
+						<div class="dropdown">
+							<a class="dropdown-toggle btn btn-light btn-sm" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"><span class="text-muted">Weekly<i
+										class="mdi mdi-chevron-down ms-1"></i></span>
+							</a>
+
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">Monthly</a>
+								<a class="dropdown-item" href="#">Yearly</a>
+								<a class="dropdown-item" href="#">Weekly</a>
+							</div>
+						</div>
+						</div><!-- end card header --> 
+					<div class="card-body">
+						<div class="d-flex justify-content-between">
+							<div>
+								<h4 class="mt-2 font-weight-bold mb-2 d-flex align-items-center">
+									$46.34k 건
+								</h4>
+							</div>
+						</div>
+
+						<div id="total_order_chart" class="apex-charts"></div>                              
+					</div>
+				</div><!--end card-->
+				
+				<div class="card">
+					<div class="card-header justify-content-between d-flex align-items-center">
+						<h4 class="card-title">Profit</h4>
+						<div class="dropdown">
+							<a class="dropdown-toggle btn btn-light btn-sm" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"><span class="text-muted">Weekly<i
+										class="mdi mdi-chevron-down ms-1"></i></span>
+							</a>
+
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">Monthly</a>
+								<a class="dropdown-item" href="#">Yearly</a>
+								<a class="dropdown-item" href="#">Weekly</a>
+							</div>
+						</div>
+						</div><!-- end card header --> 
+					<div class="card-body">
+						<div class="d-flex justify-content-between">
+							<div>
+								<h4 class="mt-2 font-weight-bold mb-2 d-flex align-items-center">
+									$46.34k 원
+								</h4>
+							</div>
+						</div>
+
+						<div id="total_profit_chart" class="apex-charts"></div>                              
+					</div>
+				</div><!--end card-->
+			</div>
+		</div>
+	</div>
+			
+		<!-- Add New Event MODAL -->
+		<div class="modal fade" id="event-modal" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header py-3 px-4 border-bottom-0">
+						<h5 class="modal-title" id="modal-title">Event</h5>
+
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-hidden="true"></button>
+
+					</div>
+					<div class="modal-body p-4">
+						<form class="needs-validation" name="event-form" id="form-event" novalidate>
+							<div class="row">
+								<div class="col-12">
+									<div class="mb-3">
+										<label class="form-label">Event Name</label>
+										<input class="form-control" placeholder="Insert Event Name"
+											type="text" name="title" id="event-title" required value="" />
+										<div class="invalid-feedback">Please provide a valid event name</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="mb-3">
+										<label class="form-label">Category</label>
+										<select class="form-select shadow-none" name="category"
+											id="event-category" required>
+											<option value="bg-danger" selected>Danger</option>
+											<option value="bg-success">Success</option>
+											<option value="bg-primary">Primary</option>
+											<option value="bg-info">Info</option>
+											<option value="bg-dark">Dark</option>
+											<option value="bg-warning">Warning</option>
+										</select>
+										<div class="invalid-feedback">Please select a valid event category</div>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-2">
+								<div class="col-6">
+									<button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button>
+								</div>
+								<div class="col-6 text-end">
+									<button type="button" class="btn btn-light me-1" data-bs-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div> <!-- end modal-content-->
+			</div> <!-- end modal dialog-->
+		</div>
+		<!-- end modal-->
+
+	<!-- container-fluid -->
+</div>
+<!-- End Page-content -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<script>
+var options={
+	series:[{
+		name:"주문수",
+		data:[10,41,35,51,49,62,69,91,148]
+	}],
+	chart:{
+		height:200,
+		type:"line",
+		zoom:{enabled:!1},
+		toolbar:{show:!1}},
+		markers:{size:4},
+		dataLabels:{enabled:!1},
+		stroke:{curve:"straight"},
+		xaxis:{categories:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep"]
+	}
+}
+var chart = new ApexCharts(document.querySelector("#total_order_chart"), options);
+chart.render();
+
+var options={
+	series:[{
+		name:"주문수",
+		data:[10,41,35,51,49,62,69,91,148]
+	}],
+	chart:{
+		height:200,
+		type:"line",
+		zoom:{enabled:!1},
+		toolbar:{show:!1}},
+		markers:{size:4},
+		dataLabels:{enabled:!1},
+		stroke:{curve:"straight"},
+		xaxis:{categories:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep"]
+	}
+}
+var chart = new ApexCharts(document.querySelector("#total_profit_chart"), options);
+chart.render();
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    var n = new bootstrap.Modal(document.getElementById("event-modal"), {
+        keyboard: !1
+    });
+    document.getElementById("event-modal");
+    var t = document.getElementById("modal-title"),
+        a = document.getElementById("form-event"),
+        l = null,
+        d = null,
+        i = document.getElementsByClassName("needs-validation"),
+        l = null,
+        d = null,
+        e = new Date,
+        s = e.getDate(),
+        r = e.getMonth(),
+        e = e.getFullYear();
+    
+		e = [{
+        title: "All Day Event",
+        start: new Date(e, r, 1),
+        className: "bg-primary"
+    }, {
+        title: "Long Event",
+        start: new Date(e, r, s - 5),
+        end: new Date(e, r, s - 2),
+        className: "bg-warning"
+    }, {
+        id: 999,
+        title: "Repeating Event",
+        start: new Date(e, r, s - 3, 16, 0),
+        allDay: !1,
+        className: "bg-info"
+    }, {
+        id: 999,
+        title: "Repeating Event",
+        start: new Date(e, r, s + 4, 16, 0),
+        allDay: !1,
+        className: "bg-primary"
+    }, {
+        title: "Meeting",
+        start: new Date(e, r, s, 10, 30),
+        allDay: !1,
+        className: "bg-success"
+    }, {
+        title: "Lunch",
+        start: new Date(e, r, s, 12, 0),
+        end: new Date(e, r, s, 14, 0),
+        allDay: !1,
+        className: "bg-danger"
+    }, {
+        title: "Birthday Party",
+        start: new Date(e, r, s + 1, 19, 0),
+        end: new Date(e, r, s + 1, 22, 30),
+        allDay: !1,
+        className: "bg-success"
+	}, {
+        title: "Birthday Party",
+        start: new Date(e, r, s + 1, 19, 0),
+        end: new Date(e, r, s + 1, 22, 30),
+        allDay: !1,
+        className: "bg-success"
+	}, {
+        title: "Birthday Party",
+        start: new Date(e, r, s + 1, 19, 0),
+        end: new Date(e, r, s + 1, 22, 30),
+        allDay: !1,
+        className: "bg-success"
+	}, {
+        title: "Birthday Party",
+        start: new Date(e, r, s + 1, 19, 0),
+        end: new Date(e, r, s + 1, 22, 30),
+        allDay: !1,
+        className: "bg-success"
+	}, {
+        title: "Birthday Party",
+        start: new Date(e, r, s + 1, 19, 0),
+        end: new Date(e, r, s + 1, 22, 30),
+        allDay: !1,
+        className: "bg-success"
+	}, {
+        title: "Birthday Party",
+        start: new Date(e, r, s + 1, 19, 0),
+        end: new Date(e, r, s + 1, 22, 30),
+        allDay: !1,
+        className: "bg-success"
+	}, {
+        title: "Birthday Party",
+        start: new Date(e, r, s + 1, 19, 0),
+        end: new Date(e, r, s + 1, 22, 30),
+        allDay: !1,
+        className: "bg-success"
+	}, {
+        title: "Birthday Party",
+        start: new Date(e, r, s + 1, 19, 0),
+        end: new Date(e, r, s + 1, 22, 30),
+        allDay: !1,
+        className: "bg-success"
+	
+    }, {
+        title: "Click for Google",
+        start: new Date(e, r, 28),
+        end: new Date(e, r, 29),
+        url: "http://google.com/",
+        className: "bg-dark"
+    }], r = document.getElementById("calendar");
+
+    function c() {
+        return 768 <= window.innerWidth && window.innerWidth < 1200 ? "timeGridWeek" : window.innerWidth <= 768 ? "listMonth" : "dayGridMonth"
+    }
+    var m = new FullCalendar.Calendar(r, {
+        timeZone: "local",
+		contentHeight: 'auto',
+        initialView: c(),
+        themeSystem: "bootstrap",
+        headerToolbar: {
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+        },
+        windowResize: function(e) {
+            var t = c();
+            m.changeView(t)
+        },
+        eventDidMount: function(e) {
+            "done" === e.event.extendedProps.status && (e.el.style.backgroundColor = "red", (e = e.el.getElementsByClassName("fc-event-dot")[0]) && (e.style.backgroundColor = "white"))
+        },
+        eventClick: function(e) {
+            n.show(), a.reset(), document.getElementById("event-title").value[0] = "", l = e.event, document.getElementById("event-title").value = l.title, document.getElementById("event-category").value = l.classNames[0], d = null, t.innerText = "Edit Event", d = null
+        },
+        events: e
+    });
+    m.render(), a.addEventListener("submit", function(e) {
+        e.preventDefault();
+        var t = document.getElementById("event-title").value,
+            e = document.getElementById("event-category").value;
+        !1 === i[0].checkValidity() ? i[0].classList.add("was-validated") : (l ? (l.setProp("title", t), l.setProp("classNames", [e])) : (e = {
+            title: t,
+            start: d.date,
+            allDay: d.allDay,
+            className: e
+        }, m.addEvent(e)), n.hide())
+    })
+});
+
+</script>
+
+{% endblock %}

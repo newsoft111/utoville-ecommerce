@@ -1,0 +1,52 @@
+{% load static %}
+	<footer class="footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<script>document.write(new Date().getFullYear())</script> &copy; Utoville Homecare.
+				</div>
+			</div>
+		</div>
+	</footer>
+	</div>
+	<!-- end main content-->
+
+	</div>
+	<!-- END layout-wrapper -->
+
+<div class="modal fade" id="globalModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="globalModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">
+		<div class="modal-header p-4">
+			<h4 class="mb-0 text-center" id="modal_subject">알림</h4>
+			<button type="button" class="btn-close" id="closeModalBtn" data-before-modal="" onclick="closeModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body p-4" id="modal_content">
+		</div>
+		<div class="modal-footer">
+				<button type="button" class="btn btn-primary btn-md" id="closeModalBtn" data-before-modal="" onclick="closeModal()" data-bs-dismiss="modal">확인</button>
+		</div>
+		</div>
+	</div>
+</div>
+
+<!-- end authentication section -->
+
+
+<!-- JAVASCRIPT -->
+<script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'libs/metismenujs/dist/metismenujs.min.js' %}"></script>
+<script src="{% static 'libs/simplebar/dist/simplebar.min.js' %}"></script>
+<script src="{% static 'libs/feather-icons/dist/feather.min.js' %}"></script>
+
+
+<!-- Vector map-->
+<script src="{% static 'libs/jsvectormap/dist/js/jsvectormap.min.js' %}"></script>
+<script src="{% static 'libs/jsvectormap/dist/maps/world-merc.js' %}"></script>
+
+<script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+<script src="{% static 'libs/fullcalendar/main.min.js' %}"></script>
+</body>
+</html>

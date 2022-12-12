@@ -1,0 +1,184 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Sign In | Dashonic - Admin & Dashboard Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Pichforest" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+        
+    </head>
+
+    
+    <body>
+        <div class="authentication-bg min-vh-100">
+            <div class="bg-overlay bg-white"></div>
+            <div class="container">
+                <div class="d-flex flex-column min-vh-100 px-3 pt-4">
+                    <div class="row justify-content-center my-auto">
+                        <div class="col-md-8 col-lg-6 col-xl-4">                            
+                            <div class="text-center  py-5">
+                                <div class="mb-4 mb-md-5">
+                                    <a href="/" class="d-block auth-logo">
+                                        <img src="{% static 'images/logo-dark.png' %}" alt="" height="22" class="auth-logo-dark">
+                                        <img src="{% static 'images/logo-light.png' %}" alt="" height="22" class="auth-logo-light">
+                                    </a>
+                                </div>                               
+                                
+                    			<div class="mb-4">
+                        			<h5>Welcome Back !</h5>
+									<p>Sign in to continue to Dashonic.</p>
+                        		</div>
+
+                                <form name="loginForm">
+								{% csrf_token %}
+									<div id="div_id_login" class="form-group">
+										<div>
+											<input type="text" name="username" class="form-floating form-floating-custom mb-3 textinput textInput form-control" placeholder="Username" id="username" required>
+										</div> 
+									</div> 
+									
+									<div id="div_id_password" class="form-group">
+										<div>
+											<input type="password" name="password" class="form-floating form-floating-custom mb-3 textinput textInput form-control" placeholder="Password" id="password" required>
+										</div>
+									</div> 
+									
+									<div class="form-group">
+										<div id="div_id_remember" class="form-check">
+											<input type="checkbox" name="remember" class="checkboxinput form-check-input" id="id_remember">
+											<label for="id_remember" class="form-check-label">Remember Me</label>
+										</div>
+									</div>
+                                     
+                                    <div class="mt-3">
+                                        <a class="btn btn-info w-100" onclick="login_submit();">Log In</a>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <a href="/account/password/reset/" class="text-muted text-decoration-underline">Forgot your password?</a>
+                                    </div>
+                                </form>
+                                
+                                <div class="mt-5 text-center text-muted">
+                                    <p>Don't have an account ? <a href="/account/signup/" class="fw-medium text-decoration-underline"> Signup </a></p>
+                                </div>
+
+                            </div>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="text-center text-muted p-4">
+                                <p class="mb-0">&copy; <script>document.write(new Date().getFullYear())</script> Dashonic. Crafted with <i class="mdi mdi-heart text-danger"></i> by Pichforest</p>
+                            </div>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+
+                </div>
+            </div><!-- end container -->
+        </div>
+
+		<div class="modal fade" id="globalModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="globalModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+				<div class="modal-content">
+				<div class="modal-header p-4">
+					<h4 class="mb-0 text-center" id="modal_subject">알림</h4>
+					<button type="button" class="btn-close" id="closeModalBtn" data-before-modal="" onclick="closeModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body p-4" id="modal_content">
+				</div>
+				<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-md" id="closeModalBtn" data-before-modal="" onclick="closeModal()" data-bs-dismiss="modal">확인</button>
+				</div>
+				</div>
+			</div>
+		</div>
+
+        <!-- end authentication section -->
+        
+		
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenujs/dist/metismenujs.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/dist/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/dist/feather.min.js' %}"></script>
+        <script src="{% static 'js/app.js' %}"></script>
+		<script src="{% static 'js/custom.js' %}"></script>
+
+		<script>
+		var is_run = false;
+		
+		document.querySelector('form[name=loginForm]').addEventListener('keypress', function (e) {
+			if (e.key === 'Enter') {
+				login_submit();
+			}
+		});
+
+			
+		function login_submit() {
+			var loginForm = document.loginForm;
+			var username = loginForm.username.value;
+			var password = loginForm.password.value;
+		
+			var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+				
+			if (isEmpty(username)) {
+					openModal('알림','아이디을 입력해주세요.');
+				return false;
+		
+			}
+			if (isEmpty(password)) {
+					openModal('알림','비밀번호를 입력해주세요.');
+				return false;
+			}
+		
+			if(is_run == true) {
+				openModal('알림','잠시후에 다시시도 해주세요.');
+				return false;
+			}
+		
+			is_run = true;
+			//document.getElementById("my-spinner").style.display = "";
+		
+			var url = "{{request.path}}";
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", url, true);
+		
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200){
+						location.replace("{% url 'main:index' %}");
+					} else if (xhr.status == 201) {
+						openModal("알림", data.result_text);
+					} else {
+						console.log("[status] : " + xhr.status);
+						console.log("[response] : " + "[fail]");    				   				    				
+						console.log("[response] : " + xhr.responseText);
+						console.log("");        				
+					}    				
+				}
+				is_run  = false;
+				//document.getElementById("my-spinner").style.display = "none";
+			}
+		
+			var form = document.querySelector('form[name=loginForm]');
+			var data = new FormData(form);
+			xhr.send(data);
+		}
+		
+		</script>
+		
+		
+    </body>
+</html>

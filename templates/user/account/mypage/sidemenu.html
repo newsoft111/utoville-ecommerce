@@ -1,0 +1,35 @@
+<style>
+.link-hover-decoration:hover {
+	text-decoration-line: none;
+	color: #2ea7e0 !important;
+}
+</style>
+<div class="mypage_sidebar col-lg-3 mb-5 mb-lg-0">
+	<div class="mt-lg-n16 position-relative z-index-1">
+		<div class="sidebar_body card shadow p-3">
+			<div>
+				<h4 class="mb-2">Welcome User</h4>
+				<ul class="list-group list-group-flush mt-5 mb-0">
+					<li class="list-group-item {% if active_tab == '대쉬보드' %}active{% endif %}">
+						<i class="bx bx-layer me-2 text-dark"></i>
+						<a href="{% url 'account:my_dashboard' %}" class="small link-hover-decoration text-dark">대쉬보드</a>
+					</li>
+
+					<li class="list-group-item {% if active_tab == '주문 조회' %}active{% endif %}">
+						<i class="bx bx-user-circle me-2 text-dark"></i>
+						<a href="{% url 'account:my_order' %}" class="small link-hover-decoration text-dark">주문 조회</a>
+					</li>
+					
+					<li class="list-group-item {% if active_tab == '구독관리'%}active{% endif %}">
+						<i class="bx bx-cog me-2 text-dark"></i>
+						<a href="{% url 'account:my_subscribe' %}" class="small link-hover-decoration text-dark">구독관리</a>
+					</li>
+					<li class="list-group-item {% if active_tab == '1:1 문의'%}active{% endif %}">
+						<i class="bx bx-question-mark me-2 text-dark"></i>
+						<a href="{% url 'account:my_qna_list' %}" class="small link-hover-decoration text-dark">1:1 문의</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

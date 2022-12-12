@@ -1,0 +1,209 @@
+{% load static %}
+{% load humanize %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Utoville HouseCare Seller</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+	<meta content="Pichforest" name="author" />
+	<!-- App favicon -->
+	<link rel="shortcut icon" href="{% static 'seller/images/favicon.ico' %}">
+	<link href="{% static 'seller/css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" /> 
+	<!-- Icons Css -->
+	<link href="{% static 'seller/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+	<!-- App Css-->
+	<link href="{% static 'seller/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />  
+	<link href="{% static 'seller/libs/fullcalendar/main.min.css' %}" rel="stylesheet" type="text/css" />
+	<script src="{% static 'seller/js/custom.js' %}"></script>
+	<!-- Custom css -->
+	<link href="{% static 'seller/css/custom.css' %}" rel="stylesheet" type="text/css" />
+</head>
+
+<style>
+	@media only screen and (max-width: 992px) {
+		.topnav {
+			position: relative;
+			top: 70px;			
+			text-align: center;
+		}
+		.navbar-nav {
+			display: inline-block;
+
+		}
+		.navbar-nav li {
+			display: inline-block;
+		}
+	}
+</style> 
+<body data-sidebar-size="lg" data-layout-mode="light">
+	<div id="layout-wrapper">
+		<header id="page-topbar">
+			<div class="navbar-header">
+				<div class="d-flex">
+					<!-- LOGO -->
+					<div class="navbar-brand-box">
+						<a href="{% url 'main:index' %}" class="logo">
+							<span class="logo-sm">
+								<img src="{% static 'seller/images/logo-dark.png' %}" alt="" height="22">
+							</span>
+							<span class="logo-lg">
+								<img src="{% static 'seller/images/logo-sm-dark.png' %}" alt="" height="22">
+							</span>
+						</a>
+					</div>
+				</div>
+	
+				<div>
+					<a href="{% url 'account:logout' %}" class="btn header-item user text-start d-flex align-items-center">
+						<span class="ms-2 d-sm-block user-item-desc">
+							<span class="user-name">로그아웃</span>
+						</span>
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- ========== Left Sidebar Start ========== -->
+		<div class="vertical-menu">
+	
+			<!-- LOGO -->
+			<div class="navbar-brand-box">
+	
+				<a href="{% url 'main:index' %}" class="logo">
+					<span class="logo-lg">
+						<img src="{% static 'seller/images/logo-dark.png' %}" alt="" height="22">
+					</span>
+					<span class="logo-sm">
+						<img src="{% static 'seller/images/logo-sm-dark.png' %}" alt="" height="22">
+					</span>
+				</a>
+			</div>
+	
+			<div data-simplebar class="sidebar-menu-scroll">
+	
+				<!--- Sidemenu -->
+				<div id="sidebar-menu">
+					<!-- Left Menu Start -->
+					<ul class="metismenu list-unstyled" id="side-menu">
+						<li class="menu-title" data-key="t-dashboards">Dashboard</li>
+						<li>
+							<a href="{% url 'main:index' %}">
+								<i class="icon nav-icon" data-feather="monitor"></i>
+								<span class="menu-item">Dashboard</span>
+							</a>
+						</li>
+	
+						
+						<li class="menu-title" data-key="t-components">Sales</li>
+						<li>
+							<a href="{% url 'order:seller_order_list' %}">
+								<i class="icon nav-icon" data-feather="briefcase"></i>
+								<span class="menu-item">주문</span>
+								<span class="badge rounded-pill badge-soft-secondary">{{counter_new_order}}+</span>
+							</a>
+						</li>
+
+						<li>
+							<a href="{% url 'qna:list' %}">
+								<i class="icon nav-icon" data-feather="message-square"></i>
+								<span class="menu-item">문의</span>
+								<span class="badge rounded-pill badge-soft-secondary">{{counter_new_qna}}+</span>
+							</a>
+						</li>
+
+						<li class="menu-title" data-key="t-components">Profit</li>
+						<li>
+							<a href="{% url 'profit:list' %}">
+								<i class="icon nav-icon" data-feather="tag"></i>
+								<span class="menu-item">정산</span>
+							</a>
+						</li>
+
+						<li>
+							<a href="{% url 'profit:catalog' %}">
+								<i class="icon nav-icon" data-feather="tag"></i>
+								<span class="menu-item">정산 목록</span>
+							</a>
+						</li>
+
+						<li class="menu-title" data-key="t-components">Revenue</li>
+						<li>
+							<a href="{% url 'revenue:list' %}">
+								<i class="icon nav-icon" data-feather="tag"></i>
+								<span class="menu-item">매출</span>
+							</a>
+						</li>
+
+						<li class="menu-title" data-key="t-components">Profile</li>
+						<li>
+							<a href="{% url 'account:seller_my_profile' %}">
+								<i class="icon nav-icon" data-feather="user"></i>
+								<span class="menu-item">정보 수정</span>
+							</a>
+						</li>
+	
+					</ul>
+				</div>
+				<!-- Sidebar -->
+			</div>
+		</div>
+		<!-- Left Sidebar End -->
+	
+		<!-- ========== Responsive Top Menu Start ========== -->		
+		<div class="topnav">
+			<div class="container-fluid">
+				<nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+					<div class="navbar-collapse" id="topnav-menu-content">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'main:index' %}">
+									<i class="icon nav-icon" data-feather="monitor"></i>
+									<span class="menu-item">Dashboards</span>
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'order:seller_order_list' %}">
+									<i class="icon nav-icon" data-feather="package"></i>
+								   <span class="menu-item">주문</span>
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'qna:list' %}">
+									<i class="icon nav-icon" data-feather="message-square"></i>
+									<span class="menu-item">문의</span>
+									<span class="badge rounded-pill badge-soft-secondary">{{counter_new_qna}}+</span>
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'profit:list' %}">
+									<i class="icon nav-icon" data-feather="layers"></i>
+									<span class="menu-item">정산</span>
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'revenue:list' %}">
+									<i class="icon nav-icon" data-feather="file"></i>
+									<span class="menu-item">매출</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'account:seller_my_profile' %}">
+									<i class="icon nav-icon" data-feather="file"></i>
+									<span class="menu-item">정보 수정</span> 
+								</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<!-- ============================================================== -->
+		<div class="main-content">

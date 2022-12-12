@@ -1,0 +1,468 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<link href="{% static 'user/vendor/node_modules/css/fullcalendar.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'user/css/borex.app.min.css' %}" rel="stylesheet" type="text/css" />
+
+<style>
+.subs-overflow-hidden {
+	max-height: 342px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.fc-daygrid-day-bottom {
+	margin-top: 3px !important;
+	margin-left: 3px;
+}
+a.fc-daygrid-event {
+	cursor: default;
+}  
+a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
+    font-size: 14px;
+    font-weight: bold;
+}
+.progress-bar {
+	background-color: #90c31f;
+}
+.e-charts{height:350px}
+@media only screen and (max-width: 496px){
+	.fc-header-toolbar {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+	.fc-toolbar-title {
+		margin: 10px 0 !important;
+	}
+}
+@media only screen and (max-width: 767px) {
+	.subs-list-table {
+		border: 0;
+	}
+
+	.subs-list-table caption {
+		font-size: 1.3em;
+	}
+
+	.subs-list-table thead {
+		border: none;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+
+	.subs-list-table tr {
+		border-bottom: 3px solid #ddd;
+		display: block;
+		margin-bottom: .625em;
+	}
+
+	.subs-list-table td {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		text-align: right;
+	}
+
+	.subs-list-table td::before {
+		content: attr(data-label);
+		float: left;
+		font-weight: bold;
+	}
+	.subs-list-table td:last-child:before {
+		margin-right: 40px;
+	}
+	.subs-list-table td:last-child {
+		border-bottom: 0;
+	}
+}
+</style>
+
+<section class="position-relative">
+	<div class="container position-relative">
+		<div class="position-relative pt-9 pb-9 pb-lg-11">
+			<div class="row my_page_main ">
+				{% include "user/account/mypage/sidemenu.html" with active_tab="대쉬보드"%}
+				<div class="col-lg-9 subs_contents">
+					{% include "user/account/mypage/topmenu.html" with active_tab="대쉬보드"%}		
+					<div class="my-5 subs-view show">
+						<h4 class="my-4 page-title-box">My Dashboard</h4>
+						<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
+							<div class="row">
+								<div class="col-6 col-md-3 mb-md-0 sub-banner">
+									<div class="text-center position-relative">
+										<span id="next-service" style="cursor: pointer;">
+											<h2 data-countup='{"startVal": 0,"prefix":"D-"}' data-to="{{next_service_day_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+											<div class="text-muted">다음 서비스까지</div>
+										</span>
+									</div>
+								</div>
+								<div class="col-6 col-md-3 mb-md-0 sub-banner">
+									<div class="text-center position-relative">
+										<span id="subs-num" style="cursor: pointer;">
+											<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="3" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+											<div class="text-muted">구독한 서비스 수</div>
+										</span>
+									</div>
+								</div>											
+								<div class="col-6 col-md-3 mb-md-0 sub-banner">
+									<div class="text-center position-relative">
+										<span id="complete-service-num" style="cursor: pointer;">
+											<h2 data-countup='{"startVal": 0,"prefix":"+"}' data-to="{{delivered_service_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+											<div class="text-muted">완료된 서비스 수</div>
+										</span>
+									</div>
+								</div>
+								<div class="col-6 col-md-3 mb-md-0 sub-banner">
+									<div class="text-center position-relative">
+										<h2 data-countup='{"startVal": 0,"prefix":""}' data-to="{{water_delivered_service_count}}" data-aos=""data-aos-id="countup:in" class="display-4 fw-normal text-primary">0</h2>
+										<div class="text-muted">남은 생수 개수</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="pt-5 col-12">
+						<div id="calendar"></div>
+					</div>	
+					<div class="row">
+						<div class="col-lg-8 pt-5" id="subs-list">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-start mb-4">
+										<div class="flex-grow-1 overflow-hidden">
+											<h5 class="card-title text-truncate">구독 목록</h5>
+										</div>
+										<div class="flex-shrink-0">
+											<div class="dropdown">
+												<a class="dropdown-toggle text-reset" href="#"
+													data-bs-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<span class="fw-semibold">Report By: </span> <span class="text-muted">최신 순<i class="mdi mdi-chevron-down ms-1"></i></span>
+												</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item" href="#">최신 순</a>
+													<a class="dropdown-item" href="#">오래된 순</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="table-responsive subs-overflow-hidden">
+										<table class="table subs-list-table mt-3 text-center">
+											<thead>
+												<tr>
+													<th scope="col">No.</th>
+													<th scope="col">시작 일자</th>
+													<th scope="col">종료 일자</th>
+													<th scope="col">서비스명</th>
+													<th scope="col" style="width: 150px;">진행 회차<th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td data-label="No.">1</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">7회차</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">2</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td data-label="No.">3</td>
+													<td data-label="시작 일자">2022-11-10</td>
+													<td data-label="종료 일자">2023-11-10</td>
+													<td data-label="서비스명">에어컨 청소</td>
+													<td data-label="진행 회차">
+														<div class="progress ms-3">
+															<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 pt-5">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-start">
+										<div class="flex-grow-1">
+											<h5 class="card-title mb-4">완료된 서비스</h5>
+										</div>
+									</div>
+									<div id="doughnut-chart" data-colors='["#3b76e1", "#f9c256", "#f56e6e", "#57c9eb", "#63ad6f"]' class="e-charts"></div>
+								</div>
+								<!-- end card body -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script src="{% static 'user/vendor/node_modules/js/fullcalendar.min.js' %}"></script>
+<script src="{% static 'user/vendor/node_modules/js/apexcharts.min.js' %}"></script>
+<script src="{% static 'user/vendor/node_modules/js/echarts.min.js' %}"></script>
+
+<script>
+var order_data = {{ orders|safe }}
+
+document.addEventListener("DOMContentLoaded", function() {   
+	// 달력
+	var l = null,
+        d = null,
+        l = null,
+        d = null,
+        e = new Date,
+        s = e.getDate(),
+        r = e.getMonth(),
+        e = e.getFullYear();
+    
+		e = order_data, r = document.getElementById("calendar");
+
+    function c() {
+        return 768 <= window.innerWidth && window.innerWidth < 1200 ? "timeGridWeek" : window.innerWidth <= 768 ? "listMonth" : "dayGridMonth"
+    }
+    var m = new FullCalendar.Calendar(r, {
+		dayMaxEvents: 5,
+		eventMaxStack: 2,
+        timeZone: "local",
+		contentHeight: 'auto',
+		aspectRatio: 25,
+        initialView: c(),
+        themeSystem: "bootstrap5",
+        headerToolbar: {
+            left: "prev today next",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+        },
+
+        windowResize: function(e) {
+            var t = c();
+            m.changeView(t)
+        },
+        events: e
+    });
+    m.render();
+
+	// 원형차트
+	function getChartColorsArray(e) {
+		if (null !== document.getElementById(e)) {
+			var t = document.getElementById(e).getAttribute("data-colors");
+			return (t = JSON.parse(t)).map(function(e) {
+				var t = e.replace(" ", "");
+				if (-1 == t.indexOf("--")) return t;
+				var o = getComputedStyle(document.documentElement).getPropertyValue(t);
+				return o || void 0
+			})
+		}
+	}
+
+	barchartColors = getChartColorsArray("doughnut-chart"), dom = document.getElementById("doughnut-chart"), myChart = echarts.init(dom), app = {};
+	option = null, option = {
+		tooltip: {
+			trigger: "item",
+			formatter: "{a} <br/>{b}: {c} ({d}%)"
+		},
+			legend: {
+			data: {{order_done_keys|safe}},
+			textStyle: {
+				color: "#8791af"
+			}
+		},
+		color: barchartColors,
+		series: [{
+			name: "Completed Service",
+			type: "pie",
+			radius: ["50%", "70%"],
+			avoidLabelOverlap: !1,
+			label: {
+				normal: {
+					show: !1,
+					position: "center"
+				},
+				emphasis: {
+					show: !0,
+					textStyle: {
+						fontSize: "30",
+						fontWeight: "bold"
+					}
+				}
+			},
+			labelLine: {
+				normal: {
+					show: !1
+				}
+			},
+			data: {{order_done_data|safe}}
+		}]
+	}, option && "object" == typeof option && myChart.setOption(option, !0);
+	
+	let echart = echarts.init(document.getElementById('doughnut-chart'));
+	window.addEventListener("resize", function(){
+		echart.resize();
+	});
+
+
+	let nextService = document.getElementById("next-service");
+	let subsNum = document.getElementById("subs-num");
+	let completeNum = document.getElementById("complete-service-num");
+	let subsList = document.getElementById("subs-list");
+
+	nextService.addEventListener("click" , function(){
+		window.scrollTo({top: 400, behavior: "smooth"});
+	});
+	subsNum.addEventListener("click" , function(){
+		window.scrollTo({top: subsList.offsetTop, behavior: "smooth"});
+	});
+	completeNum.addEventListener("click" , function(){
+		window.scrollTo({top: subsList.offsetTop, behavior: "smooth"});
+	});
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<section class="pt-3 pt-md-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 mt-5 mt-lg-0 order-2 order-lg-1">
+				<!-- Title -->
+				<h3>Sign up for your account!</h3>
+				<p class="mb-4 mb-lg-5">Create your account easily with less information.</p>
+				<!-- Contact form START -->
+				<form class="row" name="joinForm">
+					{% csrf_token %}
+					<!-- Email -->
+					<div class="col-md-12 mb-3">
+						<label for="email" class="form-label text-dark">Email address *</label>
+						<input type="email" class="form-control bg-light border-0" name="email" id="email">
+					</div>
+
+					<div class="col-md-12 mb-3">
+						<label for="nickname" class="form-label text-dark">Nickname *</label>
+						<input type="text" id="nickname" name="nickname" class="form-control bg-light border-0">
+						<div id="passwordHelpBlock" class="form-text">
+							Your password must be 8 characters at least 
+						</div>
+					</div>
+
+					<!-- Password -->
+					<div class="col-md-12 mb-3">
+						<label for="password" class="form-label text-dark">Password *</label>
+						<input type="password" id="password" name="password" class="form-control bg-light border-0">
+						<div id="passwordHelpBlock" class="form-text">
+							Your password must be 8 characters at least 
+						</div>
+					</div>
+					<!-- Conform password -->
+					<div class="col-md-12 mb-3">
+						<label for="password2" class="form-label text-dark">Confirm Password *</label>
+						<input type="password" id="password2" name="password2" class="form-control bg-light border-0">
+					</div>
+					<!-- Check box -->
+					<div class="col-md-12">
+						<div class="mb-4 form-check">
+							<input type="checkbox" class="form-check-input" id="is_agree" name="is_agree">
+							<label class="form-check-label" for="is_agree">keep me signed in</label>
+						</div>
+					</div>
+					<!-- Button -->
+					<div class="row align-items-center">
+						<div class="col-sm-4">
+							<button class="btn btn-primary" type="button" onclick="join_submit();">Sign up</button>
+						</div>
+						<div class="col-sm-8 text-sm-end mt-3 mt-sm-0">
+							<span class="text-muted">Already have an account? 
+
+									<a href="{% url 'account:login' %}">Signin here</a>
+	
+							</span>
+						</div>
+					</div>	
+				</form>
+				<!-- Contact form END -->
+
+				<!-- Social media button -->
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="position-relative my-5">
+							<hr>
+							<p class="small position-absolute top-50 start-50 translate-middle bg-white">Or do it via social media account</p>
+						</div>
+						<!-- Social button -->
+						<ul class="list-inline-item">
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-lg btn-light fs-5"><i class="fab fa-fw fa-google text-google-icon"></i></a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-lg btn-light fs-5"><i class="fab fa-fw fa-apple"></i></a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#" class="btn btn-lg btn-light fs-5"><i class="fab fa-fw fa-facebook-f text-facebook"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Image -->
+			<div class="col-lg-6 order-1 text-center">
+				<img src="{% static 'user/images/signin-signup/01.png' %}" alt="">
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	var is_run = false;
+
+	$(document).ready(function() {
+    $("form[name=joinForm]").keypress(function (e) {
+			if (e.keyCode === 13) {
+				join_submit();
+			}
+		});
+  });
+	
+
+	function join_submit() {
+    var joinForm = document.joinForm;
+		var email = joinForm.email.value;
+		var password = joinForm.password.value;
+		var password2 = joinForm.password2.value;
+		var nickname = joinForm.nickname.value;
+
+
+		if (isEmpty(email)) {
+			openModal('알림','이메일을 입력해주세요.');
+			return false;
+		}
+		if (!/^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(email)) {
+			openModal('알림','올바른 이메일이 아닙니다.');
+			return false;
+		}
+		if (isEmpty(password)) {
+			openModal('알림','비밀번호를 입력해주세요.');
+			return false;
+		}
+		if (!/^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{6,20}$/.test(password)) {
+			openModal('알림','비밀번호는 6~20자 영문, 숫자, 특수문자 조합이여야 합니다.');
+			return false;
+		}
+		if (isEmpty(password2)) {
+			openModal('알림','비밀번호를 한번더 입력해주세요.');
+			return false;
+		}
+		if (password != password2) {
+			openModal('알림','비밀번호가 일치하지 않습니다.');
+			return false;
+		}
+		if (isEmpty(nickname)) {
+			openModal('알림','닉네임을 입력해주세요.');
+			return false;
+		}
+		if (!/^[가-힣|a-z|A-Z|0-9|]{2,10}$/.test(nickname)) {
+			openModal('알림','닉네임은 2~10자 한글, 영문, 숫자 조합이여야 합니다.');
+			return false;
+		}
+
+		if (!$("input:checkbox[name=is_agree]").is(":checked")) {
+			openModal('알림','약관에 동의해주세요.');
+			return false;
+		}
+
+		if(is_run == true) {
+			openModal('알림','잠시후에 다시시도 해주세요.');
+			return false;
+    }
+
+		is_run = true;
+    var queryString = $("form[name=joinForm]").serialize();
+		
+    $.ajax({
+        type : 'POST',
+        url : "{{request.path}}",
+        data : queryString,
+        dataType : 'json',
+        success: function(data){
+          if(data.result==200){
+            location.replace("{% url 'main:index' %}");
+          }else{
+            openModal("알림", data.result_text);
+          }
+					is_run  = false;
+          return;
+        },
+        error: function (request, status, error){
+          var msg = "ERROR : " + request.status + "<br>"
+			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
+			    console.log(msg);
+        }
+    });
+  }
+
+</script>
+{% endblock %}

@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load util_filter %}
+{% load mathfilters %}
+
+<style>
+@media only screen and (max-width: 767px) {
+	.btn-group {
+		width: 100% !important;
+		margin-bottom: 20px;
+	}
+}
+</style>
+<div class="page-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header justify-content-between d-flex align-items-center">
+						<h4 class="card-title">매출 관리</h4>
+					</div>	
+					<div class="card-body p-3">
+						<div class="d-md-flex justify-content-center align-items-center mb-5">	
+							<div class="btn-group" id="date-btn">
+								<button type="button" class="btn btn-outline-primary" onclick="todayBtn()">오늘</button>
+								<button type="button" class="btn btn-outline-primary" onclick="lastWeekBtn()">1주일</button>
+								<button type="button" class="btn btn-outline-primary" onclick="lastOneMonthBtn()">1개월</button>
+								<button type="button" class="btn btn-outline-primary" onclick="lastThreeMonthBtn()">3개월</button>
+								<button type="button" class="btn btn-outline-primary" onclick="lastSixMonthBtn()">6개월</button>
+							</div>
+							<form action="{{request.path}}" method="GET" name="dateSearchForm">
+								<div class="d-flex align-items-center ms-md-5 ms-0">
+									<input class="form-control form-radius" name="start_date" type="date" id="start-date-input">
+										&nbsp;&nbsp;~&nbsp;&nbsp;
+									<input class="form-control form-radius" name="end_date" type="date" id="end-date-input">
+									<button type="submit" data-bs-target="#" data-bs-toggle="collapse" class="ms-2 border-0 bg-white">
+										<i class="bx bx-search-alt-2 fs-4"></i>
+									</button>
+								</div>
+							</form>
+						</div>
+						<div class="row justify-content-center">
+							<div class="col-md-4">
+								<div class="card sales-all">
+									<div class="card-body text-center">
+										<h5 class="card-title fw-bold mb-2">매출</h5>
+										<p class="card-text" style="color: rgb(239, 102, 102);"><b class="fs-1">₱{{total_payment|intcomma}}</b></p>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="card pay-done">
+									<div class="card-body text-center">
+										<h5 class="card-title fw-bold mb-2">결제 금액</h5>
+										<p class="card-text" style="color: rgb(101, 202, 113); "><b class="fs-1">₱{{payment_amount|intcomma}}</b></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">			
+								<div class="card pay-refund">
+									<div class="card-body text-center">
+										<h5 class="card-title fw-bold mb-2">환불 금액</h5>
+										<p class="card-text" style="color: rgb(255, 193, 63);"><b class="fs-1">₱{{refund_amount|intcomma}}</b></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="excel-btn text-end mt-5">
+							<a href="{% url 'revenue:export' %}?start_date={{request.GET.start_date}}&end_date={{request.GET.end_date}}">
+								<span class="btn btn-outline-dark"><img class= "me-2" style="width: 40px;" src="{% static 'images/down_i.png' %}">Excel Download</span>
+							</a>
+						</div>
+						<div class="table-responsive">
+							<table class="table mt-3 text-center">
+								<thead style="background-color: #f5f6f9;">
+									<tr>
+										<th>날짜</th>
+										<th>결제금액</th>
+										<th>환불금액</th>
+										<th>주문수</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for revenue_admin_obj in revenue_admin_objs %}
+									<tr>
+										<th>{{revenue_admin_obj.date}}</th>
+										<td>₱{{revenue_admin_obj.payment_amount|intcomma}}</td>
+										<td>₱{{revenue_admin_obj.refunt_amount|intcomma}}</td>
+										<td>{{revenue_admin_obj.order_count|intcomma}}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table><!-- end table --> 
+						</div>	
+						
+						<div class="row g-0 mt-3 text-center text-sm-start">
+							<!-- end col -->
+							<div class="col-12">
+								<ul class="pagination pagination-rounded justify-content-center mb-sm-0">
+									{% if revenue_admin_objs.has_previous %}
+									<li class="page-item">
+										<a href="?p={{revenue_admin_objs.previous_page_number }}" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-left"></i></span>
+									</li>
+									{% endif %}
+									
+									{% for page_number in revenue_admin_objs.paginator.page_range %}
+										{% if page_number >= revenue_admin_objs.number|add:-2 and page_number <= revenue_admin_objs.number|add:2 %}
+											{% if page_number == revenue_admin_objs.number %}
+											<li class="page-item active">
+												<span class="page-link">{{ page_number }}</span>
+											</li>
+											{% else %}
+											<li class="page-item">
+												<a href="?p={{page_number }}" class="page-link">{{ page_number }}</a>
+											</li>
+											{% endif %}
+										{% endif %}
+									{% endfor %}
+									
+									{% if revenue_admin_objs.has_next  %}
+									<li class="page-item">
+										<a href="?p={{revenue_admin_objs.next_page_number }}" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-right"></i></span>
+									</li>
+									{% endif %}
+								</ul>
+							</div><!-- end col -->
+						</div><!-- end row -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	
+//==============================
+// URL 파라미터 날짜 시작일에 적용
+//==============================
+
+const curUrl = window.location.href;
+const url = new URL(curUrl);
+const urlParams = url.searchParams;
+
+/*종료 날짜 오늘 날짜로 지정*/
+document.getElementById("end-date-input").value = new Date().toISOString().slice(0,10);
+
+/*새로 페이지 들어올 시 한달 전 날짜로 셋팅*/
+if (urlParams.has('start_date') == false) {
+	lastOneMonthBtn();
+}else{
+	document.getElementById("start-date-input").value = urlParams.get('start_date');
+}
+	
+//==============================
+// 기간별 날짜 적용
+//==============================
+
+function todayBtn(){
+	document.getElementById("start-date-input").value = new Date().toISOString().slice(0,10);
+	document.getElementById("end-date-input").value = new Date().toISOString().slice(0,10);
+}
+
+function lastWeekBtn(){
+	let nowDate = new Date();
+	let weekDate = nowDate.getTime() - (7*24*60*60*1000);
+	nowDate.setTime(weekDate);
+	
+	let weekYear = nowDate.getFullYear();
+	let weekMonth = nowDate.getMonth() + 1;
+	let weekDay = nowDate.getDate();
+	
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+	
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+	
+	document.getElementById("start-date-input").value = resultDate;
+}  
+
+
+function lastOneMonthBtn(){
+	let nowDate = new Date();
+	let monthDate = nowDate.getTime() - (30*24*60*60*1000);
+	nowDate.setTime(monthDate);
+	
+	let weekYear = nowDate.getFullYear();
+	let weekMonth = nowDate.getMonth() + 1;
+	let weekDay = nowDate.getDate();
+	
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+	
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+	
+	document.getElementById("start-date-input").value = resultDate;	
+}
+function lastThreeMonthBtn(){
+	let nowDate = new Date();
+	let threeMonthDate = nowDate.getTime() - (3*30*24*60*60*1000);
+	nowDate.setTime(threeMonthDate);
+	
+	let weekYear = nowDate.getFullYear();
+	let weekMonth = nowDate.getMonth() + 1;
+	let weekDay = nowDate.getDate() - 1;
+	
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+	
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+	
+	document.getElementById("start-date-input").value = resultDate;	
+}
+function lastSixMonthBtn(){
+	let nowDate = new Date();
+	let sixMonthDte = nowDate.getTime() - (6*30*24*60*60*1000);
+	nowDate.setTime(sixMonthDte);
+	
+	let weekYear = nowDate.getFullYear();
+	let weekMonth = nowDate.getMonth() + 1;
+	let weekDay = nowDate.getDate() -3;
+	
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+	
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+	
+	document.getElementById("start-date-input").value = resultDate;	
+}
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,197 @@
+{% extends 'seller/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load util_filter %}
+{% load mathfilters %}
+
+<div class="page-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header justify-content-between d-flex align-items-center">
+						<h4 class="card-title">주문 내역</h4>
+						<div class="row">
+							<div class="col-12 text-end">
+								<a href="#!" onclick="event_checked_item('주문취소');" class="btn btn-light">취소</a>
+								<a href="#!" onclick="event_checked_item('주문접수');" class="btn btn-primary">접수</a>
+							</div>
+						</div>
+					</div>
+					<div class="card-body p-3">
+						<div class="responsiveTable">
+							<table class="table mt-3 mb-0 text-center">
+								<thead>
+									<tr>
+										<th scope="col" style="width: 50px;">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" id="checkAll">
+												<label class="form-check-label" for="checkAll"></label>
+											</div>
+										</th>
+										<th scope="col">주문번호</th>
+										<th scope="col">상태</th>
+										<th scope="col">상품명</th>
+										<th scope="col">옵션</th>
+										<th scope="col">수량</th>
+										<th scope="col">이름</th>
+										<th scope="col">연락처</th>
+										<th scope="col">남은수량</th>
+										<th scope="col">결제일</th>
+									</tr><!-- end tr -->
+								</thead><!-- end thead -->
+								<tbody>
+									{% if not order_item_list %}
+									<tr>
+										<td class="border-bottom-0 text-center p-5" colspan="10">주문이 없습니다.</td>
+									</tr>
+									{% endif%}
+									
+									{% for orderItem in order_item_list %}
+									<tr>
+										<td scope="row">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" value="{{orderItem.pk}}" name="order_item_id">
+												<label class="form-check-label" for="contacusercheck1"></label>
+											</div>
+										</td>
+
+										<td data-label="주문번호">
+											<a href="#!" class="text-link fw-medium">{{orderItem.order_uid}}</a>
+										</td>
+
+										<td data-label="상태">
+											<span href="#" class="badge badge-soft-primary">{{orderItem.order_item_status}}</span>
+										</td>
+
+										<td data-label="상품명">
+											<a href="#!" class="text-link fw-medium">{{orderItem.product_name}}</a>
+										</td>
+
+										<td data-label="옵션">
+											{{orderItem.variant_value}}
+										</td>
+
+										<td data-label="수량">
+											{{orderItem.ordered_quantity}}개
+										</td>
+
+										<td data-label="이름">
+											{{orderItem.order.user.mb_name}}
+										</td>
+
+										<td data-label="연락처">
+											{{orderItem.order.user.mb_phone}}
+										</td>
+
+										<td data-label="남은수량">
+											{{orderItem.ordered_quantity|sub:orderItem.shipped_quantity}}개
+										</td>
+
+										<td data-label="결제일">
+											{{orderItem.order.payment.paid_at}}
+										</td>
+									</tr><!-- end tr -->
+									{% endfor %}
+								</tbody><!-- end tbody -->
+							</table><!-- end table -->
+						</div><!-- end table responsive -->
+
+						<div class="row g-0 text-center text-sm-start">
+							<!-- end col -->
+							<div class="col-12">
+								<ul class="pagination pagination-rounded justify-content-center mb-sm-0">
+									{% if order_item_list.has_previous %}
+									<li class="page-item">
+										<a href="?p={{order_item_list.previous_page_number }}" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-left"></i></span>
+									</li>
+									{% endif %}
+									
+									{% for page_number in order_item_list.paginator.page_range %}
+										{% if page_number >= order_item_list.number|add:-2 and page_number <= order_item_list.number|add:2 %}
+											{% if page_number == order_item_list.number %}
+											<li class="page-item active">
+												<span class="page-link">{{ page_number }}</span>
+											</li>
+											{% else %}
+											<li class="page-item">
+												<a href="?p={{page_number }}" class="page-link">{{ page_number }}</a>
+											</li>
+											{% endif %}
+										{% endif %}
+									{% endfor %}
+									
+									{% if order_item_list.has_next  %}
+									<li class="page-item">
+										<a href="?p={{order_item_list.next_page_number }}" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-right"></i></span>
+									</li>
+									{% endif %}
+								</ul>
+							</div><!-- end col -->
+						</div><!-- end row -->
+					</div><!-- end card body -->
+				</div><!-- end card -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+let is_run = false;
+
+function event_checked_item(e) {
+	const item_list = document.querySelectorAll("input[name=order_item_id][type=checkbox]:checked");
+
+	let arr = [];
+
+	item_list.forEach(ele => arr.push(ele.value));
+
+	edit_order_status_sumit(e, arr);
+}
+
+async function edit_order_status_sumit(event_type, order_item_id) {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+
+	if (event_type == '배송일정수정') {
+		form_data.append('schedule_date', schedule_date);
+	}
+
+    const response = await fetch("{% url 'order:edit_status' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: JSON.stringify({
+			'event_type':event_type,
+			'order_item_id':order_item_id
+
+		}),
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		is_run  = false;
+		if (data.result == '200') {
+			openModal("알림", data.result_text, '', 'reload');
+		} else { 
+			openModal("알림", data.result_text, '');
+		}
+	});
+}
+</script>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+<!-- Section -->
+<section class="position-relative">
+	<div class="container position-relative">
+		<div class="position-relative pt-9 pb-9 pb-lg-11">
+			<div class="my_page_main row">
+				{% include "user/account/mypage/sidemenu.html" with active_tab="1:1 문의"%}
+				<div class="col-lg-9">
+					{% include "user/account/mypage/topmenu.html" with active_tab="1:1 문의"%}
+					<div class="row">
+						<div class="col-12">
+							<!-- Page title -->
+							<h4 class="my-4">1:1 문의게시판 </h4>
+
+							<!-- Ask Content START -->
+							<div class="row main_contents">
+								<div class="col-md-12">
+									<div class="bg-secondary-soft p-3 p-md-5 rounded">
+										<table class="ask_table table">
+											<thead>
+												<tr>
+													<th colspan="2">{{qna_obj.subject}}</th>
+												</tr>
+											</thead>
+											<tbody>
+												<td colspan="2" class="text-end">
+													<span class="qna date">작성일: {{qna_obj.questioned_at}}</span>
+												</td>
+											</tbody>
+											<tbody>
+												<td colspan="2" class="ques_contnet text-start">
+													<p class="fs-6 fw-bold">질문 내용:</p>
+													{{qna_obj.question|safe}}
+												</td>		
+											</tbody>
+											<tbody>
+												<td colspan="2" class="anw_content text-start">
+													<p class="fs-6 fw-bold">관리자 답변:</p>
+													{{qna_obj.answer}}
+												</td>		
+											</tbody>											
+										</table>
+									</div>
+									<!-- Details -->
+									<div class="ask_btn">
+										<a href="/account/mypage/qna/" class="btn btn-secondary">목록</a>
+									</div>
+								</div>
+							</div>
+							<!-- Ask Content END  -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
