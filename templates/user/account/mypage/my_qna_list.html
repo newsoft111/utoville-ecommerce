@@ -33,7 +33,7 @@
 											{% for qna_obj in qna_objs %}
 												<tr>
 													<th scope="row">{{forloop.counter}}</th>
-													<td><a href="{% url 'account:my_qna_detail' qna_obj.id %}">{{qna_obj.subject}}</a></td>
+													<td><a href="{% url 'account:user_my_qna_detail' qna_obj.id %}">{{qna_obj.subject}}</a></td>
 													<td>
 														{% if qna_obj.answered_at %}
 														답변완료
@@ -85,7 +85,7 @@
 										</ul>
 
 										<div class="text-end">
-											<a href="{% url 'account:my_qna_write' %}" class="px-3 py-2" style="font-size: 13px;">
+											<a href="{% url 'account:user_my_qna_write' %}" class="px-3 py-2" style="font-size: 13px;">
 												<button type="button" class="btn btn-outline-secondary btn-rise">
 													<div class="btn-rise-bg bg-secondary"></div>
 													<div class="btn-rise-text"  style="font-size: 14px;">
