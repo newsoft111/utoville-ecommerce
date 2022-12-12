@@ -54,10 +54,10 @@ urlpatterns = [
 
 	path('admin/account/',
 		include([
-			path('', views.account_list, name='list'),
-			path('delete/', views.account_delete, name='delete'),
-			path('login/', views.user_login, name='login'),
-			path('logout/', views.user_logout, name='logout'),
+			path('', views.admin_account_manage_list, name='admin_account_manage_list'),
+			path('delete/', views.admin_account_manage_delete, name='admin_account_manage_delete'),
+			path('login/', views.admin_login, name='admin_login'),
+			path('logout/', views.admin_logout, name='admin_logout'),
 		])
 	),
 ]
