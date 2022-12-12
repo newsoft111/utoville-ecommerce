@@ -4,7 +4,7 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build("mcfly17/utoville-homecare-user")
+        app = docker.build("mcfly17/utoville-homecare")
     }
 
     stage('Test image') {
@@ -28,7 +28,7 @@ node {
                         configName: "dev",
                         verbose: true,
                         transfers: [
-                            sshTransfer(execCommand: "make run-user")
+                            sshTransfer(execCommand: "make restart-homecare")
                         ]
                     )
                 ]
