@@ -6,7 +6,6 @@ from ..models import *
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta, date
 from django.views.generic import View
-import pandas as pd
 import json
 from util.views import cache
 
