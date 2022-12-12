@@ -23,4 +23,4 @@ EXPOSE 8000
 #CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 # guinicorn를 이용해서 django를 실행할때 사용
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--access-logfile", "access.log", "--error-logfile", "error.log", "config.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--access-logfile", "access.log", "--error-logfile", "error.log", "config.wsgi:application"]
