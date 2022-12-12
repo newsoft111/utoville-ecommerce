@@ -125,7 +125,7 @@ input[id="flexCheckDefault"]:checked + label::after{
         dataType : 'json',
         success: function(data){
           if(data.result==200){
-            location.replace("{% url 'main:index' %}");
+            location.replace("{% url 'main:user_index' %}");
           }else{
             openModal("알림", data.result_text);
           }

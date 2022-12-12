@@ -38,7 +38,7 @@
 									<input type="hidden" name="question">
 									<div id="quill-editor"></div>
 									<div class="btn_group">
-										<a href="{% url 'account:my_qna_list' %}" class="btn btn-secondary">목록</a>
+										<a href="{% url 'account:user_my_qna_list' %}" class="btn btn-secondary">목록</a>
 										<a href="#!" onclick="qna_write_submit();" class="btn btn-brand">작성</a>
 									</div>
 								</div>
@@ -101,7 +101,7 @@ async function qna_write_submit() {
         console.log(data);
         is_run  = false;
         if (data.result == '200') {
-            openModal("알림", data.result_text, '', "location.replace(`{% url 'account:my_qna_list' %}`);");
+            openModal("알림", data.result_text, '', "location.replace(`{% url 'account:user_my_qna_list' %}`);");
         } else {
             openModal("알림", data.result_text, '');
         }
