@@ -1,0 +1,631 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+.inputBlock {
+	display: inline-block; 
+	width: 100%;
+}
+.submitBlock {
+	display: inline-block;
+}
+.resp-order-main {
+	display: none;
+}
+.resp-order-main .title {
+	padding: 10px 0;
+	text-align: center;
+	background-color: #f3f3f3;
+}
+.resp-order-main .title span {
+	font-size: 18px;
+}
+.resp-order-main .contents {
+	margin: 10px 0;
+	text-align: center;
+}
+.resp-order-main .contents li {
+	display: inline-block;
+	margin-left: 10px;
+}
+.resp-order-main .contents li button[type=button] {
+	padding: 10px 20px;
+}
+.status-main .contnets {
+	margin: 10px 0;
+}
+.resp-od-list-main {
+	display: none;
+}
+@media only screen and (max-width: 768px){
+	.formFlex {
+		flex-wrap: wrap;
+	}
+	.inputBlock {
+		display: block;
+		width: 100%;
+	}
+	.submitBlock {
+		display: block;
+		width: 100%;
+	}
+	.submitBlock button[type=submit] {
+		margin-top: 10px;
+		width: 100%;
+	}
+
+}
+@media only screen and (max-width: 495px){
+	.main_contents {
+		display: none;
+	}
+	.resp-order-main {
+		display: block;
+	}
+	.inputBlock {
+		margin-right: 0;
+	}
+
+	.resp-od-list-main {
+		display: block;
+	}
+}
+
+</style>
+<!-- Section -->
+<section class="position-relative">
+	<div class="container position-relative">
+		<!--Profile info header-->
+		<div class="position-relative pt-9 pb-9 pb-lg-11">
+			<div class="row justify-content-center">
+				{% include "user/account/mypage/sidemenu.html" with active_tab="주문 조회"%}
+				<div class="col-lg-9">
+					{% include "user/account/mypage/topmenu.html" with active_tab="주문 조회"%}
+					<div class="order_search_area">
+						<div class="row">
+							<div class="col-12">
+								<!-- Page title -->
+								<h4 class="my-4">주문 조회</h4>
+								<div class="row main_contents">
+									<div class="col-md-12">
+										<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
+											<div class="table-responsive" style="text-align: center;">
+												<table class="table">
+													<tbody>
+														<form action="{{request.path}}" method="GET" name="dateSearchForm" class="mb-0 formFlex">
+															<tr>
+																<td class="order-tb-left">날짜</td>
+																<td colspan="3">
+																	<div class="btn-group w-100 mb-3">
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastWeek();">1주일</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(1);">1개월</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(3);">3개월</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(6);">6개월</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(12);">1년</button>
+																	</div>		
+																
+																	<div class="inputBlock">
+																		<div class="input_group input-daterange">
+																			<input class="form-control form-radius" id="start-date-input" name="start_date" type="date">
+																			&nbsp;&nbsp;~&nbsp;&nbsp;
+																			<input class="form-control form-radius" id="end-date-input" name="end_date" type="date">
+																		</div>	
+																	</div>
+																</td>		
+															</tr>
+															<tr>
+																<td class="order-tb-left">카테고리</td>
+																<td class="order-tb-right">
+																	<select class="form-select" name="category_by" aria-label="Default select example">
+																		<option value="" {% if not request.GET.category %}selected{% endif %}>선택</option>
+																		{% for category_obj in category_objs %}
+																		<option value="{{category_obj.pk}}" {% if request.GET.category|slugify == category_obj.pk|slugify %}selected{% endif %}>{{category_obj.name}}</option>
+																		{% endfor %}
+																	</select>
+																</td>
+																
+																<td class="order-tb-left">진행 상태</td>							
+																<td class="order-tb-right">
+																	<select class="form-select" name="status_by" aria-label="Default select example">
+																		<option value="">선택</option>
+																		{% for k, v in order_status_dict %}
+																		<option value="{{k}}">{{v}}</option>
+																		{% endfor %}
+																	</select>
+																</td>
+															</tr>
+															<tr>
+																<td class="order-tb-left">서비스명</td>
+																<td colspan="3" class="order-tb-right">
+																	<div class="d-flex">
+																		<div class="inputBlock me-2">
+																			<input type="text" class="form-control form-radius" name="keyword"
+																				placeholder="서비스명을 검색하세요.">
+																		</div>
+																		<div class="submitBlock">
+																			<button type="submit"class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																				<span class="btn-hover-label label-default">Search</span>
+																				<span class="btn-hover-label label-hover">Search</span>
+																			</button>
+																		</div>
+																	</div>				
+																</td>																			
+															</tr>							
+														</form>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Responsive  Order Search -->
+								<div class="row resp-order-main">
+									<div class="col-md-12">
+										<form action="{{request.path}}" method="GET" name="keywordSearchForm" class="mb-0 formFlex">
+											<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">	
+												<div class="datesearch-main">
+													<div class="title">
+														<span>날짜</span>
+													</div>		
+													<div class="contents">
+														<div class="btn-group mb-3">
+															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastWeek();">1주일</button>
+															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(1);">1개월</button>
+															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(3);">3개월</button>
+															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(6);">6개월</button>
+															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(12);">1년</button>
+														</div>
+														<div class="datasearch-body">
+															<div class="inputBlock">
+																<div class="input_group input-daterange">
+																	<input class="form-control form-radius" id="resp-start-date-input" name="start_date" type="date">
+																	&nbsp;&nbsp;~&nbsp;&nbsp;
+																	<input class="form-control form-radius" id="resp-end-date-input" name="end_date" type="date">
+																</div>	
+															</div>
+														</div>
+													</div>										
+												</div>
+												<div class="category-main">
+													<div class="title">
+														<span>카테고리</span>
+													</div>		
+													<div class="contents">
+														<select class="form-select" name="category_by" aria-label="Default select example">
+															<option value="" {% if not request.GET.category %}selected{% endif %}>선택</option>
+															{% for category_obj in category_objs %}
+															<option value="{{category_obj.pk}}" {% if request.GET.category|slugify == category_obj.pk|slugify %}selected{% endif %}>{{category_obj.name}}</option>
+															{% endfor %}
+														</select>
+													</div>										
+												</div>
+												<div class="status-main">
+													<div class="title">
+														<span>진행 상태</span>
+													</div>	
+													<div class="contnets">
+														<select class="form-select" name="status_by" aria-label="Default select example">
+															<option value="">선택</option>
+															{% for k, v in order_status_dict %}
+															<option value="{{k}}">{{v}}</option>
+															{% endfor %}
+														</select>
+													</div>											
+												</div>
+												<div class="kewordsearch-main">
+													<div class="title">
+														<span>서비스명</span>
+													</div>	
+													<div class="contents">
+														<div class="inputBlock">
+															<input type="text" class="form-control form-radius" name="keyword"
+																placeholder="서비스명을 검색하세요.">
+														</div>
+														<div class="submitBlock">
+															<button type="submit"class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
+																<span class="btn-hover-label label-default">Search</span>
+																<span class="btn-hover-label label-hover">Search</span>
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div> 
+
+						<!-- Order list -->
+						<div class="row main_contents">
+							<div class="col-md-12 mt-5">
+								<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
+									<div class="table-responsive" style="text-align: center;">
+										<table class="table order_view">
+											<!-- Title -->
+											<h4 class="text-start mb-3">주문 목록</h4>
+											<thead>
+												<tr>
+													<th scope="col">주문일/주문번호</th>
+													<th scope="col">서비스 정보</th>
+													<th scope="col">수량</th>
+													<th scope="col">주문 금액</th>
+													<th scope="col">진행 상태</th>
+												</tr>
+											</thead>
+											
+											<tbody>
+												{% for my_order_obj in my_order_objs %}
+												<tr>
+													<td>{{my_order_obj.order.ordered_at}}</td>
+													<td>{{my_order_obj.product_name}}</td>
+													<td>{{my_order_obj.ordered_quantity}}</td>
+													<td>₱{{my_order_obj.sub_total_price|intcomma}}</td>
+													<td>
+														완료
+														<div class="mt-1">
+															<a href="#!" class="btn btn-outline-secondary btn-rise" onclick="open_review_write_modal('{{my_order_obj.pk}}');">
+																<div class="btn-rise-bg bg-secondary"></div>
+																<div class="btn-rise-text">
+																	Write Review
+																</div>
+															</a>			
+														</div>	
+													</td>			
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Responsive Order list -->
+						<div class="row resp-od-list-main">
+							<div class="col-md-12">
+									<div class="order_info row">
+										<div class="col-12 align-middle text-center py-4">
+											<div class="row">
+												<div class="col-xxl-6">
+													<div class="row border-0">
+														<h4 class="text-start mb-3">주문 목록</h4>
+														<!-- Image -->
+														{% for my_order_obj in my_order_objs %}
+														<div class="col-xl-3 text-center">
+															<img class="rounded w-100" src="{% static 'user/img/mypage/subs01.jpg' %}" alt="Listing image1">
+														</div>
+														<!-- Info -->
+														<div class="col-xl-9 pt-2 pt-xl-0 text-center">
+															<h6 class="mb-1 fs-1">{{my_order_obj.product_name}}</h6>
+															<p class="mb-1 fs-4 text-success">₱{{my_order_obj.sub_total_price|intcomma}} / {{my_order_obj.ordered_quantity}}</p>
+															<span class="fs-4 text-secondary">{{my_order_obj.order.ordered_at}}</span>
+														</div>
+														<div class="list-status-main mb-5">
+															<span class="fs-4">진행 상태</span>
+															<div class="contnets">
+																<span class="text-danger fs-5">완료</span>
+																<div class="mt-1">
+																	<button type="button" class="btn btn-sm btn-primary w-100 fs-5" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
+																</div>	
+															</div>
+														</div>
+														<hr>
+														{% endfor %}
+													</div>
+												</div>
+											</div> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row mb-5">
+							<ul class="pagination justify-content-center m-0">
+								{% if my_order_objs.has_previous %}
+								<li class="page-item ">
+									<a class="page-link" href="?p={{my_order_objs.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">이전</a>
+								</li>
+								{% else %}
+								<li class="page-item disabled">
+									<span class="page-link">이전</span>
+								</li>
+								{% endif %}
+						
+								{% for page_number in my_order_objs.paginator.page_range %}
+									{% if page_number >= my_order_objs.number|add:-2 and page_number <= my_order_objs.number|add:2 %}
+										{% if page_number == my_order_objs.number %}
+										<li class="page-item active">
+											<span class="page-link">{{ page_number }}</span>
+										</li>
+										{% else %}
+										<li class="page-item">
+												<a class="page-link" href="?p={{page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">{{ page_number }}</a>
+										</li>
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+						
+								{% if my_order_objs.has_next  %}
+								<li class="page-item">
+									<a class="page-link" href="?p={{my_order_objs.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">다음</a> 
+								</li>
+								{% else %}
+								<li class="page-item disabled">
+									<span class="page-link">다음</span>
+								</li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="modal fade" data-bs-backdrop="static" id="reviewWriteModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-md">
+		<div class="modal-content">
+			<div class="review_content">
+				<form name="reviewWriteForm" id="dropForm">
+					{% csrf_token %}
+					<input type="hidden" name="order_id" value="">
+					<div class="modal-body p-4 text-center">			
+						<h5 class="review_title">만족하셨나요?</h5>
+						<div class="rating">
+							<input type="radio" name="rating" value="5" id="review-start-5"><label for="review-start-5">☆</label>
+							<input type="radio" name="rating" value="4" id="review-start-4"><label for="review-start-4">☆</label>
+							<input type="radio" name="rating" value="3" id="review-start-3"><label for="review-start-3">☆</label>
+							<input type="radio" name="rating" value="2" id="review-start-2"><label for="review-start-2">☆</label>
+							<input type="radio" name="rating" value="1" id="review-start-1"><label for="review-start-1">☆</label>
+						</div>
+					</div>
+					<!-- <div class="upload_photo p-4">
+						<h5 class="review_title">Upload images</h5>
+						
+						<div class="p-4 border rounded-3" data-dropzone-area="">
+							<div class="dz-preview" id="dz-preview-row" data-horizontal-scroll="">
+							</div>
+							<div class="chat-form rounded-pill" data-emoji-form="">
+								<button type="button"
+								class="btn btn-outline-secondary dz-clickable"
+								id="dz-btn">
+								<i class="bx bx-cloud-upload fs-4 me-1"></i> Upload
+							</button>
+							</div>
+						</div>
+
+					</div> -->
+					<div class="p-4">
+						<h5 class="review_title text-center">Upload images</h5>
+						<div class="thumbnail-preview row" id="thumbnail-preview" >
+						</div>
+						<div class="chat-form rounded-pill" data-emoji-form="">
+							<input type="file" class="d-none" name="thumbnail" id="thumbnail-upload" onclick="handleClick(this);" accept="image/png, image/jpeg, image/gif">
+							<label for="thumbnail-upload">
+								<span class="btn btn-light">파일 선택</span>
+							</label>
+						</div>
+					</div>
+					<div class="review_area p-4 text-center">
+						<h5 class="review_title">리뷰를 작성해주세요.</h5>
+						<textarea class="form-control rounded-3" name='review' style="resize:none; border-color: #e9e9e9;"></textarea>		
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-brandGreen ms-1" data-product-id='' onclick="review_write_submit()">완료</button>
+						<button type="button" class="btn btn-outline-secondary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">취소</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="{% static 'user/vendor/node_modules/js/dropzone-min.js' %}"></script>
+<script>
+//==============================
+// URL 파라미터 날짜 시작일에 적용
+//==============================
+
+const curUrl = window.location.href;
+const url = new URL(curUrl);
+const urlParams = url.searchParams;
+
+/*종료 날짜 오늘 날짜로 지정*/
+document.getElementById("end-date-input").value = new Date().toISOString().slice(0,10);
+document.getElementById("resp-end-date-input").value = new Date().toISOString().slice(0,10);
+
+/*새로 페이지 들어올 시 한달 전 날짜로 셋팅*/
+if (urlParams.has('start_date') == false) {
+	setLastMonth(1);
+}else{
+	document.getElementById("start-date-input").value = urlParams.get('start_date');
+	document.getElementById("resp-start-date-input").value = urlParams.get('start_date');
+}
+
+//==============================
+// 기간별 날짜 적용
+//==============================
+
+function setLastWeek(){
+	let now = new Date();	// 현재 날짜 및 시간
+	let lastweek = new Date(now.setDate(now.getDate() - 7)); // 일주일 전
+
+	let weekYear = lastweek.getFullYear();
+	let weekMonth = lastweek.getMonth() + 1;
+	let weekDay = lastweek.getDate();
+
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};
+	if(weekDay < 10) {weekDay = "0" + weekDay};
+
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+
+	document.getElementById("start-date-input").value = resultDate;
+	document.getElementById("resp-start-date-input").value = resultDate;
+} 
+
+function setLastMonth(numMonthAgo){
+	let now = new Date();
+	let setMonthAgo = new Date(now.setMonth(now.getMonth() - numMonthAgo))
+	let weekYear = setMonthAgo.getFullYear();
+	let weekMonth = setMonthAgo.getMonth() + 1;
+	let weekDay = setMonthAgo.getDate();
+
+	if(weekMonth < 10) {weekMonth = "0" + weekMonth};  // yy-mm-dd 형식 맞추기 위해 1~9 숫자앞에 문자 0 추가
+	if(weekDay < 10) {weekDay = "0" + weekDay}; 
+
+	let resultDate = weekYear + "-" + weekMonth + "-" + weekDay;
+
+	document.getElementById("start-date-input").value = resultDate;
+	document.getElementById("resp-start-date-input").value = resultDate;
+}
+	
+const category_by = document.querySelector('select[name=category_by]');
+
+category_by.addEventListener('change', (event) => {
+	var link = `{{request.path}}?category=${event.target.value}`;
+	location.href=link;
+});
+
+const status_by = document.querySelector('select[name=status_by]');
+
+status_by.addEventListener('change', (event) => {
+	var link = `{{request.path}}?status=${event.target.value}`;
+	location.href=link;
+});
+	
+//==============================
+// Write Review
+//==============================
+
+let is_run = false;
+let review_product_id = '';
+
+let fileArr = [];
+
+const dataTransfer = new DataTransfer();
+const handler = {
+	init() {
+		const fileInput = document.querySelector('#thumbnail-upload');
+		const preview = document.querySelector('.thumbnail-preview');
+		
+		fileInput.addEventListener('change', () => {
+			const files = Array.from(fileInput.files);
+			const filesExtension = files[0].name.split('.').pop().toLowerCase();
+
+			if(!(filesExtension == 'jpg' || filesExtension == 'jpeg' || filesExtension == 'png' || filesExtension == 'gif')){
+				openModal('알림', '이미지 파일이 아닙니다.');
+				return false;
+			}	
+
+			files.forEach((file) => {
+				fileArr.push(file.lastModified);
+				console.log(fileArr)
+				if(!isDuplicate(fileArr)){
+					var reader = new FileReader();
+					reader.onload = function(e) {	
+						html = '<div class="position-relative col-5">';
+						html += `<button type='button' onclick='thumbnail_remove(this);' data-index='${file.lastModified}' class='border-0 bg-transparent position-absolute top-0 end-0' id='thumbnail-remove-btn'><i class='bx bx-x fs-2 lh-1'></i></button>`;
+						html += `<img src="${e.target.result}" class="img-thumbnail">`;
+						html += '</div>'
+						preview.innerHTML +=  html;
+					}
+					reader.readAsDataURL(file);
+					dataTransfer.items.add(file);
+
+				}else{
+					openModal('알림', '이미 업로드 된 파일입니다.');
+					removeArrItem(fileArr, file.lastModified);
+				}
+			});
+
+			fileInput.files = dataTransfer.files;
+		});
+	},
+}
+
+handler.init();
+
+/* 처음 동일한 파일 두 번 이상 업로드 했을 시 이벤트 핸들러 정상 작동하지 않는 에러 해결 */
+function handleClick(e) {
+	e.value = '';
+}
+
+function removeArrItem(array, item){
+    for(var i in array){
+        if(array[i]==item){
+            array.splice(i,1);
+            break;
+        }
+    }
+}
+
+function thumbnail_remove(e) {
+	dataTransfer.clearData();
+	const lastModified = e.dataset.index;
+	const input = document.querySelector('#thumbnail-upload');
+	const { files } = input;
+
+	
+	for (let i = 0; i < files.length; i++) {
+		const file = files[i]
+		if (lastModified != file.lastModified) {
+			dataTransfer.items.add(file) // here you exclude the file. thus removing it.
+		}
+	}
+	
+	input.files = dataTransfer.files // Assign the updates list
+	e.parentElement.remove();
+	removeArrItem(fileArr, lastModified);
+}
+
+function open_review_write_modal(product_id) {
+	review_product_id = product_id;
+
+	var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#reviewWriteModal'));
+	modal.show();
+}
+
+async function review_write_submit() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+	// let reviewWriteForm = document.reviewWriteForm;
+	// let review = reviewWriteForm.review.value;
+	// let rating = reviewWriteForm.rating.value;
+	// let thumbnail = reviewWriteForm.thumbnail.files;
+
+	let this_modal = "#ReviewWriteModal";
+
+	let form_data = new FormData(document.querySelector('form[name=reviewWriteForm]'));
+	form_data.append('review_product_id', review_product_id);
+	
+    const response = await fetch("{% url 'product:review_write' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: form_data,
+	})
+	.then(response => response.json())
+	.then(data => {
+		is_run  = false;
+		if (data.result == '200') {
+			openModal("알림", data.result_text, this_modal, 'reload');
+		} else { 
+			openModal("알림", data.result_text, this_modal);
+		}
+	});
+}
+
+</script>
+{% endblock %}

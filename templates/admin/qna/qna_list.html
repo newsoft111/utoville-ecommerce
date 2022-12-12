@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load util_filter %}
+
+<!-- Begin page -->
+
+<div class="page-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header justify-content-between d-flex align-items-center">
+						<h4 class="card-title">문의 내역</h4>
+					</div>
+					<div class="card-body">				
+						<div class="table-responsive">					
+							<table class="table table-bordered align-middle table-nowrap table-check">
+								<thead>
+									<tr>
+										<th scope="col" style="width: 50px;"></th>
+										<th scope="col">제목</th>
+										<th scope="col" style="width: 100px;">상태</th>
+										<th scope="col" style="width:15%;">날짜</th>
+									</tr><!-- end tr -->
+								</thead><!-- end thead -->
+								<tbody>
+									{% for qna_obj in qna_objs %}
+									<tr>
+										<th scope="row">
+											{{forloop.counter}}
+										</th>
+
+										<td>
+											<a href="{% url 'qna:detail' qna_obj.pk %}" class="text-link fw-medium">{{qna_obj.subject}}</a>
+										</td>
+
+										<td>
+											<span href="#" class="badge badge-soft-primary">
+												{% if qna_obj.answered_at is not None %}
+												답변완료
+												{% else %}
+												답변대기
+												{% endif %}
+											</span>
+										</td>
+
+										<td>
+											{{qna_obj.questioned_at}}
+										</td>
+									</tr><!-- end tr -->
+									{% endfor %}
+								</tbody><!-- end tbody -->
+							</table><!-- end table -->
+						</div><!-- end table responsive -->
+
+						<div class="row g-0 text-center text-sm-start">
+							<!-- end col -->
+							<div class="col-12">
+								<ul class="pagination pagination-rounded justify-content-center mb-sm-0">
+									{% if qna_objs.has_previous %}
+									<li class="page-item">
+										<a href="?p={{qna_objs.previous_page_number }}" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-left"></i></span>
+									</li>
+									{% endif %}
+									
+									{% for page_number in qna_objs.paginator.page_range %}
+										{% if page_number >= qna_objs.number|add:-2 and page_number <= qna_objs.number|add:2 %}
+											{% if page_number == qna_objs.number %}
+											<li class="page-item active">
+												<span class="page-link">{{ page_number }}</span>
+											</li>
+											{% else %}
+											<li class="page-item">
+												<a href="?p={{page_number }}" class="page-link">{{ page_number }}</a>
+											</li>
+											{% endif %}
+										{% endif %}
+									{% endfor %}
+									
+									{% if qna_objs.has_next  %}
+									<li class="page-item">
+										<a href="?p={{qna_objs.next_page_number }}" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-right"></i></span>
+									</li>
+									{% endif %}
+								</ul>
+							</div><!-- end col -->
+						</div><!-- end row -->
+						
+					</div><!-- end card body -->
+				</div><!-- end card -->
+			</div><!-- end col -->
+		</div><!-- end row -->
+	</div>
+</div>
+{% endblock %}

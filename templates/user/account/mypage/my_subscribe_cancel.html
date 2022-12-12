@@ -1,0 +1,82 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<!-- Section -->
+<section class="position-relative">
+	<div class="container position-relative">
+		<div class="position-relative pt-9 pb-9 pb-lg-11">
+			<div class="my_page_main row">
+				{% include "user/account/mypage/sidemenu.html" with active_tab="구독관리"%}
+				<div class="col-lg-9">
+					{% include "user/account/mypage/topmenu.html" with active_tab="구독관리"%}
+	
+					<div class="row">
+						<div class="col-12">
+							<!-- Page title -->
+							<h4 class="my-4">구독관리</h4>
+							<!-- Ask Content START -->
+							<div class="form-content clearfix">
+								<div class="form-body clearfix">
+									<form class="clearfix">
+										<div class="left_side clearfix col-6">
+											<div class="select_reasons mb-3">
+												<label for="chBasic" class="form-label">취소사유 선택</label>
+												<select id="chBasic" class="form-control text-start" data-choices='{"searchEnabled":false, "allowHTML":true,"itemSelectText":""}' required>
+													<option value="" class="text-start" selected disabled>구매 취소사유를 선택해주세요</option>
+													<option value="">단순 변심</option>
+													<option value="">다른 서비스 잘못 주문</option>
+													<option value="">서비스 및 상품 불만족</option>
+													<option value="">서비스 정보 상이</option>			
+													<option value="">해피콜 지연</option>
+												</select>
+												</div>
+											<div class="mb-3">
+												<textarea class="form-control" id="message-text" placeholder="상세 사유 입력(선택사항)"></textarea>
+											</div>
+										</div>
+										<div class="right_side clearfix col-6">
+											<div class="select_service">										
+												<label for="chBasic" class="form-label">취소 상품 선택</label>
+												<div class="select_list">
+													<ul style="padding: 0">
+														<li>
+															<input type="checkbox"><img class="cancel_item" src="images/img" alt="이미지">
+															<span class="service_name">서비스명</span>
+															<span class="service_option">옵션명</span>
+															<span class="service_price">48,000원/1</span>
+														</li>
+													</ul>
+												</div>
+											</div>
+											<div class="refund_price">
+												<label for="chBasic" class="form-label">환불 예정 금액</label>
+												<div class="refund_detail">
+													<div class="refund_sum">
+														<h6>취소상품 총 금액 합계 <span class="price">48,000원</span></h3>
+													</div>
+													<div class="execpt_sale">
+														<h6>환불 금액 차감 내역 <span class="price">7,000원</span></h3>
+														<span>상품 할인 금액 차감<p>7,000원</p></span>														
+													</div>
+													<div class="refund_total">
+														<h6>환불 예정 금액 <span class="price">41,000원</span></h3>													
+													</div>
+												</div>										
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="btn_group">
+									<button type="button" class="btn btn-secondary">주문 취소</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

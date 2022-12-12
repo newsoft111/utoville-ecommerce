@@ -1,0 +1,200 @@
+{% extends 'seller/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+.pass-change-area {
+	display: none;
+}
+</style>
+<div class="page-content">
+	<div class="container-fluid mx-auto">
+		<form name="updateUserForm">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title">기본 정보</h4>
+						</div>
+						<div class="card-body">
+							<div class="mb-3 row">
+								<label for="profile_id" class="col-md-2 col-form-label">ID</label>
+								<label class="col-md-10 col-form-label">{{request.user.username}}</label>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-md-2 col-form-label">Password</label>
+								<div class="col-md-10">
+									<input type="password" class="form-control" name="password" value="">
+
+									<span class="btn-pass-change btn btn-primary my-2" style="margin-left:0.75em;">변경</span>
+									<div class="pass-change-area">
+										<div class="mb-3 new-pass-zone">
+											<label for="update_pass_new" class="form-label">New password</label>
+											<input type="password" class="form-control" id="update_pass_new" value="" name="new_password">
+										</div>
+										<div class="mb-3 confrim-pass-zone">
+											<label for="update_pass_new_confirm" class="form-label">Confirm new password</label>
+											<input type="password" class="form-control" id="update_pass_new_confirm" value="" name="new_password2">
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label for="profile_name" class="col-md-2 col-form-label">판매 담당자명</label>
+								<div class="col-md-10">
+									<input class="form-control" type="search" value="{{request.user.mb_name}}" name="mb_name" id="profile_name">
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label for="profile_tel" class="col-md-2 col-form-label">판매 담당자 연락처</label>
+								<div class="col-md-10">
+									<input class="form-control" type="tel" value="{{request.user.mb_phone}}" name="mb_phone" placeholder="Enter Telephone"
+										id="profile_tel">
+								</div>
+							</div>
+						</div>
+						<div class="card-header">
+							<h4 class="card-title">정산 정보</h4>
+						</div>
+						<div class="card-body">
+							<div class="mb-3 row">
+								<label class="col-md-2 col-form-label">Bank</label>
+								<div class="col-md-10">
+									<select class="form-select">
+										<option>Select</option>
+										<option>bank1</option>
+										<option>bank2</option>
+									</select>
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label for="account-holder" class="col-md-2 col-form-label">Account Holder</label>
+								<div class="col-md-10">
+									<input class="form-control" type="text" value="11"  placeholder="Enter Number" id="account-holder">
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label for="account-number-input" class="col-md-2 col-form-label">Account Number</label>
+								<div class="col-md-10 accountInputArea">
+									<input class="form-control" type="text" placeholder="Enter Number" value="1111-1111-1111-1111" id="account-number-input">
+								</div>
+							</div>
+							<div class="text-end">
+								<button type="button" class="btn btn-primary" id="profileSaveBtn">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<!-- <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalScrollableTitle">휴대폰 인증</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light"
+					data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<script>
+let is_run = false;
+let btnPassChange = document.querySelector(".btn-pass-change");
+
+btnPassChange.addEventListener("click", function(){
+	document.querySelector(".pass-change-area").classList.toggle("d-block")
+});
+
+/*정보수정 변수*/
+
+let accountInputArea = document.querySelector(".accountInputArea");
+let accountNumberInput = document.getElementById("account-number-input");
+let profileSaveBtn = document.getElementById("profileSaveBtn");
+
+/*비밀번호 변경 변수*/
+let passChangeArea = document.querySelector(".pass-change-area");
+let updatePassNew = document.getElementById("update_pass_new");
+let updatePassNewConfirm = document.getElementById("update_pass_new_confirm");
+let newPassZone = document.querySelector(".new-pass-zone");
+let confrimPassZone = document.querySelector(".confrim-pass-zone");
+
+/*이메일, 계좌번호 입력 검사*/
+profileSaveBtn.addEventListener("click", function(){
+	/*if(! account_check(Number(accountNumberInput.value))){
+		let html = `<input class="form-control" style="border-color: red;" type="text" value=""  placeholder="Enter Number" id="account-number-input">
+		<span class="text-danger">계좌번호를 정확히 입력하세요.</span>`;
+
+		accountInputArea.innerHTML = html;
+		return false;
+	}*/
+
+	/*새로운 비밀번호 같은지 검사*/
+
+	/*if(passChangeArea.classList.contains("d-block")){
+
+		if(updatePassNew.value != updatePassNewConfirm.value) {
+			let html = `<input type="password" style="border-color: red;" class="form-control" id="update_pass_new_confirm">
+			<span class="text-danger">비밀번호가 다릅니다.</span>`;
+	
+			confrimPassZone.innerHTML = html;
+			return false;
+		}
+	
+		if(updatePassNew.length < 10 || ! password_check(updatePassNew.value)) {
+			let html = `<input type="password" style="border-color: red;" class="form-control" id="update_pass_new">
+			<span class="text-danger">최소 8글자 이상, 숫자, 특수문자 포함 필수</span>`;
+	
+			newPassZone.innerHTML = html;
+			return false;
+		} 
+	}*/
+	update_user_submit();
+});
+
+async function update_user_submit() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+    is_run = true;
+
+	let form_data = new FormData(document.querySelector('form[name=updateUserForm]'));
+
+    const response = await fetch("{{request.path}}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: form_data
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        is_run  = false;
+        if (data.result == '200') {
+            openModal("알림", data.result_text, '', 'reload');
+        } else {
+            openModal("알림", data.result_text, '');
+        }
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<link href="{% static 'css/nice-select.css' %}" rel="stylesheet">
+<style>
+/**
+ * An example CSS of how to render a table responsively.
+ * It enables stacking of row data on mobile devices.
+ * Only do this for view mode (not for edit mode).
+ *
+ * On each cell rendered, it adds a user-defined attribute 
+ * 'data-label' with value matching the column header text.
+ */
+ @media only screen and (max-width: 767px) {
+ 	table {
+    border: 0;
+  }
+
+ table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: right;
+  }
+
+   table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+</style>
+<div class="page-content ">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header justify-content-between d-flex align-items-center">
+						<h4 class="card-title">회원 관리</h4>
+					</div>
+					<div class="card-body">
+						<form class="d-block d-md-flex align-items-center mb-3">
+							<div class="me-md-3 mb-md-0 mb-3 mt-md-0">
+								<div class="d-flex align-items-center border rounded-3">
+									<span class="border-end" style="padding: 10px 20px; border-color: #e2e5e8; font-size: 14px;">회원 유형</span>
+									<div style="padding: 10px 20px; border-color: #e2e5e8;">
+										<input class="form-check-input" type="radio" name="mb_type" value="" id="all-type" checked><label for="all-type" class="ms-1 mb-0" style="font-size: 13px;">All</label>
+										<input class="form-check-input ms-3" type="radio" name="mb_type" value="R" id="Regidents"><label for="Regidents" class="ms-1 mb-0" style="font-size: 13px;">Regidents</label>
+										<input class="form-check-input ms-3" type="radio" name="mb_type" value="S" id="Sellers"><label for="Sellers" class="ms-1 mb-0" style="font-size: 13px;">Sellers</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="d-sm-inline-flex selectArea">
+								<select class="px-nice-select me-1" name="division">
+									<option value="name">이름</option>
+									<option value="id">아이디</option>
+								</select>
+								<input type="text" name="keyword" class="form-control">
+								<button type="submit" style="width:100px;" class="btn btn-primary mx-1 member-search-btn">검색</button>
+							</div>
+							
+						</form>
+						<div class="table-responsive">
+							<table class="table mb-0 text-center table-check">
+								<thead class="table-light">
+									<tr>
+										<th>No.</th>
+										<th>회원 유형</th>
+										<th>회원 상태</th>
+										<th>이름</th>
+										<th>아이디</th>
+										<th>전화번호/휴대폰</th>
+										<th>포인트</th>
+										<th>가입일</th>
+										<th>관리</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										{% for account_obj in account_objs %}
+										<td data-label="No." scope="row">{{forloop.counter}}</td>
+										<td data-label="회원 유형">{{account_obj.get_mb_type_display }}</td>
+										<td data-label="회원 상태">{{account_obj.get_mb_status_display }}</td>
+										<td data-label="이름">{{account_obj.mb_name}}</td>
+										<td data-label="아이디">{{account_obj.username}}</td>
+										<td data-label="전화번호/휴대폰">{{account_obj.mb_phone}}</td>
+										<td data-label="포인트">{{account_obj.point}}</td>
+										<td data-label="가입일">{{account_obj.mb_regdate|date:'Y-m-d H:i:s'}}</td>
+										<td data-label="관리">
+											<span class="btn btn-light">수정</span>
+											<button type="button" onclick="account_delete_submit('{{account_obj.pk}}');" class="btn btn-secondary">탈퇴</button>
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						
+						<div class="row mt-3 g-0 text-center text-sm-start">
+							<!-- end col -->
+							<div class="col-12">
+								<ul class="pagination pagination-rounded justify-content-center mb-sm-0">
+									{% if account_objs.has_previous %}
+									<li class="page-item">
+										<a href="?p={{account_objs.previous_page_number }}" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-left"></i></span>
+									</li>
+									{% endif %}
+									
+									{% for page_number in account_objs.paginator.page_range %}
+										{% if page_number >= account_objs.number|add:-2 and page_number <= account_objs.number|add:2 %}
+											{% if page_number == account_objs.number %}
+											<li class="page-item active">
+												<span class="page-link">{{ page_number }}</span>
+											</li>
+											{% else %}
+											<li class="page-item">
+												<a href="?p={{page_number }}" class="page-link">{{ page_number }}</a>
+											</li>
+											{% endif %}
+										{% endif %}
+									{% endfor %}
+									
+									{% if account_objs.has_next  %}
+									<li class="page-item">
+										<a href="?p={{account_objs.next_page_number }}" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-right"></i></span>
+									</li>
+									{% endif %}
+								</ul>
+							</div><!-- end col -->
+						</div><!-- end row -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'js/pages/jquery.nice-select.js' %}"></script>
+<script src="{% static 'js/pages/jquery.nice-select.min.js' %}"></script>
+
+<script>
+let is_run = false;
+$(document).ready(function(){
+	$('select').niceSelect();
+});
+
+function checkbox_manager() {
+	const allboxes = document.querySelectorAll(".list-check");
+	// if some of the checkbox is checked
+	const isSomeCheck = [...allboxes].some(item => item.checked);
+	
+	// if all are checked
+	const isAllChecked = [...allboxes].every(item => item.checked);
+	// if some are checked then on click of button check all
+	if (!isSomeCheck) {
+		allboxes.forEach(item => item.checked = true);
+	} else if (isAllChecked && isSomeCheck) {
+		allboxes.forEach(item => item.checked = false);
+	} else{
+		allboxes.forEach(item => item.checked = true);
+	}
+}
+
+function remove_checked_item() {
+	const item_list = document.querySelectorAll("input[name=cart_item_id][type=checkbox]:checked");
+
+	let arr = [];
+
+	item_list.forEach(ele => arr.push(ele.value));
+
+	remove_cart_submit(arr);
+}
+
+async function account_delete_submit(user_id) {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+    is_run = true;
+
+	let form_data = new FormData();
+	form_data.append('user_id', user_id)
+    const response = await fetch("{% url 'account:delete' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: form_data
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        is_run  = false;
+        if (data.result == '200') {
+            openModal("good", data.result_text, '', 'reload');
+        } else {
+            openModal("good", data.result_text, '');
+        }
+    });
+}
+
+</script>
+
+
+{% endblock %}

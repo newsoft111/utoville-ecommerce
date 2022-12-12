@@ -1,0 +1,262 @@
+{% extends 'seller/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load util_filter %}
+{% load mathfilters %}
+
+<style>
+.catalog-arrow {
+	background: url("{% static 'seller/images/up-arrow.png' %}") no-repeat center center;
+}
+</style>
+<div class="page-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header justify-content-between d-flex align-items-center">
+						<h4 class="card-title">정산 목록 <span class="text-muted fw-normal ms-2">(34)</span></h4>
+					</div>
+					<div class="card-body p-3">
+						<div class="text-end">
+							<div class="d-flex flex-wrap align-items-start justify-content-md-end mt-2 mt-md-0 gap-2 mb-3">
+								<div>
+									<a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="uil uil-plus me-1"></i> Add New</a>
+								</div>                                                    
+							</div>
+						</div>
+
+						<!-- Modal -->
+						<div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body p-4">
+										<div>
+											<div class="mb-3">
+												<label for="addcontact-name-input" class="form-label">Name</label>
+												<input type="text" class="form-control" id="addcontact-name-input" placeholder="Enter Name">
+											</div>
+											<div class="mb-3">
+												<label for="addcontact-designation-input" class="form-label">Designation</label>
+												<input type="text" class="form-control" id="addcontact-designation-input" placeholder="Enter Designation">
+											</div>
+											<div class="mb-3">
+												<label for="addcontact-file-input" class="form-label">User Image</label>
+												<input type="file" class="form-control" id="addcontact-file-input">
+											</div>
+
+											<div class="mb-3">
+												<label for="addcontact-email-input" class="form-label">Email</label>
+												<input type="email" class="form-control" id="addcontact-email-input" placeholder="Enter Email">
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-light w-sm" data-bs-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary w-sm">Add</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- end modal -->
+
+						<div class="table-responsive">
+							<table class="table align-middle table-nowrap table-check">
+								<thead>
+									<tr>
+										<th scope="col" style="width: 50px;">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" id="checkAll">
+												<label class="form-check-label" for="checkAll"></label>
+											</div>
+										</th>
+										<th scope="col" class="position-relative">Name
+											<span class="catalog-arrow position-absolute"></span>
+										</th>
+										<th scope="col">Company</th>
+										<th scope="col">Phone</th>
+										<th scope="col">Email</th>
+										<th scope="col">Status</th>
+										<th style="width: 80px; min-width: 80px;">Action</th>
+									</tr><!-- end tr -->
+								</thead><!-- end thead -->
+								<tbody>
+									<tr>
+										<th scope="row">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" id="contacusercheck1">
+												<label class="form-check-label" for="contacusercheck1"></label>
+											</div>
+										</th>
+										<td>
+											<span class="text-body fw-medium">Donald Risher</span>
+										</td>
+										<td>AwesomeHomcare</td>
+										<td>02-8856-9210</td>
+										<td>selleremail@email.com</td>
+										<td>이체 대기중</td>
+										<td>
+											<div class="dropdown">
+												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="uil uil-ellipsis-h"></i>
+												</button>
+												<ul class="dropdown-menu dropdown-menu-end">
+													<li><a class="dropdown-item" href="#">이체 완료</a></li>
+													<li><a class="dropdown-item" href="#">이체 취소</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr><!-- end tr -->
+									<tr>
+										<th scope="row">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" id="contacusercheck1">
+												<label class="form-check-label" for="contacusercheck1"></label>
+											</div>
+										</th>
+										<td>
+											<span class="text-body fw-medium">Donald Risher</span>
+										</td>
+										<td>AwesomeHomcare</td>
+										<td>02-8856-9210</td>
+										<td>selleremail@email.com</td>
+										<td>이체 대기중</td>
+										<td>
+											<div class="dropdown">
+												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="uil uil-ellipsis-h"></i>
+												</button>
+												<ul class="dropdown-menu dropdown-menu-end">
+													<li><a class="dropdown-item" href="#">이체 완료</a></li>
+													<li><a class="dropdown-item" href="#">이체 취소</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr><!-- end tr -->
+									<tr>
+										<th scope="row">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" id="contacusercheck1">
+												<label class="form-check-label" for="contacusercheck1"></label>
+											</div>
+										</th>
+										<td>
+											<span class="text-body fw-medium">Donald Risher</span>
+										</td>
+										<td>AwesomeHomcare</td>
+										<td>02-8856-9210</td>
+										<td>selleremail@email.com</td>
+										<td>이체 대기중</td>
+										<td>
+											<div class="dropdown">
+												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="uil uil-ellipsis-h"></i>
+												</button>
+												<ul class="dropdown-menu dropdown-menu-end">
+													<li><a class="dropdown-item" href="#">이체 완료</a></li>
+													<li><a class="dropdown-item" href="#">이체 취소</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr><!-- end tr -->
+									<tr>
+										<th scope="row">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" id="contacusercheck1">
+												<label class="form-check-label" for="contacusercheck1"></label>
+											</div>
+										</th>
+										<td>
+											<span class="text-body fw-medium">Donald Risher</span>
+										</td>
+										<td>AwesomeHomcare</td>
+										<td>02-8856-9210</td>
+										<td>selleremail@email.com</td>
+										<td>이체 대기중</td>
+										<td>
+											<div class="dropdown">
+												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="uil uil-ellipsis-h"></i>
+												</button>
+												<ul class="dropdown-menu dropdown-menu-end">
+													<li><a class="dropdown-item" href="#">이체 완료</a></li>
+													<li><a class="dropdown-item" href="#">이체 취소</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr><!-- end tr -->
+									<tr>
+										<th scope="row">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" id="contacusercheck1">
+												<label class="form-check-label" for="contacusercheck1"></label>
+											</div>
+										</th>
+										<td>
+											<span class="text-body fw-medium">Donald Risher</span>
+										</td>
+										<td>AwesomeHomcare</td>
+										<td>02-8856-9210</td>
+										<td>selleremail@email.com</td>
+										<td>이체 대기중</td>
+										<td>
+											<div class="dropdown">
+												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="uil uil-ellipsis-h"></i>
+												</button>
+												<ul class="dropdown-menu dropdown-menu-end">
+													<li><a class="dropdown-item" href="#">이체 완료</a></li>
+													<li><a class="dropdown-item" href="#">이체 취소</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr><!-- end tr -->
+								</tbody><!-- end tbody -->
+							</table><!-- end table -->
+						</div><!-- end table responsive -->
+
+						<div class="row g-0 text-center text-sm-start">
+							<div class="col-sm-6">
+								<div>
+									<p class="mb-sm-0">Showing 1 to 10 of 57 entries</p>
+								</div>
+							</div>
+							<!-- end col -->
+							<div class="col-sm-6">
+								<ul class="pagination pagination-rounded justify-content-center justify-content-sm-end mb-sm-0">
+									<li class="page-item disabled">
+										<a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+									</li>
+									<li class="page-item">
+										<a href="#" class="page-link">1</a>
+									</li>
+									<li class="page-item active">
+										<a href="#" class="page-link">2</a>
+									</li>
+									<li class="page-item">
+										<a href="#" class="page-link">3</a>
+									</li>
+									<li class="page-item">
+										<a href="#" class="page-link">4</a>
+									</li>
+									<li class="page-item">
+										<a href="#" class="page-link">5</a>
+									</li>
+									<li class="page-item">
+										<a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+									</li>
+								</ul>
+							</div><!-- end col -->
+						</div><!-- end row -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

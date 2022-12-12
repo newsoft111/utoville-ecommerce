@@ -1,0 +1,497 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load util_filter %}
+{% load mathfilters %}
+{% load product_filters %}
+
+<link href="{% static 'libs/quill/dist/quill.snow.css' %}" rel="stylesheet" type="text/css" />
+<style>
+	.category-select:focus {
+		box-shadow: inset 0 1px 1px rgba(255,255,255);
+	}
+</style>
+
+<div class="page-content">
+	<div class="container-fluid">
+		<form name="productWriteForm">
+			<div class="row">
+				<div class="page-title-box d-flex align-items-center justify-content-between">
+					<h4 class="mb-0">상품 등록</h4>
+				</div>
+
+				<p>대분류 > 중분류 > 소분류 순으로 선택하세요.</p>
+				<div class="col-md-4">
+					<div class="card text-bg-light">
+						<div class="card-header">대분류</div>
+						<select class="category-select form-select border-0" name="category_first" size="9" id="l1_cat">
+							{% for key, value in cats_data.items %}
+								{% if key == product.category_first.name %}
+								<option value="{{key}}" onclick="get_l2(this)" selected> {{key}} </option>
+							{% else %}
+								<option value="{{key}}" onclick="get_l2(this)" > {{key}} </option>
+							{% endif %}
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card text-bg-light">
+						<div class="card-header">중분류</div>				
+						<select class="category-select form-select border-0" name="category_second" size="9" id="l2_cat">
+							{% for data in cat_sec %}
+								{% if data.name == product.category_second.name %}
+								<option value="{{data.name}}" onclick="get_l3(this)" selected> {{data.name}} </option>
+							{% else %}
+								<option value="{{data.name}}" onclick="get_l3(this)" > {{data.name}} </option>
+							{% endif %}
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card text-bg-light">
+						<div class="card-header">소분류</div>
+						<select class="category-select form-select border-0" name="category_third" size="9" id="l3_cat">
+							{% for data in cat_third %}
+								{% if data.name == product.category_third.name %}
+								<option value="{{data.id}}" selected> {{data.name}} </option>
+							{% else %}
+								<option value="{{data.id}}"  > {{data.name}} </option>
+							{% endif %}
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+
+				<div class="col-12">
+					<div class="card" style="padding: 20px 10px;">
+						<div class="card-header justify-content-between d-flex align-items-center">
+							<h4 class="card-title">서비스 기본정보</h4>
+						</div><!-- end card header -->
+						<div class="card-body">
+
+							<div class="mb-3">
+								<label for="example-text-input" class="form-label">서비스 명</label>
+								<input class="form-control" type="text" placeholder="서비스 명을 입력하세요." value="{{product.product_name}}" name="product_name">
+							</div><!-- end row -->
+
+							<div class="mb-3">
+								<div class="row">
+									<div class="col-md-6">
+										<label class="form-label">지역</label>
+										<select class="form-select" name="area">
+											<option value="">Select</option>
+											<option>Large select</option>
+											<option>Small select</option>
+										</select>
+									</div>
+									<div class="col-md-6">
+										<label for="price-search-input" class="form-label">서비스 가격</label>
+										<input class="form-control" type="text" placeholder="가격을 입력하세요." maxlength="11" name="price" id="price-search-input" value="{{product.amount}}">
+									</div>
+								</div>	
+							</div>
+
+							<div class="mb-3">
+								<label class="form-label">옵션 설정</label>
+								<div class="border p-3">
+									<div class="row">
+										<div class="col-md-2">
+											<label class="form-label">옵션</label>
+										</div>
+										<div class="col-md-10">
+											<div class="d-flex">
+												<input class="form-control" type="text" placeholder="옵션을 입력하세요." id="option_name" name="option_name">
+												<button type="button" class="btn btn-primary text-nowrap ms-3" onclick="add_options(this)">추가</button>
+											</div>
+											
+											<div class="mt-2">
+												<table class="table mb-9 table-bordered text-center">
+													<thead>
+														<tr>
+															<!-- <th scope="col">순서</th> -->
+															<th scope="col">옵션 항목</th>
+															<th scope="col">옵션 가격</th>
+															<th scope="col">삭제</th>
+														</tr>
+													</thead>
+													<tbody id="option-list">
+														<tr>
+															<!-- <th scope="row" id="option-list-num"><span id=""></span>1</th> -->
+															<td><input class="form-control" type="text" placeholder="옵션 항목 입력하세요."></td>
+															<td><input class="form-control" type="text" value="0" placeholder="가격을 입력하세요." maxlength="11" name="option-price" id="option-price-input"></td>
+															<td><button type="button" class="btn btn-secondary" id="remove-option-btn" disabled>삭제</button></td>
+														</tr>			
+													</tbody>
+													<tfoot>
+														<tr>
+															<td colspan="3"><a href="#!" id="add-option-btn">+ 새 옵션 항목 추가하기</a></td>
+														</tr>					
+													</tfoot>
+												</table>
+											</div>
+										</div>									
+									</div>
+
+									<div class="row">
+										<div class="col-md-2">
+											<label class="form-label">추가된옵션</label>
+										</div>
+										<div class="col-md-10">
+									
+											<table class="table mb-9 table-bordered text-center">
+												<thead>
+													<tr>
+														<!-- <th scope="col">순서</th> -->
+														<th scope="col">옵션명</th>
+														<th scope="col">옵션항목</th>
+														<th scope="col">삭제</th>
+													</tr>
+												</thead>
+												<tbody id="added-option-list">
+												{% for i in variant_val_obj %}
+													{% for key, value in i.items %}
+												<tr>
+													<td id="options_name" >{{key}}</td>
+													<td id="options_price" >{{ value|options_create }}</td>
+													<td><button type="button" class="btn btn-secondary" onclick="removeAddedOptionItem(this);" >remove added option button</button></td>
+												</tr>
+												{% endfor %}
+												{% endfor %}
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+								</div>
+							</div>
+				
+							<!--Listing Images-->
+							<div class="mb-4" data-dropzone-area="">
+								<label class="form-label">썸네일</label>
+								<div class="thumbnail-preview row" id="thumbnail-preview" >
+									{% for i in thumbnail %}
+										<div class="position-relative col-3">
+											<button type="button" onclick="thumbnail_remove(this);" data-index="1667891727034" class="btn btn-primary position-absolute top-0 end-0" id="thumbnail-remove-btn"><i class="bx bx-x fs-5 lh-1"></i></button>
+											<img src="{{ i.thumbnail.url }}" class="img-thumbnail">
+										</div>
+									{% endfor %}
+								</div>
+								<div class="chat-form rounded-pill" data-emoji-form="">
+									<input type="file" class="d-none" name="thumbnail" id="thumbnail-upload">
+									<label for="thumbnail-upload">
+										<span class="btn btn-primary">업로드</span>
+									</label>
+								</div>
+							</div>
+
+							<div class="mb-3">
+								<label class="form-label">상세정보</label>
+								<input type="hidden" name="content">
+								<div id="snow-editor" style="height: 300px;">{{product.content|safe}}</div>
+							</div>
+
+							<div class="text-end">
+								<a href="#!" class="btn btn-success" onClick='product_write_submit();'>등록</a>
+								<a href="{% url 'product:list' %}" class="btn btn-secondary">취소</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="{% static 'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+<script src="{% static 'libs/quill/dist/quill.min.js' %}"></script>
+<script src="{% static 'libs/sweetalert2/dist/sweetalert2.all.min.js' %}"></script>
+
+<script>
+opt_data = {{ variant_val_obj|safe }}
+options_data = []
+if (opt_data){
+options_data = opt_data
+}
+let is_run = false
+const dataTransfer = new DataTransfer();
+const handler = {
+	init() {
+		const fileInput = document.querySelector('#thumbnail-upload');
+		const preview = document.querySelector('.thumbnail-preview');
+		
+		fileInput.addEventListener('change', () => {
+			
+			const files = Array.from(fileInput.files);
+			files.forEach((file) => {
+				var reader = new FileReader();
+				reader.onload = function(e) {			
+					html = '<div class="position-relative col-3">';
+					html += `<button type='button' onclick='thumbnail_remove(this);' data-index='${file.lastModified}' class='btn btn-primary position-absolute top-0 end-0' id='thumbnail-remove-btn'><i class='bx bx-x fs-5 lh-1'></i></button>`;
+					html += `<img src="${e.target.result}" class="img-thumbnail">`;
+					html += '</div>'
+					preview.innerHTML +=  html;
+				}
+				reader.readAsDataURL(file);
+				dataTransfer.items.add(file);
+			});
+
+			fileInput.files = dataTransfer.files;
+			console.log(document.querySelector('#thumbnail-upload').files)
+		});
+	},
+}
+
+handler.init();
+
+
+function thumbnail_remove(e) {
+	dataTransfer.clearData();
+	const lastModified = e.dataset.index;
+	const input = document.querySelector('#thumbnail-upload');
+	const { files } = input;
+
+	
+	for (let i = 0; i < files.length; i++) {
+		const file = files[i]
+		if (lastModified != file.lastModified) {
+
+			dataTransfer.items.add(file) // here you exclude the file. thus removing it.
+		}
+	}
+	
+	input.files = dataTransfer.files // Assign the updates list
+	e.parentElement.remove();
+
+}
+
+var quill = new Quill('#snow-editor', {
+	modules: {
+		toolbar: [
+			[{ 'size': ['small', false, 'large', 'huge'] }],
+			['bold', 'italic', 'underline', 'strike'],
+			['blockquote', 'code-block'],
+			[{ 'color': [] }, { 'background': [] }],
+			[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+			['link', 'image'],
+			['clean'],
+		]
+	},
+	theme: 'snow'
+});
+
+quill.getModule('toolbar').addHandler('image', function() {
+	upload_content_image();
+});
+
+
+function upload_content_image() {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+	input.setAttribute('accept', "image/jpeg, image/png, image/gif");
+    input.click();
+
+    input.onchange = upload_submit;
+	
+	async function upload_submit() {
+		if(is_run == true) {
+			openModal('알림','잠시후에 다시시도 해주세요.');
+			return false;
+		}
+
+		is_run = true;
+
+		const fd = new FormData();
+		const file = this.files[0];
+		fd.append('image', file);
+
+		const response = fetch("{% url 'product:upload_image' %}", {
+			method: "POST",
+			headers: {
+				"X-CSRFToken": getCookie("csrftoken"),
+			},
+			body: fd,
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			is_run  = false;
+			if (data.result == '200') {
+				const range = quill.getSelection();
+				quill.insertEmbed(range.index, 'image', data.result_text);
+			} else {
+				openModal("알림", data.result_text);
+			}
+		});
+    };
+}
+
+
+
+async function product_write_submit() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+    is_run = true;
+	document.querySelector('input[name=content]').value = quill.root.innerHTML;
+	let form_data = new FormData(document.querySelector('form[name=productWriteForm]'));
+	form_data.append('options_data', JSON.stringify(options_data))
+    const response = await fetch("{{request.path}}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: form_data
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        is_run  = false;
+        if (data.result == '200') {
+            openModal("good", data.result_text, '', 'reload');
+        } else {
+            openModal("good", data.result_text, '');
+        }
+    });
+}
+
+"propertychange change keyup paste input".split(" ").forEach(function(e){
+	document.querySelector("input[name=price]").addEventListener(e, function(){
+		this.value = this.value.replace(/(^0+)/, '');
+		this.value = this.value.replace(/[^0-9]/g,'').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	});
+});
+
+"propertychange change keyup paste input".split(" ").forEach(function(e){
+	document.querySelector("input[name=option-price]").addEventListener(e, function(){
+		this.value = this.value.replace(/(^0+)/, '');
+		this.value = this.value.replace(/[^0-9]/g,'').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	});
+});
+
+
+let addoptionBtn = document.getElementById("add-option-btn");
+let removeoptionBtn = document.getElementById("remove-option-btn")
+let num = 2;
+
+addoptionBtn.addEventListener("click", function(){
+	html = `<tr><td><input class="form-control" type="text" placeholder="옵션 항목 입력하세요."></td>`;
+	html += `<td><input class="form-control" type="text" placeholder="가격을 입력하세요." value="0" maxlength="11" name="option-price" id="option-price-input"></td>`;
+	html += '<td><button type="button" class="btn btn-secondary" onclick=removeOptionItem(this);>삭제</button></td></tr>'
+	document.querySelector('tbody[id=option-list]').insertAdjacentHTML("beforeend", html);
+});
+
+cats_data = {{cats_data|safe}};
+product_l1_name = "{{product.category_first.name}}"
+product_l2_name = "{{product.category_second.name}}"
+product_l3_name = "{{product.category_third.name}}"
+l1_name = '';
+function get_l2(elem) {
+    		l1_name= elem.value;
+            let cats = '';
+            l2_data = cats_data[l1_name]
+			for (var i=0; i < l2_data.length; i++) {
+						if (product_l2_name == Object.keys(l2_data[i])) {
+						cats += '<option value='+Object.keys(l2_data[i])+' onclick="get_l3(this)" selected>'+Object.keys(l2_data[i])+'</option>';
+						}
+						else {
+							cats += '<option value='+Object.keys(l2_data[i])+' onclick="get_l3(this)">'+Object.keys(l2_data[i])+'</option>';
+
+						}
+			}
+			document.querySelector('select[id=l2_cat]').innerHTML =  '';
+			document.querySelector('select[id=l2_cat]').innerHTML +=  cats;
+			document.querySelector('select[id=l3_cat]').innerHTML =  '';
+}
+
+function get_l3(elem){
+            let cats = '';
+            if (!l1_name){
+            l1_name = product_l1_name;
+            }
+            l2_data = cats_data[l1_name]
+            if (l2_data.length){
+				for (var i=0; i < l2_data.length; i++) {
+					l3_cats = l2_data[i][elem.value]
+
+					if (l3_cats) {
+						for (var j=0; j < l3_cats.length; j++) {
+						if (product_l3_name == l3_cats[j]['name']){
+							cats += '<option value='+l3_cats[j]['id']+' selected>'+l3_cats[j]['name']+'</option>';
+							}
+						else {
+							cats += '<option value='+l3_cats[j]['id']+'>'+l3_cats[j]['name']+'</option>';
+
+						}
+						}
+					}
+				}
+				document.querySelector('select[id=l3_cat]').innerHTML = '';
+				document.querySelector('select[id=l3_cat]').innerHTML +=  cats;
+				}
+			else{
+				document.querySelector('select[id=l3_cat]').innerHTML = '';
+			}
+}
+
+
+function removeOptionItem(e){
+	e.parentElement.parentElement.remove();
+}
+
+function removeAddedOptionItem(e){
+    remove_data = e.parentElement.previousElementSibling.previousElementSibling.innerHTML
+    if (remove_data){
+    options_data.forEach(function(item){ delete item[remove_data] });
+    }
+	e.parentElement.parentElement.remove();
+}
+
+function add_options(elem){
+	let addoptionname = document.getElementById("option_name").value;
+        if (!addoptionname) {
+            openModal("Required!!", "Please add option", '',);
+				}
+		else
+			{
+				html = `<tr> <td id="options_name" name="options_name" > ${addoptionname} </td>`;
+				let elem = document.getElementById('option-list').querySelectorAll('input');
+				let names = [];
+				let dict = {};
+				let dict1 = {};
+				for (var i = 0; i < elem.length-1; i++) {
+						if(i == elem.length-2){
+							names += elem[i].value +'(+' + elem[i+1].value + ') ';
+							if (!dict.hasOwnProperty(addoptionname)) {
+								dict1[elem[i].value] = elem[i+1].value
+								dict[addoptionname] = dict1;
+							}
+							else {
+								dict1[elem[i].value] = elem[i+1].value
+							}
+						}
+						else {
+								names += elem[i].value +'(+' + elem[i+1].value + '), ';
+								if (!dict.hasOwnProperty(addoptionname)) {
+									dict[addoptionname] = dict1;
+									dict1[elem[i].value] = elem[i+1].value
+								}
+								else {
+									dict1[elem[i].value] = elem[i+1].value
+								}
+								i = i+1;
+						}
+					}
+				options_data.push(dict);
+				html +=	`<td id="options_price" name="options_price" >${names}</td>`;
+				html +=  `<td><button type="button" class="btn btn-secondary" onclick="removeAddedOptionItem(this);" >remove added option button</button></td></tr>`;
+				document.querySelector('tbody[id=added-option-list]').innerHTML +=  html;
+        }
+}
+
+</script>
+{% endblock %}

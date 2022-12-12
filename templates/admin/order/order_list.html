@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load util_filter %}
+{% load mathfilters %}
+
+<!-- Begin page -->
+
+<link href="{% static 'css/nice-select.css' %}" rel="stylesheet">
+
+<style>
+@media only screen and (max-width: 575px){
+	.nice-select {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.nice-select > ul {
+		width: 100%;
+	}
+	button[type=submit] {
+		width: 100% !important;
+		margin: 10px 0 0 0 !important;
+	}
+}
+</style>
+<div class="page-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header justify-content-between d-flex align-items-center">
+						<h4 class="card-title">주문 관리</h4>
+						<div class="text-end">
+							<a href="#" class="btn btn-light">취소</a>
+						</div>
+					</div>
+					<div class="card-body">
+						<form>
+							<div class="d-sm-inline-flex mb-3">
+								<select class="px-nice-select me-1" name="category" style="width: 200px;">
+									<option value="0">주문번호</option>
+									<option value="1">상품명  </option>
+									<option value="2">이름</option>
+								</select>
+								<input type="text" name="keyword" class="form-control">
+								<button type="submit" style="width:100px;" class="btn btn-primary mx-1">검색</button>
+							</div>
+						</form>			
+						<div class="table-responsive">
+							<table class="table table-bordered align-middle table-nowrap table-check">
+								<thead>
+									<tr>
+										<th scope="col" style="width: 50px;">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" id="checkAll">
+												<label class="form-check-label" for="checkAll"></label>
+											</div>
+										</th>
+										<th scope="col">주문번호</th>
+										<th scope="col">상태</th>
+										<th scope="col">상품명</th>
+										<th scope="col">옵션</th>
+										<th scope="col">수량</th>
+										<th scope="col">이름</th>
+										<th scope="col">연락처</th>
+										<th scope="col">남은수량</th>
+										<th scope="col">결제일</th>
+									</tr><!-- end tr -->
+								</thead><!-- end thead -->
+								<tbody>
+									{% if not order_item_objs %}
+									<tr>
+										<td class="border-bottom-0 text-center p-5" colspan="10">주문이 없습니다.</td>
+									</tr>
+									{% endif%}
+									
+									{% for order_item_obj in order_item_objs %}
+									<tr>
+										<th scope="row">
+											<div class="form-check font-size-16">
+												<input type="checkbox" class="form-check-input" id="contacusercheck1">
+												<label class="form-check-label" for="contacusercheck1"></label>
+											</div>
+										</th>
+
+										<td>
+											<a href="#!" class="text-link fw-medium">{{order_item_obj.order_uid}}</a>
+										</td>
+
+										<td>
+											<span href="#" class="badge badge-soft-primary">{{order_item_obj.order_item_status}}</span>
+										</td>
+
+										<td>
+											<a href="#!" class="text-link fw-medium">{{order_item_obj.product_name}}</a>
+										</td>
+
+										<td>
+											{{order_item_obj.variant_value}}
+										</td>
+
+										<td>
+											{{order_item_obj.ordered_quantity}}개
+										</td>
+
+										<td>
+											{{order_item_obj.order.user.mb_name}}
+										</td>
+
+										<td>
+											{{order_item_obj.order.user.mb_phone}}
+										</td>
+
+										<td>
+											{{order_item_obj.ordered_quantity|sub:order_item_obj.shipped_quantity}}개
+										</td>
+
+										<td>
+											{{order_item_obj.order.payment.paid_at}}
+										</td>
+									</tr><!-- end tr -->
+									{% endfor %}
+								</tbody><!-- end tbody -->
+							</table><!-- end table -->
+						</div><!-- end table responsive -->
+
+						<div class="row g-0 text-center text-sm-start">
+							<!-- end col -->
+							<div class="col-12">
+								<ul class="pagination pagination-rounded justify-content-center mb-sm-0">
+									{% if order_item_objs.has_previous %}
+									<li class="page-item">
+										<a href="?p={{order_item_objs.previous_page_number }}" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-left"></i></span>
+									</li>
+									{% endif %}
+									
+									{% for page_number in order_item_objs.paginator.page_range %}
+										{% if page_number >= order_item_objs.number|add:-2 and page_number <= order_item_objs.number|add:2 %}
+											{% if page_number == order_item_objs.number %}
+											<li class="page-item active">
+												<span class="page-link">{{ page_number }}</span>
+											</li>
+											{% else %}
+											<li class="page-item">
+												<a href="?p={{page_number }}" class="page-link">{{ page_number }}</a>
+											</li>
+											{% endif %}
+										{% endif %}
+									{% endfor %}
+									
+									{% if order_item_objs.has_next  %}
+									<li class="page-item">
+										<a href="?p={{order_item_objs.next_page_number }}" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+									</li>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-right"></i></span>
+									</li>
+									{% endif %}
+								</ul>
+							</div><!-- end col -->
+						</div><!-- end row -->
+						
+					</div><!-- end card body -->
+				</div><!-- end card -->
+			</div><!-- end col -->
+		</div><!-- end row -->
+	</div>
+</div>
+
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'js/pages/jquery.nice-select.js' %}"></script>
+<script src="{% static 'js/pages/jquery.nice-select.min.js' %}"></script>
+<script>
+$(document).ready(function(){
+	$('select').niceSelect();
+});
+
+</script>
+{% endblock %}
