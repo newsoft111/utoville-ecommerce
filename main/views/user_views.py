@@ -7,7 +7,7 @@ def user_index(request):
 		'title': "유토빌",
 	}
 	if request.user.is_authenticated: #로그인 상태면
-		return redirect('account:my_dashboard')
+		return redirect('account:user_my_dashboard')
 	else:
 		return render(request, 'user/main/index.html',{"seo":seo})
 
