@@ -76,6 +76,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'qna.context_processors.admin_counter_new_qna',
 				'cart.context_processors.counter_cart_items',
 				'category.context_processors.categories',
                 'django.template.context_processors.debug',
@@ -83,6 +84,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
+            'libraries':{
+            	'util_filter': 'util.templatetags.util_filter',
+            	'product_filter': 'product.templatetags.product_filter',
+            }
         },
     },
 ]
