@@ -265,8 +265,8 @@ def send_auth_mail(email):
 	else:
 		return False
 
-@login_required(login_url="account:login")
-def my_dashboard(request):
+@login_required(login_url="account:user_login")
+def user_my_dashboard(request):
 	"""Here we are preparing data to show order detail on user's calender"""
 
 	if request.user.is_authenticated and not request.user.is_anonymous:
@@ -335,8 +335,8 @@ def my_dashboard(request):
 		"order_done_keys":order_done_keys
 	})
 
-@login_required(login_url="account:login")
-def my_order(request):
+@login_required(login_url="account:user_login")
+def user_my_order(request):
 	seo = {
 		'title': "상품 리스트 - 유토빌",
 	}
@@ -397,16 +397,16 @@ def my_order(request):
 		'order_status_dict': order_status_dict.items(),
 	})
 
-@login_required(login_url="account:login")
-def my_subscribe(request):
+@login_required(login_url="account:user_login")
+def user_my_subscribe(request):
 	return render(request, 'user/account/mypage/my_subscribe.html')
 
-@login_required(login_url="account:login")
-def my_subscribe_cancel(request):
+@login_required(login_url="account:user_login")
+def user_my_subscribe_cancel(request):
 	return render(request, 'user/account/mypage/my_subscribe_cancel.html')
 
-@login_required(login_url="account:login")
-def qna_list(request):
+@login_required(login_url="account:user_login")
+def user_my_qna_list(request):
 	seo = {
 		'title': "상품 리스트 - 유토빌",
 	}
@@ -425,7 +425,7 @@ def qna_list(request):
 	 	"qna_objs":qna_objs,
 	})
 
-def qna_write(request):
+def user_my_qna_write(request):
 	if request.method == 'POST':
 		jsonData = json.loads(request.body)
 		subject = jsonData.get('subject')
@@ -462,7 +462,7 @@ def qna_write(request):
 	else:
 		return render(request, 'user/account/mypage/my_qna_write.html')
 
-def qna_detail(request, qna_id):
+def user_my_qna_detail(request, qna_id):
 	seo = {
 		'title': "상품 리스트 - 유토빌",
 	}
