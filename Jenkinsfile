@@ -1,6 +1,18 @@
 node {
-    stage('Clone repository') {
-        checkout scm
+    stage('Checkout') {
+		checkout changelog: false, poll: false, scm: [
+			$class: 'GitSCM',
+			branches: [[
+				name: "main"
+			]],
+			doGenerateSubmoduleConfigurations: false,
+			extensions: [[
+				$class: "WipeWorkspace"
+			], [
+				$class: "CleanBeforeCheckout"
+			]],
+			submoduleCfg: [],
+		]
     }
 
     stage('Build image') {
@@ -34,12 +46,5 @@ node {
                 ]
             )
         }
-    }
-
-	post {
-         always {
-             echo 'One way or another, I have finished'
-             deleteDir() /* clean up our workspace */
-         }
     }
 }
