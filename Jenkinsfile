@@ -10,7 +10,7 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build("mcfly17/utoville-homecare", "--no-cache .")
+        app = docker.build("mcfly17/utoville-homecare")
     }
 
     stage('Test image') {
