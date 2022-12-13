@@ -27,7 +27,7 @@ def seller_order_list(request):
 	pagenator   = Paginator(order_item_list, 12)
 	order_item_list = pagenator.get_page(page)
 
-	return render(request, 'order/order_list.html',{
+	return render(request, 'seller/order/order_list.html',{
 		"seo":seo,
 		'order_item_list': order_item_list
 	})

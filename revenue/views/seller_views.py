@@ -46,7 +46,7 @@ def seller_revenue_list(request):
 	pagenator   = Paginator(result, 10)
 	result = pagenator.get_page(page)
 
-	return render(request, 'revenue/revenue_list.html', {
+	return render(request, 'seller/revenue/revenue_list.html', {
 		"revenue_seller_objs": result,
 		'payment_amount': payment_amount,
 		'refund_amount': refund_amount,

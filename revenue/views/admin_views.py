@@ -9,8 +9,8 @@ import urllib
 import xlwt
 from django.http import JsonResponse, HttpResponse
 
-@login_required(login_url="account:login")
-def revenue_list(request):
+@login_required(login_url="account:admin_login")
+def admin_revenue_list(request):
 	now = date.today()
 	start_date = now-relativedelta(months=1)
 	end_date = now
@@ -52,7 +52,7 @@ def revenue_list(request):
 	pagenator   = Paginator(result, 10)
 	result = pagenator.get_page(page)
 
-	return render(request, 'revenue/revenue_list.html', {
+	return render(request, 'admin/revenue/revenue_list.html', {
 		"revenue_admin_objs": result,
 		'payment_amount': payment_amount,
 		'refund_amount': refund_amount,
@@ -60,8 +60,8 @@ def revenue_list(request):
 	})
 
 
-@login_required(login_url="account:login")
-def revenue_export(request):
+@login_required(login_url="account:admin_login")
+def admin_revenue_export(request):
 	now = date.today()
 	start_date = now-relativedelta(months=1)
 	end_date = now

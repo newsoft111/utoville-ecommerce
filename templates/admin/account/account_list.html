@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'admin/base.html' %}
 {% block content %}
 {% load static %}
 {% load humanize %}
@@ -218,7 +218,7 @@ async function account_delete_submit(user_id) {
 
 	let form_data = new FormData();
 	form_data.append('user_id', user_id)
-    const response = await fetch("{% url 'account:delete' %}", {
+    const response = await fetch("{% url 'account:admin_account_manage_delete' %}", {
         method: "POST",
         headers: {
             "X-CSRFToken": getCookie("csrftoken"),

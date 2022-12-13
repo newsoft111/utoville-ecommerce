@@ -15,7 +15,7 @@ urlpatterns = [
 	),
 	path('admin/product/',
 		include([
-			path('', views.product_list, name='list'),
+			path('', views.admin_product_list, name='admin_product_list'),
 			path('write/', views.product_write, name='write'),
 			path('<int:product_id>/', views.product_update, name='update'),
 			path('delete/', views.product_delete, name='delete'),

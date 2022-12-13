@@ -12,8 +12,8 @@ urlpatterns = [
     ),
     path('admin/revenue/',
 		include([
-            path('', views.revenue_list, name='list'),
-	        path('export/', views.revenue_export, name='export'),
+            path('', views.admin_revenue_list, name='admin_revenue_list'),
+	        path('export/', views.admin_revenue_export, name='admin_revenue_export'),
         ])
     )
 ]

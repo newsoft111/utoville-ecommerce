@@ -12,7 +12,8 @@ import urllib
 import xlwt
 User = get_user_model()
 
-def profit_list(request):
+@login_required(login_url="account:admin_login")
+def admin_profit_list(request):
 	profit_objs = Profit.objects.filter(profit_done=None)
 	profit_amount = profit_objs.aggregate(Sum('profit_amount'))['profit_amount__sum']
 	if profit_amount is None:
@@ -36,7 +37,7 @@ def profit_list(request):
 	pagenator   = Paginator(profit_done_objs, 10)
 	profit_done_objs = pagenator.get_page(page)
 
-	return render(request, 'profit/profit_list.html', {
+	return render(request, 'admin/profit/profit_list.html', {
 		"profit_objs": profit_objs,
 		'profit_amount': profit_amount,
 		'profit_done_objs': profit_done_objs
@@ -44,8 +45,8 @@ def profit_list(request):
 
 
 
-@login_required(login_url="account:login")
-def profit_export(request):
+@login_required(login_url="account:admin_login")
+def admin_profit_export(request):
 	profit_done_obj = get_object_or_404(ProfitDone, pk=request.GET.get("id"))
 	
 	q = Q()

@@ -7,8 +7,8 @@ from django.http import JsonResponse
 import json, re
 # Create your views here.
 
-@login_required(login_url="account:login")
-def product_list(request):
+@login_required(login_url="account:admin_login")
+def admin_product_list(request):
 	seo = {
 		'title': "상품 리스트 - 유토빌",
 	}
@@ -18,7 +18,7 @@ def product_list(request):
 	pagenator   = Paginator(product_list, 12)
 	product_list = pagenator.get_page(page)
 
-	return render(request, 'product/product_list.html',{
+	return render(request, 'admin/product/product_list.html',{
 		"seo":seo,
 		'product_list': product_list
 	})
@@ -121,7 +121,7 @@ def product_write(request):
 				for l3_cat in l3_cats:
 					l2_data[l2_cat.name].append({"name":l3_cat.name, "id":l3_cat.pk})
 				l1_l2_l3_cat_data[l1.name].append(l2_data)
-		return render(request, 'product/product_write.html', context={"cats_data": l1_l2_l3_cat_data})
+		return render(request, 'admin/product/product_write.html', context={"cats_data": l1_l2_l3_cat_data})
 
 
 @login_required(login_url="account:login")
@@ -259,7 +259,7 @@ def product_update(request, product_id):
 					"variant_val_obj": prod_variant_data,
 					"cat_sec": CategorySecond.objects.filter(parent=product_obj.category_first),
 					"cat_third": CategoryThird.objects.filter(parent=product_obj.category_second)}
-		return render(request, 'product/product_update.html', context=ctx_data)
+		return render(request, 'admin/product/product_update.html', context=ctx_data)
 
 
 

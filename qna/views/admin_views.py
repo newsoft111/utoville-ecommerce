@@ -8,8 +8,8 @@ from datetime import datetime
 import json
 # Create your views here.
 
-@login_required(login_url="account:login")
-def qna_list(request):
+@login_required(login_url="account:admin_login")
+def admin_qna_list(request):
 	seo = {
 		'title': "유토빌",
 	}
@@ -20,14 +20,14 @@ def qna_list(request):
 	pagenator   = Paginator(qna_objs, 12)
 	qna_objs = pagenator.get_page(page)
 
-	return render(request, 'qna/qna_list.html',{
+	return render(request, 'admin/qna/qna_list.html',{
 		"seo": seo,
 		"qna_objs": qna_objs,
 	})
 
 
-@login_required(login_url="account:login")
-def qna_detail(request, qna_id):
+@login_required(login_url="account:admin_login")
+def admin_qna_detail(request, qna_id):
 	seo = {
 		'title': "유토빌",
 	}
@@ -57,7 +57,7 @@ def qna_detail(request, qna_id):
 			'result_text': result_text
 		})
 	else:
-		return render(request, 'qna/qna_detail.html',{
+		return render(request, 'admin/qna/qna_detail.html',{
 			"seo":seo,
 			"qna_obj": qna_obj
 		})
