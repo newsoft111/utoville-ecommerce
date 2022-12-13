@@ -44,7 +44,7 @@
 							</div>
 
 							<div class="text-end">
-								<a href="{% url 'qna:list' %}" class="btn btn-light mt-4">목록</a>
+								<a href="{% url 'qna:admin_qna_list' %}" class="btn btn-light mt-4">목록</a>
 								<a href="#!" onclick="qna_submit();" class="btn btn-primary mt-4">답변완료</a>
 							</div>
 						</form>
@@ -110,7 +110,7 @@ async function qna_submit() {
 	.then(data => {
 		is_run  = false;
 		if (data.result == '200') {
-			openModal("알림", data.result_text, '#qnaDeleteModal', `location.href="{% url 'qna:list' %}";`);
+			openModal("알림", data.result_text, '#qnaDeleteModal', `location.href="{% url 'qna:admin_qna_list' %}";`);
 		} else {
 			openModal("알림", data.result_text, '#qnaDeleteModal');
 		}
