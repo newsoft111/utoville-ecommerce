@@ -25,7 +25,7 @@ def seller_qna_list(request):
 	pagenator   = Paginator(qna_list, 12)
 	qna_list = pagenator.get_page(page)
 
-	return render(request, 'qna/qna_list.html',{
+	return render(request, 'seller/qna/qna_list.html',{
 		"seo": seo,
 		"qna_list": qna_list,
 	})
@@ -61,7 +61,7 @@ def seller_qna_detail(request, qna_id):
 			'result_text': result_text
 		})
 	else:
-		return render(request, 'qna/qna_detail.html',{
+		return render(request, 'seller/qna/qna_detail.html',{
 			"seo":seo,
 			"qna_detail": qna_obj
 		})

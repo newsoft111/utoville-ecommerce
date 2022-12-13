@@ -19,7 +19,7 @@ urlpatterns = [
 	),
 	path('admin/order/',
 		include([
-			path('', views.order_list, name='list'),
+			path('', views.admin_order_list, name='admin_order_list'),
 		])
 	)
 ]

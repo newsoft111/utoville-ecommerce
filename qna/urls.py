@@ -17,8 +17,8 @@ urlpatterns = [
     ),
     path('admin/qna/',
 		include([
-            path('', views.qna_list, name='list'),
-			path('<int:qna_id>/', views.qna_detail, name='detail'),
+            path('', views.admin_qna_list, name='admin_qna_list'),
+			path('<int:qna_id>/', views.admin_qna_detail, name='admin_qna_detail'),
         ])
     )
 ]

@@ -38,7 +38,7 @@ def seller_profit_list(request):
 	pagenator   = Paginator(profit_done_objs, 10)
 	profit_done_objs = pagenator.get_page(page)
 
-	return render(request, 'profit/profit_list.html', {
+	return render(request, 'seller/profit/profit_list.html', {
 		"profit_objs": profit_objs,
 		'profit_amount': profit_amount,
 		'profit_done_objs': profit_done_objs

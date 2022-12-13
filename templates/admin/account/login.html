@@ -158,7 +158,7 @@
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200){
-						location.replace("{% url 'main:index' %}");
+						location.replace("{% url 'main:admin_index' %}");
 					} else if (xhr.status == 201) {
 						openModal("알림", data.result_text);
 					} else {

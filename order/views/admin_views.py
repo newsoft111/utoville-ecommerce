@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 @login_required(login_url="account:admin_login")
-def order_list(request):
+def admin_order_list(request):
 	seo = {
 		'title': "상품 리스트 - 유토빌",
 	}
@@ -17,7 +17,7 @@ def order_list(request):
 	pagenator   = Paginator(order_item_objs, 12)
 	order_item_objs = pagenator.get_page(page)
 
-	return render(request, 'order/order_list.html',{
+	return render(request, 'admin/order/order_list.html',{
 		"seo":seo,
 		'order_item_objs': order_item_objs
 	})
