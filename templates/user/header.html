@@ -115,7 +115,7 @@
 					{% if categoryFirst.categorysecond_set.all.count > 0 %}
 					<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="{% url 'product:user_product_list' %}?category1={{categoryFirst.id}}">
-                            {{categoryFirst.name}} {% url 'product:user_product_list' %}?category1={{categoryFirst.id}}
+                            {{categoryFirst.name}}
                         </a>
 
                         <div class="dropdown-menu">
