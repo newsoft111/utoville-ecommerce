@@ -32,7 +32,7 @@ def seller_order_list(request):
 		'order_item_list': order_item_list
 	})
 
-def order_edit_status(request):
+def seller_order_edit_status(request):
 	jsonData = json.loads(request.body)
 	event_type  = jsonData.get('event_type')
 	order_item_id = jsonData.get('order_item_id')
@@ -45,11 +45,11 @@ def order_edit_status(request):
 
 	order_item_objs = OrderItem.objects.filter(pk__in=order_item_id)
 
-	result = update_status(query_set=order_item_objs, event_type=event_type)
+	result = seller_update_status(query_set=order_item_objs, event_type=event_type)
 	return JsonResponse(result)
 	
 
-def update_status(query_set, event_type):
+def seller_update_status(query_set, event_type):
 	if event_type == '배달완료':
 		query_set.update(
 			is_delivered = True, 
@@ -92,7 +92,7 @@ def update_status(query_set, event_type):
 		}
 
 
-class OrderPreview(View):
+class SellerOrderPreview(View):
 	def get(self, request):
 		self.end_date = datetime.now() + timedelta(1)
 

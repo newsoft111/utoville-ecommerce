@@ -9,7 +9,7 @@ from django.http import JsonResponse, HttpResponse
 import urllib
 import xlwt
 
-def revenue_list(request):
+def seller_revenue_list(request):
 	now = date.today()
 	start_date = now-relativedelta(months=1)
 	end_date = now
@@ -56,7 +56,7 @@ def revenue_list(request):
 
 
 @login_required(login_url="account:seller_login")
-def revenue_export(request):
+def seller_revenue_export(request):
 	now = date.today()
 	start_date = now-relativedelta(months=1)
 	end_date = now

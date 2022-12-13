@@ -57,7 +57,7 @@ def seller_logout(request):
 
 
 
-@login_required(login_url="account:login")
+@login_required(login_url="account:seller_login")
 def seller_my_profile(request):
 	if request.method == 'POST':
 		password=request.POST.get('password')
