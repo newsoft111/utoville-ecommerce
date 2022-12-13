@@ -12,6 +12,7 @@ node {
 				$class: "CleanBeforeCheckout"
 			]],
 			submoduleCfg: [],
+			userRemoteConfigs: [[url: 'https://github.com/newsoft111/utoville-ecommerce']]
 		]
     }
 
