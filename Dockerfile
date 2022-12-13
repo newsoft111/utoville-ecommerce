@@ -6,11 +6,11 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get -y update
 RUN apt-get -y install vim
 
-RUN apt-get install git -y
+#RUN apt-get install git -y
 
 RUN mkdir /var/django
-#ADD . /var/django
-RUN git clone https://github.com/newsoft111/utoville-ecommerce /var/django
+ADD . /var/django
+#RUN git clone https://github.com/newsoft111/utoville-ecommerce /var/django
 
 WORKDIR /var/django
 
@@ -20,9 +20,6 @@ RUN poetry export -f requirements.txt > requirements.txt
 RUN pip install -r requirements.txt
 
 EXPOSE 8000
-# django를 단독으로 실행할때 사용 명령어
-# 단, nginx를 이용해서 django를 실행
 #CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-# guinicorn를 이용해서 django를 실행할때 사용
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--access-logfile", "access.log", "--error-logfile", "error.log", "config.wsgi:application"]
