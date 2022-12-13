@@ -16,6 +16,13 @@
 .xdsoft_timepicker .xdsoft_prev, .xdsoft_timepicker .xdsoft_next {
 	display: none !important;
 }
+.accordion-item:first-of-type .accordion-button {
+	color: #000;
+	background-color: #fff;
+}
+.accordion-button {
+	padding: 0;
+}
 </style>
 
 <section class="position-relative bg-white">
@@ -60,74 +67,72 @@
 		  		</div>
 			</div>
 
-			<!--/.col-->
 			<div class="col-md-8 mx-auto col-lg-5 ms-xl-auto">		  
-		  <!-- Product Description -->
-			<div class="mb-3 pb-3 border-bottom">
-				<div class="mb-3">
-				<h2 class="mb-4 display-4">{{product_detail.product_name}}</h2>
-					<div class="d-flex justify-content-between align-items-center">
-						<div>
-							<p class="fs-5 mb-0">₱{{product_detail.price|intcomma}}</p>
+				<!-- Product Description -->
+				<div class="mb-3 pb-3 border-bottom">
+					<div class="mb-3">
+					<h2 class="mb-4 display-4">{{product_detail.product_name}}</h2>
+						<div class="d-flex justify-content-between align-items-center">
+							<div>
+								<p class="fs-5 mb-0">₱{{product_detail.price|intcomma}}</p>
+							</div>
 						</div>
 					</div>
+
+					<p class="mb-4">Lorem ipsum dolor sit amet adipiscing euismod tincidunt
+					laoreet dolore magna aliquam erat volutpat.</p>
 				</div>
 
-				<p class="mb-4">Lorem ipsum dolor sit amet adipiscing euismod tincidunt
-				laoreet dolore magna aliquam erat volutpat.</p>
-			</div>
-
-		  	{% if product_detail.productvariant_set.all %}
-		  	<div class="mb-3 pb-3 border-bottom">
-				<h6 class="mb-3">Option</h6>
-				
-				<select id="optionFirst" class="form-select form-select-md mb-3" onchange="set_variant_value(this)" style="border-color : #ddd;">
-					<option selected>옵션1</option>
-					{% for variant in product_detail.productvariant_set.all %}
-					<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
-					{% endfor %}
-				</select>
-				<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-md mb-3" style="border-color : #ddd;">
-					<option selected>옵션2</option>
-				</select>
-			</div>
-			{% endif %}
-
-			<div class="mb-3 pb-3 {% if not product_detail.productvariant_set.all %}border-bottom{% endif %}" id="selectedList">
-				{% if not product_detail.productvariant_set.all %}
-				<div id="productDom" class="optionTotal">
-				   	<div class="title" id="optionTitle">
-					  <h6>Qty:</h6>
-				   	</div>
-	
-				   
-				   <div class="optionAdd d-flex">
-					  <input type="number" onKeyDown="return false" class="form-control w-25" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
-					  <span class="price ms-auto" data-id="" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
-				   </div>
-				</div>
-				{% endif %}
-			 </div>
-	
-			 <div class="totalPrice d-flex">
 				{% if product_detail.productvariant_set.all %}
-				<p>Total Price (<span id="totalQty">0개</span>)</p> 
-				<p id="totalPrice" style="font-size: 20px;" class="total_price_part ms-auto">₱0</p>
-				{% else %}
-				<p>Total Price(<span id="totalQty">1개</span>)</p>
-				<p class="ms-auto" id="totalPrice">₱{{product_detail.price|intcomma}}</p>
+				<div class="mb-3 pb-3 border-bottom">
+					<h6 class="mb-3">Option</h6>
+					
+					<select id="optionFirst" class="form-select form-select-md mb-3" onchange="set_variant_value(this)" style="border-color : #ddd;">
+						<option selected>옵션1</option>
+						{% for variant in product_detail.productvariant_set.all %}
+						<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
+						{% endfor %}
+					</select>
+					<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-md mb-3" style="border-color : #ddd;">
+						<option selected>옵션2</option>
+					</select>
+				</div>
 				{% endif %}
-			 </div>
-			
 
-			<div class="d-grid">
-				<input type="hidden" name="obj_data" value='{% if product_detail.productvariant_set.all.count < 1 %}[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]{% endif %}'>
-				<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-outline-brandGreen hover-lift">
-					<i class="bx bx-shopping-bag fs-5 me-2"></i>Add to Cart
-				</a>
-				<a href="#!" onclick="order_submit();" class="btn btn-outline-brandGreen hover-lift mt-3">
-					<i class="bx bx-credit-card fs-5 me-2"></i>Buy Now
-				</a>
+				<div class="mb-3 pb-3 {% if not product_detail.productvariant_set.all %}border-bottom{% endif %}" id="selectedList">
+					{% if not product_detail.productvariant_set.all %}
+					<div id="productDom" class="optionTotal">
+						<!-- <div class="title" id="optionTitle">
+							<h6>Qty:</h6>
+						</div> -->
+					
+						<div class="optionAdd d-flex">
+							<input type="number" onKeyDown="return false" class="form-control w-25 text-center" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
+							<span class="price ms-auto" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+		
+				<div class="totalPrice d-flex">
+					{% if product_detail.productvariant_set.all %}
+					<p>Total Price (<span id="totalQty">0개</span>)</p> 
+					<p id="totalPrice" style="font-size: 20px;" class="total_price_part ms-auto">₱0</p>
+					{% else %}
+					<p>Total Price(<span id="totalQty">1개</span>)</p>
+					<p class="ms-auto" id="totalPrice">₱{{product_detail.price|intcomma}}</p>
+					{% endif %}
+				</div>
+
+				<div class="d-grid">
+					<input type="hidden" name="obj_data" value='{% if product_detail.productvariant_set.all.count < 1 %}[{"product_id":"{{product_detail.pk}}","variant_value_id":"","qty":"1"}]{% endif %}'>
+					<a href="#!" onclick="add_cart_submit('{{product_detail.id}}');" class="btn btn-outline-brandGreen hover-lift">
+						<i class="bx bx-shopping-bag fs-5 me-2"></i>Add to Cart
+					</a>
+					<a href="#!" onclick="order_submit();" class="btn btn-outline-brandGreen hover-lift mt-3">
+						<i class="bx bx-credit-card fs-5 me-2"></i>Buy Now
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -208,9 +213,9 @@
 					<div class="row">
 						<div class="w-100"></div>
 						<div class="col-12">
-						<div class="mb-3">
-							<textarea class="form-control" name="question"></textarea>
-						</div>
+							<div class="mb-3">
+								<textarea class="form-control" name="question"></textarea>
+							</div>
 						</div>
 					</div>
 					<div class="text-end">
@@ -231,7 +236,7 @@
 		<div class="modal-content">
 		<div class="modal-header p-4">
 			<h4 class="mb-0 text-center">알림</h4>
-			<button type="button" class="btn-close" data-before-modal="" data-bs-dismiss="modal" aria-label="Close"></button>
+			<button type="button" class="btn-close" style="background: none;" data-before-modal="" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body p-4">
 			<span>장바구니에 넣었습니다.</span>
@@ -347,7 +352,7 @@ function cal_item_price(e) {
 	let total_price = (qty * ori_price).toFixed(2);
 	total_price = total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-	total_price_span.innerHTML = `Price : <p>₱${total_price}</p>`;
+	total_price_span.innerHTML = `₱${total_price}`;
 	cal_total_value();
 }
 
@@ -360,32 +365,38 @@ function add_item(e) {
 	let option_second_id = e.options[e.selectedIndex].dataset.id;
 	let option_second_price = (parseFloat('{{product_detail.price}}') + parseFloat(e.options[e.selectedIndex].dataset.price)).toFixed(2);
 
-
-
 	let my_item_id = document.querySelector(`span[data-id="${option_second_id}"]`);
 	if (my_item_id == null) {
 
-		html = '<div id="productDom" class="optionTotal">';
+		html = '<div id="productDom" class="optionTotal border-bottom mb-3">';
 		html += '<div class="product_title" id="optionTitle">';
 		html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
-		html += '<a class="close" href="#!" onclick="remove_item(this)">X</a>';
+		html += '<a class="btn-close" href="#!" onclick="remove_item(this)"></a>';
 		html += '</div>';
-		html += '<div class="optionAdd">';
-		html += '<div class="center">';
-		html += `<span class="fs-6">Qty : </span><input type="number" onKeyDown="return false" class="form-control w-100 text-center mb-2" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
-		html += `<span class="price fs-6" data-id="${option_second_id}" id="itemPrice">Price : <p>₱${numberWithCommas(option_second_price)}</p></span>`;
+		html += '<div class="optionAdd d-flex justify-content-between align-items-center">';
+		html += `<input type="number" onKeyDown="return false" class="form-control w-25 text-center mb-2" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
+		html += `<span class="price fs-5" data-id="${option_second_id}" id="itemPrice">₱${numberWithCommas(option_second_price)}</span>`;
 		html += '</div>'
-		html += `<div class="hopeDateSelect">
-					<p>희망 서비스 일자 :</p>
-					<form>
-						<input type="text" id="date-time-picker" nmae="date-time-picker" class="all-date-time-picker mt-3"/><br><br>
-					</form>
-				</div>`
-		html += '</div>';
+		html += `<div class="accordion accordion-flush my-3">
+					<div class="accordion-item">
+						<h2 class="accordion-header">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#date${option_second_id}">
+								<p>희망 서비스 일자 :</p>
+							</button>
+						</h2>
+						<div id="date${option_second_id}" class="accordion-collapse collapse">
+							<div class="hopeDateSelect">
+								<form>
+									<input type="text" id="date-time-picker" nmae="date-time-picker" class="all-date-time-picker mt-3"/><br><br>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>`;
 		html += '</div>';
 	
 		var newstuff = document.createElement('div');
-		newstuff.innerHTML = html
+		newstuff.innerHTML = html;
 		let parent = document.querySelector("#selectedList");
 
 		while (newstuff.firstChild) {
