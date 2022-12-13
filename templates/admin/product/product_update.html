@@ -195,7 +195,7 @@
 
 							<div class="text-end">
 								<a href="#!" class="btn btn-success" onClick='product_write_submit();'>등록</a>
-								<a href="{% url 'product:list' %}" class="btn btn-secondary">취소</a>
+								<a href="{% url 'product:admin_product_list' %}" class="btn btn-secondary">취소</a>
 							</div>
 						</div>
 					</div>
@@ -307,7 +307,7 @@ function upload_content_image() {
 		const file = this.files[0];
 		fd.append('image', file);
 
-		const response = fetch("{% url 'product:upload_image' %}", {
+		const response = fetch("{% url 'product:admin_product_upload_content_image' %}", {
 			method: "POST",
 			headers: {
 				"X-CSRFToken": getCookie("csrftoken"),
