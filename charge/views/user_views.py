@@ -22,7 +22,7 @@ def call_back(request):
 	})
 
 
-def payment(request):
+def user_payment(request):
 	if not request.user.is_authenticated:
 		return JsonResponse({
 			'result': '201', 

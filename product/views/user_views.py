@@ -10,7 +10,7 @@ import json
 
 
 # Create your views here.
-def product_list(request):
+def user_product_list(request):
 	seo = {
 		'title': "상품 리스트 - 유토빌",
 	}
@@ -44,7 +44,7 @@ def product_list(request):
 	})
 
 
-def product_detail(request, product_id):
+def user_product_detail(request, product_id):
 	seo = {
 		'title': "상품 디테일 - 유토빌",
 	}
@@ -85,7 +85,7 @@ def product_detail(request, product_id):
 	})
 
 
-def product_qna_question(request):
+def user_product_qna_question(request):
 	if request.method == 'POST':
 		question = request.POST.get("question")
 		product_id = request.POST.get("product_id")
@@ -120,7 +120,7 @@ def product_qna_question(request):
 
 
 
-def product_review_write(request):
+def user_product_review_write(request):
 	review = request.POST.get("review")
 	rating = request.POST.get("rating")
 	product_id = request.POST.get("review_product_id")

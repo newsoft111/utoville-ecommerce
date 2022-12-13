@@ -6,8 +6,8 @@ from charge.models import *
 from django.db.models import Q
 import json
 
-@login_required(login_url="account:login")
-def order_view(request):
+@login_required(login_url="account:user_login")
+def user_order_view(request):
 	order_id = request.GET.get("id")
 	if order_id is None:
 		return redirect('main:index')
@@ -24,7 +24,7 @@ def order_view(request):
 	})
 
 
-def order_create(request):
+def user_order_create(request):
 	if request.method == 'POST':
 		if not request.user.is_authenticated:
 			return JsonResponse({

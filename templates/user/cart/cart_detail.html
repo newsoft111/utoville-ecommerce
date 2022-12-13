@@ -116,7 +116,7 @@
                </div>
 			   <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center mt-3">
 				  <div class="mb-3 mb-sm-0">
-					 <a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
+					 <a href="{% url 'product:user_product_list' %}" class="link-hover-underline text-body"><i
 						   class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
 					 </a>
 				  </div>
@@ -151,7 +151,7 @@ function remove_cart_submit(cart_item_id, item_arr) {
 
     $.ajax({
         type : 'POST',
-        url : "{% url 'cart:remove' %}",
+        url : "{% url 'cart:user_cart_remove_item' %}",
       headers: { "X-CSRFToken": '{{csrf_token}}' },
         data : {
          'cart_item_id[]':cart_item_id
@@ -187,7 +187,7 @@ function remove_cart_submit(cart_item_id, item_arr) {
 
 //     $.ajax({
 //         type : 'POST',
-//         url : "{% url 'cart:update' %}",
+//         url : "{% url 'cart:user_cart_update' %}",
 // 		headers: { "X-CSRFToken": '{{csrf_token}}' },
 //         data : {
 // 			cart_item_id: cart_item_id,
@@ -366,7 +366,7 @@ async function order_create_submit() {
 
    let order_item_list = document.querySelector("input[name=obj_data]").value;
 
-    const response = await fetch("{% url 'order:create' %}", {
+    const response = await fetch("{% url 'order:user_order_create' %}", {
       method: "POST",
       headers: {
          "X-CSRFToken": getCookie("csrftoken"),
@@ -380,7 +380,7 @@ async function order_create_submit() {
       console.log(data);
       is_run  = false;
       if (data.result == '200') {
-         window.history.pushState("", "", `{% url 'order:view' %}?id=${data.result_text}`);
+         window.history.pushState("", "", `{% url 'order:user_order_view' %}?id=${data.result_text}`);
          window.location.reload();
       } else {
          openModal("알림", data.result_text);

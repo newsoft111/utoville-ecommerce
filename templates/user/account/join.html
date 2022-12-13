@@ -54,7 +54,7 @@
 						<div class="col-sm-8 text-sm-end mt-3 mt-sm-0">
 							<span class="text-muted">Already have an account? 
 
-									<a href="{% url 'account:login' %}">Signin here</a>
+									<a href="{% url 'account:user_login' %}">Signin here</a>
 	
 							</span>
 						</div>
@@ -166,7 +166,7 @@
         dataType : 'json',
         success: function(data){
           if(data.result==200){
-            location.replace("{% url 'main:index' %}");
+            location.replace("{% url 'main:user_index' %}");
           }else{
             openModal("알림", data.result_text);
           }

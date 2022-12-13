@@ -286,7 +286,7 @@
 									<img src="{% static 'user/img/shop/backpack2.jpg' %}" alt="product-img" title="product-img" class="avatar-lg rounded">
 								</div>
 								<div class="ms-3 w-75 order-item-details">
-									<h5 class="font-size-16 text-truncate"><a href="{% url 'product:list' %}" class="text-dark order-product-name">{{order_item.product_name}}</a></h5>
+									<h5 class="font-size-16 text-truncate"><a href="{% url 'product:user_product_list' %}" class="text-dark order-product-name">{{order_item.product_name}}</a></h5>
 									{% if order_item.variant_value is not None %}
 									<span class="text-uppercase order-option-name">
 										{{order_item.variant}}: {{order_item.variant_value}}
@@ -329,7 +329,7 @@
 					</div>
 					<div class="row my-4">
 						<div class="col">
-							<a href="{% url 'product:list' %}" class="link-hover-underline text-body"><i
+							<a href="{% url 'product:user_product_list' %}" class="link-hover-underline text-body"><i
 								class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
 						</a>
 						</div> <!-- end col -->
@@ -416,7 +416,7 @@ async function order_submit() {
 	form_data.append('order_id', '{{request.GET.id}}')
 	form_data.append('used_point', pointForm.value)
 
-    const response = await fetch("{% url 'charge:payment' %}", {
+    const response = await fetch("{% url 'charge:user_payment' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),

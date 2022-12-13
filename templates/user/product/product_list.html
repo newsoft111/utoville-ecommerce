@@ -84,20 +84,20 @@
 		<!--:card-hover-expand-->
 		<div class="card overflow-hidden hover-lift card-product">
 		<div class="card-product-header p-3 d-block overflow-hidden position-relative">
-			<a href="{% url 'product:detail' productList.id %}">
+			<a href="{% url 'product:user_product_detail' productList.id %}">
 				{% for thumbnail in productList.productthumbnail_set.all %}
 				<img src="{{thumbnail.thumbnail.url}}" class="img-fluid" alt="Product">
 				{% endfor %}
 			</a>
 		</div>
 		<div class="card-product-body p-3 pt-0 text-center">
-			<a href="{% url 'product:detail' productList.id %}" class="h5 text-dark d-block position-relative mb-2">{{productList.name}}</a>
+			<a href="{% url 'product:user_product_detail' productList.id %}" class="h5 text-dark d-block position-relative mb-2">{{productList.name}}</a>
 			<div class="card-product-body-overlay">
 			<span class="card-product-price">
 				<span>₱{{productList.price|intcomma}}</span>
 			</span>
 			<span class="card-product-view-btn">
-				<a href="{% url 'product:detail' productList.id %}" class="link-underline mb-1 fw-semibold text-dark">View Details</a>
+				<a href="{% url 'product:user_product_detail' productList.id %}" class="link-underline mb-1 fw-semibold text-dark">View Details</a>
 			</span>
 			</div>
 		</div>

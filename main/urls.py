@@ -7,8 +7,8 @@ urlpatterns = [
 	path('user/',
 		include([
 			path('', views.user_index, name='user_index'),
-			path('contact/', views.contact, name='contact'),
-			path('faq/', views.faq, name='faq'),
+			path('contact/', views.user_contact, name='user_contact'),
+			path('faq/', views.user_faq, name='user_faq'),
 		])
 	),
 	path('seller/',

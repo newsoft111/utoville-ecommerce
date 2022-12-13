@@ -237,7 +237,7 @@
 			<span>장바구니에 넣었습니다.</span>
 		</div>
 		<div class="modal-footer">
-			<a href="{% url 'product:detail' product_detail.pk %}">
+			<a href="{% url 'product:user_product_detail' product_detail.pk %}">
 				<button type="button" class="btn btn-outline-brandGreen hover-lift" data-bs-dismiss="modal">쇼핑 계속하기</button>
 			</a>
 			<a href="{% url 'cart:user_cart_detail' %}">
@@ -268,7 +268,7 @@ function add_cart_submit(product_id) {
 
     $.ajax({
         type : 'POST',
-        url : "{% url 'cart:add' %}",
+        url : "{% url 'cart:user_cart_add_item' %}",
 		headers: { "X-CSRFToken": '{{csrf_token}}' },
         data : {
 			data: data,
@@ -432,7 +432,7 @@ function product_qna_question_submit() {
 
     $.ajax({
         type : 'POST',
-        url : "{% url 'product:qna_question' %}",
+        url : "{% url 'product:user_product_qna_question' %}",
 		headers: { "X-CSRFToken": '{{csrf_token}}' },
         data : {
 			question: question,
@@ -465,7 +465,7 @@ async function order_submit() {
 
 	let order_item_list = document.querySelector("input[name=obj_data]").value;
 
-    const response = await fetch("{% url 'order:create' %}", {
+    const response = await fetch("{% url 'order:user_order_create' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),
@@ -478,7 +478,7 @@ async function order_submit() {
 	.then(data => {
 		is_run  = false;
 		if (data.result == '200') {
-			window.history.pushState("", "", `{% url 'order:view' %}?id=${data.result_text}`);
+			window.history.pushState("", "", `{% url 'order:user_order_view' %}?id=${data.result_text}`);
 			window.location.reload();
 		} else {
 			openModal("알림", data.result_text);
