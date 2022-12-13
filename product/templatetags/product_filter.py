@@ -2,7 +2,10 @@ from django import template
 
 register = template.Library()
 
-
+@register.filter
+def times(number):
+	return range(number)
+	
 @register.filter
 def options_create(data):
     final_data = ''
@@ -14,3 +17,4 @@ def options_create(data):
             final_data += '{}(+{}), '.format(key, value)
         count = count+1
     return final_data
+
