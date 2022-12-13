@@ -1,19 +1,12 @@
 node {
-    stage('Checkout') {
-		checkout changelog: false, poll: false, scm: [
-			$class: 'GitSCM',
-			branches: [[
-				name: "*/main"
-			]],
-			doGenerateSubmoduleConfigurations: false,
-			extensions: [[
-				$class: "WipeWorkspace"
-			], [
-				$class: "CleanBeforeCheckout"
-			]],
-			submoduleCfg: [],
-			userRemoteConfigs: [[url: 'https://github.com/newsoft111/utoville-ecommerce']]
-		]
+	stage('Clean Work Space') {
+		cleanWs()
+		sh 'pwd'
+		sh 'ls'
+	}
+
+    stage('Clone repository') {
+        checkout scm
     }
 
     stage('Build image') {
