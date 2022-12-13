@@ -3,7 +3,7 @@ node {
 		checkout changelog: false, poll: false, scm: [
 			$class: 'GitSCM',
 			branches: [[
-				name: "main"
+				name: "*/main"
 			]],
 			doGenerateSubmoduleConfigurations: false,
 			extensions: [[
