@@ -173,7 +173,7 @@ async function edit_order_status_sumit() {
 	let order_item_id = document.querySelector("#scheduleModal").dataset.orderItemId;
 	let event_type = document.querySelector("select[name=event_type]").value;
 
-    const response = await fetch("{% url 'order:edit_status' %}", {
+    const response = await fetch("{% url 'order:seller_order_edit_status' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),
@@ -248,7 +248,7 @@ async function get_order_preview_data(cache) {
 	spinner = document.querySelector("#order-preview-chart-spinner");
 	spinner.classList.remove('d-none');
 
-    const response = await fetch(`{% url 'order:preview' %}?standard=${value}&cache=${cache}`, 
+    const response = await fetch(`{% url 'order:seller_order_preview' %}?standard=${value}&cache=${cache}`, 
 	{
 		method: "GET",
 	})
@@ -321,7 +321,7 @@ async function get_profit_preview_data(cache) {
 
 	document.querySelector("#profit-preview-chart-spinner").classList.remove('d-none');
 
-    const response = await fetch(`{% url 'profit:preview' %}?standard=${value}&cache=${cache}`, 
+    const response = await fetch(`{% url 'profit:seller_profit_preview' %}?standard=${value}&cache=${cache}`, 
 	{
 		method: "GET",
 	})

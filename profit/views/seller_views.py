@@ -13,8 +13,8 @@ import xlwt
 from decimal import Decimal
 from util.views import cache
 
-@login_required(login_url="account:login")
-def profit_list(request):
+@login_required(login_url="account:seller_login")
+def seller_profit_list(request):
 	profit_objs = Profit.objects.filter(seller=request.user, profit_done=None)
 	profit_amount = profit_objs.aggregate(Sum('profit_amount'))['profit_amount__sum']
 	if profit_amount is None:
@@ -46,8 +46,8 @@ def profit_list(request):
 
 
 
-@login_required(login_url="account:login")
-def profit_export(request):
+@login_required(login_url="account:seller_login")
+def seller_profit_export(request):
 	profit_done_obj = get_object_or_404(ProfitDone, pk=request.GET.get("id"), seller=request.user)
 	q = Q()
 	q &= Q(profit_done=profit_done_obj)
@@ -91,7 +91,7 @@ def profit_export(request):
 
 
 
-class ProfitPreview(View):
+class SellerProfitPreview(View):
 	def get(self, request):
 		profit_objs = Profit.objects.filter(seller=request.user, profit_done=None)
 		profit_amount = profit_objs.aggregate(Sum('profit_amount'))['profit_amount__sum']
@@ -138,5 +138,3 @@ class ProfitPreview(View):
 
 		return preview_data
 
-def profit_catalog(request):
-	return render(request, 'profit/profit_catalog.html')

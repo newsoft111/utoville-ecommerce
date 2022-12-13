@@ -44,7 +44,7 @@
 							</div>
 
 							<div class="text-end">
-								<a href="{% url 'qna:list' %}" class="btn btn-light mt-4">목록</a>
+								<a href="{% url 'qna:seller_qna_list' %}" class="btn btn-light mt-4">목록</a>
 								<a href="#!" class="btn btn-dark mt-4" data-bs-toggle="modal" data-bs-target="#qnaDeleteModal">답변거부</a>
 								<a href="#!" onclick="qna_submit();" class="btn btn-primary mt-4">답변완료</a>
 							</div>
@@ -129,7 +129,7 @@ async function qna_delete_submit() {
 
 	let qna_id = '{{qna_detail.pk}}';
 
-    const response = await fetch("{% url 'qna:delete' %}", {
+    const response = await fetch("{% url 'qna:seller_qna_delete' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),

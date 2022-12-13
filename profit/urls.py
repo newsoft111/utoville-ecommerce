@@ -6,10 +6,9 @@ app_name = 'profit'
 urlpatterns = [
     path('seller/profit/',
 		include([
-            path('', views.profit_list, name='list'),
-            path('preview/', views.ProfitPreview.as_view(), name='preview'),
-            path('export/', views.profit_export, name='export'),
-            path('catalog', views.profit_catalog, name='catalog'),
+            path('', views.seller_profit_list, name='seller_profit_list'),
+            path('preview/', views.SellerProfitPreview.as_view(), name='seller_profit_preview'),
+            path('export/', views.seller_profit_export, name='seller_profit_export'),
         ])
     )
 ]

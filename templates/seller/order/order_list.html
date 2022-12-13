@@ -171,7 +171,7 @@ async function edit_order_status_sumit(event_type, order_item_id) {
 		form_data.append('schedule_date', schedule_date);
 	}
 
-    const response = await fetch("{% url 'order:edit_status' %}", {
+    const response = await fetch("{% url 'order:seller_order_edit_status' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),

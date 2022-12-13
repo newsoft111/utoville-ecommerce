@@ -7,8 +7,8 @@ from django.db.models import Q
 import json
 # Create your views here.
 
-@login_required(login_url="acount:login")
-def qna_list(request):
+@login_required(login_url="acount:seller_login")
+def seller_qna_list(request):
 	seo = {
 		'title': "유토빌",
 	}
@@ -31,8 +31,8 @@ def qna_list(request):
 	})
 
 
-@login_required(login_url="acount:login")
-def qna_detail(request, qna_id):
+@login_required(login_url="acount:seller_login")
+def seller_qna_detail(request, qna_id):
 	seo = {
 		'title': "유토빌",
 	}
@@ -67,7 +67,7 @@ def qna_detail(request, qna_id):
 		})
 
 
-def qna_delete(request):
+def seller_qna_delete(request):
 	seo = {
 		'title': "유토빌",
 	}

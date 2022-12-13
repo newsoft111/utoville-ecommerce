@@ -164,7 +164,7 @@
 				console.log(data);
 				is_run  = false;
 				if (data.result == '200') {
-					location.replace("{% url 'main:index' %}");
+					location.replace("{% url 'main:seller_index' %}");
 				} else {
 					openModal("알림", data.result_text, '');
 				}

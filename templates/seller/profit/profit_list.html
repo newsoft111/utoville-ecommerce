@@ -76,7 +76,7 @@
 										<td data-label="배송비">₱{{profit_done_obj.total_shipping_fee|intcomma}}</td>
 										<td data-label="세부내역 다운로드">
 											<div class="excel-btn">
-												<a href="{% url 'profit:export' %}?id={{profit_done_obj.pk}}">
+												<a href="{% url 'profit:seller_profit_export' %}?id={{profit_done_obj.pk}}">
 													<span class="btn btn-outline-secondary"><img class="me-2" style="width: 40px;" src="{% static 'seller/images/down_i.png' %}">Excel Download</span>
 												</a>
 											</div>
