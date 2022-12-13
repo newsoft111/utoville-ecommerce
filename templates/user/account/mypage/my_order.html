@@ -609,7 +609,7 @@ async function review_write_submit() {
 	let form_data = new FormData(document.querySelector('form[name=reviewWriteForm]'));
 	form_data.append('review_product_id', review_product_id);
 	
-    const response = await fetch("{% url 'product:review_write' %}", {
+    const response = await fetch("{% url 'product:user_product_review_write' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),

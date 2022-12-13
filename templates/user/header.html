@@ -114,19 +114,19 @@
 				{% for categoryFirst in category_first_list %}
 					{% if categoryFirst.categorysecond_set.all.count > 0 %}
 					<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="{% url 'product:list' %}?category1={{categoryFirst.id}}">
+                        <a class="nav-link dropdown-toggle" href="{% url 'product:user_product_list' %}?category1={{categoryFirst.id}}">
                             {{categoryFirst.name}}
                         </a>
 
                         <div class="dropdown-menu">
 							{% for categorySecond in categoryFirst.categorysecond_set.all %}
-                            <a href="{% url 'product:list' %}?category1={{categoryFirst.id}}&category2={{categorySecond.id}}" class="dropdown-item">{{categorySecond.name}}</a>
+                            <a href="{% url 'product:user_product_list' %}?category1={{categoryFirst.id}}&category2={{categorySecond.id}}" class="dropdown-item">{{categorySecond.name}}</a>
                             {% endfor %}
                         </div>
                     </li>
 					{% else %}
 					<li class="nav-item">
-						<a class="nav-link" href="{% url 'product:list' %}?category1={{categoryFirst.id}}">
+						<a class="nav-link" href="{% url 'product:user_product_list' %}?category1={{categoryFirst.id}}">
 							{{categoryFirst.name}}
 						</a>
 					</li>
@@ -137,7 +137,7 @@
             </div>
         
             <div class="collapse collapse-search ms-xl-auto ms-lg-3 me-lg-1 d-lg-block" style="--navbar-search-width:280px;" id="searchCollapse">
-                <form class="mb-0" action="{% url 'product:list' %}" method="GET">
+                <form class="mb-0" action="{% url 'product:user_product_list' %}" method="GET">
                     <div class="position-relative mt-3 mt-lg-0 me-3">
                         <span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50 pt-1" style="z-index:999;">
 							<i class="bx bx-search-alt-2"></i>

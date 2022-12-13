@@ -6,8 +6,8 @@ app_name = 'order'
 urlpatterns = [
 	path('user/order/',
 		include([
-			path('', views.order_view, name='view'),
-			path('create/', views.order_create, name='create'),
+			path('', views.user_order_view, name='user_order_view'),
+			path('create/', views.user_order_create, name='user_order_create'),
 		])
 	),
 	path('seller/order/',

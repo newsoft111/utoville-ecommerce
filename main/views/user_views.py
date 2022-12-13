@@ -11,8 +11,8 @@ def user_index(request):
 	else:
 		return render(request, 'user/main/index.html',{"seo":seo})
 
-def contact(request):
+def user_contact(request):
 	return render(request, 'user/main/contact.html')
 
-def faq(request):
+def user_faq(request):
 	return render(request, 'user/main/faq.html')
