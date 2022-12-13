@@ -6,9 +6,11 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get -y update
 RUN apt-get -y install vim
 
+RUN apt-get install git -y
 
 RUN mkdir /var/django
-ADD . /var/django
+#ADD . /var/django
+RUN git clone https://github.com/newsoft111/utoville-ecommerce /var/django
 
 WORKDIR /var/django
 
