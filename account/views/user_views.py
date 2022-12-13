@@ -26,7 +26,7 @@ def user_login(request):
 		'title': "로그인 - 유토빌",
 	}
 	if request.user.is_authenticated: #로그인 상태면
-		return HttpResponseRedirect(resolve_url('main:index'))
+		return HttpResponseRedirect(resolve_url('main:user_index'))
 	if request.method == 'POST':
 		username=request.POST.get('username')
 		password=request.POST.get('password')
@@ -58,7 +58,7 @@ def user_login(request):
 
 def user_logout(request):
 	auth.logout(request)
-	return HttpResponseRedirect(resolve_url('main:index'))
+	return HttpResponseRedirect(resolve_url('main:user_index'))
 
 
 def user_join(request):
@@ -66,7 +66,7 @@ def user_join(request):
 		'title': "회원가입 - 유토빌",
 	}
 	if request.user.is_authenticated:
-		return HttpResponseRedirect(resolve_url('main:index'))
+		return HttpResponseRedirect(resolve_url('main:user_index'))
 	if request.method == 'POST':
 		email=request.POST.get('email')
 		nickname=request.POST.get('nickname')
@@ -140,7 +140,7 @@ def join_confirm(request, uidb64, token):
 
 def re_verify(request):
 	if request.user.is_authenticated:
-		return HttpResponseRedirect(resolve_url('main:index'))
+		return HttpResponseRedirect(resolve_url('main:user_index'))
 	if request.method == 'POST':
 		email=request.POST.get('email')
 
@@ -167,7 +167,7 @@ def find_passwd(request):
 		'title': "비밀번호 재설정 - 유토빌",
 	}
 	if request.user.is_authenticated: #로그인 상태면
-		return HttpResponseRedirect(resolve_url('main:index'))
+		return HttpResponseRedirect(resolve_url('main:user_index'))
 	if request.method == 'POST':
 		email = request.POST.get('email')
 		try:
