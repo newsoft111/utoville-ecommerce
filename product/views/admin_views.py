@@ -24,8 +24,8 @@ def admin_product_list(request):
 	})
 
 
-@login_required(login_url="account:login")
-def product_write(request):
+@login_required(login_url="account:admin_login")
+def admin_product_write(request):
 	seo = {
 		'title': "체험단 모집 - 콘디",
 	}
@@ -125,7 +125,7 @@ def product_write(request):
 
 
 @login_required(login_url="account:login")
-def product_update(request, product_id):
+def admin_product_update(request, product_id):
 	seo = {
 		'title': "체험단 모집 - 콘디",
 	}
@@ -263,7 +263,7 @@ def product_update(request, product_id):
 
 
 
-def product_delete(request):
+def admin_product_delete(request):
 	jsonData = json.loads(request.body)
 	product_id = jsonData.get('cart_item_id_arr')
 	print(product_id)
@@ -281,8 +281,8 @@ def product_delete(request):
 	return JsonResponse(result)
 
 
-@login_required(login_url="account:login")
-def product_upload_content_image(request):
+@login_required(login_url="account:admin_login")
+def admin_product_upload_content_image(request):
 	image = request.FILES['image']
 			
 	try:

@@ -16,7 +16,7 @@
 						<h4 class="card-title">상품 관리</h4>
 						<div class="text-end">
 							<a href="#!" onclick="remove_checked_item();" class="remove-btn btn btn-light">체크삭제</a>
-							<a href="{% url 'product:write' %}" class="btn btn-primary">상품등록</a>
+							<a href="{% url 'product:admin_product_write' %}" class="btn btn-primary">상품등록</a>
 						</div>
 					</div>
 					<div class="card-body">				
@@ -64,7 +64,7 @@
 											<span class="badge badge-soft-primary">취소</span>
 										</td>
 										<td>
-											<a href="{% url 'product:update' productList.pk %}" class="btn btn-outline-primary">수정하기</a>
+											<a href="{% url 'product:admin_product_update' productList.pk %}" class="btn btn-outline-primary">수정하기</a>
 										</td>
 									</tr><!-- end tr -->
 									{% endfor %}
@@ -161,7 +161,7 @@ async function remove_product_submit(cart_item_id) {
 
 	is_run = true;
 
-    const response = await fetch("{% url 'product:delete' %}", {
+    const response = await fetch("{% url 'product:admin_product_delete' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),
