@@ -25,15 +25,15 @@
 							<div class="mb-3 row">
 								<label class="col-md-2 col-form-label">Password</label>
 								<div class="col-md-10">
-									<input type="password" class="form-control" name="password" value="">
+									<input type="password" class="form-control" id="crt_password" name="password">
 
-									<span class="btn-pass-change btn btn-primary my-2" style="margin-left:0.75em;">변경</span>
+									<span class="btn-pass-change btn btn-secondary my-2">변경</span>
 									<div class="pass-change-area">
-										<div class="mb-3 new-pass-zone">
+										<div class="mb-3">
 											<label for="update_pass_new" class="form-label">New password</label>
 											<input type="password" class="form-control" id="update_pass_new" value="" name="new_password">
 										</div>
-										<div class="mb-3 confrim-pass-zone">
+										<div class="mb-3">
 											<label for="update_pass_new_confirm" class="form-label">Confirm new password</label>
 											<input type="password" class="form-control" id="update_pass_new_confirm" value="" name="new_password2">
 										</div>
@@ -51,7 +51,7 @@
 								<label for="profile_tel" class="col-md-2 col-form-label">판매 담당자 연락처</label>
 								<div class="col-md-10">
 									<input class="form-control" type="tel" value="{{request.user.mb_phone}}" name="mb_phone" placeholder="Enter Telephone"
-										id="profile_tel">
+										id="profile_tel" oninput="checkNumVal(this)">
 								</div>
 							</div>
 						</div>
@@ -78,11 +78,11 @@
 							<div class="mb-3 row">
 								<label for="account-number-input" class="col-md-2 col-form-label">Account Number</label>
 								<div class="col-md-10 accountInputArea">
-									<input class="form-control" type="text" placeholder="Enter Number" value="1111-1111-1111-1111" id="account-number-input">
+									<input class="form-control" type="text" placeholder="Enter Number" value="123456789" id="account-number-input" oninput="checkNumVal(this)">
 								</div>
 							</div>
 							<div class="text-end">
-								<button type="button" class="btn btn-primary" id="profileSaveBtn">Save changes</button>
+								<button type="button" class="btn btn-success" id="profileSaveBtn">Save changes</button>
 							</div>
 						</div>
 					</div>
@@ -93,78 +93,63 @@
 </div>
 
 
-<!-- <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-scrollable">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalScrollableTitle">휴대폰 인증</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal"
-					aria-label="Close">
-				</button>
-			</div>
-			<div class="modal-body">
-
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-light"
-					data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div> -->
 
 <script>
+
 let is_run = false;
+
 let btnPassChange = document.querySelector(".btn-pass-change");
 
-btnPassChange.addEventListener("click", function(){
+let currentPass = document.getElementById("crt_password");
+let updatePassNew = document.getElementById("update_pass_new");
+let updatePassNewConfirm = document.getElementById("update_pass_new_confirm");
+
+let profileSaveBtn = document.getElementById("profileSaveBtn");
+
+btnPassChange.addEventListener("click", ()=>{
 	document.querySelector(".pass-change-area").classList.toggle("d-block")
 });
 
-/*정보수정 변수*/
-
-let accountInputArea = document.querySelector(".accountInputArea");
-let accountNumberInput = document.getElementById("account-number-input");
-let profileSaveBtn = document.getElementById("profileSaveBtn");
-
-/*비밀번호 변경 변수*/
-let passChangeArea = document.querySelector(".pass-change-area");
-let updatePassNew = document.getElementById("update_pass_new");
-let updatePassNewConfirm = document.getElementById("update_pass_new_confirm");
-let newPassZone = document.querySelector(".new-pass-zone");
-let confrimPassZone = document.querySelector(".confrim-pass-zone");
-
-/*이메일, 계좌번호 입력 검사*/
-profileSaveBtn.addEventListener("click", function(){
-	/*if(! account_check(Number(accountNumberInput.value))){
-		let html = `<input class="form-control" style="border-color: red;" type="text" value=""  placeholder="Enter Number" id="account-number-input">
-		<span class="text-danger">계좌번호를 정확히 입력하세요.</span>`;
-
-		accountInputArea.innerHTML = html;
+updatePassNew.addEventListener("input", ()=>{
+	if(updatePassNew.value == ''){
+		updatePassNew.style.borderColor = "#e2e5e8";
 		return false;
-	}*/
+	}
+	if(currentPass.value == updatePassNew.value) {
+		openModal("알림", "현재 비밀번호와 같습니다.")
+		updatePassNew.value= '';
+	}
 
-	/*새로운 비밀번호 같은지 검사*/
+	if(password_check(updatePassNew.value)){
+		updatePassNew.style.borderColor = "#51d28c";
+	}else {
+		updatePassNew.style.borderColor = "#e2e5e8";
+	}
+})
 
-	/*if(passChangeArea.classList.contains("d-block")){
+updatePassNewConfirm.addEventListener("input", ()=>{
+	if(updatePassNew.value == updatePassNewConfirm.value){
+		updatePassNewConfirm.style.borderColor = "#51d28c";
+	}else if(updatePassNewConfirm.value == '') {
+		updatePassNewConfirm.style.borderColor = "#e2e5e8";
+	}else {
+		updatePassNewConfirm.style.borderColor = "#ef6866";
+	}
+})
 
-		if(updatePassNew.value != updatePassNewConfirm.value) {
-			let html = `<input type="password" style="border-color: red;" class="form-control" id="update_pass_new_confirm">
-			<span class="text-danger">비밀번호가 다릅니다.</span>`;
-	
-			confrimPassZone.innerHTML = html;
-			return false;
-		}
-	
-		if(updatePassNew.length < 10 || ! password_check(updatePassNew.value)) {
-			let html = `<input type="password" style="border-color: red;" class="form-control" id="update_pass_new">
-			<span class="text-danger">최소 8글자 이상, 숫자, 특수문자 포함 필수</span>`;
-	
-			newPassZone.innerHTML = html;
-			return false;
-		} 
-	}*/
+function checkNumVal(e){
+	if(e.value == '') {
+		return false;
+	}
+
+	if(!number_check(e.value)){
+		openModal("알림", "숫자만 입력해주세요.")
+ 		e.value = e.value.slice(0, -1);
+	}
+
+}
+
+profileSaveBtn.addEventListener("click", function(){
 	update_user_submit();
 });
 
