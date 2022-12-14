@@ -5,7 +5,7 @@ from . import views
 app_name = 'product'
 
 urlpatterns = [
-	path('user/product/',
+	path(f'{app_name}/',
 		include([
 			path('', views.user_product_list, name="user_product_list"),
 			path('<int:product_id>/', views.user_product_detail, name="user_product_detail"),
@@ -13,7 +13,7 @@ urlpatterns = [
 			path('review/write/', views.user_product_review_write, name="user_product_review_write"),
 		])
 	),
-	path('admin/product/',
+	path(f'admin/{app_name}/',
 		include([
 			path('', views.admin_product_list, name='admin_product_list'),
 			path('write/', views.admin_product_write, name='admin_product_write'),
