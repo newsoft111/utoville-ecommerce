@@ -4,7 +4,7 @@ from . import views
 app_name = 'account'
 
 urlpatterns = [
-	path('user/account/',
+	path(f'{app_name}/',
 		include([
 			path('login/', views.user_login, name='user_login'),
 			path('logout/', views.user_logout, name='user_logout'),
@@ -35,7 +35,7 @@ urlpatterns = [
 		])
 	),
 	
-	path('seller/account/',
+	path(f'seller/{app_name}/',
 		include([
 			path('login/', views.seller_login, name='seller_login'),
 			path('logout/', views.seller_logout, name='seller_logout'),
@@ -52,7 +52,7 @@ urlpatterns = [
 		])
 	),
 
-	path('admin/account/',
+	path(f'admin/{app_name}/',
 		include([
 			path('', views.admin_account_manage_list, name='admin_account_manage_list'),
 			path('delete/', views.admin_account_manage_delete, name='admin_account_manage_delete'),

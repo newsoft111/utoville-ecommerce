@@ -4,14 +4,11 @@ from . import views
 app_name = 'charge'
 
 urlpatterns = [
-	path('charge/',
+	path(f'{app_name}/',
 		include([
 			path('call_back', views.call_back, name='call_back'),
-		])
-	),
-	path('user/charge/',
-		include([
 			path('', views.user_payment, name='user_payment'),
 		])
-	)
+	),
+	
 ]
