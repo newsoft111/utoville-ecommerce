@@ -3711,8 +3711,7 @@ textarea.form-control-lg {
 	border-color:transparent
 }
 .nav-pills .nav-link.active,.nav-pills .show>.nav-link, .link-hover-decoration.active {
-	color: #000;
-	font-weight: bold;
+	color: #2ea7e0;
 	background-color: transparent !important;
 }
 .nav-fill .nav-item,.nav-fill>.nav-link {
@@ -4717,11 +4716,12 @@ textarea.form-control-lg {
 	pointer-events:none;
 	background-color:var(--bs-list-group-disabled-bg)
 }
-.list-group-item.active {
+/* .list-group-item.active {
 	z-index:2;
 	color:var(--bs-list-group-active-color);
 	border: none;
-}
+	background-color: #d8ffa9 !important;
+} */
 .list-group-item+.list-group-item {
 	border-top-width:0
 }
