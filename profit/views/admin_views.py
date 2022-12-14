@@ -88,3 +88,6 @@ def admin_profit_export(request):
 	wb.save(response)
 	
 	return response
+
+def admin_profit_catalog(request):
+	return render(request, 'admin/profit/profit_catalog.html')

@@ -15,6 +15,7 @@ urlpatterns = [
 		include([
             path('', views.admin_profit_list, name='admin_profit_list'),
 			path('export/', views.admin_profit_export, name='admin_profit_export'),
+			path('catalog/', views.admin_profit_catalog, name='admin_profit_catalog'),
         ])
     )
 ]
