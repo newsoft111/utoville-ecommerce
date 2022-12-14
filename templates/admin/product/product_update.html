@@ -6,7 +6,7 @@
 {% load mathfilters %}
 {% load product_filters %}
 
-<link href="{% static 'libs/quill/dist/quill.snow.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'admin/libs/quill/dist/quill.snow.css' %}" rel="stylesheet" type="text/css" />
 <style>
 	.category-select:focus {
 		box-shadow: inset 0 1px 1px rgba(255,255,255);
@@ -205,9 +205,9 @@
 	</div>
 </div>
 
-<script src="{% static 'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
-<script src="{% static 'libs/quill/dist/quill.min.js' %}"></script>
-<script src="{% static 'libs/sweetalert2/dist/sweetalert2.all.min.js' %}"></script>
+<script src="{% static 'admin/libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+<script src="{% static 'admin/libs/quill/dist/quill.min.js' %}"></script>
+<script src="{% static 'admin/libs/sweetalert2/dist/sweetalert2.all.min.js' %}"></script>
 
 <script>
 opt_data = {{ variant_val_obj|safe }}
