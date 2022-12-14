@@ -3,13 +3,17 @@ from . import views
 
 app_name = 'order'
 
-urlpatterns = [
+
+user_urlpatterns = [
 	path(f'{app_name}/',
 		include([
 			path('', views.user_order_view, name='user_order_view'),
 			path('create/', views.user_order_create, name='user_order_create'),
 		])
 	),
+]
+
+seller_urlpatterns = [
 	path(f'seller/{app_name}/',
 		include([
 			path('', views.seller_order_list, name='seller_order_list'),
@@ -17,9 +21,15 @@ urlpatterns = [
 			path('edit/status/', views.seller_order_edit_status, name='seller_order_edit_status'),
 		])
 	),
+]
+
+admin_urlpatterns = [
 	path(f'admin/{app_name}/',
 		include([
 			path('', views.admin_order_list, name='admin_order_list'),
 		])
 	)
 ]
+
+
+urlpatterns = user_urlpatterns + seller_urlpatterns + admin_urlpatterns

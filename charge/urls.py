@@ -3,12 +3,16 @@ from . import views
 
 app_name = 'charge'
 
-urlpatterns = [
+user_urlpatterns = [
 	path(f'{app_name}/',
 		include([
-			path('call_back', views.call_back, name='call_back'),
+			
 			path('', views.user_payment, name='user_payment'),
 		])
-	),
-	
+	)
 ]
+
+urlpatterns = [
+	path(f'{app_name}/call_back/', views.call_back, name='call_back'),
+]
+urlpatterns += user_urlpatterns

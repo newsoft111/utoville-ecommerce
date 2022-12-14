@@ -3,7 +3,7 @@ from . import views
 
 app_name = 'cart'
 
-urlpatterns = [
+user_urlpatterns = [
 	path(f'{app_name}/',
 		include([
 			path('', views.user_cart_detail, name='user_cart_detail'),
@@ -13,3 +13,5 @@ urlpatterns = [
 		])
 	)
 ]
+
+urlpatterns = user_urlpatterns
