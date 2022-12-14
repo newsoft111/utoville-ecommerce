@@ -3,7 +3,7 @@ from . import views
 
 app_name = 'profit'
 
-urlpatterns = [
+seller_urlpatterns = [
     path(f'seller/{app_name}/',
 		include([
             path('', views.seller_profit_list, name='seller_profit_list'),
@@ -11,6 +11,9 @@ urlpatterns = [
             path('export/', views.seller_profit_export, name='seller_profit_export'),
         ])
     ),
+]
+
+admin_urlpatterns = [
 	path(f'admin/{app_name}/',
 		include([
             path('', views.admin_profit_list, name='admin_profit_list'),
@@ -18,3 +21,5 @@ urlpatterns = [
         ])
     )
 ]
+
+urlpatterns = seller_urlpatterns + admin_urlpatterns

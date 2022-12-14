@@ -4,7 +4,7 @@ from . import views
 
 app_name = 'product'
 
-urlpatterns = [
+user_urlpatterns = [
 	path(f'{app_name}/',
 		include([
 			path('', views.user_product_list, name="user_product_list"),
@@ -13,6 +13,9 @@ urlpatterns = [
 			path('review/write/', views.user_product_review_write, name="user_product_review_write"),
 		])
 	),
+]
+
+admin_urlpatterns = [
 	path(f'admin/{app_name}/',
 		include([
 			path('', views.admin_product_list, name='admin_product_list'),
@@ -23,3 +26,5 @@ urlpatterns = [
 		])
 	)
 ]
+
+urlpatterns = user_urlpatterns + admin_urlpatterns
