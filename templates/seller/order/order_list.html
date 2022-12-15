@@ -5,6 +5,18 @@
 {% load util_filter %}
 {% load mathfilters %}
 
+<style>
+.order-details > ul {
+	margin-bottom: 1.25em;
+}
+.order-details > ul > li:first-child {
+	width: 120px;
+	font-weight: bold;
+}
+.modal-body > .card {
+	box-shadow: 4px 4px 3px #eaedf2;
+}
+</style>
 <div class="page-content">
 	<div class="container-fluid">
 		<div class="row">
@@ -58,11 +70,7 @@
 										</td>
 
 										<td data-label="주문번호">
-<<<<<<< Updated upstream
-											<a href="#!" class="text-link fw-medium">{{orderItem.order_uid}}</a>
-=======
 											<a href="#!" class="text-link fw-medium" onclick="get_order_item_info('{{orderItem.order_item_uid}}', `{% url 'order:seller_order_detail' orderItem.pk %}`);">{{orderItem.order_item_uid}}</a>
->>>>>>> Stashed changes
 										</td>
 
 										<td data-label="상태">
@@ -104,7 +112,7 @@
 
 						<div class="row g-0 text-center text-sm-start">
 							<!-- end col -->
-							<div class="col-12">
+							<div class="col-12 mt-3">
 								<ul class="pagination pagination-rounded justify-content-center mb-sm-0">
 									{% if order_item_list.has_previous %}
 									<li class="page-item">
@@ -192,6 +200,7 @@ async function get_order_item_info(order_item_uid, url) {
 	})
 	.then(response => response.text())
 	.then(data => {
+		console.log(data);
 		label.innerHTML = `상품주문정보 조회 [${order_item_uid}]`;
 		body.innerHTML = data;
 	});
