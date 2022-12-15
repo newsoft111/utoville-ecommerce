@@ -17,6 +17,7 @@ seller_urlpatterns = [
 	path(f'seller/{app_name}/',
 		include([
 			path('', views.seller_order_list, name='seller_order_list'),
+			path('<int:order_item_id>/', views.seller_order_detail, name='seller_order_detail'),
 			path('preview/', views.SellerOrderPreview.as_view(), name='seller_order_preview'),
 			path('edit/status/', views.seller_order_edit_status, name='seller_order_edit_status'),
 		])

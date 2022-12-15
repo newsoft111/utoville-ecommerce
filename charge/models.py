@@ -6,6 +6,7 @@ class Payment(models.Model):
 	payment_uid = models.CharField(max_length=255, null=True, unique=True)
 	is_paid=models.BooleanField(default=False)
 	paid_at = models.DateTimeField(null=True)
+	paid_amount = models.DecimalField(max_digits=14, decimal_places=2)
 
 	
 	class Meta:

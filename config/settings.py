@@ -77,6 +77,10 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'qna.context_processors.admin_counter_new_qna',
+
+				'qna.context_processors.seller_counter_new_qna',
+				'order.context_processors.seller_counter_new_order',
+				
 				'cart.context_processors.counter_cart_items',
 				'category.context_processors.categories',
                 'django.template.context_processors.debug',
