@@ -3,6 +3,8 @@
 {% load static %}
 {% load humanize %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'seller/css/datetimepicker.css' %}"/>
+
 <style>
 .fc-daygrid-day-bottom {
 	margin-top: 3px !important;
@@ -12,6 +14,19 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 	font-size: 14px;
 	font-weight: bold;
 	color: #000 !important;
+}
+.fc .fc-more-popover .fc-popover-body {
+	height: 400px;
+	overflow-y: auto;
+}
+.xdsoft_datetimepicker, .xdsoft_datepicker, .xdsoft_timepicker {
+	width: 100% !important;
+}
+.xdsoft_timepicker {
+	margin-top: 20px !important;
+}
+.xdsoft_timepicker .xdsoft_prev, .xdsoft_timepicker .xdsoft_next {
+	display: none !important;
 }
 </style>
 
@@ -137,7 +152,7 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 
 				<div class="mt-3 d-none" id="edit-schedule">
 					<h6>날짜</h6>
-					여기에 달력
+					<input type="text" id="date-time-picker" nmae="date-time-picker" class="all-date-time-picker mt-3"/><br><br>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -149,6 +164,8 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="{% static 'seller/js/pages/datetimepicker.js' %}"></script>
+
 <script>
 let is_run = false;
 
@@ -385,6 +402,11 @@ document.addEventListener("DOMContentLoaded", function() {
     m.render()
 });
 
+$('.all-date-time-picker').datetimepicker({
+	inline:true,
+	minDate: 0,
+	minTime: 0,
+});
 </script>
 
 {% endblock %}

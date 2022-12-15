@@ -28,56 +28,56 @@
 </section>
 
 <script>
-	$(document).ready(function() {
+$(document).ready(function() {
     $("form[name=findPwForm]").keypress(function (e) {
 			if (e.keyCode === 13) {
 				find_pw_submit();
 			}
 		});
-  });
+});
 	
-	function find_pw_submit() {
-		
-    var findPwForm = document.findPwForm;
-    var email = findPwForm.email.value;
+function find_pw_submit() {
+	
+var findPwForm = document.findPwForm;
+var email = findPwForm.email.value;
 
-		var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-        
-    if (isEmpty(email)) {
-      openPopup('알림','이메일을 입력해주세요.');
-			return false;
+var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+	
+if (isEmpty(email)) {
+	openPopup('알림','이메일을 입력해주세요.');
+		return false;
+	}
+
+	if (!reg_email.test(email)) {
+	openPopup('알림','올바른 이메일이 아닙니다.');
+		return false;
+}
+
+
+
+	
+var queryString = $("form[name=findPwForm]").serialize();
+
+$.ajax({
+	type : 'POST',
+	url : "{{request.path}}",
+	data : queryString,
+	dataType : 'json',
+	success: function(data){
+		if(data.result==200){
+		openPopup("알림", data.result_text,'','reload');
+		}else{
+		openPopup("알림", data.result_text);
 		}
-
-		if (!reg_email.test(email)) {
-      openPopup('알림','올바른 이메일이 아닙니다.');
-			return false;
-    }
-
-
-
-		
-    var queryString = $("form[name=findPwForm]").serialize();
- 
-    $.ajax({
-        type : 'POST',
-        url : "{{request.path}}",
-        data : queryString,
-        dataType : 'json',
-        success: function(data){
-          if(data.result==200){
-            openPopup("알림", data.result_text,'','reload');
-          }else{
-            openPopup("알림", data.result_text);
-          }
-          return;
-        },
-        error: function (request, status, error){
-          var msg = "ERROR : " + request.status + "<br>"
-			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
-			    console.log(msg);
-        }
-    });
-  }
+		return;
+	},
+	error: function (request, status, error){
+		var msg = "ERROR : " + request.status + "<br>"
+			msg +=  + "내용 : " + request.responseText + "<br>" + error;
+			console.log(msg);
+	}
+});
+}
 
 </script>
 {% endblock %}

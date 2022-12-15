@@ -9,6 +9,7 @@ from django.http import JsonResponse, HttpResponse
 import urllib
 import xlwt
 
+@login_required(login_url="account:seller_login")
 def seller_revenue_list(request):
 	now = date.today()
 	start_date = now-relativedelta(months=1)
@@ -29,7 +30,6 @@ def seller_revenue_list(request):
 
 
 	temp = { po.date: {"payment_amount": po.payment_amount, "refunt_amount": po.payment_amount, "order_count":po.order_count} for po in revenue_seller_objs }
-
 
 	result = []
 

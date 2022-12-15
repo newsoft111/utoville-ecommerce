@@ -6,4 +6,3 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from order.models import *
 import json, re
-
