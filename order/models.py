@@ -35,7 +35,7 @@ class OrderItem(models.Model):
 			Order,
 			on_delete=models.CASCADE
 	)
-	order_uid = models.CharField(
+	order_item_uid = models.CharField(
 		max_length=255,
 		null=True
 	)
@@ -83,6 +83,6 @@ class OrderItem(models.Model):
 
 	def save(self, *args, **kwargs):
 		super().save(*args, **kwargs)
-		order_uid = str(calendar.timegm(time.gmtime()))+str(self.pk)
-		OrderItem.objects.filter(id=self.pk).update(order_uid=order_uid)
+		order_item_uid = str(calendar.timegm(time.gmtime()))+str(self.pk)
+		OrderItem.objects.filter(id=self.pk).update(order_item_uid=order_item_uid)
 	

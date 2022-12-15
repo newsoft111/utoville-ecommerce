@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -10,8 +10,6 @@ import json
 from util.views import cache
 
 # Create your views here.
-
-
 
 @login_required(login_url="account:seller_login")
 def seller_order_list(request):
@@ -31,6 +29,24 @@ def seller_order_list(request):
 		"seo":seo,
 		'order_item_list': order_item_list
 	})
+
+
+
+@login_required(login_url="account:seller_login")
+def seller_order_detail(request, order_item_id):
+	seo = {
+		'title': "상품주문정보 조회 - 유토빌",
+	}
+	q = Q()
+	q &= Q(pk = order_item_id)
+
+	order_item_obj =  get_object_or_404(OrderItem, q)
+
+	return render(request, 'seller/order/order_detail.html',{
+		"seo":seo,
+		'order_item_obj': order_item_obj
+	})
+
 
 def seller_order_edit_status(request):
 	jsonData = json.loads(request.body)

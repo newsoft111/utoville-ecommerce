@@ -58,7 +58,11 @@
 										</td>
 
 										<td data-label="주문번호">
+<<<<<<< Updated upstream
 											<a href="#!" class="text-link fw-medium">{{orderItem.order_uid}}</a>
+=======
+											<a href="#!" class="text-link fw-medium" onclick="get_order_item_info('{{orderItem.order_item_uid}}', `{% url 'order:seller_order_detail' orderItem.pk %}`);">{{orderItem.order_item_uid}}</a>
+>>>>>>> Stashed changes
 										</td>
 
 										<td data-label="상태">
@@ -145,8 +149,58 @@
 	</div>
 </div>
 
+<<<<<<< Updated upstream
+=======
+<!-- 주문 내역 상세 모달 -->
+
+
+<div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title fw-bold" id="orderDetailModalLabel">상품주문정보 조회 [주문번호]</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" id="orderDetailModalBody">
+				
+			</div>
+			<div class="modal-footer">
+				<span class="btn btn-secondary" data-bs-dismiss="modal">닫기</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+>>>>>>> Stashed changes
 <script>
 let is_run = false;
+
+async function get_order_item_info(order_item_uid, url) {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+	let label = document.getElementById('orderDetailModalLabel');
+	let body = document.getElementById('orderDetailModalBody');
+	label.innerHTML = `상품주문정보 조회 []`;
+	body.innerHTML ='<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('orderDetailModal'));
+	modal.show();
+
+	is_run = true;
+
+    const response = await fetch(url, {
+		method: "GET",
+	})
+	.then(response => response.text())
+	.then(data => {
+		label.innerHTML = `상품주문정보 조회 [${order_item_uid}]`;
+		body.innerHTML = data;
+	});
+	is_run  = false;
+}
+
 
 function event_checked_item(e) {
 	const item_list = document.querySelectorAll("input[name=order_item_id][type=checkbox]:checked");
