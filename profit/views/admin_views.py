@@ -89,5 +89,6 @@ def admin_profit_export(request):
 	
 	return response
 
+@login_required(login_url="account:admin_login")
 def admin_profit_catalog(request):
 	return render(request, 'admin/profit/profit_catalog.html')

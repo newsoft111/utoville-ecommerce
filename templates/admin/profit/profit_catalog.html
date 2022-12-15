@@ -73,35 +73,33 @@
 												<label class="form-check-label" for="checkAll"></label>
 											</div>
 										</th>
-										<th scope="col" class="d-flex justify-content-between">Name
+										<th onclick="sortTable(1)" scope="col" class="d-flex justify-content-between">Name
 											<div class="sort-arrow d-flex align-items-center flex-column">
 												<img src="{% static 'admin/images/up-arrow.png' %}" style="width: 13px; cursor: pointer;">
 												<img src="{% static 'admin/images/down-arrow.png' %}" style="width: 13px; cursor: pointer;">
 											</div>
 										</th>
-										<th scope="col">Company</th>
-										<th scope="col">Phone</th>
-										<th scope="col">Email</th>
-										<th scope="col">Account</th>
+										<th onclick="sortTable(2)" scope="col">Company</th>
+										<th onclick="sortTable(3)" scope="col">Phone</th>
+										<th onclick="sortTable(4)" scope="col">Email</th>
+										<th onclick="sortTable(5)" scope="col">Account</th>
 										<th scope="col">Status</th>
 										<th style="width: 80px; min-width: 80px;">Action</th>
 									</tr><!-- end tr -->
 								</thead><!-- end thead -->
 								<tbody>
 									<tr>
-										<th scope="row">
+										<td scope="row">
 											<div class="form-check font-size-16">
 												<input type="checkbox" class="form-check-input" id="contacusercheck1">
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
-										</th>
-										<td class="sort-name">
-											<span class="text-body fw-medium">Donald Risher</span>
 										</td>
-										<td>AwesomeHomcare</td>
-										<td>02-8856-9210</td>
-										<td>selleremail@email.com</td>
-										<td>Account number here</td>
+										<td>Donald Risher1</td>
+										<td>AwesomeHomcare1</td>
+										<td>02-8856-9211</td>
+										<td>selleremail@email.com1</td>
+										<td>Account number here1</td>
 										<td>이체 대기중</td>
 										<td>
 											<div class="dropdown">
@@ -116,19 +114,17 @@
 										</td>
 									</tr><!-- end tr -->
 									<tr>
-										<th scope="row">
+										<td scope="row">
 											<div class="form-check font-size-16">
 												<input type="checkbox" class="form-check-input" id="contacusercheck1">
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
-										</th>
-										<td class="sort-name">
-											<span class="text-body fw-medium">Aonald Risher</span>
 										</td>
-										<td>CwesomeHomcare</td>
-										<td>02-2856-9210</td>
-										<td>delleremail@email.com</td>
-										<td>Account number here</td>
+										<td>Aonald Risher2</td>
+										<td>CwesomeHomcare2</td>
+										<td>02-2856-9212</td>
+										<td>delleremail@email.com2</td>
+										<td>Account number here2</td>
 										<td>이체 대기중</td>
 										<td>
 											<div class="dropdown">
@@ -143,19 +139,17 @@
 										</td>
 									</tr><!-- end tr -->
 									<tr>
-										<th scope="row">
+										<td scope="row">
 											<div class="form-check font-size-16">
 												<input type="checkbox" class="form-check-input" id="contacusercheck1">
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
-										</th>
-										<td class="sort-name">
-											<span class="text-body fw-medium">Conald Risher</span>
 										</td>
-										<td>DwesomeHomcare</td>
-										<td>02-3856-9210</td>
-										<td>sblleremail@email.com</td>
-										<td>Account number here</td>
+										<td>Conald Risher3</td>
+										<td>DwesomeHomcare3</td>
+										<td>02-3856-9213</td>
+										<td>sblleremail@email.com3</td>
+										<td>Account number here3</td>
 										<td>이체 대기중</td>
 										<td>
 											<div class="dropdown">
@@ -170,19 +164,17 @@
 										</td>
 									</tr><!-- end tr -->
 									<tr>
-										<th scope="row">
+										<td scope="row">
 											<div class="form-check font-size-16">
 												<input type="checkbox" class="form-check-input" id="contacusercheck1">
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
-										</th>
-										<td class="sort-name">
-											<span class="text-body fw-medium">Bonald Risher</span>
 										</td>
-										<td>BwesomeHomcare</td>
-										<td>02-8456-9210</td>
-										<td>telleremail@email.com</td>
-										<td>Account number here</td>
+										<td>Bonald Risher4</td>
+										<td>BwesomeHomcare4</td>
+										<td>02-8456-9214</td>
+										<td>telleremail@email.com4</td>
+										<td>Account number here4</td>
 										<td>이체 대기중</td>
 										<td>
 											<div class="dropdown">
@@ -200,14 +192,8 @@
 							</table><!-- end table -->
 						</div><!-- end table responsive -->
 
-						<div class="row g-0 text-center text-sm-start">
-							<div class="col-sm-6">
-								<div>
-									<p class="mb-sm-0">Showing 1 to 10 of 57 entries</p>
-								</div>
-							</div>
-							<!-- end col -->
-							<div class="col-sm-6">
+						<div class="row g-0 text-end text-sm-start">
+							<div class="col-sm-12">
 								<ul class="pagination pagination-rounded justify-content-center justify-content-sm-end mb-sm-0">
 									<li class="page-item disabled">
 										<a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
@@ -241,35 +227,47 @@
 </div>
 
 <script>
-let sortName = document.querySelectorAll(".sort-name > span");
-let upArrow = document.querySelector(".sort-arrow").firstElementChild;
-let downArrow = document.querySelector(".sort-arrow").lastElementChild;
-let arr = [];
+function sortTable(n) {
+	let rows, x, y, shouldSwith, switchCount = 0;
+	let	table = document.querySelector(".table");
+	let	switching = true;
+	let	dir = "asc";
 
+	while(switching) {
+		switching = false;
+		rows = table.getElementsByTagName("tr")
 
-for(var i=0; i<sortName.length; i++){
-	arr.push(sortName[i].innerText);
+		for(var i=1; i<(rows.length -1); i++){  // thead -> tr 부분을 제외해야하기 때문에 i=1
+			shouldSwith = false;
+			x = rows[i].getElementsByTagName("td")[n];
+			y = rows[i+1].getElementsByTagName("td")[n];
+
+			if(dir == "asc") {
+				if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+					shouldSwith = true;
+					break;
+				}
+			}else if (dir == "desc") {
+				if(x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+					shouldSwith = true;
+					break;
+				}
+			}
+		}
+
+		if(shouldSwith) {
+			rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
+			switching = true;
+			switchCount ++;
+		}else {
+			if(switchCount == 0 && dir == "asc") {
+				dir = "desc";
+				switching = true;
+			}
+		}
+	}
 }
-upArrow.addEventListener("click", ()=>{
-	let sortResult = arr.sort();	
-	
-	for(var i=0; i<sortName.length; i++){
-		sortName[i].innerText = sortResult[i];
-	}
 
-});
-
-downArrow.addEventListener("click", ()=>{
-	let revSortResult = arr.sort((a,b)=>{
-		if(a < b) return 1;
-		if(a > b) return -1;
-		if(a === b) return 0;
-	});
-
-	for(var i=0; i<sortName.length; i++){
-		sortName[i].innerText = revSortResult[i];
-	}
-});
 
 </script>
 {% endblock %}
