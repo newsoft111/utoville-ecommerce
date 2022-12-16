@@ -3,7 +3,7 @@
 {% load static %}
 {% load humanize %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'seller/css/datetimepicker.css' %}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
 .fc-daygrid-day-bottom {
@@ -19,14 +19,22 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 	height: 400px;
 	overflow-y: auto;
 }
-.xdsoft_datetimepicker, .xdsoft_datepicker, .xdsoft_timepicker {
-	width: 100% !important;
+.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current,
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box > div >div.xdsoft_current {
+	background: #2ea7e0;
+	box-shadow: #2ea7e0 0px 1px 3px 0px inset;
+	color:#fff;
+	font-weight: 700;
 }
-.xdsoft_timepicker {
-	margin-top: 20px !important;
+.xdsoft_datetimepicker .xdsoft_calendar td:hover,
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div:hover{
+	color: #fff !important;
+    background: #2ea7e0 !important;
+    box-shadow: none !important;
 }
-.xdsoft_timepicker .xdsoft_prev, .xdsoft_timepicker .xdsoft_next {
-	display: none !important;
+.form-select {
+	box-shadow: none;
+    -webkit-box-shadow: none !important;
 }
 </style>
 
@@ -83,7 +91,6 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 								</div>
 							</div>
 						
-
 							<div id="order-preview-chart" class="apex-charts"></div>                              
 						</div>
 					</div>
@@ -114,7 +121,6 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 								<span class="visually-hidden">Loading...</span>
 							</div>
 						</div>
-						
 
 						<div id="profit-preview-chart-div">
 							<div class="d-flex justify-content-between">
@@ -152,7 +158,7 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 
 				<div class="mt-3 d-none" id="edit-schedule">
 					<h6>날짜</h6>
-					<input type="text" id="date-time-picker" nmae="date-time-picker" class="all-date-time-picker mt-3"/><br><br>
+					<input type="text" id="date-time-picker" name="date-time-picker" class="set-date-time-picker form-select"/><br><br>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -164,7 +170,7 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="{% static 'seller/js/pages/datetimepicker.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
 let is_run = false;
@@ -285,7 +291,6 @@ async function get_order_preview_data(cache) {
 }
 set_order_value();
 
-
 /*Profit Charts*/
 var profit_chart_options={
 	series:[{
@@ -315,7 +320,6 @@ var profit_chart_options={
 var profit_chart = new ApexCharts(document.querySelector("#profit-preview-chart"), profit_chart_options);
 profit_chart.render();
 
-
 function set_profit_value(value) {
 	if (isEmpty(value)) {
 		value = 'Monthly';
@@ -323,7 +327,6 @@ function set_profit_value(value) {
 	document.querySelector("#profit-reload-btn").dataset.value=value;
 	get_profit_preview_data();
 }
-
 
 async function get_profit_preview_data(cache) {
 	if (isEmpty(cache)) {
@@ -402,11 +405,25 @@ document.addEventListener("DOMContentLoaded", function() {
     m.render()
 });
 
-$('.all-date-time-picker').datetimepicker({
-	inline:true,
+$('.set-date-time-picker').datetimepicker({
 	minDate: 0,
 	minTime: 0,
 });
+
+let dateTimeInput = document.querySelector("input[name=date-time-picker]");
+let modalSubmitBtn = document.querySelector(".modal-footer > .btn");
+
+dateTimeInput.addEventListener("focusout", ()=>{
+	let timePickerMinute = dateTimeInput.value.split(":").pop();
+
+	if(dateTimeInput.value == ''){
+		openModal('알림', '날짜와 시간을 선택하세요.');
+	}
+	else if(timePickerMinute != '00'){
+		openModal('알림','시간을 선택하세요.');
+		dateTimeInput.value = '';
+	}
+})
 </script>
 
 {% endblock %}
