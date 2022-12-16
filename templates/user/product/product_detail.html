@@ -7,8 +7,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
+.accordion-item:first-of-type .accordion-button {
+	color: #000;
+	background-color: #fff;
+}
+.accordion-button {
+	padding: 0;
+	align-items: flex-start;
+}
 .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current,
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div.xdsoft_current{
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box > div >div.xdsoft_current {
 	background: #2ea7e0;
 	box-shadow: #2ea7e0 0px 1px 3px 0px inset;
 	color:#fff;
@@ -20,15 +28,6 @@
     background: #2ea7e0 !important;
     box-shadow: none !important;
 }
-.accordion-item:first-of-type .accordion-button {
-	color: #000;
-	background-color: #fff;
-}
-.accordion-button {
-	padding: 0;
-	align-items: flex-start;
-}
-
 </style>
 
 <section class="position-relative bg-white">
@@ -377,18 +376,20 @@ function add_item(e) {
 	if (my_item_id == null) {
 
 		html = '<div id="productDom" class="optionTotal border-bottom mb-3">';
-		html += '<div class="product_title" id="optionTitle">';
-		html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
-		html += '<a class="btn-close" href="#!" onclick="remove_item(this)"></a>';
-		html += '</div>';
-		html += '<div class="optionAdd d-flex justify-content-between align-items-center">';
-		html += `<input type="number" onKeyDown="return false" class="form-control w-25 text-center mb-2" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
-		html += `<span class="price fs-5" data-id="${option_second_id}" id="itemPrice">₱${numberWithCommas(option_second_price)}</span>`;
-		html += '</div>';
-		html +=	'<div class="d-flex justify-content-between align-items-center mb-3">';
-		html += '<span>희망 서비스 일자 : </span>';
-		html += `<input type="text" id="date-time-picker${option_second_id}" name="date-time-picker" class="set-date-time-picker" onchange="cal_total_value(this);" placeholder="희망 일자를 선택하세요." readonly>`;
-		html += '</div>';
+			html += '<div class="product_title" id="optionTitle">';
+				html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
+				html += '<a class="btn-close" href="#!" onclick="remove_item(this)"></a>';
+			html += '</div>';
+		
+			html += '<div class="optionAdd d-flex justify-content-between align-items-center">';
+				html += `<input type="number" onKeyDown="return false" class="form-control w-25 text-center mb-2" id="item_qty" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
+				html += `<span class="price fs-5" data-id="${option_second_id}" id="itemPrice">₱${numberWithCommas(option_second_price)}</span>`;
+			html += '</div>';
+		
+			html +=	'<div class="d-flex justify-content-between align-items-center mb-3">';
+				html += `<span>희망 서비스 일자 : </span>`;
+				html += `<input type="text" id="date-time-picker${option_second_id}" name="date-time-picker" class="set-date-time-picker form-select" style="width:50%; font-size:14px;" placeholder="날짜와 시간을 선택하세요.">`;
+			html += '</div>';
 		html += '</div>';
 	
 		var newstuff = document.createElement('div');
@@ -400,9 +401,22 @@ function add_item(e) {
 		}
 		
 		$(`#date-time-picker${option_second_id}`).datetimepicker({
+			format: 'Y-m-d H:i',
 			minDate: 0,
 			minTime: 0,
 		});
+
+		// let dateTimeInput = document.querySelector(`#date-time-picker${option_second_id}`);
+		// let modalSubmitBtn = document.querySelector(".modal-footer > .btn");
+
+		// dateTimeInput.addEventListener("focusout", ()=>{
+		// 	let timePickerMinute = dateTimeInput.value.split(":").pop();
+
+		// 	if(timePickerMinute != '00'){
+		// 		openModal('알림','시간을 선택하세요.');
+		// 		return false;
+		// 	}
+		// })
 
 		let dateTimeInput = document.querySelector("input[name=date-time-picker]");
 		let modalSubmitBtn = document.querySelector(".modal-footer > .btn");
