@@ -1,4 +1,10 @@
 node {
+	stage('Clean Work Space') {
+		cleanWs()
+		sh 'pwd'
+		sh 'ls'
+	}
+
     stage('Clone repository') {
         checkout scm
     }
@@ -15,7 +21,7 @@ node {
 
     stage('Push image') {
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-            app.push("dev")
+            app.push("latest")
         }
     }
 

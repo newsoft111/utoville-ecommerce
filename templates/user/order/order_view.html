@@ -286,20 +286,26 @@
 									<img src="{% static 'user/img/shop/backpack2.jpg' %}" alt="product-img" title="product-img" class="avatar-lg rounded">
 								</div>
 								<div class="ms-3 w-75 order-item-details">
-									<h5 class="font-size-16 text-truncate"><a href="{% url 'product:user_product_list' %}" class="text-dark order-product-name">{{order_item.product_name}}</a></h5>
-									{% if order_item.variant_value is not None %}
-									<span class="text-uppercase order-option-name">
-										{{order_item.variant}}: {{order_item.variant_value}}
-									</span>
-									<span class="text-uppercase d-block">+₱{{order_item.variant_price}}</span>
-									{% endif %}
-									<p class="text-muted mb-0 mt-1">
-										₱{{order_item.sub_price|intcomma}} X {{order_item.ordered_quantity}}
-									</p>
+									<div class="mb-2">
+										<h5 class="font-size-16 text-truncate mb-0"><a href="{% url 'product:user_product_list' %}" class="text-dark order-product-name">{{order_item.product_name}}</a></h5>
+										<span class="w-25 text-end order-item-price">
+											₱{{order_item.sub_total_price |intcomma}}
+										</span>
+									</div>
+									
+									<div>
+										{% if order_item.variant_value is not None %}
+										<span class="text-uppercase order-option-name">
+											{{order_item.variant}}: {{order_item.variant_value}}
+										</span>
+										<span class="text-uppercase d-block">+₱{{order_item.variant_price}}</span>
+										{% endif %}
+										<p class="text-muted mb-0 mt-1">
+											₱{{order_item.sub_price|intcomma}} X {{order_item.ordered_quantity}}
+										</p>
+									</div>
 								</div>
-								<span class="w-25 text-end order-item-price">
-									₱{{order_item.sub_total_price |intcomma}}
-								</span>
+								
 							</div>
 							<hr>
 							{% endfor %}

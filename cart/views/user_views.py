@@ -53,14 +53,16 @@ def user_cart_add_item(request):
 	item_list = json.loads(request.POST.get('data'))
 
 	for item in item_list:
-
+		print(item_list)
 		product = Product.objects.get(pk=item["product_id"])
 		variant_value_id = item["variant_value_id"] or None
 		quantity = int(item["qty"]) or 1
+		schedule_date = item['schedule_date']
 		
 		try:
 			cart_item = CartItem.objects.get(product=product, cart=cart, variant_value=variant_value_id)
 			cart_item.quantity += quantity
+			cart_item.schedule_date = schedule_date
 			cart_item.save()
 		except CartItem.DoesNotExist:
 			if variant_value_id is not None:
@@ -72,7 +74,8 @@ def user_cart_add_item(request):
 				product=product, 
 				cart=cart,
 				variant_value=variant_value,
-				quantity=1
+				quantity=quantity,
+				schedule_date = schedule_date
 			)
 
 

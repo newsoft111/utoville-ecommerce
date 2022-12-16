@@ -16,7 +16,7 @@ def user_order_view(request):
 	q &= Q(order=order_id)
 	q &= Q(order__user=request.user)
 	order_items = OrderItem.objects.filter(q).order_by("-pk")
-
+	print(order_items)
 	
 	return render(request, 'user/order/order_view.html' ,{
 		"order_items": order_items,
@@ -49,6 +49,7 @@ def user_order_create(request):
 			product_id = order_item['product_id']
 			variant_value_id = order_item['variant_value_id']
 			ordered_quantity = order_item['qty']
+			schedule_date = order_item['schedule_date']
 
 			try:
 				product_obj = Product.objects.get(pk=product_id)
@@ -62,7 +63,8 @@ def user_order_create(request):
 
 			try:
 				variant_value_obj = ProductVariantValue.objects.get(pk=variant_value_id)
-			except:
+			except Exception as e:
+				print(e)
 				variant_value_obj = None
 			
 			if variant_value_obj is not None:
@@ -86,7 +88,7 @@ def user_order_create(request):
 						variant_value = variant_value,
 						variant_price = variant_price,
 						ordered_quantity = ordered_quantity,
-						schedule_date = datetime.now(),
+						schedule_date = schedule_date,
 						order_item_status = '결제대기',
 					)
 					total_price += order_item_obj.sub_total_price()

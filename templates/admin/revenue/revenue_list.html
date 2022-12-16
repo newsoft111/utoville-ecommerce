@@ -69,8 +69,8 @@
 							</div>
 						</div>
 						<div class="excel-btn text-end mt-5">
-							<a href="{% url 'revenue:export' %}?start_date={{request.GET.start_date}}&end_date={{request.GET.end_date}}">
-								<span class="btn btn-outline-dark"><img class= "me-2" style="width: 40px;" src="{% static 'images/down_i.png' %}">Excel Download</span>
+							<a href="{% url 'revenue:admin_revenue_export' %}?start_date={{request.GET.start_date}}&end_date={{request.GET.end_date}}">
+								<span class="btn btn-outline-dark"><img class= "me-2" style="width: 40px;" src="{% static 'admin/images/down_i.png' %}">Excel Download</span>
 							</a>
 						</div>
 						<div class="table-responsive">

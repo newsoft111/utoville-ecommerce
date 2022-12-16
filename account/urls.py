@@ -3,8 +3,8 @@ from . import views
 
 app_name = 'account'
 
-urlpatterns = [
-	path('user/account/',
+user_urlpatterns = [
+	path(f'{app_name}/',
 		include([
 			path('login/', views.user_login, name='user_login'),
 			path('logout/', views.user_logout, name='user_logout'),
@@ -33,9 +33,12 @@ urlpatterns = [
 				])
 			)
 		])
-	),
-	
-	path('seller/account/',
+	)
+]
+
+
+seller_urlpatterns = [
+	path(f'seller/{app_name}/',
 		include([
 			path('login/', views.seller_login, name='seller_login'),
 			path('logout/', views.seller_logout, name='seller_logout'),
@@ -50,14 +53,18 @@ urlpatterns = [
 				])
 			)
 		])
-	),
+	)
+]
 
-	path('admin/account/',
+admin_urlpatterns = [
+	path(f'admin/{app_name}/',
 		include([
 			path('', views.admin_account_manage_list, name='admin_account_manage_list'),
 			path('delete/', views.admin_account_manage_delete, name='admin_account_manage_delete'),
 			path('login/', views.admin_login, name='admin_login'),
 			path('logout/', views.admin_logout, name='admin_logout'),
 		])
-	),
+	)
 ]
+
+urlpatterns = user_urlpatterns + seller_urlpatterns + admin_urlpatterns

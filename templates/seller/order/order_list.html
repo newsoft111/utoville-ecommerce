@@ -5,18 +5,6 @@
 {% load util_filter %}
 {% load mathfilters %}
 
-<style>
-.order-details > ul {
-	margin-bottom: 1.25em;
-}
-.order-details > ul > li:first-child {
-	width: 120px;
-	font-weight: bold;
-}
-.modal-body > .card {
-	box-shadow: 4px 4px 3px #eaedf2;
-}
-</style>
 <div class="page-content">
 	<div class="container-fluid">
 		<div class="row">
@@ -70,8 +58,11 @@
 										</td>
 
 										<td data-label="주문번호">
-											<a href="#!" class="text-link fw-medium" data-bs-toggle="modal"
-											data-bs-target=".order-detail-modal">{{orderItem.order_uid}}</a>
+<<<<<<< Updated upstream
+											<a href="#!" class="text-link fw-medium">{{orderItem.order_uid}}</a>
+=======
+											<a href="#!" class="text-link fw-medium" onclick="get_order_item_info('{{orderItem.order_item_uid}}', `{% url 'order:seller_order_detail' orderItem.pk %}`);">{{orderItem.order_item_uid}}</a>
+>>>>>>> Stashed changes
 										</td>
 
 										<td data-label="상태">
@@ -79,8 +70,7 @@
 										</td>
 
 										<td data-label="상품명">
-											<a href="#!" class="text-link fw-medium" data-bs-toggle="modal"
-											data-bs-target=".order-detail-modal">{{orderItem.product_name}}</a>
+											<a href="#!" class="text-link fw-medium">{{orderItem.product_name}}</a>
 										</td>
 
 										<td data-label="옵션">
@@ -114,7 +104,7 @@
 
 						<div class="row g-0 text-center text-sm-start">
 							<!-- end col -->
-							<div class="col-12 mt-3">
+							<div class="col-12">
 								<ul class="pagination pagination-rounded justify-content-center mb-sm-0">
 									{% if order_item_list.has_previous %}
 									<li class="page-item">
@@ -162,113 +152,18 @@
 <!-- 주문 내역 상세 모달 -->
 
 
-<div class="modal fade order-detail-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title fw-bold" id="myExtraLargeModalLabel">상품주문정보 조회 [주문번호]</h5>
+				<h5 class="modal-title fw-bold" id="orderDetailModalLabel">상품주문정보 조회 [주문번호]</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="modal-body">
-				<div class="card border border-light">
-					<div class="card-header bg-transparent border-light">
-						<h6 class="card-title my-0 fw-bold">주문상세정보</h6>
-					</div>
-					<div class="row card-body order-details">
-						<ul class="col-6">
-							<li>상품명</li>
-							<li></li>
-						</ul>
-						<ul class="col-6">
-							<li>주문상태</li>
-							<li>a</li>
-						</ul>
-						<ul class="col-6">
-							<li>결제일</li>
-							<li>a</li>
-						</ul>
-						<ul class="col-6">
-							<li>주문자명</li>
-							<li>a</li>
-						</ul>
-						<ul class="col-6">
-							<li>아이디</li>
-							<li>a</li>
-						</ul>
-						<ul class="col-6">
-							<li>수량</li>
-							<li>a</li>
-						</ul>
-						<ul class="col-6">
-							<li>결제금액</li>
-							<li>a</li>
-						</ul>
-						<ul class="col-6">
-							<li>옵션정보</li>
-							<li>a</li>
-						</ul>			
-					</div>
-				</div>
-				<div class="card border border-light">
-					<div class="card-header bg-transparent border-light">
-						<h6 class="card-title my-0 fw-bold">결제상세정보</h6>
-					</div>
-					<div class="row card-body order-details">
-						<ul class="col-6">
-							<li>결제수단</li>
-							<li>a</li>
-						</ul>
-						<ul class="col-6">
-							<li>결제상태</li>
-							<li>a</li>
-						</ul>
-						<ul class="col-6">
-							<li>상품 결제 금액</li>
-							<li>a</li>
-						</ul>		
-						<ul class="col-6">
-							<li>적릭금 할인</li>
-							<li>a</li>
-						</ul>
-					</div>
-				</div>
-				<div class="card border border-light">
-					<div class="card-header bg-transparent border-light">
-						<h6 class="card-title my-0 fw-bold">서비스정보</h6>
-					</div>
-					<div class="row card-body order-details">
-						<ul class="col-6">
-							<li>서비스 시작일</li>
-							<li></li>
-						</ul>
-						<ul class="col-6">
-							<li>서비스 종료일</li>
-							<li></li>
-						</ul>	
-					</div>
-				</div>
-				<div class="card border border-light">
-					<div class="card-header bg-transparent border-light">
-						<h6 class="card-title my-0 fw-bold">배송지정보</h6>
-					</div>
-					<div class="row card-body order-details">
-						<ul class="col-6">
-							<li>주문자명</li>
-							<li></li>
-						</ul>
-						<ul class="col-6">
-							<li>연락처</li>
-							<li></li>
-						</ul>	
-						<ul class="col-12">
-							<li>주문자 주소</li>
-							<li></li>
-						</ul>	
-					</div>
-				</div>
-				<div class="text-end mt-3">
-					<span class="btn btn-secondary" data-bs-dismiss="modal">닫기</span>
-				</div>
+			<div class="modal-body" id="orderDetailModalBody">
+				
+			</div>
+			<div class="modal-footer">
+				<span class="btn btn-secondary" data-bs-dismiss="modal">닫기</span>
 			</div>
 		</div>
 	</div>
@@ -277,6 +172,32 @@
 
 <script>
 let is_run = false;
+
+async function get_order_item_info(order_item_uid, url) {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+	let label = document.getElementById('orderDetailModalLabel');
+	let body = document.getElementById('orderDetailModalBody');
+	label.innerHTML = `상품주문정보 조회 []`;
+	body.innerHTML ='<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('orderDetailModal'));
+	modal.show();
+
+	is_run = true;
+
+    const response = await fetch(url, {
+		method: "GET",
+	})
+	.then(response => response.text())
+	.then(data => {
+		label.innerHTML = `상품주문정보 조회 [${order_item_uid}]`;
+		body.innerHTML = data;
+	});
+	is_run  = false;
+}
+
 
 function event_checked_item(e) {
 	const item_list = document.querySelectorAll("input[name=order_item_id][type=checkbox]:checked");
