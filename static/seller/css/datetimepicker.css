@@ -82,8 +82,6 @@
     float: right;
 	background-position:0px 0px;
 }
-.xdsoft_datetimepicker  .xdsoft_next:active,.xdsoft_datetimepicker  .xdsoft_prev:active{
-}
 .xdsoft_datetimepicker  .xdsoft_next,.xdsoft_datetimepicker  .xdsoft_prev {
 	background-color: transparent;
 	background-repeat: no-repeat;
