@@ -108,7 +108,7 @@
 						</div> -->
 					
 						<div class="optionAdd d-flex">
-							<input type="number" onKeyDown="return false" class="form-control w-25 text-center" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
+							<input type="number" onKeyDown="return false" class="form-control w-25 text-center" id="item_qty" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
 							<span class="price ms-auto" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
 						</div>
 					</div>
@@ -261,6 +261,8 @@
 is_run = false;
 
 function add_cart_submit(product_id) {
+	cal_total_value();
+	
 	is_run = true;
 	var loadingModal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#loading'));
 	let data = document.querySelector("input[name=obj_data]").value;
@@ -317,7 +319,7 @@ function set_variant_value(e) {
 
 function cal_total_value() {
 	let total_price_obj = document.getElementById("totalPrice");
- 	let item_list = document.querySelectorAll("span[id=itemPrice]");
+ 	let item_list = document.querySelectorAll("div[id=productDom]");
  	let arr = [];
 
  	let total_price = 0
@@ -325,16 +327,25 @@ function cal_total_value() {
 
  	for (i=0; i<item_list.length; i++) {
  		let item = item_list[i];
-		item_price = item.innerHTML.replace(/[^0-9.]+/g, '');
+		let item_price_elem = item.querySelector("span[id=itemPrice]")
+		let qty = item.querySelector("#item_qty").value;
 
+		item_price = item_price_elem.innerHTML.replace(/[^0-9.]+/g, '');
+		
  		total_price = (parseFloat(total_price) + parseFloat(item_price)).toFixed(2);
 
- 		count += Number(item.previousElementSibling.value);
+ 		count += Number(qty);
 		
  		let objData = new Object();
  		objData.product_id = "{{product_detail.id}}";
+<<<<<<< Updated upstream
  		objData.variant_value_id = item.dataset.id;
  		objData.qty = item.previousElementSibling.value;
+=======
+ 		objData.variant_value_id = item_price_elem.dataset.id;
+ 		objData.qty = qty;
+		objData.schedule_date = item.querySelector("input[name=date-time-picker]").value;	
+>>>>>>> Stashed changes
 
  		arr.push(objData);
 	}
@@ -371,6 +382,7 @@ function add_item(e) {
 	if (my_item_id == null) {
 
 		html = '<div id="productDom" class="optionTotal border-bottom mb-3">';
+<<<<<<< Updated upstream
 		html += '<div class="product_title" id="optionTitle">';
 		html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
 		html += '<a class="btn-close" href="#!" onclick="remove_item(this)"></a>';
@@ -395,6 +407,22 @@ function add_item(e) {
 						</div>
 					</div>
 				</div>`;
+=======
+			html += '<div class="product_title" id="optionTitle">';
+				html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
+				html += '<a class="btn-close" href="#!" onclick="remove_item(this)"></a>';
+			html += '</div>';
+		
+			html += '<div class="optionAdd d-flex justify-content-between align-items-center">';
+				html += `<input type="number" onKeyDown="return false" class="form-control w-25 text-center mb-2" id="item_qty" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
+				html += `<span class="price fs-5" data-id="${option_second_id}" id="itemPrice">₱${numberWithCommas(option_second_price)}</span>`;
+			html += '</div>';
+		
+			html +=	'<div class="d-flex justify-content-between align-items-center">';
+				html += `<p>희망 서비스 일자 : </p>`;
+				html += `<input type="text" id="date-time-picker${option_second_id}" name="date-time-picker" class="set-date-time-picker mt-3">`;
+			html += '</div>';
+>>>>>>> Stashed changes
 		html += '</div>';
 	
 		var newstuff = document.createElement('div');
@@ -405,11 +433,19 @@ function add_item(e) {
 			parent.appendChild(newstuff.firstChild);
 		}
 		
+<<<<<<< Updated upstream
 		$('.all-date-time-picker').datetimepicker({
 			inline:true,
 			minDate: 0,
 			minTime: 0,
 		});
+=======
+		$(`#date-time-picker${option_second_id}`).datetimepicker({
+			format: 'Y-m-d H:i',
+			value: new Date(),
+		});
+		
+>>>>>>> Stashed changes
 
 	}else{
 		let sibling = my_item_id.previousSibling
@@ -420,6 +456,12 @@ function add_item(e) {
 	cal_total_value();
 }
 
+<<<<<<< Updated upstream
+=======
+
+
+
+>>>>>>> Stashed changes
 function remove_item(e) {
 	e.parentNode.parentNode.remove();
 	cal_total_value();
@@ -436,7 +478,8 @@ function reset_variant(e, val) {
 
 
 function product_qna_question_submit() {
-      var question = document.querySelector("[name=question]").value;
+	cal_total_value();
+	var question = document.querySelector("[name=question]").value;
             
       if (isEmpty(question)) {
 		openModal('알림','질문을 입력해주세요.');
