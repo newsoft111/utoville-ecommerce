@@ -338,14 +338,9 @@ function cal_total_value() {
 		
  		let objData = new Object();
  		objData.product_id = "{{product_detail.id}}";
-<<<<<<< Updated upstream
- 		objData.variant_value_id = item.dataset.id;
- 		objData.qty = item.previousElementSibling.value;
-=======
  		objData.variant_value_id = item_price_elem.dataset.id;
  		objData.qty = qty;
 		objData.schedule_date = item.querySelector("input[name=date-time-picker]").value;	
->>>>>>> Stashed changes
 
  		arr.push(objData);
 	}
@@ -382,32 +377,6 @@ function add_item(e) {
 	if (my_item_id == null) {
 
 		html = '<div id="productDom" class="optionTotal border-bottom mb-3">';
-<<<<<<< Updated upstream
-		html += '<div class="product_title" id="optionTitle">';
-		html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
-		html += '<a class="btn-close" href="#!" onclick="remove_item(this)"></a>';
-		html += '</div>';
-		html += '<div class="optionAdd d-flex justify-content-between align-items-center">';
-		html += `<input type="number" onKeyDown="return false" class="form-control w-25 text-center mb-2" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
-		html += `<span class="price fs-5" data-id="${option_second_id}" id="itemPrice">₱${numberWithCommas(option_second_price)}</span>`;
-		html += '</div>'
-		html += `<div class="accordion accordion-flush my-3">
-					<div class="accordion-item">
-						<h2 class="accordion-header">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#date${option_second_id}">
-								<p>희망 서비스 일자 :</p>
-							</button>
-						</h2>
-						<div id="date${option_second_id}" class="accordion-collapse collapse">
-							<div class="hopeDateSelect">
-								<form>
-									<input type="text" id="date-time-picker" nmae="date-time-picker" class="all-date-time-picker mt-3"/><br><br>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>`;
-=======
 			html += '<div class="product_title" id="optionTitle">';
 				html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
 				html += '<a class="btn-close" href="#!" onclick="remove_item(this)"></a>';
@@ -422,7 +391,6 @@ function add_item(e) {
 				html += `<p>희망 서비스 일자 : </p>`;
 				html += `<input type="text" id="date-time-picker${option_second_id}" name="date-time-picker" class="set-date-time-picker mt-3">`;
 			html += '</div>';
->>>>>>> Stashed changes
 		html += '</div>';
 	
 		var newstuff = document.createElement('div');
@@ -433,19 +401,11 @@ function add_item(e) {
 			parent.appendChild(newstuff.firstChild);
 		}
 		
-<<<<<<< Updated upstream
-		$('.all-date-time-picker').datetimepicker({
-			inline:true,
-			minDate: 0,
-			minTime: 0,
-		});
-=======
 		$(`#date-time-picker${option_second_id}`).datetimepicker({
 			format: 'Y-m-d H:i',
 			value: new Date(),
 		});
 		
->>>>>>> Stashed changes
 
 	}else{
 		let sibling = my_item_id.previousSibling
@@ -456,12 +416,9 @@ function add_item(e) {
 	cal_total_value();
 }
 
-<<<<<<< Updated upstream
-=======
 
 
 
->>>>>>> Stashed changes
 function remove_item(e) {
 	e.parentNode.parentNode.remove();
 	cal_total_value();
