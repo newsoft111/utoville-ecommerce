@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-from django.db.models import Q, Sum
+from django.db.models import Q, Sum, Avg
 from ..models import *
 from django.core.paginator import Paginator
 from django.http import JsonResponse, HttpResponse
@@ -13,7 +13,7 @@ import xlwt
 User = get_user_model()
 
 @login_required(login_url="account:admin_login")
-def admin_profit_list(request):
+def admin_profit_done_list(request):
 	profit_objs = Profit.objects.filter(profit_done=None)
 	profit_amount = profit_objs.aggregate(Sum('profit_amount'))['profit_amount__sum']
 	if profit_amount is None:
@@ -37,7 +37,7 @@ def admin_profit_list(request):
 	pagenator   = Paginator(profit_done_objs, 10)
 	profit_done_objs = pagenator.get_page(page)
 
-	return render(request, 'admin/profit/profit_list.html', {
+	return render(request, 'admin/profit/profit_done_list.html', {
 		"profit_objs": profit_objs,
 		'profit_amount': profit_amount,
 		'profit_done_objs': profit_done_objs
@@ -90,5 +90,32 @@ def admin_profit_export(request):
 	return response
 
 @login_required(login_url="account:admin_login")
-def admin_profit_catalog(request):
-	return render(request, 'admin/profit/profit_catalog.html')
+def admin_profit_expect_list(request):
+	now = date.today()
+	start_date = now-relativedelta(months=1)
+	end_date = now
+
+	if request.GET.get("start_date") is not None and request.GET.get("start_date") != '':
+		start_date = datetime.strptime(request.GET.get("start_date"), "%Y-%m-%d")
+
+	if request.GET.get("end_date") is not None and request.GET.get("end_date") != '':
+		end_date = datetime.strptime(request.GET.get("end_date"), "%Y-%m-%d")
+
+	start_date = start_date + timedelta(days=1)
+
+	profit_expect_objs = Profit.objects.filter(
+		#created_at__range=[start_date, end_date],
+		profit_done=None
+	).values(
+		"seller__username"
+	).annotate(
+		charge_amount=Sum('charge_amount'),
+		payment_fee=Avg('payment_fee'),
+		profit_amount=Sum('profit_amount')
+	).order_by(
+		"seller__username"
+	)
+
+	return render(request, 'admin/profit/profit_expect_list.html', {
+		"profit_expect_objs":profit_expect_objs
+	})

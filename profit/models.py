@@ -32,9 +32,9 @@ class Profit(models.Model):
 	)
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
-	charge_amount = models.DecimalField(max_digits=14, decimal_places=2)
-	payment_fee = models.DecimalField(max_digits=14, decimal_places=2)
-	profit_amount = models.DecimalField(max_digits=14, decimal_places=2)
+	charge_amount = models.DecimalField(max_digits=14, decimal_places=2) #결제금액
+	payment_fee = models.DecimalField(max_digits=14, decimal_places=2) #결제수수료
+	profit_amount = models.DecimalField(max_digits=14, decimal_places=2) #정산금액
 	seller = models.ForeignKey(
 			settings.AUTH_USER_MODEL,
 			on_delete=models.CASCADE,
