@@ -24,8 +24,17 @@ def seller_revenue_list(request):
 	start_date = start_date + timedelta(days=1)
 
 	revenue_seller_objs = RevenueSeller.objects.filter(seller=request.user, date__range=[start_date, end_date])
+
+	#이렇게 안하면 타입 None 오류남
 	payment_amount = revenue_seller_objs.aggregate(Sum('payment_amount'))['payment_amount__sum']
+	if payment_amount is None:
+		payment_amount = 0
+
 	refund_amount = revenue_seller_objs.aggregate(Sum('refund_amount'))['refund_amount__sum']
+	if refund_amount is None:
+		refund_amount = 0
+
+
 	total_revenue = payment_amount-refund_amount
 
 
