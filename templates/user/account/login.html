@@ -66,10 +66,9 @@ input[id="flexCheckDefault"]:checked + label::after{
 									<label class="text-end d-block small mb-0"><a href="page-account-forget-password.html" class="text-muted link-decoration">Forget Password?</a></label>
 								</div>
 							</div>		
-							<div class="d-grid">
-								<button class="btn btn-primary" type="button" onclick="login_submit();">
-									Sign in
-								</button>
+							<div class="d-grid btn btn-outline-brandGreen btn-rise" onclick="login_submit();">
+									<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+									<div class="btn-rise-text">Sign in</div>
 							</div>
 						</form>
 					</div>
@@ -80,18 +79,17 @@ input[id="flexCheckDefault"]:checked + label::after{
 </section>
 
 <script>
-	var is_run = false;
+var is_run = false;
 
-	$(document).ready(function() {
-    $("form[name=loginForm]").keypress(function (e) {
-			if (e.keyCode === 13) {
-				login_submit();
-			}
-		});
-  	});
+$(document).ready(function() {
+$("form[name=loginForm]").keypress(function (e) {
+		if (e.keyCode === 13) {
+			login_submit();
+		}
+	});
+});
 	
-
-	function login_submit() {
+function login_submit() {
     var loginForm = document.loginForm;
     var username = loginForm.username.value;
     var password = loginForm.password.value;
@@ -140,8 +138,8 @@ input[id="flexCheckDefault"]:checked + label::after{
 		complete: function () {
 			$('#my-spinner').hide();
 		}
-    });
-  }
+	});
+}
 
 </script>
 {% endblock %}
