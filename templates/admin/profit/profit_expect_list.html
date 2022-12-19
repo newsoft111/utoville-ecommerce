@@ -88,6 +88,7 @@
 									</tr><!-- end tr -->
 								</thead><!-- end thead -->
 								<tbody>
+									{% for profit_expect_obj in profit_expect_objs %}
 									<tr>
 										<td scope="row">
 											<div class="form-check font-size-16">
@@ -95,10 +96,10 @@
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
 										</td>
-										<td>Donald Risher1</td>
-										<td>AwesomeHomcare1</td>
-										<td>02-8856-9211</td>
-										<td>selleremail@email.com1</td>
+										<td>{{profit_expect_obj.seller__username}}</td>
+										<td>{{profit_expect_obj.charge_amount|intcomma}}</td>
+										<td>{{profit_expect_obj.payment_fee|intcomma}}</td>
+										<td>{{profit_expect_obj.profit_amount|intcomma}}</td>
 										<td>Account number here1</td>
 										<td>이체 대기중</td>
 										<td>
@@ -113,81 +114,8 @@
 											</div>
 										</td>
 									</tr><!-- end tr -->
-									<tr>
-										<td scope="row">
-											<div class="form-check font-size-16">
-												<input type="checkbox" class="form-check-input" id="contacusercheck1">
-												<label class="form-check-label" for="contacusercheck1"></label>
-											</div>
-										</td>
-										<td>Aonald Risher2</td>
-										<td>CwesomeHomcare2</td>
-										<td>02-2856-9212</td>
-										<td>delleremail@email.com2</td>
-										<td>Account number here2</td>
-										<td>이체 대기중</td>
-										<td>
-											<div class="dropdown">
-												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-													<i class="uil uil-ellipsis-h"></i>
-												</button>
-												<ul class="dropdown-menu dropdown-menu-end">
-													<li><a class="dropdown-item" href="#">이체 완료</a></li>
-													<li><a class="dropdown-item" href="#">이체 취소</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr><!-- end tr -->
-									<tr>
-										<td scope="row">
-											<div class="form-check font-size-16">
-												<input type="checkbox" class="form-check-input" id="contacusercheck1">
-												<label class="form-check-label" for="contacusercheck1"></label>
-											</div>
-										</td>
-										<td>Conald Risher3</td>
-										<td>DwesomeHomcare3</td>
-										<td>02-3856-9213</td>
-										<td>sblleremail@email.com3</td>
-										<td>Account number here3</td>
-										<td>이체 대기중</td>
-										<td>
-											<div class="dropdown">
-												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-													<i class="uil uil-ellipsis-h"></i>
-												</button>
-												<ul class="dropdown-menu dropdown-menu-end">
-													<li><a class="dropdown-item" href="#">이체 완료</a></li>
-													<li><a class="dropdown-item" href="#">이체 취소</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr><!-- end tr -->
-									<tr>
-										<td scope="row">
-											<div class="form-check font-size-16">
-												<input type="checkbox" class="form-check-input" id="contacusercheck1">
-												<label class="form-check-label" for="contacusercheck1"></label>
-											</div>
-										</td>
-										<td>Bonald Risher4</td>
-										<td>BwesomeHomcare4</td>
-										<td>02-8456-9214</td>
-										<td>telleremail@email.com4</td>
-										<td>Account number here4</td>
-										<td>이체 대기중</td>
-										<td>
-											<div class="dropdown">
-												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-													<i class="uil uil-ellipsis-h"></i>
-												</button>
-												<ul class="dropdown-menu dropdown-menu-end">
-													<li><a class="dropdown-item" href="#">이체 완료</a></li>
-													<li><a class="dropdown-item" href="#">이체 취소</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr><!-- end tr -->
+									{% endfor %}
+									
 								</tbody><!-- end tbody -->
 							</table><!-- end table -->
 						</div><!-- end table responsive -->

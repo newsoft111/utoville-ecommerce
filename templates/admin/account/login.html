@@ -61,7 +61,7 @@
 									</div>
                                      
                                     <div class="mt-3">
-                                        <a class="btn btn-info w-100" onclick="login_submit();">Log In</a>
+                                        <button type="button" class="btn btn-info w-100" onclick="login_submit();">Log In</button>
                                     </div>
 
                                     <div class="mt-4">
@@ -126,7 +126,15 @@
 		});
 
 			
-		function login_submit() {
+		
+		async function login_submit() {
+			if(is_run == true) {
+				openModal('알림','잠시후에 다시시도 해주세요.');
+				return false;
+			}
+
+			is_run = true;
+
 			var loginForm = document.loginForm;
 			var username = loginForm.username.value;
 			var password = loginForm.password.value;
@@ -143,40 +151,28 @@
 				return false;
 			}
 		
-			if(is_run == true) {
-				openModal('알림','잠시후에 다시시도 해주세요.');
-				return false;
-			}
-		
-			is_run = true;
-			//document.getElementById("my-spinner").style.display = "";
-		
-			var url = "{{request.path}}";
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", url, true);
-		
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4) {
-					if (xhr.status == 200){
-						location.replace("{% url 'main:admin_index' %}");
-					} else if (xhr.status == 201) {
-						openModal("알림", data.result_text);
-					} else {
-						console.log("[status] : " + xhr.status);
-						console.log("[response] : " + "[fail]");    				   				    				
-						console.log("[response] : " + xhr.responseText);
-						console.log("");        				
-					}    				
+
+			let form_data = new FormData(document.querySelector('form[name=loginForm]'));
+
+			const response = await fetch("{{request.path}}", {
+				method: "POST",
+				headers: {
+					"X-CSRFToken": getCookie("csrftoken"),
+				},
+				body: form_data
+			})
+			.then(response => response.json())
+			.then(data => {
+				if (data.result == '200') {
+					location.replace("{% url 'main:admin_index' %}");
+				} else {
+					openModal("알림", data.result_text);
 				}
-				is_run  = false;
-				//document.getElementById("my-spinner").style.display = "none";
-			}
-		
-			var form = document.querySelector('form[name=loginForm]');
-			var data = new FormData(form);
-			xhr.send(data);
+			});
+			
+			is_run  = false;
 		}
-		
+
 		</script>
 		
 		

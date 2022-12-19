@@ -109,15 +109,15 @@
 
 						<li class="menu-title" data-key="t-components">Profit</li>
 						<li>
-							<a href="{% url 'profit:admin_profit_list' %}">
+							<a href="{% url 'profit:admin_profit_expect_list' %}">
 								<i class="icon nav-icon" data-feather="tag"></i>
-								<span class="menu-item">정산</span>
+								<span class="menu-item">정산예정</span>
 							</a>
 						</li>
 						<li>
-							<a href="{% url 'profit:admin_profit_catalog' %}">
+							<a href="{% url 'profit:admin_profit_done_list' %}">
 								<i class="icon nav-icon" data-feather="tag"></i>
-								<span class="menu-item">정산 목록</span>
+								<span class="menu-item">정산완료</span>
 							</a>
 						</li>
 
@@ -178,9 +178,16 @@
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link" href="{% url 'profit:admin_profit_list' %}">
+								<a class="nav-link" href="{% url 'profit:admin_profit_expect_list' %}">
 									<i class="icon nav-icon" data-feather="layers"></i>
-									<span class="menu-item">정산</span>
+									<span class="menu-item">정산예정</span>
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'profit:admin_profit_done_list' %}">
+									<i class="icon nav-icon" data-feather="layers"></i>
+									<span class="menu-item">정산완료</span>
 								</a>
 							</li>
 
