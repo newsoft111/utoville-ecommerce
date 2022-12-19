@@ -97,9 +97,9 @@
 											</div>
 										</td>
 										<td>{{profit_expect_obj.seller__username}}</td>
-										<td>{{profit_expect_obj.charge_amount|intcomma}}</td>
-										<td>{{profit_expect_obj.payment_fee|intcomma}}</td>
-										<td>{{profit_expect_obj.profit_amount|intcomma}}</td>
+										<td>₱{{profit_expect_obj.charge_amount|intcomma}}</td>
+										<td>₱{{profit_expect_obj.payment_fee|intcomma}}</td>
+										<td>₱{{profit_expect_obj.profit_amount|intcomma}}</td>
 										<td>Account number here1</td>
 										<td>이체 대기중</td>
 										<td>
@@ -120,30 +120,43 @@
 							</table><!-- end table -->
 						</div><!-- end table responsive -->
 
-						<div class="row g-0 text-end text-sm-start">
-							<div class="col-sm-12">
-								<ul class="pagination pagination-rounded justify-content-center justify-content-sm-end mb-sm-0">
+						<div class="row g-0 text-center text-sm-start">
+							<!-- end col -->
+							<div class="col-12">
+								<ul class="pagination pagination-rounded justify-content-center mb-sm-0">
+									{% if profit_expect_objs.has_previous %}
+									<li class="page-item">
+										<a href="?p={{profit_expect_objs.previous_page_number }}" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+									</li>
+									{% else %}
 									<li class="page-item disabled">
-										<a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+										<span class="page-link"><i class="mdi mdi-chevron-left"></i></span>
 									</li>
+									{% endif %}
+									
+									{% for page_number in profit_expect_objs.paginator.page_range %}
+										{% if page_number >= profit_expect_objs.number|add:-2 and page_number <= profit_expect_objs.number|add:2 %}
+											{% if page_number == profit_expect_objs.number %}
+											<li class="page-item active">
+												<span class="page-link">{{ page_number }}</span>
+											</li>
+											{% else %}
+											<li class="page-item">
+												<a href="?p={{page_number }}" class="page-link">{{ page_number }}</a>
+											</li>
+											{% endif %}
+										{% endif %}
+									{% endfor %}
+									
+									{% if profit_expect_objs.has_next  %}
 									<li class="page-item">
-										<a href="#" class="page-link">1</a>
+										<a href="?p={{profit_expect_objs.next_page_number }}" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
 									</li>
-									<li class="page-item active">
-										<a href="#" class="page-link">2</a>
+									{% else %}
+									<li class="page-item disabled">
+										<span class="page-link"><i class="mdi mdi-chevron-right"></i></span>
 									</li>
-									<li class="page-item">
-										<a href="#" class="page-link">3</a>
-									</li>
-									<li class="page-item">
-										<a href="#" class="page-link">4</a>
-									</li>
-									<li class="page-item">
-										<a href="#" class="page-link">5</a>
-									</li>
-									<li class="page-item">
-										<a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
-									</li>
+									{% endif %}
 								</ul>
 							</div><!-- end col -->
 						</div><!-- end row -->
