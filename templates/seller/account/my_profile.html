@@ -31,6 +31,7 @@
 									<div class="pass-change-area">
 										<div class="mb-3">
 											<label for="update_pass_new" class="form-label">New password</label>
+											<p style="font-size: 11px; color:#333; margin-bottom: 8px;">최소 8자리 이상 영문 대소문자, 숫자, 특수문자가 각각 1개 이상</p>
 											<input type="password" class="form-control" id="update_pass_new" value="" name="new_password">
 										</div>
 										<div class="mb-3">
@@ -109,15 +110,6 @@ btnPassChange.addEventListener("click", ()=>{
 });
 
 updatePassNew.addEventListener("input", ()=>{
-	if(updatePassNew.value == ''){
-		updatePassNew.style.borderColor = "#e2e5e8";
-		return false;
-	}
-	if(currentPass.value == updatePassNew.value) {
-		openModal("알림", "현재 비밀번호와 같습니다.")
-		updatePassNew.value= '';
-	}
-
 	if(password_check(updatePassNew.value)){
 		updatePassNew.style.borderColor = "#51d28c";
 	}else {
@@ -128,8 +120,6 @@ updatePassNew.addEventListener("input", ()=>{
 updatePassNewConfirm.addEventListener("input", ()=>{
 	if(updatePassNew.value == updatePassNewConfirm.value){
 		updatePassNewConfirm.style.borderColor = "#51d28c";
-	}else if(updatePassNewConfirm.value == '') {
-		updatePassNewConfirm.style.borderColor = "#e2e5e8";
 	}else {
 		updatePassNewConfirm.style.borderColor = "#ef6866";
 	}
@@ -173,10 +163,24 @@ async function update_user_submit() {
         console.log(data);
         is_run  = false;
         if (data.result == '200') {
-            openModal("알림", data.result_text, '', 'reload');
+			// if(currentPass.value == updatePassNew.value) {
+			// 	openModal("알림", "변경할 비밀번호가 현재 비밀번호와 같습니다.")
+			// 	updatePassNew.value = '';
+			// 	updatePassNewConfirm.value = '';
+			// 	return false;
+			// }
+			// else if(!password_check(updatePassNew.value)){
+			// 	openModal("알림", "비밀번호는 최소 8자리 이상 영문 대소문자, 숫자, 특수문자가 각각 1개 이상 포함되야 합니다.")
+			// 	updatePassNew.value = '';
+			// 	updatePassNewConfirm.value = '';
+			// 	updatePassNewConfirm.style.borderColor = "#e2e5e8";
+			// 	return false;
+			// }else {}
+			openModal("알림", data.result_text, '', 'reload');
         } else {
             openModal("알림", data.result_text, '');
         }
+		console.log(data.result)
     });
 }
 </script>

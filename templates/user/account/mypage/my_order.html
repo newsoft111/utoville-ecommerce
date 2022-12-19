@@ -73,10 +73,9 @@
 	}
 }
 </style>
-<!-- Section -->
+
 <section class="position-relative">
 	<div class="container position-relative">
-		<!--Profile info header-->
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
 			<div class="row justify-content-center">
 				{% include "user/account/mypage/sidemenu.html" with active_tab="주문 조회"%}
@@ -85,7 +84,6 @@
 					<div class="order_search_area">
 						<div class="row">
 							<div class="col-12">
-								<!-- Page title -->
 								<h4 class="my-4">주문 조회</h4>
 								<div class="row main_contents">
 									<div class="col-md-12">
@@ -384,22 +382,6 @@
 							<input type="radio" name="rating" value="1" id="review-start-1"><label for="review-start-1">☆</label>
 						</div>
 					</div>
-					<!-- <div class="upload_photo p-4">
-						<h5 class="review_title">Upload images</h5>
-						
-						<div class="p-4 border rounded-3" data-dropzone-area="">
-							<div class="dz-preview" id="dz-preview-row" data-horizontal-scroll="">
-							</div>
-							<div class="chat-form rounded-pill" data-emoji-form="">
-								<button type="button"
-								class="btn btn-outline-secondary dz-clickable"
-								id="dz-btn">
-								<i class="bx bx-cloud-upload fs-4 me-1"></i> Upload
-							</button>
-							</div>
-						</div>
-
-					</div> -->
 					<div class="p-4">
 						<h5 class="review_title text-center">Upload images</h5>
 						<div class="thumbnail-preview row" id="thumbnail-preview" >
@@ -427,6 +409,12 @@
 
 <script src="{% static 'user/vendor/node_modules/js/dropzone-min.js' %}"></script>
 <script>
+
+const clickButton = () => {
+	const result = (myChocie === 'apple') ? '사과' : (myChoice === 'strawberry') ? '딸기' : '키위';
+	alert(result)
+}
+
 //==============================
 // URL 파라미터 날짜 시작일에 적용
 //==============================
