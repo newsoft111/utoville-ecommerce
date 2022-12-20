@@ -1,10 +1,10 @@
 {% load static %}
 {% load humanize %}
 <html lang="en">
-
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Utoville Housecare</title>
     <link rel="icon" href="{% static 'user/img/favicon.ico' %}" type="image/ico">
 
 	<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
@@ -29,20 +29,18 @@
 
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+	<style type="text/css">
+		.simplebar-track.simplebar-vertical {
+			width: 7px;
+		}
+	
+		.simplebar-scrollbar:before {
+			background: currentColor;
+		}
 
-    <!--:Simplebar css ()-->
-    <style type="text/css">
-    .simplebar-track.simplebar-vertical {
-    	width: 7px;
-    }
-
-    .simplebar-scrollbar:before {
-    	background: currentColor;
-    }
-
-    </style>
-    <title>Utoville Housecare</title>
-  </head>
+	</style>  
+</head>
 
   <body>
 	<!--:Preloader Spinner-->
@@ -66,24 +64,19 @@
                     </span>
                 </button>
 
-				<!--Search collapse trigger(hidden in desktop laptop)-->
 				<div class="nav-item ms-0 me-4 d-lg-none">
 					<a href="#searchCollapse" data-bs-target="#" data-bs-toggle="collapse" class="nav-link search-link lh-1">
 						<i class="bx bx-search-alt-2 fs-4"></i>
 					</a>
 				</div>
-				<!-- Search collapse END -->
 
-				<!-- cart -->
                 <div class="nav-item me-4 me-lg-2 ms-0">
                     <a href="{% url 'cart:user_cart_detail' %}" class="nav-link lh-1 position-relative p-0">
                         <i class="bx bx-shopping-bag fs-4"></i>
-                        <!--card badge-->
                         <span class="badge d-none d-lg-flex p-0 position-absolute end-0 top-0 me-n2 mt-n1 lh-1 fw-semibold width-1x height-1x bg-white shadow-sm rounded-circle flex-center text-dark">{{counter_cart_items}}</span>
                     </a>
                 </div>         
-				
-				<!-- my page -->
+
                 <div class="nav-item me-4 me-lg-2">
 					{% if not user.is_authenticated %}
                     <a href="{% url 'account:user_login' %}" class="nav-link p-0">
