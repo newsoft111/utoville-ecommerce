@@ -5,6 +5,27 @@
 {% load util_filter %}
 {% load mathfilters %}
 
+<link href="{% static 'seller/css/nice-select.css' %}" rel="stylesheet">
+
+<style>
+ul, li {
+	display: block;
+}
+@media only screen and (max-width: 575px){
+	.nice-select {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.nice-select > ul {
+		width: 100%;
+	}
+	button[type=submit] {
+		width: 100% !important;
+		margin: 10px 0 0 0 !important;
+	}
+}
+</style>
+
 <div class="page-content">
 	<div class="container-fluid">
 		<div class="row">
@@ -20,8 +41,19 @@
 						</div>
 					</div>
 					<div class="card-body p-3">
+						<form>
+							<div class="d-sm-inline-flex mb-3">
+								<select class="px-nice-select me-1" name="category" style="width: 200px;">
+									<option value="0">주문번호</option>
+									<option value="1">상품명  </option>
+									<option value="2">이름</option>
+								</select>
+								<input type="text" name="keyword" class="form-control">
+								<button type="submit" style="width:100px;" class="btn btn-primary mx-1">검색</button>
+							</div>
+						</form>	
 						<div class="responsiveTable">
-							<table class="table mt-3 mb-0 text-center">
+							<table class="table">
 								<thead>
 									<tr>
 										<th scope="col" style="width: 50px;">
@@ -147,7 +179,6 @@
 
 <!-- 주문 내역 상세 모달 -->
 
-
 <div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
@@ -165,7 +196,8 @@
 	</div>
 </div>
 
-
+<script src="{% static 'seller/js/pages/jquery.nice-select.js' %}"></script>
+<script src="{% static 'seller/js/pages/jquery.nice-select.min.js' %}"></script>
 <script>
 let is_run = false;
 
@@ -240,5 +272,9 @@ async function edit_order_status_sumit(event_type, order_item_id) {
 		}
 	});
 }
+
+$(document).ready(function(){
+	$('select').niceSelect();
+});
 </script>
 {% endblock %}

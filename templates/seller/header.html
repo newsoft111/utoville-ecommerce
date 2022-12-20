@@ -25,20 +25,31 @@
 </head>
 
 <style>
-	@media only screen and (max-width: 992px) {
-		.topnav {
-			position: relative;
-			top: 70px;			
-			text-align: center;
-		}
-		.navbar-nav {
-			display: inline-block;
-
-		}
-		.navbar-nav li {
-			display: inline-block;
-		}
+.menu-title {
+	pointer-events: auto !important;
+}
+.topmenu-2depth {
+	height: 0;
+	overflow: hidden;
+	transition: all 0.5s;
+}
+.topmenu-2depth.show {
+	height: 50px;
+}
+@media only screen and (max-width: 992px) {
+	.topnav {
+		position: relative;
+		top: 70px;			
+		text-align: center;
 	}
+	.navbar-nav {
+		display: inline-block;
+
+	}
+	.navbar-nav li {
+		display: inline-block;
+	}
+}
 </style> 
 <body data-sidebar-size="lg" data-layout-mode="light">
 	<div id="layout-wrapper">
@@ -152,47 +163,75 @@
 				<nav class="navbar navbar-light navbar-expand-lg topnav-menu">
 					<div class="navbar-collapse" id="topnav-menu-content">
 						<ul class="navbar-nav">
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'main:seller_index' %}">
-									<i class="icon nav-icon" data-feather="monitor"></i>
-									<span class="menu-item">Dashboards</span>
-								</a>
-							</li>
+							<div class="row">
+								<div class="col-6">
+									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Dashboard</li>
+									<ul class="topmenu-2depth">
+										<li class="nav-item">
+											<a class="nav-link" href="{% url 'main:seller_index' %}">
+												<i class="icon nav-icon" data-feather="monitor"></i>
+												<span class="menu-item">Dashboard</span>
+											</a>
+										</li>
+									</ul>
+								</div>
 
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'order:seller_order_list' %}">
-									<i class="icon nav-icon" data-feather="package"></i>
-								   <span class="menu-item">주문</span>
-								</a>
-							</li>
+								<div class="col-6">
+									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Sales</li>
+									<ul class="topmenu-2depth">
+										<li class="nav-item">
+											<a class="nav-link" href="{% url 'order:seller_order_list' %}">
+												<i class="icon nav-icon" data-feather="package"></i>
+												<span class="menu-item">주문</span>
+											</a>
+										</li>
 
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'qna:seller_qna_list' %}">
-									<i class="icon nav-icon" data-feather="message-square"></i>
-									<span class="menu-item">문의</span>
-									<span class="badge rounded-pill badge-soft-secondary">{{counter_new_qna}}+</span>
-								</a>
-							</li>
+										<li class="nav-item">
+											<a class="nav-link" href="{% url 'qna:seller_qna_list' %}">
+												<i class="icon nav-icon" data-feather="message-square"></i>
+												<span class="menu-item">문의</span>
+												<span class="badge rounded-pill badge-soft-secondary">{{counter_new_qna}}+</span>
+											</a>
+										</li>
+									</ul>
+								</div>
 
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'profit:seller_profit_list' %}">
-									<i class="icon nav-icon" data-feather="layers"></i>
-									<span class="menu-item">정산</span>
-								</a>
-							</li>
+								<div class="col-6">
+									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Profit</li>
+									<ul class="topmenu-2depth">
+										<li class="nav-item">
+											<a class="nav-link" href="{% url 'profit:seller_profit_list' %}">
+												<i class="icon nav-icon" data-feather="layers"></i>
+												<span class="menu-item">정산</span>
+											</a>
+										</li>
+									</ul>
+								</div>
 
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'revenue:seller_revenue_list' %}">
-									<i class="icon nav-icon" data-feather="file"></i>
-									<span class="menu-item">매출</span>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{% url 'account:seller_my_profile' %}">
-									<i class="icon nav-icon" data-feather="file"></i>
-									<span class="menu-item">정보 수정</span> 
-								</a>
-							</li>
+								<div class="col-6">
+									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Revenue</li>
+									<ul class="topmenu-2depth">
+										<li class="nav-item">
+											<a class="nav-link" href="{% url 'revenue:seller_revenue_list' %}">
+												<i class="icon nav-icon" data-feather="file"></i>
+												<span class="menu-item">매출</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+
+								<div class="col-6">
+									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Profile</li>
+									<ul class="topmenu-2depth">
+										<li class="nav-item">
+											<a class="nav-link" href="{% url 'account:seller_my_profile' %}">
+												<i class="icon nav-icon" data-feather="file"></i>
+												<span class="menu-item">정보 수정</span> 
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</ul>
 					</div>
 				</nav>
@@ -203,3 +242,9 @@
 		<!-- Start right Content here -->
 		<!-- ============================================================== -->
 		<div class="main-content">
+
+<script>
+function open2Depth(e){
+	e.nextElementSibling.classList.toggle("show");
+}
+</script>

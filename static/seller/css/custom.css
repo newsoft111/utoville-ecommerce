@@ -89,11 +89,11 @@ li {
 	}
 
 	.responsiveTable tr:first-child {
-		border-top: 3px solid #ddd;
+		border-top: 2px solid #ddd;
 	}
 
 	.responsiveTable tr {
-		border-bottom: 3px solid #ddd;
+		border-bottom: 2px solid #ddd;
 		display: block;
 		margin-bottom: .625em;
 	}
