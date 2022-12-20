@@ -5,8 +5,6 @@
 {% load util_filter %}
 {% load mathfilters %}
 
-<!-- Begin page -->
-
 <link href="{% static 'admin/css/nice-select.css' %}" rel="stylesheet">
 
 <style>
@@ -47,7 +45,7 @@
 								<button type="submit" style="width:100px;" class="btn btn-primary mx-1">검색</button>
 							</div>
 						</form>			
-						<div class="table-responsive">
+						<div class="responsiveTable">
 							<table class="table table-bordered align-middle table-nowrap table-check">
 								<thead>
 									<tr>
@@ -77,46 +75,46 @@
 									
 									{% for order_item_obj in order_item_objs %}
 									<tr>
-										<th scope="row">
+										<td scope="row">
 											<div class="form-check font-size-16">
 												<input type="checkbox" class="form-check-input" id="contacusercheck1">
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
-										</th>
+										</td>
 
-										<td>
+										<td data-label="주문번호">
 											<a href="#!" class="text-link fw-medium">{{order_item_obj.order_uid}}</a>
 										</td>
 
-										<td>
-											<span href="#" class="badge badge-soft-primary">{{order_item_obj.order_item_status}}</span>
+										<td data-label="상태">
+											<span class="badge badge-soft-primary">{{order_item_obj.order_item_status}}</span>
 										</td>
 
-										<td>
+										<td data-label="상품명">
 											<a href="#!" class="text-link fw-medium">{{order_item_obj.product_name}}</a>
 										</td>
 
-										<td>
+										<td data-label="옵션">
 											{{order_item_obj.variant_value}}
 										</td>
 
-										<td>
+										<td data-label="수량">
 											{{order_item_obj.ordered_quantity}}개
 										</td>
 
-										<td>
+										<td data-label="이름">
 											{{order_item_obj.order.user.mb_name}}
 										</td>
 
-										<td>
+										<td data-label="연락처">
 											{{order_item_obj.order.user.mb_phone}}
 										</td>
 
-										<td>
+										<td data-label="남은수량">
 											{{order_item_obj.ordered_quantity|sub:order_item_obj.shipped_quantity}}개
 										</td>
 
-										<td>
+										<td data-label="결제일">
 											{{order_item_obj.order.payment.paid_at}}
 										</td>
 									</tr><!-- end tr -->
@@ -173,11 +171,52 @@
 	</div>
 </div>
 
+<div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title fw-bold" id="orderDetailModalLabel">상품주문정보 조회 [주문번호]</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" id="orderDetailModalBody">
+				
+			</div>
+			<div class="modal-footer">
+				<span class="btn btn-secondary" data-bs-dismiss="modal">닫기</span>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <script src="{% static 'admin/js/jquery-3.5.1.min.js' %}"></script>
 <script src="{% static 'admin/js/pages/jquery.nice-select.js' %}"></script>
 <script src="{% static 'admin/js/pages/jquery.nice-select.min.js' %}"></script>
 <script>
+async function get_order_item_info(order_item_uid, url) {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+	let label = document.getElementById('orderDetailModalLabel');
+	let body = document.getElementById('orderDetailModalBody');
+	label.innerHTML = `상품주문정보 조회 []`;
+	body.innerHTML ='<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('orderDetailModal'));
+	modal.show();
+
+	is_run = true;
+
+    const response = await fetch(url, {
+		method: "GET",
+	})
+	.then(response => response.text())
+	.then(data => {
+		label.innerHTML = `상품주문정보 조회 [${order_item_uid}]`;
+		body.innerHTML = data;
+	});
+	is_run  = false;
+}
 $(document).ready(function(){
 	$('select').niceSelect();
 });
