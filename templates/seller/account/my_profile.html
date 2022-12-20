@@ -37,6 +37,9 @@
 										<div class="mb-3">
 											<label for="update_pass_new_confirm" class="form-label">Confirm new password</label>
 											<input type="password" class="form-control" id="update_pass_new_confirm" value="" name="new_password2">
+											<div class="invalid-feedback" style="margin-top: 8px;">
+												<span>비밀번호가 다릅니다.</span>
+											</div>
 										</div>
 									</div>
 
@@ -51,8 +54,8 @@
 							<div class="mb-3 row">
 								<label for="profile_tel" class="col-md-2 col-form-label">판매 담당자 연락처</label>
 								<div class="col-md-10">
-									<input class="form-control" type="tel" value="{{request.user.mb_phone}}" name="mb_phone" placeholder="Enter Telephone"
-										id="profile_tel" oninput="checkNumVal(this)">
+									<input class="form-control" type="text" value="{{request.user.mb_phone}}" name="mb_phone" placeholder="Enter Telephone"
+										id="profile_tel" oninput="checkNumVal(this);">
 								</div>
 							</div>
 						</div>
@@ -79,7 +82,7 @@
 							<div class="mb-3 row">
 								<label for="account-number-input" class="col-md-2 col-form-label">Account Number</label>
 								<div class="col-md-10 accountInputArea">
-									<input class="form-control" type="text" placeholder="Enter Number" value="123456789" id="account-number-input" oninput="checkNumVal(this)">
+									<input class="form-control" type="text" placeholder="Enter Number" value="123456789" id="account-number-input" oninput="checkNumVal(this);">
 								</div>
 							</div>
 							<div class="text-end">
@@ -98,12 +101,11 @@
 let is_run = false;
 
 let btnPassChange = document.querySelector(".btn-pass-change");
-
 let currentPass = document.getElementById("crt_password");
 let updatePassNew = document.getElementById("update_pass_new");
 let updatePassNewConfirm = document.getElementById("update_pass_new_confirm");
-
 let profileSaveBtn = document.getElementById("profileSaveBtn");
+let invalidFeed = document.querySelector(".invalid-feedback");
 
 btnPassChange.addEventListener("click", ()=>{
 	document.querySelector(".pass-change-area").classList.toggle("d-block")
@@ -118,11 +120,23 @@ updatePassNew.addEventListener("input", ()=>{
 })
 
 updatePassNewConfirm.addEventListener("input", ()=>{
-	if(updatePassNew.value == updatePassNewConfirm.value){
-		updatePassNewConfirm.style.borderColor = "#51d28c";
+	if(updatePassNewConfirm.value == ''){
+			updatePassNewConfirm.style.borderColor = "#e2e5e8";
+			invalidFeed.classList.remove("d-block");
 	}else {
-		updatePassNewConfirm.style.borderColor = "#ef6866";
+
+		if(updatePassNew.value == updatePassNewConfirm.value){
+			
+			updatePassNewConfirm.style.borderColor = "#51d28c";
+			invalidFeed.classList.add("d-none");
+			invalidFeed.classList.remove("d-block");
+		}else {
+			updatePassNewConfirm.style.borderColor = "#ef6866";
+			invalidFeed.classList.add("d-block");
+			invalidFeed.classList.remove("d-none");
+		}
 	}
+		
 })
 
 function checkNumVal(e){
@@ -131,11 +145,12 @@ function checkNumVal(e){
 	}
 
 	if(!number_check(e.value)){
-		openModal("알림", "숫자만 입력해주세요.")
- 		e.value = '';
+		let test = e.value.replace(/[\sa-zA-Z\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g, '');
+		e.value = test;
 	}
 
 }
+
 
 profileSaveBtn.addEventListener("click", function(){
 	update_user_submit();
