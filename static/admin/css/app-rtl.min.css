@@ -53,9 +53,7 @@ body:not([data-sidebar-size=sm]) .app-search {
   width: 255px;
   position: fixed;
   z-index: 1;
-  background-color: #ffffff;
-  -webkit-box-shadow: 0 2px 3px rgba(52, 58, 64, 0.06);
-          box-shadow: 0 2px 3px rgba(52, 58, 64, 0.06); }
+  background-color: #ffffff; }
 
 .logo {
   line-height: 70px; }
