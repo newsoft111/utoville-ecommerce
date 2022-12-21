@@ -29,10 +29,12 @@
 	pointer-events: auto !important;
 }
 .topmenu-2depth {
-	display: none;
+	height: 0;
+	overflow: hidden;
+	transition: all 0.5s;
 }
 .topmenu-2depth.show {
-	display: block;
+	height: 100px;
 }
 .topnav {
 	display: none;
