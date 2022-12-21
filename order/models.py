@@ -5,12 +5,18 @@ from product.models import *
 from account.models import UserShippingAddress
 from charge.models import *
 from decimal import Decimal
+import uuid
 
 # Create your models here.
 class Order(models.Model):
 	user = models.ForeignKey(
 			settings.AUTH_USER_MODEL,
 			on_delete=models.CASCADE,
+	)
+	txnid = models.CharField(
+		max_length=255,
+		default=uuid.uuid1().int>>64,
+		verbose_name="주문번호"
 	)
 	ordered_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	shpping_address = models.ForeignKey(
@@ -20,6 +26,7 @@ class Order(models.Model):
 	)
 	payment = models.ForeignKey(
 		Payment,
+		null=True,
 		on_delete=models.CASCADE,
 	)
 	total_price = models.DecimalField(max_digits=14, decimal_places=2)
@@ -28,6 +35,7 @@ class Order(models.Model):
 	class Meta:
 		db_table = 'ecommerce_order'
 
+	
 
 
 class OrderItem(models.Model):
@@ -37,7 +45,8 @@ class OrderItem(models.Model):
 	)
 	order_item_uid = models.CharField(
 		max_length=255,
-		null=True
+		null=True,
+		verbose_name="상품주문번호"
 	)
 	is_responded = models.BooleanField(default=False, verbose_name="셀러가 주문에 응답했는지")
 	responded_at = models.DateTimeField(null=True)

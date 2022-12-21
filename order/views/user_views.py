@@ -35,10 +35,8 @@ def user_order_create(request):
 		jsonData = json.loads(request.body)
 		order_item_list = json.loads(jsonData.get('order_item_list'))
 
-		payment_obj = Payment.objects.create()
 		order_obj = Order.objects.create(
 			user=request.user,
-			payment=payment_obj,
 			total_price=0,
 			used_point=0
 		)
