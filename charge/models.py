@@ -7,10 +7,11 @@ class Payment(models.Model):
 	is_paid=models.BooleanField(default=False)
 	paid_at = models.DateTimeField(null=True)
 	paid_amount = models.DecimalField(max_digits=14, decimal_places=2, null=True)
+	referrer = models.CharField(max_length=200, default="homecare")
 
 	
 	class Meta:
-		db_table = 'ecommerce_payment'
+		db_table = 'charge_payment'
 
 
 class Refund(models.Model):
@@ -19,4 +20,4 @@ class Refund(models.Model):
 
 	
 	class Meta:
-		db_table = 'ecommerce_refund'
+		db_table = 'charge_refund'
