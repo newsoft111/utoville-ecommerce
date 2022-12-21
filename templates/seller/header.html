@@ -29,15 +29,17 @@
 	pointer-events: auto !important;
 }
 .topmenu-2depth {
-	height: 0;
-	overflow: hidden;
-	transition: all 0.5s;
+	display: none;
 }
 .topmenu-2depth.show {
-	height: 50px;
+	display: block;
+}
+.topnav {
+	display: none;
 }
 @media only screen and (max-width: 992px) {
 	.topnav {
+		display: block;
 		position: relative;
 		top: 70px;			
 		text-align: center;
