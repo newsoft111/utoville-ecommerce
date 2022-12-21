@@ -173,7 +173,7 @@
 						<ul class="navbar-nav">
 							<div class="row">
 								<div class="col-6">
-									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Main</li>
+									<li class="menu-title resp-title" style="cursor: pointer;">Main</li>
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'main:admin_index' %}">
@@ -185,7 +185,7 @@
 								</div>
 
 								<div class="col-6">
-									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Account</li>
+									<li class="menu-title resp-title" style="cursor: pointer;">Account</li>
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'account:admin_account_manage_list' %}">
@@ -197,7 +197,7 @@
 								</div>
 
 								<div class="col-6">
-									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">QNA</li>
+									<li class="menu-title resp-title" style="cursor: pointer;">QNA</li>
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'qna:admin_qna_list' %}">
@@ -210,7 +210,7 @@
 								</div>
 
 								<div class="col-6">
-									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Profit</li>
+									<li class="menu-title resp-title" style="cursor: pointer;">Profit</li>
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'profit:admin_profit_expect_list' %}">
@@ -228,7 +228,7 @@
 								</div>
 
 								<div class="col-6">
-									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Revenue</li>
+									<li class="menu-title resp-title" style="cursor: pointer;">Revenue</li>
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'revenue:admin_revenue_list' %}">
@@ -240,7 +240,7 @@
 								</div>
 
 								<div class="col-6">
-									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Product</li>
+									<li class="menu-title resp-title" style="cursor: pointer;">Product</li>
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'product:admin_product_list' %}">
@@ -252,7 +252,7 @@
 								</div>
 
 								<div class="col-6">
-									<li class="menu-title" onclick="open2Depth(this);" style="cursor: pointer;">Order</li>
+									<li class="menu-title resp-title" style="cursor: pointer;">Order</li>
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'order:admin_order_list' %}">
@@ -277,7 +277,21 @@
 		<div class="main-content">
 
 <script>
-function open2Depth(e){
-	e.nextElementSibling.classList.toggle("show");
+
+let menuTitle = document.querySelectorAll(".resp-title");
+let topmenuTwoDepth = document.querySelectorAll(".topmenu-2depth"), n = 0;
+
+for(var i=0; i<menuTitle.length; i++){
+	menuTitle[i].index = i;
+
+	menuTitle[i].addEventListener("click", (e)=>{
+		n = e.currentTarget.index;
+
+		for(var j=0; j<menuTitle.length; j++){
+			(j == n) ? topmenuTwoDepth[j].classList.toggle("show") : topmenuTwoDepth[j].classList.remove("show");
+		}
+	})
 }
+
+
 </script>

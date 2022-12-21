@@ -7,7 +7,7 @@ def seller_counter_new_order(request):
 		q = Q()
 		q &= Q(is_responded=False)
 		q &= Q(product__user = request.user)
-		q &= Q(order__payment__is_paid = True)
+		q &= ~Q(order__payment = None)
 		result = OrderItem.objects.filter(q).count()
 	else:
 		result = None

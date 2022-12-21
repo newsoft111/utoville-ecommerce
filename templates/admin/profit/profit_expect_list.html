@@ -63,7 +63,7 @@
 						</div>
 						<!-- end modal -->
 
-						<div class="table-responsive text-center">
+						<div class="responsiveTable text-center">
 							<table class="table align-middle table-nowrap table-check">
 								<thead>
 									<tr>
@@ -89,11 +89,11 @@
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
 										</td>
-										<td>{{profit_expect_obj.seller__username}}</td>
-										<td>₱{{profit_expect_obj.charge_amount|intcomma}}</td>
-										<td>₱{{profit_expect_obj.payment_fee|intcomma}}</td>
-										<td>₱{{profit_expect_obj.profit_amount|intcomma}}</td>
-										<td>Account number here1</td>
+										<td data-label="Name">{{profit_expect_obj.seller__username}}</td>
+										<td data-label="Company">₱{{profit_expect_obj.charge_amount|intcomma}}</td>
+										<td data-label="Phone">₱{{profit_expect_obj.payment_fee|intcomma}}</td>
+										<td data-label="Email">₱{{profit_expect_obj.profit_amount|intcomma}}</td>
+										<td data-label="Account">Account number here1</td>
 									</tr><!-- end tr -->
 									{% endfor %}
 									
