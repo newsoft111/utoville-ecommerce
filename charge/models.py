@@ -3,15 +3,11 @@ from django.conf import settings
 
 # Create your models here.
 class Payment(models.Model):
-	txnid = models.CharField(max_length=255, null=True, unique=True)
-	refno = models.CharField(max_length=255, null=True, unique=True)
+	payment_uid = models.CharField(max_length=255, null=True, unique=True)
+	is_paid=models.BooleanField(default=False)
 	paid_at = models.DateTimeField(null=True)
 	paid_amount = models.DecimalField(max_digits=14, decimal_places=2, null=True)
 	referrer = models.CharField(max_length=200, default="homecare")
-	user = models.ForeignKey(
-			settings.AUTH_USER_MODEL,
-			on_delete=models.CASCADE,
-	)
 
 	
 	class Meta:
