@@ -22,11 +22,16 @@
 </head>
 
 <style>
+.menu-title {
+	pointer-events: auto;
+}
 .topmenu-2depth {
-	display: none;
+	height: 0;
+	overflow: hidden;
+	transition: all 0.5s;
 }
 .topmenu-2depth.show {
-	display: block;
+	height: 100px;
 }
 .topnav {
 	display: none;
@@ -121,13 +126,13 @@
 						<li class="menu-title" data-key="t-components">Profit</li>
 						<li>
 							<a href="{% url 'profit:admin_profit_expect_list' %}">
-								<i class="icon nav-icon" data-feather="tag"></i>
+								<i class="icon nav-icon" data-feather="edit"></i>
 								<span class="menu-item">정산 예정</span>
 							</a>
 						</li>
 						<li>
 							<a href="{% url 'profit:admin_profit_done_list' %}">
-								<i class="icon nav-icon" data-feather="tag"></i>
+								<i class="icon nav-icon" data-feather="check-square"></i>
 								<span class="menu-item">정산 완료</span>
 							</a>
 						</li>
@@ -135,7 +140,7 @@
 						<li class="menu-title" data-key="t-components">Revenue</li>
 						<li>
 							<a href="{% url 'revenue:admin_revenue_list' %}">
-								<i class="icon nav-icon" data-feather="tag"></i>
+								<i class="icon nav-icon" data-feather="dollar-sign"></i>
 								<span class="menu-item">매출</span>
 							</a>
 						</li>
@@ -143,16 +148,16 @@
 						<li class="menu-title" data-key="t-components">Product</li>
 						<li>
 							<a href="{% url 'product:admin_product_list' %}">
-								<i class="icon nav-icon" data-feather="briefcase"></i>
-								<span class="menu-item">상품</span>
+								<i class="icon nav-icon" data-feather="archive"></i>
+								<span class="menu-item">상품 관리</span>
 							</a>
 						</li>
 						
 						<li class="menu-title" data-key="t-components">Order</li>
 						<li>
 							<a href="{% url 'order:admin_order_list' %}">
-								<i class="icon nav-icon" data-feather="briefcase"></i>
-								<span class="menu-item">주문</span>
+								<i class="icon nav-icon" data-feather="copy"></i>
+								<span class="menu-item">주문 관리</span>
 							</a>
 						</li>
 					</ul>
@@ -184,7 +189,7 @@
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'account:admin_account_manage_list' %}">
-												<i class="icon nav-icon" data-feather="package"></i>
+												<i class="icon nav-icon" data-feather="user"></i>
 											<span class="menu-item">회원</span>
 											</a>
 										</li>
@@ -209,13 +214,13 @@
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'profit:admin_profit_expect_list' %}">
-												<i class="icon nav-icon" data-feather="layers"></i>
+												<i class="icon nav-icon" data-feather="edit"></i>
 												<span class="menu-item">정산 예정</span>
 											</a>
 										</li>
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'profit:admin_profit_done_list' %}">
-												<i class="icon nav-icon" data-feather="layers"></i>
+												<i class="icon nav-icon" data-feather="check-square"></i>
 												<span class="menu-item">정산 완료</span>
 											</a>
 										</li>
@@ -227,7 +232,7 @@
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'revenue:admin_revenue_list' %}">
-												<i class="icon nav-icon" data-feather="file"></i>
+												<i class="icon nav-icon" data-feather="dollar-sign"></i>
 												<span class="menu-item">매출</span>
 											</a>
 										</li>
@@ -239,8 +244,8 @@
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'product:admin_product_list' %}">
-												<i class="icon nav-icon" data-feather="file"></i>
-												<span class="menu-item">상품</span> 
+												<i class="icon nav-icon" data-feather="archive"></i>
+												<span class="menu-item">상품 관리</span> 
 											</a>
 										</li>
 									</ul>
@@ -251,8 +256,8 @@
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'order:admin_order_list' %}">
-												<i class="icon nav-icon" data-feather="briefcase"></i>
-												<span class="menu-item">주문</span> 
+												<i class="icon nav-icon" data-feather="copy"></i>
+												<span class="menu-item">주문 관리</span> 
 											</a>
 										</li>
 									</ul>
@@ -272,7 +277,7 @@
 		<div class="main-content">
 
 <script>
-	function open2Depth(e){
-		e.nextElementSibling.classList.toggle("show");
-	}
+function open2Depth(e){
+	e.nextElementSibling.classList.toggle("show");
+}
 </script>
