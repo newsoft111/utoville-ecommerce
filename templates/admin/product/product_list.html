@@ -13,14 +13,14 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
-						<h4 class="card-title">상품 관리</h4>
+						<h4 class="card-title">서비스 관리</h4>
 						<div class="text-end">
-							<a href="#!" onclick="remove_checked_item();" class="remove-btn btn btn-light">체크삭제</a>
-							<a href="{% url 'product:admin_product_write' %}" class="btn btn-primary">상품등록</a>
+							<a href="#!" onclick="remove_checked_item();" class="remove-btn btn btn-light">체크 삭제</a>
+							<a href="{% url 'product:admin_product_write' %}" class="btn btn-primary">서비스 등록</a>
 						</div>
 					</div>
 					<div class="card-body">				
-						<div class="table-responsive text-center">
+						<div class="responsiveTable text-center">
 							<table class="table table-bordered align-middle table-nowrap table-check">
 								<thead>
 									<tr>
@@ -29,9 +29,11 @@
 												<input type="checkbox" class="form-check-input" id="checkAll">		
 											</div>
 										</th>
-										<th scope="col">상품명</th>
+										<th scope="col">서비스명</th>
+										<th scope="col">지역</th>
 										<th scope="col">옵션</th>
-										<th scope="col">판매가</th>
+										<th scope="col">옵션 가격</th>
+										<th scope="col">서비스 가격</th>
 										<th scope="col" style="width: 100px">수정</th>
 									</tr><!-- end tr -->
 								</thead><!-- end thead -->
@@ -50,14 +52,20 @@
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
 										</th>	
-										<td>
+										<td data-label="서비스명">
 											<span class="fw-medium">{{productList.product_name}}</span>
 										</td>
-										<td>
-											123
+										<td data-label="지역">
+											지역
 										</td>
-										<td>
-											123
+										<td data-label="옵션">
+											옵션
+										</td>
+										<td data-label="옵션가격">
+											옵션가격
+										</td>
+										<td data-label="서비스가격">
+											서비스가격
 										</td>
 										<td>
 											<a href="{% url 'product:admin_product_update' productList.pk %}" class="btn btn-outline-primary">수정하기</a>

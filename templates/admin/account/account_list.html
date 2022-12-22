@@ -5,58 +5,23 @@
 
 <link href="{% static 'admin/css/nice-select.css' %}" rel="stylesheet">
 <style>
-/**
- * An example CSS of how to render a table responsively.
- * It enables stacking of row data on mobile devices.
- * Only do this for view mode (not for edit mode).
- *
- * On each cell rendered, it adds a user-defined attribute 
- * 'data-label' with value matching the column header text.
- */
- @media only screen and (max-width: 767px) {
- 	table {
-    border: 0;
-  }
-
- table caption {
-    font-size: 1.3em;
-  }
-
-  table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-
-  table tr {
-    border-bottom: 3px solid #ddd;
-    display: block;
-    margin-bottom: .625em;
-  }
-
-  table td {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    text-align: right;
-  }
-
-   table td::before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-  }
-
-  table td:last-child {
-    border-bottom: 0;
-  }
+@media only screen and (max-width: 767px) {
+	.selectArea {
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 575px) {
+	.px-nice-select {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.member-search-btn {
+		width: 100% !important;
+		margin-top: 10px;
+	}
 }
 </style>
-<div class="page-content ">
+<div class="page-content">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
@@ -87,7 +52,7 @@
 							</div>
 							
 						</form>
-						<div class="table-responsive">
+						<div class="responsiveTable">
 							<table class="table mb-0 text-center table-check">
 								<thead class="table-light">
 									<tr>
@@ -102,7 +67,7 @@
 										<th>관리</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody class="align-middle">
 									<tr>
 										{% for account_obj in account_objs %}
 										<td data-label="No." scope="row">{{forloop.counter}}</td>

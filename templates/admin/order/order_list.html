@@ -34,19 +34,35 @@
 						</div>
 					</div>
 					<div class="card-body">
+						<div class="d-flex mb-3">
+							<select name="sort_by" class="px-nice-select" id="sort-by" style="border-color: #ddd; cursor: pointer;">
+								<option value="id" selected>지역별</option>
+								<option value="apart">아파트별</option>
+								<option value="state">상태별</option>
+								<option value="order-newest">결제일 최신 순</option>
+								<option value="order-oldest">결제일 오래된 순</option>
+							</select>
+						</div>
 						<form>
-							<div class="d-sm-inline-flex mb-3">
-								<select class="px-nice-select me-1" name="category" style="width: 200px;">
-									<option value="0">주문번호</option>
-									<option value="1">상품명  </option>
-									<option value="2">이름</option>
-								</select>
-								<input type="text" name="keyword" class="form-control">
-								<button type="submit" style="width:100px;" class="btn btn-primary mx-1">검색</button>
+							<div class="d-sm-flex justify-content-between">
+								<div class="d-sm-inline-flex mb-3">
+									<select class="px-nice-select me-1" name="category" style="width: 200px;">
+										<option value="0">주문번호</option>
+										<option value="1">상품명  </option>
+										<option value="2">이름</option>
+									</select>
+									<input type="text" name="keyword" class="form-control">
+									<button type="submit" style="width:100px;" class="btn btn-primary mx-1">검색</button>
+								</div>
+								<div class="excel-btn text-end mb-2">
+									<!-- <a href="{% url 'revenue:admin_revenue_export' %}?start_date={{request.GET.start_date}}&end_date={{request.GET.end_date}}"> -->
+										<span class="btn btn-outline-dark"><img class= "me-2" style="width: 40px;" src="{% static 'admin/images/down_i.png' %}">Excel Download</span>
+									<!-- </a> -->
+								</div>
 							</div>
 						</form>			
-						<div class="responsiveTable">
-							<table class="table table-bordered align-middle table-nowrap table-check">
+						<div class="responsiveTable text-center">
+							<table class="table table-bordered align-middle table-check">
 								<thead>
 									<tr>
 										<th scope="col" style="width: 50px;">
@@ -83,7 +99,7 @@
 										</td>
 
 										<td data-label="주문번호">
-											<a href="#!" class="text-link fw-medium">{{order_item_obj.order_uid}}</a>
+											<a href="#!" class="text-link fw-medium" onclick="get_order_item_info('{{order_item_obj.order_item_uid}}', `{% url 'order:admin_order_detail' order_item_obj.pk %}`);">{{order_item_obj.order_item_uid}}</a>
 										</td>
 
 										<td data-label="상태">
@@ -193,6 +209,8 @@
 <script src="{% static 'admin/js/pages/jquery.nice-select.js' %}"></script>
 <script src="{% static 'admin/js/pages/jquery.nice-select.min.js' %}"></script>
 <script>
+let is_run = false;
+
 async function get_order_item_info(order_item_uid, url) {
 	if(is_run == true) {
 		openModal('알림','잠시후에 다시시도 해주세요.');
@@ -217,9 +235,30 @@ async function get_order_item_info(order_item_uid, url) {
 	});
 	is_run  = false;
 }
-$(document).ready(function(){
+
+//==============================
+// 지역별, 아파트별 등 정렬
+//==============================
+
+$(document).ready(function() {
 	$('select').niceSelect();
+
+	const urlParams = new URLSearchParams(window.location.search);
+	let sort = urlParams.get('sort');
+	if (isEmpty(sort)) {
+		sort = 'id';
+	}
+	console.log(sort);
+
+	let element = document.getElementById("sort-by");
+    element.value = sort;
 });
 
+const sort = document.querySelector('select[name=sort_by]');
+
+sort.addEventListener('change', (event) => {
+	var link = `{{request.path}}?sort=${event.target.value}`;
+	location.href=link;
+});
 </script>
 {% endblock %}

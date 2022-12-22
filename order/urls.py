@@ -28,6 +28,7 @@ admin_urlpatterns = [
 	path(f'admin/{app_name}/',
 		include([
 			path('', views.admin_order_list, name='admin_order_list'),
+			path('<int:order_item_id>/', views.admin_order_detail, name='admin_order_detail'),
 		])
 	)
 ]
