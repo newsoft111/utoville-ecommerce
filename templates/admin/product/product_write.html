@@ -26,7 +26,7 @@
 						<div class="card-header">대분류</div>
 						<select class="category-select form-select border-0" name="category_first" size="9" id="l1_cat">
 							{% for key, value in cats_data.items %}
-							<option value="{{key}}" onclick="get_l2(this)"> {{key}} </option>
+								<option value="{{key}}" onclick="get_l2(this)" style="cursor:pointer; margin-bottom: 5px;"> {{key}} </option>
 							{% endfor %}
 						</select>
 					</div>
@@ -356,7 +356,8 @@ function get_l2(elem) {
             let cats = '';
             l2_data = cats_data[l1_name]
 			for (var i=0; i < l2_data.length; i++) {
-						cats += '<option value='+Object.keys(l2_data[i])+' onclick="get_l3(this)">'+Object.keys(l2_data[i])+'</option>';
+						// cats += '<option value=' +Object.keys(l2_data[i])+ 'onclick="get_l3(this)" style="cursor:pointer; margin-bottom: 5px;">' +Object.keys(l2_data[i])+ '</option>';
+						cats += `<option value=${Object.keys(l2_data[i])} onclick="get_l3(this)" style="cursor:pointer; margin-bottom: 5px;">${Object.keys(l2_data[i])}</option>`;
 			}
 			document.querySelector('select[id=l2_cat]').innerHTML =  '';
 			document.querySelector('select[id=l2_cat]').innerHTML +=  cats;
@@ -372,7 +373,8 @@ function get_l3(elem){
 
 					if (l3_cats) {
 						for (var j=0; j < l3_cats.length; j++) {
-							cats += '<option value='+l3_cats[j]['id']+'>'+l3_cats[j]['name']+'</option>';
+							// cats += '<option value='+l3_cats[j]['id']+'>'+l3_cats[j]['name']+'</option>';
+							cats += `<option value=${l3_cats[j]['id']}>${l3_cats[j]['name']}</option>`;
 						}
 					}
 				}

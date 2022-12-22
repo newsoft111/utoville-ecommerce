@@ -15,23 +15,23 @@
 						<h4 class="card-title">문의 내역</h4>
 					</div>
 					<div class="card-body">				
-						<div class="responsiveTable">					
+						<div class="responsiveTable text-center">					
 							<table class="table table-bordered align-middle table-nowrap table-check">
 								<thead>
 									<tr>
-										<th scope="col" style="width: 5%;"></th>
-										<th scope="col" style="width: 70%;">제목</th>
-										<th scope="col" style="width: 5%;">작성자</th>
-										<th scope="col" style="width: 5%;">상태</th>
-										<th scope="col" style="width:15%;">날짜</th>
+										<th>No.</th>
+										<th style="width: 70%;">제목</th>
+										<th style="width: 10%;">작성자</th>
+										<th style="width: 5%;">상태</th>
+										<th style="width:15%;">날짜</th>
 									</tr><!-- end tr -->
 								</thead><!-- end thead -->
 								<tbody>
 									{% for qna_obj in qna_objs %}
 									<tr>
-										<th scope="row">
+										<td data-label="No." scope="row">
 											{{forloop.counter}}
-										</th>
+										</td>
 
 										<td data-label="제목">
 											<a href="{% url 'qna:admin_qna_detail' qna_obj.pk %}" class="text-link fw-medium">{{qna_obj.subject}}</a>
