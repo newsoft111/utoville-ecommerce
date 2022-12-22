@@ -8,6 +8,10 @@ def upload_to(instance, filename):
 	return '/'.join(['account' , str(instance.id), nowDate, filename])
 
 class User(AbstractBaseUser, PermissionsMixin):
+	class ResidenceType(models.TextChoices):
+		LANDLORD = "1", "LANDLORD" #집주인
+		TENANT = "2", "TENANT" #세입자
+
 	id = models.AutoField(primary_key=True, db_column='mb_seq')
 	username = models.CharField(max_length=200,unique=True, db_column='mb_id')
 	password = models.CharField(max_length=200, db_column='mb_password')
@@ -33,6 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 	mb_fcm = models.CharField(max_length=200)
 	mb_del_date = models.DateTimeField(null=True)
 	mb_regdate = models.DateTimeField(default=datetime.now)
+	mbm_residence_type = models.CharField(max_length=200, choices=ResidenceType.choices)
 
 	USERNAME_FIELD = 'username'
 	REQUIRED_FIELDS = []
