@@ -15,9 +15,10 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">기본 정보</h4>
+							<h4 class="card-title">정보 수정</h4>
 						</div>
 						<div class="card-body">
+							<h6 class="fw-bold mb-3">기본 정보</h6>
 							<div class="mb-3 row">
 								<label for="profile_id" class="col-md-2 col-form-label">ID</label>
 								<label class="col-md-10 col-form-label">{{request.user.username}}</label>
@@ -59,14 +60,12 @@
 								</div>
 							</div>
 						</div>
-						<div class="card-header">
-							<h4 class="card-title">정산 정보</h4>
-						</div>
 						<div class="card-body">
+							<h6 class="fw-bold mb-3" >정산 정보</h6>
 							<div class="mb-3 row">
 								<label class="col-md-2 col-form-label">Bank</label>
 								<div class="col-md-10">
-									<select class="form-select">
+									<select class="form-select" style="box-shadow: none;">
 										<option>Select</option>
 										<option>bank1</option>
 										<option>bank2</option>

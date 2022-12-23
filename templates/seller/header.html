@@ -116,8 +116,8 @@
 						<li class="menu-title" data-key="t-components">Sales</li>
 						<li>
 							<a href="{% url 'order:seller_order_list' %}">
-								<i class="icon nav-icon" data-feather="briefcase"></i>
-								<span class="menu-item">주문</span>
+								<i class="icon nav-icon" data-feather="copy"></i>
+								<span class="menu-item">주문 관리</span>
 								<span class="badge rounded-pill badge-soft-secondary">{{seller_counter_new_order}}+</span>
 							</a>
 						</li>
@@ -125,7 +125,7 @@
 						<li>
 							<a href="{% url 'qna:seller_qna_list' %}">
 								<i class="icon nav-icon" data-feather="message-square"></i>
-								<span class="menu-item">문의</span>
+								<span class="menu-item">문의 내역</span>
 								<span class="badge rounded-pill badge-soft-secondary">{{seller_counter_new_qna}}+</span>
 							</a>
 						</li>
@@ -133,16 +133,16 @@
 						<li class="menu-title" data-key="t-components">Profit</li>
 						<li>
 							<a href="{% url 'profit:seller_profit_list' %}">
-								<i class="icon nav-icon" data-feather="tag"></i>
-								<span class="menu-item">정산</span>
+								<i class="icon nav-icon" data-feather="edit"></i>
+								<span class="menu-item">정산 관리</span>
 							</a>
 						</li>
 
 						<li class="menu-title" data-key="t-components">Revenue</li>
 						<li>
 							<a href="{% url 'revenue:seller_revenue_list' %}">
-								<i class="icon nav-icon" data-feather="tag"></i>
-								<span class="menu-item">매출</span>
+								<i class="icon nav-icon" data-feather="dollar-sign"></i>
+								<span class="menu-item">매출 관리</span>
 							</a>
 						</li>
 
@@ -185,15 +185,15 @@
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'order:seller_order_list' %}">
-												<i class="icon nav-icon" data-feather="package"></i>
-												<span class="menu-item">주문</span>
+												<i class="icon nav-icon" data-feather="copy"></i>
+												<span class="menu-item">주문 관리</span>
 											</a>
 										</li>
 
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'qna:seller_qna_list' %}">
 												<i class="icon nav-icon" data-feather="message-square"></i>
-												<span class="menu-item">문의</span>
+												<span class="menu-item">문의 내역</span>
 												<span class="badge rounded-pill badge-soft-secondary">{{counter_new_qna}}+</span>
 											</a>
 										</li>
@@ -205,8 +205,8 @@
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'profit:seller_profit_list' %}">
-												<i class="icon nav-icon" data-feather="layers"></i>
-												<span class="menu-item">정산</span>
+												<i class="icon nav-icon" data-feather="edit"></i>
+												<span class="menu-item">정산 관리</span>
 											</a>
 										</li>
 									</ul>
@@ -217,8 +217,8 @@
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'revenue:seller_revenue_list' %}">
-												<i class="icon nav-icon" data-feather="file"></i>
-												<span class="menu-item">매출</span>
+												<i class="icon nav-icon" data-feather="dollar-sign"></i>
+												<span class="menu-item">매출 관리</span>
 											</a>
 										</li>
 									</ul>
@@ -229,7 +229,7 @@
 									<ul class="topmenu-2depth">
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'account:seller_my_profile' %}">
-												<i class="icon nav-icon" data-feather="file"></i>
+												<i class="icon nav-icon" data-feather="user"></i>
 												<span class="menu-item">정보 수정</span> 
 											</a>
 										</li>
