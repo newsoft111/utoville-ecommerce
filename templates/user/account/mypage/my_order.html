@@ -78,13 +78,13 @@
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
 			<div class="row justify-content-center">
-				{% include "user/account/mypage/sidemenu.html" with active_tab="주문 조회"%}
+				{% include "user/account/mypage/sidemenu.html" with active_tab="Service History"%}
 				<div class="col-lg-9">
-					{% include "user/account/mypage/topmenu.html" with active_tab="주문 조회"%}
+					{% include "user/account/mypage/topmenu.html" with active_tab="Service History"%}
 					<div class="order_search_area">
 						<div class="row">
 							<div class="col-12">
-								<h4 class="my-4">주문 조회</h4>
+								<h4 class="my-4">Service History</h4>
 								<div class="row main_contents">
 									<div class="col-md-12">
 										<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
@@ -93,14 +93,14 @@
 													<tbody>
 														<form action="{{request.path}}" method="GET" name="dateSearchForm" class="mb-0 formFlex">
 															<tr>
-																<td class="order-tb-left">날짜</td>
+																<td class="order-tb-left">Date</td>
 																<td colspan="3">
 																	<div class="btn-group w-100 mb-3">
-																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastWeek();">1주일</button>
-																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(1);">1개월</button>
-																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(3);">3개월</button>
-																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(6);">6개월</button>
-																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(12);">1년</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastWeek();">1 Week</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(1);">1 Month</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(3);">3 Month</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(6);">6 Month</button>
+																		<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(12);">1 Year</button>
 																	</div>		
 																
 																	<div class="inputBlock">
@@ -113,10 +113,10 @@
 																</td>		
 															</tr>
 															<tr>
-																<td class="order-tb-left">카테고리</td>
+																<td class="order-tb-left">Category</td>
 																<td class="order-tb-right">
 																	<select class="form-select" name="category_by" style="border-color: #ddd;">
-																		<option value="" {% if not request.GET.category %}selected{% endif %}>선택</option>
+																		<option value="" {% if not request.GET.category %}selected{% endif %}>Select</option>
 																		{% for category_obj in category_objs %}
 																		<option value="{{category_obj.pk}}" {% if request.GET.category|slugify == category_obj.pk|slugify %}selected{% endif %}>{{category_obj.name}}</option>
 																		{% endfor %}
@@ -126,7 +126,7 @@
 																<td class="order-tb-left">진행 상태</td>							
 																<td class="order-tb-right">
 																	<select class="form-select" name="status_by" style="border-color: #ddd;">
-																		<option value="">선택</option>
+																		<option value="">Select</option>
 																		{% for k, v in order_status_dict %}
 																		<option value="{{k}}">{{v}}</option>
 																		{% endfor %}
@@ -134,7 +134,7 @@
 																</td>
 															</tr>
 															<tr>
-																<td class="order-tb-left">서비스명</td>
+																<td class="order-tb-left">Service</td>
 																<td colspan="3" class="order-tb-right">
 																	<div class="d-flex">
 																		<div class="inputBlock me-2">
@@ -165,15 +165,15 @@
 											<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">	
 												<div class="datesearch-main">
 													<div class="title">
-														<span>날짜</span>
+														<span>Date</span>
 													</div>		
 													<div class="contents">
 														<div class="btn-group mb-3">
-															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastWeek();">1주일</button>
-															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(1);">1개월</button>
-															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(3);">3개월</button>
-															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(6);">6개월</button>
-															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(12);">1년</button>
+															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastWeek();">1 Week</button>
+															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(1);">1 Month</button>
+															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(3);">3 Month</button>
+															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(6);">6 Month</button>
+															<button type="button" class="btn btn-outline-secondary order-tb-button" onclick="setLastMonth(12);">1 Year</button>
 														</div>
 														<div class="datasearch-body">
 															<div class="inputBlock">
@@ -188,11 +188,11 @@
 												</div>
 												<div class="category-main">
 													<div class="title">
-														<span>카테고리</span>
+														<span>Category</span>
 													</div>		
 													<div class="contents">
 														<select class="form-select" name="category_by" style="border-color: #ddd;">
-															<option value="" {% if not request.GET.category %}selected{% endif %}>선택</option>
+															<option value="" {% if not request.GET.category %}selected{% endif %}>Select</option>
 															{% for category_obj in category_objs %}
 															<option value="{{category_obj.pk}}" {% if request.GET.category|slugify == category_obj.pk|slugify %}selected{% endif %}>{{category_obj.name}}</option>
 															{% endfor %}
@@ -205,7 +205,7 @@
 													</div>	
 													<div class="contnets">
 														<select class="form-select" name="status_by" style="border-color: #ddd;">
-															<option value="">선택</option>
+															<option value="">Select</option>
 															{% for k, v in order_status_dict %}
 															<option value="{{k}}">{{v}}</option>
 															{% endfor %}
@@ -214,7 +214,7 @@
 												</div>
 												<div class="kewordsearch-main">
 													<div class="title">
-														<span>서비스명</span>
+														<span>Service</span>
 													</div>	
 													<div class="contents">
 														<div class="inputBlock">
@@ -243,14 +243,14 @@
 									<div class="table-responsive" style="text-align: center;">
 										<table class="table order_view">
 											<!-- Title -->
-											<h4 class="text-start mb-3">주문 목록</h4>
+											<h4 class="text-start mb-3">Subscription List</h4>
 											<thead>
 												<tr>
-													<th scope="col">주문일/주문번호</th>
-													<th scope="col">서비스 정보</th>
+													<th scope="col">Order Date/Order Number</th>
+													<th scope="col">Service Information</th>
 													<th scope="col">수량</th>
-													<th scope="col">주문 금액</th>
-													<th scope="col">진행 상태</th>
+													<th scope="col">Amount</th>
+													<th scope="col">Process Status</th>
 												</tr>
 											</thead>
 											
@@ -262,7 +262,7 @@
 													<td>{{my_order_obj.ordered_quantity}}</td>
 													<td>₱{{my_order_obj.sub_total_price|intcomma}}</td>
 													<td>
-														완료
+														Complete
 														<div class="mt-1">
 															<a href="#!" class="btn btn-outline-secondary btn-rise" onclick="open_review_write_modal('{{my_order_obj.pk}}');">
 																<div class="btn-rise-bg bg-secondary"></div>
@@ -289,7 +289,7 @@
 											<div class="row">
 												<div class="col-xxl-6">
 													<div class="row border-0">
-														<h4 class="text-start mb-3">주문 목록</h4>
+														<h4 class="text-start mb-3">Subscription List</h4>
 														<!-- Image -->
 														{% for my_order_obj in my_order_objs %}
 														<div class="col-xl-3 text-center">
@@ -302,9 +302,9 @@
 															<span class="fs-4 text-secondary">{{my_order_obj.order.ordered_at}}</span>
 														</div>
 														<div class="list-status-main mb-5">
-															<span class="fs-4">진행 상태</span>
+															<span class="fs-4">Process Status</span>
 															<div class="contnets">
-																<span class="text-danger fs-5">완료</span>
+																<span class="text-danger fs-5">Complete</span>
 																<div class="mt-1">
 																	<button type="button" class="btn btn-sm btn-primary w-100 fs-5" data-bs-toggle="modal" data-bs-target="#reviewWriteModal">Write Review</button>			
 																</div>	
@@ -389,7 +389,7 @@
 						<div class="chat-form rounded-pill" data-emoji-form="">
 							<input type="file" class="d-none" name="thumbnail" id="thumbnail-upload" onclick="handleClick(this);" accept="image/png, image/jpeg, image/gif">
 							<label for="thumbnail-upload">
-								<span class="btn btn-light">파일 선택</span>
+								<span class="btn btn-light">Select File</span>
 							</label>
 						</div>
 					</div>
