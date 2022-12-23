@@ -22,47 +22,6 @@
 							</div>
 						</div>
 
-						<!-- Modal -->
-						<div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
-							<div class="modal-dialog modal-lg modal-dialog-centered">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body p-4">
-										<div>
-											<div class="mb-3">
-												<label for="addcontact-name-input" class="form-label">Name</label>
-												<input type="text" class="form-control" id="addcontact-name-input" placeholder="Enter Name">
-											</div>
-											<div class="mb-3">
-												<label for="addcontact-designation-input" class="form-label">Company</label>
-												<input type="text" class="form-control" id="addcontact-designation-input" placeholder="Enter Company Name">
-											</div>
-											<div class="mb-3">
-												<label for="addcontact-file-input" class="form-label">Phone Number</label>
-												<input type="text" class="form-control" id="addcontact-file-input">
-											</div>
-											<div class="mb-3">
-												<label for="addcontact-email-input" class="form-label">Email Address</label>
-												<input type="email" class="form-control" id="addcontact-email-input" placeholder="Enter Email Address">
-											</div>
-											<div class="mb-3">
-												<label for="addcontact-email-input" class="form-label">Account Number</label>
-												<input type="email" class="form-control" id="addcontact-email-input" placeholder="Enter Account Number">
-											</div>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-light w-sm" data-bs-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary w-sm">Add</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end modal -->
-
 						<div class="responsiveTable text-center">
 							<table class="table align-middle table-nowrap table-check">
 								<thead>
@@ -78,6 +37,7 @@
 										<th>Phone</th>
 										<th>Email</th>
 										<th>Account</th>
+										<th>Action</th>
 									</tr><!-- end tr -->
 								</thead><!-- end thead -->
 								<tbody>
@@ -93,7 +53,18 @@
 										<td data-label="Company">₱{{profit_expect_obj.charge_amount|intcomma}}</td>
 										<td data-label="Phone">₱{{profit_expect_obj.payment_fee|intcomma}}</td>
 										<td data-label="Email">₱{{profit_expect_obj.profit_amount|intcomma}}</td>
-										<td data-label="Account">Account number here1</td>
+										<td data-label="Account">Account number here</td>
+										<td data-label="Action">
+											<div class="dropdown">
+												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="uil uil-ellipsis-h"></i>
+												</button>
+												<ul class="dropdown-menu dropdown-menu-end">
+													<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reasonMemoModal">이체 대기</button>
+													<li><a class="dropdown-item" href="#">이체 취소</a></li>
+												</ul>
+											</div>
+										</td>
 									</tr><!-- end tr -->
 									{% endfor %}
 									
@@ -148,7 +119,35 @@
 	</div>
 </div>
 
+<div class="modal fade" id="reasonMemoModal" tabindex="-1" aria-labelledby="reasonMemoModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="reasonMemoModalLabel">`${a}`</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		  <form>
+			<div class="mb-3">
+			  <label for="recipient-name" class="col-form-label">Recipient:</label>
+			  <input type="text" class="form-control" id="recipient-name">
+			</div>
+			<div class="mb-3">
+			  <label for="message-text" class="col-form-label">Message:</label>
+			  <textarea class="form-control" id="message-text"></textarea>
+			</div>
+		  </form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary">Send message</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
 <script>
+let a = "이체 대기";
 function sortTable(n) {
 	let rows, x, y, shouldSwith, switchCount = 0;
 	let	table = document.querySelector(".table");
@@ -190,6 +189,7 @@ function sortTable(n) {
 	}
 }
 
-
+// <span class="badge bg-warning p-2" style="cursor: pointer;">이체 대기</span>
+// <span class="badge bg-danger p-2" style="cursor: pointer;">이체 취소</span>
 </script>
 {% endblock %}
