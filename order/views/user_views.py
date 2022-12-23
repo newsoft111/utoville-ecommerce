@@ -16,11 +16,10 @@ def user_order_view(request):
 	q &= Q(order=order_id)
 	q &= Q(order__user=request.user)
 	order_items = OrderItem.objects.filter(q).order_by("-pk")
-	print(order_items)
 	
 	return render(request, 'user/order/order_view.html' ,{
 		"order_items": order_items,
-		"total_price": order_items[0].order.total_price
+
 	})
 
 
@@ -53,7 +52,6 @@ def user_order_create(request):
 				product_obj = Product.objects.get(pk=product_id)
 				
 			except Exception as e:
-				print(e)
 				return JsonResponse({
 					'result': '201', 
 					'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
@@ -62,7 +60,6 @@ def user_order_create(request):
 			try:
 				variant_value_obj = ProductVariantValue.objects.get(pk=variant_value_id)
 			except Exception as e:
-				print(e)
 				variant_value_obj = None
 			
 			if variant_value_obj is not None:
@@ -74,7 +71,7 @@ def user_order_create(request):
 				variant_value = None
 				variant_price = None
 
-
+			print(1)
 			if product_obj is not None:
 				try:
 					order_item_obj = OrderItem.objects.create(
@@ -90,11 +87,11 @@ def user_order_create(request):
 						order_item_status = '결제대기',
 					)
 					total_price += order_item_obj.sub_total_price()
+					print(2)
 				except Exception as e:
-					print(e)
 					pass
-		
-		print(total_price)
+					print(3)
+
 		order_obj.total_price = total_price
 		order_obj.save()
 			
