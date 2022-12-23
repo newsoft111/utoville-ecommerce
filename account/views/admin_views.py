@@ -17,40 +17,43 @@ from django.db.models import Q
 User = get_user_model()
 
 def admin_login(request):
-	seo = {
-		'title': "로그인 - 유토빌",
-	}
-	if request.user.is_authenticated: #로그인 상태면
-		return HttpResponseRedirect(resolve_url('main:admin_index'))
-	if request.method == 'POST':
-		username=request.POST.get('username')
-		password=request.POST.get('password')
-		
-		user = auth.authenticate(request, username=username, password=password)
+	try:
+		seo = {
+			'title': "로그인 - 유토빌",
+		}
+		if request.user.is_authenticated: #로그인 상태면
+			return HttpResponseRedirect(resolve_url('main:admin_index'))
+		if request.method == 'POST':
+			username=request.POST.get('username')
+			password=request.POST.get('password')
+			
+			user = auth.authenticate(request, username=username, password=password)
 
-		if user is None:
-			result = '201'
-			result_text = '아이디와 비밀번호를 정확히 입력해 주세요.'
-			print(1)
-			return JsonResponse({'result': result, 'result_text': result_text})
-		
-		if user.mb_status != 'Y':
-			result = '201'
-			result_text = f"관리자에게 문의바랍니다."
-			return JsonResponse({'result': result, 'result_text': result_text})
+			if user is None:
+				result = '201'
+				result_text = '아이디와 비밀번호를 정확히 입력해 주세요.'
+				print(1)
+				return JsonResponse({'result': result, 'result_text': result_text})
+			
+			if user.mb_status != 'Y':
+				result = '201'
+				result_text = f"관리자에게 문의바랍니다."
+				return JsonResponse({'result': result, 'result_text': result_text})
 
-		if user.mb_active == 'Y':
-			auth.login(request, user)
-			result = '200'
-			result_text = '로그인 성공'
+			if user.mb_active == 'Y':
+				auth.login(request, user)
+				result = '200'
+				result_text = '로그인 성공'
+			else:
+				result = '201'
+				result_text = '탈퇴한 계정입니다.'	
+			
+
+			return JsonResponse({'result': result, 'result_text': result_text})
 		else:
-			result = '201'
-			result_text = '탈퇴한 계정입니다.'	
-		
-
-		return JsonResponse({'result': result, 'result_text': result_text})
-	else:
-		return render(request, 'admin/account/login.html',{"seo":seo})
+			return render(request, 'admin/account/login.html',{"seo":seo})
+	except Exception as e:
+		print(e)
 
 
 def admin_logout(request):
