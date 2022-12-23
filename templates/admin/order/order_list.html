@@ -8,7 +8,27 @@
 <link href="{% static 'admin/css/nice-select.css' %}" rel="stylesheet">
 
 <style>
+
+.date-search, .date-search-area {
+	width: 50%;
+}
+.date-search-area {
+	height: 0;
+	overflow: hidden;
+	transition: all 0.3s;
+}
+.date-search-area.show {
+	height: 100px;
+}
+@media only screen and (max-width: 767px){
+	.search-form {
+		flex-direction: column;
+	}
+}
 @media only screen and (max-width: 575px){
+	.date-search, .date-search-area {
+		width: 100%;
+	}
 	.nice-select {
 		width: 100%;
 		margin-bottom: 10px;
@@ -18,7 +38,7 @@
 	}
 	button[type=submit] {
 		width: 100% !important;
-		margin: 10px 0 0 0 !important;
+		margin: 10px 0px !important;
 	}
 }
 </style>
@@ -29,30 +49,46 @@
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
 						<h4 class="card-title">주문 관리</h4>
-						<div class="text-end">
-							<a href="#" class="btn btn-light">취소</a>
-						</div>
 					</div>
 					<div class="card-body">
-						<div class="d-flex mb-3">
-							<select name="sort_by" class="px-nice-select" id="sort-by" style="border-color: #ddd; cursor: pointer;">
-								<option value="id" selected>지역별</option>
-								<option value="apart">아파트별</option>
-								<option value="state">상태별</option>
-								<option value="order-newest">결제일 최신 순</option>
-								<option value="order-oldest">결제일 오래된 순</option>
-							</select>
-						</div>
-						<form>
-							<div class="d-sm-flex justify-content-between">
-								<div class="d-sm-inline-flex mb-3">
-									<select class="px-nice-select me-1" name="category" style="width: 200px;">
+						<form action="{{request.path}}" method="GET" name="dateSearchForm">
+							<div class="date-search nice-select mb-2 float-none">기간 검색</div>
+							<div class="date-search-area mt-3">
+								<div class="btn-group" id="date-btn">
+									<button type="button" class="btn btn-outline-primary" onclick="todayBtn()">오늘</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastWeekBtn()">1주일</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastOneMonthBtn()">1개월</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastThreeMonthBtn()">3개월</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastSixMonthBtn()">6개월</button>
+								</div>
+
+								<div class="d-flex mt-2">
+									<input class="form-control" name="start_date" type="date" id="start-date-input">
+									&nbsp;&nbsp;~&nbsp;&nbsp;
+									<input class="form-control" name="end_date" type="date" id="end-date-input">
+									<button type="submit" data-bs-target="#" data-bs-toggle="collapse" class="ms-2 border-0 bg-white">
+										<i class="bx bx-search-alt-2 fs-4"></i>
+									</button>
+								</div>
+							</div>
+							<div class="search-form d-sm-flex justify-content-between">
+								<div class="category-search d-sm-inline-flex mb-3">
+									<select class="nice-select me-1" name="category" style="width: 200px;">
 										<option value="0">주문번호</option>
-										<option value="1">상품명  </option>
+										<option value="1">상품명</option>
 										<option value="2">이름</option>
 									</select>
 									<input type="text" name="keyword" class="form-control">
 									<button type="submit" style="width:100px;" class="btn btn-primary mx-1">검색</button>
+
+									<select name="sort_by" class="nice-select" id="sort-by" style="border-color: #ddd; cursor: pointer;" >
+										<option selected disabled>Fliter</option>
+										<option value="id">지역별</option>
+										<option value="apart">아파트별</option>
+										<option value="state">상태별</option>
+										<option value="order-newest">최신 순</option>
+										<option value="order-oldest">오래된 순</option>
+									</select>
 								</div>
 								<div class="excel-btn text-end mb-2">
 									<!-- <a href="{% url 'revenue:admin_revenue_export' %}?start_date={{request.GET.start_date}}&end_date={{request.GET.end_date}}"> -->
@@ -236,6 +272,13 @@ async function get_order_item_info(order_item_uid, url) {
 	is_run  = false;
 }
 
+let dateSearch = document.querySelector(".date-search");
+let dateSearchArea = document.querySelector(".date-search-area");
+
+dateSearch.addEventListener("click", ()=>{
+	dateSearchArea.classList.toggle("show");
+})
+
 //==============================
 // 지역별, 아파트별 등 정렬
 //==============================
@@ -260,5 +303,6 @@ sort.addEventListener('change', (event) => {
 	var link = `{{request.path}}?sort=${event.target.value}`;
 	location.href=link;
 });
+
 </script>
 {% endblock %}
