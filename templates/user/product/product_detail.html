@@ -97,19 +97,19 @@ input[type="text"]::placeholder {
 
             <div class="mb-3 pb-3 {% if not product_detail.productvariant_set.all %}border-bottom{% endif %}" id="selectedList">
                {% if not product_detail.productvariant_set.all %}
-               <div id="productDom" class="optionTotal">
-                  <!-- <div class="title" id="optionTitle">
-                     <h6>Qty:</h6>
-                  </div> -->
-               
+              	<div id="productDom" class="optionTotal">
                   <div class="optionAdd d-flex">
                      <input type="number" onKeyDown="return false" class="form-control w-25 text-center" id="item_qty" onchange="cal_item_price(this);" data-option-price='{{product_detail.price}}' value="1" min="1">
                      <span class="price ms-auto" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
                   </div>
-               </div>
-               {% endif %}
+				  <div class="d-flex justify-content-between align-items-center mb-3">
+					  <span>희망 서비스 일자 : </span>
+					  <input type="text" id="date-time-picker" name="date-time-picker" class="set-date-time-picker" placeholder="날짜와 시간을 선택하세요.">
+				  </div>
+				</div>
+				{% endif %}
             </div>
-      
+
             <div class="totalPrice d-flex">
                {% if product_detail.productvariant_set.all %}
                <p>Total Price (<span id="totalQty">0개</span>)</p> 
@@ -313,7 +313,7 @@ function set_variant_value(e) {
 
 
 function cal_total_value() {
-   let total_price_obj = document.getElementById("totalPrice");
+	let total_price_obj = document.getElementById("totalPrice");
     let item_list = document.querySelectorAll("div[id=productDom]");
     let arr = [];
 
@@ -325,6 +325,9 @@ function cal_total_value() {
 		let item_price_elem = item.querySelector("span[id=itemPrice]")
 		let qty = item.querySelector("#item_qty").value;
 
+	
+		let schedule_date = item.querySelector("input[name=date-time-picker]").value;
+	
 		item_price = item_price_elem.innerHTML.replace(/[^0-9.]+/g, '');
 		
 		total_price = (parseFloat(total_price) + parseFloat(item_price)).toFixed(2);
@@ -335,12 +338,13 @@ function cal_total_value() {
 		objData.product_id = "{{product_detail.id}}";
 		objData.variant_value_id = item_price_elem.dataset.id;
 		objData.qty = qty;
+		objData.schedule_date = schedule_date;
 
-		if(item.querySelector("input[name=date-time-picker]") != null) {
-			objData.schedule_date = item.querySelector("input[name=date-time-picker]").value;   
-		}else {
-			break;
-		}
+		// if(item.querySelector("input[name=date-time-picker]") != null) {
+		// 	objData.schedule_date = item.querySelector("input[name=date-time-picker]").value;   
+		// }else {
+		// 	break;
+		// }
 
 		arr.push(objData);
    }
@@ -413,8 +417,7 @@ function add_item(e) {
 				document.querySelectorAll(".xdsoft_timepicker .xdsoft_time_box")[i].style.borderWidth = "2px";
 			}
 		}
-      });
-      
+      });   
 
    }else{
       let sibling = my_item_id.previousSibling
@@ -425,7 +428,19 @@ function add_item(e) {
    cal_total_value();
 }
 
+$("#date-time-picker").datetimepicker({
+        format: 'Y-m-d H:i',
+		minDate: 0,
+		minTime: 0,
+		onSelectDate:function(){
+			timeBox = document.querySelectorAll(".xdsoft_timepicker .xdsoft_time_box");
+			for(var i=0; i< timeBox.length; i++){
 
+				document.querySelectorAll(".xdsoft_timepicker .xdsoft_time_box")[i].style.borderColor = "#2ea7e0";
+				document.querySelectorAll(".xdsoft_timepicker .xdsoft_time_box")[i].style.borderWidth = "2px";
+			}
+		}
+      });
 
 
 function remove_item(e) {
