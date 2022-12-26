@@ -17,5 +17,5 @@ def user_contact(request):
 def user_faq(request):
 	return render(request, 'user/main/faq.html')
 
-def business_regist(request):
-	return render(request, 'user/main/business_regist.html')
+def partnership_inquiry(request):
+	return render(request, 'user/main/partnership_inquiry.html')
