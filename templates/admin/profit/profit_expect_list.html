@@ -4,7 +4,16 @@
 {% load humanize %}
 {% load util_filter %}
 {% load mathfilters %}
-
+<style>
+.responsiveTable {
+	overflow: auto;
+}
+@media only screen and (max-width: 767px) {
+	td[data-label=Charge], td[data-label=Memo] {
+		border-bottom: 0;
+	}
+}
+</style>
 <div class="page-content">
 	<div class="container-fluid">
 		<div class="row">
@@ -23,7 +32,7 @@
 						</div>
 
 						<div class="responsiveTable text-center">
-							<table class="table align-middle table-nowrap table-check">
+							<table class="table table-nowrap  align-middle">
 								<thead>
 									<tr>
 										<th scope="col" style="width: 50px;">
@@ -33,11 +42,14 @@
 											</div>
 										</th>
 										<th>Name</th>
-										<th>Company</th>
-										<th>Phone</th>
-										<th>Email</th>
+										<th colspan="2">Charge</th>
+										<th>Payment</th>
+										<th>Profit</th>
 										<th>Account</th>
-										<th>Issue</th>
+										<th colspan="2">Memo</th>
+										<th>Status</th>
+										<th>Action</th>
+										
 									</tr><!-- end tr -->
 								</thead><!-- end thead -->
 								<tbody>
@@ -50,17 +62,30 @@
 											</div>
 										</td>
 										<td data-label="Name">{{profit_expect_obj.seller__username}}</td>
-										<td data-label="Company">₱{{profit_expect_obj.charge_amount|intcomma}}</td>
-										<td data-label="Phone">₱{{profit_expect_obj.payment_fee|intcomma}}</td>
-										<td data-label="Email">₱{{profit_expect_obj.profit_amount|intcomma}}</td>
+										<td data-label="Charge">₱{{profit_expect_obj.charge_amount|intcomma}}</td>
+										<td>
+											<button class="btn btn-light btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#chargeDetailsModal">View Details</button>
+										</td>
+										<td data-label="Payment">₱{{profit_expect_obj.payment_fee|intcomma}}</td>
+										<td data-label="profit">₱{{profit_expect_obj.profit_amount|intcomma}}</td>
 										<td data-label="Account">Account number here</td>
+										<td data-label="Memo">asdfasdfds</td>
+										<td>
+											<button class="btn btn-light btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#reasonMemoModal">
+												Edit
+											</button>
+										</td>
+										<td data-label="Status">
+											<span class="badge bg-warning p-2">이체 대기</span> or
+											<span class="badge bg-danger p-2">이체 취소</span>
+										</td>
 										<td data-label="Action">
 											<div class="dropdown">
 												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-													<i class="uil uil-ellipsis-h"></i>
+													<i class="icon nav-icon text-sm" data-feather="list" style="width: 20px;"></i>
 												</button>
 												<ul class="dropdown-menu dropdown-menu-end">
-													<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reasonMemoModal">이체 대기</button></li>
+													<li><a class="dropdown-item" href="#">이체 대기</a></li>
 													<li><a class="dropdown-item" href="#">이체 취소</a></li>
 												</ul>
 											</div>
@@ -119,32 +144,65 @@
 	</div>
 </div>
 
+
+<!-- Charge Details Modal -->
+<div class="modal fade" id="chargeDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title fw-bold" id="chargeDetailsModalLabel">Charge Details</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" id="chargeDetailsModalBody">
+				<div class="d-flex justify-space-between align-items-center">
+					<ul>
+						<li>서비스 판매</li>
+						<li>+₱</li>
+					</ul>
+					<ul>
+						<li>환불 금액</li>
+						<li>-₱</li>
+					</ul>
+					<ul>
+						<li>총 정산금액</li>
+						<li>₱</li>
+					</ul>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
+			</div>
+		</div>
+	</div>
+</div> 
+
+<!-- Memo Modal -->
 <div class="modal fade" id="reasonMemoModal" tabindex="-1" aria-labelledby="reasonMemoModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h5 class="modal-title" id="reasonMemoModalLabel">Issue</h5>
-		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body">
-		  <form>
-			<div class="mb-3">
-			  <label for="recipient-name" class="col-form-label">사유 :</label>
-			  <input type="text" class="form-control" id="recipient-name" placeholder="이체 대기" readonly>
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="reasonMemoModalLabel">Issue</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="mb-3">
-			  <label for="message-text" class="col-form-label">Memo:</label>
-			  <textarea class="form-control" id="message-text">memo here</textarea>
+			<div class="modal-body">
+				<form>
+				<div class="mb-3">
+					<label for="issue-reason" class="col-form-label">Reason :</label>
+					<input type="text" class="form-control" id="issue-reason" placeholder="reason here">
+				</div>
+				<div class="mb-3">
+					<label for="message-text" class="col-form-label">Memo:</label>
+					<textarea class="form-control" id="message-text" placeholder="memo here"></textarea>
+				</div>
+				</form>
 			</div>
-		  </form>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary memo-save">Save</button>
+			</div>
 		</div>
-		<div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		  <button type="button" class="btn btn-primary">Save</button>
-		</div>
-	  </div>
 	</div>
-  </div>
+</div>
 
 <script>
 let a = "이체 대기";
@@ -189,7 +247,5 @@ function sortTable(n) {
 	}
 }
 
-// <span class="badge bg-warning p-2" style="cursor: pointer;">이체 대기</span>
-// <span class="badge bg-danger p-2" style="cursor: pointer;">이체 취소</span>
 </script>
 {% endblock %}
