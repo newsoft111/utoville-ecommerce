@@ -20,7 +20,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
-						<h4 class="card-title">정산 예정 <span class="text-muted fw-normal ms-2">(34)</span></h4>
+						<h4 class="card-title">정산 예정 <span class="text-muted fw-normal ms-2">({{profit_expect_objs|length}})</span></h4>
 					</div>
 					<div class="card-body p-3">
 						<div class="text-end">
@@ -42,9 +42,9 @@
 											</div>
 										</th>
 										<th>Name</th>
-										<th colspan="2">Charge</th>
-										<th>Payment</th>
-										<th>Profit</th>
+										<th colspan="2">Total charge</th>
+										<th>Charge fee</th>
+										<th>Total profit</th>
 										<th>Account</th>
 										<th colspan="2">Memo</th>
 										<th>Status</th>
@@ -61,15 +61,15 @@
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
 										</td>
-										<td data-label="Name">{{profit_expect_obj.seller__username}}</td>
-										<td data-label="Charge">₱{{profit_expect_obj.charge_amount|intcomma}}</td>
+										<td data-label="Name">{{profit_expect_obj.seller.username}}</td>
+										<td data-label="Charge">₱{{profit_expect_obj.total_charge_amount|intcomma}}</td>
 										<td>
 											<button class="btn btn-light btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#chargeDetailsModal">View Details</button>
 										</td>
-										<td data-label="Payment">₱{{profit_expect_obj.payment_fee|intcomma}}</td>
-										<td data-label="profit">₱{{profit_expect_obj.profit_amount|intcomma}}</td>
+										<td data-label="Payment">₱{{profit_expect_obj.total_charge_fee|intcomma}}</td>
+										<td data-label="profit">₱{{profit_expect_obj.total_profit_amount|intcomma}}</td>
 										<td data-label="Account">Account number here</td>
-										<td data-label="Memo">asdfasdfds</td>
+										<td data-label="Memo">{{profit_expect_obj.memo}}</td>
 										<td>
 											<button class="btn btn-light btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#reasonMemoModal">
 												Edit

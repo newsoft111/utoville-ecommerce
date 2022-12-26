@@ -25,7 +25,7 @@ admin_urlpatterns = [
 			path('expect/',
 				include([
 					path('', views.admin_profit_expect_list, name='admin_profit_expect_list'),
-					path('export/', views.admin_profit_expent_export, name='admin_profit_expent_export'),
+					path('export/', views.admin_profit_expect_detail, name='admin_profit_expect_detail'),
 				])
 			)
         ])
