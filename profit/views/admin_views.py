@@ -14,11 +14,6 @@ User = get_user_model()
 
 @login_required(login_url="account:admin_login")
 def admin_profit_done_list(request):
-	profit_objs = Profit.objects.filter(profit_done=None)
-	profit_amount = profit_objs.aggregate(Sum('profit_amount'))['profit_amount__sum']
-	if profit_amount is None:
-		profit_amount = 0
-
 	now = date.today()
 	start_date = now-relativedelta(months=1)
 	end_date = now
@@ -31,16 +26,20 @@ def admin_profit_done_list(request):
 
 	start_date = start_date + timedelta(days=1)
 	
-	profit_done_objs = ProfitDone.objects.filter(created_at__range=[start_date, end_date])
+	profit_done_objs = Profit.objects.filter(created_at__range=[start_date, end_date], is_done=True)
+
+	profit_done_amount = profit_done_objs.aggregate(Sum('total_profit_amount'))['total_profit_amount__sum']
+	if profit_done_amount is None:
+		profit_done_amount = 0
+
 
 	page        = int(request.GET.get('p', 1))
 	pagenator   = Paginator(profit_done_objs, 10)
 	profit_done_objs = pagenator.get_page(page)
 
 	return render(request, 'admin/profit/profit_done_list.html', {
-		"profit_objs": profit_objs,
-		'profit_amount': profit_amount,
-		'profit_done_objs': profit_done_objs
+		"profit_done_objs": profit_done_objs,
+		'profit_done_amount': profit_done_amount,
 	})
 
 
@@ -103,18 +102,7 @@ def admin_profit_expect_list(request):
 
 	start_date = start_date + timedelta(days=1)
 
-	profit_expect_objs = Profit.objects.filter(
-		#created_at__range=[start_date, end_date],
-		profit_done=None
-	).values(
-		"seller__username"
-	).annotate(
-		charge_amount=Sum('charge_amount'),
-		payment_fee=Avg('payment_fee'),
-		profit_amount=Sum('profit_amount')
-	).order_by(
-		"seller__username"
-	)
+	profit_expect_objs = Profit.objects.filter(created_at__range=[start_date, end_date], is_done=False)
 
 	page        = int(request.GET.get('p', 1))
 	pagenator   = Paginator(profit_expect_objs, 10)

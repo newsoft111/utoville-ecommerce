@@ -9,6 +9,7 @@ user_urlpatterns = [
 			path('', views.user_index, name='user_index'),
 			path('contact/', views.user_contact, name='user_contact'),
 			path('faq/', views.user_faq, name='user_faq'),
+			path('partnership_inquiry/', views.partnership_inquiry, name='partnership_inquiry'),
 		])
 	)
 ]

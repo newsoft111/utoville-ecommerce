@@ -16,3 +16,6 @@ def user_contact(request):
 
 def user_faq(request):
 	return render(request, 'user/main/faq.html')
+
+def partnership_inquiry(request):
+	return render(request, 'user/main/partnership_inquiry.html')
