@@ -32,7 +32,7 @@
                   <div class="d-flex align-items-start border-bottom pb-3">
                      <div class="item-list me-3">
                         <input type="checkbox" checked onchange="cal_checked_item_price();" data-product-id="{{cart_item.product.id}}" data-variant-value-id="{{cart_item.variant_value.id}}" data-qty="{{cart_item.quantity}}"
-                           id="cart{{cart_item.pk}}" name="cart_item_id" value="{{cart_item.pk}}">
+                           id="cart{{cart_item.pk}}" data-schedule-date="{{cart_item.schedule_date}}" value="{{cart_item.pk}}" name="cart_item_id">
                         <label for="cart{{cart_item.pk}}"><img src="{% static 'user/img/shop/backpack2.jpg' %}" class="width-7x rounded-3 ms-2"></label>
                      </div>
                      <div class="flex-grow-1 align-self-center">
@@ -237,7 +237,7 @@ function checkbox_manager() {
 //==============================
 function cal_checked_item_price() {
 	let cart_items = document.querySelectorAll("input[name=cart_item_id]:checked");
-
+	console.log(cart_items);
 	let total_price = 0;
 	let arr = [];
 	
@@ -251,6 +251,7 @@ function cal_checked_item_price() {
  		objData.product_id = item.dataset.productId;
  		objData.variant_value_id = item.dataset.variantValueId;
  		objData.qty = item.dataset.qty;
+		objData.schedule_date = item.dataset.scheduleDate;
 
  		arr.push(objData);
 	});	

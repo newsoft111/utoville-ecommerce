@@ -7,52 +7,17 @@
 
 <style>
 @media only screen and (max-width: 767px) {
- 	table {
-    border: 0;
-}
-
-table caption {
-    font-size: 1.3em;
-}
-
-table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-	width: 1px;
-}
-
-table tr {
-    border-bottom: 3px solid #ddd;
-    display: block;
-    margin-bottom: .625em;
-}
-
-table td {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    text-align: right;
-}
-
-table td::before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-}
-
-table td:last-child {
-    border-bottom: 0;
-  }
-}
-
-@media only screen and (max-width: 767px) {
 	.btn-group {
 		width: 100% !important;
 		margin-bottom: 20px;
+	}
+}
+@media only screen and (max-width: 360px) {
+	button[type="button"] {
+		font-size: 13px;
+	}
+	input[type="date"] {
+		font-size: 11px;
 	}
 }
 </style>
@@ -63,7 +28,7 @@ table td:last-child {
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
-						<h4 class="card-title">정산 관리</h4>
+						<h4 class="card-title">정산 완료</h4>
 					</div>
 					<div class="card-body p-3">
 						<div class="d-md-flex justify-content-center align-items-center mb-5">
@@ -76,9 +41,9 @@ table td:last-child {
 							</div>
 							<form action="{{request.path}}" method="GET" name="dateSearchForm">
 								<div class="d-flex align-items-center ms-md-5 ms-0">
-									<input class="form-control form-radius" name="start_date" type="date" id="start-date-input">
+									<input class="form-control" name="start_date" type="date" id="start-date-input">
 									&nbsp;&nbsp;~&nbsp;&nbsp;
-									<input class="form-control form-radius" name="end_date" type="date" id="end-date-input">
+									<input class="form-control" name="end_date" type="date" id="end-date-input">
 									<button type="submit" data-bs-target="#" data-bs-toggle="collapse" class="ms-2 border-0 bg-white">
 										<i class="bx bx-search-alt-2 fs-4"></i>
 									</button>
@@ -95,7 +60,7 @@ table td:last-child {
 								</div>
 							</div>
 						</div>
-						<div class="table-responsive mt-2">
+						<div class="responsiveTable mt-2">
 							<table class="table table-bordered text-center align-middle table-check">
 								<thead class="align-middle table-light">
 									<tr>

@@ -85,6 +85,7 @@ def admin_product_write(request):
 			product_obj.product_name = product_name
 			product_obj.price = price
 			product_obj.content = content
+			product_obj.discount = 0
 			product_obj.save()
 
 			for thumbnail in thumbnails:

@@ -15,9 +15,10 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">기본 정보</h4>
+							<h4 class="card-title">정보 수정</h4>
 						</div>
 						<div class="card-body">
+							<h6 class="fw-bold mb-3">기본 정보</h6>
 							<div class="mb-3 row">
 								<label for="profile_id" class="col-md-2 col-form-label">ID</label>
 								<label class="col-md-10 col-form-label">{{request.user.username}}</label>
@@ -31,11 +32,15 @@
 									<div class="pass-change-area">
 										<div class="mb-3">
 											<label for="update_pass_new" class="form-label">New password</label>
+											<p style="font-size: 11px; color:#333; margin-bottom: 8px;">최소 8자리 이상 영문 대소문자, 숫자, 특수문자가 각각 1개 이상</p>
 											<input type="password" class="form-control" id="update_pass_new" value="" name="new_password">
 										</div>
 										<div class="mb-3">
 											<label for="update_pass_new_confirm" class="form-label">Confirm new password</label>
 											<input type="password" class="form-control" id="update_pass_new_confirm" value="" name="new_password2">
+											<div class="invalid-feedback" style="margin-top: 8px;">
+												<span>비밀번호가 다릅니다.</span>
+											</div>
 										</div>
 									</div>
 
@@ -50,19 +55,17 @@
 							<div class="mb-3 row">
 								<label for="profile_tel" class="col-md-2 col-form-label">판매 담당자 연락처</label>
 								<div class="col-md-10">
-									<input class="form-control" type="tel" value="{{request.user.mb_phone}}" name="mb_phone" placeholder="Enter Telephone"
-										id="profile_tel" oninput="checkNumVal(this)">
+									<input class="form-control" type="text" value="{{request.user.mb_phone}}" name="mb_phone" placeholder="Enter Telephone"
+										id="profile_tel" oninput="checkNumVal(this);">
 								</div>
 							</div>
 						</div>
-						<div class="card-header">
-							<h4 class="card-title">정산 정보</h4>
-						</div>
 						<div class="card-body">
+							<h6 class="fw-bold mb-3" >정산 정보</h6>
 							<div class="mb-3 row">
 								<label class="col-md-2 col-form-label">Bank</label>
 								<div class="col-md-10">
-									<select class="form-select">
+									<select class="form-select" style="box-shadow: none;">
 										<option>Select</option>
 										<option>bank1</option>
 										<option>bank2</option>
@@ -78,7 +81,7 @@
 							<div class="mb-3 row">
 								<label for="account-number-input" class="col-md-2 col-form-label">Account Number</label>
 								<div class="col-md-10 accountInputArea">
-									<input class="form-control" type="text" placeholder="Enter Number" value="123456789" id="account-number-input" oninput="checkNumVal(this)">
+									<input class="form-control" type="text" placeholder="Enter Number" value="123456789" id="account-number-input" oninput="checkNumVal(this);">
 								</div>
 							</div>
 							<div class="text-end">
@@ -97,27 +100,17 @@
 let is_run = false;
 
 let btnPassChange = document.querySelector(".btn-pass-change");
-
 let currentPass = document.getElementById("crt_password");
 let updatePassNew = document.getElementById("update_pass_new");
 let updatePassNewConfirm = document.getElementById("update_pass_new_confirm");
-
 let profileSaveBtn = document.getElementById("profileSaveBtn");
+let invalidFeed = document.querySelector(".invalid-feedback");
 
 btnPassChange.addEventListener("click", ()=>{
 	document.querySelector(".pass-change-area").classList.toggle("d-block")
 });
 
 updatePassNew.addEventListener("input", ()=>{
-	if(updatePassNew.value == ''){
-		updatePassNew.style.borderColor = "#e2e5e8";
-		return false;
-	}
-	if(currentPass.value == updatePassNew.value) {
-		openModal("알림", "현재 비밀번호와 같습니다.")
-		updatePassNew.value= '';
-	}
-
 	if(password_check(updatePassNew.value)){
 		updatePassNew.style.borderColor = "#51d28c";
 	}else {
@@ -126,13 +119,23 @@ updatePassNew.addEventListener("input", ()=>{
 })
 
 updatePassNewConfirm.addEventListener("input", ()=>{
-	if(updatePassNew.value == updatePassNewConfirm.value){
-		updatePassNewConfirm.style.borderColor = "#51d28c";
-	}else if(updatePassNewConfirm.value == '') {
-		updatePassNewConfirm.style.borderColor = "#e2e5e8";
+	if(updatePassNewConfirm.value == ''){
+			updatePassNewConfirm.style.borderColor = "#e2e5e8";
+			invalidFeed.classList.remove("d-block");
 	}else {
-		updatePassNewConfirm.style.borderColor = "#ef6866";
+
+		if(updatePassNew.value == updatePassNewConfirm.value){
+			
+			updatePassNewConfirm.style.borderColor = "#51d28c";
+			invalidFeed.classList.add("d-none");
+			invalidFeed.classList.remove("d-block");
+		}else {
+			updatePassNewConfirm.style.borderColor = "#ef6866";
+			invalidFeed.classList.add("d-block");
+			invalidFeed.classList.remove("d-none");
+		}
 	}
+		
 })
 
 function checkNumVal(e){
@@ -141,11 +144,12 @@ function checkNumVal(e){
 	}
 
 	if(!number_check(e.value)){
-		openModal("알림", "숫자만 입력해주세요.")
- 		e.value = '';
+		let test = e.value.replace(/[\sa-zA-Z\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g, '');
+		e.value = test;
 	}
 
 }
+
 
 profileSaveBtn.addEventListener("click", function(){
 	update_user_submit();
@@ -173,10 +177,24 @@ async function update_user_submit() {
         console.log(data);
         is_run  = false;
         if (data.result == '200') {
-            openModal("알림", data.result_text, '', 'reload');
+			// if(currentPass.value == updatePassNew.value) {
+			// 	openModal("알림", "변경할 비밀번호가 현재 비밀번호와 같습니다.")
+			// 	updatePassNew.value = '';
+			// 	updatePassNewConfirm.value = '';
+			// 	return false;
+			// }
+			// else if(!password_check(updatePassNew.value)){
+			// 	openModal("알림", "비밀번호는 최소 8자리 이상 영문 대소문자, 숫자, 특수문자가 각각 1개 이상 포함되야 합니다.")
+			// 	updatePassNew.value = '';
+			// 	updatePassNewConfirm.value = '';
+			// 	updatePassNewConfirm.style.borderColor = "#e2e5e8";
+			// 	return false;
+			// }else {}
+			openModal("알림", data.result_text, '', 'reload');
         } else {
             openModal("알림", data.result_text, '');
         }
+		console.log(data.result)
     });
 }
 </script>

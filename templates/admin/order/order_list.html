@@ -5,12 +5,30 @@
 {% load util_filter %}
 {% load mathfilters %}
 
-<!-- Begin page -->
-
 <link href="{% static 'admin/css/nice-select.css' %}" rel="stylesheet">
 
 <style>
+
+.date-search, .date-search-area {
+	width: 50%;
+}
+.date-search-area {
+	height: 0;
+	overflow: hidden;
+	transition: all 0.3s;
+}
+.date-search-area.show {
+	height: 100px;
+}
+@media only screen and (max-width: 767px){
+	.search-form {
+		flex-direction: column;
+	}
+}
 @media only screen and (max-width: 575px){
+	.date-search, .date-search-area {
+		width: 100%;
+	}
 	.nice-select {
 		width: 100%;
 		margin-bottom: 10px;
@@ -20,7 +38,7 @@
 	}
 	button[type=submit] {
 		width: 100% !important;
-		margin: 10px 0 0 0 !important;
+		margin: 10px 0px !important;
 	}
 }
 </style>
@@ -31,24 +49,56 @@
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
 						<h4 class="card-title">주문 관리</h4>
-						<div class="text-end">
-							<a href="#" class="btn btn-light">취소</a>
-						</div>
 					</div>
 					<div class="card-body">
-						<form>
-							<div class="d-sm-inline-flex mb-3">
-								<select class="px-nice-select me-1" name="category" style="width: 200px;">
-									<option value="0">주문번호</option>
-									<option value="1">상품명  </option>
-									<option value="2">이름</option>
-								</select>
-								<input type="text" name="keyword" class="form-control">
-								<button type="submit" style="width:100px;" class="btn btn-primary mx-1">검색</button>
+						<form action="{{request.path}}" method="GET" name="dateSearchForm">
+							<div class="date-search nice-select mb-2 float-none">기간 검색</div>
+							<div class="date-search-area mt-3">
+								<div class="btn-group" id="date-btn">
+									<button type="button" class="btn btn-outline-primary" onclick="todayBtn()">오늘</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastWeekBtn()">1주일</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastOneMonthBtn()">1개월</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastThreeMonthBtn()">3개월</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastSixMonthBtn()">6개월</button>
+								</div>
+
+								<div class="d-flex mt-2">
+									<input class="form-control" name="start_date" type="date" id="start-date-input">
+									&nbsp;&nbsp;~&nbsp;&nbsp;
+									<input class="form-control" name="end_date" type="date" id="end-date-input">
+									<button type="submit" data-bs-target="#" data-bs-toggle="collapse" class="ms-2 border-0 bg-white">
+										<i class="bx bx-search-alt-2 fs-4"></i>
+									</button>
+								</div>
+							</div>
+							<div class="search-form d-sm-flex justify-content-between">
+								<div class="category-search d-sm-inline-flex mb-3">
+									<select class="nice-select me-1" name="category" style="width: 200px;">
+										<option value="0">주문번호</option>
+										<option value="1">상품명</option>
+										<option value="2">이름</option>
+									</select>
+									<input type="text" name="keyword" class="form-control">
+									<button type="submit" style="width:100px;" class="btn btn-primary mx-1">검색</button>
+
+									<select name="sort_by" class="nice-select" id="sort-by" style="border-color: #ddd; cursor: pointer;" >
+										<option selected disabled>Fliter</option>
+										<option value="id">지역별</option>
+										<option value="apart">아파트별</option>
+										<option value="state">상태별</option>
+										<option value="order-newest">최신 순</option>
+										<option value="order-oldest">오래된 순</option>
+									</select>
+								</div>
+								<div class="excel-btn text-end mb-2">
+									<!-- <a href="{% url 'revenue:admin_revenue_export' %}?start_date={{request.GET.start_date}}&end_date={{request.GET.end_date}}"> -->
+										<span class="btn btn-outline-dark"><img class= "me-2" style="width: 40px;" src="{% static 'admin/images/down_i.png' %}">Excel Download</span>
+									<!-- </a> -->
+								</div>
 							</div>
 						</form>			
-						<div class="table-responsive">
-							<table class="table table-bordered align-middle table-nowrap table-check">
+						<div class="responsiveTable text-center">
+							<table class="table table-bordered align-middle table-check">
 								<thead>
 									<tr>
 										<th scope="col" style="width: 50px;">
@@ -77,46 +127,46 @@
 									
 									{% for order_item_obj in order_item_objs %}
 									<tr>
-										<th scope="row">
+										<td scope="row">
 											<div class="form-check font-size-16">
 												<input type="checkbox" class="form-check-input" id="contacusercheck1">
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
-										</th>
-
-										<td>
-											<a href="#!" class="text-link fw-medium">{{order_item_obj.order_uid}}</a>
 										</td>
 
-										<td>
-											<span href="#" class="badge badge-soft-primary">{{order_item_obj.order_item_status}}</span>
+										<td data-label="주문번호">
+											<a href="#!" class="text-link fw-medium" onclick="get_order_item_info('{{order_item_obj.order_item_uid}}', `{% url 'order:admin_order_detail' order_item_obj.pk %}`);">{{order_item_obj.order_item_uid}}</a>
 										</td>
 
-										<td>
+										<td data-label="상태">
+											<span class="badge badge-soft-primary">{{order_item_obj.order_item_status}}</span>
+										</td>
+
+										<td data-label="상품명">
 											<a href="#!" class="text-link fw-medium">{{order_item_obj.product_name}}</a>
 										</td>
 
-										<td>
+										<td data-label="옵션">
 											{{order_item_obj.variant_value}}
 										</td>
 
-										<td>
+										<td data-label="수량">
 											{{order_item_obj.ordered_quantity}}개
 										</td>
 
-										<td>
+										<td data-label="이름">
 											{{order_item_obj.order.user.mb_name}}
 										</td>
 
-										<td>
+										<td data-label="연락처">
 											{{order_item_obj.order.user.mb_phone}}
 										</td>
 
-										<td>
+										<td data-label="남은수량">
 											{{order_item_obj.ordered_quantity|sub:order_item_obj.shipped_quantity}}개
 										</td>
 
-										<td>
+										<td data-label="결제일">
 											{{order_item_obj.order.payment.paid_at}}
 										</td>
 									</tr><!-- end tr -->
@@ -173,13 +223,85 @@
 	</div>
 </div>
 
+<div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title fw-bold" id="orderDetailModalLabel">상품주문정보 조회 [주문번호]</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" id="orderDetailModalBody">
+				
+			</div>
+			<div class="modal-footer">
+				<span class="btn btn-secondary" data-bs-dismiss="modal">닫기</span>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <script src="{% static 'admin/js/jquery-3.5.1.min.js' %}"></script>
 <script src="{% static 'admin/js/pages/jquery.nice-select.js' %}"></script>
 <script src="{% static 'admin/js/pages/jquery.nice-select.min.js' %}"></script>
 <script>
-$(document).ready(function(){
+let is_run = false;
+
+async function get_order_item_info(order_item_uid, url) {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+	let label = document.getElementById('orderDetailModalLabel');
+	let body = document.getElementById('orderDetailModalBody');
+	label.innerHTML = `상품주문정보 조회 []`;
+	body.innerHTML ='<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('orderDetailModal'));
+	modal.show();
+
+	is_run = true;
+
+    const response = await fetch(url, {
+		method: "GET",
+	})
+	.then(response => response.text())
+	.then(data => {
+		label.innerHTML = `상품주문정보 조회 [${order_item_uid}]`;
+		body.innerHTML = data;
+	});
+	is_run  = false;
+}
+
+let dateSearch = document.querySelector(".date-search");
+let dateSearchArea = document.querySelector(".date-search-area");
+
+dateSearch.addEventListener("click", ()=>{
+	dateSearchArea.classList.toggle("show");
+})
+
+//==============================
+// 지역별, 아파트별 등 정렬
+//==============================
+
+$(document).ready(function() {
 	$('select').niceSelect();
+
+	const urlParams = new URLSearchParams(window.location.search);
+	let sort = urlParams.get('sort');
+	if (isEmpty(sort)) {
+		sort = 'id';
+	}
+	console.log(sort);
+
+	let element = document.getElementById("sort-by");
+    element.value = sort;
+});
+
+const sort = document.querySelector('select[name=sort_by]');
+
+sort.addEventListener('change', (event) => {
+	var link = `{{request.path}}?sort=${event.target.value}`;
+	location.href=link;
 });
 
 </script>
