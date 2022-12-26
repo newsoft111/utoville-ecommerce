@@ -44,10 +44,23 @@ def user_order_create(request):
 
 		for order_item in order_item_list:
 			product_id = order_item['product_id']
-			variant_value_id = order_item['variant_value_id']
+			try:
+				variant_value_id = item["variant_value_id"]
+			except:
+				variant_value_id = None
 			ordered_quantity = order_item['qty']
-			schedule_date = order_item['schedule_date']
 
+
+			schedule_date = order_item['schedule_date']
+			
+			schedule_date.replace(' ', '')
+
+			if schedule_date is None or schedule_date == '':
+				return JsonResponse({
+					'result': '201', 
+					'result_text': '배송날짜 입력바람.'
+				})
+			
 			try:
 				product_obj = Product.objects.get(pk=product_id)
 				
@@ -71,7 +84,7 @@ def user_order_create(request):
 				variant_value = None
 				variant_price = None
 
-			print(1)
+
 			if product_obj is not None:
 				try:
 					order_item_obj = OrderItem.objects.create(
@@ -87,10 +100,10 @@ def user_order_create(request):
 						order_item_status = '결제대기',
 					)
 					total_price += order_item_obj.sub_total_price()
-					print(2)
+
 				except Exception as e:
 					pass
-					print(3)
+
 
 		order_obj.total_price = total_price
 		order_obj.save()

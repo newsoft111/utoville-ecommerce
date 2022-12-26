@@ -53,9 +53,11 @@ def user_cart_add_item(request):
 	item_list = json.loads(request.POST.get('data'))
 
 	for item in item_list:
-		print(item_list)
 		product = Product.objects.get(pk=item["product_id"])
-		variant_value_id = item["variant_value_id"] or None
+		try:
+			variant_value_id = item["variant_value_id"]
+		except:
+			variant_value_id = None
 		quantity = int(item["qty"]) or 1
 		schedule_date = item['schedule_date']
 		
