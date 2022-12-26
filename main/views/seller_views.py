@@ -13,7 +13,7 @@ def seller_index(request):
 
 	q = Q()
 	q &= Q(product__user=request.user)
-	q &= Q(order__payment__is_paid = True)
+	q &= ~Q(order__payment = None)
 
 	order_items = OrderItem.objects.filter(q)
 	for items in order_items:

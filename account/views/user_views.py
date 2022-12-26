@@ -310,7 +310,7 @@ def user_my_dashboard(request):
 	#완료된 서비스 시작
 	q = Q()
 	q &= Q(order__user = request.user)
-	q &= Q(order__payment__is_paid = True)
+	q &= ~Q(order__payment = None)
 	q &= Q(is_delivered = True)
 	
 
