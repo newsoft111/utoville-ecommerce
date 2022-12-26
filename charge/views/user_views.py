@@ -19,12 +19,13 @@ def user_payment(request):
 	try:
 		order_obj = Order.objects.get(pk=order_id)
 
-		payment_obj = Payment.objects.create()
+		payment_obj = Payment.objects.create(user=request.user)
 
 		order_obj.used_point = used_point
 		order_obj.payment = payment_obj
 		order_obj.save()
-	except:
+	except Exception as e:
+		print(e)
 		return JsonResponse({
 			'result': '201', 
 			'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
