@@ -34,6 +34,7 @@ def user_order_create(request):
 
 		jsonData = json.loads(request.body)
 		order_item_list = json.loads(jsonData.get('order_item_list'))
+		print(order_item_list)
 
 		order_obj = Order.objects.create(
 			user=request.user,

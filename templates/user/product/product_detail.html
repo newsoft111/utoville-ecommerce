@@ -471,6 +471,7 @@ function product_qna_question_submit() {
 }
 
 async function order_submit() {
+	cal_total_value();
 	if(is_run == true) {
 		openModal('알림','잠시후에 다시시도 해주세요.');
 		return false;
