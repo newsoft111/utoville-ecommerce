@@ -114,7 +114,7 @@ class SellerOrderPreview(View):
 
 		q = Q()
 		q &= Q(product__user=request.user)
-		q &= Q(order__payment__is_paid = True)
+		q &= ~Q(order__payment = None)
 
 		self.start_date = self.end_date - timedelta(days=7)
 		q &= Q(order__payment__paid_at__range = [self.start_date, self.end_date])
