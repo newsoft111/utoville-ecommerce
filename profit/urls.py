@@ -26,6 +26,7 @@ admin_urlpatterns = [
 				include([
 					path('', views.admin_profit_expect_list, name='admin_profit_expect_list'),
 					path('<int:profit_id>/', views.admin_profit_expect_detail, name='admin_profit_expect_detail'),
+					path('change/status/', views.admin_profit_expect_detail, name='admin_profit_expect_detail'),
 				])
 			)
         ])
