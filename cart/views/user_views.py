@@ -61,6 +61,14 @@ def user_cart_add_item(request):
 		quantity = int(item["qty"]) or 1
 		schedule_date = item['schedule_date']
 		
+		schedule_date.replace(' ', '')
+
+		if schedule_date is None or schedule_date == '':
+			return JsonResponse({
+				'result': '201', 
+				'result_text': '배송날짜 입력바람.'
+			})
+
 		try:
 			cart_item = CartItem.objects.get(product=product, cart=cart, variant_value=variant_value_id)
 			cart_item.quantity += quantity
