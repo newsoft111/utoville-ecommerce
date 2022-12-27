@@ -10,25 +10,22 @@ from order.models import OrderItem
 class Profit(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
-	total_charge_amount=models.DecimalField(max_digits=14, decimal_places=2)
-	total_shipping_fee = models.DecimalField(max_digits=14, decimal_places=2)
-	total_charge_fee = models.DecimalField(max_digits=14, decimal_places=2)
+	total_charge_amount=models.DecimalField(max_digits=14, decimal_places=2, default=0)
+	total_shipping_fee = models.DecimalField(max_digits=14, decimal_places=2, default=0)
+	total_charge_fee = models.DecimalField(max_digits=14, decimal_places=2, default=0)
 	seller = models.ForeignKey(
 			settings.AUTH_USER_MODEL,
 			on_delete=models.CASCADE,
 	)
 	is_done = models.BooleanField(default=False)
-	memo = models.CharField(max_length=255)
-	status = models.CharField(max_length=255)
-	total_profit_amount=models.DecimalField(max_digits=14, decimal_places=2)
+	memo = models.CharField(max_length=255, null=True)
+	status = models.CharField(max_length=255, default='정산대기')
+	total_profit_amount=models.DecimalField(max_digits=14, decimal_places=2, default=0)
 
 	class Meta:
 		db_table = 'ecommerce_profit'
 
 
-class ProfitManager(models.Manager):
-	def get_queryset(self):
-		return super(ProfitManager, self).get_queryset().filter(profit_done=None)
 
 class ProfitDetail(models.Model):
 	order_item = models.ForeignKey(
@@ -46,7 +43,6 @@ class ProfitDetail(models.Model):
 			on_delete=models.CASCADE,
 	)
 	
-	objects = ProfitManager()
 	class Meta:
 		db_table = 'ecommerce_profit_detail'
 	
