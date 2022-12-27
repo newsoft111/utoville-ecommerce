@@ -16,7 +16,7 @@ seller_urlpatterns = [
 admin_urlpatterns = [
 	path(f'admin/{app_name}/',
 		include([
-			path('dnoe/',
+			path('done/',
 				include([
 					path('', views.admin_profit_done_list, name='admin_profit_done_list'),
 					path('export/', views.admin_profit_done_export, name='admin_profit_done_export'),
@@ -26,6 +26,8 @@ admin_urlpatterns = [
 				include([
 					path('', views.admin_profit_expect_list, name='admin_profit_expect_list'),
 					path('<int:profit_id>/', views.admin_profit_expect_detail, name='admin_profit_expect_detail'),
+					path('change/status/', views.admin_profit_expect_change_status, name='admin_profit_expect_change_status'),
+					path('change/memo/', views.admin_profit_expect_change_memo, name='admin_profit_expect_change_memo'),
 				])
 			)
         ])
