@@ -16,7 +16,7 @@ seller_urlpatterns = [
 admin_urlpatterns = [
 	path(f'admin/{app_name}/',
 		include([
-			path('dnoe/',
+			path('done/',
 				include([
 					path('', views.admin_profit_done_list, name='admin_profit_done_list'),
 					path('export/', views.admin_profit_done_export, name='admin_profit_done_export'),

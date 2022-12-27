@@ -61,8 +61,9 @@ def admin_profit_done_export(request):
    ).values_list(
       'created_at_date', 
       'charge_amount',
-      'payment_fee', 
-      'profit_amount',
+      'charge_fee', 
+      'shipping_fee',
+	  'profit_amount',
    )
 
    file_name = urllib.parse.quote(str(f"{request.user.username} 매출").encode('utf-8'))
@@ -73,7 +74,7 @@ def admin_profit_done_export(request):
    ws = wb.add_sheet('신청자') #시트 추가
    
    row_num = 0
-   col_names = ['날짜', '금액', '수수료', '배송비']
+   col_names = ['날짜', '금액', '수수료', '배송비','총금액']
    
    #열이름을 첫번째 행에 추가 시켜준다.
    for idx, col_name in enumerate(col_names):
