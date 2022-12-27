@@ -8,6 +8,13 @@ from order.models import OrderItem
 
 
 class Profit(models.Model):
+	class StatusChoice(models.TextChoices):
+		DONE = u'D', 'Done'
+		WAIT = u'W', 'Wait'
+		HOLD = u'H', 'Hold'
+		
+
+		
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 	updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
 	total_charge_amount=models.DecimalField(max_digits=14, decimal_places=2, default=0)
@@ -19,7 +26,7 @@ class Profit(models.Model):
 	)
 	is_done = models.BooleanField(default=False)
 	memo = models.CharField(max_length=255, null=True)
-	status = models.CharField(max_length=255, default='정산대기')
+	status = models.CharField(max_length=255, choices=StatusChoice.choices, default=StatusChoice.WAIT)
 	total_profit_amount=models.DecimalField(max_digits=14, decimal_places=2, default=0)
 
 	class Meta:

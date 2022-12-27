@@ -60,7 +60,7 @@ def user_cart_add_item(request):
 			variant_value_id = None
 		quantity = int(item["qty"]) or 1
 		schedule_date = item['schedule_date']
-		
+
 		schedule_date.replace(' ', '')
 
 		if schedule_date is None or schedule_date == '':
