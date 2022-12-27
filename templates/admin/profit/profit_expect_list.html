@@ -8,6 +8,11 @@
 .responsiveTable {
 	overflow: auto;
 }
+#chargeDetailsModalBody > ul { 
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 @media only screen and (max-width: 767px) {
 	td[data-label=Charge], td[data-label=Memo] {
 		border-bottom: 0;
@@ -42,14 +47,14 @@
 											</div>
 										</th>
 										<th>Name</th>
-										<th colspan="2">Charge</th>
-										<th>Payment</th>
-										<th>Profit</th>
+										<th>Total charge</th>
+										<th>Charge fee</th>
+										<th>Total profit</th>
 										<th>Account</th>
 										<th colspan="2">Memo</th>
 										<th>Status</th>
 										<th>Action</th>
-										
+										<th>Details</th>
 									</tr><!-- end tr -->
 								</thead><!-- end thead -->
 								<tbody>
@@ -61,13 +66,10 @@
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
 										</td>
-										<td data-label="Name">{{profit_expect_obj.seller__username}}</td>
-										<td data-label="Charge">₱{{profit_expect_obj.charge_amount|intcomma}}</td>
-										<td>
-											<button class="btn btn-light btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#chargeDetailsModal">View Details</button>
-										</td>
-										<td data-label="Payment">₱{{profit_expect_obj.payment_fee|intcomma}}</td>
-										<td data-label="profit">₱{{profit_expect_obj.profit_amount|intcomma}}</td>
+										<td data-label="Name">{{profit_expect_obj.seller.username}}</td>
+										<td data-label="Charge">₱{{profit_expect_obj.total_charge_amount|intcomma}}</td>
+										<td data-label="Payment">₱{{profit_expect_obj.total_charge_fee|intcomma}}</td>
+										<td data-label="profit">₱{{profit_expect_obj.total_profit_amount|intcomma}}</td>
 										<td data-label="Account">Account number here</td>
 										<td data-label="Memo">asdfasdfds</td>
 										<td>
@@ -75,20 +77,20 @@
 												Edit
 											</button>
 										</td>
-										<td data-label="Status">
-											<span class="badge bg-warning p-2">이체 대기</span> or
-											<span class="badge bg-danger p-2">이체 취소</span>
-										</td>
+										<td data-label="Status">-</td>
 										<td data-label="Action">
 											<div class="dropdown">
 												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 													<i class="icon nav-icon text-sm" data-feather="list" style="width: 20px;"></i>
 												</button>
 												<ul class="dropdown-menu dropdown-menu-end">
-													<li><a class="dropdown-item" href="#">이체 대기</a></li>
-													<li><a class="dropdown-item" href="#">이체 취소</a></li>
+													<li class="dropdown-item" id="wating_transfer" data-status="wait" onclick="changeStatus(this)" style="cursor: pointer;">이체 대기</li>
+													<li class="dropdown-item" id="cancel_transfer" data-status="cancel" onclick="changeStatus(this)" style="cursor: pointer;">이체 취소</li>
 												</ul>
 											</div>
+										</td>
+										<td>
+											<button class="btn btn-primary btn-sm" type="button" data-url="{% url 'profit:admin_profit_expect_detail' profit_expect_obj.pk %}" data-username="{{profit_expect_obj.seller.username}}"  onclick="get_profile_detail_info(this);">View</button>
 										</td>
 									</tr><!-- end tr -->
 									{% endfor %}
@@ -154,18 +156,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body" id="chargeDetailsModalBody">
-				<ul class="d-flex justify-content-between">
-					<li>서비스 판매</li>
-					<li>+₱</li>
-				</ul>
-				<ul class="d-flex justify-content-between">
-					<li>환불 금액</li>
-					<li>-₱</li>
-				</ul>
-				<ul class="d-flex justify-content-between">
-					<li>총 정산금액</li>
-					<li>₱</li>
-				</ul>
+				
 			</div>
 			<div class="modal-footer">
 				<span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
@@ -203,47 +194,55 @@
 </div>
 
 <script>
-let a = "이체 대기";
-function sortTable(n) {
-	let rows, x, y, shouldSwith, switchCount = 0;
-	let	table = document.querySelector(".table");
-	let	switching = true;
-	let	dir = "asc";
+let is_run = false;
 
-	while(switching) {
-		switching = false;
-		rows = table.getElementsByTagName("tr")
-
-		for(var i=1; i<(rows.length -1); i++){  // thead -> tr 부분을 제외해야하기 때문에 i=1
-			shouldSwith = false;
-			x = rows[i].getElementsByTagName("td")[n];
-			y = rows[i+1].getElementsByTagName("td")[n];
-
-			if(dir == "asc") {
-				if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-					shouldSwith = true;
-					break;
-				}
-			}else if (dir == "desc") {
-				if(x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-					shouldSwith = true;
-					break;
-				}
-			}
-		}
-
-		if(shouldSwith) {
-			rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
-			switching = true;
-			switchCount ++;
-		}else {
-			if(switchCount == 0 && dir == "asc") {
-				dir = "desc";
-				switching = true;
-			}
-		}
+async function get_profile_detail_info(e) {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
 	}
+	let url = e.dataset.url;
+	console.log(url);
+	let username = e.dataset.username;
+
+	let label = document.getElementById('chargeDetailsModalLabel');
+	let body = document.getElementById('chargeDetailsModalBody');
+	label.innerHTML = `${username} Details`;
+	body.innerHTML ='<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('chargeDetailsModal'));
+	modal.show();
+
+	is_run = true;
+
+    const response = await fetch(url, {
+		method: "GET",
+	})
+	.then(response => response.text())
+	.then(data => {
+		body.innerHTML = data;
+	});
+	is_run  = false;
+
 }
+
+// let watingTransfer = document.getElementById("wating_transfer");
+// let cancelTransfer = document.getElementById("cancel_transfer");
+// let waitingHtml = `<span class="badge bg-warning p-2">이체 대기</span>`;
+
+// localStorage.setItem('waiting', waitingHtml);
+
+// function changeStatus(e){
+// 	let transferStatus = e.parentElement.parentElement.parentElement.previousElementSibling;
+
+// 	if(e.dataset.status == "wait") {
+// 		transferStatus.innerHTML = localStorage.getItem('waiting');
+// 	}
+// 	if(e.dataset.status == "cancel") {
+// 		transferStatus.innerHTML = `<span class="badge bg-danger p-2">이체 취소</span>`;
+// 	}
+// }
+
+// changeStatus();
 
 </script>
 {% endblock %}
