@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.db.models import Q, Sum, Avg
@@ -8,6 +8,9 @@ from django.http import JsonResponse, HttpResponse
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import json, re
+from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 import urllib
 import xlwt
 User = get_user_model()
@@ -106,21 +109,56 @@ def admin_profit_expect_list(request):
 def admin_profit_expect_change_status(request):
 	if request.method == 'POST':
 		profit_id = request.POST.get('profit_id')
+		status = request.POST.get('status')
+
 		try:
 			profit_obj = Profit.objects.get(pk=profit_id)
 		except:
 			result = {'result': '201', 'result_text': '잘못된 요청입니다.'}
 			return JsonResponse(result)
 
-		profit_obj.status = '1'
-		profit_obj.save()
+		try:
+			profit_obj.status = status
+			profit_obj.save()
+
+		except:
+			result = {'result': '201', 'result_text': '잘못된 요청입니다.'}
+			return JsonResponse(result)
 
 		result = {'result': '200', 'result_text': '처리가 완료되었습니다.'}
 		return JsonResponse(result)
+		
 	else:
 		result = {'result': '201', 'result_text': '잘못된 요청입니다.'}
 		return JsonResponse(result)
 
+
+@login_required(login_url="account:admin_login")
+def admin_profit_expect_change_memo(request):
+	if request.method == 'POST':
+		profit_id = request.POST.get('profit_id')
+		memo = request.POST.get('memo')
+
+		try:
+			profit_obj = Profit.objects.get(pk=profit_id)
+		except:
+			result = {'result': '201', 'result_text': '잘못된 요청입니다.'}
+			return JsonResponse(result)
+
+		try:
+			profit_obj.memo = memo
+			profit_obj.save()
+
+		except:
+			result = {'result': '201', 'result_text': '잘못된 요청입니다.'}
+			return JsonResponse(result)
+
+		result = {'result': '200', 'result_text': '처리가 완료되었습니다.'}
+		return JsonResponse(result)
+		
+	else:
+		result = {'result': '201', 'result_text': '잘못된 요청입니다.'}
+		return JsonResponse(result)
 
 
 @login_required(login_url="account:admin_login")
