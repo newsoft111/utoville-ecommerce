@@ -66,7 +66,7 @@
 										<td data-label="Payment">₱{{profit_expect_obj.total_charge_fee|intcomma}}</td>
 										<td data-label="profit">₱{{profit_expect_obj.total_profit_amount|intcomma}}</td>
 										<td data-label="Account">Account number here</td>
-										<td data-label="Memo">{{profit_expect_obj.memo}}</td>
+										<td data-label="Memo" class="profit-memo" style="white-space:normal; word-break:keep-all;">{{profit_expect_obj.memo}}</td>
 										<td><button class="btn btn-light btn-sm" type="button" onclick="openMemoModal(`{{profit_expect_obj.pk}}`)">Edit</button></td>
 										<td data-label="Status">{{profit_expect_obj.get_status_display}}</td>
 										<td data-label="Action">
@@ -80,7 +80,7 @@
 												</ul>
 											</div>
 										</td>
-										<td>
+										<td data-label="Details">
 											<button class="btn btn-primary btn-sm" type="button" data-url="{% url 'profit:admin_profit_expect_detail' profit_expect_obj.pk %}" data-username="{{profit_expect_obj.seller.username}}"  onclick="get_profile_detail_info(this);">View</button>
 										</td>
 									</tr><!-- end tr -->
@@ -216,6 +216,7 @@ async function get_profile_detail_info(e) {
 function openMemoModal(profit_id) {
 	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById("reasonMemoModal"));	
 	document.querySelector("input[name=profit_id]").value = profit_id;
+	document.getElementById("message-text").value = '';
 	modal.show();
 }
 
@@ -228,6 +229,7 @@ async function change_memo_submit() {
 	is_run = true;
 
 	let form_data = new FormData(document.querySelector('form[name=change_memo_form]'));
+	let issueMemo = document.getElementById("message-text");
 
 	const response = fetch("{% url 'profit:admin_profit_expect_change_memo' %}", {
 		method: "POST",
@@ -241,6 +243,7 @@ async function change_memo_submit() {
 		if (data.result == '200') {
 			bootstrap.Modal.getOrCreateInstance(document.getElementById("reasonMemoModal")).hide()
 			openModal("알림", data.result_text);
+			document.querySelector(".profit-memo").innerHTML=issueMemo.value;
 		} else {
 			openModal("알림", data.result_text, "#reasonMemoModal");
 		}
@@ -280,24 +283,5 @@ async function change_status_submit(e, profit_id, status) {
 	});
 	is_run  = false;
 };
-
-// let watingTransfer = document.getElementById("wating_transfer");
-// let cancelTransfer = document.getElementById("cancel_transfer");
-// let waitingHtml = `<span class="badge bg-warning p-2">이체 대기</span>`;
-
-// localStorage.setItem('waiting', waitingHtml);
-
-// function changeStatus(e){
-// 	let transferStatus = e.parentElement.parentElement.parentElement.previousElementSibling;
-
-// 	if(e.dataset.status == "wait") {
-// 		transferStatus.innerHTML = localStorage.getItem('waiting');
-// 	}
-// 	if(e.dataset.status == "cancel") {
-// 		transferStatus.innerHTML = `<span class="badge bg-danger p-2">이체 취소</span>`;
-// 	}
-// }
-
-// changeStatus();
 </script>
 {% endblock %}

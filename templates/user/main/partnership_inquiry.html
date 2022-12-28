@@ -1,0 +1,242 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<section>
+	<div class="container pt-12 pt-lg-15">
+		<div class="row">
+			<div class="col-lg-12 col-md-10 text-center">
+				<h1 class="display-2 mb-3">
+					Partnership Inquiry
+				</h1>
+				<p class="mb-7 px-lg-9 lead">Thank you for your interest in partnering with us. We </p>
+			</div>
+			<img src="{% static 'user/img/faq_bg.jpg' %}" class="img-fluid rounded-block" alt="">
+		</div>		
+</section>
+
+<section class="position-relative">
+	<div class="container py-9 py-lg-11">
+		<div class="row">
+			<div class="col-md-12 col-lg-12 mx-auto">
+				<div class="position-relative">
+					<h1>Inquiry Form</h1>
+					<p class="mb-3 lead w-lg-75">
+						Please fill out this form if you are interested in partnering with us. We are pleased to have a partnership with you.
+					</p>
+					<div class="width-7x pt-1 bg-primary mb-7"></div>
+					<!-- inquiry Form -->
+					<form class="mb-5 mb-lg-7" novalidate onSubmit="return false;">
+						<div class="row">
+							<div class="col-sm-6 mb-3">
+								<label class="form-label" for="name">Company Name</label>
+								<input type="text" name="name" class="form-control" id="name" placeholder="your name here" oninput="checkValidation(this)">
+								<div class="invalid-feedback">
+									Please enter a valid form
+								</div>
+							</div>
+
+							<div class="col-sm-6 mb-3">
+								<label class="form-label" for="email">Company Website</label>
+								<input type="text" class="form-control" name="website" id="website" oninput="checkValidation(this)"
+									placeholder="If you have website, website address here">
+								<div class="invalid-feedback">
+									Please enter a valid form
+								</div>
+							</div>
+
+							<div class="col-sm-6 mb-3">
+								<label class="form-label" for="name">Telephone</label>
+								<input type="number" name="telephone" class="form-control" id="telephone" placeholder="your telephone here" oninput="checkValidation(this)">
+								<div class="invalid-feedback">
+									Please enter a valid form
+								</div>
+							</div>
+
+							<div class="col-sm-6 mb-3">
+								<label class="form-label" for="email">Email Address</label>
+								<input type="email" class="form-control" name="email" id="email" oninput="checkValidation(this)"
+									placeholder="email address here">
+								<div class="invalid-feedback">
+									Please enter a valid email address
+								</div>
+							</div>
+
+
+							<div class="col-sm-12 mb-3">
+								<label class="form-label" for="subject">Upload Business License</label>
+								<div class="thumbnail-preview row" id="thumbnail-preview" >
+								</div>
+								<div class="chat-form rounded-pill" data-emoji-form="">
+									<input type="file" class="d-none" name="thumbnail" id="thumbnail-upload" onclick="handleClick(this);" accept="image/png, image/jpeg, image/gif">
+									<label for="thumbnail-upload">
+										<span class="btn btn-light">Select File</span>
+									</label>
+								</div>
+							</div>
+
+
+							<div class="d-md-flex justify-content-md-between align-items-center mt-3">
+								<p class="small mb-4 text-muted mb-md-0">We'll get back to you in 1-2 business
+									days.</p>
+								<input type="submit" name="submit" value="Submit" id="sendBtn"
+									class="btn btn-lg btn-primary">
+							</div>
+						</div>
+					</form>
+					<!-- End Contacts Form -->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+let sendBtn = document.getElementById("sendBtn");
+
+function checkValidation(e) {
+	if(e.name == 'name') {
+		if(e.value == '') {
+			e.classList.remove("is-invalid");
+		}else if(!name_check(e.value)) {
+			e.classList.add("is-invalid");
+		}else{
+			e.classList.remove("is-invalid")
+		}
+	}
+	if(e.name == 'email'){
+		if(e.value == '') {
+			e.classList.remove("is-invalid");
+		}else if(!email_check(e.value)) {
+			e.classList.add("is-invalid");
+		}else{
+			e.classList.remove("is-invalid")
+		}
+	}
+}
+
+sendBtn.addEventListener("click", () => {
+	let count = 0;
+
+	if(document.querySelector("#name").value == ''){
+		document.querySelector("#name").classList.add("is-invalid");
+		count ++;
+	}
+
+	if(document.querySelector("#email").value == ''){
+		document.querySelector("#email").classList.add("is-invalid");
+		count ++;		
+	}
+
+	if(document.querySelector("#subject").value == ''){
+		document.querySelector("#subject").classList.add("is-invalid");	
+		
+		count ++;
+	}else{
+		document.querySelector("#subject").classList.remove("is-invalid")
+	}
+
+	if(document.querySelector("#message").value == ''){
+		document.querySelector("#message").classList.add("is-invalid");	
+		count ++;
+	}else {
+		document.querySelector("#message").classList.remove("is-invalid")
+	}
+
+	if(count == 0) {
+		return true;
+	}else {
+		return false;
+	}
+});
+
+let is_run = false;
+let review_product_id = '';
+
+let fileArr = [];
+
+const dataTransfer = new DataTransfer();
+const handler = {
+	init() {
+		const fileInput = document.querySelector('#thumbnail-upload');
+		const preview = document.querySelector('.thumbnail-preview');
+		
+		fileInput.addEventListener('change', () => {
+			const files = Array.from(fileInput.files);
+			const filesExtension = files[0].name.split('.').pop().toLowerCase();
+
+			if(!(filesExtension == 'jpg' || filesExtension == 'jpeg' || filesExtension == 'png' || filesExtension == 'gif')){
+				openModal('알림', '이미지 파일이 아닙니다.');
+				return false;
+			}	
+
+			files.forEach((file) => {
+				fileArr.push(file.lastModified);
+				console.log(fileArr)
+				if(!isDuplicate(fileArr)){
+					var reader = new FileReader();
+					reader.onload = function(e) {	
+						html = '<div class="position-relative col-5">';
+						html += `<button type='button' onclick='thumbnail_remove(this);' data-index='${file.lastModified}' class='border-0 bg-transparent position-absolute top-0 end-0' id='thumbnail-remove-btn'><i class='bx bx-x fs-2 lh-1' stlye="color:#919191;"></i></button>`;
+						html += `<img src="${e.target.result}" class="img-thumbnail">`;
+						html += '</div>'
+						preview.innerHTML +=  html;
+					}
+					reader.readAsDataURL(file);
+					dataTransfer.items.add(file);
+
+				}else{
+					openModal('알림', '이미 업로드 된 파일입니다.');
+					removeArrItem(fileArr, file.lastModified);
+				}
+			});
+
+			fileInput.files = dataTransfer.files;
+		});
+	},
+}
+
+handler.init();
+
+/* 처음 동일한 파일 두 번 이상 업로드 했을 시 이벤트 핸들러 정상 작동하지 않는 에러 해결 */
+function handleClick(e) {
+	e.value = '';
+}
+
+function removeArrItem(array, item){
+    for(var i in array){
+        if(array[i]==item){
+            array.splice(i,1);
+            break;
+        }
+    }
+}
+
+function thumbnail_remove(e) {
+	dataTransfer.clearData();
+	const lastModified = e.dataset.index;
+	const input = document.querySelector('#thumbnail-upload');
+	const { files } = input;
+
+	
+	for (let i = 0; i < files.length; i++) {
+		const file = files[i]
+		if (lastModified != file.lastModified) {
+			dataTransfer.items.add(file) // here you exclude the file. thus removing it.
+		}
+	}
+	
+	input.files = dataTransfer.files // Assign the updates list
+	e.parentElement.remove();
+	removeArrItem(fileArr, lastModified);
+}
+
+function open_review_write_modal(product_id) {
+	review_product_id = product_id;
+
+	var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#reviewWriteModal'));
+	modal.show();
+}
+</script>
+
+{% endblock %}
