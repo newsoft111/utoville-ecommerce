@@ -100,8 +100,10 @@ def admin_profit_expect_list(request):
 	pagenator   = Paginator(profit_expect_objs, 10)
 	profit_expect_objs = pagenator.get_page(page)
 
-	result = {'result': '200', 'result_text': profit_obj.get_status_display()}
-	return JsonResponse(result)
+
+	return render(request, 'admin/profit/profit_expect_list.html', {
+		"profit_expect_objs":profit_expect_objs
+	})
 
 def admin_profit_expect_change_status(request):
 	if request.method == 'POST':
@@ -123,9 +125,9 @@ def admin_profit_expect_change_status(request):
 		except:
 			result = {'result': '201', 'result_text': '잘못된 요청입니다.'}
 			return JsonResponse(result)
-
-		result = {'result': '200', 'result_text': '처리가 완료되었습니다.'}
-		return JsonResponse(result)		
+		
+		result = {'result': '200', 'result_text': profit_obj.get_status_display()}
+		return JsonResponse(result)
 
 	else:
 		result = {'result': '201', 'result_text': '잘못된 요청입니다.'}
