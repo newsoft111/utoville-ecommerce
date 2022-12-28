@@ -67,20 +67,16 @@
 										<td data-label="profit">₱{{profit_expect_obj.total_profit_amount|intcomma}}</td>
 										<td data-label="Account">Account number here</td>
 										<td data-label="Memo">{{profit_expect_obj.memo}}</td>
-										<td>
-											<button class="btn btn-light btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#reasonMemoModal">
-												Edit
-											</button>
-										</td>
-										<td data-label="Status">-</td>
+										<td><button class="btn btn-light btn-sm" type="button" onclick="openMemoModal(`{{profit_expect_obj.pk}}`)">Edit</button></td>
+										<td data-label="Status">{{profit_expect_obj.get_status_display}}</td>
 										<td data-label="Action">
 											<div class="dropdown">
 												<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 													<i class="icon nav-icon text-sm" data-feather="list" style="width: 20px;"></i>
 												</button>
 												<ul class="dropdown-menu dropdown-menu-end">
-													<li class="dropdown-item" id="wating_transfer" data-status="wait" onclick="changeStatus(this)" style="cursor: pointer;">이체 대기</li>
-													<li class="dropdown-item" id="cancel_transfer" data-status="cancel" onclick="changeStatus(this)" style="cursor: pointer;">이체 취소</li>
+													<li class="dropdown-item" onclick="change_status_submit(this, `{{profit_expect_obj.pk}}`, 'H')" style="cursor: pointer;">이체 보류</li>
+													<li class="dropdown-item" onclick="change_status_submit(this, `{{profit_expect_obj.pk}}`, 'D')" style="cursor: pointer;">이체 완료</li>
 												</ul>
 											</div>
 										</td>
@@ -169,20 +165,17 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<form>
-				<div class="mb-3">
-					<label for="issue-reason" class="col-form-label">Reason :</label>
-					<input type="text" class="form-control" id="issue-reason" placeholder="reason here">
-				</div>
-				<div class="mb-3">
-					<label for="message-text" class="col-form-label">Memo:</label>
-					<textarea class="form-control" id="message-text" placeholder="memo here"></textarea>
-				</div>
+				<form name="change_memo_form">
+					<input type="hidden" name="profit_id" value="">
+					<div class="mb-3">
+						<label for="message-text" class="col-form-label">Memo:</label>
+						<textarea class="form-control" id="message-text" placeholder="memo here" name="memo"></textarea>
+					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary memo-save">Save</button>
+				<button type="button" class="btn btn-primary memo-save" onclick="change_memo_submit()">Save</button>
 			</div>
 		</div>
 	</div>
@@ -220,6 +213,73 @@ async function get_profile_detail_info(e) {
 	is_run  = false;
 }
 
+function openMemoModal(profit_id) {
+	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById("reasonMemoModal"));	
+	document.querySelector("input[name=profit_id]").value = profit_id;
+	modal.show();
+}
+
+async function change_memo_submit() {
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+	let form_data = new FormData(document.querySelector('form[name=change_memo_form]'));
+
+	const response = fetch("{% url 'profit:admin_profit_expect_change_memo' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: form_data,
+	})
+	.then(response => response.json())
+	.then(data => {	
+		if (data.result == '200') {
+			bootstrap.Modal.getOrCreateInstance(document.getElementById("reasonMemoModal")).hide()
+			openModal("알림", data.result_text);
+		} else {
+			openModal("알림", data.result_text, "#reasonMemoModal");
+		}
+	});
+	is_run  = false;
+};
+
+async function change_status_submit(e, profit_id, status) {
+	let transferStatus = e.parentElement.parentElement.parentElement.previousElementSibling;
+
+	if(is_run == true) {
+		openModal('알림','잠시후에 다시시도 해주세요.');
+		return false;
+	}
+
+	is_run = true;
+
+	const form_data = new FormData();
+
+	form_data.append('profit_id', profit_id);
+	form_data.append('status', status);
+
+	const response = fetch("{% url 'profit:admin_profit_expect_change_status' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: form_data,
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.result == '200') {
+			transferStatus.innerHTML = data.result_text;
+		} else {
+			openModal("알림", data.result_text);
+		}
+	});
+	is_run  = false;
+};
 
 // let watingTransfer = document.getElementById("wating_transfer");
 // let cancelTransfer = document.getElementById("cancel_transfer");
