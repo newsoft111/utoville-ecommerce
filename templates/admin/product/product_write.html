@@ -148,7 +148,7 @@
 								<div class="thumbnail-preview row" id="thumbnail-preview" >
 								</div>
 								<div class="chat-form rounded-pill" data-emoji-form="">
-									<input type="file" class="d-none" name="thumbnail" id="thumbnail-upload">
+									<input type="file" class="d-none" name="thumbnail" id="thumbnail-upload" onclick="handleClick(this);" accept="image/png, image/jpeg, image/gif">
 									<label for="thumbnail-upload">
 										<span class="btn btn-primary">업로드</span>
 									</label>
@@ -179,6 +179,7 @@
 
 <script>
 let options_data = []
+let fileArr = [];
 let is_run = false
 const dataTransfer = new DataTransfer();
 const handler = {
@@ -186,20 +187,33 @@ const handler = {
 		const fileInput = document.querySelector('#thumbnail-upload');
 		const preview = document.querySelector('.thumbnail-preview');
 		
-		fileInput.addEventListener('change', () => {
-			
+		fileInput.addEventListener('change', () => {	
 			const files = Array.from(fileInput.files);
+			const filesExtension = files[0].name.split('.').pop().toLowerCase();
+
+			if(!(filesExtension == 'jpg' || filesExtension == 'jpeg' || filesExtension == 'png' || filesExtension == 'gif')){
+				openModal('알림', '이미지 파일이 아닙니다.');
+				return false;
+			}	
+
 			files.forEach((file) => {
-				var reader = new FileReader();
-				reader.onload = function(e) {			
-					html = '<div class="position-relative col-3">';
-					html += `<button type='button' onclick='thumbnail_remove(this);' data-index='${file.lastModified}' class='btn btn-primary position-absolute top-0 end-0' id='thumbnail-remove-btn'><i class='bx bx-x fs-5 lh-1'></i></button>`;
-					html += `<img src="${e.target.result}" class="img-thumbnail">`;
-					html += '</div>'
-					preview.innerHTML +=  html;
+				fileArr.push(file.lastModified);
+				console.log(fileArr)
+				if(!isDuplicate(fileArr)){
+					var reader = new FileReader();
+					reader.onload = function(e) {			
+						html = '<div class="position-relative col-3">';
+						html += `<button type='button' onclick='thumbnail_remove(this);' data-index='${file.lastModified}' class='btn btn-primary position-absolute top-0 end-0' id='thumbnail-remove-btn'><i class='bx bx-x fs-5 lh-1'></i></button>`;
+						html += `<img src="${e.target.result}" class="img-thumbnail">`;
+						html += '</div>'
+						preview.innerHTML +=  html;
+					}
+					reader.readAsDataURL(file);
+					dataTransfer.items.add(file);
+				}else{
+					openModal('알림', '이미 업로드 된 파일입니다.');
+					removeArrItem(fileArr, file.lastModified);
 				}
-				reader.readAsDataURL(file);
-				dataTransfer.items.add(file);
 			});
 
 			fileInput.files = dataTransfer.files;
@@ -210,6 +224,18 @@ const handler = {
 
 handler.init();
 
+function handleClick(e) {
+	e.value = '';
+}
+
+function removeArrItem(array, item){
+    for(var i in array){
+        if(array[i]==item){
+            array.splice(i,1);
+            break;
+        }
+    }
+}
 
 function thumbnail_remove(e) {
 	dataTransfer.clearData();
@@ -228,7 +254,7 @@ function thumbnail_remove(e) {
 	
 	input.files = dataTransfer.files // Assign the updates list
 	e.parentElement.remove();
-
+	removeArrItem(fileArr, lastModified);
 }
 
 var quill = new Quill('#snow-editor', {
