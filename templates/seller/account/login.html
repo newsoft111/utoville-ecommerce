@@ -134,10 +134,11 @@
 			var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 				
 			if (isEmpty(username)) {
-					openModal('알림','아이디을 입력해주세요.');
+				openModal('알림','아이디을 입력해주세요.');
 				return false;
 		
 			}
+
 			if (isEmpty(password)) {
 					openModal('알림','비밀번호를 입력해주세요.');
 				return false;

@@ -23,6 +23,7 @@ def seller_login(request):
 		return HttpResponseRedirect(resolve_url('main:seller_index'))
 	if request.method == 'POST':
 		username=request.POST.get('username')
+		print(username)
 		password=request.POST.get('password')
 		
 		user = auth.authenticate(request, username=username, password=password)

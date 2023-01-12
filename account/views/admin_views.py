@@ -26,13 +26,13 @@ def admin_login(request):
 		if request.method == 'POST':
 			username=request.POST.get('username')
 			password=request.POST.get('password')
-			
+			print(password)
+
 			user = auth.authenticate(request, username=username, password=password)
 
 			if user is None:
 				result = '201'
 				result_text = '아이디와 비밀번호를 정확히 입력해 주세요.'
-				print(1)
 				return JsonResponse({'result': result, 'result_text': result_text})
 			
 			if user.mb_status != 'Y':

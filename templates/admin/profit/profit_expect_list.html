@@ -266,7 +266,7 @@ async function change_status_submit(e, profit_id, status) {
 	form_data.append('profit_id', profit_id);
 	form_data.append('status', status);
 
-	const response = fetch("{% url 'profit:admin_profit_expect_change_status' %}", {
+	const response = fetch("{% url 'profit:admin_profit_expect_change_status' %}", { 
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),
@@ -285,3 +285,4 @@ async function change_status_submit(e, profit_id, status) {
 };
 </script>
 {% endblock %}
+
