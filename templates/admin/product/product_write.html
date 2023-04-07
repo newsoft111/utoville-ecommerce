@@ -19,7 +19,6 @@
 				<div class="page-title-box d-flex align-items-center justify-content-between">
 					<h4 class="mb-0">상품 등록</h4>
 				</div>
-
 				<p>대분류 > 중분류 > 소분류 순으로 선택하세요.</p>
 				<div class="col-md-4">
 					<div class="card text-bg-light">
@@ -195,10 +194,8 @@ const handler = {
 				openModal('알림', '이미지 파일이 아닙니다.');
 				return false;
 			}	
-
 			files.forEach((file) => {
 				fileArr.push(file.lastModified);
-				console.log(fileArr)
 				if(!isDuplicate(fileArr)){
 					var reader = new FileReader();
 					reader.onload = function(e) {			
@@ -217,7 +214,6 @@ const handler = {
 			});
 
 			fileInput.files = dataTransfer.files;
-			console.log(document.querySelector('#thumbnail-upload').files)
 		});
 	},
 }
@@ -243,7 +239,6 @@ function thumbnail_remove(e) {
 	const input = document.querySelector('#thumbnail-upload');
 	const { files } = input;
 
-	
 	for (let i = 0; i < files.length; i++) {
 		const file = files[i]
 		if (lastModified != file.lastModified) {
@@ -378,12 +373,13 @@ addoptionBtn.addEventListener("click", function(){
 cats_data = {{cats_data|safe}};
 l1_name = '';
 function get_l2(elem) {
-    		l1_name= elem.value;
+    		l1_name = elem.value;
             let cats = '';
-            l2_data = cats_data[l1_name]
+            l2_data = cats_data[l1_name];
+			
 			for (var i=0; i < l2_data.length; i++) {
-						// cats += '<option value=' +Object.keys(l2_data[i])+ 'onclick="get_l3(this)" style="cursor:pointer; margin-bottom: 5px;">' +Object.keys(l2_data[i])+ '</option>';
-						cats += `<option value=${Object.keys(l2_data[i])} onclick="get_l3(this)" style="cursor:pointer; margin-bottom: 5px;">${Object.keys(l2_data[i])}</option>`;
+					// cats += '<option value=' +Object.keys(l2_data[i])+ 'onclick="get_l3(this)" style="cursor:pointer; margin-bottom: 5px;">' +Object.keys(l2_data[i])+ '</option>';
+					cats += `<option value=${Object.keys(l2_data[i])} onclick="get_l3(this)" style="cursor:pointer; margin-bottom: 5px;">${Object.keys(l2_data[i])}</option>`;
 			}
 			document.querySelector('select[id=l2_cat]').innerHTML =  '';
 			document.querySelector('select[id=l2_cat]').innerHTML +=  cats;
