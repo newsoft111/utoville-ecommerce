@@ -5,17 +5,89 @@
 
 
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+
 <style>
-.video_area {
-	height: 100vh;
-	overflow: hidden;
+.display-1 {
+	font-size: 5rem;
 }
-.video_area video {
+.swiper {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	display: block;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
+
+.swiper-pagination {
+	bottom: 30px !important;
+}
+.swiper-pagination-bullet {
+	margin-right: 15px !important;
+	margin-bottom: 100px;
+    background-color: #fff !important;
+    border-radius: 6px !important;
+    outline: none !important;
+
+}
+
+.swiper-pagination-bullet-active {
+	position: relative;
+	opacity: 1;
+}
+.swiper-button-next {
+	margin-right: 20px;
+}
+.swiper-button-prev {
+	margin-left: 20px;
+}
+.swiper-button-next::after, .swiper-button-prev::after {  /*양 옆 화살표에 마우스 후버시 나타나는 막대 길이*/
+	width: 40px;
+	background-color: #ECE6CC;
+}
+.swiper-button-next::before, .swiper-button-prev::before {  /*next, prev 화살표*/
+	width: 30px;
+	height: 30px;
+	border: solid #ECE6CC;
+    border-width: 0 2px 2px 0;
+}
+.swiper-pagination-bullet-active::after { /* 슬라이더 하단 동그라미 디자인*/
+	content: '';
+    width: 30px !important;
+    height: 30px !important;
+    border: 1px solid #fff !important;
+    border-radius: 30px !important;
+    position: absolute;
+    top: 50%;
+	left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+.swiper-button-next, .swiper-button-prev {
+	background-color: transparent !important;
+}
+.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after,
+.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+	content:'' !important; 
+}
+
 @media only screen and (max-width: 767px){
+	.display-1 {
+		font-size: 3rem;
+	}
 	.supportText {
 		font-size: 1.5em !important;
 	}
@@ -25,6 +97,22 @@
 	}
 }
 @media only screen and (max-width: 400px){
+	.display-1 {
+		font-size: 2rem;
+	}
+	.lead {
+		font-size: 1rem;
+	}
+	.swiper-button-prev {
+		margin-left: -8px;
+	}
+	.swiper-button-next {
+		margin-right: -8px;
+	}
+	.swiper-button-next::before, .swiper-button-prev::before {
+		width: 15px;
+		height: 15px;
+	}
 	.supportText {
 		font-size: 1.3em !important;
 	}
@@ -40,8 +128,18 @@
 	<div class="container-fluid position-relative z-index-1 mt-3">
 		<div class="position-relative rounded-4 overflow-hidden bg-dark">
 			<div class="video_area">
-				<video id="my_video" src="{% static 'user/video/video1.mp4' %}"></video>
-				<div class="position-absolute top-50 start-50 translate-middle text-white w-md-75 px-4 w-lg-60 mx-auto text-center z-index-1 py-12 py-lg-15">
+				<!-- <video id="my_video" src="{% static 'user/video/video1.mp4' %}"></video> -->
+				<div class="swiper mySwiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg1.jpg' %}"></div>
+						<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg2.jpg' %}"></div>
+						<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg3.jpg' %}"></div>
+					</div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-pagination"></div>
+				</div>
+				<div class="position-absolute top-50 start-50 translate-middle text-white w-75 w-lg-60 mx-auto text-center z-index-1 py-12">
 				<!--Hero title-->
 					<h1 class="display-1 mb-3 mb-md-4 position-relative">Welcome to<br><span class="text-gradient">Utoville House Care</span></h1>
 
@@ -59,7 +157,6 @@
 					</div>
 				</div>
 			</div>
-			
 		</div>
 		<!--/.row-->
 	</div>
@@ -150,7 +247,7 @@
 						<div class="ms-xl-auto ms-lg-3 me-lg-1 mt-12" style="--navbar-search-width:280px;" id="searchCollapse">
 							<h6 class="mb-3 text-muted">HIGH-QUALITY SERVICE</h6>
 							<h2 class="mb-4 display-4">유토빌 홈케어 베스트 상품</h2>
-							<form class="mb-0" action="{% url 'product:user_product_list' %}" method="GET">
+							<form class="mb-0" action="{% url 'product:user_product_list' %}" method="POST">
 								<div class="position-relative mt-3 mt-lg-0 me-3">
 									<span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50 pt-1" style="z-index:999;">
 										<i class="bx bx-search-alt-2"></i>
@@ -427,13 +524,27 @@
 
 <script>
 /*Main Swiper*/
-const swiper = new Swiper('.swiper-main', {
-	spaceBetween: 0,
+const swiper = new Swiper(".mySwiper", {
+	spaceBetween: 30,
 	effect: "fade",
-	autoplay: true,
 	loop: true,
-});	
+    autoplay: {
+      enabled: true,
+      delay: 5000,          
+      pauseOnMouseEnter: true,
+      disableOnInteraction: false,
+    },
+	pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+	},
+	navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+});
 
+/* 상품 검색 부분 이미지 스와이퍼 */
 let swiperTestimonails = new Swiper(".swiper-testimonials", {
 	autoHeight: true,
 	spaceBetween: 16,
@@ -461,30 +572,30 @@ let swiperTestimonails = new Swiper(".swiper-testimonials", {
 	}
 });
 
-/*Main Video*/
-let videoUrl=["video1", "video2"];
-let videoTotal=videoUrl.length;
-let videoN = 0;
-let videoPath="";
-let video=document.getElementById("my_video");
-video.muted=true;
-video.play();
+// /*Main Video*/
+// let videoUrl=["video1", "video2"];
+// let videoTotal=videoUrl.length;
+// let videoN = 0;
+// let videoPath="";
+// let video=document.getElementById("my_video");
+// video.muted=true;
+// video.play();
 
-video.addEventListener("ended", function(){
-	if(videoN < (videoTotal-1)){
-		videoN+=1;
-	}
-	else{
-		videoN=0;
-	}
+// video.addEventListener("ended", function(){
+// 	if(videoN < (videoTotal-1)){
+// 		videoN+=1;
+// 	}
+// 	else{
+// 		videoN=0;
+// 	}
 
-	video.pause();
+// 	video.pause();
 	
-	videoPath="{% static 'user/video/' %}"+videoUrl[videoN]+".mp4";
-	$("#my_video").attr({src:videoPath});
-	video.play();
+// 	videoPath="{% static 'user/video/' %}"+videoUrl[videoN]+".mp4";
+// 	$("#my_video").attr({src:videoPath});
+// 	video.play();
 
-});
+// });
 
 
 </script>
