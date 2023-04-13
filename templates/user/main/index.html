@@ -8,153 +8,90 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
 <style>
-.display-1 {
-	font-size: 5rem;
-}
-.swiper {
-	width: 100%;
-	height: 100%;
-}
-
-.swiper-slide {
-	text-align: center;
-	font-size: 18px;
-	background: #fff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.swiper-slide img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.swiper-pagination {
-	bottom: 30px !important;
-}
-.swiper-pagination-bullet {
-	margin-right: 15px !important;
-	margin-bottom: 100px;
-    background-color: #fff !important;
-    border-radius: 6px !important;
-    outline: none !important;
-
-}
-
-.swiper-pagination-bullet-active {
-	position: relative;
-	opacity: 1;
-}
-.swiper-button-next {
-	margin-right: 20px;
-}
-.swiper-button-prev {
-	margin-left: 20px;
-}
-.swiper-button-next::after, .swiper-button-prev::after {  /*양 옆 화살표에 마우스 후버시 나타나는 막대 길이*/
-	width: 40px;
-	background-color: #ECE6CC;
-}
-.swiper-button-next::before, .swiper-button-prev::before {  /*next, prev 화살표*/
-	width: 30px;
-	height: 30px;
-	border: solid #ECE6CC;
-    border-width: 0 2px 2px 0;
-}
-.swiper-pagination-bullet-active::after { /* 슬라이더 하단 동그라미 디자인*/
-	content: '';
-    width: 30px !important;
-    height: 30px !important;
-    border: 1px solid #fff !important;
-    border-radius: 30px !important;
-    position: absolute;
-    top: 50%;
-	left: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-}
-.swiper-button-next, .swiper-button-prev {
-	background-color: transparent !important;
-}
+.display-1 {font-size: 5rem;}
+/*main page 이미지 슬라이드*/
+.swiper {width: 100%;}
+.swiper-wrapper {height: auto;}
+.swiper-slide {text-align: center; font-size: 18px; background: #fff; display: flex; justify-content: center; align-items: center;}
+.swiper-slide img {display: block; width: 100%; object-fit: cover;}
+.swiper-pagination {bottom: 30px !important;}
+.swiper-pagination-bullet {margin-right: 15px !important; margin-bottom: 100px; background-color: #fff !important; border-radius: 6px !important; outline: none !important;}
+.swiper-pagination-bullet-active {position: relative; opacity: 1;}
+.swiper-button-next {margin-right: 20px;}
+.swiper-button-prev {margin-left: 20px;}
+/*양 옆 화살표에 마우스 후버시 나타나는 막대 길이*/
+.swiper-button-next::after, .swiper-button-prev::after {width: 40px; background-color: #ECE6CC;}
+/*next, prev 화살표*/
+.swiper-button-next::before, .swiper-button-prev::before {width: 30px; height: 30px; border: solid #ECE6CC; border-width: 0 2px 2px 0;}
+/* 슬라이더 하단 동그라미 디자인*/
+.swiper-pagination-bullet-active::after {content: ''; width: 30px !important; height: 30px !important; border: 1px solid #fff !important; border-radius: 30px !important; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);}
+.swiper-button-next, .swiper-button-prev {background-color: transparent !important;}
 .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after,
-.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
-	content:'' !important; 
-}
+.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {content:'' !important; }
 
-@media only screen and (max-width: 767px){
-	.display-1 {
-		font-size: 3rem;
-	}
-	.supportText {
-		font-size: 1.5em !important;
-	}
-	.supportImg {
-		width: 150px;
-		height: 150px;
-	}
+@media only screen and (max-width: 1024px){
+	.display-1 {font-size: 3rem;}
+	.shop-now-btn {font-size: 14px;}
+	.supportText h6 {font-size: 1.5em !important;}
+	.supportImg {width: 150px;height: 150px;}
+	.swiper-pagination-bullet {width: 8px !important; height: 8px !important;}
+	.swiper-pagination-bullet-active::after {content: ''; width: 20px !important; height: 20px !important; border-radius: 15px}
 }
-@media only screen and (max-width: 400px){
-	.display-1 {
-		font-size: 2rem;
-	}
-	.lead {
-		font-size: 1rem;
-	}
-	.swiper-button-prev {
-		margin-left: -8px;
-	}
-	.swiper-button-next {
-		margin-right: -8px;
-	}
-	.swiper-button-next::before, .swiper-button-prev::before {
-		width: 15px;
-		height: 15px;
-	}
-	.supportText {
-		font-size: 1.3em !important;
-	}
-	.supportImg {
-		width: 100px;
-		height: 100px;
-	}
+@media only screen and (max-width: 720px){
+	.display-1 {font-size: 2rem;}
+	.lead {font-size: 1rem;} /*1page sub text*/
+	.shop-now-btn {padding: 6px 15px; font-size: 12px;}
+	.swiper-pagination {bottom: 10px !important;}
+	.swiper-button-prev {margin-left: -8px;}
+	.swiper-button-next {margin-right: -8px;}
+	.swiper-button-next::before, .swiper-button-prev::before {width: 15px;height: 15px;}
+	.swiper-button-next::after, .swiper-button-prev::after { width: 18px;}
+	.supportText h6 {font-size: 1.3em !important;}
+	.supportImg {width: 100px; height: 100px;}
+}
+@media only screen and (max-width: 480px){
+	.display-1, .display-4, .display-5 {font-size: 1.5rem;}
+	.lead {margin-bottom: 0.5rem !important; font-size: 0.875rem;} /*1page sub text*/
+	.shop-now-btn {padding: 5px 10px; font-size: 10px;}
+	.swiper-pagination {bottom: 10px !important;}
+	.swiper-pagination-bullet {margin-right: 8px !important; width: 6px !important; height: 6px !important;}
+	.swiper-pagination-bullet-active::after {content: ''; width: 15px !important; height: 15px !important; border-radius: 15px}
+	.swiper-button-next::before, .swiper-button-prev::before {width: 10px;height: 10px;}
+	.swiper-button-next::after, .swiper-button-prev::after { width: 13px;}
+	
+	#searchCollapse {margin: 0 !important;}
+	.supportText h6 {font-size: 12px !important;}
 }
 </style>
 
-<!-- Section -->
 <section>
 	<div class="container-fluid position-relative z-index-1 mt-3">
 		<div class="position-relative rounded-4 overflow-hidden bg-dark">
-			<div class="video_area">
-				<!-- <video id="my_video" src="{% static 'user/video/video1.mp4' %}"></video> -->
-				<div class="swiper mySwiper">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg1.jpg' %}"></div>
-						<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg2.jpg' %}"></div>
-						<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg3.jpg' %}"></div>
-					</div>
-					<div class="swiper-button-next"></div>
-					<div class="swiper-button-prev"></div>
-					<div class="swiper-pagination"></div>
+			<div class="swiper mySwiper">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg1.jpg' %}"></div>
+					<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg2.jpg' %}"></div>
+					<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg3.jpg' %}"></div>
 				</div>
-				<div class="position-absolute top-50 start-50 translate-middle text-white w-75 w-lg-60 mx-auto text-center z-index-1 py-12">
-				<!--Hero title-->
-					<h1 class="display-1 mb-3 mb-md-4 position-relative">Welcome to<br><span class="text-gradient">Utoville House Care</span></h1>
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-pagination"></div>
+			</div>
+			<div class="position-absolute top-50 start-50 translate-middle text-white w-75 w-lg-60 mx-auto text-center z-index-1 py-12">
+			<!--Hero title-->
+				<h1 class="display-1 mb-3 mb-md-4 position-relative">Welcome to<br><span class="text-gradient">Utoville House Care</span></h1>
 
-					<!--Hero text-->
-					<p class="lead w-lg-60 mx-auto mb-5">Enjoy a comfortable residential life with Utoville Homecare Service.</p>
+				<!--Hero text-->
+				<p class="lead w-lg-60 mx-auto mb-5">Enjoy a comfortable residential life with Utoville Homecare Service.</p>
 
-					<!--Hero buttons-->
-					<div class="d-inline-block">
-						<a href="{% url 'product:user_product_list' %}" class="btn btn-outline-white btn-rise">
-							<div class="btn-rise-bg bg-white"></div>
-							<div class="btn-rise-text">
-								Shop Now
-							</div>
-						</a>
-					</div>
+				<!--Hero buttons-->
+				<div class="d-inline-block">
+					<a href="{% url 'product:user_product_list' %}" class="shop-now-btn btn btn-outline-white btn-rise">
+						<div class="btn-rise-bg bg-white"></div>
+						<div class="btn-rise-text">
+							Shop Now
+						</div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -246,7 +183,7 @@
 					<div class="sticky-top pt-lg-3">
 						<div class="ms-xl-auto ms-lg-3 me-lg-1 mt-12" style="--navbar-search-width:280px;" id="searchCollapse">
 							<h6 class="mb-3 text-muted">HIGH-QUALITY SERVICE</h6>
-							<h2 class="mb-4 display-4">유토빌 홈케어 베스트 상품</h2>
+							<h2 class="mb-4 display-4">Search for the service you're looking for!</h2>
 							<form class="mb-0" action="{% url 'product:user_product_list' %}" method="POST">
 								<div class="position-relative mt-3 mt-lg-0 me-3">
 									<span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50 pt-1" style="z-index:999;">
@@ -259,12 +196,12 @@
 					</div>
 				</div>
 				<div class="col-md-7 ms-auto">
-					<img src="{% static 'user/img/main/services/case6.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-once="false" style="width: 732px;">
+					<img src="{% static 'user/img/main/services/case1.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-once="false" style="width: 732px;">
 					<img src="{% static 'user/img/main/services/case2.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
 					<img src="{% static 'user/img/main/services/case3.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false">
 					<img src="{% static 'user/img/main/services/case4.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
 					<img src="{% static 'user/img/main/services/case5.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
-					<img src="{% static 'user/img/main/services/case1.jpg' %}" class="img-fluid" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
+					<img src="{% static 'user/img/main/services/case6.jpg' %}" class="img-fluid" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
 				</div>
 			</div>
 		</div>
@@ -275,13 +212,7 @@
 	<div class="container position-relative py-9 py-lg-11">
 		<div class="row mb-4 mb-lg-5 align-items-end justify-content-between">
 			<div class="col-md-8 mb-4 mb-md-0">
-				<h6 class="mb-3 text-muted">Testimonials</h6>
-				<h2 class="mb-4 display-4">Clients who love
-					<span class="d-block">our
-						<span class="d-inline-block" style="color: #90c31f;"
-							data-typed='{"strings": ["Ideas...", "Creativity...", "passion...", "innovation..."]}'></span>
-					</span>
-				</h2>
+				<h6 class="mb-3 text-muted">Photo Review</h6>
 			</div>
 			<div class="col-md-4 text-md-end">
 				<div class="position-relative d-flex justify-content-md-end align-items-center">
@@ -301,8 +232,12 @@
 				<div class="swiper-container swiper-testimonials">
 					<div class="swiper-wrapper">
 						<!--Slide-->
+						{% for review in review %}
 						<div class="swiper-slide">
 							<div class="position-relative">
+								<div class="img_wrap">
+									<img src="{% static 'user/img/main/background/bg1.jpg' %}">
+								</div>
 								<div class="mb-4 flex-grow-1 px-3 px-4 py-5 shadow rounded-4">
 									<div class="mb-3 text-warning">
 										<i class="bx bx-star small"></i>
@@ -312,207 +247,20 @@
 										<i class="bx bx-star small"></i>
 									</div>
 									<p class="fw-semibold fs-5 mb-0">
-										“ Loved working with the beautiful theme. Everything clean and
-										professional,
-										also very helpful throughout the customisation. Looking forward to
-										buy more
-										license of Assan again in the future.”
+										{{ review.review_content }}
 									</p>
-								</div>
-								<div class="d-flex align-items-center justify-content-start">
-
-									<div class="position-relative me-3">
-										<!--Avatar Image-->
-										<img class="position-relative avatar lg rounded-circle p-1"
-											src="assets/img/avatar/4.jpg" alt="">
-									</div>
-									<div>
-										<h5 class="mb-0">Nala Goins</h5>
-										<small class="text-muted">UI UX Designer, Paris</small>
+									<div class="d-flex align-items-center justify-content-center">
+										<span class="me-2">{{ review.review_name }}</span>
+										<small class="me-2">{{ review.review_residence }} </small>
+										<small> {{ review.review_date }} </small>
 									</div>
 								</div>
 							</div>
 						</div>
-						<!--Slide-->
-						<div class="swiper-slide">
-							<div class="position-relative">
-								<div class="mb-4 flex-grow-1 px-3 px-4 py-5 shadow rounded-4">
-									<div class="mb-3 text-warning">
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-									</div>
-									<p class="fw-semibold fs-5 mb-0">
-										“ Their design delivery framework is fantastic and it really helped
-										us all get
-										on the same page from day one. The team has delivered a strong brand
-										identity and a seamless UI
-										which we can’t wait to put live and begin testing. ”
-									</p>
-								</div>
-								<div class="d-flex align-items-center justify-content-start">
-
-									<div class="position-relative me-3">
-										<img class="position-relative avatar lg rounded-circle p-1"
-											src="assets/img/avatar/5.jpg" alt="">
-									</div>
-									<div>
-										<h5 class="mb-0">Lilja Peltola</h5>
-										<small class="text-muted">Full stack developer,
-											Toronto</small>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!--Slide-->
-						<div class="swiper-slide">
-							<div class="position-relative">
-								<div class="mb-4 flex-grow-1 px-3 px-4 py-5 shadow rounded-4">
-									<div class="mb-3 text-warning">
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-									</div>
-									<p class="fw-semibold fs-5 mb-0">
-										“ Their design delivery framework is fantastic and it really helped
-										us all get
-										on the same page from day one. The team has delivered a strong brand
-										identity and a seamless UI
-										which we can’t wait to put live and begin testing. ”
-									</p>
-								</div>
-								<div class="d-flex align-items-center justify-content-start">
-
-									<div class="position-relative me-3">
-										<!--Avatar Image-->
-										<img class="position-relative avatar lg rounded-circle p-1"
-											src="assets/img/avatar/6.jpg" alt="">
-									</div>
-									<div>
-										<h5 class="mb-0">Adam Macofey</h5>
-										<small class="text-muted">CEO, Physics, Stockholm</small>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--Slide-->
-						<div class="swiper-slide">
-							<div class="position-relative">
-								<div class="mb-4 flex-grow-1 px-3 px-4 py-5 shadow rounded-4">
-									<div class="mb-3 text-warning">
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-									</div>
-									<p class="fw-semibold fs-5 mb-0">
-										“ Loved working with the beautiful theme. Everything clean and
-										professional,
-										also very helpful throughout the customisation. Looking forward to
-										buy more
-										license of Assan again in the future.”
-									</p>
-								</div>
-								<div class="d-flex align-items-center justify-content-start">
-
-									<div class="position-relative me-3">
-										<!--Avatar Image-->
-										<img class="position-relative avatar lg rounded-circle p-1"
-											src="assets/img/avatar/7.jpg" alt="">
-									</div>
-									<div>
-										<h5 class="mb-0">Alex Lee</h5>
-										<small class="text-muted">Developer, Barcelona</small>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--Slide-->
-						<div class="swiper-slide">
-							<div class="position-relative">
-								<div class="mb-4 flex-grow-1 px-3 px-4 py-5 shadow rounded-4">
-									<div class="mb-3 text-warning">
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-									</div>
-									<p class="fw-semibold fs-5 mb-0">
-										“ Their design delivery framework is fantastic and it really helped
-										us all get
-										on the same page from day one. The team has delivered a strong brand
-										identity and a seamless UI
-										which we can’t wait to put live and begin testing. ”
-									</p>
-								</div>
-								<div class="d-flex align-items-center justify-content-start">
-
-									<div class="position-relative me-3">
-										<!--Avatar Image-->
-										<img class="position-relative avatar lg rounded-circle p-1"
-											src="assets/img/avatar/8.jpg" alt="">
-									</div>
-									<div>
-										<h5 class="mb-0">Jayden Massey</h5>
-										<small class="text-muted">UI UX master, Warsaw</small>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!--Slide-->
-						<div class="swiper-slide">
-							<div class="position-relative">
-								<div class="mb-4 flex-grow-1 px-3 px-4 py-5 shadow rounded-4">
-									<div class="mb-3 text-warning">
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-										<i class="bx bx-star small"></i>
-									</div>
-									<p class="fw-semibold fs-5 mb-0">
-										“ Their design delivery framework is fantastic and it really helped
-										us all get
-										on the same page from day one. The team has delivered a strong brand
-										identity and a seamless UI
-										which we can’t wait to put live and begin testing. ”
-									</p>
-								</div>
-								<div class="d-flex align-items-center justify-content-start">
-
-									<div class="position-relative me-3">
-										<img class="position-relative avatar lg rounded-circle p-1"
-											src="assets/img/avatar/9.jpg" alt="">
-									</div>
-									<div>
-										<h5 class="mb-0">Raymond Atkins</h5>
-										<small class="text-muted">Entrepreneur, Los
-											Angeles</small>
-									</div>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
 					</div>
-
 				</div>
 			</div>
-		</div>
-	</div>
-	<div class="row w-100 h-25 bg-light align-items-center">
-		<div class="col-6 text-end">
-			<span class="fs-3 supportText">평일 9:00 - 18:00</span>
-			<p class="fs-2 fw-bold supportText">유토빌 홈케어 전화 상담 1111-1111</p>
-		</div>
-		<div class="col-6 text-center">
-			<img class="supportImg" src="{% static 'user/img/main/customer_service.jpg' %}" alt="">
 		</div>
 	</div>
 </section>
@@ -525,15 +273,14 @@
 <script>
 /*Main Swiper*/
 const swiper = new Swiper(".mySwiper", {
-	spaceBetween: 30,
 	effect: "fade",
 	loop: true,
-    autoplay: {
-      enabled: true,
-      delay: 5000,          
-      pauseOnMouseEnter: true,
-      disableOnInteraction: false,
-    },
+    // autoplay: {
+    //   enabled: true,
+    //   delay: 5000,          
+    //   pauseOnMouseEnter: true,
+    //   disableOnInteraction: false,
+    // },
 	pagination: {
         el: ".swiper-pagination",
         clickable: true,

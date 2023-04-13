@@ -9,6 +9,10 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+.bx-x:before {
+	background-color: #fff;
+}
+
 </style>
 
 <section>
@@ -83,14 +87,13 @@ input[type="number"]::-webkit-inner-spin-button {
 
 							<div class="col-sm-12 mb-3">
 								<label class="form-label" for="subject">Upload Business License</label>
-								<div class="thumbnail-preview row" id="thumbnail-preview" >
-								</div>
 								<div class="chat-form rounded-pill" data-emoji-form="">
 									<input type="file" class="d-none" name="thumbnail" id="thumbnail-upload" onclick="handleClick(this);" accept="image/png, image/jpeg, image/gif">
 									<label for="thumbnail-upload">
 										<span class="btn btn-light">Select File</span>
 									</label>
 								</div>
+								<div class="thumbnail-preview row" id="thumbnail-preview" ></div>
 							</div>
 
 
