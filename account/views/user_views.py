@@ -350,7 +350,7 @@ def user_my_order(request):
 
 	q = Q()
 	q &= Q(order__user = request.user)
-	q &= Q(order__payment__is_paid = True)
+	q &= ~Q(order__payment__paid_at = None)
 
 	now = date.today()
 	start_date = now-relativedelta(months=1)
