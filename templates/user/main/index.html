@@ -29,6 +29,26 @@
 .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after,
 .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {content:'' !important; }
 
+.hidden {
+	display: none;
+}
+.service-case-swiper-pagination {
+	position: absolute;
+	left: auto;
+	right: 10px;
+	bottom: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	gap: 0 3px;
+	width: 45px;
+	height: 22px;
+	border-radius: 22px;
+	background: rgba(0,0,0,.4);
+	font-size: 11px;
+	color: rgba(255,255,255,.66);
+}
 @media only screen and (max-width: 1024px){
 	.display-1 {font-size: 3rem;}
 	.shop-now-btn {font-size: 14px;}
@@ -97,105 +117,38 @@
 		</div>
 		<!--/.row-->
 	</div>
-</section>
-<section class="position-relative" id="section">
-	<div class="container py-9 py-lg-11 position-relative">
-		<div class="row justify-content-between align-items-center">
-			<div class="col-lg-6 col-xl-5 order-lg-last mb-7 mb-lg-0">
-				<!--Heading-->
-				<h2 class="position-relative mb-5 display-5" data-aos="fade-up">
-					We make UTOPIA LIFE with Utoville homecare service.
-				</h2>
-				<!--text-->
-				<p class="mb-0 lead" data-aos="fade-up" data-aos-delay="100">
-					Enjoy a comfortable residential life with Utoville Homecare Service.
-				</p>
-			</div>
-			<div class="col-lg-6 col-xl-5 order-lg-1">
-				<div class="row justify-content-center">
-					<div class="col-md-6 text-center mb-5" data-aos="fade-up">
-						<!--Numbers card-->
-						<div class="position-relative pb-2 rounded-4 overflow-hidden bg-white">
-							<!--Numbers card bg-->
-							<div
-								class="position-absolute start-50 translate-middle-x bottom-0 bg-primary rounded-4 w-75 h-75">
-							</div>
-							<div class="position-relative bg-light p-4 rounded-4">
-								<h2 class="display-5" data-aos
-									data-countup='{"startVal":0,"suffix":"+","duration":"5"}' data-to="6750"
-									data-aos-id="countup:in">0</h2>
-								<h6 class="mb-0">서비스 이용자 수</h6>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 text-center mb-5" data-aos="fade-up" data-aos-delay="100">
-						<!--Numbers card-->
-						<div class="position-relative pb-2 rounded-4 overflow-hidden bg-white">
-							<!--Numbers card bg-->
-							<div
-								class="position-absolute start-50 translate-middle-x bottom-0 bg-danger rounded-4 w-75 h-75">
-							</div>
-							<div class="position-relative bg-light p-4 rounded-4">
-								<h2 class="display-5" data-aos
-									data-countup='{"startVal":0,"suffix":"+","duration":"5"}' data-to="500"
-									data-aos-id="countup:in">0</h2>
-								<h6 class="mb-0">입점한 판매자 수</h6>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 mb-5 mb-md-0 text-center" data-aos="fade-up" data-aos-delay="150">
-						<!--Numbers card-->
-						<div class="position-relative pb-2 rounded-4 overflow-hidden bg-white">
-							<!--Numbers card bg-->
-							<div
-								class="position-absolute start-50 translate-middle-x bottom-0 bg-warning rounded-4 w-75 h-75">
-							</div>
-							<div class="position-relative bg-light p-4 rounded-4">
-								<h2 class="display-5" data-aos
-									data-countup='{"startVal":0,"suffix":"+","duration":"5"}' data-to="250"
-									data-aos-id="countup:in">0</h2>
-								<h6 class="mb-0">계약된 공동주택 수</h6>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 text-center" data-aos="fade-up">
-						<!--Numbers card-->
-						<div class="position-relative pb-2 rounded-4 overflow-hidden bg-white"
-							data-aos-delay="200">
-							<!--Numbers card bg-->
-							<div
-								class="position-absolute start-50 translate-middle-x bottom-0 bg-success rounded-4 w-75 h-75">
-							</div>
-							<div class="position-relative bg-light p-4 rounded-4">
-								<h2 class="display-5" data-aos
-									data-countup='{"startVal":0,"suffix":"+","duration":"5"}' data-to="15"
-									data-aos-id="countup:in">0</h2>
-								<h6 class="mb-0">이용가능한 서비스 수</h6>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+</section>    
+
+<div class="banner_zone pt-6 pt-lg-11">
+	<div class="swiper bannerSwiper">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide"><img src="{% static 'user/img/main/banner1.jpg' %}"></div>
+			<div class="swiper-slide"><img src="{% static 'user/img/main/banner2.jpg' %}"></div>
 		</div>
-		<div class="container py-9 py-lg-11">
-			<div class="row pt-5 pt-lg-9">
-				<div class="col-md-5 col-lg-4 mb-5 mb-lg-0">
-					<div class="sticky-top pt-lg-3">
-						<div class="ms-xl-auto ms-lg-3 me-lg-1 mt-12" style="--navbar-search-width:280px;" id="searchCollapse">
-							<h6 class="mb-3 text-muted">HIGH-QUALITY SERVICE</h6>
-							<h2 class="mb-4 display-4">Search for the service you're looking for!</h2>
-							<form class="mb-0" action="{% url 'product:user_product_list' %}" method="POST">
-								<div class="position-relative mt-3 mt-lg-0 me-3">
-									<span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50 pt-1" style="z-index:999;">
-										<i class="bx bx-search-alt-2"></i>
-									</span>
-									<input type="text" placeholder="Search Services..." name="keyword" class="form-control ps-6 rounded-pill">
-								</div>
-							</form>
-						</div>
+	</div>
+</div>
+
+<section class="position-relative" id="section">
+	<div class="container py-6 py-lg-11 position-relative">
+		<div class="row">
+			<div class="col-md-5 col-lg-4 mb-5 mb-lg-0">
+				<div class="sticky-top pt-lg-3">
+					<div class="ms-xl-auto ms-lg-3 me-lg-1 mt-12" style="--navbar-search-width:280px;" id="searchCollapse">
+						<h6 class="mb-3 text-muted">HIGH-QUALITY SERVICE</h6>
+						<h2 class="mb-4 display-4">Search for the service you're looking for!</h2>
+						<form class="mb-0" action="{% url 'product:user_product_list' %}" method="POST">
+							<div class="position-relative mt-3 mt-lg-0 me-3">
+								<span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50 pt-1" style="z-index:999;">
+									<i class="bx bx-search-alt-2"></i>
+								</span>
+								<input type="text" placeholder="Search Services..." name="keyword" class="form-control ps-6 rounded-pill">
+							</div>
+						</form>
 					</div>
 				</div>
-				<div class="col-md-7 ms-auto">
+			</div>
+			<div class="service_slider col-md-7 ms-auto">
+				<div data-slide-type="default">
 					<img src="{% static 'user/img/main/services/case1.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-once="false" style="width: 732px;">
 					<img src="{% static 'user/img/main/services/case2.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
 					<img src="{% static 'user/img/main/services/case3.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false">
@@ -203,13 +156,24 @@
 					<img src="{% static 'user/img/main/services/case5.jpg' %}" class="img-fluid mb-3" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
 					<img src="{% static 'user/img/main/services/case6.jpg' %}" class="img-fluid" alt="" data-aos="fade-up" data-aos-delay="100" data-aos-once="false" style="width: 732px;">
 				</div>
+				<div class="serviceSwiper col-md-7 ms-auto position-relative overflow-hidden" data-slide-type="responsive">
+					<div class="swiper-wrapper position-relative">
+						<div class="swiper-slide"><img src="{% static 'user/img/main/services/case1.jpg' %}"></div>
+						<div class="swiper-slide"><img src="{% static 'user/img/main/services/case2.jpg' %}"></div>
+						<div class="swiper-slide"><img src="{% static 'user/img/main/services/case3.jpg' %}"></div>
+						<div class="swiper-slide"><img src="{% static 'user/img/main/services/case4.jpg' %}"></div>
+						<div class="swiper-slide"><img src="{% static 'user/img/main/services/case5.jpg' %}"></div>
+						<div class="swiper-slide"><img src="{% static 'user/img/main/services/case6.jpg' %}"></div>
+					</div>
+					<div class="service-case-swiper-pagination"></div>
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
 <section class="position-relative bg-white overflow-hidden">
-	<div class="container position-relative py-9 py-lg-11">
+	<div class="container position-relative pb-6 py-lg-11 overflow-hidden">
 		<div class="row mb-4 mb-lg-5 align-items-end justify-content-between">
 			<div class="col-md-8 mb-4 mb-md-0">
 				<h6 class="mb-3 text-muted">Photo Review</h6>
@@ -233,12 +197,12 @@
 					<div class="swiper-wrapper">
 						<!--Slide-->
 						{% for review in review %}
-						<div class="swiper-slide">
+						<div class="swiper-slide rounded-4 shadow">
 							<div class="position-relative">
 								<div class="img_wrap">
-									<img src="{% static 'user/img/main/background/bg1.jpg' %}">
+									<img class="rounded-top" src="{% static 'user/img/main/background/bg1.jpg' %}">
 								</div>
-								<div class="mb-4 flex-grow-1 px-3 px-4 py-5 shadow rounded-4">
+								<div class="flex-grow-1 px-3 px-4 py-5">
 									<div class="mb-3 text-warning">
 										<i class="bx bx-star small"></i>
 										<i class="bx bx-star small"></i>
@@ -271,16 +235,17 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
 
 <script>
+
 /*Main Swiper*/
 const swiper = new Swiper(".mySwiper", {
 	effect: "fade",
 	loop: true,
-    // autoplay: {
-    //   enabled: true,
-    //   delay: 5000,          
-    //   pauseOnMouseEnter: true,
-    //   disableOnInteraction: false,
-    // },
+    autoplay: {
+      enabled: true,
+      delay: 5000,          
+      pauseOnMouseEnter: true,
+      disableOnInteraction: false,
+    },
 	pagination: {
         el: ".swiper-pagination",
         clickable: true,
@@ -291,22 +256,78 @@ const swiper = new Swiper(".mySwiper", {
     },
 });
 
-/* 상품 검색 부분 이미지 스와이퍼 */
+/*Banner Swiper*/
+const banner_swiper = new Swiper(".bannerSwiper", {
+	loop: true,
+	autoplay: {
+      enabled: true,
+      delay: 3000,          
+      pauseOnMouseEnter: true,
+      disableOnInteraction: false,
+    },
+});
+
+/*aos.js(스크롤 스와이퍼) 스마트폰 뷰에서 일반 swiper로 전환*/
+const service_swiper = new Swiper(".serviceSwiper", {
+      pagination: {
+        el: ".service-case-swiper-pagination",
+        type: "fraction",
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+	  autoplay: {
+      enabled: true,
+      delay: 5000,          
+      pauseOnMouseEnter: true,
+      disableOnInteraction: false,
+    },
+});
+
+// 기본 슬라이드와 반응형 슬라이드를 식별하는 데이터 속성 이름
+const slideTypeAttr = "data-slide-type";
+// 반응형 슬라이드를 보여줄 화면 크기
+const responsiveScreenWidth = 768;
+
+// 슬라이드 요소와 미디어 쿼리 객체 가져오기
+const slider = document.querySelector(".service_slider");
+const defaultSlide = slider.querySelector(`[${slideTypeAttr}="default"]`);
+const responsiveSlide = slider.querySelector(`[${slideTypeAttr}="responsive"]`);
+const responsiveQuery = window.matchMedia(`(max-width: ${responsiveScreenWidth}px)`);
+
+// 현재 화면 크기에 따라 슬라이드 변경하기
+function updateSlider() {
+  if (responsiveQuery.matches) {
+	defaultSlide.classList.add("hidden");
+    responsiveSlide.classList.remove("hidden");
+  } else {
+    defaultSlide.classList.remove("hidden");
+    responsiveSlide.classList.add("hidden");
+  }
+}
+
+// 초기화
+updateSlider();
+
+// 화면 크기 변경 시 슬라이드 업데이트하기
+responsiveQuery.addEventListener('change', updateSlider);
+
+/* 리뷰 스와이퍼 */
 let swiperTestimonails = new Swiper(".swiper-testimonials", {
-	autoHeight: true,
 	spaceBetween: 16,
 	breakpoints: {
+		0: {
+			slidesPerView: 2
+		},
 		640: {
-			slidesPerView: 1,
-			spaceBetween: 16
+			slidesPerView: 2
 		},
 		768: {
-			slidesPerView: 2,
-			spaceBetween: 16
+			slidesPerView: 3
 		},
 		1024: {
-			slidesPerView: 3,
-			spaceBetween: 30
+			slidesPerView: 4
 		}
 	},
 	pagination: {
@@ -319,30 +340,6 @@ let swiperTestimonails = new Swiper(".swiper-testimonials", {
 	}
 });
 
-// /*Main Video*/
-// let videoUrl=["video1", "video2"];
-// let videoTotal=videoUrl.length;
-// let videoN = 0;
-// let videoPath="";
-// let video=document.getElementById("my_video");
-// video.muted=true;
-// video.play();
-
-// video.addEventListener("ended", function(){
-// 	if(videoN < (videoTotal-1)){
-// 		videoN+=1;
-// 	}
-// 	else{
-// 		videoN=0;
-// 	}
-
-// 	video.pause();
-	
-// 	videoPath="{% static 'user/video/' %}"+videoUrl[videoN]+".mp4";
-// 	$("#my_video").attr({src:videoPath});
-// 	video.play();
-
-// });
 
 
 </script>
