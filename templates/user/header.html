@@ -35,11 +35,16 @@
 		.simplebar-scrollbar:before { background: currentColor; }
 		.logo-img { width: 150px;}
 		
-		#mainNavbarTheme { display: block !important; }
+		#mainNavbarTheme { display: block; }
 		#mainNavbarTheme .navbar-nav a { height: 2.75em; }
 
+		.dropdown-menu { margin-top: 0 !important; }
+		.dropdown:hover > a { color: #2ea7e0; }
+		.dropdown-item:hover { background-color: #62b7df; }
+
 		@media only screen and (max-width: 991px) {
-			#mainNavbarTheme { display: none !important; }			
+			#mainNavbarTheme { visibility: hidden; height: 0; transition: height 0.3s ease-in-out; }			
+			#mainNavbarTheme.show { visibility: visible; height: 300px; }			
 		}
 	</style>  
 </head>
@@ -113,7 +118,7 @@
             </div>
         </div>
 
-		<div class="container collapse navbar-collapse text-center" id="mainNavbarTheme">
+		<div class="container text-center" id="mainNavbarTheme">
 			<ul class="navbar-nav d-flex justify-content-between">  <!-- me-lg-auto ms-xl-5 ms-lg-2 삭제 -->
 			{% for categoryFirst in category_first_list %}
 				{% if categoryFirst.categorysecond_set.all.count > 0 %}
@@ -144,3 +149,12 @@
     
     <!--Main content-->
     <main>
+
+	<script>
+		let toggleMenuBtn = document.querySelector(".order-last");
+		let mainNavMenu = document.querySelector("#mainNavbarTheme");
+
+		toggleMenuBtn.addEventListener("click", () => {
+			mainNavMenu.classList.toggle = 'show';
+		});
+	</script>

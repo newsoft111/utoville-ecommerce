@@ -44,6 +44,9 @@ def user_product_list(request):
 	})
 
 
+def user_product_list_main_image(request):
+    w
+
 def user_product_detail(request, product_id):
 	seo = {
 		'title': "상품 디테일 - 유토빌",
