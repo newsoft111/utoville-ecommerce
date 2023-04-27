@@ -7,7 +7,7 @@
 
 <link href="{% static 'user/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
 
-<!--Page header start-->
+<!-- Page header start
 <section class="position-relative overflow-hidden">    
    <div class="container-fluid">
       <div class="py-8 py-lg-11 bg-dark text-white position-relative">
@@ -17,7 +17,19 @@
 			</div>
       </div>
    </div>
-</section>
+</section> -->
+
+<div class="container pt-5">
+	<span class="fs-3 font-weight-bold">Cart</span>
+	<div class="mt-3">
+		<div class="d-flex align-items-center justify-content-between">
+			<div class="d-flex">
+				<input type="checkbox" checked class="ms-2 mb-2 mb-sm-0" onclick="checkbox_manager();"><span style="margin-left: 8px; font-size: 12px;">Select All</span></button>
+			</div>
+			<button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();" style="padding: 4px 6px;"><span style="font-size: 12px;">Remove</span></button>
+		</div>
+	</div>
+</div>
 
 <section class="position-relative bg-white" id="cart-section">
    <div class="container pb-7 pb-lg-12 pt-7 position-relative">
@@ -74,10 +86,6 @@
                </div>
             </div>   
             {% endfor %}
-            <div class="mt-3">
-                  <button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="checkbox_manager();"><span style="font-size: 14px;">전체선택</span></button>
-                  <button class="btn btn-outline-secondary small ms-2 mb-2 mb-sm-0" onclick="remove_checked_item();"><span style="font-size: 14px;">선택삭제</span></button>
-            </div>
             <!-- end card -->
          </div>
          
@@ -178,41 +186,6 @@ function remove_cart_submit(cart_item_id, item_arr) {
     });
 }
 
-
-// function update_cart_submit(cart_item_id, qty) {
-// 	is_run = true;
-// 	var modal = new bootstrap.Modal(document.getElementById("loading"), {});
-
-// 	modal.show();
-
-//     $.ajax({
-//         type : 'POST',
-//         url : "{% url 'cart:user_cart_update' %}",
-// 		headers: { "X-CSRFToken": '{{csrf_token}}' },
-//         data : {
-// 			cart_item_id: cart_item_id,
-// 			qty: qty
-// 		},
-//         dataType : 'json',
-//         success: function(data){
-// 			if(data.result==200){
-// 				console.log('success!');
-// 			}else{
-// 				openModal("알림", data.result_text);
-// 			}
-// 			is_run  = false;
-//         },
-//         error: function (request, status, error){
-//           var msg = "ERROR : " + request.status + "<br>"
-// 			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
-// 			    console.log(msg);
-//         },
-// 		complete: function () {
-// 			modal.hide();
-// 		}
-//     });
-// }
-
 function checkbox_manager() {
    const allboxes = document.querySelectorAll("input[name=cart_item_id][type=checkbox]");
    // if some of the checkbox is checked
@@ -242,8 +215,8 @@ function cal_checked_item_price() {
 	let arr = [];
 	
 	cart_items.forEach((item) => {
-		const tr = item.parentElement.parentElement.parentElement;
-		let sub_total = tr.querySelector('#item-total-price').innerHTML.replace(/[^0-9.]+/g, '');
+		const singleItem = item.parentElement.parentElement.parentElement;
+		let sub_total = singleItem.querySelector('#item-total-price').innerHTML.replace(/[^0-9.]+/g, '');
 		
 		total_price = (parseFloat(total_price) + parseFloat(sub_total)).toFixed(2);
 
@@ -252,7 +225,7 @@ function cal_checked_item_price() {
  		objData.variant_value_id = item.dataset.variantValueId;
  		objData.qty = item.dataset.qty;
 		objData.schedule_date = item.dataset.scheduleDate;
-
+		
  		arr.push(objData);
 	});	
 
@@ -332,27 +305,63 @@ function initial_price() {
 //==============================
 
 function cal_item_price(e) {
-   let itemDom = e.parentElement.parentElement.parentElement;
-   let itemId = e.dataset.cartItemId;
-   let itemPrice = itemDom.querySelector("#item-price").innerText.replace(/[^0-9.]+/g, '');
-   let itemQuantity = itemDom.querySelector("#item-quantity").value;
-   let itemTotalPrice = itemDom.querySelector("#item-total-price");
-   let itemsTotalPrice = document.querySelectorAll("#item-total-price");
-   let totalPrice = 0;
+	let itemDom = e.parentElement.parentElement.parentElement;
+	let itemId = e.dataset.cartItemId;
+	let itemPrice = itemDom.querySelector("#item-price").innerText.replace(/[^0-9.]+/g, '');
+	let itemQuantity = itemDom.querySelector("#item-quantity").value;
+	let itemTotalPrice = itemDom.querySelector("#item-total-price");
+	let itemsTotalPrice = document.querySelectorAll("#item-total-price");
+	let totalPrice = 0;
 
-   itemTotalPrice.innerText = numberWithCommas("₱" + parseFloat(itemPrice * itemQuantity).toFixed(2));
-   
-   itemsTotalPrice.forEach(element => {
-      let item_price = element.innerHTML.replace(/[^0-9.]+/g, '');
+	itemTotalPrice.innerText = numberWithCommas("₱" + parseFloat(itemPrice * itemQuantity).toFixed(2));
 
-      totalPrice = (parseFloat(totalPrice) + parseFloat(item_price)).toFixed(2);
-   });
+	itemsTotalPrice.forEach(element => {
+		let item_price = element.innerHTML.replace(/[^0-9.]+/g, '');
 
-   document.getElementById("sub-total-price").innerHtml = "₱" + numberWithCommas(totalPrice);
-   document.getElementById("total-price").innerHTML = "₱" + numberWithCommas(totalPrice);
-// update_cart_submit(itemId, itemQuantity);
+		totalPrice = (parseFloat(totalPrice) + parseFloat(item_price)).toFixed(2);
+	});
+
+	document.getElementById("sub-total-price").innerHtml = "₱" + numberWithCommas(totalPrice);
+	document.getElementById("total-price").innerHTML = "₱" + numberWithCommas(totalPrice);
+
+	update_cart_submit(itemId, itemQuantity);
+	console.log(itemQuantity)
 }
 
+function update_cart_submit(cart_item_id, qty) {
+	is_run = true;
+	var modal = new bootstrap.Modal(document.getElementById("loading"), {});
+
+	modal.show();
+
+    $.ajax({
+        type : 'POST',
+        url : "{% url 'cart:user_cart_update' %}",
+		headers: { "X-CSRFToken": '{{csrf_token}}' },
+        data : {
+			cart_item_id: cart_item_id,
+			qty: qty
+		},
+        dataType : 'json',
+        success: function(data){
+			if(data.result==200){
+				openModal("Success", data.result_text)
+				window.location.reload();
+			}else{
+				openModal("알림", data.result_text);
+			}
+			is_run  = false;
+        },
+        error: function (request, status, error){
+          var msg = "ERROR : " + request.status + "<br>"
+			    msg +=  + "내용 : " + request.responseText + "<br>" + error;
+			    console.log(msg);
+        },
+		complete: function () {
+			modal.hide();
+		}
+    });
+}
 
 async function order_create_submit() {
    if(is_run == true) {

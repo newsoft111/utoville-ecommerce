@@ -4,8 +4,13 @@
 {% load humanize %}
 
 <style>
+	body { overflow-x: hidden; }
 	.nav-level-2 a.nav-link:hover { text-decoration: underline; text-underline-offset: 6px; }
+
+	.bg-image {scale: 1.2; transition: all 2s;}
+	.bg-image.active {scale: 1;}
 </style>
+
 <!--Page header start-->
 <section class="position-relative overflow-hidden">
 	<div class="py-8 py-lg-11 bg-dark text-white position-relative category_info">
@@ -59,7 +64,7 @@
 				</div>
 				<div class="row mb-5">
 					{% for productList in product_list %}
-					<div class="col-md-6 col-xl-4 mb-4">
+					<div class="col-6 col-md-6 col-xl-4 mb-4">
 						<!--:card-hover-expand-->
 						<div class="card overflow-hidden hover-lift card-product">
 						<div class="card-product-header p-3 d-block overflow-hidden position-relative">
@@ -138,6 +143,8 @@ $(document).ready(function() {
 
 	let element = document.getElementById("sort-by");
     element.value = sort;
+
+	document.querySelector(".bg-image").classList.add("active");
 });
 
 const sort = document.querySelector('select[name=sort_by]');
@@ -159,12 +166,12 @@ for(var i=0; i<categoryNameArr.length; i++){
 		firstCategoryName.innerHTML = categoryNameArr[i];
 
 		let imgSrc = "{% static 'user/img/shop/banners/' %}" + i + ".jpg";
-		let categoryImg = `<img src=${imgSrc} class="bg-image bg-top-center opacity-75" alt="">`;
+		let categoryImg = `<img src=${imgSrc} class="bg-image bg-top-center" alt="">`;
 
 		categoryInfo.insertAdjacentHTML("afterbegin", categoryImg);
-
 	}
 }
+
 
 </script>
 

@@ -226,7 +226,7 @@
 											<button class="btn point-btn">전액사용</button>									
 										</div>	
 									</div>
-									<div>
+									<!-- <div>
 										<h5 class="font-size-14 mb-3">Payment method :</h5>
 										<div class="row">
 											<div class="col-lg-3 col-sm-6">
@@ -266,7 +266,7 @@
 												</div>
 											</div>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</li>
 						</ol>
@@ -309,9 +309,10 @@
 							</div>
 							<hr>
 							{% endfor %}
+
 							<div class="d-flex justify-content-between p-2 mb-2">
 								<h5 class="font-size-14 m-0">Sub Total :</h5>
-								<span class="total-price">₱{{total_price|intcomma}}</span>
+								<span class="total-price"></span>
 							</div>
 							<div class="d-flex justify-content-between p-2 mb-2">  
 								<h5 class="font-size-14 m-0">Discount :</h5>
@@ -328,9 +329,10 @@
 							<div class="d-flex justify-content-between align-items-center p-2 mb-5 bg-light">
 								<h5 class="font-size-14 m-0">Total:</h5>
 								<span class="pd fw-bold fs-5 text-dark">
-									<span class="payment">₱{{total_price|intcomma}}</span>
+									<span class="payment"></span>
 								</span>
 							</div>
+
 						</div>
 					</div>
 					<div class="row my-4">
@@ -360,14 +362,9 @@
 let is_run = false;
 
 let pointForm = document.querySelector(".use-point");
-let totalPrice = document.querySelector(".total-price");
 let pointBtn = document.querySelector(".point-btn");
 let payment = document.querySelector(".payment");
 let usingPoint = document.querySelector(".using-point");
-
-
-const regex = /[^0-9.]/g;
-const result = totalPrice.innerHTML.replace(regex, "");
 
 "propertychange change keyup paste input".split(" ").forEach(function(e){ 
 	  pointForm.addEventListener(e, function(){
@@ -472,6 +469,16 @@ async function temp_call_back() {
 		}
 	});
 }
+
+let orderItemPrice = document.querySelectorAll(".order-item-price")
+let totalPrice = 0;
+
+orderItemPrice.forEach(item => {
+	let price = item.innerText.replace(/[^\d.-]/g, '');
+	totalPrice += parseFloat(price);
+})
+
+document.querySelector(".total-price").innerHTML = "₱" + totalPrice.toLocaleString('en-US',{minimumFractionDigits: 2, maximumFractionDigits: 2});
 
 </script>
 {% endblock %}
