@@ -1,9 +1,13 @@
 {% load static %}
 
+<style>
+	.ft_info { font-size: 12px; line-height: 2; color: rgba(255, 255, 255, 0.6); }
+</style>
+
 </main>
 <!--begin:footer-->
 <footer class="position-relative bg-dark text-white overflow-hidden">
-	<div class="container pt-9 pt-lg-9 pb-6 position-relative">
+	<div class="container py-6 position-relative">
 		<div class="row">
 			<!-- logo -->
 			<div class="col-lg-3 col-md-6 mb-3">
@@ -18,7 +22,13 @@
 					<p class="small text-muted mb-0">COPYRIGHT © UTOVILLE ALL RIGHTS RESERVED.</p>
 				</div>
 			</div>
-			<div class="col-6 col-lg-3 col-xl-2 ms-lg-auto mb-3">
+			<div class="col-lg-9 mb-3">
+				<span class="ft_info">CEO: YOUN JI HYUN<br>Business Registration Number: 274-87-02430<br>
+				      Address:Headquarters - 10th Floor G-Tower, 38 Digital-ro 29, Guro-gu, Seoul, South Korea <br>
+					  PH Branch - 2nd Floor Meralco Compex, Metrowalk, Ugong, Ortigas Center, Pasig City, NCR, Philippines
+				</span>
+			</div>
+			<!-- <div class="col-6 col-lg-3 col-xl-2 ms-lg-auto mb-3">
 				<h6 class="mb-4">Company</h6>
 				<ul class="nav flex-column mb-0">
 					<li class="nav-item"><a class="nav-link" href="#!">About</a></li>
@@ -50,7 +60,7 @@
 					<li class="nav-item"><a class="nav-link" href="#!">차 서비스</a></li>
 					<li class="nav-item"><a class="nav-link" href="#!">생수 배달</a></li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 		<hr class="bg-transparent border-top border-white opacity-25 mt-0">
 		<div class="col-md-12 text-start">
@@ -61,6 +71,12 @@
 				</li>
 				<li class="list-inline-item me-3">
 					<a class="d-block" href="#!">Privacy &amp; Policy</a>
+				</li>
+				<li class="list-inline-item me-3">
+					<a class="d-block" href="{% url 'main:user_contact' %}">Contact</a>
+				</li>
+				<li class="list-inline-item me-3">
+					<a class="d-block" href="{% url 'main:partnership_inquiry' %}">Partnership Inquiry</a>
 				</li>
 			</ul>
 			<!-- End Links -->
