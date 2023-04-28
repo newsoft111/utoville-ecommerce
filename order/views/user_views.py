@@ -28,7 +28,7 @@ def user_order_create(request):
 		if not request.user.is_authenticated:
 			return JsonResponse({
 				'result': '201', 
-				'result_text': '로그인을 해주세요.'
+				'result_text': 'Please log in.'
 			})
 
 		jsonData = json.loads(request.body)
@@ -58,7 +58,7 @@ def user_order_create(request):
 			if schedule_date is None or schedule_date == '':
 				return JsonResponse({
 					'result': '201', 
-					'result_text': '배송날짜 입력바람.'
+					'result_text': 'Please enter the delivery date.'
 				})
 			
 			try:
@@ -67,7 +67,7 @@ def user_order_create(request):
 			except Exception as e:
 				return JsonResponse({
 					'result': '201', 
-					'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+					'result_text': 'An unknown error has occurred. Please try again.'
 				})
 
 			try:
@@ -97,7 +97,7 @@ def user_order_create(request):
 						variant_price = variant_price,
 						ordered_quantity = ordered_quantity,
 						schedule_date = schedule_date,
-						order_item_status = '결제대기',
+						order_item_status = 'Payment awaiting',
 					)
 					total_price += order_item_obj.sub_total_price()
 

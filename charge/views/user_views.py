@@ -10,7 +10,7 @@ def user_payment(request):
 	if not request.user.is_authenticated:
 		return JsonResponse({
 			'result': '201', 
-			'result_text': '로그인을 해주세요.'
+			'result_text': 'Please log in.'
 		})
 
 	order_id = request.POST.get('order_id')
@@ -28,7 +28,7 @@ def user_payment(request):
 		print(e)
 		return JsonResponse({
 			'result': '201', 
-			'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+			'result_text': 'An unknown error has occurred. Please try again.'
 		})
 
 	return JsonResponse({
