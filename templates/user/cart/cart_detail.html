@@ -104,11 +104,11 @@
                            </tr>
                            <tr>
                               <td>Discount : </td>
-                              <td class="text-end">- ₱0</td>
+                              <td class="text-end" id="item-discount">- ₱10</td>
                            </tr>
                            <tr>
                               <td>Shipping Charge :</td>
-                              <td class="text-end">₱0</td>
+                              <td class="text-end" id="shipping-charge">- ₱2</td>
                            </tr>
                            <tr class="bg-light">
                               <th>Total :</th>
@@ -145,7 +145,7 @@
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 <script>
 window.addEventListener('DOMContentLoaded', function(){
-	//initial_price();
+	// initial_price();
 	cal_checked_item_price();
 });
 
@@ -171,13 +171,13 @@ function remove_cart_submit(cart_item_id, item_arr) {
             check_item_zero();
 			cal_checked_item_price();
          }else{
-            openModal("알림", data.result_text);
+            openModal("", data.result_text);
          }
          is_run  = false;
         },
         error: function (request, status, error){
           var msg = "ERROR : " + request.status + "<br>"
-             msg +=  + "내용 : " + request.responseText + "<br>" + error;
+             msg +=  + "TEXT : " + request.responseText + "<br>" + error;
              console.log(msg);
         },
       complete: function () {
@@ -210,15 +210,16 @@ function checkbox_manager() {
 //==============================
 function cal_checked_item_price() {
 	let cart_items = document.querySelectorAll("input[name=cart_item_id]:checked");
-	console.log(cart_items);
-	let total_price = 0;
+	let itemDiscount = document.querySelector("#item-discount").innerHTML.replace(/[^0-9.]+/g, '');
+	let shippingCharge = document.querySelector("#shipping-charge").innerHTML.replace(/[^0-9.]+/g, '');
+	let total_price, sub_total_price = 0;
 	let arr = [];
 	
 	cart_items.forEach((item) => {
 		const singleItem = item.parentElement.parentElement.parentElement;
 		let sub_total = singleItem.querySelector('#item-total-price').innerHTML.replace(/[^0-9.]+/g, '');
-		
-		total_price = (parseFloat(total_price) + parseFloat(sub_total)).toFixed(2);
+
+		sub_total_price = (parseFloat(sub_total_price) + parseFloat(sub_total)).toFixed(2);
 
 		let objData = new Object();
  		objData.product_id = item.dataset.productId;
@@ -229,8 +230,10 @@ function cal_checked_item_price() {
  		arr.push(objData);
 	});	
 
+	total_price = (parseFloat(sub_total_price) - parseFloat(itemDiscount) - parseFloat(shippingCharge)).toFixed(2);
+
 	document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
-	document.querySelector("#sub-total-price").innerHTML = '₱'+numberWithCommas(total_price);
+	document.querySelector("#sub-total-price").innerHTML = '₱'+numberWithCommas(sub_total_price);
 	document.querySelector("#total-price").innerHTML = '₱'+numberWithCommas(total_price);
 }
 
@@ -264,7 +267,7 @@ function check_item_zero() {
    let html = '';
 
    if(itemList.length < 1) {
-      html = `<h6 class="text-center mb-0 p-5 bg-light">상품이 없습니다.</h6>`
+      html = `<h6 class="text-center mb-0 p-5 bg-light">There is no item.</h6>`
    
       itemListBody.insertAdjacentHTML("afterbegin", html);
    }
@@ -286,7 +289,7 @@ function removeItem(e) {
 // 초기 금액 출력
 //==============================
 
-function initial_price() {   
+function initial_price() {  
 	let itemsTotalPrice = document.querySelectorAll("#item-total-price");   
 	let totalPrice = 0;
 
@@ -298,6 +301,8 @@ function initial_price() {
 
 	document.querySelector("#sub-total-price").innerHTML = '₱'+numberWithCommas(totalPrice);
 	document.querySelector("#total-price").innerHTML = '₱'+numberWithCommas(totalPrice);
+
+
 }
 
 //==============================
@@ -313,19 +318,17 @@ function cal_item_price(e) {
 	let itemsTotalPrice = document.querySelectorAll("#item-total-price");
 	let totalPrice = 0;
 
+
 	itemTotalPrice.innerText = numberWithCommas("₱" + parseFloat(itemPrice * itemQuantity).toFixed(2));
 
 	itemsTotalPrice.forEach(element => {
-		let item_price = element.innerHTML.replace(/[^0-9.]+/g, '');
+		let subTotalPrice = element.innerHTML.replace(/[^0-9.]+/g, '');
 
-		totalPrice = (parseFloat(totalPrice) + parseFloat(item_price)).toFixed(2);
+		totalPrice = (parseFloat(totalPrice) + parseFloat(subTotalPrice)).toFixed(2);
 	});
 
-	document.getElementById("sub-total-price").innerHtml = "₱" + numberWithCommas(totalPrice);
-	document.getElementById("total-price").innerHTML = "₱" + numberWithCommas(totalPrice);
-
+	document.querySelector("#total-price").innerHTML = totalPrice;
 	update_cart_submit(itemId, itemQuantity);
-	console.log(itemQuantity)
 }
 
 function update_cart_submit(cart_item_id, qty) {
@@ -340,12 +343,12 @@ function update_cart_submit(cart_item_id, qty) {
 		headers: { "X-CSRFToken": '{{csrf_token}}' },
         data : {
 			cart_item_id: cart_item_id,
-			qty: qty
+			qty: qty,
 		},
         dataType : 'json',
         success: function(data){
 			if(data.result==200){
-				openModal("Success", data.result_text)
+				openModal("", data.result_text)
 				window.location.reload();
 			}else{
 				openModal("알림", data.result_text);

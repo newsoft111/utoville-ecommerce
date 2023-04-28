@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 def user_index(request):
 	seo = {
-		'title': "유토빌",
+		'title': "Utoville",
 	}
 
 	test_list = [

@@ -66,7 +66,7 @@ def user_cart_add_item(request):
 		if schedule_date is None or schedule_date == '':
 			return JsonResponse({
 				'result': '201', 
-				'result_text': '배송날짜 입력바람.'
+				'result_text': 'Please enter the delivery date.'
 			})
 
 		try:
@@ -90,7 +90,7 @@ def user_cart_add_item(request):
 
 
 	result = '200'
-	result_text = '장바구니 넣었음.'
+	result_text = 'Added to cart.'
 
 	result = {'result': result, 'result_text': result_text}
 	return JsonResponse(result)
@@ -108,7 +108,7 @@ def user_cart_remove_item(request):
 		cart_item.save()
 	
 	result = '200'
-	result_text = '장바구니 삭제함.'
+	result_text = 'Removed from cart.'
 
 	result = {'result': result, 'result_text': result_text}
 	return JsonResponse(result)
@@ -128,11 +128,11 @@ def user_cart_update(request):
 
 
 		result = '200'
-		result_text = '업데이트 성공'
+		result_text = 'The quantity has been updated.'
 	except Exception as e:
 		print(e)
 		result = '201'
-		result_text = '알수없는 오류입니다. 다시시도 해주세요.'
+		result_text = 'An unknown error has occurred. Please try again.'
 
 	result = {'result': result, 'result_text': result_text}
 	return JsonResponse(result)
@@ -140,7 +140,7 @@ def user_cart_update(request):
 
 def user_cart_detail(request, total_price=0, counter=0, cart_items=None):
 	seo = {
-		'title': "장바구니 - 유토빌",
+		'title': "cart - utoville",
 	}
 
 	try:
