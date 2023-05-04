@@ -12,7 +12,7 @@ import json
 # Create your views here.
 def user_product_list(request):
 	seo = {
-		'title': "상품 리스트 - 유토빌",
+		'title': "Product List - Utoville",
 	}
 
 	q = Q()
@@ -44,9 +44,12 @@ def user_product_list(request):
 	})
 
 
+def user_product_list_main_image(request):
+    w
+
 def user_product_detail(request, product_id):
 	seo = {
-		'title': "상품 디테일 - 유토빌",
+		'title': "Product Detail - Utoville",
 	}
 
 	product_detail = get_object_or_404(Product, pk=product_id)
@@ -95,7 +98,7 @@ def user_product_qna_question(request):
 		except:
 			result = {
 				'result': "201", 
-				'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+				'result_text': 'An unknown error has occurred. Please try again.'
 			}
 			return JsonResponse(result)
 
@@ -107,11 +110,11 @@ def user_product_qna_question(request):
 			product_qna.save()
 
 			result = '200'
-			result_text = "등록이 완료되었습니다."
+			result_text = "Registration is complete."
 		except Exception as e:
 			print(e)
 			result = '201'
-			result_text = '알수없는 오류입니다. 다시시도 해주세요.'
+			result_text = 'An unknown error has occurred. Please try again.'
 
 		result = {'result': result, 'result_text': result_text}
 		return JsonResponse(result)
@@ -129,13 +132,13 @@ def user_product_review_write(request):
 	if review is None or review == '':
 		return JsonResponse({
 			'result': "201", 
-			'result_text': '리뷰를 입력해주세요.'
+			'result_text': 'Please enter a review.'
 		})
 
 	if rating is None or rating == '':
 		return JsonResponse({
 			'result': "201", 
-			'result_text': '별점을 입력해주세요.'
+			'result_text': ' Please enter a rating.'
 		})
 
 	try:
@@ -143,7 +146,7 @@ def user_product_review_write(request):
 	except:
 		result = {
 			'result': "201", 
-			'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+			'result_text': 'An unknown error has occurred. Please try again.'
 		}
 		return JsonResponse(result)
 
@@ -162,10 +165,10 @@ def user_product_review_write(request):
 			product_review_image_obj.save()
 
 		result = '200'
-		result_text = "등록이 완료되었습니다."
+		result_text = "Registration is complete."
 	except Exception as e:
 		result = '201'
-		result_text = '알수없는 오류입니다. 다시시도 해주세요.'
+		result_text = 'An unknown error has occurred. Please try again.'
 		print(e,5555555555)
 	result = {'result': result, 'result_text': result_text}
 	return JsonResponse(result)

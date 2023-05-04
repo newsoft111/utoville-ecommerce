@@ -409,8 +409,6 @@ pointBtn.addEventListener("click", function(){
 	totalPoint.innerHTML = "-₱" + pointForm.value;
 });
 
-<<<<<<< Updated upstream
-=======
 async function pay_submit(order_pk, transaction_id) {
 	let amount = document.querySelector(".payment").innerHTML.replace(/[^\d.-]/g, '');
 	let form_data = {
@@ -433,7 +431,6 @@ async function pay_submit(order_pk, transaction_id) {
 		window.location.href = data.url;
 	})
 }
->>>>>>> Stashed changes
 
 async function order_submit() {
 	if(is_run == true) {
@@ -467,39 +464,6 @@ async function order_submit() {
 }
 
 
-<<<<<<< Updated upstream
-async function temp_call_back() {
-	if(is_run == true) {
-		openModal('알림','잠시후에 다시시도 해주세요.');
-		return false;
-	}
-
-	is_run = true;
-
-	let form_data = new FormData();
-	form_data.append('order_id', '1')
-	form_data.append('used_point', pointForm.value)
-
-    const response = await fetch("{% url 'charge:call_back' %}", {
-		method: "POST",
-		headers: {
-			"X-CSRFToken": getCookie("csrftoken"),
-		},
-		body: form_data,
-	})
-	.then(response => response.json())
-	.then(data => {
-		console.log(data);
-		is_run  = false;
-		if (data.result == '200') {
-			openModal("알림", data.result_text);
-		} else {
-			openModal("알림", data.result_text);
-		}
-	});
-}
-=======
->>>>>>> Stashed changes
 
 </script>
 {% endblock %}

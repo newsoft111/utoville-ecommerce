@@ -23,7 +23,7 @@ User = get_user_model()
 
 def user_login(request):
 	seo = {
-		'title': "로그인 - 유토빌",
+		'title': "Login - Utoville",
 	}
 	if request.user.is_authenticated: #로그인 상태면
 		return HttpResponseRedirect(resolve_url('main:user_index'))
@@ -35,21 +35,21 @@ def user_login(request):
 
 		if user is None:
 			result = '201'
-			result_text = '아이디와 비밀번호를 정확히 입력해 주세요.'
+			result_text = 'Please enter your ID and password correctly.'
 			return JsonResponse({'result': result, 'result_text': result_text})
 
 		if user.mb_status != 'Y':
 			result = '201'
-			result_text = f"관리자에게 문의바랍니다."
+			result_text = "Please contact the administrator."
 			return JsonResponse({'result': result, 'result_text': result_text})
 
 		if user.mb_active == 'Y':
 			auth.login(request, user)
 			result = '200'
-			result_text = '로그인 성공'
+			result_text = 'Welcome to Utoville Homecare.'
 		else:
 			result = '201'
-			result_text = '탈퇴한 계정입니다.'	
+			result_text = 'This account has been terminated.'	
 
 		return JsonResponse({'result': result, 'result_text': result_text})
 	else:
@@ -63,7 +63,7 @@ def user_logout(request):
 
 def user_join(request):
 	seo = {
-		'title': "회원가입 - 유토빌",
+		'title': "Join - Utoville",
 	}
 	if request.user.is_authenticated:
 		return HttpResponseRedirect(resolve_url('main:user_index'))
@@ -84,17 +84,17 @@ def user_join(request):
 
 		if _email is not None:
 			result = '201'
-			result_text = '입력한 이메일은 이미 사용 중입니다.'
+			result_text = 'This email is already in use.'
 			return JsonResponse({'result': result, 'result_text': result_text})
 
 		if _nickname is not None:
 			result = '201'
-			result_text = '입력한 닉네임은 이미 사용 중입니다.'
+			result_text = 'This nickname is already in use.'
 			return JsonResponse({'result': result, 'result_text': result_text})
 
 		if password != password2:
 			result = '201'
-			result_text = '비밀번호가 일치하지 않습니다.'
+			result_text = 'The passwords do not match.'
 			return JsonResponse({'result': result, 'result_text': result_text})
 		
 
@@ -106,10 +106,10 @@ def user_join(request):
 		
 		if send_auth_mail(email):
 			result = '200'
-			result_text = "회원가입이 완료되었습니다.<br>가입하신 이메일 주소로 인증 메일을 보내드렸습니다.<br>이메일 인증을 한 후에 정상적인 서비스 이용이 가능합니다."
+			result_text = 'Your registration has been completed.<br>We have sent a confirmation email to the email address you provided.<br>Please verify your email address to access our services.'
 		else:
 			result = '201'
-			result_text = '알수없는 오류입니다.<br>다시시도 해주세요.'
+			result_text = 'An unknown error has occurred.<br>Please try again.'
 
 		result = {'result': result, 'result_text': result_text}
 		return JsonResponse(result)
@@ -130,11 +130,11 @@ def join_confirm(request, uidb64, token):
 			user.is_verify = True
 			user.save()
 			auth.login(request, user)
-			message = "인증이 완료되었습니다."
+			message = "Authentication has been completed."
 		else:
-			message = "이미 인증을 완료했습니다."
+			message = "Authentication has already been completed."
 	else:
-		message = "알수없는 오류입니다. 다시시도 해주세요."
+		message = "An unknown error has occurred.<br>Please try again."
 	return render(request, 'user/main/index.html', {"message":message})
 
 
@@ -151,10 +151,10 @@ def re_verify(request):
 
 		if _email is not None and send_auth_mail(email):
 			result = '200'
-			result_text = f"{email}로 인증 메일을 보내드렸습니다.<br>이메일 인증을 한 후에 정상적인 서비스 이용이 가능합니다."
+			result_text = f"We have sent a confirmation email to {email}. <br>Please verify your email address to access our services."
 		else:
 			result = '201'
-			result_text = '알수없는 오류입니다. 다시시도 해주세요.'
+			result_text = 'An unknown error has occurred.<br>Please try again.'
 		result = {'result': result, 'result_text': result_text}
 		return JsonResponse(result)
 
@@ -164,7 +164,7 @@ def re_verify(request):
 
 def find_passwd(request):
 	seo = {
-		'title': "비밀번호 재설정 - 유토빌",
+		'title': "Password reset - Utoville",
 	}
 	if request.user.is_authenticated: #로그인 상태면
 		return HttpResponseRedirect(resolve_url('main:user_index'))
@@ -177,7 +177,7 @@ def find_passwd(request):
 
 		if user is None:
 			result = '201'
-			result_text = '등록되지 않은 이메일 입니다.'
+			result_text = 'This email is not registered.'
 			return JsonResponse({'result': result, 'result_text': result_text})
 
 
@@ -189,18 +189,18 @@ def find_passwd(request):
 		})
 
 		_result = EmailSender(
-			email              = email,
-			subject = '[유토빌] 비밀번호 재설정 안내 메일입니다.',
+			email   = email,
+			subject = '[Utoville] This is an e-mail informing you of resetting your password.',
 			message = emailContent,
 			mailType = 'html'
 		)
 		
 		if _result:
 			result = '200'
-			result_text = '비밀번호 재설정 메일이 전송되었습니다.<br>메일함을 확인해주세요.'
+			result_text = 'A password reset email has been sent. <br>Please check your mailbox.'
 		else:
 			result = '201'
-			result_text = '알수없는 오류입니다. 다시시도 해주세요.'
+			result_text = 'An unknown error has occurred.<br>Please try again.'
 			
 		result = {'result': result, 'result_text': result_text}
 		return JsonResponse(result)   
@@ -217,10 +217,10 @@ def reset_passwd(request, uidb64, token):
 		user = None
 
 	if user is None:
-		return render(request, 'user/main/index.html', {"message":"알수없는 오류입니다. 다시시도 해주세요."})
+		return render(request, 'user/main/index.html', {"message":"An unknown error has occurred.<br>Please try again."})
 		
 	if not PasswordResetTokenGenerator().check_token(user, token):
-		return render(request, 'user/main/index.html', {"message":"이미 사용된 인증메일 입니다."})
+		return render(request, 'user/main/index.html', {"message":"This confirmation email has already been used."})
 
 
 	if request.method == 'POST':
@@ -230,10 +230,10 @@ def reset_passwd(request, uidb64, token):
 			user.set_password(new_password)
 			user.save()
 			result = '200'
-			result_text = '비밀번호 변경이 완료되었습니다.<br>변경하신 비밀번호로 다시 로그인 해주시기 바랍니다.'
+			result_text = 'Your password has been successfully changed. <br>Please log in again with your new password.'
 		else:
 			result = '201'
-			result_text = '입력하신 비밀번호가 동일하지 않습니다.'
+			result_text = 'The passwords you entered do not match.'
 
 		result = {'result': result, 'result_text': result_text}
 		return JsonResponse(result)
@@ -257,7 +257,7 @@ def send_auth_mail(email):
 
 		EmailSender(
 			email              = email,
-			subject = '[유토빌] 이메일 주소 인증을 완료해 주세요.',
+			subject = '[Utoville] Please complete your email address verification.',
 			message = message,
 			mailType = 'html'
 		)
@@ -268,7 +268,7 @@ def send_auth_mail(email):
 @login_required(login_url="account:user_login")
 def user_my_dashboard(request):
 	"""Here we are preparing data to show order detail on user's calender"""
-
+	
 	if request.user.is_authenticated and not request.user.is_anonymous:
 		order_data = []
 
@@ -338,19 +338,19 @@ def user_my_dashboard(request):
 @login_required(login_url="account:user_login")
 def user_my_order(request):
 	seo = {
-		'title': "상품 리스트 - 유토빌",
+		'title': "Product list - Utoville",
 	}
 
 	order_status_dict = {
-		"1":"결제대기",
-		"2":"결제완료",
-		"3":"배달대기",
-		"4":"배달완료",
+		"1":"Payment Awaiting",
+		"2":"Payment Completed",
+		"3":"Delivery Awaiting",
+		"4":"Delivery Completed",
 	}
 
 	q = Q()
 	q &= Q(order__user = request.user)
-	q &= Q(order__payment__is_paid = True)
+	q &= ~Q(order__payment__paid_at = None)
 
 	now = date.today()
 	start_date = now-relativedelta(months=1)
@@ -408,7 +408,7 @@ def user_my_subscribe_cancel(request):
 @login_required(login_url="account:user_login")
 def user_my_qna_list(request):
 	seo = {
-		'title': "상품 리스트 - 유토빌",
+		'title': "Product List - Utoville",
 	}
 
 	q = Q()
@@ -433,15 +433,15 @@ def user_my_qna_write(request):
 		qna_type = jsonData.get('question')
 
 		if subject is None or subject == '':
-			result = {'result': '201', 'result_text': '제목을 입력해주세요.'}
+			result = {'result': '201', 'result_text': 'Please enter title.'}
 			return JsonResponse(result)
 
 		if question is None or question == '':
-			result = {'result': '201', 'result_text': '질문을 입력해주세요.'}
+			result = {'result': '201', 'result_text': 'Please enter your question.'}
 			return JsonResponse(result)
 
 		if qna_type is None or qna_type == '':
-			result = {'result': '201', 'result_text': '문의유형을 선택해주세요.'}
+			result = {'result': '201', 'result_text': 'Please select a type of question.'}
 			return JsonResponse(result)
 
 		try:
@@ -452,19 +452,19 @@ def user_my_qna_write(request):
 			qna_obj.qna_type = qna_type
 			qna_obj.save()
 
-			result = {'result': '200', 'result_text': '등록이 완료되었습니다.'}
+			result = {'result': '200', 'result_text': 'Your question has been registered.'}
 			return JsonResponse(result)
 
 		except Exception as e:
 			print(e)
-			result = {'result': '201', 'result_text': '알수없는 오류입니다. 관리자에게 문의해주세요.'}
+			result = {'result': '201', 'result_text': 'An unknown error has occurred. Please contact the administrator.'}
 			return JsonResponse(result)
 	else:
 		return render(request, 'user/account/mypage/my_qna_write.html')
 
 def user_my_qna_detail(request, qna_id):
 	seo = {
-		'title': "상품 리스트 - 유토빌",
+		'title': "Product List - Utoville",
 	}
 	
 	q = Q()

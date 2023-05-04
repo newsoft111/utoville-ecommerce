@@ -137,6 +137,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+    )
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -166,7 +170,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CURRENT_URL = 'http://localhost:8000'
-WATER_DELIVERY_SERVICE_NAME = '생수 배달'
+WATER_DELIVERY_SERVICE_NAME = 'Water Delivery'
 
 EMAIL_HOST = 'smtp.hanmail.net' 		 # 메일 호스트 서버
 EMAIL_PORT = 465 			 # 서버 포트

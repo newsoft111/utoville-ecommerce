@@ -75,8 +75,8 @@
 													<i class="icon nav-icon text-sm" data-feather="list" style="width: 20px;"></i>
 												</button>
 												<ul class="dropdown-menu dropdown-menu-end">
-													<li class="dropdown-item" onclick="change_status_submit(this, `{{profit_expect_obj.pk}}`, 'H')" style="cursor: pointer;">이체 보류</li>
-													<li class="dropdown-item" onclick="change_status_submit(this, `{{profit_expect_obj.pk}}`, 'D')" style="cursor: pointer;">이체 완료</li>
+													<li class="dropdown-item" onclick="change_status_submit(this, `{{profit_expect_obj.pk}}`, 'H')" style="cursor: pointer;">Hold</li>
+													<li class="dropdown-item" onclick="change_status_submit(this, `{{profit_expect_obj.pk}}`, 'D')" style="cursor: pointer;">Done</li>
 												</ul>
 											</div>
 										</td>
@@ -266,7 +266,7 @@ async function change_status_submit(e, profit_id, status) {
 	form_data.append('profit_id', profit_id);
 	form_data.append('status', status);
 
-	const response = fetch("{% url 'profit:admin_profit_expect_change_status' %}", {
+	const response = fetch("{% url 'profit:admin_profit_expect_change_status' %}", { 
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),
@@ -285,3 +285,4 @@ async function change_status_submit(e, profit_id, status) {
 };
 </script>
 {% endblock %}
+

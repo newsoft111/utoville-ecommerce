@@ -4434,9 +4434,9 @@ textarea.form-control-lg {
 }
 .active>.page-link,.page-link.active {
 	z-index:3;
-	color:var(--bs-pagination-active-color);
-	background-color: #8cb808;
-	border: 1px solid #8cb808;
+	color: #2ea7e0;
+	background-color: #fff;
+	border: 1px solid #2ea7e0;
 }
 .disabled>.page-link,.page-link.disabled {
 	color: #000;
@@ -17094,7 +17094,7 @@ b,strong {
 	will-change:transform
 }
 .collapse-group .nav-link[data-bs-toggle=collapse][aria-expanded=true],.collapse-group [data-bs-toggle=collapse][aria-expanded=true] {
-	color: #8cb808;
+	color: #2ea7e0;
 }
 .collapse-group .nav-link[data-bs-toggle=collapse][aria-expanded=true]::after,.collapse-group [data-bs-toggle=collapse][aria-expanded=true]::after {
 	transform:translateY(-50%) rotate(0)

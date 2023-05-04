@@ -2,6 +2,19 @@
 {% block content %}
 {% load static %}
 {% load humanize %}
+
+<style>
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.bx-x:before {
+	background-color: #fff;
+}
+
+</style>
+
 <section>
 	<div class="container pt-12 pt-lg-15">
 		<div class="row">
@@ -9,7 +22,7 @@
 				<h1 class="display-2 mb-3">
 					Partnership Inquiry
 				</h1>
-				<p class="mb-7 px-lg-9 lead">Thank you for your interest in partnering with us. We </p>
+				<p class="mb-7 px-lg-9 lead">Thank you for your interest in partnering with us. </p>
 			</div>
 			<img src="{% static 'user/img/faq_bg.jpg' %}" class="img-fluid rounded-block" alt="">
 		</div>		
@@ -30,49 +43,57 @@
 						<div class="row">
 							<div class="col-sm-6 mb-3">
 								<label class="form-label" for="name">Company Name</label>
-								<input type="text" name="name" class="form-control" id="name" placeholder="your name here" oninput="checkValidation(this)">
+								<input type="text" name="name" class="form-control" id="name" placeholder="company name here">
 								<div class="invalid-feedback">
-									Please enter a valid form
+									Please enter company name
+								</div>
+							</div>
+							<div class="col-sm-6 mb-3">
+								<label class="form-label" for="ceo_name">President/CEO</label>
+								<input type="text" name="ceo_name" class="form-control" id="ceo_name" placeholder="CEO name here">
+								<div class="invalid-feedback">
+									Please enter CEO name
 								</div>
 							</div>
 
 							<div class="col-sm-6 mb-3">
-								<label class="form-label" for="email">Company Website</label>
-								<input type="text" class="form-control" name="website" id="website" oninput="checkValidation(this)"
-									placeholder="If you have website, website address here">
+								<label class="form-label" for="contact">Contact</label>
+								<input type="number" name="contact" class="form-control" id="contact" placeholder="contact number here">
 								<div class="invalid-feedback">
-									Please enter a valid form
-								</div>
-							</div>
-
-							<div class="col-sm-6 mb-3">
-								<label class="form-label" for="name">Telephone</label>
-								<input type="number" name="telephone" class="form-control" id="telephone" placeholder="your telephone here" oninput="checkValidation(this)">
-								<div class="invalid-feedback">
-									Please enter a valid form
+									Please enter contact number
 								</div>
 							</div>
 
 							<div class="col-sm-6 mb-3">
 								<label class="form-label" for="email">Email Address</label>
-								<input type="email" class="form-control" name="email" id="email" oninput="checkValidation(this)"
-									placeholder="email address here">
+								<input type="email" class="form-control" name="email" id="email" oninput="checkValidation(this)" placeholder="email address here">
 								<div class="invalid-feedback">
 									Please enter a valid email address
 								</div>
 							</div>
 
+							<div class="col-sm-6 mb-3">
+								<label class="form-label" for="address">Address</label>
+								<input type="text" class="form-control" name="address" id="address" placeholder="address here">
+								<div class="invalid-feedback">
+									Please enter company address
+								</div>
+							</div>
+
+							<div class="col-sm-6 mb-3">
+								<label class="form-label" for="website">Company Website</label>
+								<input type="text" class="form-control" name="website" id="website" placeholder="If you have website, website address here">
+							</div>
 
 							<div class="col-sm-12 mb-3">
 								<label class="form-label" for="subject">Upload Business License</label>
-								<div class="thumbnail-preview row" id="thumbnail-preview" >
-								</div>
 								<div class="chat-form rounded-pill" data-emoji-form="">
 									<input type="file" class="d-none" name="thumbnail" id="thumbnail-upload" onclick="handleClick(this);" accept="image/png, image/jpeg, image/gif">
 									<label for="thumbnail-upload">
 										<span class="btn btn-light">Select File</span>
 									</label>
 								</div>
+								<div class="thumbnail-preview row" id="thumbnail-preview" ></div>
 							</div>
 
 
@@ -95,15 +116,6 @@
 let sendBtn = document.getElementById("sendBtn");
 
 function checkValidation(e) {
-	if(e.name == 'name') {
-		if(e.value == '') {
-			e.classList.remove("is-invalid");
-		}else if(!name_check(e.value)) {
-			e.classList.add("is-invalid");
-		}else{
-			e.classList.remove("is-invalid")
-		}
-	}
 	if(e.name == 'email'){
 		if(e.value == '') {
 			e.classList.remove("is-invalid");
@@ -127,21 +139,20 @@ sendBtn.addEventListener("click", () => {
 		document.querySelector("#email").classList.add("is-invalid");
 		count ++;		
 	}
-
-	if(document.querySelector("#subject").value == ''){
-		document.querySelector("#subject").classList.add("is-invalid");	
-		
-		count ++;
-	}else{
-		document.querySelector("#subject").classList.remove("is-invalid")
+	if(document.querySelector("#ceo_name").value == ''){
+		document.querySelector("#ceo_name").classList.add("is-invalid");
+		count ++;		
+	}
+	if(document.querySelector("#contact").value == ''){
+		document.querySelector("#contact").classList.add("is-invalid");
+		count ++;		
+	}
+	if(document.querySelector("#address").value == ''){
+		document.querySelector("#address").classList.add("is-invalid");
+		count ++;		
 	}
 
-	if(document.querySelector("#message").value == ''){
-		document.querySelector("#message").classList.add("is-invalid");	
-		count ++;
-	}else {
-		document.querySelector("#message").classList.remove("is-invalid")
-	}
+
 
 	if(count == 0) {
 		return true;
@@ -237,6 +248,7 @@ function open_review_write_modal(product_id) {
 	var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#reviewWriteModal'));
 	modal.show();
 }
+
 </script>
 
 {% endblock %}
