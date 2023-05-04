@@ -25,7 +25,6 @@ def user_payment(request):
 		order_obj.payment = payment_obj
 		order_obj.save()
 	except Exception as e:
-		print(e)
 		return JsonResponse({
 			'result': '201', 
 			'result_text': 'An unknown error has occurred. Please try again.'

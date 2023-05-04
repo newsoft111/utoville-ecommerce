@@ -108,7 +108,7 @@
                            </tr>
                            <tr>
                               <td>Shipping Charge :</td>
-                              <td class="text-end" id="shipping-charge">- ₱2</td>
+                              <td class="text-end" id="shipping-charge">+ ₱2</td>
                            </tr>
                            <tr class="bg-light">
                               <th>Total :</th>
@@ -230,7 +230,10 @@ function cal_checked_item_price() {
  		arr.push(objData);
 	});	
 
-	total_price = (parseFloat(sub_total_price) - parseFloat(itemDiscount) - parseFloat(shippingCharge)).toFixed(2);
+	total_price = (parseFloat(sub_total_price) - parseFloat(itemDiscount) + parseFloat(shippingCharge)).toFixed(2);
+	if(total_price < 0) {
+		document.querySelector("#total-price").innerHTML = '₱ 0';
+	}
 
 	document.querySelector("input[name=obj_data]").value=JSON.stringify(arr);
 	document.querySelector("#sub-total-price").innerHTML = '₱'+numberWithCommas(sub_total_price);
