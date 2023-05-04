@@ -113,7 +113,8 @@ def user_order_create(request):
 			
 		return JsonResponse({
 			'result': '200', 
-			'result_text': order_obj.pk
+			'order_pk': order_obj.pk,
+			'transaction_id' : order_obj.txnid
 		})
 	else:
 		return redirect("main:user_index")
@@ -121,10 +122,6 @@ def user_order_create(request):
 
 
 class UserOrderPay(View):
-	def hexdec_uniqid(self):
-		unique_id = uuid.uuid4().hex[:16] # 16자리만 추출
-		return int(unique_id, 16)
-	
 	def get(self, request):
 		return HttpResponse('404')
 	
@@ -132,11 +129,28 @@ class UserOrderPay(View):
 		jsonData = json.loads(request.body)
 		amount  = jsonData.get('amount')
 		description = jsonData.get('description')
-
+		order_pk = jsonData.get('order_pk')
+		transaction_id = jsonData.get('transaction_id')
+		param1 = {
+			"order_pk" : order_pk,
+			"user_pk" : request.user.id
+		}
 		dragon_pay = DragonPay()
+<<<<<<< Updated upstream
 		return HttpResponse(dragon_pay.token_pay(
 			self.hexdec_uniqid(), #txnid
 			amount, #금액
 			description, #메모
 			request.user.email #이메일
 		))
+=======
+		return JsonResponse(
+			{"url":dragon_pay.token_pay(
+				transaction_id, #txnid
+				amount, #금액
+				description, #메모
+				request.user.email, #이메일
+				param1 #부가정보
+			)}
+		)
+>>>>>>> Stashed changes

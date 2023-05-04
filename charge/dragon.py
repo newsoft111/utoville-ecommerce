@@ -16,7 +16,7 @@ class DragonPay(object):
 		production = True
 		self.url = self.production_url if production else self.test_url
 
-	def get_token(self, transaction_id, amount, description, email):
+	def get_token(self, transaction_id, amount, description, email, param1):
 		url = f"{self.url}/DragonPayWebService/MerchantService.asmx?wsdl"
 		client = Client(url)
 
@@ -28,8 +28,7 @@ class DragonPay(object):
 			"ccy": "PHP",
 			"description": description,
 			"email": email,
-			"param1": '',
-			"param2": ''
+			"param1": param1,
 		}
 
 		token = client.service.GetTxnToken(**data)
