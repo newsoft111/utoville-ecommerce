@@ -111,6 +111,7 @@ def user_order_create(request):
 			
 		return JsonResponse({
 			'result': '200', 
+			'order_id': order_obj.pk,
 		})
 	else:
 		return redirect("main:user_index")

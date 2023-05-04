@@ -2,56 +2,63 @@ import hashlib
 import urllib, requests, base64
 from decimal import Decimal
 from zeep import Client
-
+import json
 
 class DragonPay(object):
 	"""Dragonpay class"""
 	production_url = "https://gw.dragonpay.ph"
 	test_url = "https://test.dragonpay.ph"
 
-	def __init__(self):
+	def __init__(self, transaction_id, amount, description, email, param1):
 		self.merchant_id = 'UTOVILLEPH'
 		#self.secretkey = 'RdcRk3hUxvis8vQ'
 		self.secretkey = 'RdcRk3hUxvis8vQ'
 		production = True
 		self.url = self.production_url if production else self.test_url
 
-	def get_token(self, transaction_id, amount, description, email, param1):
+		self.transaction_id = transaction_id
+		self.amount = amount
+		self.description = description
+		self.email = email
+		self.param1 = json.dumps(param1)
+
+	def get_token(self):
 		url = f"{self.url}/DragonPayWebService/MerchantService.asmx?wsdl"
 		client = Client(url)
 
 		data = {
 			"merchantId": self.merchant_id,
 			"password": self.secretkey,
-			"merchantTxnId": transaction_id,
-			"amount": self.format_amount(amount),
+			"merchantTxnId": self.transaction_id,
+			"amount": self.format_amount(self.amount),
 			"ccy": "PHP",
-			"description": description,
-			"email": email,
-			"param1": param1,
+			"description": self.description,
+			"email": self.email,
+			"param1": self.param1,
+			"param2": ''
 		}
 
 		token = client.service.GetTxnToken(**data)
 		return token
 
 	#결제모듈
-	def api_pay(self, transaction_id, amount, currency, description, email):
+	def api_pay(self):
 		"""Pay method"""
 		digest = self.digest_parameters(
-			transaction_id,
-			self.format_amount(amount),
-			currency,
-			description,
-			email
+			self.transaction_id,
+			self.format_amount(self.amount),
+			"PHP",
+			self.description,
+			self.email
 		)
 		
 		data = {
 			"merchantid": self.merchant_id,
-			"txnid": transaction_id,
-			"amount": self.format_amount(amount),
-			"ccy": currency,
-			"description": description,
-			"email": email,
+			"txnid": self.transaction_id,
+			"amount": self.format_amount(self.amount),
+			"ccy": "PHP",
+			"description": self.description,
+			"email": self.email,
 			"digest": digest,
 		}
 
@@ -59,8 +66,8 @@ class DragonPay(object):
 		return self.url + "/Pay.aspx?" + urllib.parse.urlencode(data)
 
 
-	def token_pay(self, transaction_id, amount, description, email):
-		token = self.get_token(transaction_id, amount, description, email)
+	def token_pay(self):
+		token = self.get_token()
 
 		return self.url + '/Pay.aspx?tokenid=' + token + "&procid=CUP"
 

@@ -393,10 +393,10 @@ async function order_create_submit() {
       console.log(data);
       is_run  = false;
       if (data.result == '200') {
-         window.history.pushState("", "", `{% url 'order:user_order_view' %}?id=${data.result_text}`);
+         window.history.pushState("", "", `{% url 'order:user_order_view' %}?id=${data.order_id}`);
          window.location.reload();
       } else {
-         openModal("알림", data.result_text);
+         openModal("알림", "Error");
       }
    });
 }

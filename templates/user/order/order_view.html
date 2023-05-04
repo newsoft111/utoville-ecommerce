@@ -334,7 +334,7 @@
 						</div> <!-- end col -->
 						<div class="col">
 							<div class="text-end mt-2 mt-sm-0">
-								<a href="#!" onclick="pay_submit();" class="btn btn-outline-brandGreen btn-rise">
+								<a href="#!" onclick="order_submit();" class="btn btn-outline-brandGreen btn-rise">
 									<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
 									<div class="btn-rise-text">Procced</div>
 								</a>
@@ -415,10 +415,8 @@ async function order_submit() {
 		"used_point" : pointForm.value,
 		"amount" : amount,
 		"description" : "",
-		"order_pk" : order_pk,
-		"transaction_id" : transaction_id
 	}
-	console.log(form_data, JSON.stringify(form_data))
+
 	const response = await fetch("{% url 'charge:user_pay' %}", {
 		method: "POST",
 		headers: {
@@ -429,6 +427,8 @@ async function order_submit() {
 	})
 	.then(response => response.json())
 	.then(data => {
+		console.log(data)
+		//여기에 추가되야 할것 pc일때 새창 모바일일땐 그대로
 		window.location.href = data.url;
 	})
 }
