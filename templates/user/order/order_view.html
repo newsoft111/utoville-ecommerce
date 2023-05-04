@@ -334,7 +334,7 @@
 						</div> <!-- end col -->
 						<div class="col">
 							<div class="text-end mt-2 mt-sm-0">
-								<a href="#!" onclick="order_submit();" class="btn btn-outline-brandGreen btn-rise">
+								<a href="#!" onclick="pay_submit();" class="btn btn-outline-brandGreen btn-rise">
 									<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
 									<div class="btn-rise-text">Procced</div>
 								</a>
@@ -408,6 +408,26 @@ pointBtn.addEventListener("click", function(){
 
 });
 
+async function pay_submit() {
+	let amount = document.querySelector(".payment").innerHTML.replace(/[^\d.-]/g, '');
+	let form_data = {
+		amount : amount,
+		description : ""
+	}
+	console.log(form_data, JSON.stringify(form_data))
+	const response = await fetch("{% url 'order:user_order_pay' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+			"Content-Type": "application/json"
+		},
+		body : JSON.stringify(form_data),
+	})
+	.then(response => response.json())
+	.then(data => {
+		window.location.href = data.url;
+	})
+}
 
 async function order_submit() {
 	if(is_run == true) {

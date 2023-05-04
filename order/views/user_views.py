@@ -134,9 +134,11 @@ class UserOrderPay(View):
 		description = jsonData.get('description')
 
 		dragon_pay = DragonPay()
-		return HttpResponse(dragon_pay.token_pay(
-			self.hexdec_uniqid(), #txnid
-			amount, #금액
-			description, #메모
-			request.user.email #이메일
-		))
+		return JsonResponse(
+			{"url":dragon_pay.token_pay(
+				self.hexdec_uniqid(), #txnid
+				amount, #금액
+				description, #메모
+				request.user.email #이메일
+			)}
+		)
