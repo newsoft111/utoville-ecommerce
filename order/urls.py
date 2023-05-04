@@ -1,4 +1,5 @@
 from django.urls import path, include
+
 from . import views
 
 app_name = 'order'
@@ -8,6 +9,7 @@ user_urlpatterns = [
 	path(f'{app_name}/',
 		include([
 			path('', views.user_order_view, name='user_order_view'),
+			path('pay/', views.UserOrderPay.as_view(), name='user_order_pay'),
 			path('create/', views.user_order_create, name='user_order_create'),
 		])
 	),
