@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from ..models import *
 from charge.models import *
 from django.db.models import Q
 import json
+from .dragon import DragonPay
+import uuid
 
 @login_required(login_url="account:user_login")
 def user_order_view(request):
@@ -45,7 +47,7 @@ def user_order_create(request):
 		for order_item in order_item_list:
 			product_id = order_item['product_id']
 			try:
-				variant_value_id = item["variant_value_id"]
+				variant_value_id = order_item["variant_value_id"]
 			except:
 				variant_value_id = None
 			ordered_quantity = order_item['qty']
@@ -113,5 +115,21 @@ def user_order_create(request):
 			'result_text': order_obj.pk
 		})
 	else:
-		return redirect("main:index")
+		return redirect("main:user_index")
 
+
+
+def user_order_pay(request):
+	def hexdec_uniqid():
+		unique_id = uuid.uuid4().hex[:16] # 16자리만 추출
+		return int(unique_id, 16)
+	
+	d = DragonPay("UTOVILLEPH", "RdcRk3hUxvis8vQ", production=True)
+
+	return HttpResponse(d.pay(
+		hexdec_uniqid(), #txnid
+		"111", 
+		"PHP", 
+		"",
+		"asgd@asdjflksd.com"
+	))
