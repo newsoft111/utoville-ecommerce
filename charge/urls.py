@@ -6,8 +6,7 @@ app_name = 'charge'
 user_urlpatterns = [
 	path(f'{app_name}/',
 		include([
-			
-			path('', views.user_payment, name='user_payment'),
+			path('', views.UserOrderPay.as_view(), name='user_pay'),
 		])
 	)
 ]

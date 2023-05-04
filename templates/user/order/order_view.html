@@ -67,17 +67,7 @@
 	}
 }
 </style>
-<!--Form billing information-->
-<section class="position-relative overflow-hidden">    
-	<div class="container-fluid">
-	   <div class="py-8 py-lg-11 bg-dark text-white position-relative">
-			<img src="assets/img/shop/banners/06.jpg" class="bg-image bg-top-center opacity-75" alt="">
-			<div class="col-lg-10 mx-auto text-center">
-			<h1 class="mb-0 display-3">Order View</h1>
-			</div>
-	   </div>
-	</div>
- </section>
+
 <section class="position-relative bg-white" id="order-view-section">
 	<div class="container pb-7 pb-lg-12 pt-7 position-relative">
 		<div class="row">
@@ -93,8 +83,11 @@
 								</div>
 								<div class="feed-item-list">
 									<div>
-										<h5 class="font-size-16 mb-1">Billing Info</h5>
-										<p class="text-muted text-truncate mb-4">Sed ut perspiciatis unde omnis iste</p>
+										<h5 class="font-size-16 mb-3">Shipping Info</h5>
+										<!-- <div class="select_shipping_info py-3">
+											<span class="fs-6 me-3"><input type="radio" name="shipping_info" style="margin-right: 3px; vertical-align: -1px;" checked>Default shipping address</span>
+											<span class="fs-6"><input type="radio" name="shipping_info" style="margin-right: 3px; vertical-align: -1px;">New shipping address</span>
+										</div> -->
 										<div class="mb-3">
 											<form>
 												<div>
@@ -121,7 +114,7 @@
 
 													<div class="mb-3">
 														<label class="form-label" for="billing-address">Address</label>
-														<textarea class="form-control" style="border-color: #ddd;" id="billing-address" rows="3" placeholder="Enter full address"></textarea>
+														<textarea class="form-control" style="border-color: #ddd;" id="billing-address" rows="3" placeholder="Enter full address">{{user.address}}</textarea>
 													</div>
 
 													<div class="row">
@@ -154,7 +147,7 @@
 									</div>
 								</div>
 							</li>
-							<li class="checkout-item">
+							<!-- <li class="checkout-item">
 								<div class="avatar checkout-icon p-1">
 									<div class="avatar-title rounded-circle bg-brandBlue">
 										<i class="bx bxs-truck text-white font-size-20"></i>
@@ -163,7 +156,6 @@
 								<div class="feed-item-list">
 									<div>
 										<h5 class="font-size-16 mb-1">Shipping Info</h5>
-										<p class="text-muted text-truncate mb-4">Neque porro quisquam est</p>
 										<div class="mb-3">
 											<div class="row">
 												<div class="col-lg-4 col-sm-6 position-relative">
@@ -207,7 +199,7 @@
 										</div>
 									</div>
 								</div>
-							</li>
+							</li> -->
 							<li class="checkout-item">
 								<div class="avatar checkout-icon p-1">
 									<div class="avatar-title rounded-circle bg-brandBlue">
@@ -217,16 +209,15 @@
 								<div class="feed-item-list">
 									<div>
 										<h5 class="font-size-16 mb-1">Payment Info</h5>
-										<p class="text-muted text-truncate mb-4">Duis arcu tortor, suscipit eget</p>
 									</div>
 									<div class="mb-4">
 										<h5 class="font-size-14 mb-3">Use Point :</h5>
 										<div class="point-input text-start">
 											<input type="text" name="points" min="0" value="0" class="use-point">
-											<button class="btn point-btn">전액사용</button>									
+											<button class="btn point-btn">Use all points</button>									
 										</div>	
 									</div>
-									<div>
+									<!-- <div>
 										<h5 class="font-size-14 mb-3">Payment method :</h5>
 										<div class="row">
 											<div class="col-lg-3 col-sm-6">
@@ -266,7 +257,7 @@
 												</div>
 											</div>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</li>
 						</ol>
@@ -289,7 +280,7 @@
 									<div class="mb-2">
 										<h5 class="font-size-16 text-truncate mb-0"><a href="{% url 'product:user_product_list' %}" class="text-dark order-product-name">{{order_item.product_name}}</a></h5>
 										<span class="w-25 text-end order-item-price">
-											₱{{order_item.sub_total_price |intcomma}}
+											₱ {{order_item.sub_total_price |intcomma}}
 										</span>
 									</div>
 									
@@ -301,7 +292,7 @@
 										<span class="text-uppercase d-block">+₱{{order_item.variant_price}}</span>
 										{% endif %}
 										<p class="text-muted mb-0 mt-1">
-											₱{{order_item.sub_price|intcomma}} X {{order_item.ordered_quantity}}
+											₱ {{order_item.sub_price|intcomma}} X {{order_item.ordered_quantity}}
 										</p>
 									</div>
 								</div>
@@ -309,28 +300,30 @@
 							</div>
 							<hr>
 							{% endfor %}
+
 							<div class="d-flex justify-content-between p-2 mb-2">
 								<h5 class="font-size-14 m-0">Sub Total :</h5>
-								<span class="total-price">₱{{total_price|intcomma}}</span>
+								<span class="sub_total_price"></span>
 							</div>
 							<div class="d-flex justify-content-between p-2 mb-2">  
 								<h5 class="font-size-14 m-0">Discount :</h5>
-								<span>0</span>
+								<span class="discount_price">-₱ 1,000</span>
 							</div>
 							<div class="d-flex justify-content-between p-2 mb-2">  
 								<h5 class="font-size-14 m-0">Point :</h5>
-								<span class="total-point">0</span>
+								<span class="total-point">-₱ 0.00</span>
 							</div>
 							<div class="d-flex justify-content-between p-2 mb-2">
 								<h5 class="font-size-14 m-0">Shipping Charge :</h5>
-								<span>0</span>
+								<span class="shipping_charge">+₱ 5,000</span>
 							</div>                     	
 							<div class="d-flex justify-content-between align-items-center p-2 mb-5 bg-light">
 								<h5 class="font-size-14 m-0">Total:</h5>
 								<span class="pd fw-bold fs-5 text-dark">
-									<span class="payment">₱{{total_price|intcomma}}</span>
+									<span class="payment total_price"></span>
 								</span>
 							</div>
+
 						</div>
 					</div>
 					<div class="row my-4">
@@ -341,7 +334,7 @@
 						</div> <!-- end col -->
 						<div class="col">
 							<div class="text-end mt-2 mt-sm-0">
-								<a href="#!" onclick="order_submit();" class="btn btn-outline-brandGreen btn-rise">
+								<a href="#!" onclick="pay_submit();" class="btn btn-outline-brandGreen btn-rise">
 									<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
 									<div class="btn-rise-text">Procced</div>
 								</a>
@@ -360,23 +353,22 @@
 let is_run = false;
 
 let pointForm = document.querySelector(".use-point");
-let totalPrice = document.querySelector(".total-price");
 let pointBtn = document.querySelector(".point-btn");
 let payment = document.querySelector(".payment");
-let usingPoint = document.querySelector(".using-point");
 
-
-const regex = /[^0-9.]/g;
-const result = totalPrice.innerHTML.replace(regex, "");
 
 "propertychange change keyup paste input".split(" ").forEach(function(e){ 
 	  pointForm.addEventListener(e, function(){
+		let subTotalPrice = document.querySelector(".sub_total_price").innerHTML.replace(/[^\d.-]/g, '');
+		let discountPrice = parseFloat(document.querySelector(".discount_price").innerHTML.replace(/[^\d.-]/g, ''));
+		let shippingCharge = parseFloat(document.querySelector(".shipping_charge").innerHTML.replace(/[^\d.-]/g, ''));
 		let check = /^[0-9.]+$/;
+
 		pointForm.value = Number(pointForm.value).toFixed(2);
 
 		if(!check.test(pointForm.value) && pointForm.value != ''){
 			pointForm.value = 0;
-			payment.innerHTML = "₱" + "{{total_price|intcomma}}";
+			payment.innerHTML = "₱ " + "{{total_price|intcomma}}";
 			return false;	
 		}
 		
@@ -390,35 +382,44 @@ const result = totalPrice.innerHTML.replace(regex, "");
 			return false;
 		}
 
-		let calcPrice = (result - pointForm.value).toFixed(2);
-		let sumPrice= numberWithCommas(calcPrice);
-		payment.innerHTML = "₱" + sumPrice;				
+		document.querySelector(".total-point").innerText = "-₱ " + pointForm.value;
+		let calcPrice = numberWithCommas((subTotalPrice - pointForm.value + discountPrice + shippingCharge).toFixed(2));
+
+		payment.innerHTML = "₱ " + calcPrice;	
 		
 	});
 
 });
 
 pointBtn.addEventListener("click", function(){
-	pointForm.value = '{{request.user.point}}';
 
-	let calcPrice = (result - pointForm.value).toFixed(2);
-	let sumPrice= numberWithCommas(calcPrice);
+	pointForm.value = '{{request.user.point}}';
+	let subTotalPrice = document.querySelector(".sub_total_price").innerHTML.replace(/[^\d.-]/g, '');	
+	let discountPrice = parseFloat(document.querySelector(".discount_price").innerHTML.replace(/[^\d.-]/g, ''));
+	let shippingCharge = parseFloat(document.querySelector(".shipping_charge").innerHTML.replace(/[^\d.-]/g, ''));
+	let calcPrice = numberWithCommas((subTotalPrice - pointForm.value + discountPrice + shippingCharge).toFixed(2));
+
 	let totalPoint = document.querySelector(".total-point");
 
-	payment.innerHTML = "₱" + sumPrice;
-	totalPoint.innerHTML = "-₱" + pointForm.value;
+	
+	payment.innerHTML = "₱ " + calcPrice;
+	totalPoint.innerHTML = "-₱ " + pointForm.value;
+
+
 });
 
-async function pay_submit(order_pk, transaction_id) {
+async function order_submit() {
 	let amount = document.querySelector(".payment").innerHTML.replace(/[^\d.-]/g, '');
 	let form_data = {
+		"order_id" : '{{request.GET.id}}',
+		"used_point" : pointForm.value,
 		"amount" : amount,
 		"description" : "",
 		"order_pk" : order_pk,
 		"transaction_id" : transaction_id
 	}
 	console.log(form_data, JSON.stringify(form_data))
-	const response = await fetch("{% url 'order:user_order_pay' %}", {
+	const response = await fetch("{% url 'charge:user_pay' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),
@@ -432,38 +433,20 @@ async function pay_submit(order_pk, transaction_id) {
 	})
 }
 
-async function order_submit() {
-	if(is_run == true) {
-		openModal('알림','잠시후에 다시시도 해주세요.');
-		return false;
-	}
 
-	is_run = true;
-
-	let form_data = new FormData();
-	form_data.append('order_id', '{{request.GET.id}}')
-	form_data.append('used_point', pointForm.value)
-
-    const response = await fetch("{% url 'charge:user_payment' %}", {
-		method: "POST",
-		headers: {
-			"X-CSRFToken": getCookie("csrftoken"),
-		},
-		body: form_data,
+window.addEventListener("load", function(){
+	let subTotalPrice = 0;
+	let totalPrice = 0;
+	let discountPrice = parseFloat(document.querySelector(".discount_price").innerHTML.replace(/[^\d.-]/g, ''));
+	let shippingCharge = parseFloat(document.querySelector(".shipping_charge").innerHTML.replace(/[^\d.-]/g, ''));
+	let orderItemPrice = document.querySelectorAll(".order-item-price")
+	
+	orderItemPrice.forEach(item => {
+		let price = item.innerText.replace(/[^\d.-]/g, '');
+		subTotalPrice += parseFloat(price);
 	})
-	.then(response => response.json())
-	.then(data => {
-		console.log(data);
-		is_run  = false;
-		if (data.result == '200') {
-			pay_submit(order_pk, transaction_id);
-		} else {
-			openModal("알림", data.result_text);
-		}
-	});
-}
-
-
-
+	document.querySelector(".sub_total_price").innerHTML = numberWithCommas("₱ " + parseFloat(subTotalPrice).toFixed(2));
+	document.querySelector(".total_price").innerHTML = numberWithCommas("₱ " + (subTotalPrice + discountPrice + shippingCharge ).toFixed(2));
+})
 </script>
 {% endblock %}
