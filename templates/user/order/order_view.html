@@ -408,14 +408,18 @@ pointBtn.addEventListener("click", function(){
 
 });
 
-async function pay_submit() {
+async function order_submit() {
 	let amount = document.querySelector(".payment").innerHTML.replace(/[^\d.-]/g, '');
 	let form_data = {
-		amount : amount,
-		description : ""
+		"order_id" : '{{request.GET.id}}',
+		"used_point" : pointForm.value,
+		"amount" : amount,
+		"description" : "",
+		"order_pk" : order_pk,
+		"transaction_id" : transaction_id
 	}
 	console.log(form_data, JSON.stringify(form_data))
-	const response = await fetch("{% url 'order:user_order_pay' %}", {
+	const response = await fetch("{% url 'charge:user_pay' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),
@@ -429,68 +433,6 @@ async function pay_submit() {
 	})
 }
 
-async function order_submit() {
-	if(is_run == true) {
-		openModal('','Please try again later.');
-		return false;
-	}
-
-	is_run = true;
-
-	let form_data = new FormData();
-	form_data.append('order_id', '{{request.GET.id}}')
-	form_data.append('used_point', pointForm.value)
-
-    const response = await fetch("{% url 'charge:user_payment' %}", {
-		method: "POST",
-		headers: {
-			"X-CSRFToken": getCookie("csrftoken"),
-		},
-		body: form_data,
-	})
-	.then(response => response.json())
-	.then(data => {
-		console.log(data);
-		is_run  = false;
-		if (data.result == '200') {
-			temp_call_back();
-		} else {
-			openModal("", data.result_text);
-		}
-	});
-}
-
-
-async function temp_call_back() {
-	if(is_run == true) {
-		openModal('','Please try again later.');
-		return false;
-	}
-
-	is_run = true;
-
-	let form_data = new FormData();
-	form_data.append('order_id', '1')
-	form_data.append('used_point', pointForm.value)
-
-    const response = await fetch("{% url 'charge:call_back' %}", {
-		method: "POST",
-		headers: {
-			"X-CSRFToken": getCookie("csrftoken"),
-		},
-		body: form_data,
-	})
-	.then(response => response.json())
-	.then(data => {
-		console.log(data);
-		is_run  = false;
-		if (data.result == '200') {
-			openModal("", data.result_text);
-		} else {
-			openModal("", data.result_text);
-		}
-	});
-}
 
 window.addEventListener("load", function(){
 	let subTotalPrice = 0;
