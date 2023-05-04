@@ -6,18 +6,37 @@ from zeep import Client
 
 class DragonPay(object):
 	"""Dragonpay class"""
+	production_url = "https://gw.dragonpay.ph"
+	test_url = "https://test.dragonpay.ph"
 
-	production = "https://gw.dragonpay.ph"
-	test = "https://test.dragonpay.ph"
+	def __init__(self):
+		self.merchant_id = 'UTOVILLEPH'
+		#self.secretkey = 'RdcRk3hUxvis8vQ'
+		self.secretkey = 'RdcRk3hUxvis8vQ'
+		production = True
+		self.url = self.production_url if production else self.test_url
 
-	def __init__(self, merchant_id, secretkey, production=False):
-		self.merchant_id = merchant_id
-		self.secretkey = secretkey
-		self.url = self.production if production else self.test
+	def get_token(self, transaction_id, amount, description, email):
+		url = f"{self.url}/DragonPayWebService/MerchantService.asmx?wsdl"
+		client = Client(url)
 
+		data = {
+			"merchantId": self.merchant_id,
+			"password": self.secretkey,
+			"merchantTxnId": transaction_id,
+			"amount": self.format_amount(amount),
+			"ccy": "PHP",
+			"description": description,
+			"email": email,
+			"param1": '',
+			"param2": ''
+		}
+
+		token = client.service.GetTxnToken(**data)
+		return token
 
 	#결제모듈
-	def pay(self, transaction_id, amount, currency, description, email):
+	def api_pay(self, transaction_id, amount, currency, description, email):
 		"""Pay method"""
 		digest = self.digest_parameters(
 			transaction_id,
@@ -41,24 +60,9 @@ class DragonPay(object):
 		return self.url + "/Pay.aspx?" + urllib.parse.urlencode(data)
 
 
-	def get_token(self, transaction_id, amount, currency, description, email):
-		url = f"{self.url}/DragonPayWebService/MerchantService.asmx?wsdl"
-		client = Client(url)
+	def token_pay(self, transaction_id, amount, description, email):
+		token = self.get_token(transaction_id, amount, description, email)
 
-		data = {
-			"merchantId": self.merchant_id,
-			"password": self.secretkey,
-			"merchantTxnId": transaction_id,
-			"amount": self.format_amount(amount),
-			"ccy": currency,
-			"description": description,
-			"email": email,
-			"param1": '',
-			"param2": ''
-		}
-
-		token = client.service.GetTxnToken(**data)
-		print(token)
 		return self.url + '/Pay.aspx?tokenid=' + token + "&procid=CUP"
 
 
