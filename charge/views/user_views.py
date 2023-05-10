@@ -39,7 +39,6 @@ class UserOrderPay(View):
 			order_obj.save()
 			
 		except Exception as e:
-			print(e)
 			return JsonResponse({
 				'result': '201', 
 				'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
@@ -48,9 +47,16 @@ class UserOrderPay(View):
 			
 		param1 = {
 			"order_id" : order_id,
-			"user_id" : request.user.id
+			"user_id" : request.user.id,
+			"result_url" : ''
 		}
-		dragon_pay = DragonPay(order_obj.txnid, amount, description, request.user.email, param1)
+		dragon_pay = DragonPay()
 		return JsonResponse(
-			{"url":dragon_pay.token_pay()}
+			{"url":dragon_pay.pay(
+				order_obj.txnid,
+				amount,
+				description,
+				request.user.email,
+				param1
+			)}
 		)
