@@ -33,38 +33,6 @@
     white-space: nowrap;
     overflow: hidden;
 }
-.modal .modal-header .close {
-	border: none;
-    background-color: white;
-	font-size: 25px;
-}
-.modal .modal-body table {
-	width: 100%;
-	font-size: 12px;
-	letter-spacing: -1px;
-	color: #4d4d4d;
-	text-align: center;
-}
-.modal .modal-body table thead {
-    background: #ebebeb;
-	font-weight: bold;
-}
-.modal .modal-body table th {
-	font-weight: bold;
-}
-.modal .modal-body table th,
-.modal .modal-body table td {
-	padding: 10px;
-	border: 1px solid #d9d9d9;
-}
-.modal .modal-footer {
-	padding: 16px;
-}
-.modal .modal-footer .edit-btn-group button[type=button],
-.modal .modal-footer .select-shipping-btn {
-	padding: 8px 10px;
-	font-size: 10px !important;
-}
 
 @media only screen and (max-width: 442px) {
 	.point-btn {
@@ -116,9 +84,9 @@
 								<div class="feed-item-list">
 									<div>
 										<h5 class="font-size-16 mb-3">Shipping Info</h5>
-										<div class="view-shipping-list py-3">
+										<!-- <div class="view-shipping-list py-3">
 											<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#shippingListModal">List of shipping destinations</button>	
-										</div>
+										</div> -->
 										<div class="mb-3">
 											<form id="shipping-form" method="POST">
 												<div>
@@ -148,7 +116,7 @@
 														<textarea class="form-control" style="border-color: #ddd;" id="billing-address" name="billing-address" rows="3" placeholder="Enter full address">{{user.address}}</textarea>
 													</div>
 
-													<div class="row">
+													<!-- <div class="row">
 														<div class="col-lg-4">
 															<div class="mb-4 mb-lg-0">
 																<label class="form-label">City</label>
@@ -171,7 +139,7 @@
 																<input type="text" class="form-control" id="zip-code" name="zip-code" placeholder="Enter Postal code">
 															</div>
 														</div>
-													</div>
+													</div> -->
 												</div>
 											</form>
 										</div>
@@ -359,15 +327,11 @@
 					</div>
 					<div class="row my-4">
 						<div class="col">
-							<a href="{% url 'product:user_product_list' %}" class="link-hover-underline text-body"><i
-								class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping
-						</a>
+							<a href="{% url 'product:user_product_list' %}" class="link-hover-underline text-body"><i class="bx bx-left-arrow-alt fs-6 align-middle me-1"></i>Continue shopping</a>
 						</div> <!-- end col -->
 						<div class="col">
 							<div class="text-end mt-2 mt-sm-0">
-								<a href="#!" onclick="pay_submit();" class="btn btn-outline-brandGreen btn-rise">
-									<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-									<div class="btn-rise-text">Procced</div>
+								<a href="#!" onclick="pay_submit();" class="link-hover-underline text-body">Procced<i class="bx bx-right-arrow-alt fs-6 align-middle me-1"></i></a>
 								</a>
 								<input type="hidden" name="obj_data" value=''>
 							</div>
@@ -538,7 +502,7 @@ async function pay_submit() {
 	.then(data => {
 		console.log(data)
 		//여기에 추가되야 할것 pc일때 새창 모바일일땐 그대로
-		//window.location.href = data.url;
+		window.location.href = data.url;
 	})
 
 	// shipping-form data 전송
@@ -572,7 +536,7 @@ async function order_submit() {
 	form_data.append('order_id', '{{request.GET.id}}')
 	form_data.append('used_point', pointForm.value)
 
-    const response = await fetch("{% url 'charge:user_payment' %}", {
+    const response = await fetch("{% url 'charge:user_pay' %}", {
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken"),
