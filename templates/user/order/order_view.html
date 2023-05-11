@@ -33,6 +33,38 @@
     white-space: nowrap;
     overflow: hidden;
 }
+.modal .modal-header .close {
+	border: none;
+    background-color: white;
+	font-size: 25px;
+}
+.modal .modal-body table {
+	width: 100%;
+	font-size: 12px;
+	letter-spacing: -1px;
+	color: #4d4d4d;
+	text-align: center;
+}
+.modal .modal-body table thead {
+    background: #ebebeb;
+	font-weight: bold;
+}
+.modal .modal-body table th {
+	font-weight: bold;
+}
+.modal .modal-body table th,
+.modal .modal-body table td {
+	padding: 10px;
+	border: 1px solid #d9d9d9;
+}
+.modal .modal-footer {
+	padding: 16px;
+}
+.modal .modal-footer .edit-btn-group button[type=button],
+.modal .modal-footer .select-shipping-btn {
+	padding: 8px 10px;
+	font-size: 10px !important;
+}
 
 @media only screen and (max-width: 442px) {
 	.point-btn {
@@ -84,44 +116,43 @@
 								<div class="feed-item-list">
 									<div>
 										<h5 class="font-size-16 mb-3">Shipping Info</h5>
-										<!-- <div class="select_shipping_info py-3">
-											<span class="fs-6 me-3"><input type="radio" name="shipping_info" style="margin-right: 3px; vertical-align: -1px;" checked>Default shipping address</span>
-											<span class="fs-6"><input type="radio" name="shipping_info" style="margin-right: 3px; vertical-align: -1px;">New shipping address</span>
-										</div> -->
+										<div class="view-shipping-list py-3">
+											<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#shippingListModal">List of shipping destinations</button>	
+										</div>
 										<div class="mb-3">
-											<form>
+											<form id="shipping-form" method="POST">
 												<div>
 													<div class="row">
 														<div class="col-lg-4">
 															<div class="mb-3">
 																<label class="form-label" for="billing-name">Name</label>
-																<input type="text" class="form-control" id="billing-name" placeholder="Enter name">
+																<input type="text" class="form-control" id="billing-name" name="billing-name" placeholder="Enter name">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="mb-3">
 																<label class="form-label" for="billing-email-address">Email Address</label>
-																<input type="email" class="form-control" id="billing-email-address" placeholder="Enter email">
+																<input type="email" class="form-control" id="billing-email-address" name="billing-email-address" placeholder="Enter email">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="mb-3">
 																<label class="form-label" for="billing-phone">Phone</label>
-																<input type="text" class="form-control" id="billing-phone" placeholder="Enter Phone no.">
+																<input type="text" class="form-control" id="billing-phone" name="billing-phone" placeholder="Enter Phone no.">
 															</div>
 														</div>
 													</div>
 
 													<div class="mb-3">
 														<label class="form-label" for="billing-address">Address</label>
-														<textarea class="form-control" style="border-color: #ddd;" id="billing-address" rows="3" placeholder="Enter full address">{{user.address}}</textarea>
+														<textarea class="form-control" style="border-color: #ddd;" id="billing-address" name="billing-address" rows="3" placeholder="Enter full address">{{user.address}}</textarea>
 													</div>
 
 													<div class="row">
 														<div class="col-lg-4">
 															<div class="mb-4 mb-lg-0">
 																<label class="form-label">City</label>
-																<select class="form-control form-select" title="City">
+																<select class="form-control form-select" title="City" name="billing-city">
 																	<option value="0">Select City</option>
 																</select>
 															</div>
@@ -130,14 +161,14 @@
 														<div class="col-lg-4">
 															<div class="mb-4 mb-lg-0">
 																<label class="form-label" for="billing-state">State</label>
-																<input type="text" class="form-control" id="billing-state" placeholder="Enter State">
+																<input type="text" class="form-control" id="billing-state" name="billing-state" placeholder="Enter State">
 															</div>
 														</div>
 
 														<div class="col-lg-4">
 															<div class="mb-0">
 																<label class="form-label" for="zip-code">Zip / Postal code</label>
-																<input type="text" class="form-control" id="zip-code" placeholder="Enter Postal code">
+																<input type="text" class="form-control" id="zip-code" name="zip-code" placeholder="Enter Postal code">
 															</div>
 														</div>
 													</div>
@@ -334,7 +365,7 @@
 						</div> <!-- end col -->
 						<div class="col">
 							<div class="text-end mt-2 mt-sm-0">
-								<a href="#!" onclick="order_submit();" class="btn btn-outline-brandGreen btn-rise">
+								<a href="#!" onclick="pay_submit();" class="btn btn-outline-brandGreen btn-rise">
 									<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
 									<div class="btn-rise-text">Procced</div>
 								</a>
@@ -349,6 +380,48 @@
 	</div>
 </section>
 
+<div class="modal fade" id="shippingListModal" tabindex="-1" role="dialog" aria-labelledby="shippingListModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="eshippingListModalLabel">배송지 관리</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			<table> 
+				<thead>
+					<th>선택</th>
+					<th>배송지 이름</th>
+					<th>주소</th>
+					<th>받는 사람</th>
+					<th>연락처</th>
+				</thead>
+				<tbody>
+					<td><input type="radio" name="shipping_info"></td>
+					<td>배송지 이름</td>
+					<td>주소</td>
+					<td>받는 사람</td>
+					<td>연락처</td>
+				</tbody>
+			</table>
+		</div>
+		<div class="modal-footer justify-content-between">
+			<div class="edit-btn-group">
+				<button type="button" class="btn btn-secondary">배송지 추가</button>
+				<button type="button" class="btn btn-secondary">수정</button>
+				<button type="button" class="btn btn-secondary">삭제</button>
+			</div>
+			<button type="button" class="btn btn-danger select-shipping-btn">배송지로 선택</button>
+		  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary">Save changes</button> -->
+		</div>
+	  </div>
+	</div>
+</div>
+
+<script src="{% static 'user/js/custom.js' %}"></script>
 <script>
 let is_run = false;
 
@@ -408,13 +481,49 @@ pointBtn.addEventListener("click", function(){
 
 });
 
-async function order_submit() {
+async function pay_submit() {
 	let amount = document.querySelector(".payment").innerHTML.replace(/[^\d.-]/g, '');
 	let form_data = {
-		"order_id" : '{{request.GET.id}}',
-		"used_point" : pointForm.value,
-		"amount" : amount,
-		"description" : "",
+		amount : amount,
+		description : ""
+	}
+
+	let billingName = document.querySelector("input[name=billing-name]").value;
+	let billingEmailAddress = document.querySelector("input[name=billing-email-address]").value;
+	let billingPhoneNumber = document.querySelector("input[name=billing-phone]").value;
+	let billingAddress = document.querySelector("textarea[name=billing-address]").value;
+	let billingState = document.querySelector("input[name=billing-state]").value;
+	let billingZipCode = document.querySelector("input[name=zip-code]").value;
+
+	if(billingName == ""){
+		alert("Please enter name.");
+		return false;
+	}
+	if(billingEmailAddress == ""){
+		alert("Please enter email address.");
+		return false;
+	}
+	if(billingPhoneNumber == ""){
+		alert("Please enter phone number.");
+		return false;
+	}
+	if(billingAddress == ""){
+		alert("Please enter address.");
+		return false;
+	}
+	if(billingState == ""){
+		alert("Please enter state.");
+		return false;
+	}
+	if(billingZipCode == ""){
+		alert("Please enter zip/postal code.");
+		return false;
+	}
+
+	//static/user/js/custom.js에 있는 이메일 형식 체크 함수, 정규표현식 검사를 통과하면 true를 리턴
+	if(!email_check(billingEmailAddress)){
+		alert("Please enter correct email address.");
+		return false;
 	}
 
 	const response = await fetch("{% url 'charge:user_pay' %}", {
@@ -429,10 +538,90 @@ async function order_submit() {
 	.then(data => {
 		console.log(data)
 		//여기에 추가되야 할것 pc일때 새창 모바일일땐 그대로
-		window.location.href = data.url;
+		//window.location.href = data.url;
+	})
+
+	// shipping-form data 전송
+	let shippingForm = document.getElementById("shipping-form");
+	let shippingFormData = new FormData(shippingForm);
+
+	const shippingResponse = await fetch("{% url 'charge:user_pay' %}", {  // ************ URL 검토 필요 ************
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken")
+		},
+		body : JSON.stringify(shippingFormData),
+	})
+	.then(response => response.json())
+	.then(()=>{
+		for(let [key, value] of shippingFormData.entries()) {
+			console.log(key, value);
+		}
 	})
 }
 
+async function order_submit() {
+	if(is_run == true) {
+		openModal('','Please try again later.');
+		return false;
+	}
+
+	is_run = true;
+
+	let form_data = new FormData();
+	form_data.append('order_id', '{{request.GET.id}}')
+	form_data.append('used_point', pointForm.value)
+
+    const response = await fetch("{% url 'charge:user_payment' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: form_data,
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		is_run  = false;
+		if (data.result == '200') {
+			temp_call_back();
+		} else {
+			openModal("", data.result_text);
+		}
+	});
+}
+
+
+async function temp_call_back() {
+	if(is_run == true) {
+		openModal('','Please try again later.');
+		return false;
+	}
+
+	is_run = true;
+
+	let form_data = new FormData();
+	form_data.append('order_id', '1')
+	form_data.append('used_point', pointForm.value)
+
+    const response = await fetch("{% url 'charge:call_back' %}", {
+		method: "POST",
+		headers: {
+			"X-CSRFToken": getCookie("csrftoken"),
+		},
+		body: form_data,
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		is_run  = false;
+		if (data.result == '200') {
+			openModal("", data.result_text);
+		} else {
+			openModal("", data.result_text);
+		}
+	});
+}
 
 window.addEventListener("load", function(){
 	let subTotalPrice = 0;
@@ -449,4 +638,5 @@ window.addEventListener("load", function(){
 	document.querySelector(".total_price").innerHTML = numberWithCommas("₱ " + (subTotalPrice + discountPrice + shippingCharge ).toFixed(2));
 })
 </script>
+
 {% endblock %}
