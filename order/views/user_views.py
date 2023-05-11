@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
-from django.views.generic import View
 from ..models import *
 from charge.models import *
 from django.db.models import Q
 import json
-from charge.dragon import DragonPay
-import uuid
+
 
 @login_required(login_url="account:user_login")
 def user_order_view(request):
@@ -113,32 +111,8 @@ def user_order_create(request):
 			
 		return JsonResponse({
 			'result': '200', 
-			'result_text': order_obj.pk
+			'order_id': order_obj.pk,
 		})
 	else:
 		return redirect("main:user_index")
 
-
-
-class UserOrderPay(View):
-	def hexdec_uniqid(self):
-		unique_id = uuid.uuid4().hex[:16] # 16자리만 추출
-		return int(unique_id, 16)
-	
-	def get(self, request):
-		return HttpResponse('404')
-	
-	def post(self, request):
-		jsonData = json.loads(request.body)
-		amount  = jsonData.get('amount')
-		description = jsonData.get('description')
-
-		dragon_pay = DragonPay()
-		return JsonResponse(
-			{"url":dragon_pay.token_pay(
-				self.hexdec_uniqid(), #txnid
-				amount, #금액
-				description, #메모
-				request.user.email #이메일
-			)}
-		)

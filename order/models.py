@@ -6,6 +6,9 @@ from account.models import UserShippingAddress
 from charge.models import *
 from decimal import Decimal
 import uuid
+def hexdec_uniqid():
+	unique_id = uuid.uuid4().hex[:16] # 16자리만 추출
+	return int(unique_id, 16)
 
 # Create your models here.
 class Order(models.Model):
@@ -15,7 +18,7 @@ class Order(models.Model):
 	)
 	txnid = models.CharField(
 		max_length=255,
-		default=uuid.uuid1().int>>64,
+		default=hexdec_uniqid,
 		verbose_name="주문번호"
 	)
 	ordered_at = models.DateTimeField(auto_now_add=True, auto_now=False)

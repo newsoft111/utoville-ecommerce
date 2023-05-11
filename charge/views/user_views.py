@@ -1,37 +1,62 @@
 from django.shortcuts import render
 from ..models import *
 from order.models import *
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.views.generic import View
+import json
+from charge.dragon import DragonPay
 # Create your views here.
 
 
 
-def user_payment(request):
-	if not request.user.is_authenticated:
-		return JsonResponse({
-			'result': '201', 
-			'result_text': 'Please log in.'
-		})
+class UserOrderPay(View):
+	def get(self, request):
+		return HttpResponse('404')
+	
+	def post(self, request):
+		if not request.user.is_authenticated:
+			return JsonResponse({
+				'result': '201', 
+				'result_text': 'Need to login.'
+			})
+			
+		jsonData = json.loads(request.body)
 
-	order_id = request.POST.get('order_id')
-	used_point = request.POST.get('used_point')
+		order_id = jsonData.get('order_id')
+		used_point = jsonData.get('used_point')
 
-	try:
-		order_obj = Order.objects.get(pk=order_id)
+		amount  = jsonData.get('amount')
+		description = jsonData.get('description')
+		transaction_id = jsonData.get('transaction_id')
 
-		payment_obj = Payment.objects.create(user=request.user)
+		try:
+			order_obj = Order.objects.get(pk=order_id)
 
-		order_obj.used_point = used_point
-		order_obj.payment = payment_obj
-		order_obj.save()
-	except Exception as e:
-		return JsonResponse({
-			'result': '201', 
-			'result_text': 'An unknown error has occurred. Please try again.'
-		})
+			payment_obj = Payment.objects.create(user=request.user)
 
-	return JsonResponse({
-		'result': '200', 
-		'result_text': payment_obj.pk
-	})
+			order_obj.used_point = used_point
+			order_obj.payment = payment_obj
+			order_obj.save()
+			
+		except Exception as e:
+			return JsonResponse({
+				'result': '201', 
+				'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+			})
 
+			
+		param1 = {
+			"order_id" : order_id,
+			"user_id" : request.user.id,
+			"result_url" : ''
+		}
+		dragon_pay = DragonPay()
+		return JsonResponse(
+			{"url":dragon_pay.pay(
+				order_obj.txnid,
+				amount,
+				description,
+				request.user.email,
+				param1
+			)}
+		)

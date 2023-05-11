@@ -2,7 +2,7 @@ import hashlib
 import urllib, requests, base64
 from decimal import Decimal
 from zeep import Client
-
+import json
 
 class DragonPay(object):
 	"""Dragonpay class"""
@@ -16,7 +16,11 @@ class DragonPay(object):
 		production = True
 		self.url = self.production_url if production else self.test_url
 
-	def get_token(self, transaction_id, amount, description, email):
+
+
+	def pay(self, transaction_id, amount, description, email, param1):
+		param1 = json.dumps(param1)
+
 		url = f"{self.url}/DragonPayWebService/MerchantService.asmx?wsdl"
 		client = Client(url)
 
@@ -28,40 +32,11 @@ class DragonPay(object):
 			"ccy": "PHP",
 			"description": description,
 			"email": email,
-			"param1": '',
+			"param1": param1,
 			"param2": ''
 		}
 
 		token = client.service.GetTxnToken(**data)
-		return token
-
-	#결제모듈
-	def api_pay(self, transaction_id, amount, currency, description, email):
-		"""Pay method"""
-		digest = self.digest_parameters(
-			transaction_id,
-			self.format_amount(amount),
-			currency,
-			description,
-			email
-		)
-		
-		data = {
-			"merchantid": self.merchant_id,
-			"txnid": transaction_id,
-			"amount": self.format_amount(amount),
-			"ccy": currency,
-			"description": description,
-			"email": email,
-			"digest": digest,
-		}
-
-
-		return self.url + "/Pay.aspx?" + urllib.parse.urlencode(data)
-
-
-	def token_pay(self, transaction_id, amount, description, email):
-		token = self.get_token(transaction_id, amount, description, email)
 
 		return self.url + '/Pay.aspx?tokenid=' + token + "&procid=CUP"
 
