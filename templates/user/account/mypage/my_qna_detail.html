@@ -10,13 +10,13 @@
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
 			<div class="my_page_main row">
-				{% include "user/account/mypage/sidemenu.html" with active_tab="1:1 문의"%}
+				{% include "user/account/mypage/sidemenu.html" with active_tab="My QnA"%}
 				<div class="col-lg-9">
-					{% include "user/account/mypage/topmenu.html" with active_tab="1:1 문의"%}
+					{% include "user/account/mypage/topmenu.html" with active_tab="My QnA"%}
 					<div class="row">
 						<div class="col-12">
 							<!-- Page title -->
-							<h4 class="my-4">1:1 문의게시판 </h4>
+							<h4 class="my-4">My QnA</h4>
 
 							<!-- Ask Content START -->
 							<div class="row main_contents">
@@ -30,18 +30,18 @@
 											</thead>
 											<tbody>
 												<td colspan="2" class="text-end">
-													<span class="qna date">작성일: {{qna_obj.questioned_at}}</span>
+													<span class="qna date">Date: {{qna_obj.questioned_at}}</span>
 												</td>
 											</tbody>
 											<tbody>
 												<td colspan="2" class="ques_contnet text-start">
-													<p class="fs-6 fw-bold">질문 내용:</p>
+													<p class="fs-6 fw-bold">What is your question?</p>
 													{{qna_obj.question|safe}}
 												</td>		
 											</tbody>
 											<tbody>
 												<td colspan="2" class="anw_content text-start">
-													<p class="fs-6 fw-bold">관리자 답변:</p>
+													<p class="fs-6 fw-bold">Administrator response:</p>
 													{{qna_obj.answer}}
 												</td>		
 											</tbody>											
@@ -49,7 +49,7 @@
 									</div>
 									<!-- Details -->
 									<div class="ask_btn">
-										<a href="/account/mypage/qna/" class="btn btn-secondary">목록</a>
+										<a href="/account/mypage/qna/" class="btn btn-secondary">List</a>
 									</div>
 								</div>
 							</div>

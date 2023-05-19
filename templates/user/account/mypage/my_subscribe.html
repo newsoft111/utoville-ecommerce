@@ -18,13 +18,13 @@
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
 			<div class="my_page_main row">
-				{% include "user/account/mypage/sidemenu.html" with active_tab="구독관리" %}
+				{% include "user/account/mypage/sidemenu.html" with active_tab="Subscription Management" %}
 				<div class="col-lg-9">
-					{% include "user/account/mypage/topmenu.html" with active_tab="구독관리" %}
+					{% include "user/account/mypage/topmenu.html" with active_tab="Subscription Management" %}
 					<div class="row">
 						<div class="col-12">
 							<!-- Page title -->
-							<h4 class="my-4">구독관리</h4>
+							<h4 class="my-4">Subscription Management</h4>
 							<!-- Service Cancel START -->
 							<div class="row main_contents">
 								<div class="col-md-12">
@@ -65,9 +65,9 @@
 															</div>
 															<!-- Info -->
 															<div class="col-xl-9 pt-2 pt-xl-0 text-center">
-																<h6 class="mb-1">에어컨청소</h6>
-																<p class="mb-1 text-body">스탠드형</p>
-																<span class="text-success">₱5,000 / 1개</span>
+																<h6 class="mb-1"></h6>
+																<p class="mb-1 text-body"></p>
+																<span class="text-success">₱5,000</span>
 															</div>
 														</div>
 													</div>
@@ -80,13 +80,13 @@
 															</div>
 															<!-- Status -->
 															<div class="col-md-4 pt-2">
-																<span class="text-danger border border-danger p-2" style="font-size: 13px;">취소 완료</span>
+																<span class="text-danger border border-danger p-2" style="font-size: 13px;">Cancelled</span>
 															</div>		
 															<!-- Details -->
 															<div class="col-md-4">
 																<div class="btn btn-outline-brandGreen btn-rise" data-bs-toggle="modal" data-bs-target="#cancelDetailModal" style="font-size: 14px;">
 																	<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-																	<div class="btn-rise-text" style="font-size: 14px;">취소 상세</div>
+																	<div class="btn-rise-text" style="font-size: 14px;">Details</div>
 																</div>
 															</div>
 														</div>
@@ -116,12 +116,12 @@
 																08 July 2018
 															</div>
 															<div class="col-md-4 pt-2">
-																<span class="text-success border border-success p-2" style="font-size: 13px;">구매 완료</span>
+																<span class="text-success border border-success p-2" style="font-size: 13px;">Purchased</span>
 															</div>			
 															<div class="col-md-4">
 																<a href="{% url 'account:user_my_subscribe_cancel' %}" class="btn btn-outline-brandGreen btn-rise">
 																	<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-																	<div class="btn-rise-text" style="font-size: 14px;">취소</div>
+																	<div class="btn-rise-text" style="font-size: 14px;">Go to Cancel</div>
 																</a>
 															</div>
 														</div>
@@ -151,14 +151,12 @@
 																08 July 2018
 															</div>
 															<div class="col-md-4 align-middle pt-2">
-																<span class="text-info border border-info p-2" style="font-size: 13px;">취소 신청</span>
+																<span class="text-info border border-info p-2" style="font-size: 13px;">Pending</span>
 															</div>			
 															<div class="col-md-4 align-middle">
 																<button type="button" class="btn btn-outline-brandGreen btn-rise" id="sa-warning">
 																	<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-																	<div class="btn-rise-text"  style="font-size: 14px;">
-																		취소 철회
-																	</div>
+																	<div class="btn-rise-text"  style="font-size: 14px;">Withdrawal</div>
 																</button>
 															</div>
 														</div>

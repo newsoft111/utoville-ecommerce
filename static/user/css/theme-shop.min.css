@@ -4826,9 +4826,9 @@ textarea.form-control-lg {
 .list-group-flush>.list-group-item {
 	border-width:0 0 var(--bs-list-group-border-width)
 }
-.list-group-flush>.list-group-item:last-child {
+/* .list-group-flush>.list-group-item:last-child {
 	border-bottom-width:0
-}
+} */
 .list-group-item-primary {
 	color:#826f4a;
 	background-color:#f7f1e5
@@ -19382,5 +19382,5 @@ th {
 }
 
 .fc-button-active {
-	background-color: #90c31f !important;
+	background-color: #7e7e7e !important;
 }

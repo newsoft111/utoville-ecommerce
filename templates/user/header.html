@@ -21,7 +21,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-	<!-- Assan Select css -->
+	
+	<!-- Google fontawesome css -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
 	<!-- Main CSS -->
     <link href="{% static 'user/css/theme-shop.min.css' %}" rel="stylesheet">
@@ -38,9 +40,9 @@
 		#mainNavbarTheme { display: block; }
 		#mainNavbarTheme .navbar-nav a { height: 2.75em; }
 
-		.dropdown-menu { margin-top: 0 !important; }
-		.dropdown:hover > a { color: #2ea7e0; }
-		.dropdown-item:hover { background-color: #62b7df; }
+		.navbar .dropdown:hover > a { color: #2ea7e0; }
+		.navbar .dropdown .dropdown-menu { margin-top: 0 !important; border-bottom: 5px solid #0bc0eb; border-radius: 3px;}
+		.navbar .dropdown .dropdown-menu a:hover { background-color: white; color: #2ea7e0; }
 
 		@media only screen and (max-width: 991px) {
 			#mainNavbarTheme { visibility: hidden; height: 0; transition: height 0.3s ease-in-out; }			
@@ -53,9 +55,19 @@
      <!--begin:Header shop-->
      <nav class="navbar position-sticky top-0 z-index-fixed navbar-expand-lg navbar-light bg-white d-block">
         <div class="container position-relative d-flex">
-			<a href="{% url 'main:user_index' %}">
-				<img src="{% static 'user/img/logo/logo.png' %}" alt="" class="logo-img">
-            </a>
+			<div class="logo_group d-flex align-items-center">
+				<a href="{% url 'main:user_index' %}">
+					<img src="{% static 'user/img/logo/logo.png' %}" alt="" class="logo-img">
+				</a>
+				<a href="{% url 'product:user_home_check' %}">
+					<div class="bg-brandBlue d-flex justify-content-between align-items-center p-2 ms-3 rounded">
+						<span class="display-9 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
+						<div class="text-center ms-2">
+							<h6 class="mb-0 text-white">Home Check</h5>
+						</div>
+					</div>
+				</a>
+			</div>
             <div class="d-flex align-items-center navbar-no-collapse-items navbar-nav flex-row order-lg-last">
 				<div class="nav-item ms-0 me-2 d-lg-none">
 					<a href="#searchCollapse" data-bs-target="#" data-bs-toggle="collapse" class="nav-link search-link lh-1">
@@ -99,14 +111,14 @@
 					</span>
 				</button>
             </div>
-        
+
             <div class="collapse collapse-search ms-lg-3 me-lg-1 d-lg-block" style="--navbar-search-width:280px;" id="searchCollapse"> <!--ms-xl-auto  삭제-->
                 <form class="mb-0" action="{% url 'product:user_product_list' %}" method="GET">
                     <div class="position-relative mt-3 mt-lg-0 me-3">
                         <span class="position-absolute start-0 top-50 translate-middle-y ms-3 opacity-50 pt-1" style="z-index:999;">
 							<i class="bx bx-search-alt-2"></i>
                         </span>
-                        <input type="text" placeholder="Search Products..." name="keyword" class="form-control ps-6 rounded-pill">
+                        <input type="text" placeholder="Search Products." name="keyword" class="form-control ps-6 rounded-pill">
                         <!--With Submit button-->
                         <!-- <button class="btn position-absolute end-0 top-0 flex-center p-0 width-4x h-100 rounded-pill btn-white">
                             <i class="bx bx-search-alt-2"></i>

@@ -8,6 +8,7 @@ user_urlpatterns = [
 	path(f'{app_name}/',
 		include([
 			path('', views.user_product_list, name="user_product_list"),
+			path('home_check/', views.user_home_check, name='user_home_check'),	
 			path('<int:product_id>/', views.user_product_detail, name="user_product_detail"),
 			path('qna/answer/', views.user_product_qna_question, name="user_product_qna_question"),
 			path('review/write/', views.user_product_review_write, name="user_product_review_write"),

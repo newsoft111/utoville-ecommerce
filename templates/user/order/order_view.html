@@ -94,26 +94,26 @@
 														<div class="col-lg-4">
 															<div class="mb-3">
 																<label class="form-label" for="billing-name">Name</label>
-																<input type="text" class="form-control" id="billing-name" name="billing-name" placeholder="Enter name">
+																<input type="text" class="form-control" id="billing-name" name="billing-name" value="{{user.mb_name}}" placeholder="Enter name">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="mb-3">
 																<label class="form-label" for="billing-email-address">Email Address</label>
-																<input type="email" class="form-control" id="billing-email-address" name="billing-email-address" placeholder="Enter email">
+																<input type="email" class="form-control" id="billing-email-address" name="billing-email-address" value="{{user.email}}" placeholder="Enter email">
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="mb-3">
 																<label class="form-label" for="billing-phone">Phone</label>
-																<input type="text" class="form-control" id="billing-phone" name="billing-phone" placeholder="Enter Phone no.">
+																<input type="text" class="form-control" id="billing-phone" name="billing-phone" value="{{user.mb_phone}}" placeholder="Enter Phone no.">
 															</div>
 														</div>
 													</div>
 
 													<div class="mb-3">
 														<label class="form-label" for="billing-address">Address</label>
-														<textarea class="form-control" style="border-color: #ddd;" id="billing-address" name="billing-address" rows="3" placeholder="Enter full address">{{user.address}}</textarea>
+														<textarea class="form-control" style="border-color: #ddd;" id="billing-address" name="billing-address" rows="3" placeholder="Enter full address">{{user.address_name}}</textarea>
 													</div>
 
 													<!-- <div class="row">

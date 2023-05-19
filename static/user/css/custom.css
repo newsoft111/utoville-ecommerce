@@ -134,7 +134,8 @@ a {
 
 /* side menu */
 .list-group-item {
-	margin-bottom: 20px;
+	white-space: nowrap;
+	margin-bottom: 15px;
 }
 .side_menu_msg {
 	background: transparent !important;
@@ -543,5 +544,5 @@ thead tr:nth-child(3) th {
 	border: none !important;
 }
 .fc-button-primary:hover {
-	background-color: #90c31f !important;
+	background-color: #7e7e7e !important;
 }

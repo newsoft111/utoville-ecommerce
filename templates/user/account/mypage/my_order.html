@@ -123,7 +123,7 @@
 																	</select>
 																</td>
 																
-																<td class="order-tb-left">진행 상태</td>							
+																<td class="order-tb-left">Status in progress</td>							
 																<td class="order-tb-right">
 																	<select class="form-select" name="status_by" style="border-color: #ddd;">
 																		<option value="">Select</option>
@@ -139,7 +139,7 @@
 																	<div class="d-flex">
 																		<div class="inputBlock me-2">
 																			<input type="text" class="form-control form-radius" name="keyword"
-																				placeholder="서비스명을 검색하세요.">
+																				placeholder="Please search for the service name.">
 																		</div>
 																		<div class="submitBlock">
 																			<button type="submit"class="od-search-btn btn btn-lg btn-hover-text btn-secondary">
@@ -201,7 +201,7 @@
 												</div>
 												<div class="status-main">
 													<div class="title">
-														<span>진행 상태</span>
+														<span>Progress status</span>
 													</div>	
 													<div class="contnets">
 														<select class="form-select" name="status_by" style="border-color: #ddd;">
@@ -248,7 +248,7 @@
 												<tr>
 													<th scope="col">Order Date/Order Number</th>
 													<th scope="col">Service Information</th>
-													<th scope="col">수량</th>
+													<th scope="col">Quantity</th>
 													<th scope="col">Amount</th>
 													<th scope="col">Process Status</th>
 												</tr>
@@ -329,7 +329,7 @@
 								</li>
 								{% else %}
 								<li class="page-item disabled">
-									<span class="page-link">이전</span>
+									<span class="page-link">Previous</span>
 								</li>
 								{% endif %}
 						
@@ -353,7 +353,7 @@
 								</li>
 								{% else %}
 								<li class="page-item disabled">
-									<span class="page-link">다음</span>
+									<span class="page-link">Next</span>
 								</li>
 								{% endif %}
 							</ul>
@@ -373,7 +373,7 @@
 					{% csrf_token %}
 					<input type="hidden" name="order_id" value="">
 					<div class="modal-body p-4 text-center">			
-						<h5 class="review_title">만족하셨나요?</h5>
+						<h5 class="review_title">Are you satisfied?</h5>
 						<div class="rating">
 							<input type="radio" name="rating" value="5" id="review-start-5"><label for="review-start-5">☆</label>
 							<input type="radio" name="rating" value="4" id="review-start-4"><label for="review-start-4">☆</label>
@@ -394,12 +394,12 @@
 						</div>
 					</div>
 					<div class="review_area p-4 text-center">
-						<h5 class="review_title">리뷰를 작성해주세요.</h5>
+						<h5 class="review_title">Please leave a review.</h5>
 						<textarea class="form-control rounded-3" name='review' style="resize:none; border-color: #e9e9e9;"></textarea>		
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-outline-brandGreen ms-1" data-product-id='' onclick="review_write_submit()">완료</button>
-						<button type="button" class="btn btn-outline-secondary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-outline-brandGreen ms-1" data-product-id='' onclick="review_write_submit()">Confirm</button>
+						<button type="button" class="btn btn-outline-secondary btn-md" id="reviewModalCloseBtn" data-bs-dismiss="modal">Cancel</button>
 					</div>
 				</form>
 			</div>
@@ -501,7 +501,7 @@ const handler = {
 			const filesExtension = files[0].name.split('.').pop().toLowerCase();
 
 			if(!(filesExtension == 'jpg' || filesExtension == 'jpeg' || filesExtension == 'png' || filesExtension == 'gif')){
-				openModal('알림', '이미지 파일이 아닙니다.');
+				openModal('Notification', 'Invalid image file.');
 				return false;
 			}	
 
@@ -521,7 +521,7 @@ const handler = {
 					dataTransfer.items.add(file);
 
 				}else{
-					openModal('알림', '이미 업로드 된 파일입니다.');
+					openModal('Notification', 'Already uploaded file.');
 					removeArrItem(fileArr, file.lastModified);
 				}
 			});
@@ -575,7 +575,7 @@ function open_review_write_modal(product_id) {
 
 async function review_write_submit() {
 	if(is_run == true) {
-		openModal('알림','잠시후에 다시시도 해주세요.');
+		openModal('Notification','Please try again later.');
 		return false;
 	}
 
@@ -602,9 +602,9 @@ async function review_write_submit() {
 	.then(data => {
 		is_run  = false;
 		if (data.result == '200') {
-			openModal("알림", data.result_text, this_modal, 'reload');
+			openModal("Notification", data.result_text, this_modal, 'reload');
 		} else { 
-			openModal("알림", data.result_text, this_modal);
+			openModal("Notification", data.result_text, this_modal);
 		}
 	});
 }
