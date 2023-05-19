@@ -9,23 +9,23 @@
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
 			<div class="my_page_main row">
-				{% include "user/account/mypage/sidemenu.html" with active_tab="1:1 문의"%}
+				{% include "user/account/mypage/sidemenu.html" with active_tab="My QnA"%}
 				<div class="col-lg-9">
-					{% include "user/account/mypage/topmenu.html" with active_tab="1:1 문의"%}
+					{% include "user/account/mypage/topmenu.html" with active_tab="My QnA"%}
 					<div class="row">
 						<div class="col-12">
 							<!-- Page title -->
-							<h4 class="my-4">1:1 문의게시판 </h4>
+							<h4 class="my-4">My QnA</h4>
 
 							<form name="qnaWriteForm">
 								<div class="py-3">
-									<h6>제목</h6>
-									<input type="text" name="subject" class="form-control" placeholder="제목을 입력하세요.">
+									<h6>Title</h6>
+									<input type="text" name="subject" class="form-control" placeholder="Enter title.">
 								</div>
 								<div class="py-3">
-									<h6>문의 유형</h6>
+									<h6>Type</h6>
 									<select class="form-control" nmae="qna_type" data-choices='{"searchEnabled":false, "allowHTML":true, "shouldSort": false,"itemSelectText":""}' required>
-										<option value="" selected disabled>문의 유형을 선택해주세요.</option>
+										<option value="" selected disabled>Please select QnA type.</option>
 										<option value="이용방법 문의">이용방법 문의</option>
 										<option value="결제 관련 문의">결제 관련 문의</option>
 										<option value="로그인/서비스 이용 문의">로그인/서비스 이용 문의</option>
@@ -34,12 +34,12 @@
 									</select>
 								</div>
 								<div class="py-3">
-									<h6>내용</h6>
+									<h6>Contents</h6>
 									<input type="hidden" name="question">
 									<div id="quill-editor"></div>
 									<div class="btn_group">
-										<a href="{% url 'account:user_my_qna_list' %}" class="btn btn-secondary">목록</a>
-										<a href="#!" onclick="qna_write_submit();" class="btn btn-brand">작성</a>
+										<a href="{% url 'account:user_my_qna_list' %}" class="btn btn-secondary">List</a>
+										<a href="#!" onclick="qna_write_submit();" class="btn btn-secondary">Done</a>
 									</div>
 								</div>
 							</form>	
@@ -67,7 +67,7 @@ var quill = new Quill('#quill-editor', {
 			['clean'],
 		]
 	},
-	placeholder: '내용을 입력해주세요.',
+	placeholder: 'What is your question? Please enter here.',
 	theme: 'snow'
 });
 
@@ -78,7 +78,7 @@ quill.getModule('toolbar').addHandler('image', function() {
 
 async function qna_write_submit() {
 	if(is_run == true) {
-		openModal('알림','잠시후에 다시시도 해주세요.');
+		openModal('Notification','Please try this later.');
 		return false;
 	}
 
@@ -101,9 +101,9 @@ async function qna_write_submit() {
         console.log(data);
         is_run  = false;
         if (data.result == '200') {
-            openModal("알림", data.result_text, '', "location.replace(`{% url 'account:user_my_qna_list' %}`);");
+            openModal("Notification", data.result_text, '', "location.replace(`{% url 'account:user_my_qna_list' %}`);");
         } else {
-            openModal("알림", data.result_text, '');
+            openModal("Notification", data.result_text, '');
         }
     });
 }

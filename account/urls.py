@@ -8,6 +8,7 @@ user_urlpatterns = [
 		include([
 			path('login/', views.user_login, name='user_login'),
 			path('logout/', views.user_logout, name='user_logout'),
+			path('home_check/', views.user_home_check, name='user_home_check'),
 			#path('join/', views.user_join, name='join'),
 			#path('confirm/<str:uidb64>/<str:token>/', views.join_confirm, name="confirm"),
 			#path('find/password/', views.find_passwd, name='find_passwd'),
@@ -30,7 +31,7 @@ user_urlpatterns = [
 							path('<int:qna_id>/', views.user_my_qna_detail, name='user_my_qna_detail'),
 						])
 					),
-				])
+				]),
 			)
 		])
 	)

@@ -41,7 +41,7 @@ class UserOrderPay(View):
 		except Exception as e:
 			return JsonResponse({
 				'result': '201', 
-				'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+				'result_text': 'Unknown error. Please try again.'
 			})
 
 			

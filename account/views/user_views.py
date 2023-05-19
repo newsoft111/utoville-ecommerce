@@ -476,3 +476,6 @@ def user_my_qna_detail(request, qna_id):
 	 	"seo":seo,
 	 	"qna_obj":qna_obj,
 	})
+
+def user_home_check(request):
+	return render(request, 'user/account/home_check.html')

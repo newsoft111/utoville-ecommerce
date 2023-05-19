@@ -90,31 +90,47 @@
 		<div class="position-relative rounded-4 overflow-hidden bg-dark">
 			<div class="swiper mySwiper">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg1.jpg' %}"></div>
-					<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg2.jpg' %}"></div>
-					<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg3.jpg' %}"></div>
+					<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg1.jpg' %}">
+						<div class="position-absolute top-50 start-50 translate-middle text-white w-75 w-lg-60 mx-auto text-center z-index-1 py-12">
+							<!--Hero title-->
+								<h1 class="display-1 mb-3 mb-md-4 position-relative">Welcome to<br><span class="text-gradient">Utoville House Care</span></h1>
+				
+								<!--Hero text-->
+								<p class="lead w-lg-60 mx-auto mb-5">Enjoy a comfortable residential life with Utoville Homecare Service.</p>
+				
+								<!--Hero buttons-->
+								<div class="d-inline-block">
+									<a href="{% url 'product:user_product_list' %}" class="shop-now-btn btn btn-outline-white btn-rise">
+										<div class="btn-rise-bg bg-white"></div>
+										<div class="btn-rise-text">
+											Shop Now
+										</div>
+									</a>
+								</div>
+							</div>
+					</div>
+					<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg3.jpg' %}">
+						<div class="position-absolute top-50 start-50 translate-middle text-white w-75 w-lg-60 mx-auto text-center z-index-1 py-12">
+							<!--Hero title-->
+								<h1 class="display-9 mb-3 mb-md-4 position-relative" style="line-height:1.6;"><span style="font-size: 30px; font-weight: 300;">숙련된 Home Checker가 진행하는</span><br><p style="font-size: 60px;">공동주택 사전점검 서비스</p></h1>
+				
+								<!--Hero buttons-->
+								<div class="d-inline-block">
+									<a href="{% url 'product:user_product_list' %}" class="shop-now-btn btn btn-outline-white btn-rise">
+										<div class="btn-rise-bg bg-white"></div>
+										<div class="btn-rise-text">
+											사전점검 바로예약
+										</div>
+									</a>
+								</div>
+							</div>
+					</div>
 				</div>
 				<div class="swiper-button-next"></div>
 				<div class="swiper-button-prev"></div>
 				<div class="swiper-pagination"></div>
 			</div>
-			<div class="position-absolute top-50 start-50 translate-middle text-white w-75 w-lg-60 mx-auto text-center z-index-1 py-12">
-			<!--Hero title-->
-				<h1 class="display-1 mb-3 mb-md-4 position-relative">Welcome to<br><span class="text-gradient">Utoville House Care</span></h1>
 
-				<!--Hero text-->
-				<p class="lead w-lg-60 mx-auto mb-5">Enjoy a comfortable residential life with Utoville Homecare Service.</p>
-
-				<!--Hero buttons-->
-				<div class="d-inline-block">
-					<a href="{% url 'product:user_product_list' %}" class="shop-now-btn btn btn-outline-white btn-rise">
-						<div class="btn-rise-bg bg-white"></div>
-						<div class="btn-rise-text">
-							Shop Now
-						</div>
-					</a>
-				</div>
-			</div>
 		</div>
 		<!--/.row-->
 	</div>
@@ -243,7 +259,7 @@ const swiper = new Swiper(".mySwiper", {
 	loop: true,
     autoplay: {
       enabled: true,
-      delay: 5000,          
+      delay: 8000,          
       pauseOnMouseEnter: true,
       disableOnInteraction: false,
     },

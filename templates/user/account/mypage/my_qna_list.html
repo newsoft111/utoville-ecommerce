@@ -8,14 +8,14 @@
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
 			<div class="my_page_main row">
-				{% include "user/account/mypage/sidemenu.html" with active_tab="1:1 문의"%}
+				{% include "user/account/mypage/sidemenu.html" with active_tab="My QnA"%}
 				<div class="col-lg-9">
-					{% include "user/account/mypage/topmenu.html" with active_tab="1:1 문의"%}
+					{% include "user/account/mypage/topmenu.html" with active_tab="My QnA"%}
 	
 					<div class="row">
 						<div class="col-12">
 							<!-- Page title -->
-							<h4 class="my-4">1:1 문의게시판 </h4>
+							<h4 class="my-4">My QnA</h4>
 							<!-- Ask Content START -->
 							<div class="row main_contents">
 								<div class="col-md-12">
@@ -23,10 +23,10 @@
 										<table class="ask_table table">
 											<thead>
 											<tr>
-												<th scope="col" class="col-1">번호</th>
-												<th scope="col" class="col-7">제목</th>
-												<th scope="col" class="col-2">상태</th>
-												<th scope="col" class="col-2">날짜</th>
+												<th scope="col" class="col-1">Num</th>
+												<th scope="col" class="col-7">Title</th>
+												<th scope="col" class="col-2">Status</th>
+												<th scope="col" class="col-2">Date</th>
 											</tr>
 											</thead>
 											<tbody>
@@ -36,9 +36,9 @@
 													<td><a href="{% url 'account:user_my_qna_detail' qna_obj.id %}">{{qna_obj.subject}}</a></td>
 													<td>
 														{% if qna_obj.answered_at %}
-														답변완료
+														Completed
 														{% else %}
-														답변대기
+														Pending
 														{% endif %}
 													</td>
 													<td>{{qna_obj.questioned_at}}</td>
@@ -51,11 +51,11 @@
 										<ul class="pagination justify-content-center m-0">
 											{% if qna_objs.has_previous %}
 											<li class="page-item ">
-												<a class="page-link" href="?p={{qna_objs.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">이전</a>
+												<a class="page-link" href="?p={{qna_objs.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">Previous</a>
 											</li>
 											{% else %}
 											<li class="page-item disabled">
-												<span class="page-link">이전</span>
+												<span class="page-link">Previous</span>
 											</li>
 											{% endif %}
 									
@@ -75,11 +75,11 @@
 									
 											{% if qna_objs.has_next  %}
 											<li class="page-item">
-												<a class="page-link" href="?p={{qna_objs.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">다음</a> 
+												<a class="page-link" href="?p={{qna_objs.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">Next</a> 
 											</li>
 											{% else %}
 											<li class="page-item disabled">
-												<span class="page-link">다음</span>
+												<span class="page-link">Next</span>
 											</li>
 											{% endif %}
 										</ul>
@@ -89,7 +89,7 @@
 												<button type="button" class="btn btn-outline-secondary btn-rise">
 													<div class="btn-rise-bg bg-secondary"></div>
 													<div class="btn-rise-text"  style="font-size: 14px;">
-														문의 작성
+														Write
 													</div>
 												</button>
 											</a>

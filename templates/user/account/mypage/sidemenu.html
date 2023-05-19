@@ -16,28 +16,38 @@
 			<div>
 				<h4 class="mb-2 text-gradient">Welcome User</h4>
 				<ul class="list-group list-group-flush mt-5 mb-0">
-					<li class="list-group-item {% if active_tab == '대쉬보드' %}active{% endif %}">
+					<li class="list-group-item {% if active_tab == 'Dashboard' %}active{% endif %}">
 						<i class="bx bx-layer me-2 text-dark"></i>
-						<a href="{% url 'account:user_my_dashboard' %}" class="small link-hover-decoration text-dark text-body">
-							<span>대쉬보드</span>
+						<a href="{% url 'account:user_my_dashboard' %}" class="small link-hover-decoration text-dark">
+							<span>Dashboard</span>
 						</a>
 					</li>
 
-					<li class="list-group-item {% if active_tab == '주문 조회' %}active{% endif %}">
+					<li class="list-group-item {% if active_tab == 'Service History' %}active{% endif %}">
 						<i class="bx bx-user-circle me-2 text-dark"></i>
-						<a href="{% url 'account:user_my_order' %}" class="small link-hover-decoration text-dark">주문 조회</a>
+						<a href="{% url 'account:user_my_order' %}" class="small link-hover-decoration text-dark">Service History</a>
 					</li>
 					
-					<li class="list-group-item {% if active_tab == '구독관리'%}active{% endif %}">
+					<li class="list-group-item {% if active_tab == 'Subscription Management'%}active{% endif %}">
 						<i class="bx bx-cog me-2 text-dark"></i>
-						<a href="{% url 'account:user_my_subscribe' %}" class="small link-hover-decoration text-dark">구독관리</a>
+						<a href="{% url 'account:user_my_subscribe' %}" class="small link-hover-decoration text-dark">Subscription Management</a>
 					</li>
-					<li class="list-group-item {% if active_tab == '1:1 문의'%}active{% endif %}">
+					<li class="list-group-item {% if active_tab == 'My QnA'%}active{% endif %}">
 						<i class="bx bx-question-mark me-2 text-dark"></i>
-						<a href="{% url 'account:user_my_qna_list' %}" class="small link-hover-decoration text-dark">1:1 문의</a>
+						<a href="{% url 'account:user_my_qna_list' %}" class="small link-hover-decoration text-dark">My QnA</a>
 					</li>
 				</ul>
 			</div>
 		</div>
+	</div>
+	<div class="mt-6">
+		<a href="{% url 'account:user_home_check' %}">
+			<div class="bg-brandBlue d-flex justify-content-between align-items-center p-3 rounded">
+				<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
+				<div class="text-center">
+					<h5 class="mb-0 text-white">Home Check</h5>
+				</div>
+			</div>
+		</a>
 	</div>
 </div>
