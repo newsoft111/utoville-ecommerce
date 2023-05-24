@@ -337,9 +337,9 @@ async function product_write_submit() {
         console.log(data);
         is_run  = false;
         if (data.result == '200') {
-            openModal("good", data.result_text, '', 'reload');
+            openModal("Success", data.result_text, '', 'reload');
         } else {
-            openModal("good", data.result_text, '');
+            openModal("Fail", data.result_text, '');
         }
     });
 }
@@ -376,10 +376,10 @@ function get_l2(elem) {
     		l1_name = elem.value;
             let cats = '';
             l2_data = cats_data[l1_name];
-			
 			for (var i=0; i < l2_data.length; i++) {
+					console.log(Object.keys(l2_data[i]))
 					// cats += '<option value=' +Object.keys(l2_data[i])+ 'onclick="get_l3(this)" style="cursor:pointer; margin-bottom: 5px;">' +Object.keys(l2_data[i])+ '</option>';
-					cats += `<option value=${Object.keys(l2_data[i])} onclick="get_l3(this)" style="cursor:pointer; margin-bottom: 5px;">${Object.keys(l2_data[i])}</option>`;
+					cats += `<option value="${Object.keys(l2_data[i])}" onclick="get_l3(this)" style="cursor:pointer; margin-bottom: 5px;">${Object.keys(l2_data[i])}</option>`;
 			}
 			document.querySelector('select[id=l2_cat]').innerHTML =  '';
 			document.querySelector('select[id=l2_cat]').innerHTML +=  cats;
@@ -389,10 +389,10 @@ function get_l2(elem) {
 function get_l3(elem){
             let cats = '';
             l2_data = cats_data[l1_name]
+			console.log(elem, elem.value)
             if (l2_data.length){
 				for (var i=0; i < l2_data.length; i++) {
 					l3_cats = l2_data[i][elem.value]
-
 					if (l3_cats) {
 						for (var j=0; j < l3_cats.length; j++) {
 							// cats += '<option value='+l3_cats[j]['id']+'>'+l3_cats[j]['name']+'</option>';
@@ -431,7 +431,7 @@ let addoptionname = document.getElementById("option_name").value;
 				let dict1 = {};
 				for (var i = 0; i < elem.length-1; i++) {
 						if(i == elem.length-2){
-							names += elem[i].value +'(+' + elem[i+1].value + ') ';
+							names += elem[i].value +'(+' + elem[i+1].value + ')';
 							if (!dict.hasOwnProperty(addoptionname)) {
 								dict1[elem[i].value] = elem[i+1].value
 								dict[addoptionname] = dict1;
@@ -454,7 +454,7 @@ let addoptionname = document.getElementById("option_name").value;
 					}
 				options_data.push(dict);
 				html +=	`<td id="options_price" name="options_price" >${names}</td>`;
-				html +=  `<td><button type="button" class="btn btn-secondary" onclick="removeAddedOptionItem(this);" >remove added option button</button></td></tr>`;
+				html +=  `<td><button type="button" class="btn btn-secondary" onclick="removeAddedOptionItem(this);" >Remove</button></td></tr>`;
 				document.querySelector('tbody[id=added-option-list]').innerHTML +=  html;
         }
 }

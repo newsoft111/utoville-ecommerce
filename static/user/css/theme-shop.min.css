@@ -19318,7 +19318,7 @@ th {
 	position:relative;
 	overflow:hidden;
 	width:100%;
-	height:28px;
+	height:50px;
 	display:flex;
 	flex-direction:column;
 	align-items:center
@@ -19332,7 +19332,7 @@ th {
 	position:absolute;
 	text-align:center;
 	left:0;
-	top:0;
+	top:15px;
 	height:100%;
 	width:100%;
 	transition:all .35s;
