@@ -84,13 +84,13 @@ input[type="text"]::placeholder {
                <h6 class="mb-3">Option</h6>
                
                <select id="optionFirst" class="form-select form-select-md mb-3" onchange="set_variant_value(this)" style="border-color : #ddd;">
-                  <option selected>옵션1</option>
+                  <option selected>Option1</option>
                   {% for variant in product_detail.productvariant_set.all %}
                   <option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
                   {% endfor %}
                </select>
                <select id="optionSecond" onchange="add_item(this)" class="form-select form-select-md mb-3" style="border-color : #ddd;">
-                  <option selected>옵션2</option>
+                  <option selected>Option2</option>
                </select>
             </div>
             {% endif %}
@@ -103,8 +103,8 @@ input[type="text"]::placeholder {
                      <span class="price ms-auto" id="itemPrice">₱{{product_detail.price|intcomma}}</span>
                   </div>
 				  <div class="d-flex justify-content-between align-items-center mb-3">
-					  <span>희망 서비스 일자 : </span>
-					  <input type="text" id="date-time-picker" name="date-time-picker" class="set-date-time-picker" placeholder="날짜와 시간을 선택하세요.">
+					  <span>Desired service date : </span>
+					  <input type="text" id="date-time-picker" name="date-time-picker" class="set-date-time-picker" placeholder="Please select date and time.">
 				  </div>
 				</div>
 				{% endif %}
@@ -112,10 +112,10 @@ input[type="text"]::placeholder {
 
             <div class="totalPrice d-flex">
                {% if product_detail.productvariant_set.all %}
-               <p>Total Price (<span id="totalQty">0개</span>)</p> 
+               <p>Total Price (<span id="totalQty">0</span>)</p> 
                <p id="totalPrice" style="font-size: 20px;" class="total_price_part ms-auto">₱0</p>
                {% else %}
-               <p>Total Price(<span id="totalQty">1개</span>)</p>
+               <p>Total Price(<span id="totalQty">1</span>)</p>
                <p class="ms-auto" id="totalPrice">₱{{product_detail.price|intcomma}}</p>
                {% endif %}
             </div>
@@ -164,7 +164,7 @@ input[type="text"]::placeholder {
                         <i class="bx {% if product_detail.rating < 4.5%}bx-star{% elif product_detail.rating >= 4.5 and product_detail.rating < 5 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
                      </span>
                      <p class="mb-0"><span class="reviews small fw-normal">{{product_detail.rating}} / 5</span>
-                        <small class="text-muted">( {{product_detail.rating_count}}개 - Reviews)</small>
+                        <small class="text-muted">( {{product_detail.rating_count}} - Reviews)</small>
                      </p>
 
                   </div>
@@ -232,18 +232,18 @@ input[type="text"]::placeholder {
    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
       <div class="modal-content">
       <div class="modal-header p-4">
-         <h4 class="mb-0 text-center">알림</h4>
+         <h4 class="mb-0 text-center">Notification</h4>
          <button type="button" class="btn-close" style="background: none;" data-before-modal="" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-4">
-         <span>장바구니에 넣었습니다.</span>
+         <span>Added cart.</span>
       </div>
       <div class="modal-footer">
          <a href="{% url 'product:user_product_detail' product_detail.pk %}">
-            <button type="button" class="btn btn-outline-brandGreen hover-lift" data-bs-dismiss="modal">쇼핑 계속하기</button>
+            <button type="button" class="btn btn-outline-brandGreen hover-lift" data-bs-dismiss="modal">Continue to shopping</button>
          </a>
          <a href="{% url 'cart:user_cart_detail' %}">
-            <button type="button" class="btn btn-outline-brandGreen hover-lift" data-bs-dismiss="modal">장바구니 가기</button>
+            <button type="button" class="btn btn-outline-brandGreen hover-lift" data-bs-dismiss="modal">Go to cart</button>
          </a>
       </div>
    </div>
@@ -265,7 +265,7 @@ function add_cart_submit(product_id) {
    let itemPrice = document.getElementById("itemPrice");
 
    if (isEmpty(data) || data == '[]') {
-      openModal('알림','옵션을 선택해주세요.');
+      openModal('Notification','Please select options.');
       return false;
    }
    loadingModal.show();
@@ -284,13 +284,13 @@ function add_cart_submit(product_id) {
             var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector("#addCartDoneModal"));
             modal.show();
          }else{
-            openModal("알림", data.result_text);
+            openModal("Notification", data.result_text);
          }
          is_run  = false;
         },
         error: function (request, status, error){
           var msg = "ERROR : " + request.status + "<br>"
-             msg +=  + "내용 : " + request.responseText + "<br>" + error;
+             msg +=  + "Contents : " + request.responseText + "<br>" + error;
              console.log(msg);
         },
       complete : function() {
@@ -392,8 +392,8 @@ function add_item(e) {
          html += '</div>';
       
          html +=   '<div class="d-flex justify-content-between align-items-center mb-3">';
-            html += `<span>희망 서비스 일자 : </span>`;
-            html += `<input type="text" id="date-time-picker${option_second_id}" name="date-time-picker" class="set-date-time-picker" placeholder="날짜와 시간을 선택하세요.">`;
+            html += `<span>Desired service date : </span>`;
+            html += `<input type="text" id="date-time-picker${option_second_id}" name="date-time-picker" class="set-date-time-picker" placeholder="Please select date and time.">`;
          html += '</div>';
       html += '</div>';
    

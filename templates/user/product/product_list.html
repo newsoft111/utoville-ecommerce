@@ -51,7 +51,7 @@
 						<div class="bg-brandBlue d-flex justify-content-between align-items-center p-3 rounded">
 							<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
 							<div class="text-center">
-								<h5 class="mb-0 text-white">Home Check</h5>
+								<h5 class="mb-0 text-white">Check Reservation</h5>
 							</div>
 						</div>
 					</a>
@@ -78,7 +78,7 @@
 					<div class="col-6 col-md-6 col-xl-4 mb-4">
 						<!--:card-hover-expand-->
 						<div class="card overflow-hidden hover-lift card-product">
-						<div class="card-product-header p-3 d-block overflow-hidden position-relative">
+						<div class="card-product-header p-3 pb-0 d-block overflow-hidden position-relative">
 							<a href="{% url 'product:user_product_detail' productList.id %}">
 								{% for thumbnail in productList.productthumbnail_set.all %}
 								<img src="{{thumbnail.thumbnail.url}}" class="img-fluid" alt="Product">
@@ -88,12 +88,14 @@
 						<div class="card-product-body p-3 pt-0 text-center">
 							<a href="{% url 'product:user_product_detail' productList.id %}" class="h5 text-dark d-block position-relative mb-2">{{productList.name}}</a>
 							<div class="card-product-body-overlay">
-							<span class="card-product-price">
-								<span>₱{{productList.price|intcomma}}</span>
-							</span>
-							<span class="card-product-view-btn">
-								<a href="{% url 'product:user_product_detail' productList.id %}" class="link-underline mb-1 fw-semibold text-dark">View Details</a>
-							</span>
+								<span class="card-product-price">
+									<span>{{productList.product_name}}</span>
+									<br>
+									<span>₱{{productList.price|intcomma}}</span>
+								</span>
+								<span class="card-product-view-btn">
+									<a href="{% url 'product:user_product_detail' productList.id %}" class="link-underline mb-1 fw-semibold text-dark">View Details</a>
+								</span>
 							</div>
 						</div>
 						</div>
@@ -170,9 +172,13 @@ let firstCategory = params.get('category1');
 let firstCategoryName = document.querySelector(".first_category_name");
 
 let categoryInfo = document.querySelector(".category_info");
-let categoryNameArr = ["Cleaning", "Disinfection", "Repair", "Appliance Care", "Moving Service", "Car Service", "Water Delivery"];
 
-for(var i=0; i<categoryNameArr.length; i++){
+let categoryNameArr = ["Home Check", "Cleaning", "Disinfection", "Repair", "Appliance Care", "Moving Service", "Car Service", "Water Delivery"];
+
+
+
+
+for(var i=0; i<=categoryNameArr.length; i++){	
 	if(firstCategory == i+1) {
 		firstCategoryName.innerHTML = categoryNameArr[i];
 
