@@ -20,6 +20,6 @@ RUN poetry export -f requirements.txt > requirements.txt
 RUN pip install -r requirements.txt
 
 EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-#CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--access-logfile", "access.log", "--error-logfile", "error.log", "config.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--access-logfile", "access.log", "--error-logfile", "error.log", "config.wsgi:application"]
