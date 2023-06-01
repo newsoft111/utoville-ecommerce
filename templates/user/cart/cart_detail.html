@@ -89,7 +89,7 @@
             <!-- end card -->
          </div>
          
-         <div class="col-xl-4">
+         <div class="order_summary col-xl-4">
             <div class="mt-5 mt-lg-0 position-sticky" style="top: 60px;">
                <div class="card-header bg-transparent border-bottom py-3 px-4">
                   <h5 class="font-size-16 mb-0">Order Summary <span class="float-end">#MN0124</span></h5>
@@ -266,12 +266,14 @@ function remove_checked_item() {
 function check_item_zero() {
    let itemList = document.querySelectorAll(".item-list");
    let itemListBody = document.getElementById("item-list-body");
+   let orderSummary = document.querySelector(".order_summary");
    let html = '';
 
    if(itemList.length < 1) {
       html = `<h6 class="text-center mb-0 p-5 bg-light">There is no item.</h6>`
    
       itemListBody.insertAdjacentHTML("afterbegin", html);
+	  orderSummary.style.display = "none";
    }
 }
    
