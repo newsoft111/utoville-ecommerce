@@ -2,7 +2,7 @@
 	<nav class="top_menu nav nav-pills">
 		<a href="{% url 'account:user_my_dashboard' %}" class="nav-link {% if active_tab == 'Dashboard' %}active{% endif %}">Dashboard</a>
 
-		<a href="{% url 'account:user_my_order' %}" class="nav-link {% if active_tab == 'Service History' %}active{% endif %}">Service History</a>
+		<a href="{% url 'account:user_my_order' %}" class="nav-link {% if active_tab == 'Order History' %}active{% endif %}">Order History</a>
 		
 		<a href="{% url 'account:user_my_subscribe' %}" class="nav-link {% if active_tab == 'Subscription Management' %}active{% endif %}">Subscription Management</a>
 		<a href="{% url 'account:user_my_qna_list' %}" class="nav-link {% if active_tab == 'My QnA' %}active{% endif %}">My QnA</a>

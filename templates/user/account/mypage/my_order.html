@@ -4,73 +4,30 @@
 {% load humanize %}
 
 <style>
-.inputBlock {
-	display: inline-block; 
-	width: 100%;
-}
-.submitBlock {
-	display: inline-block;
-}
-.resp-order-main {
-	display: none;
-}
-.resp-order-main .title {
-	padding: 10px 0;
-	text-align: center;
-	background-color: #f3f3f3;
-}
-.resp-order-main .title span {
-	font-size: 18px;
-}
-.resp-order-main .contents {
-	margin: 10px 0;
-	text-align: center;
-}
-.resp-order-main .contents li {
-	display: inline-block;
-	margin-left: 10px;
-}
-.resp-order-main .contents li button[type=button] {
-	padding: 10px 20px;
-}
-.status-main .contnets {
-	margin: 10px 0;
-}
-.resp-od-list-main {
-	display: none;
-}
-@media only screen and (max-width: 768px){
-	.formFlex {
-		flex-wrap: wrap;
-	}
-	.inputBlock {
-		display: block;
-		width: 100%;
-	}
-	.submitBlock {
-		display: block;
-		width: 100%;
-	}
-	.submitBlock button[type=submit] {
-		margin-top: 10px;
-		width: 100%;
-	}
+.inputBlock { display: inline-block;  width: 100%; }
+.submitBlock { display: inline-block; }
+.resp-order-main { display: none; }
+.resp-order-main .title { padding: 10px 0; text-align: center; background-color: #f3f3f3; }
+.resp-order-main .title span { font-size: 18px; }
+.resp-order-main .contents { margin: 10px 0; text-align: center; }
+.resp-order-main .contents li { display: inline-block; margin-left: 10px; }
+.resp-order-main .contents li button[type=button] { padding: 10px 20px; }
+.status-main .contnets { margin: 10px 0; }
+.resp-od-list-main { display: none; }
+.process_status { display: flex; align-items: center; justify-content: space-evenly;}
+.write_review_btn { font-size: 13px; padding: 2px 8px; border-radius: 0px;}
 
+@media only screen and (max-width: 768px){
+	.formFlex { flex-wrap: wrap; }
+	.inputBlock { display: block; width: 100%; }
+	.submitBlock { display: block; width: 100%; }
+	.submitBlock button[type=submit] { margin-top: 10px; width: 100%; }
 }
 @media only screen and (max-width: 495px){
-	.main_contents {
-		display: none;
-	}
-	.resp-order-main {
-		display: block;
-	}
-	.inputBlock {
-		margin-right: 0;
-	}
-
-	.resp-od-list-main {
-		display: block;
-	}
+	.main_contents { display: none; }
+	.resp-order-main { display: block; }
+	.inputBlock { margin-right: 0; }
+	.resp-od-list-main { display: block; }
 }
 </style>
 
@@ -78,13 +35,13 @@
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
 			<div class="row justify-content-center">
-				{% include "user/account/mypage/sidemenu.html" with active_tab="Service History"%}
+				{% include "user/account/mypage/sidemenu.html" with active_tab="Order History"%}
 				<div class="col-lg-9">
-					{% include "user/account/mypage/topmenu.html" with active_tab="Service History"%}
+					{% include "user/account/mypage/topmenu.html" with active_tab="Order History"%}
 					<div class="order_search_area">
 						<div class="row">
 							<div class="col-12">
-								<h4 class="my-4">Service History</h4>
+								<h4 class="my-4">Order History</h4>
 								<div class="row main_contents">
 									<div class="col-md-12">
 										<div class="bg-secondary-soft p-3 p-md-5 rounded" style="padding: 0 !important;">
@@ -261,10 +218,10 @@
 													<td>{{my_order_obj.product_name}}</td>
 													<td>{{my_order_obj.ordered_quantity}}</td>
 													<td>₱{{my_order_obj.sub_total_price|intcomma}}</td>
-													<td>
-														Complete
+													<td class="process_status">
+														<span style="text-decoration:underline; text-underline-offset: 4px;">Complete</span>
 														<div class="mt-1">
-															<a href="#!" class="btn btn-outline-secondary btn-rise" onclick="open_review_write_modal('{{my_order_obj.pk}}');">
+															<a href="#!" class="btn btn-outline-secondary btn-rise write_review_btn" onclick="open_review_write_modal('{{my_order_obj.pk}}');">
 																<div class="btn-rise-bg bg-secondary"></div>
 																<div class="btn-rise-text">
 																	Write Review
