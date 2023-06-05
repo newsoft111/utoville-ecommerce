@@ -65,33 +65,31 @@ input[type="text"]::placeholder {
 
          <div class="col-md-8 mx-auto col-lg-5 ms-xl-auto">        
             <!-- Product Description -->
-            <div class="mb-3 pb-3 border-bottom">
-               <div class="mb-3">
-               <h2 class="mb-4 display-4">{{product_detail.product_name}}</h2>
-                  <div class="d-flex justify-content-between align-items-center">
-                     <div>
-                        <p class="fs-5 mb-0">₱{{product_detail.price|intcomma}}</p>
-                     </div>
-                  </div>
-               </div>
-
-               <p class="mb-4">Lorem ipsum dolor sit amet adipiscing euismod tincidunt
-               laoreet dolore magna aliquam erat volutpat.</p>
-            </div>
+				<div class="mb-3 pb-3 border-bottom">
+					<div class="mb-3">
+					<h2 class="mb-4 display-4">{{product_detail.product_name}}</h2>
+						<div class="d-flex justify-content-between align-items-center">
+							<div>
+								<p class="fs-5 mb-0">₱{{product_detail.price|intcomma}}</p>
+							</div>
+						</div>
+					</div>
+					<p class="mb-4">Lorem ipsum dolor sit amet adipiscing euismod tinciduntlaoreet dolore magna aliquam erat volutpat.</p>
+				</div>
 
             {% if product_detail.productvariant_set.all %}
             <div class="mb-3 pb-3 border-bottom">
-               <h6 class="mb-3">Option</h6>
-               
-               <select id="optionFirst" class="form-select form-select-md mb-3" onchange="set_variant_value(this)" style="border-color : #ddd;">
-                  <option selected>Option1</option>
-                  {% for variant in product_detail.productvariant_set.all %}
-                  <option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
-                  {% endfor %}
-               </select>
-               <select id="optionSecond" onchange="add_item(this)" class="form-select form-select-md mb-3" style="border-color : #ddd;">
-                  <option selected>Option2</option>
-               </select>
+				<h6 class="mb-3">Option</h6>
+				
+				<select id="optionFirst" class="form-select form-select-md mb-3" onchange="set_variant_value(this)" style="border-color : #ddd;">
+					<option selected>Option1</option>
+					{% for variant in product_detail.productvariant_set.all %}
+					<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
+					{% endfor %}
+				</select>
+				<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-md mb-3" style="border-color : #ddd;">
+					<option selected>Option2</option>
+				</select>
             </div>
             {% endif %}
 
@@ -302,7 +300,7 @@ function add_cart_submit(product_id) {
 function set_variant_value(e) {
    let key = e.options[e.selectedIndex].value;
    let json_data = {{variant_data|safe}};
-   let html='<option selected>옵션2</optimPriceon>';
+   let html='<option selected>Option2</optimPriceon>';
    
    for (idx in json_data[key]) {
       value = json_data[key][idx];
@@ -424,7 +422,7 @@ function add_item(e) {
       sibling.value = Number(sibling.value) + 1
       cal_item_price(sibling)
    }
-   reset_variant(e, '옵션2');
+   reset_variant(e, 'Option2');
    cal_total_value();
 }
 

@@ -68,7 +68,7 @@
 										</div>
 									</form>
 								</div>
-								<div class="btn_group">
+								<div class="btn_group" id="sa-warning">
 									<button type="button" class="btn btn-secondary">주문 취소</button>
 								</div>
 							</div>
@@ -79,4 +79,19 @@
 		</div>
 	</div>
 </section>
+
+<script>
+	document.getElementById("sa-warning").addEventListener("click", function() {
+    Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: !0,
+        confirmButtonColor: "#51d28c",
+        cancelButtonColor: "#f34e4e",
+        confirmButtonText: "Yes"
+    }).then(function(e) {
+        e.value && Swal.fire("Done!", "The order cancellation has been completed.", "success")
+    })
+})
+</script>
 {% endblock %}

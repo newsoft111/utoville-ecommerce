@@ -6,10 +6,51 @@
 <!-- Sweet Alert-->
 <link href="{% static 'user/vendor/node_modules/css/sweetalert2.min.css' %}" rel="stylesheet" type="text/css" />
 <style>
+table { border-collapse: collapse; }
+.subs-thead { border: #f9f9f9; border-top: #000; border-bottom: #000;}
+.subs-tbody { border: #fff; }
+.table-bordered>:not(caption)>*>* { border-width: 0; }
+.table>:not(:first-child) { border-top: 1px solid #f9f9f9; }
 @media only screen and (max-width: 767px) {
-	.subs-status {
-		display: inline-block;
-		margin-bottom: 10px;
+	.responsiveTable {
+		border: 0;
+	}
+	.responsiveTable caption {
+		font-size: 1.3em;
+	}
+	.responsiveTable thead {
+		border: none;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+	.responsiveTable tr:first-child {
+		border-top: 3px solid #ddd;
+	}
+	.responsiveTable tr {
+		border-bottom: 3px solid #ddd;
+		display: block;
+		margin-bottom: .625em;
+	}
+	.responsiveTable td {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		text-align: right;
+	}
+	.responsiveTable td::before {
+		content: attr(data-label);
+		float: left;
+		font-weight: bold;
+	}
+	.responsiveTable td:last-child {
+		border-bottom: 0;
+	}
+	.responsiveTable img {
+		width: 20% !important;
 	}
 }
 </style>
@@ -17,159 +58,101 @@
 <section class="position-relative">
 	<div class="container position-relative">
 		<div class="position-relative pt-9 pb-9 pb-lg-11">
-			<div class="my_page_main row">
+			<div class="my_page_main row justify-content-center">
 				{% include "user/account/mypage/sidemenu.html" with active_tab="Subscription Management" %}
 				<div class="col-lg-9">
 					{% include "user/account/mypage/topmenu.html" with active_tab="Subscription Management" %}
-					<div class="row">
-						<div class="col-12">
-							<!-- Page title -->
-							<h4 class="my-4">Subscription Management</h4>
-							<!-- Service Cancel START -->
-							<div class="row main_contents">
-								<div class="col-md-12">
-									<div class="bg-secondary-soft p-3 p-md-5 rounded">
-										<!-- Title -->
-										<div class="row d-none d-xxl-block">
-											<div class="col-12 align-middle py-3">
-												<div class="row border-bottom">
-													<div class="col-6 align-middle text-center py-2">
-														<h5>Listing</h5>
-													</div>
-													<div class="col-6">
-														<div class="row">
-															<div class="col-4 align-middle text-center py-2">
-																<h5>Purchase date</h5>
-															</div>
-															<div class="col-4 align-middle text-center py-2">
-																<h5>Status</h5>
-															</div>
-															<div class="col-4 align-middle text-center py-2">
-																<h5>Details</h5>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<!-- List -->
-										<div class="order_info row">
-											<div class="col-12 align-middle text-center py-4">
-												<div class="row">
-													<div class="col-xxl-6">
-														<div class="row border-0">
-															<!-- Image -->
-															<div class="col-xl-3 text-center">
-																<img class="rounded mw-100" src="{% static 'user/img/mypage/subs01.jpg' %}" alt="Listing image1">
-															</div>
-															<!-- Info -->
-															<div class="col-xl-9 pt-2 pt-xl-0 text-center">
-																<h6 class="mb-1"></h6>
-																<p class="mb-1 text-body"></p>
-																<span class="text-success">₱5,000</span>
-															</div>
-														</div>
-													</div>
-													<!-- Contents -->
-													<div class="col-xxl-6 mt-5">
-														<div class="row">
-															<!-- Date -->
-															<div class="col-md-4">
-																08 July 2018
-															</div>
-															<!-- Status -->
-															<div class="col-md-4 pt-2">
-																<span class="text-danger border border-danger p-2" style="font-size: 13px;">Cancelled</span>
-															</div>		
-															<!-- Details -->
-															<div class="col-md-4">
-																<div class="btn btn-outline-brandGreen btn-rise" data-bs-toggle="modal" data-bs-target="#cancelDetailModal" style="font-size: 14px;">
-																	<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-																	<div class="btn-rise-text" style="font-size: 14px;">Details</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div> <!-- Row END -->
-											</div>
-										</div>
-										<hr>
-										<div class="order_info row">
-											<div class="col-12 align-middle text-center py-4">
-												<div class="row">
-													<div class="col-xxl-6">	
-														<div class="row">
-															<div class="col-xl-3 text-center">
-																<img class="rounded mw-100" src="{% static 'user/img/mypage/subs01.jpg' %}" alt="Listing image2">
-															</div>
-															<div class="col-xl-9 pt-2 pt-xl-0 text-center">
-																<h6 class="mb-1">Store in Woodside, San Francisco</h6>
-																<p class="mb-1 text-body">Chicago HQ Estica Cop. 8573 Livingston </p>
-																<span class="text-success">$160,000</span>
-															</div>
-														</div>
-													</div>
-													<div class="col-xxl-6 mt-5">
-														<div class="row">
-															<div class="col-md-4">
-																08 July 2018
-															</div>
-															<div class="col-md-4 pt-2">
-																<span class="text-success border border-success p-2" style="font-size: 13px;">Purchased</span>
-															</div>			
-															<div class="col-md-4">
-																<a href="{% url 'account:user_my_subscribe_cancel' %}" class="btn btn-outline-brandGreen btn-rise">
-																	<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-																	<div class="btn-rise-text" style="font-size: 14px;">Go to Cancel</div>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div> 
-											</div>
-										</div>
-										<hr> 
-										<div class="order_info row">
-											<div class="col-12 text-center py-4">
-												<div class="row">
-													<div class="col-xxl-6">	
-														<div class="row">
-															<div class="col-xl-3 text-center">
-																<img class="rounded mw-100" src="{% static 'user/img/mypage/subs01.jpg' %}" alt="Listing image2">
-															</div>
-															<div class="col-xl-9 pt-2 pt-xl-0 text-center">
-																<h6 class="mb-1">Store in Woodside, San Francisco</h6>
-																<p class="mb-1">Chicago HQ Estica Cop. 8573 Livingston </p>
-																<span class="text-success">$160,000</span>
-															</div>
-														</div>
-													</div>
-													<div class="col-xxl-6 mt-5">
-														<div class="row">
-															<div class="col-md-4 align-middle">
-																08 July 2018
-															</div>
-															<div class="col-md-4 align-middle pt-2">
-																<span class="text-info border border-info p-2" style="font-size: 13px;">Pending</span>
-															</div>			
-															<div class="col-md-4 align-middle">
-																<button type="button" class="btn btn-outline-brandGreen btn-rise" id="sa-warning">
-																	<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
-																	<div class="btn-rise-text"  style="font-size: 14px;">Withdrawal</div>
-																</button>
-															</div>
-														</div>
-													</div>
-												</div> 
-											</div>
-										</div>
-									</div>
-								</div>
+					<!-- Page title -->
+					<h4 class="my-4">Subscription Management</h4>
+					<!-- Service Cancel START -->
+					<div class="responsiveTable mt-2">
+						<table class="table table-bordered text-center align-middle table-check">
+							<thead class="align-middle table-light subs-thead">
+								<tr>
+									<th><h6>Product Details</h6></th>
+									<th><h6>Purchase Date</h6></th>
+									<th><h6>Expiry Date</h6></th>
+									<th><h6>Payment Due Date</h6></th>
+									<th><h6>Status</h6></th>				
+								</tr>
+							</thead>
+							<tbody class="subs-tbody">
+								<tr style="border-bottom: 0;">
+									<td data-label="Product Details">
+										<img class="rounded w-50" src="{% static 'user/img/mypage/subs01.jpg' %}" alt="Listing image1">
+										<h6 class="mb-1">Company name</h6>
+										<p class="mb-1 text-body">Product name</p>
+										<span class="text-secondary">₱5,000</span><br>
+										<span class="text-secondary">Option: 6 Months</span>
+									</td>
+									
+									<td data-label="Purchase Date">
+										<span>07 June 2023</span>
+									</td>
+									<td data-label="Expiry Date">
+										<span>07 December 2023</span>
+									</td>
+									<td data-label="Payment Due Date">
+										<span>07 July 2023</span>
+									</td>
+									<td data-label="Status">
+										<span class="text-success" style="font-size: 13px;">Subscribed</span>
+										<!-- 구독 취소되면 Canceled로 상태 변경 및 Go to Cancel display none-->
+										<!-- <span class="text-danger" style="font-size: 13px;">Canceled</span> -->
+										<a href="{% url 'account:user_my_subscribe_cancel' %}" class="d-block mt-2">
+											<span class="text-secondary border border-secondary p-1 text-nowrap" style="font-size: 13px;">Go to Cancel</span>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table><!-- end table --> 
+					</div>	
+						<!-- Details -->
+						<!-- <div class="col-md-4">
+							<div class="btn btn-outline-brandGreen btn-rise" data-bs-toggle="modal" data-bs-target="#cancelDetailModal" style="font-size: 14px;">
+								<div class="btn-rise-bg" style="background-color: #90c31f;"></div>
+								<div class="btn-rise-text" style="font-size: 14px;">Details</div>
 							</div>
+						</div> -->
+						<div class="row mb-5">
+							<ul class="pagination justify-content-center m-0">
+								{% if my_order_objs.has_previous %}
+								<li class="page-item ">
+									<a class="page-link" href="?p={{my_order_objs.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">이전</a>
+								</li>
+								{% else %}
+								<li class="page-item disabled">
+									<span class="page-link">Previous</span>
+								</li>
+								{% endif %}
+						
+								{% for page_number in my_order_objs.paginator.page_range %}
+									{% if page_number >= my_order_objs.number|add:-2 and page_number <= my_order_objs.number|add:2 %}
+										{% if page_number == my_order_objs.number %}
+										<li class="page-item active">
+											<span class="page-link">{{ page_number }}</span>
+										</li>
+										{% else %}
+										<li class="page-item">
+												<a class="page-link" href="?p={{page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">{{ page_number }}</a>
+										</li>
+										{% endif %}
+									{% endif %}
+								{% endfor %}
+						
+								{% if my_order_objs.has_next  %}
+								<li class="page-item">
+									<a class="page-link" href="?p={{my_order_objs.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">다음</a> 
+								</li>
+								{% else %}
+								<li class="page-item disabled">
+									<span class="page-link">Next</span>
+								</li>
+								{% endif %}
+							</ul>
 						</div>
-					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -243,14 +226,13 @@ new Choices(el, t)
 document.getElementById("sa-warning").addEventListener("click", function() {
     Swal.fire({
         title: "Are you sure?",
-        text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: !0,
         confirmButtonColor: "#51d28c",
         cancelButtonColor: "#f34e4e",
         confirmButtonText: "Yes"
     }).then(function(e) {
-        e.value && Swal.fire("Done!", "취소 철회가 완료되었습니다.", "success")
+        e.value && Swal.fire("Done!", "The cancellation withdrawal has been completed.", "success")
     })
 })
 
