@@ -13,6 +13,7 @@ urlpatterns = [
 	path('', include('revenue.urls')),
 	path('', include('profit.urls')),
 	path('', include('subscribe.urls')),
+	path('', include('house_check.urls')),
 ]
 
 if settings.DEBUG:
