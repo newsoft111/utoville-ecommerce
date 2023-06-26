@@ -12,6 +12,7 @@ urlpatterns = [
 	path('', include('qna.urls')),
 	path('', include('revenue.urls')),
 	path('', include('profit.urls')),
+	path('', include('subscribe.urls')),
 ]
 
 if settings.DEBUG:

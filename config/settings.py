@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 	'charge',
 	'revenue',
 	'profit',
+	'subscribe',
 ]
 
 AUTH_USER_MODEL = 'account.User'

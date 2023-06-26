@@ -11,48 +11,26 @@ table { border-collapse: collapse; }
 .subs-tbody { border: #fff; }
 .table-bordered>:not(caption)>*>* { border-width: 0; }
 .table>:not(:first-child) { border-top: 1px solid #f9f9f9; }
+
+.table-responsive th, .table-responsive td { border: 1px solid #ddd; }
+.table-responsive tr.space {border-bottom: 2px solid #000;}
+.check_info { font-size: 12px; }
+
 @media only screen and (max-width: 767px) {
-	.responsiveTable {
-		border: 0;
-	}
-	.responsiveTable caption {
-		font-size: 1.3em;
-	}
-	.responsiveTable thead {
-		border: none;
-		clip: rect(0 0 0 0);
-		height: 1px;
-		margin: -1px;
-		overflow: hidden;
-		padding: 0;
-		position: absolute;
-		width: 1px;
-	}
-	.responsiveTable tr:first-child {
-		border-top: 3px solid #ddd;
-	}
-	.responsiveTable tr {
-		border-bottom: 3px solid #ddd;
-		display: block;
-		margin-bottom: .625em;
-	}
-	.responsiveTable td {
-		border-bottom: 1px solid #ddd;
-		display: block;
-		text-align: right;
-	}
-	.responsiveTable td::before {
-		content: attr(data-label);
-		float: left;
-		font-weight: bold;
-	}
-	.responsiveTable td:last-child {
-		border-bottom: 0;
-	}
-	.responsiveTable img {
-		width: 20% !important;
-	}
+	.responsiveTable { border: 0; }
+	.responsiveTable caption { font-size: 1.3em; }
+	.responsiveTable thead { border: none; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+	.responsiveTable tr:first-child { border-top: 3px solid #ddd; }
+	.responsiveTable tr { border-bottom: 3px solid #ddd; display: block; margin-bottom: .625em; }
+	.responsiveTable td { border-bottom: 1px solid #ddd; display: block; text-align: right; }
+	.responsiveTable td::before { content: attr(data-label); float: left; font-weight: bold; }
+	.responsiveTable td:last-child { border-bottom: 0; }
+	.responsiveTable img { width: 20% !important; }
 }
+@media (max-width: 480px) {
+	table thead tr th:nth-child(2) {padding: 0 120px;}
+}
+
 </style>
 <!-- Section -->
 <section class="position-relative">
@@ -73,6 +51,7 @@ table { border-collapse: collapse; }
 									<th><h6>Purchase Date</h6></th>
 									<th><h6>Expiry Date</h6></th>
 									<th><h6>Payment Due Date</h6></th>
+									<th><h6>Reports</h6></th>
 									<th><h6>Status</h6></th>				
 								</tr>
 							</thead>
@@ -95,12 +74,16 @@ table { border-collapse: collapse; }
 									<td data-label="Payment Due Date">
 										<span>07 July 2023</span>
 									</td>
+									<td data-label="Payment Due Date">
+										<button type="button" class="btn btn-outline-secondary rounded-0 p-1 mb-2" data-bs-toggle="modal" data-bs-target="#checkDetailModal" style="font-size: 13px;">Check Report</button>
+										<button type="button" class="btn btn-outline-secondary rounded-0 p-1" data-bs-toggle="modal" data-bs-target="#cleaningDetailModal" style="font-size: 13px;">Cleaning Report</button>
+									</td>
 									<td data-label="Status">
 										<span class="text-success" style="font-size: 13px;">Subscribed</span>
 										<!-- 구독 취소되면 Canceled로 상태 변경 및 Go to Cancel display none-->
 										<!-- <span class="text-danger" style="font-size: 13px;">Canceled</span> -->
 										<a href="{% url 'account:user_my_subscribe_cancel' %}" class="d-block mt-2">
-											<span class="text-secondary border border-secondary p-1 text-nowrap" style="font-size: 13px;">Go to Cancel</span>
+											<span class="btn btn-outline-secondary rounded-0 p-1 text-nowrap" style="font-size: 13px;">Go to Cancel</span>
 										</a>
 									</td>
 								</tr>
@@ -158,46 +141,8 @@ table { border-collapse: collapse; }
 	</div>
 </section>
 
-<div class="modal fade" id="cancelDetailModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="cancelDetailLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered modal-md" role="document">
-		<div class="modal-content">
-		<div class="modal-header p-4">
-			<h4 class="mb-0 text-center" id="cancelDetail">취소 상세정보</h4>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body p-4" id="cancelDetailBody">
-			<div class="cancelCatalog">
-				<div class="cancelphoto">
-					<img class="rounded" src="{% static 'user/images/property/grid-list/02.jpg' %}" alt="">
-				</div>
-				<div class="cancel-list text-start">
-					<h6>에어컨 청소</h6>
-					<p>스탠드형</p>
-					<span>₱5,000 / 1개</span>
-				</div>
-				<span class="calce-notice">취소완료</span>
-			</div>
-			<div class="cancelreason">
-				<h6>취소사유</h6>
-				<div class="reasoninner">
-					<ul>
-						<li>취소요청사유</li>
-						<li>다른 서비스 잘못 주문</li>
-					</ul>
-					<ul>
-						<li>환불방법</li>
-						<li>자동 결제취소</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-				<button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">확인</button>
-				<!-- id="" data-before-modal="" onclick="" -->
-		</div>
-		</div>
-	</div>
-</div>
+{% include "user/account/mypage/check_report_modal.html" %}
+{% include "user/account/mypage/cleaning_report_modal.html" %}
 
 <!-- Sweet Alerts js -->
 <script src="{% static 'user/vendor/node_modules/js/sweetalert2.min.js' %}"></script>
