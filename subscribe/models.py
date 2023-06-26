@@ -4,7 +4,7 @@ from product.models import *
 from account.models import UserShippingAddress
 
 # Create your models here.
-# class Subscribe(models.Model):
+# class SubscribeBillingKey(models.Model):
 # 	user = models.ForeignKey(
 # 			settings.AUTH_USER_MODEL,
 # 			on_delete=models.CASCADE,
@@ -13,7 +13,7 @@ from account.models import UserShippingAddress
 # 	subscribed_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 # 	class Meta:
-# 		db_table = 'ecommerce_order'
+# 		db_table = 'ecommerce_subcribe_billing_key'
 
 
 # class SubscribeItem(models.Model):
@@ -38,7 +38,7 @@ from account.models import UserShippingAddress
 	
 
 # 	class Meta:
-# 		db_table = 'ecommerce_order_item'
+# 		db_table = 'ecommerce_subcribe_item'
 
 # 	def sub_total_price(self):
 # 		if self.variant is not None:
