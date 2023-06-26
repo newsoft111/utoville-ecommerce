@@ -25,6 +25,10 @@ node {
         }
     }
 
+	stage('Clean Docker Image') {
+    	sh 'docker image prune -a --force'
+	}
+
     stage('SSH docker run') {
         script {
             sshPublisher(

@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Sign In | Dashonic - Admin & Dashboard Template</title>
+        <title>Sign In Utoville Admin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Pichforest" name="author" />
@@ -17,7 +17,6 @@
         <link href="{% static 'admin/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
         
     </head>
-
     
     <body>
         <div class="authentication-bg min-vh-100">
@@ -35,8 +34,8 @@
                                 </div>                               
                                 
                     			<div class="mb-4">
-                        			<h5>Welcome Back !</h5>
-									<p>Sign in to continue to Dashonic.</p>
+                        			<h5>Welcome!</h5>
+									<p>Sign in to continue to Utoville Admin.</p>
                         		</div>
 
                                 <form name="loginForm">
@@ -52,39 +51,15 @@
 											<input type="password" name="password" class="form-floating form-floating-custom mb-3 textinput textInput form-control" placeholder="Password" id="password" required>
 										</div>
 									</div> 
-									
-									<div class="form-group">
-										<div id="div_id_remember" class="form-check">
-											<input type="checkbox" name="remember" class="checkboxinput form-check-input" id="id_remember">
-											<label for="id_remember" class="form-check-label">Remember Me</label>
-										</div>
-									</div>
                                      
                                     <div class="mt-3">
                                         <button type="button" class="btn btn-info w-100" onclick="login_submit();">Log In</button>
                                     </div>
 
-                                    <div class="mt-4">
-                                        <a href="/account/password/reset/" class="text-muted text-decoration-underline">Forgot your password?</a>
-                                    </div>
                                 </form>
-                                
-                                <div class="mt-5 text-center text-muted">
-                                    <p>Don't have an account ? <a href="/account/signup/" class="fw-medium text-decoration-underline"> Signup </a></p>
-                                </div>
-
                             </div>
                         </div><!-- end col -->
                     </div><!-- end row -->
-
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="text-center text-muted p-4">
-                                <p class="mb-0">&copy; <script>document.write(new Date().getFullYear())</script> Dashonic. Crafted with <i class="mdi mdi-heart text-danger"></i> by Pichforest</p>
-                            </div>
-                        </div><!-- end col -->
-                    </div><!-- end row -->
-
                 </div>
             </div><!-- end container -->
         </div>
@@ -129,7 +104,7 @@
 		
 		async function login_submit() {
 			if(is_run == true) {
-				openModal('알림','잠시후에 다시시도 해주세요.');
+				openModal('Notification','Please try this again.');
 				return false;
 			}
 
@@ -142,12 +117,12 @@
 			var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 				
 			if (isEmpty(username)) {
-					openModal('알림','아이디을 입력해주세요.');
+					openModal('Notification','Please enter your ID.');
 				return false;
 		
 			}
 			if (isEmpty(password)) {
-					openModal('알림','비밀번호를 입력해주세요.');
+					openModal('Notification','Please enter your PASSWORD.');
 				return false;
 			}
 		
@@ -166,7 +141,7 @@
 				if (data.result == '200') {
 					location.replace("{% url 'main:admin_index' %}");
 				} else {
-					openModal("알림", data.result_text);
+					openModal("Notification", data.result_text);
 				}
 			});
 			
