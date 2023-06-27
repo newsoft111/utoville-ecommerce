@@ -1,7 +1,7 @@
 from django.urls import path, include
 from . import views
 
-app_name = 'subscribe'
+app_name = 'house_check'
 
 user_urlpatterns = [
     path(f'{app_name}/',
