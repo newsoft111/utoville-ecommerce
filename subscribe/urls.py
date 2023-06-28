@@ -6,6 +6,7 @@ app_name = 'subscribe'
 user_urlpatterns = [
     path(f'{app_name}/',
 		include([
+			path('about/', views.user_subscription_about, name='user_subscription_about'),
 			path('check_list/', views.user_subscription_check_list_view, name='user_subscription_check_list_view'),
         ])
     ),
