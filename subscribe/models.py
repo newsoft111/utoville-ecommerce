@@ -9,10 +9,10 @@ class SubscribeBillingKey(models.Model):
 			settings.AUTH_USER_MODEL,
 			on_delete=models.CASCADE,
 	)
-	billing_key = models.CharField(max_length=255, null=True)
+	billing_key = models.CharField(max_length=255)
 
 	class Meta:
-		db_table = 'ecommerce_subcribe_billing_key'
+		db_table = 'ecommerce_subscribe_billing_key'
 
 
 class SubscribeItem(models.Model):
