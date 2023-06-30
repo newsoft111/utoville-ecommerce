@@ -1,5 +1,8 @@
+{% extends 'user/base.html' %}
 {% block content %}
 {% load static %}
+{% load product_filter %}
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
 <link rel="stylesheet" href="{% static 'user/css/theme.min.css' %}">
@@ -9,7 +12,7 @@
 
 </style>
 <div class="wrapper">
-	<a class="btn_top">top</a>
+	<!-- <a class="btn_top">top</a>
 	<header id="header">
 		<div class="header_inner">
 			<div class="top">
@@ -37,7 +40,7 @@
 			<li><a href="">Menu5</a></li>
 			<li><a href="">Menu6</a></li>
 		</ul>
-	</nav>
+	</nav> -->
 	<div id="main_slider">
 		<div class="container">
 			<div class="slide">
@@ -54,29 +57,7 @@
 				<p class="sub_title">Enjoy a comfortable residential life with Utoville Homecare Service.</p>
 			</div>
 			<!-- <div class="business_list">
-				<ul>
-					<li>
-						<img src="images/business_img1.png" alt="business1">
-						<p class="title">인공지능 반응형 홈페이지 제작</p>
-						<p class="text">
-							저희 디지털 엑스는 PC, 모바일, 아이패드, 태블릿PC 등 모든 기기에 최적화된 홈페이지를 제공합니다. 어떠한 기기에서도 최적화된 홈페이지를 제공함으로 비용을 들여 추가로 모바일 페이지 등을 제작하지 않으셔도 됩니다.
-						</p>
-					</li>
-					<li>
-						<img src="images/business_img2.png" alt="business2">
-						<p class="title">최고 기술자의 서버 관리</p>
-						<p class="text">
-							홈페이지를 제작하면서 어처구니 없는 문제를 겪어보셨습니까? 디지털엑스는 프로그래밍에 특화된 고급 프로그래머가 네트워크 시스템의 노하우를 가지고 홈페이지를 개발, 관리합니다.
-						</p>
-					</li>
-					<li>
-						<img src="images/business_img3.png" alt="business3">
-						<p class="title">최고의 서버 & 보안 솔루션 적용</p>
-						<p class="text">
-							저희 디지털 엑스는 학계와 굴지의 IT기업에서 인정받은 기술을 가지고  연구소등에 적용된 보안 / SEO(검색엔진 최적화) / SNS 연동 / 복사 방지 / 백업 시스템 무료 제공하고 있습니다.
-						</p>
-					</li>
-				</ul>
+				
 			</div> -->
 		</div>
 		<div id="page2" class="clearfix">
@@ -86,50 +67,7 @@
 					<p class="sub_title">Enjoy a comfortable residential life with Utoville Homecare Service.</p>
 				</div>
 				<!-- <div class="portfolio_list">
-					<ul>
-						<li>
-							<a href=""><img src="images/portfolio1.jpg" alt="portfolio1"></a>
-							<div class="desc">
-								<p class="name">혹리후생관 복지포인트몰</p>
-								<p class="cont">이제너두 복지포인트몰 모바일 구축</p>
-							</div>
-						</li>
-						<li>
-							<a href=""><img src="images/portfolio2.jpg" alt="portfolio2"></a>
-							<div class="desc">
-								<p class="name">클라뷰 온라인몰</p>
-								<p class="cont">리뉴얼 제작</p>
-							</div>
-						</li>
-						<li>
-							<a href=""><img src="images/portfolio3.jpg" alt="portfolio3"></a>
-							<div class="desc">
-								<p class="name">디지털 테크놀로지</p>
-								<p class="cont">고급기술 적용 사례</p>
-							</div>
-						</li>
-						<li>
-							<a href=""><img src="images/portfolio4.jpg" alt="portfolio4"></a>
-							<div class="desc">
-								<p class="name">위치기반 어플리케이션</p>
-								<p class="cont">고급기술 적용 사례</p>
-							</div>
-						</li>
-						<li>
-							<a href=""><img src="images/portfolio5.jpg" alt="portfolio5"></a>
-							<div class="desc">
-								<p class="name">이제너두 반응형 웹</p>
-								<p class="cont">이제너두 반응형 웹사이트</p>
-							</div>
-						</li>
-						<li>
-							<a href=""><img src="images/portfolio6.jpg" alt="portfolio6"></a>
-							<div class="desc">
-								<p class="name">브랜딩</p>
-								<p class="cont">디자인을 넘어서 브랜딩으로</p>
-							</div>
-						</li>
-					</ul>
+					
 				</div> -->
 			</div>
 		</div>
@@ -139,43 +77,7 @@
 				<p class="sub_title">Enjoy a comfortable residential life with Utoville Homecare Service.</p>
 			</div>
 			<!-- <div class="process_list">
-				<ul>
-					<li>
-						<a href=""><img src="images/process_img1.png" alt="culture1"></a>
-						<div class="process_cont">
-							<p class="title">1. 계약</p>
-							<p class="text">전화, 이메일, 또는 미팅을 통해 하시고자 하는 프로젝트에 대해 논의합니다. 만드는 프로젝트의 종류, 기술, 기능 ,예산, 페이지 수를 기반으로 견적을 산출합니다. 계약서를 작성하고 계약금 결제가 되면 착수를 시작합니다.</p>
-						</div>
-					</li>
-					<li>
-						<a href=""><img src="images/process_img2.png" alt="culture2"></a>
-						<div class="process_cont">
-							<p class="title">2. 기획</p>
-							<p class="text">고객에게서 제작에 필요한 자료를 전달 받고 고객이 하고자 하는 서비스 중심으로 강점과 특징을 분석합니다. 이 과정에서 경쟁사나 비슷한 서비스를 제공하는 업체의 리써치가 병행하여 이루어집니다.</p>
-						</div>	
-					</li>
-					<li>
-						<a href=""><img src="images/process_img3.png" alt="culture3"></a>
-						<div class="process_cont">
-							<p class="title">3. 디자인</p>
-							<p class="text">브랜드 방향성에 따라 디자인을 정하고 샘플을 고객님에게 전달합니다. 샘플 중에서 하나가 결정되면, 그 샘플을 중심으로 메인페이지와 세부페이지 디자인이 시작됩니다.</p>
-						</div>
-					</li>
-					<li>
-						<a href=""><img src="images/process_img4.png" alt="culture4"></a>
-						<div class="process_cont">
-							<p class="title">4. 개발</p>
-							<p class="text">웹/앱 프로젝트 개발이 시작됩니다. 개발 세팅부터, 최적화, 보안, 백업등의 기본기를 지켜나가며 개발합니다. 개발중간에도 디자인의 결과물, 사용성을 고려하여 디자인의 수정이 계속 이루어집니다.</p>
-						</div>
-					</li>
-					<li>
-						<a href=""><img src="images/process_img5.png" alt="culture5"></a>
-						<div class="process_cont">
-							<p class="title">5. 서비스 오픈</p>
-							<p class="text">개발 후 철저한 테스트를 거쳐 고객에게 산출물을 전달합니다. 고객의 검수가 끝나면, 잔금이 지급되고 서비스를 오픈합니다.</p>
-						</div>
-					</li>
-				</ul>
+				
 			</div> -->
 		</div>
 		<div id="page4" class="clearfix">
@@ -186,49 +88,13 @@
 							<p class="sub_title">Enjoy a comfortable residential life with Utoville Homecare Service.</p>
 						</div>
 					<!-- <div class="review_cont clearfix">
-						<ul>
-							<li>
-								<a href=""><img src="images/review_img1.png" alt="review1"></a>
-								<div class="brand">
-									<p class="name">ZOOMA INC</p>
-									<p class="cont">
-										일단 디자인이 제 생각대로 나와서 기쁩니다. 여러번 홈페이지 제작을 업체들에게 맡기면서 어려움을 많이 겪었는데,  너무 깔끔하게 진행해주셔서 감사합니다.
-									</p>
-								</div>
-							</li>
-							<li>
-								<a href=""><img src="images/review_img2.png" alt="review2"></a>
-								<div class="brand">
-									<p class="name">고려대학교 연구원</p>
-									<p class="cont">
-										저희 프로젝트의 경우 일정이 빠듯했지만 파트너님께서 자주 피드백을 해주시고, 바로바로 반영해 주셔서 일정 준수는 물론 결과물의 만족도도 높았습니다.
-									</p>
-								</div>
-							</li>
-							<li>
-								<a href=""><img src="images/review_img3.png" alt="review3"></a>
-								<div class="brand">
-									<p class="name">WE SAVER</p>
-									<p class="cont">
-										위치기반으로 한 길찾기, 가까운 헬프데스크를 자동으로 찾아내는 등 어려운 기술을 접목한 앱을 큰 문제없이 훌륭히 제작해주셔서 감사합니다. 
-									</p>
-								</div>
-							</li>
-						</ul>
+						
 					</div> -->
 				</div>
 			</div>
 			<!-- <div class="banner">
 				<div class="banner_inner clearfix">
-					<ul>
-						<li><a href=""><img src="images/signature1.png" alt="signature1"></a></li>
-						<li><a href=""><img src="images/signature2.png" alt="signature2"></a></li>
-						<li><a href=""><img src="images/signature3.png" alt="signature3"></a></li>
-						<li><a href=""><img src="images/signature4.png" alt="signature4"></a></li>
-						<li><a href=""><img src="images/signature5.png" alt="signature5"></a></li>
-						<li><a href=""><img src="images/signature6.png" alt="signature6"></a></li>
-						<li><a href=""><img src="images/signature7.png" alt="signature7"></a></li>
-					</ul>
+					
 				</div>
 			</div> -->
 		</div>
@@ -260,7 +126,7 @@
 									
 									<!--Action button-->
 									<div class="grid mb-5">
-										<a href="#!" class="btn btn-lg hover-lift w-100 btn-primary">Register Now</a>
+										<a href="{% url 'subscribe:user_subscription_book_now' %}" class="btn btn-lg hover-lift w-100 btn-primary">Register Now</a>
 									</div>
 									<!--Features-->
 									<div class="inspection_desc">

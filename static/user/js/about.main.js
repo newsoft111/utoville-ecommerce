@@ -50,7 +50,6 @@ $(function(){
 			}
 			else{
 				$("#page"+n).addClass("active");
-				console.log(n)
 			}
 
 			$(".controller li").removeClass("on");

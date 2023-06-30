@@ -368,62 +368,63 @@ function cal_item_price(e) {
 
 //옵션 선택하면 옵션리스트에 추가해주는것
 function add_item(e) {
-   let option_first = document.getElementById("optionFirst");
-   let option_first_value = option_first.options[option_first.selectedIndex].dataset.value;
+	let option_first = document.getElementById("optionFirst");
+	let option_first_value = option_first.options[option_first.selectedIndex].dataset.value;
 
-   let option_second_value = e.options[e.selectedIndex].dataset.value;
-   let option_second_id = e.options[e.selectedIndex].dataset.id;
-   let option_second_price = (parseFloat('{{product_detail.price}}') + parseFloat(e.options[e.selectedIndex].dataset.price)).toFixed(2);
+	let option_second_value = e.options[e.selectedIndex].dataset.value;
+	let option_second_id = e.options[e.selectedIndex].dataset.id;
+	let option_second_price = (parseFloat('{{product_detail.price}}') + parseFloat(e.options[e.selectedIndex].dataset.price)).toFixed(2);
 
-   let my_item_id = document.querySelector(`span[data-id="${option_second_id}"]`);
-   if (my_item_id == null) {
+	let my_item_id = document.querySelector(`span[data-id="${option_second_id}"]`);
+	
+	if (my_item_id == null) {
 
-      html = '<div id="productDom" class="optionTotal border-bottom mb-3">';
-         html += '<div class="product_title" id="optionTitle">';
-            html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
-            html += '<a class="btn-close" href="#!" onclick="remove_item(this)"></a>';
-         html += '</div>';
-      
-         html += '<div class="optionAdd d-flex justify-content-between align-items-center">';
-            html += `<input type="number" onKeyDown="return false" class="form-control w-25 text-center mb-2" id="item_qty" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
-            html += `<span class="price fs-5" data-id="${option_second_id}" id="itemPrice">₱${numberWithCommas(option_second_price)}</span>`;
-         html += '</div>';
-      
-         html +=   '<div class="d-flex justify-content-between align-items-center mb-3">';
-            html += `<span>Desired service date : </span>`;
-            html += `<input type="text" id="date-time-picker${option_second_id}" name="date-time-picker" class="set-date-time-picker" placeholder="Please select date and time.">`;
-         html += '</div>';
-      html += '</div>';
+		html = '<div id="productDom" class="optionTotal border-bottom mb-3">';
+			html += '<div class="product_title" id="optionTitle">';
+			html += `<div clss="option_title">${option_first_value} / ${option_second_value}</div>`;
+			html += '<a class="btn-close" href="#!" onclick="remove_item(this)"></a>';
+			html += '</div>';
+		
+			html += '<div class="optionAdd d-flex justify-content-between align-items-center">';
+			html += `<input type="number" onKeyDown="return false" class="form-control w-25 text-center mb-2" id="item_qty" onchange="cal_item_price(this);" data-option-price='${option_second_price}' value="1" min="1">`;
+			html += `<span class="price fs-5" data-id="${option_second_id}" id="itemPrice">₱${numberWithCommas(option_second_price)}</span>`;
+			html += '</div>';
+		
+			html +=   '<div class="d-flex justify-content-between align-items-center mb-3">';
+			html += `<span>Desired service date : </span>`;
+			html += `<input type="text" id="date-time-picker${option_second_id}" name="date-time-picker" class="set-date-time-picker" placeholder="Please select date and time.">`;
+			html += '</div>';
+		html += '</div>';
    
-      var newstuff = document.createElement('div');
-      newstuff.innerHTML = html;
-      let parent = document.querySelector("#selectedList");
+		var newstuff = document.createElement('div');
+		newstuff.innerHTML = html;
+		let parent = document.querySelector("#selectedList");
 
-      while (newstuff.firstChild) {
-         parent.appendChild(newstuff.firstChild);
-      }
-      
-      $(`#date-time-picker${option_second_id}`).datetimepicker({
-        format: 'Y-m-d H:i',
-		minDate: 0,
-		minTime: 0,
-		onSelectDate:function(){
-			timeBox = document.querySelectorAll(".xdsoft_timepicker .xdsoft_time_box");
-			for(var i=0; i< timeBox.length; i++){
-
-				document.querySelectorAll(".xdsoft_timepicker .xdsoft_time_box")[i].style.borderColor = "#2ea7e0";
-				document.querySelectorAll(".xdsoft_timepicker .xdsoft_time_box")[i].style.borderWidth = "2px";
-			}
+		while (newstuff.firstChild) {
+			parent.appendChild(newstuff.firstChild);
 		}
-      });   
+      
+		$(`#date-time-picker${option_second_id}`).datetimepicker({
+			format: 'Y-m-d H:i',
+			minDate: 0,
+			minTime: 0,
+			onSelectDate:function(){
+				timeBox = document.querySelectorAll(".xdsoft_timepicker .xdsoft_time_box");
+				for(var i=0; i< timeBox.length; i++){
 
-   }else{
-      let sibling = my_item_id.previousSibling
-      sibling.value = Number(sibling.value) + 1
-      cal_item_price(sibling)
-   }
-   reset_variant(e, 'Option2');
-   cal_total_value();
+					document.querySelectorAll(".xdsoft_timepicker .xdsoft_time_box")[i].style.borderColor = "#2ea7e0";
+					document.querySelectorAll(".xdsoft_timepicker .xdsoft_time_box")[i].style.borderWidth = "2px";
+				}
+			}
+    	});   
+
+	}else{
+		let sibling = my_item_id.previousSibling
+		sibling.value = Number(sibling.value) + 1
+		cal_item_price(sibling)
+	}
+	reset_variant(e, 'Option2');
+	cal_total_value();
 }
 
 $("#date-time-picker").datetimepicker({
