@@ -173,7 +173,7 @@ let firstCategoryName = document.querySelector(".first_category_name");
 
 let categoryInfo = document.querySelector(".category_info");
 
-let categoryNameArr = ["Home Check", "Cleaning", "Disinfection", "Repair", "Appliance Care", "Moving Service", "Car Service", "Water Delivery"];
+let categoryNameArr = ["Cleaning", "Disinfection", "Repair", "Appliance Care", "Moving Service", "Car Service", "Water Delivery"];
 
 
 
@@ -182,7 +182,7 @@ for(var i=0; i<=categoryNameArr.length; i++){
 	if(firstCategory == i+1) {
 		firstCategoryName.innerHTML = categoryNameArr[i];
 
-		let imgSrc = "{% static 'user/img/shop/banners/' %}" + i + ".jpg";
+		let imgSrc = "{% static 'user/img/shop/banners/' %}" + (i+1) + ".jpg";
 		let categoryImg = `<img src=${imgSrc} class="bg-image bg-top-center" alt="">`;
 
 		categoryInfo.insertAdjacentHTML("afterbegin", categoryImg);

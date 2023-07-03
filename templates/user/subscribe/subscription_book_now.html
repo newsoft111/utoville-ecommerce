@@ -10,6 +10,7 @@
 <style>
 .add_option_list li { display: inline-block; width: 33%; }
 .add_option_list li .contents { display: flex; flex-direction: column; text-align: center; }
+.select_details {display: none;}
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -33,83 +34,98 @@ input[type="number"]::-webkit-outer-spin-button {
 									</div>
 								</div>
 								<div class="feed-item-list">
-									<div>
-										<h5 class="form-label mb-3">Shipping Info</h5>
-										<!-- <div class="view-shipping-list py-3">
-											<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#shippingListModal">List of shipping destinations</button>	
-										</div> -->
-										<div class="mb-3">
-											<form id="shipping-form" method="POST">
-												<div>
-													<div class="row">
-														<div class="col-lg-4">
-															<div class="mb-3">
-																<label class="font-size-16" for="billing-name">Name</label>
-																<input type="text" class="form-control" id="billing-name" name="billing-name" value="{{user.mb_name}}" placeholder="Enter name">
-															</div>
-														</div>
-														<div class="col-lg-4">
-															<div class="mb-3">
-																<label class="font-size-16" for="billing-email-address">Email Address</label>
-																<input type="email" class="form-control" id="billing-email-address" name="billing-email-address" value="{{user.email}}" placeholder="Enter email">
-															</div>
-														</div>
-														<div class="col-lg-4">
-															<div class="mb-3">
-																<label class="font-size-16" for="billing-phone">Phone</label>
-																<input type="text" class="form-control" id="billing-phone" name="billing-phone" value="{{user.mb_phone}}" placeholder="Enter Phone no.">
-															</div>
-														</div>
-														<div class="col-lg-12">
-															<div class="mb-3">
-																<label class="font-size-16" for="billing-date">Desired service date </label>
-																<input type="text" id="date-time-picker" name="date-time-picker" class="form-control set-date-time-picker " placeholder="Please select date and time.">
-															</div>
+									<h5 class="form-label mb-3">Shipping Info</h5>
+									<!-- <div class="view-shipping-list py-3">
+										<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#shippingListModal">List of shipping destinations</button>	
+									</div> -->
+									<div class="mb-3">
+										<form id="shipping-form" method="POST">
+											<div>
+												<div class="row">
+													<div class="col-lg-4">
+														<div class="mb-3">
+															<label class="font-size-16" for="billing-name">Name</label>
+															<input type="text" class="form-control" id="billing-name" name="billing-name" value="{{user.mb_name}}" placeholder="Enter name">
 														</div>
 													</div>
-
-													<div class="mb-3">
-														<label class="font-size-16" for="billing-address">Address</label>
-														<textarea class="form-control" style="border-color: #ddd;" id="billing-address" name="billing-address" rows="3" placeholder="Enter full address">{{user.address_name}}</textarea>
+													<div class="col-lg-4">
+														<div class="mb-3">
+															<label class="font-size-16" for="billing-email-address">Email Address</label>
+															<input type="email" class="form-control" id="billing-email-address" name="billing-email-address" value="{{user.email}}" placeholder="Enter email">
+														</div>
 													</div>
-													
-													<div class="mb-3">
-														<label class="font-size-16" for="billing-comments">Customer Comments</label>
-														<textarea class="form-control" style="border-color: #ddd;" id="billing-comments" name="billing-comments" rows="3" placeholder="Please enter additional information we should consider, or let us know if there are any specific requirements or questions you have."></textarea>
+													<div class="col-lg-4">
+														<div class="mb-3">
+															<label class="font-size-16" for="billing-phone">Phone</label>
+															<input type="text" class="form-control" id="billing-phone" name="billing-phone" value="{{user.mb_phone}}" placeholder="Enter Phone no.">
+														</div>
 													</div>
-
-													<!-- <div class="row">
-														<div class="col-lg-4">
-															<div class="mb-4 mb-lg-0">
-																<label class="font-size-16">City</label>
-																<select class="form-control form-select" title="City" name="billing-city">
-																	<option value="0">Select City</option>
-																</select>
-															</div>
+													<div class="col-lg-12">
+														<div class="mb-3">
+															<label class="font-size-16" for="billing-date">Desired service date </label>
+															<input type="text" id="date-time-picker" name="date-time-picker" class="form-control set-date-time-picker " placeholder="Please select date and time.">
 														</div>
-
-														<div class="col-lg-4">
-															<div class="mb-4 mb-lg-0">
-																<label class="font-size-16" for="billing-state">State</label>
-																<input type="text" class="form-control" id="billing-state" name="billing-state" placeholder="Enter State">
-															</div>
-														</div>
-
-														<div class="col-lg-4">
-															<div class="mb-0">
-																<label class="font-size-16" for="zip-code">Zip / Postal code</label>
-																<input type="text" class="form-control" id="zip-code" name="zip-code" placeholder="Enter Postal code">
-															</div>
-														</div>
-													</div> -->
+													</div>
 												</div>
-											</form>
-										</div>
+
+												<div class="mb-3">
+													<label class="font-size-16" for="billing-address">Address</label>
+													<textarea class="form-control" style="border-color: #ddd;" id="billing-address" name="billing-address" rows="3" placeholder="Enter full address">{{user.address_name}}</textarea>
+												</div>
+												
+												<div class="mb-3">
+													<label class="font-size-16" for="billing-comments">Customer Comments</label>
+													<textarea class="form-control" style="border-color: #ddd;" id="billing-comments" name="billing-comments" rows="3" placeholder="Please enter additional information we should consider, or let us know if there are any specific requirements or questions you have."></textarea>
+												</div>
+
+												<!-- <div class="row">
+													<div class="col-lg-4">
+														<div class="mb-4 mb-lg-0">
+															<label class="font-size-16">City</label>
+															<select class="form-control form-select" title="City" name="billing-city">
+																<option value="0">Select City</option>
+															</select>
+														</div>
+													</div>
+
+													<div class="col-lg-4">
+														<div class="mb-4 mb-lg-0">
+															<label class="font-size-16" for="billing-state">State</label>
+															<input type="text" class="form-control" id="billing-state" name="billing-state" placeholder="Enter State">
+														</div>
+													</div>
+
+													<div class="col-lg-4">
+														<div class="mb-0">
+															<label class="font-size-16" for="zip-code">Zip / Postal code</label>
+															<input type="text" class="form-control" id="zip-code" name="zip-code" placeholder="Enter Postal code">
+														</div>
+													</div>
+												</div> -->
+											</div>
+										</form>
 									</div>
 								</div>
 							</li>
 							
 							<li class="checkout-item">
+								<div class="avatar checkout-icon p-1">
+									<div class="avatar-title rounded-circle bg-brandBlue">
+										<i class="bx bxs-receipt"></i>
+									</div>
+								</div>
+
+								<div class="feed-item-list check-cleaning-list">
+									<h5 class="form-label mb-3">Please choose the type of cleaning you want</h5>
+
+									<div>
+										<input type="checkbox" class="align-middle me-2" value="basic_cleaning" checked onClick="checkOnlyOne(this)"><span>Basic Cleaning</span>
+										<input type="checkbox" class="whole_cleaning align-middle mx-2" value="whole_cleaning" onClick="checkOnlyOne(this)"><span>Whole Cleaning</span>
+									</div>
+								</div>
+							</li>
+
+							<li class="checkout-item select_details">
 								<div class="avatar checkout-icon p-1">
 									<div class="avatar-title rounded-circle bg-brandBlue">
 										<i class="bx bxs-receipt"></i>
@@ -198,7 +214,7 @@ input[type="number"]::-webkit-outer-spin-button {
 										<div class="col-lg-4 col-sm-6">
 											<div>
 												<span class="card py-3 align-items-center">
-													<i class="bx bx-money d-block h2 mb-3"></i>
+													<i class="bx bx-money d-block h2 mb-0"></i>
 													<span>Sink</span>
 													<input type="number" class="w-50 rounded-0 mt-2" min="0">
 												</span>
@@ -314,6 +330,23 @@ $("#date-time-picker").datetimepicker({
 			document.querySelector(".xdsoft_timepicker .xdsoft_time_box").style.borderWidth = "2px";
 	}
 });
+
+function checkOnlyOne(ele){
+	let checkCleaningList = document.querySelector(".check-cleaning-list");
+	let cleaningCheckBoxs = checkCleaningList.querySelectorAll("input[type=checkbox]");
+
+	cleaningCheckBoxs.forEach((cb)=>{
+		cb.checked = false;
+	});
+
+	ele.checked = true;
+
+	if(document.querySelector(".whole_cleaning").checked == true){
+		document.querySelector(".select_details").style.display = "block";
+	}else{
+		document.querySelector(".select_details").style.display = "none";
+	}
+}
 
 </script>
 {% endblock %}

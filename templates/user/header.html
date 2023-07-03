@@ -45,8 +45,8 @@
 		.navbar .dropdown .dropdown-menu a:hover { background-color: white; color: #2ea7e0; }
 
 		@media only screen and (max-width: 991px) {
-			#mainNavbarTheme { max-height: 0; opacity: 0; transition: all 0.3s ease-in-out; }			
-			#mainNavbarTheme.show { max-height: 350px; opacity: 1; }			
+			#mainNavbarTheme {  display: none; max-height: 0; opacity: 0; transition: all 0.3s ease-in-out; }			
+			#mainNavbarTheme.show { max-height: 350px; display:block; opacity: 1; }			
 		}
 	</style>  
 </head>
@@ -132,6 +132,14 @@
 
 		<div class="container text-center" id="mainNavbarTheme">
 			<ul class="navbar-nav d-flex justify-content-between">  <!-- me-lg-auto ms-xl-5 ms-lg-2 삭제 -->
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#">Subscription</a>
+
+					<div class="dropdown-menu">
+						<a href="{% url 'subscribe:user_subscription_about' %}" class="dropdown-item">About</a>
+					</div>
+				</li>
+
 			{% for categoryFirst in category_first_list %}
 				{% if categoryFirst.categorysecond_set.all.count > 0 %}
 				<li class="nav-item dropdown">
