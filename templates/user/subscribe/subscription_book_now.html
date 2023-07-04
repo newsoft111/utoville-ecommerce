@@ -194,6 +194,7 @@ input[type="number"]::-webkit-outer-spin-button {
 											<span class="has_input_option card py-3 align-items-center">
 												<img src="/static/user/img/subscribe/book/filter.png" style="width: 31px;">
 												<span>Airconditioner</span>
+												<input type="number" inputmode="numeric" class="d-none w-50 rounded-0 mt-2" min="0">
 											</span>
 										</div>
 										
@@ -201,6 +202,7 @@ input[type="number"]::-webkit-outer-spin-button {
 											<span class="has_input_option card py-3 align-items-center">
 												<img src="/static/user/img/subscribe/book/bathroom.png" style="width: 31px;">
 												<span>Bathroom</span>
+												<input type="number" inputmode="numeric" class="d-none w-50 rounded-0 mt-2" min="0">
 											</span>
 										</div>
 										
@@ -208,7 +210,7 @@ input[type="number"]::-webkit-outer-spin-button {
 											<span class="has_input_option card py-3 align-items-center">
 												<img src="/static/user/img/subscribe/book/bed.png" style="width: 31px;">
 												<span>Bed</span>
-												<!-- <input type="number" inputmode="numeric" class="w-50 rounded-0 mt-2" min="0"> -->
+												<input type="number" inputmode="numeric" class="d-none w-50 rounded-0 mt-2" min="0">
 											</span>
 										</div>
 										
@@ -322,47 +324,29 @@ let addOptionContent = document.querySelector(".add_option_content");
 let hasInputOption = addOptionContent.querySelectorAll(".has_input_option");
 let noneInputOption = addOptionContent.querySelectorAll(".none_input_option")
 
-hasInputOption.forEach(option => {
-	option.addEventListener("click", event => {
-		event.stopPropagation();
-		let option = event.currentTarget;
-		
-		let html = `<input type="number" inputmode="numeric" class="w-50 rounded-0 mt-2" min="0">`;
-		
-		if (option.querySelector('input[type="number"]')) {
-			return;
-		}
-		
-		let originalContent = option.innerHTML; //클릭한 요소의 원본(글, 그림) 저장
-		option.innerHTML = html; // inputhas_input_option
-		
-		document.addEventListener("click", function(e){
-			if (!option.contains(e.target)) {
-				option.innerHTML = originalContent;
-			}
-		});
-	});
-});
 
-// function handleClick(event) {
-// 	event.stopPropagation();
-// 	let option = event.currentTarget;
-	
-// 	let html = `<input type="number" inputmode="numeric" class="w-50 rounded-0 mt-2" min="0">`;
-	
-// 	if (option.querySelector('input[type="number"]')) {
-// 		return;
-// 	}
-	
-// 	let originalContent = option.innerHTML; //클릭한 요소의 원본(글, 그림) 저장
-// 	option.innerHTML = html; // inputhas_input_option
-	
-// 	document.addEventListener("click", function(e){
-// 		if (!option.contains(e.target)) {
-// 			option.innerHTML = originalContent;
+
+// hasInputOption.forEach(option => {
+// 	option.addEventListener("click", event => {
+// 		event.stopPropagation();
+// 		let option = event.currentTarget;
+		
+// 		let html = `<input type="number" inputmode="numeric" class="w-50 rounded-0 mt-2" min="0">`;
+		
+// 		if (option.querySelector('input[type="number"]')) {
+// 			return;
 // 		}
+		
+// 		let originalContent = option.innerHTML; //클릭한 요소의 원본(글, 그림) 저장
+// 		option.innerHTML = html; // inputhas_input_option
+		
+// 		document.addEventListener("click", function(e){
+// 			if (!option.contains(e.target)) {
+// 				option.innerHTML = originalContent;
+// 			}
+// 		});
 // 	});
-// }
+// });
 
 noneInputOption.forEach(option => {
 	option.addEventListener("click", function(){
