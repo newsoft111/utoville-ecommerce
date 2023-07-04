@@ -1,0 +1,389 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load product_filter %}
+
+<link rel="stylesheet" href="{% static 'user/css/borex.app.min.css' %}" id="app-style" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+ab
+.select_details {display: none;}
+
+.none_input_option.fill {
+	background-color: #3b76e1;
+}
+
+.has_input_option:hover, .none_input_option:hover {
+	border-color: #3b76e1;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: inner-spin-button;
+    opacity: 1;
+}
+
+</style>
+
+<section class="position-relative bg-white" style="z-index: 9999;">
+	<div class="container pb-7 pb-lg-12 pt-7 position-relative">
+		<div class="row">
+			<div class="col-xl-8">
+				<div class="card">
+					<div class="card-body">
+						<ul class="activity-checkout mb-0 px-4 mt-3">
+							<li class="checkout-item">
+								<div class="avatar checkout-icon p-1">
+									<div class="avatar-title rounded-circle bg-brandBlue">
+										<i class="bx bxs-receipt"></i>
+									</div>
+								</div>
+								<div class="feed-item-list">
+									<h5 class="form-label mb-3">Shipping Info</h5>
+									<!-- <div class="view-shipping-list py-3">
+										<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#shippingListModal">List of shipping destinations</button>	
+									</div> -->
+									<div class="mb-3">
+										<form id="shipping-form" method="POST">
+											<div>
+												<div class="row">
+													<div class="col-lg-4">
+														<div class="mb-3">
+															<label class="font-size-16" for="billing-name">Name</label>
+															<input type="text" class="form-control" id="billing-name" name="billing-name" value="{{user.mb_name}}" placeholder="Enter name">
+														</div>
+													</div>
+													<div class="col-lg-4">
+														<div class="mb-3">
+															<label class="font-size-16" for="billing-email-address">Email Address</label>
+															<input type="email" class="form-control" id="billing-email-address" name="billing-email-address" value="{{user.email}}" placeholder="Enter email">
+														</div>
+													</div>
+													<div class="col-lg-4">
+														<div class="mb-3">
+															<label class="font-size-16" for="billing-phone">Phone</label>
+															<input type="text" class="form-control" id="billing-phone" name="billing-phone" value="{{user.mb_phone}}" placeholder="Enter Phone no.">
+														</div>
+													</div>
+													<div class="col-lg-12">
+														<div class="mb-3">
+															<label class="font-size-16" for="billing-date">Desired service date </label>
+															<input type="text" id="date-time-picker" name="date-time-picker" class="form-control set-date-time-picker " placeholder="Please select date and time.">
+														</div>
+													</div>
+												</div>
+
+												<div class="mb-3">
+													<label class="font-size-16" for="billing-address">Address</label>
+													<textarea class="form-control" style="border-color: #ddd;" id="billing-address" name="billing-address" rows="3" placeholder="Enter full address">{{user.address_name}}</textarea>
+												</div>
+												
+												<div class="mb-3">
+													<label class="font-size-16" for="billing-comments">Customer Comments</label>
+													<textarea class="form-control" style="border-color: #ddd;" id="billing-comments" name="billing-comments" rows="3" placeholder="Please enter additional information we should consider, or let us know if there are any specific requirements or questions you have."></textarea>
+												</div>
+
+												<!-- <div class="row">
+													<div class="col-lg-4">
+														<div class="mb-4 mb-lg-0">
+															<label class="font-size-16">City</label>
+															<select class="form-control form-select" title="City" name="billing-city">
+																<option value="0">Select City</option>
+															</select>
+														</div>
+													</div>
+
+													<div class="col-lg-4">
+														<div class="mb-4 mb-lg-0">
+															<label class="font-size-16" for="billing-state">State</label>
+															<input type="text" class="form-control" id="billing-state" name="billing-state" placeholder="Enter State">
+														</div>
+													</div>
+
+													<div class="col-lg-4">
+														<div class="mb-0">
+															<label class="font-size-16" for="zip-code">Zip / Postal code</label>
+															<input type="text" class="form-control" id="zip-code" name="zip-code" placeholder="Enter Postal code">
+														</div>
+													</div>
+												</div> -->
+											</div>
+										</form>
+									</div>
+								</div>
+							</li>
+							
+							<li class="checkout-item">
+								<div class="avatar checkout-icon p-1">
+									<div class="avatar-title rounded-circle bg-brandBlue">
+										<i class="bx bxs-receipt"></i>
+									</div>
+								</div>
+
+								<div class="feed-item-list check-cleaning-list">
+									<h5 class="form-label mb-3">Please choose the type of cleaning you want</h5>
+
+									<div>
+										<input type="checkbox" class="align-middle me-2" value="basic_cleaning" checked onClick="checkOnlyOne(this)"><span>Basic Cleaning</span>
+										<input type="checkbox" class="whole_cleaning align-middle mx-2" value="whole_cleaning" onClick="checkOnlyOne(this)"><span>Whole Cleaning</span>
+									</div>
+								</div>
+							</li>
+
+							<li class="checkout-item select_details">
+								<div class="avatar checkout-icon p-1">
+									<div class="avatar-title rounded-circle bg-brandBlue">
+										<i class="bx bxs-receipt"></i>
+									</div>
+								</div>
+
+								<div class="feed-item-list">
+									<h5 class="form-label mb-3">Tell us about the details of your place</h5>
+									<div class="select_qty_area">
+										<div class="row">
+											<div class="col-lg-3 col-md-6">
+												<label class="font-size-16" for="billing-name">The number of rooms</label>
+												<input type="number" inputmode="numeric" class="w-100" min="0" max="10">
+											</div>
+											<div class="col-lg-3 col-md-6">
+												<label class="font-size-16" for="billing-name">The number of baths</label>
+												<input type="number" inputmode="numeric" class="w-100" min="0" max="10">
+											</div>
+										</div>
+									</div>
+									<div class="select_size_area mt-2">
+										<label class="font-size-16" for="billing-name">Size</label>
+
+										<select class="form-select mb-2" style="border-color: #ddd;">
+											<option selected>Please select your bathroom size.</option>
+											<option value="1">Small size</option>
+											<option value="2">Medium size</option>
+											<option value="3">Big size</option>
+										</select>
+
+										<select class="form-select mb-2" style="border-color: #ddd;">
+											<option selected>Please select your kitchen size.</option>
+											<option value="1">Small size</option>
+											<option value="2">Medium size</option>
+											<option value="3">Big size</option>
+										</select>
+
+										<select class="form-select mb-2" style="border-color: #ddd;">
+											<option selected>Please select your living room size.</option>
+											<option value="1">Small size</option>
+											<option value="2">Medium size</option>
+											<option value="3">Big size</option>
+										</select>
+									</div>
+								</div>
+							</li>
+
+							<li class="checkout-item">
+								<div class="avatar checkout-icon p-1">
+									<div class="avatar-title rounded-circle bg-brandBlue">
+										<i class='bx bx-add-to-queue'></i>
+									</div>
+								</div>
+
+								<div class="feed-item-list add_option_content">
+									<h5 class="from-label mb-3">Add Options</h5>
+									<div class="row">
+										<div class="col-6 col-lg-2 mb-2">
+											<span class="has_input_option card py-3 align-items-center">
+												<img src="/static/user/img/subscribe/book/filter.png" style="width: 31px;">
+												<span>Airconditioner</span>
+											</span>
+										</div>
+										
+										<div class="col-6 col-lg-2 mb-2">
+											<span class="has_input_option card py-3 align-items-center">
+												<img src="/static/user/img/subscribe/book/bathroom.png" style="width: 31px;">
+												<span>Bathroom</span>
+											</span>
+										</div>
+										
+										<div class="col-6 col-lg-2 mb-2">
+											<span class="has_input_option card py-3 align-items-center">
+												<img src="/static/user/img/subscribe/book/bed.png" style="width: 31px;">
+												<span>Bed</span>
+												<!-- <input type="number" inputmode="numeric" class="w-50 rounded-0 mt-2" min="0"> -->
+											</span>
+										</div>
+										
+										<div class="col-6 col-lg-2 mb-2">
+											<span class="none_input_option card py-3 align-items-center">
+												<img src="/static/user/img/subscribe/book/kitchen-hood.png" style="width: 31px;">
+												<span>Hood</span>
+											</span>
+										</div>
+								
+										<div class="col-6 col-lg-2 mb-2">
+											<div>
+												<span class="none_input_option card py-3 align-items-center">
+													<i class="bx bx-money d-block h2 mb-0"></i>
+													<span>Grease trap</span>
+												</span>
+											</div>
+										</div>
+
+								
+									</div>
+								</div>
+							</li>
+
+							<li class="checkout-item">
+								<div class="avatar checkout-icon p-1">
+									<div class="avatar-title rounded-circle bg-brandBlue">
+										<i class='bx bx-add-to-queue'></i>
+									</div>
+								</div>
+
+								<div class="feed-item-list">
+									<h5 class="from-label mb-3">CONDITIONS & TERMS OF SERVICES</h5>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>	
+			</div>
+			<div class="col-xl-4">
+				<div class="mt-5 mt-lg-0 position-sticky" style="top: 75px;">
+					<div class="card-header bg-transparent border-bottom py-3 px-4">
+						<h5 class="font-size-16 mb-0">Order Summary <span class="float-end ms-2">#MN0124</span></h5>
+					</div>
+					<div class="card-body p-4 pt-2">
+						<div class="contents">
+							{% for order_item in order_items %}
+							<div class="d-flex justify-content-between order-item-list">
+								<div class="item-image">
+									<img src="{% static 'user/img/shop/backpack2.jpg' %}" alt="product-img" title="product-img" class="avatar-lg rounded">
+								</div>
+								<div class="ms-3 w-75 order-item-details">
+									<div class="mb-2">
+										<h5 class="font-size-16 text-truncate mb-0"><a href="{% url 'product:user_prosub total:duct_list' %}" class="text-dark order-product-name">{{order_item.product_name}}</a></h5>
+										<span class="w-25 text-end order-item-price">
+											₱ {{order_item.sub_total_price |intcomma}}
+										</span>
+									</div>
+									
+									<div>
+										{% if order_item.variant_value is not None %}
+										<span class="text-uppercase order-option-name">
+											{{order_item.variant}}: {{order_item.variant_value}}
+										</span>
+										<span class="text-uppercase d-block">+₱{{order_item.variant_price}}</span>
+										{% endif %}
+										<p class="text-muted mb-0 mt-1">
+											₱ {{order_item.sub_price|intcomma}} X {{order_item.ordered_quantity}}
+										</p>
+									</div>
+								</div>
+								
+							</div>
+							<hr>
+							{% endfor %}
+
+							<!-- <div class="d-flex justify-content-between p-2 mb-2">
+								<h5 class="font-size-16 m-0">Sub Total :</h5>
+								<span class="sub_total_price"></span>
+							</div> -->
+							<div class="d-flex justify-content-between align-items-center p-2 mb-5 bg-light">
+								<h5 class="font-size-16 m-0">Total:</h5>
+								<span class="pd fw-bold fs-5 text-dark">
+									<span class="payment total_price">₱ 499</span>
+								</span>
+							</div>
+
+						</div>
+					</div>
+					<div class="row my-4">
+						<div class="col">
+							<div class="text-end mt-2 mt-sm-0">
+								<a href="#!" onclick="pay_submit();" class="link-hover-underline text-body">Book now<i class="bx bx-right-arrow-alt fs-6 align-middle me-1"></i></a>
+								</a>
+								<input type="hidden" name="obj_data" value=''>
+							</div>
+						</div> <!-- end col -->
+					</div> <!-- end row-->
+				</div>
+			</div>
+		</div>
+		<!-- end row -->
+	</div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'user/js/custom.js' %}"></script>
+
+<script>
+let addOptionContent = document.querySelector(".add_option_content");
+let hasInputOption = addOptionContent.querySelectorAll(".has_input_option");
+let noneInputOption = addOptionContent.querySelectorAll(".none_input_option")
+
+hasInputOption.forEach(option => {
+	option.addEventListener("click", handleClick);
+});
+
+function handleClick(event) {
+	event.stopPropagation();
+	let option = event.currentTarget;
+	
+	let html = `<input type="number" inputmode="numeric" class="w-50 rounded-0 mt-2" min="0">`;
+	
+	if (option.querySelector('input[type="number"]')) {
+		return;
+	}
+	
+	let originalContent = option.innerHTML; //클릭한 요소의 원본(글, 그림) 저장
+	option.innerHTML = html; // inputhas_input_option
+	
+	document.addEventListener("click", function(e){
+		if (!option.contains(e.target)) {
+			option.innerHTML = originalContent;
+		}
+	});
+}
+
+noneInputOption.forEach(option => {
+	option.addEventListener("click", function(){
+		if(!option.classList.contains("fill")){
+			option.classList.add("fill");
+		}else{
+			option.classList.remove("fill");
+		}
+	})
+})
+
+function checkOnlyOne(ele){
+	let checkCleaningList = document.querySelector(".check-cleaning-list");
+	let cleaningCheckBoxs = checkCleaningList.querySelectorAll("input[type=checkbox]");
+
+	cleaningCheckBoxs.forEach((cb)=>{
+		cb.checked = false;
+	});
+
+	ele.checked = true;
+
+	if(document.querySelector(".whole_cleaning").checked == true){
+		document.querySelector(".select_details").style.display = "block";
+	}else{
+		document.querySelector(".select_details").style.display = "none";
+	}
+}
+
+$("#date-time-picker").datetimepicker({
+	format: 'Y-m-d H:i',
+	minDate: 0,
+	minTime: 0,
+	onSelectDate:function(){
+		timeBox = document.querySelector(".xdsoft_timepicker .xdsoft_time_box");
+			document.querySelector(".xdsoft_timepicker .xdsoft_time_box").style.borderColor = "#2ea7e0";
+			document.querySelector(".xdsoft_timepicker .xdsoft_time_box").style.borderWidth = "2px";
+	}
+});
+
+
+</script>
+{% endblock %}
