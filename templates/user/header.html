@@ -132,6 +132,13 @@
 
 		<div class="container text-center" id="mainNavbarTheme">
 			<ul class="navbar-nav d-flex justify-content-between">  <!-- me-lg-auto ms-xl-5 ms-lg-2 삭제 -->
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#">Subscription</a>
+
+					<div class="dropdown-menu">
+						<a href="{% url 'subscribe:user_subscription_about' %}" class="dropdown-item">About</a>
+					</div>
+				</li>
 			{% for categoryFirst in category_first_list %}
 				{% if categoryFirst.categorysecond_set.all.count > 0 %}
 				<li class="nav-item dropdown">
