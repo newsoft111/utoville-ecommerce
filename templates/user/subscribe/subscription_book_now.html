@@ -11,12 +11,25 @@
 
 .select_details {display: none;}
 
+.highlight {
+	background-color: #3b76e1;
+}
+
 .none_input_option.fill {
 	background-color: #3b76e1;
 }
 
 .has_input_option:hover, .none_input_option:hover {
 	border-color: #3b76e1;
+}
+
+
+.basic_order_list ul li {
+	border-bottom: 1px solid #ddd;
+}
+
+.basic_order_list ul li:last-child {
+	border-bottom: 2px solid #000
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -192,8 +205,9 @@ input[type="number"]::-webkit-outer-spin-button {
 									<div class="row">
 										<div class="col-6 col-lg-3 mb-2">
 											<span class="has_input_option card py-3 align-items-center">
-												<img src="/static/user/img/subscribe/book/filter.png" style="width: 31px;">
+												<img src="/static/user/img/subscribe/book/air-conditioner.png" style="width: 31px;">
 												<span>Airconditioner</span>
+												<input type="number" inputmode="numeric" name="aircon" class="d-none w-50 rounded-0 mt-2" min="0" value="0">
 											</span>
 										</div>
 										
@@ -201,6 +215,7 @@ input[type="number"]::-webkit-outer-spin-button {
 											<span class="has_input_option card py-3 align-items-center">
 												<img src="/static/user/img/subscribe/book/bathroom.png" style="width: 31px;">
 												<span>Bathroom</span>
+												<input type="number" inputmode="numeric" name="bathroom" class="d-none w-50 rounded-0 mt-2" min="0" value="0">
 											</span>
 										</div>
 										
@@ -208,22 +223,24 @@ input[type="number"]::-webkit-outer-spin-button {
 											<span class="has_input_option card py-3 align-items-center">
 												<img src="/static/user/img/subscribe/book/bed.png" style="width: 31px;">
 												<span>Bed</span>
-												<!-- <input type="number" inputmode="numeric" class="w-50 rounded-0 mt-2" min="0"> -->
+												<input type="number" inputmode="numeric" name="bed" class="d-none w-50 rounded-0 mt-2" min="0" value="0">
 											</span>
 										</div>
 										
 										<div class="col-6 col-lg-3 mb-2">
-											<span class="none_input_option card py-3 align-items-center">
+											<span class="has_input_option card py-3 align-items-center">
 												<img src="/static/user/img/subscribe/book/kitchen-hood.png" style="width: 31px;">
 												<span>Hood</span>
+												<input type="number" inputmode="numeric" name="hood" class="d-none w-50 rounded-0 mt-2" min="0" value="0">
 											</span>
 										</div>
 								
 										<div class="col-6 col-lg-3 mb-2">
 											<div>
-												<span class="none_input_option card py-3 align-items-center">
-													<i class="bx bx-money d-block h2 mb-0"></i>
+												<span class="has_input_option card py-3 align-items-center">
+													<img src="/static/user/img/subscribe/book/grease-trap.png" style="width: 31px;">
 													<span>Grease trap</span>
+													<input type="number" inputmode="numeric" name="greaseTrap" class="d-none w-50 rounded-0 mt-2" min="0" value="0">
 												</span>
 											</div>
 										</div>
@@ -289,11 +306,36 @@ input[type="number"]::-webkit-outer-spin-button {
 								<h5 class="font-size-16 m-0">Sub Total :</h5>
 								<span class="sub_total_price"></span>
 							</div> -->
-							<div class="d-flex justify-content-between align-items-center p-2 mb-5 bg-light">
-								<h5 class="font-size-16 m-0">Total:</h5>
-								<span class="pd fw-bold fs-5 text-dark">
-									<span class="payment total_price">₱ 499</span>
-								</span>
+							<div class="p-2 mb-5 bg-light">
+								<div class="basic_order_list">
+									<h5 class="fs-5 m-0">BASIC SERVICES</h5>
+									<div class="basic_cheklist">
+										<ul>
+											<li>· Buyers Checklist</li>
+											<li>· Seller Checklist</li>
+											<li>· Renter Checklist</li>
+											<li>· New Home Checklist</li>
+										</ul>
+									</div>
+									<div class="basic_cleaning">
+										<ul>
+											<li>· Kitchen Drain</li>
+											<li>· Bathroom Drain</li>
+											<li>· Bed</li>
+											<li>· Aircon Filter</li>
+											<li>· Sofa (1 seater/3 seater)</li>
+										</ul>
+									</div>
+								</div>
+								
+								<div class="add_order_list"></div>
+
+								<div class="subscribe_total_price">
+									<h5 class="font-size-16 m-0">Total:</h5>
+									<span class="pd fw-bold fs-5 text-dark">
+										<span class="payment total_price">₱ 499</span>
+									</span>
+								</div>
 							</div>
 
 						</div>
@@ -320,59 +362,112 @@ input[type="number"]::-webkit-outer-spin-button {
 <script>
 let addOptionContent = document.querySelector(".add_option_content");
 let hasInputOption = addOptionContent.querySelectorAll(".has_input_option");
-let noneInputOption = addOptionContent.querySelectorAll(".none_input_option")
+// let noneInputOption = addOptionContent.querySelectorAll(".none_input_option")
+let selectedOption = null;
+let qty = null;
+let subscribeTotalPrice = document.querySelector(".subscribe_total_price .payment");
+
+let optionPrices = {
+	aircon : "2000",
+	bathroom : "100",
+	bed : "50",
+	hood : "100",
+	greaseTrap : "50"
+};
 
 hasInputOption.forEach(option => {
-	option.addEventListener("click", event => {
-		event.stopPropagation();
-		let option = event.currentTarget;
-		
-		let html = `<input type="number" inputmode="numeric" class="w-50 rounded-0 mt-2" min="0">`;
-		
-		if (option.querySelector('input[type="number"]')) {
-			return;
-		}
-		
-		let originalContent = option.innerHTML; //클릭한 요소의 원본(글, 그림) 저장
-		option.innerHTML = html; // inputhas_input_option
-		
-		document.addEventListener("click", function(e){
-			if (!option.contains(e.target)) {
-				option.innerHTML = originalContent;
-			}
-		});
+	option.addEventListener("click", e => {
+		e.stopPropagation();
+
+		let inputNumber = option.querySelector("input[type=number]");
+
+		inputNumber.classList.remove("d-none");
+		option.classList.add("highlight");
 	});
-});
 
-// function handleClick(event) {
-// 	event.stopPropagation();
-// 	let option = event.currentTarget;
-	
-// 	let html = `<input type="number" inputmode="numeric" class="w-50 rounded-0 mt-2" min="0">`;
-	
-// 	if (option.querySelector('input[type="number"]')) {
-// 		return;
-// 	}
-	
-// 	let originalContent = option.innerHTML; //클릭한 요소의 원본(글, 그림) 저장
-// 	option.innerHTML = html; // inputhas_input_option
-	
-// 	document.addEventListener("click", function(e){
-// 		if (!option.contains(e.target)) {
-// 			option.innerHTML = originalContent;
-// 		}
-// 	});
-// }
+	document.addEventListener("click", () => {
+		let inputNumber = option.querySelector("input[type=number]");
 
-noneInputOption.forEach(option => {
-	option.addEventListener("click", function(){
-		if(!option.classList.contains("fill")){
-			option.classList.add("fill");
-		}else{
-			option.classList.remove("fill");
+		inputNumber.classList.add("d-none");
+
+		if(inputNumber.value == '0'){
+			option.classList.remove("highlight");
 		}
-	})
+	});
+
+	option.addEventListener("change", e => {
+		calcTotalPrice(e);
+		if(option.querySelector("input[type=number]").value == 0){
+			document.querySelector(`.add_order_list [data-index="${e.currentTarget.index}"]`).classList.add("d-none");
+		}else{
+			document.querySelector(`.add_order_list [data-index="${e.currentTarget.index}"]`).classList.remove("d-none");
+		}
+	});
 })
+
+function calcTotalPrice(e){
+	let totalPrice = 0;
+	let optionName = [];
+	let subtotals = [];
+	let count = [];
+
+	hasInputOption.forEach((option, i) => {
+		option.index = i;
+		optionName.push(option.querySelector("input[type=number]").name);
+
+		let qty = option.querySelector("input[type=number]").value;
+		let optionPrice = optionPrices[optionName[i]];
+		let optionTotalPrice = parseFloat(qty * optionPrice);
+
+		count.push(Number(qty));
+		totalPrice += optionTotalPrice;
+
+		subtotals.push(optionTotalPrice);
+		
+	})
+	// 이전에 선택한 옵션의 가격 업데이트
+	let existingOptionElement = document.querySelector(`.add_order_list [data-index="${e.currentTarget.index}"]`);
+	
+	if (existingOptionElement) {
+		let existingPriceElement = existingOptionElement.querySelector(".option-price");
+		let qtyElement = existingOptionElement.querySelector(".option-qty span");
+		
+		existingPriceElement.textContent = `₱ ${numberWithCommas(subtotals[e.currentTarget.index].toFixed(2))}`;
+		qtyElement.textContent = `(${count[e.currentTarget.index]})`;
+
+	} else {
+		let html = `
+			<div class="d-flex justify-content-between py-2" data-index="${e.currentTarget.index}" style="border-bottom: 1px solid #ddd;">
+				<p class="option-qty">· ${optionName[e.currentTarget.index]} <span>(${count[e.currentTarget.index]})</span></p>
+				<span class="option-price">₱ ${numberWithCommas(subtotals[e.currentTarget.index].toFixed(2))}</span>
+			</div>
+		`;
+
+		document.querySelector(".add_order_list").insertAdjacentHTML("beforeend", html);
+	}
+
+	subscribeTotalPrice.innerHTML = "₱ " + numberWithCommas(totalPrice.toFixed(2));
+}
+
+/* input type=number 필요없는 옵션 생길 시 다시 복원*/
+// noneInputOption[0].addEventListener("click", function(e){
+// 	if(!hasInputOption[0].contains(e.traget)){
+// 		hasInputOption[0].querySelector("input[type=number]").classList.add("d-none");
+// 	}
+// })
+
+// noneInputOption.forEach(option => {
+// 	option.addEventListener("click", function(){
+// 		if(!option.classList.contains("fill")){
+// 			option.classList.add("fill");
+// 		}else{
+// 			option.classList.remove("fill");
+// 		}
+
+// 		calcTotalPrice(e)
+		
+// 	})
+// })
 
 function checkOnlyOne(ele){
 	let checkCleaningList = document.querySelector(".check-cleaning-list");
