@@ -3,7 +3,7 @@ from django.db.models import Q
 from collections import defaultdict
 
 def categories(request):
-	category_first_list =  CategoryFirst.objects.all().order_by( "id")
+	category_first_list =  CategoryFirst.objects.filter(is_display=True).order_by( "id")
 
 	q = Q()
 	if request.GET.get("category1"):

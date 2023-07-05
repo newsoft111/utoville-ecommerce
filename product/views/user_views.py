@@ -73,7 +73,7 @@ def user_product_detail(request, product_id):
 			'price':str(variant_value.price)
 		})
 	
-	print(variant_data)
+
 	q = Q()
 	q &= Q(product = product_id)
 	q &= ~Q(answer = None)

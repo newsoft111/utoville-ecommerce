@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from product.models import *
 from django.db.models import Q
-from django.core import serializers
+from django.http import JsonResponse
+from order.views import create_order
 
 # Create your views here.
 
@@ -17,16 +18,30 @@ def user_subscription_check_list_view(request):
 	}
 
 	if request.method == 'POST':
-		pass
+		cleaning_type = request.GET.get("cleaning_type")
+		airconditioner_qcy = request.GET.get("airconditioner_qcy")
+		bathroom_qcy = request.GET.get("bathroom_qcy")
+		bed_qcy = request.GET.get("bed_qcy")
+		hood_qcy = request.GET.get("hood_qcy")
+		grease_trap_qcy = request.GET.get("grease_trap_qcy")
+
+		order_item_list = [
+			{
+				"product_id":'66',
+				'variant_value_id':'89',
+				"qty":airconditioner_qcy,
+				"schedule_date":""
+			}
+		]
+
+		return JsonResponse(
+			create_order(request.user, order_item_list)
+        )
+
 	else:
-		q = Q()
-		q &= Q(id = "1")
-
-		product_objs =  Product.objects.filter(q).order_by("-id")
-
-		post_list = serializers.serialize('json', product_objs, use_natural_foreign_keys=True)
+		cleaning_checking_id = '66'
 
 		return render(request, 'user/subscribe/subscription_check_list_view.html',{
 			"seo":seo,
-			"product_objs":product_objs,
+			"cleaning_checking_id":cleaning_checking_id,
 		})
