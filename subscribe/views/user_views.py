@@ -18,21 +18,36 @@ def user_subscription_check_list_view(request):
 	}
 
 	if request.method == 'POST':
-		cleaning_type = request.GET.get("cleaning_type")
-		airconditioner_qcy = request.GET.get("airconditioner_qcy")
-		bathroom_qcy = request.GET.get("bathroom_qcy")
-		bed_qcy = request.GET.get("bed_qcy")
-		hood_qcy = request.GET.get("hood_qcy")
-		grease_trap_qcy = request.GET.get("grease_trap_qcy")
+		#cleaning_type 가 basic cleaning 일땐
+		#airconditioner_qcy, bathroom_qcy, bed_qcy, hood_qcy, grease_trap_qcy
 
-		order_item_list = [
-			{
-				"product_id":'66',
-				'variant_value_id':'89',
-				"qty":airconditioner_qcy,
-				"schedule_date":""
+		#cleaning_type 가 whole cleaning 일땐
+		#아직 작업안함
+
+		q = Q()
+		q &= Q(variant_id__product_id='66')
+
+		if request.GET.get("cleaning_type") == 'basic_cleaning':
+			q &= Q(variant_id='43')
+		else:
+			q &= Q(variant_id='44')
+
+		variant_value_objs = ProductVariantValue.objects.filter()
+
+
+		order_item_list = []
+
+		for variant_value_obj in variant_value_objs:
+			variant_value = str(variant_value_obj.value).lower().replace(" ", "_")
+			qty = request.GET.get(f"{variant_value}_qcy")
+
+			order_item = {
+				"product_id": '66',
+				"variant_value_id": variant_value_obj.id,
+				"qty": qty,
+				"schedule_date": ""
 			}
-		]
+			order_item_list.append(order_item)
 
 		return JsonResponse(
 			create_order(request.user, order_item_list)
