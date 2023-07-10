@@ -227,7 +227,7 @@ input[type="number"]::-webkit-outer-spin-button {
 											</span>
 										</div>
 										
-										<div class="col-6 col-lg-3 mb-2">
+										<!-- <div class="col-6 col-lg-3 mb-2">
 											<span class="options none_input_option card py-3 align-items-center">
 												<img src="/static/user/img/subscribe/book/kitchen-hood.png" style="width: 31px;">
 												<span>Hood</span>
@@ -243,9 +243,7 @@ input[type="number"]::-webkit-outer-spin-button {
 													<input type="hidden" name="greaseTrap" class="d-none w-50 rounded-0 mt-2" value="">
 												</span>
 											</div>
-										</div>
-
-								
+										</div> -->
 									</div>
 								</div>
 							</li>
@@ -328,12 +326,13 @@ input[type="number"]::-webkit-outer-spin-button {
 									</div>
 								</div>
 								
+								<div class="basic_option_price"></div>
 								<div class="add_order_list"></div>
 
 								<div class="subscribe_total_price d-flex justify-content-between align-items-center">
 									<h5 class="font-size-16 m-0">Total:</h5>
 									<span class="pd fw-bold fs-5 text-dark">
-										<span class="payment total_price">₱ 499</span>
+										<span class="payment total_price">₱ 499.00</span>
 									</span>
 								</div>
 							</div>
@@ -366,6 +365,7 @@ let noneInputOption = addOptionContent.querySelectorAll(".none_input_option")
 let selectedOption = null;
 let qty = null;
 let subscribeTotalPrice = document.querySelector(".subscribe_total_price .payment");
+let basicOptionPrice = Number(subscribeTotalPrice.innerHTML.replace(/[^\d.-]/g, ''));
 
 let inputOptionPrices = {
 	aircon : "2000",
@@ -402,6 +402,7 @@ hasInputOption.forEach(option => {
 		
 		if(option.querySelector("input[type=number]").value == 0){
 			document.querySelector(`.add_order_list [data-index="${e.currentTarget.index}"]`).classList.add("d-none");
+			
 		}else{
 			document.querySelector(`.add_order_list [data-index="${e.currentTarget.index}"]`).classList.remove("d-none");
 		}
@@ -412,7 +413,8 @@ function calcTotalPrice(e) {
 	let totalPrice = 0;
 	let optionName = [];
 	let noneInputOptionName = [];
-	let subtotals = [];
+	let inputOptionSubTotals = [];
+	let noneInputOptionSubTotals = [];
 	let count = [];
 
 
@@ -426,11 +428,7 @@ function calcTotalPrice(e) {
 		count.push(Number(qty));
 		totalPrice += optionTotalPrice;
 
-		if(option.classList.contains("highlight")){
-			subtotals.push(optionTotalPrice);
-		}else{
-			subtotals.push(0);
-		}
+		inputOptionSubTotals.push(optionTotalPrice);
 
 	});
 
@@ -440,41 +438,13 @@ function calcTotalPrice(e) {
 		noneInputOptionName.push(option.querySelector("input[type=hidden]").name);
 
 		let noneInputOptionPrice = nonInputOptionPrices[noneInputOptionName[i]];
+		let optionTotalPrice = parseFloat(noneInputOptionPrice);
 
-		if (option.classList.contains("fill")) {
-			let optionTotalPrice = parseFloat(noneInputOptionPrice);
-			totalPrice += optionTotalPrice;
-			subtotals.push(optionTotalPrice);
-		} else {
-			subtotals.push(0);
-		}
+		noneInputOptionSubTotals.push(optionTotalPrice);
 	});
 
-	
-  
-  
-  
-  
-  
-
-  
 
 
-noneInputOption.forEach((option, i) => {
-  option.index = i;
-
-  noneInputOptionName.push(option.querySelector("input[type=hidden]").name);
-
-  let noneInputOptionPrice = nonInputOptionPrices[noneInputOptionName[i]];
-
-  if (option.classList.contains("fill")) {
-    let optionTotalPrice = parseFloat(noneInputOptionPrice);
-    totalPrice += optionTotalPrice;
-    subtotals.push(optionTotalPrice);
-  } else {
-    subtotals.push(0);
-  }
-});
 	// 이전에 선택한 옵션의 가격 업데이트
 	let existingOptionElement  = '';
 	if(e.currentTarget.querySelector("input").type === "number"){
@@ -488,16 +458,16 @@ noneInputOption.forEach((option, i) => {
 	if (existingOptionElement) {
 		let existingPriceElement = existingOptionElement.querySelector(".option-price");
 		let noneOptionPirceElement = existingOptionElement.querySelector(".none-option-price");
-		console.log(existingPriceElement, noneOptionPirceElement )
 		let qtyElement = existingOptionElement.querySelector(".option-qty span");
 
 	// number 옵션과 hidden 옵션을 함께 처리
-		existingPriceElement.textContent = `₱ ${numberWithCommas(subtotals[e.currentTarget.index].toFixed(2))}`;
 		if(e.currentTarget.querySelector("input[type=number]")){
 			qtyElement.textContent = `(${count[e.currentTarget.index]})`;
-			existingPriceElement.textContent = `₱ ${numberWithCommas(subtotals[e.currentTarget.index].toFixed(2))}`;
+			existingPriceElement.textContent = `₱ ${numberWithCommas(inputOptionSubTotals[e.currentTarget.index].toFixed(2))}`;
+		}else if(e.currentTarget.classList.contains("fill")){
+			noneOptionPirceElement.textContent = `₱ ${numberWithCommas(noneInputOptionSubTotals[e.currentTarget.index].toFixed(2))}`;
 		}else{
-			noneOptionPirceElement.textContent = `₱ ${numberWithCommas(subtotals[e.currentTarget.index].toFixed(2))}`;
+			existingOptionElement.remove();
 		}
 
 	} else {
@@ -506,16 +476,18 @@ noneInputOption.forEach((option, i) => {
 			html = `
 				<div class="d-flex justify-content-between py-2" data-index="${e.currentTarget.index}" style="border-bottom: 1px solid #ddd;">
 					<p class="option-qty mb-0">+ ${optionName[e.currentTarget.index]}<span>(${count[e.currentTarget.index]})</span></p>
-					<span class="option-price">₱ ${numberWithCommas(subtotals[e.currentTarget.index].toFixed(2))}</span>
+					<span class="option-price">₱ ${numberWithCommas(inputOptionSubTotals[e.currentTarget.index].toFixed(2))}</span>
 				</div>
 			`; 
-		}else{
+		}
+		
+		if(e.currentTarget.querySelector("input").type === "hidden" && e.currentTarget.classList.contains("fill")){
 			html = `
 				<div class="d-flex justify-content-between py-2" data-noneOptionindex="${e.currentTarget.index}" style="border-bottom: 1px solid #ddd;">
 					<p class="option-qty mb-0">+ ${noneInputOptionName[e.currentTarget.index]}</p>
-					<span class="none-option-price">₱ ${numberWithCommas(subtotals[e.currentTarget.index + hasInputOption.length].toFixed(2))}</span>
+					<span class="none-option-price">₱ ${numberWithCommas(noneInputOptionSubTotals[e.currentTarget.index].toFixed(2))}</span>
 				</div>
-			`; 
+			`;
 		}
 
 		document.querySelector(".add_order_list").insertAdjacentHTML("beforeend", html);
@@ -528,7 +500,7 @@ noneInputOption.forEach((option, i) => {
 		noneInputOptionName.push(option.querySelector("input[type=hidden]").name);
 		let noneInputOptionPrice = nonInputOptionPrices[noneInputOptionName[i]];
 
-		subtotals.push(Number(noneInputOptionPrice));
+		noneInputOptionSubTotals.push(Number(noneInputOptionPrice));
 
 		if (option.classList.contains("fill")) {
 			selectedHiddenOptions.push(i);
@@ -536,19 +508,27 @@ noneInputOption.forEach((option, i) => {
 	});
 
 	let selectedHiddenOptionsTotalPrice = selectedHiddenOptions.reduce((total, index) => {
-		return total + subtotals[index];
+		return total + noneInputOptionSubTotals[index];
 	}, 0);
-
+	
 	totalPrice += selectedHiddenOptionsTotalPrice;
-
-	subscribeTotalPrice.innerHTML = "₱ " + numberWithCommas(totalPrice.toFixed(2));
+	
+	if(totalPrice == 0){
+		subscribeTotalPrice.innerHTML = "₱ 499.00";
+		document.querySelector(".basic_option_price").innerHTML = "";
+	}else{
+		html = `
+				<p class="basic-option-price py-2 mb-0 text-end">₱ 499.00</p>
+			`;
+		document.querySelector(".basic_option_price").innerHTML = html;
+		subscribeTotalPrice.innerHTML = "₱ " + numberWithCommas((basicOptionPrice+totalPrice).toFixed(2));
+	}
 }
 
 
 /* 수량 선택 필요없는 옵션들에 대한 이벤트 */
 noneInputOption.forEach(option => {
 	option.addEventListener("click", function(e){
-
 		if(!option.classList.contains("fill")){
 			option.classList.add("fill");
 		
