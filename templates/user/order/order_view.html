@@ -509,7 +509,7 @@ async function pay_submit() {
 	let shippingForm = document.getElementById("shipping-form");
 	let shippingFormData = new FormData(shippingForm);
 
-	const shippingResponse = await fetch("{% url 'charge:user_pay' %}", {  // ************ URL 검토 필요 ************
+	const shippingResponse = await fetch("{% url 'charge:user_pay' %}", {  
 		method: "POST",
 		headers: {
 			"X-CSRFToken": getCookie("csrftoken")
