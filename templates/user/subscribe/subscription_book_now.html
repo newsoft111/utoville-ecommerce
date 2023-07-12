@@ -61,25 +61,25 @@ input[type="number"]::-webkit-outer-spin-button {
 									</div> -->
 									<div class="mb-3">
 										<div class="row">
-											<div class="col-lg-4">
+											<div class="col-lg-6">
 												<div class="mb-3">
 													<label class="font-size-16" for="billing-name">Name</label>
 													<input type="text" class="form-control" id="billing-name" name="billing-name" value="{{user.mb_name}}" placeholder="Enter name">
 												</div>
 											</div>
-											<div class="col-lg-4">
-												<div class="mb-3">
-													<label class="font-size-16" for="billing-email-address">Email Address</label>
-													<input type="email" class="form-control" id="billing-email-address" name="billing-email-address" value="{{user.email}}" placeholder="Enter email">
-												</div>
-											</div>
-											<div class="col-lg-4">
+											<div class="col-lg-6">
 												<div class="mb-3">
 													<label class="font-size-16" for="billing-phone">Phone</label>
 													<input type="text" class="form-control" id="billing-phone" name="billing-phone" value="{{user.mb_phone}}" placeholder="Enter Phone no.">
 												</div>
 											</div>
-											<div class="col-lg-12">
+											<div class="col-lg-6">
+												<div class="mb-3">
+													<label class="font-size-16" for="billing-email-address">Email Address</label>
+													<input type="email" class="form-control" id="billing-email-address" name="billing-email-address" value="{{user.email}}" placeholder="Enter email">
+												</div>
+											</div>
+											<div class="col-lg-6">
 												<div class="mb-3">
 													<label class="font-size-16" for="billing-date">Desired service date </label>
 													<input type="text" id="date-time-picker" name="billing-date" class="form-control set-date-time-picker " placeholder="Please select date and time.">
@@ -336,7 +336,6 @@ let hasInputOption = addOptionContent.querySelectorAll(".has_input_option");
 let noneInputOption = addOptionContent.querySelectorAll(".none_input_option")
 let subscribeTotalPrice = document.querySelector(".subscribe_total_price .payment");
 let basicOptionPrice = Number(subscribeTotalPrice.innerHTML.replace(/[^\d.-]/g, ''));
-let qty = null;
 
 /* 수량 선택이 있는 옵션들에 대한 이벤트 */
 hasInputOption.forEach(option => {
@@ -408,7 +407,39 @@ async function subscribe_submit(){
 	let subscribeForm = document.querySelector("#subscribe-form");
 	let subscribeFormData = new FormData(subscribeForm);
 
+	// let billingName = document.querySelector("input[name=billing-name]").value;
+	// let billingEmailAddress = document.querySelector("input[name=billing-email-address]").value;
+	// let billingPhoneNumber = document.querySelector("input[name=billing-phone]").value;
+	// let billingAddress = document.querySelector("textarea[name=billing-address]").value;
+	// let billingState = document.querySelector("input[name=billing-state]").value;
+	// let billingZipCode = document.querySelector("input[name=zip-code]").value;
 
+	// if(billingName == ""){
+	// 	alert("Please enter name.");
+	// 	return false;
+	// }
+	// if(billingEmailAddress == ""){
+	// 	alert("Please enter email address.");
+	// 	return false;
+	// }
+	// if(billingPhoneNumber == ""){
+	// 	alert("Please enter phone number.");
+	// 	return false;
+	// }
+	// if(billingAddress == ""){
+	// 	alert("Please enter address.");
+	// 	return false;
+	// }
+	// if(billingState == ""){
+	// 	alert("Please enter state.");
+	// 	return false;
+	// }
+	// if(billingZipCode == ""){
+	// 	alert("Please enter zip/postal code.");
+	// 	return false;
+	// }
+	
+	//value 값이 "" or null로 들어올 시 0으로 변경
 	for (let pair of subscribeFormData.entries()) {
 		if (pair[1] === null || pair[1] === "") {
 			pair[1] = 0;
