@@ -172,6 +172,3 @@ def user_product_review_write(request):
 		print(e,5555555555)
 	result = {'result': result, 'result_text': result_text}
 	return JsonResponse(result)
-
-def user_home_check(request):
-	return render(request, 'user/product/home_check.html')

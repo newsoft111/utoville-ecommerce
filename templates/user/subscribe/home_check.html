@@ -1,0 +1,112 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<link href="{% static 'user/css/style.css' %}" rel="stylesheet">
+<style>
+	.bg-image {scale: 1.2; transition: all 2s;}
+	.bg-image.active {scale: 1;}
+</style>
+<!--Page header start-->
+<section class="position-relative overflow-hidden" style="padding: 0;">
+	<div class="py-8 py-lg-11 bg-dark text-white position-relative category_info">
+		<img src="{% static 'user/img/shop/banners/0.jpg' %}" class="bg-image bg-top-center" alt="">
+		<div class="row align-items-center position-relative">
+			<div class="col-lg-10 mx-auto text-center">
+				<h1 class="mb-0 first_category_name" style="color:white;">Home Check</h1>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="position-relative" style="padding: 0;">
+	<div class="container position-relative">
+		<div class="position-relative pt-2 pb-9 pb-lg-11">
+			<div class="row">
+				<div class="col-lg-12 subs_contents">
+					<!-- Page title -->
+					<div class="my-5">
+						<h4 class="my-4 page-title-box">Home Check Reservation</h4>
+					</div>
+						<form id="stepByStepForm" class="file-upload">
+							<ul class="progress-step">
+								<li class="progress-bar__dot full box-md position-relative me-4 me-lg-0">
+									<span class="mb-0 position-absolute top-50 start-50 translate-middle fs-6"><i class="far fa-edit"></i></span>
+								</li>
+								<li class="progress-bar__connector align-items-center d-none d-lg-block">
+									<span class="fs-5 mb-0 ms-2 text-dark">Description</span>
+								</li>
+							</ul>
+							
+							<!-- Description step -->
+							<div class="step step1">
+								<!-- Row START -->
+								<div class="row gx-5 align-items-center justify-content-center">
+									<!-- Property detail -->
+									<div class="col-xxl-10 mb-5 mb-xxl-0">
+										<div class="row g-3 bg-secondary-soft rounded p-3 p-md-5">
+											<h4 class="my-0">Basic Information</h4>
+											<div class="col-md-6">
+												<label class="form-label">Name *</label>
+												<input type="text" class="form-control" aria-label="property id">
+											</div>
+											<div class="col-md-6">
+												<label class="form-label">Contact *</label>
+												<input type="text" class="form-control" aria-label="property id">
+											</div>
+											<div class="col-md-6">
+												<label class="form-label">E-mail *</label>
+												<input type="text" class="form-control" aria-label="property id">
+											</div>
+											<div class="col-md-12">
+												<label for="homecheck_address" class="form-label">Address *</label>
+												<textarea class="form-control" id="homecheck_address" rows="4" spellcheck="false"></textarea>
+											</div>
+											<!-- Category -->
+											<div class="col-md-12">
+												<label class="form-label">Service Type*</label>
+												<select class="form-select js-choice" aria-label="Default select example">
+													<option value="">Select Service</option>
+													<option>육안 점검</option>
+													<option>장비 점검</option>
+													<option>입주 전 점검</option>
+													<option>안전 진단</option>
+													<option>기타</option>
+												</select>
+											</div>
+
+											<div class="col-md-12">
+												<label class="form-label">Title *</label>
+												<input type="text" class="form-control" aria-label="Title">
+											</div>
+											<!-- Description -->
+											<div class="col-md-12">
+												<label for="homecheck_contents" class="form-label">Contents *</label>
+												<textarea class="form-control" id="homecheck_contents" rows="4" spellcheck="false"></textarea>
+											</div>
+											<div class="text-end">
+												<button id="validate" type="submit" class="btn btn-success btn-md">Submit</button>
+											</div>
+										</div> <!-- Row END -->
+									</div>
+								</div> <!-- Row END -->
+							</div>
+						</div>
+					</form>
+				</div>
+				<!-- Main content END -->
+			</div>
+		</div>
+	</div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+	document.querySelector(".bg-image").classList.add("active");
+});
+
+</script>
+
+{% endblock %}

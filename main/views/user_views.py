@@ -10,74 +10,12 @@ def user_index(request):
 
 	test_list = [
 		{
-			"review_content" : "리뷰가 들어갈 자리입니다.",
-			"review_name" : "이름",
-			"review_residence" : "거주지",
-			"review_date" : "작성일"
+			"review_content" : "Communications with Fernanda to set up the date and time were good, both by email and text. The cleaner Danyelle was very thorough! She cleaned both of my bathrooms and the floors of my bedroom, hall, kitchen, dining room and family room. They look great! I will not hesitate to use this service again!",
+			"review_name" : "Peggy Jupp",
+			"review_residence" : "manilla",
+			"review_date" : "2023.07.01"
 		},
-
-		{
-			"review_content" : "리뷰가 들어갈 자리입니다.",
-			"review_name" : "이름",
-			"review_residence" : "거주지",
-			"review_date" : "작성일"
-		},
-
-		{
-			"review_content" : "리뷰가 들어갈 자리입니다.",
-			"review_name" : "이름",
-			"review_residence" : "거주지",
-			"review_date" : "작성일"
-		},
-
-		{
-			"review_content" : "리뷰가 들어갈 자리입니다.",
-			"review_name" : "이름",
-			"review_residence" : "거주지",
-			"review_date" : "작성일"
-		},
-
-		{
-			"review_content" : "리뷰가 들어갈 자리입니다.",
-			"review_name" : "이름",
-			"review_residence" : "거주지",
-			"review_date" : "작성일"
-		},
-
-		{
-			"review_content" : "리뷰가 들어갈 자리입니다.",
-			"review_name" : "이름",
-			"review_residence" : "거주지",
-			"review_date" : "작성일"
-		},
-
-		{
-			"review_content" : "리뷰가 들어갈 자리입니다.",
-			"review_name" : "이름",
-			"review_residence" : "거주지",
-			"review_date" : "작성일"
-		},
-
-		{
-			"review_content" : "리뷰가 들어갈 자리입니다.",
-			"review_name" : "이름",
-			"review_residence" : "거주지",
-			"review_date" : "작성일"
-		},
-
-		{
-			"review_content" : "리뷰가 들어갈 자리입니다.",
-			"review_name" : "이름",
-			"review_residence" : "거주지",
-			"review_date" : "작성일"
-		},
-
-		{
-			"review_content" : "리뷰가 들어갈 자리입니다.",
-			"review_name" : "이름",
-			"review_residence" : "거주지",
-			"review_date" : "작성일"
-		}
+		
 	]
 
 	if request.user.is_authenticated: #로그인 상태면
