@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="{% static 'user/css/about_style.css' %}">
 
 <style>
+.inspection_desc img.checker_img { width: 150px; height: 100%; border-radius: 10px; }
+.basic_service_desc img { width: 100%; height: 100%; border-radius: 10px; }
+
+@media only screen and (max-width: 400px){
+	.inspection_desc img.checker_img { width: 110px; }
+}
 
 </style>
 <div class="wrapper">
@@ -77,58 +83,58 @@
 											<h2 class="price text-center display-4 mb-0">499 <span class="fs-6 fw-light">per month</span></h2>
 										</div>
 									</div>
-									
-									<!--Action button-->
-									<div class="grid mb-5">
-										<a href="{% url 'product:user_home_check' %}"></a>
-										<a href="{% url 'subscribe:user_subscription_book_now' %}" class="btn btn-lg hover-lift w-100 btn-primary">Register Now</a>
-									</div>
+							
 									<!--Features-->
 									<div class="inspection_desc">
 										<span class="badge py-2 px-3 rounded-pill bg-success mb-3 w-100">Home Inspection</span>
-										<ul class="list-unstyled mb-0">
-											<li class="mb-4 d-flex flex-wrap align-items-center">
-												<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>
-												Buyers Checklist
-											</li>
-											<li class="mb-4 d-flex flex-wrap align-items-center">
-												<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>
-												Seller Checklist
-											</li>
-											<li class="mb-4 d-flex flex-wrap align-items-center">
-												<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>
-												Renter Checklist
-											</li>
-											<li class="mb-4 d-flex flex-wrap align-items-center">
-												<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>
-												New Home Checklist
-											</li>
-										</ul>
+										<div class="d-flex align-items-center justify-content-evenly">
+											<img src="/static/user/img/subscribe/about/checker_img.jpg" class="checker_img">
+											<ul class="list-unstyled mb-0">
+												<li class="mb-4 d-flex flex-wrap align-items-center">
+													<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>Buyers Checklist
+												</li>
+												<li class="mb-4 d-flex flex-wrap align-items-center">
+													<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>Seller Checklist
+												</li>
+												<li class="mb-4 d-flex flex-wrap align-items-center">
+													<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>Renter Checklist
+												</li>
+												<li class="mb-4 d-flex flex-wrap align-items-center">
+													<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>New Home Checklist
+												</li>
+											</ul>
+										</div>
 									</div>
 									<div class="basic_service_desc">
 										<span class="badge py-2 px-3 rounded-pill bg-success mb-3 w-100">Basic Services</span>
-										<ul class="list-unstyled mb-0">
-											<li class="mb-4 d-flex flex-wrap align-items-center">
-												<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>
-												Kitchen Drain
+										<ul class="row d-flex justify-content-center align-items-start">
+											<li class="col-4 mb-4 d-flex flex-column align-items-center">
+												<img src="/static/user/img/subscribe/about/kitchen_drain.jpg" class="checker_img">
+												<span>Kitchen Drain</span>
 											</li>
-											<li class="mb-4 d-flex flex-wrap align-items-center">
-												<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>
-												Bathroom Drain
+											<li class="col-4 mb-4 d-flex flex-column align-items-center">
+												<img src="/static/user/img/subscribe/about/bathroom_darin.jpg" class="checker_img">
+												<span>Bathroom Drain</span>
 											</li>
-											<li class="mb-4 d-flex flex-wrap align-items-center">
-												<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>
-												Bed
-											</li>
-											<li class="mb-4 d-flex flex-wrap align-items-center">
-												<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>
-												Aircon Filter
-											</li>
-											<li class="mb-4 d-flex flex-wrap align-items-center">
-												<i class="me-2 opacity-50 fs-5 bx bx-check-circle"></i>
-												Sofa (1 seater/3 seater)
+											<li class="col-4 mb-4 d-flex flex-column align-items-center">
+												<img src="/static/user/img/subscribe/about/bed.jpg" class="checker_img">
+												<span>Bed</span>
 											</li>
 										</ul>
+										<ul class="row d-flex justify-content-center align-items-start">
+											<li class="col-4 mb-4 d-flex flex-column align-items-center">
+												<img src="/static/user/img/subscribe/about/aircon.jpg" class="checker_img">
+												<span>Aircon Filter</span>
+											</li>
+											<li class="col-4 mb-4 d-flex flex-column align-items-center">
+												<img src="/static/user/img/subscribe/about/sofa.jpg" class="checker_img">
+												<span class="text-center">Sofa<br><em style="font-size: 12px;">(1 seater/ 3 seater)</em></span>
+											</li>
+										</ul>
+									</div>
+									<!--Action button-->
+									<div class="grid mb-5">
+										<a href="{% url 'subscribe:user_subscription_book_now' %}" class="btn btn-lg hover-lift w-100 btn-primary">Register Now</a>
 									</div>
 								</div>
 							</div>

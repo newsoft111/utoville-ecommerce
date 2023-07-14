@@ -30,26 +30,10 @@
 .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {content:'' !important; }
 
 /*Serach Service 슬라이드 768px 이하에서 가로 슬라이드로 변환하기 위한 display none*/
-.hidden {
-	display: none;
-}
-.service-case-swiper-pagination {
-	position: absolute;
-	left: auto;
-	right: 10px;
-	bottom: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	z-index: 10;
-	gap: 0 3px;
-	width: 45px;
-	height: 22px;
-	border-radius: 22px;
-	background: rgba(0,0,0,.4);
-	font-size: 11px;
-	color: rgba(255,255,255,.66);
-}
+.hidden { display: none; }
+.service-case-swiper-pagination { position: absolute; left: auto; right: 10px; bottom: 10px; display: flex; align-items: center; justify-content: center; z-index: 10; gap: 0 3px; width: 45px; height: 22px; border-radius: 22px; background: rgba(0,0,0,.4); font-size: 11px; color: rgba(255,255,255,.66); }
+.review_content { font-size: 12px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; overflow: hidden; text-overflow: ellipsis; }
+
 @media only screen and (max-width: 1024px){
 	.display-1 {font-size: 3rem;}
 	.shop-now-btn {font-size: 14px;}
@@ -112,15 +96,16 @@
 					<div class="swiper-slide"><img src="{% static 'user/img/main/background/bg3.jpg' %}">
 						<div class="position-absolute top-50 start-50 translate-middle text-white w-75 w-lg-60 mx-auto text-center z-index-1 py-12">
 							<!--Hero title-->
-								<h1 class="display-9 mb-3 mb-md-4 position-relative" style="line-height:1.6;"><span style="font-size: 30px; font-weight: 300;">숙련된 Home Checker가 진행하는</span><br><p style="font-size: 60px;">공동주택 사전점검 서비스</p></h1>
+								<h1 class="display-9 mb-3 mb-md-4 position-relative" style="line-height:1.6;">
+									<p style="font-size: 60px;">Pre-Inspection Service</p>
+									<span style="font-size: 30px; font-weight: 300;"> for Cooperative Housing Conducted by Experienced Home Checker</span><br>
+								</h1>
 				
 								<!--Hero buttons-->
 								<div class="d-inline-block">
-									<a href="{% url 'product:user_product_list' %}" class="shop-now-btn btn btn-outline-white btn-rise">
+									<a href="{% url 'subscribe:user_subscription_about' %}" class="shop-now-btn btn btn-outline-white btn-rise">
 										<div class="btn-rise-bg bg-white"></div>
-										<div class="btn-rise-text">
-											사전점검 바로예약
-										</div>
+										<div class="btn-rise-text">Book Now</div>
 									</a>
 								</div>
 							</div>
@@ -139,7 +124,6 @@
 <div class="banner_zone pt-6 pt-lg-11">
 	<div class="swiper bannerSwiper">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide"><img src="{% static 'user/img/main/banner1.jpg' %}"></div>
 			<div class="swiper-slide"><img src="{% static 'user/img/main/banner2.jpg' %}"></div>
 		</div>
 	</div>
@@ -220,6 +204,7 @@
 									<img class="rounded-top" src="{% static 'user/img/main/background/bg1.jpg' %}">
 								</div>
 								<div class="flex-grow-1 px-3 px-4 py-5">
+									<span class="me-2">{{ review.review_name }}</span>
 									<div class="mb-3 text-warning">
 										<i class="bx bx-star small"></i>
 										<i class="bx bx-star small"></i>
@@ -227,11 +212,10 @@
 										<i class="bx bx-star small"></i>
 										<i class="bx bx-star small"></i>
 									</div>
-									<p class="fw-semibold fs-5 mb-0">
+									<p class="review_content fw-semibold mb-0">
 										{{ review.review_content }}
 									</p>
-									<div class="d-flex align-items-center justify-content-center">
-										<span class="me-2">{{ review.review_name }}</span>
+									<div class="d-flex align-items-center justify-content-center mt-2">
 										<small class="me-2">{{ review.review_residence }} </small>
 										<small> {{ review.review_date }} </small>
 									</div>
