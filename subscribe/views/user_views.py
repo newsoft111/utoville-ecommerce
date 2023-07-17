@@ -10,9 +10,6 @@ def user_subscription_about(request):
 	return render(request, 'user/subscribe/subscription_about.html')
 
 def user_subscription_book_now(request):
-	return render(request, 'user/subscribe/subscription_book_now.html')
-	
-def user_subscription_check_list_view(request):
 	seo = {
 		'title': "Product List - Utoville",
 	}
@@ -56,7 +53,22 @@ def user_subscription_check_list_view(request):
 	else:
 		cleaning_checking_id = '66'
 
-		return render(request, 'user/subscribe/subscription_check_list_view.html',{
+		q = Q()
+		q &= Q(variant__product=cleaning_checking_id)
+
+		cleaning_checking_variant_value_objs = variant_value_objs = ProductVariantValue.objects.filter(q)
+
+		return render(request, 'user/subscribe/subscription_book_now.html',{
 			"seo":seo,
-			"cleaning_checking_id":cleaning_checking_id,
+			"cleaning_checking_variant_value_objs":cleaning_checking_variant_value_objs,
 		})
+	
+	
+def user_subscription_check_list_view(request):
+	seo = {
+		'title': "Product List - Utoville",
+	}
+
+	return render(request, 'user/subscribe/subscription_check_list_view.html',{
+		"seo":seo,
+	})
