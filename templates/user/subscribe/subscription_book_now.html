@@ -336,6 +336,13 @@ let hasInputOption = addOptionContent.querySelectorAll(".has_input_option");
 let noneInputOption = addOptionContent.querySelectorAll(".none_input_option")
 let subscribeTotalPrice = document.querySelector(".subscribe_total_price .payment");
 let basicOptionPrice = Number(subscribeTotalPrice.innerHTML.replace(/[^\d.-]/g, ''));
+let qty = null;
+
+function calcTotalPrice(e) {
+	cleaningNumOpts.forEach(option => {
+		console.log(option.querySelector('input[type="number"]'), option.querySelector('input[type="number"]').dataset.price, option.querySelector('input[type="number"]').dataset.value, option.querySelector('input[type="number"]').dataset.Price);
+	})
+}
 
 /* 수량 선택이 있는 옵션들에 대한 이벤트 */
 hasInputOption.forEach(option => {

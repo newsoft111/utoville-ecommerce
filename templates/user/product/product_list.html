@@ -108,7 +108,7 @@
 					<ul class="pagination justify-content-center m-0">
 						{% if product_list.has_previous %}
 						<li class="page-item ">
-							<a class="page-link" href="?p={{product_list.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">이전</a>
+							<a class="page-link" href="?p={{product_list.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">Previous</a>
 						</li>
 						{% else %}
 						<li class="page-item disabled">
@@ -132,7 +132,7 @@
 
 						{% if product_list.has_next  %}
 						<li class="page-item">
-							<a class="page-link" href="?p={{product_list.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">다음</a> 
+							<a class="page-link" href="?p={{product_list.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">Next</a> 
 						</li>
 						{% else %}
 						<li class="page-item disabled">
