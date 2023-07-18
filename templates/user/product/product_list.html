@@ -32,29 +32,18 @@
 						<div class="collapse d-block">
 							<div class="nav flex-column">
 								{% for categoryFirst in category_first_list %}
-								<a href="#category{{categoryFirst.id}}" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">{{categoryFirst.name}}</a>
+								<a href="#category{{categoryFirst.id}}" class="nav-link category_first" data-bs-toggle="collapse" aria-expanded="false" data-category-name = "{{ categoryFirst.name }}">{{categoryFirst.name}}</a>
 								<div class="collapse" id="category{{categoryFirst.id}}">
-								<div class="nav nav-level-2 flex-column">
-									{% for categorySecond in categoryFirst.categorysecond_set.all %}
-									<a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}" class="nav-link small">{{categorySecond.name}}</a>
-									{% endfor %}
-								</div>
+									<div class="nav nav-level-2 flex-column">
+										{% for categorySecond in categoryFirst.categorysecond_set.all %}
+											<a href="?category1={{categoryFirst.id}}&category2={{categorySecond.id}}" class="nav-link small">{{categorySecond.name}}</a>
+										{% endfor %}
+									</div>
 								</div>
 								{% endfor %}
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="mt-6">
-					<a href="{% url 'product:user_home_check' %}">
-						<div class="bg-brandBlue d-flex justify-content-between align-items-center p-3 rounded">
-							<span class="display-5 text-white opacity-5"><i class="fas fa-fw fa-home"></i></span>
-							<div class="text-center">
-								<h5 class="mb-0 text-white">Check Reservation</h5>
-							</div>
-						</div>
-					</a>
 				</div>
 			</div>
 
@@ -64,10 +53,10 @@
 						<div class="d-flex align-items-center">
 							<span class="small text-muted text-end me-3 d-none d-lg-block w-100">Sort by</span>		
 							<select name="sort_by" class="form-select" id="sort-by" style="border-color: #ddd; cursor: pointer;">
-								<option value="id" selected> Most recent</option>
-								<option value="rating_count"> Best selling</option>
-								<option value="rating"> Best rated</option>
-								<option value="price"> Price - Low to High</option>
+								<option value="id" selected>Most recent</option>
+								<option value="rating_count">Best selling</option>
+								<option value="rating">Best rated</option>
+								<option value="price">Price - Low to High</option>
 								<option value="-price">Price - High to Low</option>
 							</select>
 						</div>
@@ -170,15 +159,13 @@ sort.addEventListener('change', (event) => {
 let params = new URLSearchParams(window.location.search);
 let firstCategory = params.get('category1');
 let firstCategoryName = document.querySelector(".first_category_name");
-
 let categoryInfo = document.querySelector(".category_info");
+let categoryFirst = document.querySelectorAll(".category_first");
+let categoryNameArr = [];
 
-let categoryNameArr = ["Home Check", "Cleaning", "Disinfection", "Repair", "Appliance Care", "Moving Service", "Car Service", "Water Delivery"];
+categoryFirst.forEach((category, i) => {
+	categoryNameArr.push(category.dataset.categoryName);
 
-
-
-
-for(var i=0; i<=categoryNameArr.length; i++){	
 	if(firstCategory == i+1) {
 		firstCategoryName.innerHTML = categoryNameArr[i];
 
@@ -187,9 +174,7 @@ for(var i=0; i<=categoryNameArr.length; i++){
 
 		categoryInfo.insertAdjacentHTML("afterbegin", categoryImg);
 	}
-}
-
-
+})
 </script>
 
 {% endblock %}
