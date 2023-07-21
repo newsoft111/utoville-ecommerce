@@ -64,10 +64,10 @@
 					<div class="navbar-brand-box">
 						<a href="{% url 'main:seller_index' %}" class="logo">
 							<span class="logo-sm">
-								<img src="{% static 'seller/images/logo-dark.png' %}" alt="" height="22">
+								<!-- <img src="{% static 'seller/images/logo-dark.png' %}" alt="" height="22"> -->
 							</span>
 							<span class="logo-lg">
-								<img src="{% static 'seller/images/logo-sm-dark.png' %}" alt="" height="22">
+								<!-- <img src="{% static 'seller/images/logo-sm-dark.png' %}" alt="" height="22"> -->
 							</span>
 						</a>
 					</div>
@@ -76,7 +76,7 @@
 				<div>
 					<a href="{% url 'account:seller_logout' %}" class="btn header-item user text-start d-flex align-items-center">
 						<span class="ms-2 d-sm-block user-item-desc">
-							<span class="user-name">로그아웃</span>
+							<span class="user-name">Logout</span>
 						</span>
 					</a>
 				</div>
@@ -90,10 +90,10 @@
 	
 				<a href="{% url 'main:seller_index' %}" class="logo">
 					<span class="logo-lg">
-						<img src="{% static 'seller/images/logo-dark.png' %}" alt="" height="22">
+						<!-- <img src="{% static 'seller/images/logo-dark.png' %}" alt="" height="22"> -->
 					</span>
 					<span class="logo-sm">
-						<img src="{% static 'seller/images/logo-sm-dark.png' %}" alt="" height="22">
+						<!-- <img src="{% static 'seller/images/logo-sm-dark.png' %}" alt="" height="22"> -->
 					</span>
 				</a>
 			</div>
@@ -117,7 +117,7 @@
 						<li>
 							<a href="{% url 'order:seller_order_list' %}">
 								<i class="icon nav-icon" data-feather="copy"></i>
-								<span class="menu-item">주문 관리</span>
+								<span class="menu-item">Order List</span>
 								<span class="badge rounded-pill badge-soft-secondary">{{seller_counter_new_order}}+</span>
 							</a>
 						</li>
@@ -125,7 +125,7 @@
 						<li>
 							<a href="{% url 'qna:seller_qna_list' %}">
 								<i class="icon nav-icon" data-feather="message-square"></i>
-								<span class="menu-item">문의 내역</span>
+								<span class="menu-item">QnA History</span>
 								<span class="badge rounded-pill badge-soft-secondary">{{seller_counter_new_qna}}+</span>
 							</a>
 						</li>
@@ -134,7 +134,7 @@
 						<li>
 							<a href="{% url 'profit:seller_profit_list' %}">
 								<i class="icon nav-icon" data-feather="edit"></i>
-								<span class="menu-item">정산 관리</span>
+								<span class="menu-item">Profit Management</span>
 							</a>
 						</li>
 
@@ -142,7 +142,7 @@
 						<li>
 							<a href="{% url 'revenue:seller_revenue_list' %}">
 								<i class="icon nav-icon" data-feather="dollar-sign"></i>
-								<span class="menu-item">매출 관리</span>
+								<span class="menu-item">Revenue Management</span>
 							</a>
 						</li>
 
@@ -150,7 +150,7 @@
 						<li>
 							<a href="{% url 'account:seller_my_profile' %}">
 								<i class="icon nav-icon" data-feather="user"></i>
-								<span class="menu-item">정보 수정</span>
+								<span class="menu-item">Profile Update</span>
 							</a>
 						</li>
 	
@@ -186,14 +186,14 @@
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'order:seller_order_list' %}">
 												<i class="icon nav-icon" data-feather="copy"></i>
-												<span class="menu-item">주문 관리</span>
+												<span class="menu-item">Order List</span>
 											</a>
 										</li>
 
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'qna:seller_qna_list' %}">
 												<i class="icon nav-icon" data-feather="message-square"></i>
-												<span class="menu-item">문의 내역</span>
+												<span class="menu-item">QnA History</span>
 												<span class="badge rounded-pill badge-soft-secondary">{{counter_new_qna}}+</span>
 											</a>
 										</li>
@@ -206,7 +206,7 @@
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'profit:seller_profit_list' %}">
 												<i class="icon nav-icon" data-feather="edit"></i>
-												<span class="menu-item">정산 관리</span>
+												<span class="menu-item">Profit Management</span>
 											</a>
 										</li>
 									</ul>
@@ -218,7 +218,7 @@
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'revenue:seller_revenue_list' %}">
 												<i class="icon nav-icon" data-feather="dollar-sign"></i>
-												<span class="menu-item">매출 관리</span>
+												<span class="menu-item">Revenue Management</span>
 											</a>
 										</li>
 									</ul>
@@ -230,7 +230,7 @@
 										<li class="nav-item">
 											<a class="nav-link" href="{% url 'account:seller_my_profile' %}">
 												<i class="icon nav-icon" data-feather="user"></i>
-												<span class="menu-item">정보 수정</span> 
+												<span class="menu-item">Profile Update</span> 
 											</a>
 										</li>
 									</ul>

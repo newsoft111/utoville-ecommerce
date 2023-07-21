@@ -349,12 +349,12 @@ function calcTotalPrice(e) {
 
 	let addedOptionInfo = document.querySelector(`.add_order_list [data-id="${options[e.currentTarget.index].id}"]`)
 
-	if(addedOptionInfo){ // 추가된 옵션이 있으면 현재 수량, 금액 업데이트
+	if(addedOptionInfo){ // 추가된 옵션이 있을때, 같은 옵션에 대한 수량, 금액 업데이트
 		document.querySelector(`[data-id="${options[e.currentTarget.index].id}"] .option-qty span`).textContent = `(${options[e.currentTarget.index].qty})`;
 		document.querySelector(`[data-id="${options[e.currentTarget.index].id}"] .option-price`).textContent = `₱ ${numberWithCommas(options[e.currentTarget.index].subtotal.toFixed(2))}`;
 
 		
-	}else{ // 추가된 옵션이 없으면 한 번 html 동적으로 생성
+	}else{ // 추가된 옵션이 없을때, html 동적으로 생성
 		html = `<div class="d-flex justify-content-between py-2" data-id="${options[e.currentTarget.index].id}" style="border-bottom: 1px solid #ddd;">
 						<p class="option-qty mb-0">+ ${options[e.currentTarget.index].name}<span>(${options[e.currentTarget.index].qty})</span></p>
 						<span class="option-price">₱ ${numberWithCommas(options[e.currentTarget.index].subtotal.toFixed(2))}</span>

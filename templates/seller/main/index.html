@@ -27,7 +27,7 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 	font-weight: 700;
 }
 .xdsoft_datetimepicker .xdsoft_calendar td:hover,
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div:hover{
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div:hover {
 	color: #fff !important;
     background: #2ea7e0 !important;
     box-shadow: none !important;
@@ -106,8 +106,7 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 
 						<div class="dropdown ms-auto">
 							<a class="dropdown-toggle btn btn-light btn-sm" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false"><span class="text-muted">Monthly<i
-										class="mdi mdi-chevron-down ms-1"></i></span>
+								aria-expanded="false"><span class="text-muted">Monthly<i class="mdi mdi-chevron-down ms-1"></i></span>
 							</a>
 
 							<div class="dropdown-menu">
@@ -142,27 +141,27 @@ a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
 		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 			<div class="modal-content">
 			<div class="modal-header p-4">
-				<h4 class="mb-0 text-center" id="">스케쥴수정</h4>
+				<h4 class="mb-0 text-center" id="">Update Schedule</h4>
 				<button type="button" class="btn-close" id="" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body p-4" id="">
 				<div>
-					<h6>유형</h6>
+					<h6>Status</h6>
 					<select class="form-select" name="event_type">
-						<option value="">선택하세요.</option>
-						<option value="배달완료">배달완료</option>
-						<option value="배송일정수정">배송일정수정</option>
-						<option value="주문취소">주문취소</option>
+						<option value="">Please select status.</option>
+						<option value="comlete">Delivery Completed</option>
+						<option value="modify">Modify Delivery Schedule</option>
+						<option value="cancel">Cancel Order</option>
 					</select>
 				</div>
 
 				<div class="mt-3 d-none" id="edit-schedule">
-					<h6>날짜</h6>
-					<input type="text" id="date-time-picker" name="date-time-picker" class="set-date-time-picker form-select" placeholder="날짜와 시간을 선택하세요.">
+					<h6>Date</h6>
+					<input type="text" id="date-time-picker" name="date-time-picker" class="set-date-time-picker form-select" placeholder="Please select date and time.">
 				</div>
 			</div>
 			<div class="modal-footer">
-					<button type="button" class="btn btn-primary btn-md" onclick="edit_order_status_sumit();" data-bs-dismiss="modal">확인</button>
+					<button type="button" class="btn btn-primary btn-md" onclick="edit_order_status_sumit();" data-bs-dismiss="modal">Ok</button>
 			</div>
 			</div>
 		</div>
@@ -177,7 +176,7 @@ let is_run = false;
 
 let editSchedule = document.querySelector("div[id=edit-schedule]");
 document.querySelector("select[name=event_type]").addEventListener("change", function(){
-	if (this.value == '배송일정수정') {
+	if (this.value == 'modify') {
 		editSchedule.classList.remove('d-none');
 	} else {
 		editSchedule.className += ' d-none';
@@ -187,7 +186,7 @@ document.querySelector("select[name=event_type]").addEventListener("change", fun
 
 async function edit_order_status_sumit() {
 	if(is_run == true) {
-		openModal('알림','잠시후에 다시시도 해주세요.');
+		openModal('Notification','Please try again later.');
 		return false;
 	}
 
@@ -204,7 +203,7 @@ async function edit_order_status_sumit() {
 		body: JSON.stringify({
 			'event_type':event_type,
 			'order_item_id':order_item_id,
-			'schedule_date' : event_type == '배송일정수정' ? schedule_date : undefined,
+			'schedule_date' : event_type == 'modify' ? schedule_date : undefined,
 		})
 	})
 	.then(response => response.json())
@@ -212,9 +211,9 @@ async function edit_order_status_sumit() {
 		console.log(data);
 		is_run  = false;
 		if (data.result == '200') {
-			openModal("알림", data.result_text, '#scheduleModal', 'reload');
+			openModal("Notification", data.result_text, '#scheduleModal', 'reload');
 		} else { 
-			openModal("알림", data.result_text, '#scheduleModal');
+			openModal("Notification", data.result_text, '#scheduleModal');
 		}
 	});
 }
@@ -222,7 +221,7 @@ async function edit_order_status_sumit() {
 /*Order Charts*/
 var order_chart_options={
 	series:[{
-		name:"주문수",
+		name:"Order count",
 		data:[]
 	}],
 	chart:{
@@ -278,7 +277,7 @@ async function get_order_preview_data(cache) {
 	.then(response => response.json())
 	.then(data => {
 		preview_div.classList.remove('d-none');
-		document.querySelector('h4[id=order-preview-value]').innerHTML = '총:' + data.count + '건';
+		document.querySelector('h4[id=order-preview-value]').innerHTML = 'Total: ' + data.count;
 		order_chart.updateSeries([{
 			data: data.chart_data
 		}])
@@ -294,7 +293,7 @@ set_order_value();
 /*Profit Charts*/
 var profit_chart_options={
 	series:[{
-		name:"정산금액",
+		name:"Profit",
 		data:[]
 	}],
 	chart:{
@@ -348,7 +347,7 @@ async function get_profit_preview_data(cache) {
 	.then(response => response.json())
 	.then(data => {
 		preview_div.classList.remove('d-none');
-		document.querySelector('h4[id=profit-preview-value]').innerHTML = '정산예정:' + data.profit_amount + '원';
+		document.querySelector('h4[id=profit-preview-value]').innerHTML = 'Profit scheduled: ₱ ' + data.profit_amount;
 		profit_chart.updateSeries([{
 			data: data.chart_data
 		}])
@@ -417,10 +416,10 @@ dateTimeInput.addEventListener("focusout", ()=>{
 	let timePickerMinute = dateTimeInput.value.split(":").pop();
 
 	if(dateTimeInput.value == ''){
-		openModal('알림', '날짜와 시간을 선택하세요.');
+		openModal('Notification', 'Please select date and time.');
 	}
 	else if(timePickerMinute != '00'){
-		openModal('알림','시간을 선택하세요.');
+		openModal('Notification','Please select time.');
 		dateTimeInput.value = '';
 	}
 })
