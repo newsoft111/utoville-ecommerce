@@ -51,10 +51,10 @@ def seller_qna_detail(request, qna_id):
 			qna_obj.save()
 
 			result = '200'
-			result_text = "답변이 완료되었습니다."
+			result_text = "The answer has been registered"
 		except:
 			result = '201'
-			result_text = '알수없는 오류입니다. 다시시도 해주세요.'
+			result_text = 'Unknown error occurred. Please try again.'
 
 		return JsonResponse({
 			'result': result, 
@@ -79,7 +79,7 @@ def seller_qna_delete(request):
 	except:
 		return JsonResponse({
 			'result': '201', 
-			'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+			'result_text': 'Unknown error occurred. Please try again.'
 		})
 
 	try:
@@ -88,11 +88,11 @@ def seller_qna_delete(request):
 		qna_obj.save()
 
 		result = '200'
-		result_text = "거부가 완료되었습니다."
+		result_text = "Refusal has been completed."
 	except Exception as e:
 		print(e)
 		result = '201'
-		result_text = '알수없는 오류입니다. 다시시도 해주세요.'
+		result_text = 'Unknown error occurred. Please try again.'
 
 	return JsonResponse({
 		'result': result, 

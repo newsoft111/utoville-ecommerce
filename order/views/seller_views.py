@@ -56,7 +56,7 @@ def seller_order_edit_status(request):
 	if event_type == '' or event_type is None:
 		return JsonResponse({
 			'result': '201',
-			'result_text': '유형을 선택해주세요.'
+			'result_text': 'Please select type.'
 		})
 
 	order_item_objs = OrderItem.objects.filter(pk__in=order_item_id)
@@ -74,7 +74,7 @@ def seller_update_status(query_set, event_type):
 		)
 		return {
 			'result': '200',
-			'result_text': '수정이 완료되었습니다.'
+			'result_text': 'Modification is complete.'
 		}
 
 	elif event_type == '주문취소요청':
@@ -85,7 +85,7 @@ def seller_update_status(query_set, event_type):
 		)
 		return {
 			'result': '200',
-			'result_text': '수정이 완료되었습니다.'
+			'result_text': 'Modification is complete.'
 		}
 
 	elif event_type == '주문접수':
@@ -97,14 +97,14 @@ def seller_update_status(query_set, event_type):
 
 		return {
 			'result': '200',
-			'result_text': '접수가 완료되었습니다.'
+			'result_text': 'Order has been received.'
 		}
 
 
 	else:
 		return {
 			'result': '201',
-			'result_text': '알수 없는 오류입니다. 다시시도 해주세요.'
+			'result_text': 'Unknown error occurred. Please try again.'
 		}
 
 

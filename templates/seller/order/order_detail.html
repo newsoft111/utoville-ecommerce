@@ -1,101 +1,121 @@
-<div class="card border border-light">
-	<div class="card-header bg-transparent border-light">
-		<h6 class="card-title my-0 fw-bold">주문상세정보</h6>
-	</div>
-	<div class="row card-body order-details">
-		<ul class="col-6">
-			<li>상품명</li>
-			<li>{{order_item_obj.product_name}}</li>
-		</ul>
-		<ul class="col-6">
-			<li>주문상태</li>
-			<li>{{order_item_obj.order_item_status}}</li>
-		</ul>
-		<ul class="col-6">
-			<li>결제일</li>
-			<li>{{order_item_obj.order.payment.paid_at}}</li>
-		</ul>
-		<ul class="col-6">
-			<li>주문자명</li>
-			<li>{{order_item_obj.order.user.mb_name}}</li>
-		</ul>
-		<ul class="col-6">
-			<li>아이디</li>
-			<li>{{order_item_obj.order.user.username}}</li>
-		</ul>
-		<ul class="col-6">
-			<li>수량</li>
-			<li>{{order_item_obj.ordered_quantity}}</li>
-		</ul>
-		<ul class="col-6">
-			<li>판매금액</li>
-			<li>₱{{order_item_obj.sub_total_price}}</li>
-		</ul>
+<style>
+.details li { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.details li:last-child { margin-bottom: 0; }
 
-		{% if cart_item.variant_value is not None %}
-		<ul class="col-6">
-			<li>{{cart_item.variant_value.variant}}</li>
-			<li>{{cart_item.variant_value.value}} +₱{{cart_item.variant_value.price}}</li>
-		</ul>	
-		{% endif %}
-		
-				
+@media only screen and (max-width: 992px){
+	.details li { flex-direction: column; justify-content: normal; }
+	.details li span { font-size: 12px; }
+}
+</style>
+
+<div class="card border border-light">
+	<div class="card-header bg-transparent border-light">
+		<h6 class="card-title my-0 fw-bold">Order Details</h6>
+	</div>
+	<div class="card-body details">
+		<ul class="row">
+			<li class="col-6">
+				<b>Product name:</b>
+				<span>{{order_item_obj.product_name}}</span>
+			</li>
+			<li class="col-6">
+				<b>Order status:</b>
+				<span>{{order_item_obj.order_item_status}}</span>
+			</li>
+			<li class="col-6">
+				<b>Payment date:</b>
+				<span>{{order_item_obj.order.payment.paid_at}}</span>
+			</li>
+			<li class="col-6">
+				<b>Name:</b>
+				<span>{{order_item_obj.order.user.mb_name}}</span>
+			</li>
+			<li class="col-6">
+				<b>Username:</b>
+				<span>{{order_item_obj.order.user.username}}</span>
+			</li>
+			<li class="col-6">
+				<b>Qty:</b>
+				<span>{{order_item_obj.ordered_quantity}}</span>
+			</li>
+			<li class="col-6">
+				<b>Total price:</b>
+				<span>₱ {{order_item_obj.sub_total_price}}</span>
+			</li>
+
+			{% if cart_item.variant_value is not None %}
+			<li class="col-6">
+				<b>{{cart_item.variant_value.variant}}</b>
+				<span>{{cart_item.variant_value.value}} +₱ {{cart_item.variant_value.price}}</span>
+			</li>	
+			{% endif %}
+		</ul>
 	</div>
 </div>
 <div class="card border border-light">
 	<div class="card-header bg-transparent border-light">
-		<h6 class="card-title my-0 fw-bold">결제상세정보</h6>
+		<h6 class="card-title my-0 fw-bold">Payment Details</h6>
 	</div>
-	<div class="row card-body order-details">
-		<ul class="col-6">
-			<li>결제수단</li>
-			<li>a</li>
-		</ul>
-		<ul class="col-6">
-			<li>결제상태</li>
-			<li>a</li>
-		</ul>
-		<ul class="col-6">
-			<li>상품 결제 금액</li>
-			<li>a</li>
-		</ul>		
-		<ul class="col-6">
-			<li>적릭금 할인</li>
-			<li>a</li>
+	<div class="card-body details">
+		<ul class="row">
+			<li class="col-6">
+				<b>Payment method</b>
+				<span>a</span>
+			</li>
+	
+			<li class="col-6">
+				<b>Payment status</b>
+				<span>a</span>
+			</li>
+
+			<li class="col-6">
+				<b>Payment amount</b>
+				<span>a</span>
+			</li>
+
+			<li class="col-6">
+				<b>Point discount</b>
+				<span>a</span>
+			</li>
 		</ul>
 	</div>
 </div>
 <div class="card border border-light">
 	<div class="card-header bg-transparent border-light">
-		<h6 class="card-title my-0 fw-bold">서비스정보</h6>
+		<h6 class="card-title my-0 fw-bold">Service Info</h6>
 	</div>
-	<div class="row card-body order-details">
-		<ul class="col-6">
-			<li>서비스 시작일</li>
-			<li></li>
-		</ul>
-		<ul class="col-6">
-			<li>서비스 종료일</li>
-			<li></li>
+	<div class="card-body details">
+		<ul class="row">
+			<li class="col-6">
+				<b>Start date</b>
+				<span>a</span>
+			</li>
+
+			<li class="col-6">
+				<b>Expiry date</b>
+				<span>a</span>
+			</li>
 		</ul>	
 	</div>
 </div>
 <div class="card border border-light">
 	<div class="card-header bg-transparent border-light">
-		<h6 class="card-title my-0 fw-bold">배송지정보</h6>
+		<h6 class="card-title my-0 fw-bold">Shipping Info</h6>
 	</div>
-	<div class="row card-body order-details">
-		<ul class="col-6">
-			<li>주문자명</li>
-			<li></li>
-		</ul>
-		<ul class="col-6">
-			<li>연락처</li>
-			<li></li>
-		</ul>	
-		<ul class="col-12">
-			<li>주문자 주소</li>
-			<li></li>
+	<div class="card-body order-details">
+		<ul class="row">
+			<li class="col-6">
+				<b>Name</b>
+				<span>a</span>
+			</li>
+			<li class="col-6">
+				<b>Contact</b>
+				<span>a</span>
+			</li>
+			<li class="col-6">
+				<b>Address</b>
+				<span>a</span>
+			</li>
 		</ul>	
 	</div>
 </div>
