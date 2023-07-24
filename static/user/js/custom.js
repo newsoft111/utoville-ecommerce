@@ -14,6 +14,7 @@ $(document).ready(function() {
  }
  
  function openModal(subject, content, before_modal, option) {
+	console.log(`${option}`);
 	document.getElementById("modal_subject").innerText = subject;
 	document.getElementById("modal_content").innerHTML = content;
 	// $("#modal_subject").text(subject);
@@ -22,6 +23,9 @@ $(document).ready(function() {
 		document.querySelector('#closeModalBtn').dataset.beforeModal = before_modal;
 		var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector(before_modal));
 		modal.hide();
+	}
+	if( option === 'window.location = "/seller/qna"') {
+		window.location = '/seller/qna';
 	}
 	if (option == 'reload') {
 	   document.querySelectorAll('#closeModalBtn').forEach(function(close_btn) {
