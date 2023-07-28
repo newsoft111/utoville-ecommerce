@@ -268,10 +268,8 @@ body.fixed {
 	opacity: 1;
 }
 #page1 {
-	height: 700px;
-	margin: 0 auto;
-	max-width: 940px;
-	text-align: center;
+	height: auto;
+	max-width: 100%;
 }
 #page1 .business {
 	padding: 5.625em 0 4.75em;
@@ -319,11 +317,8 @@ body.fixed {
 
 /* page2 */
 #page2 {
-	height: 700px;
-	padding-bottom: 7.5em;
-	background: url(../images/portfolio_bg.png) no-repeat center center;
-	background-size: cover;
-	background-attachment: fixed;
+	height: auto;
+	background-color: #f9f9f9;
 }
 #page2 .page2_inner {
 	margin: 0 auto;
@@ -399,9 +394,8 @@ body.fixed {
 
 /* page3 */
 #page3 {
-	margin: 0 auto;
-	max-width: 940px;
-	height: 700px;
+	max-width: 100%;
+	height: auto;
 }
 #page3 .process {
 	padding: 5.625em 0 4.75em;
@@ -544,7 +538,7 @@ body.fixed {
 
 /* page4 */
 #page4 {
-	height: 700px;
+	height: auto;
 	background-color: #f9f9f9;
 }
 #page4 .page4_bg {
