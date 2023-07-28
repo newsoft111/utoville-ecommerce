@@ -84,7 +84,7 @@ input[type="text"]::placeholder {
 				<select id="optionFirst" class="form-select form-select-md mb-3" onchange="set_variant_value(this)" style="border-color : #ddd;">
 					<option selected>Option1</option>
 					{% for variant in product_detail.productvariant_set.all %}
-					<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
+						<option value="{{variant}}" data-value="{{variant}}">{{variant}}</option>
 					{% endfor %}
 				</select>
 				<select id="optionSecond" onchange="add_item(this)" class="form-select form-select-md mb-3" style="border-color : #ddd;">
@@ -133,97 +133,90 @@ input[type="text"]::placeholder {
 </section>
 
 <section class="bg-light">
-   <div class="container py-9 py-lg-11">
-        <div class="row justify-content-center">
-         <div class="col-lg-12 mb-5">
-              <nav class="nav nav-tabs">
-               <a href="#detail" class="nav-link active" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="true">Detail</a>
-               <a href="#reviews" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">Reviews</a>
-               <a href="#product-qa" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">Q&amp;A</a>
-              </nav>
-         </div>
+	<div class="container py-9 py-lg-11">
+		<div class="row justify-content-center">
+			<div class="col-lg-12 mb-5">
+				<nav class="nav nav-tabs">
+					<a href="#detail" class="nav-link active" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="true">Detail</a>
+					<a href="#reviews" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">Reviews</a>
+					<a href="#product-qa" class="nav-link" data-bs-toggle="tab" aria-haspopup="false" aria-expanded="false">Q&amp;A</a>
+				</nav>
+			</div>
 
-         <div class="col-lg-12 col-md-8">
-              <div class="tab-content">
-               <div class="tab-pane fade active text-break show" id="detail">
-                  <div class="text-break">{{product_detail.content|safe}}</div>
-               </div>
-            </div>
+			<div class="col-lg-12 col-md-8">
+				<div class="tab-content">
+					<div class="tab-pane fade active text-break show" id="detail">
+						<div class="text-break">{{product_detail.content|safe}}</div>
+					</div>
+				</div>
+			</div>
 
-            <!--Tab-pane-->
-            <div class="tab-pane fade" id="reviews">
-               <div class="bg-gradient-secondary text-white d-flex justify-content-between align-items-center p-3 mb-5">
-                  <div>
-                     <span class="text-warning small d-block mb-2">
-                        <i class="bx {% if product_detail.rating < 0.5%}bx-star{% elif product_detail.rating >= 0.5 and product_detail.rating < 1 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
-                        <i class="bx {% if product_detail.rating < 1.5%}bx-star{% elif product_detail.rating >= 1.5 and product_detail.rating < 2 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
-                        <i class="bx {% if product_detail.rating < 2.5%}bx-star{% elif product_detail.rating >= 2.5 and product_detail.rating < 3 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
-                        <i class="bx {% if product_detail.rating < 3.5%}bx-star{% elif product_detail.rating >= 3.5 and product_detail.rating < 4 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
-                        <i class="bx {% if product_detail.rating < 4.5%}bx-star{% elif product_detail.rating >= 4.5 and product_detail.rating < 5 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
-                     </span>
-                     <p class="mb-0"><span class="reviews small fw-normal">{{product_detail.rating}} / 5</span>
-                        <small class="text-muted">( {{product_detail.rating_count}} - Reviews)</small>
-                     </p>
+			<!--Tab-pane-->
+			<div class="tab-pane fade" id="reviews">
+				<div class="bg-gradient-secondary text-white d-flex justify-content-between align-items-center p-3 mb-5">
+					<span class="text-warning small d-block mb-2">
+						<i class="bx {% if product_detail.rating < 0.5%}bx-star{% elif product_detail.rating >= 0.5 and product_detail.rating < 1 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
+						<i class="bx {% if product_detail.rating < 1.5%}bx-star{% elif product_detail.rating >= 1.5 and product_detail.rating < 2 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
+						<i class="bx {% if product_detail.rating < 2.5%}bx-star{% elif product_detail.rating >= 2.5 and product_detail.rating < 3 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
+						<i class="bx {% if product_detail.rating < 3.5%}bx-star{% elif product_detail.rating >= 3.5 and product_detail.rating < 4 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
+						<i class="bx {% if product_detail.rating < 4.5%}bx-star{% elif product_detail.rating >= 4.5 and product_detail.rating < 5 %}bxs-star-half{% else %}bxs-star{% endif %}"></i>
+					</span>
+					<p class="mb-0">
+						<span class="reviews small fw-normal">{{product_detail.rating}} / 5</span>
+						<small class="text-muted">( {{product_detail.rating_count}} - Reviews)</small>
+					</p>
+				</div>
 
-                  </div>
-               </div>
-               <h5 class="mb-4 mb-lg-5">Latest Reviews</h5>
-               {% for review in product_detail.productreview_set.all %}
-               <div class="media-body">
-                  <span class="text-warning small d-block mb-2">
-                     {% for i in 5|times %}
-                        {% if i < review.rating %}
-                           <i class="bx bxs-star"></i>
-                        {% else %}
-                           <i class="bx bx-star"></i>
-                        {% endif %}
-                     {% endfor %}
+				<h5 class="mb-4 mb-lg-5">Latest Reviews</h5>
+				
+				{% for review in product_detail.productreview_set.all %}
+				<div class="media-body">
+					<span class="text-warning small d-block mb-2">
+						{% for i in 5|times %}
+							{% if i < review.rating %}
+								<i class="bx bxs-star"></i>
+							{% else %}
+								<i class="bx bx-star"></i>
+							{% endif %}
+						{% endfor %}
+					</span>
+					
+					<p class="mb-2">{{review.review}}</p>
+					
+					<div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
+						<h6 class="mb-0">{{review.user.username}}</h6>
+						<small class="text-muted ms-auto">{{product_detail.created_at}}</small>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
 
-                  </span>
-                  <p class="mb-2">{{review.review}}</p>
-                  <div class="d-flex border-bottom pb-4 justify-content-between align-items-center">
-                     <h6 class="mb-0">{{review.user.username}}</h6>
-                     <small class="text-muted ms-auto">{{product_detail.created_at}}</small>
-                  </div>
-               </div>
-               {% endfor %}
-            </div>
-
-            <!--Tab-pane-->
-            <div class="tab-pane fade" id="product-qa">
-               {% for product_qna_obj in product_qna_objs %}
-               <div class="card border card-body mb-5 bg-transparent">
-                  <h5><i class="bx bx-question-mark me-2"></i>{{product_qna_obj.question}}</h5>
-                  <p class="mb-0 d-flex align-items-stretch">
-                  <strong class="small d-inline-block me-2 text-muted">Ans.</strong>
-                  <span class="mb-0">
-                     {{product_qna_obj.answer}}
-                  </span>
-                  </p>
-               </div>
-               {% endfor %}
-               
-               {% if user.is_authenticated %}
-               <h5 class="mb-4">Feel free to Ask questions</h5>
-               <div class="row">
-                  <div class="w-100"></div>
-                  <div class="col-12">
-                     <div class="mb-3">
-                        <textarea class="form-control" name="question"></textarea>
-                     </div>
-                  </div>
-               </div>
-               <div class="text-end">
-                  <button type="button" onclick="product_qna_question_submit();" class="btn btn-outline-brandGreen hover-translate-3d">
-                  Send question <i class="bx bx-right-top-arrow-circle ms-1"></i>
-                  </button>
-               </div>
-               {% endif %}
-            </div>
-         <!--Tab-pane-->
-           </div>
-      </div>
-   </div>
+			<!--Tab-pane-->
+			<div class="tab-pane fade" id="product-qa">
+				{% for product_qna_obj in product_qna_objs %}
+					<div class="card border card-body mb-5 bg-transparent">
+						<h5>Q. {{product_qna_obj.question}}</h5>
+						<span>A. {{product_qna_obj.answer}}</span>
+					</div>
+				{% endfor %}
+				
+				{% if user.is_authenticated %}
+					<h5 class="mb-4">Feel free to Ask questions</h5>
+					<div class="row">
+						<div class="w-100"></div>
+						<div class="col-12 mb-3">
+							<textarea class="form-control" name="question"></textarea>
+						</div>
+					</div>
+					<div class="text-end">
+						<button type="button" onclick="product_qna_question_submit();" class="btn btn-outline-brandGreen hover-translate-3d">
+						register question <i class="bx bx-right-top-arrow-circle ms-1"></i>
+						</button>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </section>
 
 <div class="modal fade" id="addCartDoneModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="addCartDoneModalLabel" aria-hidden="true">
@@ -254,47 +247,47 @@ input[type="text"]::placeholder {
 is_run = false;
 
 function add_cart_submit(product_id) {
-   cal_total_value();
-   
-   is_run = true;
-   var loadingModal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#loading'));
-   let data = document.querySelector("input[name=obj_data]").value;
-   let optionFirst = document.getElementById("optionFirst");
-   let itemPrice = document.getElementById("itemPrice");
+	cal_total_value();
 
-   if (isEmpty(data) || data == '[]') {
-      openModal('Notification','Please select options.');
-      return false;
-   }
-   loadingModal.show();
+	is_run = true;
+	var loadingModal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#loading'));
+	let data = document.querySelector("input[name=obj_data]").value;
+	let optionFirst = document.getElementById("optionFirst");
+	let itemPrice = document.getElementById("itemPrice");
 
-    $.ajax({
-        type : 'POST',
-        url : "{% url 'cart:user_cart_add_item' %}",
-      headers: { "X-CSRFToken": '{{csrf_token}}' },
-        data : {
-         data: data,
-      },
-        dataType : 'json',
-        success: function(data){
-         if(data.result==200){
-            // openModal("알림", data.result_text,'', 'reload');
-            var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector("#addCartDoneModal"));
-            modal.show();
-         }else{
-            openModal("Notification", data.result_text);
-         }
-         is_run  = false;
-        },
-        error: function (request, status, error){
-          var msg = "ERROR : " + request.status + "<br>"
-             msg +=  + "Contents : " + request.responseText + "<br>" + error;
-             console.log(msg);
-        },
-      complete : function() {
-         loadingModal.hide();
-      }
-    });
+	if (isEmpty(data) || data == '[]') {
+		openModal('Notification','Please select options.');
+		return false;
+	}
+	loadingModal.show();
+
+	$.ajax({
+		type : 'POST',
+		url : "{% url 'cart:user_cart_add_item' %}",
+		headers: { "X-CSRFToken": '{{csrf_token}}' },
+		data : {
+			data: data,
+		},
+		dataType : 'json',
+		success: function(data){
+			if(data.result==200){
+				// openModal("알림", data.result_text,'', 'reload');
+				var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector("#addCartDoneModal"));
+				modal.show();
+			}else{
+				openModal("Notification", data.result_text);
+			}
+			is_run  = false;
+		},
+		error: function (request, status, error){
+			var msg = "ERROR : " + request.status + "<br>"
+
+			msg +=  + "Message : " + request.responseText + "<br>" + error;
+		},
+		complete : function() {
+			loadingModal.hide();
+		}
+	});
 }
 
 function set_variant_value(e) {
@@ -304,7 +297,7 @@ function set_variant_value(e) {
    
    for (idx in json_data[key]) {
       value = json_data[key][idx];
-      html+=`<option value="${value['value']}" data-id="${value['id']}" data-value="${value['value']}" data-price="${value['price']}">${value['value']} + ${value['price']}원</option>`;
+      html+=`<option value="${value['value']}" data-id="${value['id']}" data-value="${value['value']}" data-price="${value['price']}">${value['value']} + ${value['price']}</option>`;
    }
    document.getElementById("optionSecond").innerHTML = html;
 }
@@ -461,7 +454,7 @@ function product_qna_question_submit() {
    var question = document.querySelector("[name=question]").value;
             
       if (isEmpty(question)) {
-      openModal('알림','질문을 입력해주세요.');
+      openModal('Notification','Please enter question.');
          return false;
       }
 
@@ -477,15 +470,15 @@ function product_qna_question_submit() {
         success: function(data){
           if(data.result==200){
          document.querySelector("[name=question]").value = '';
-            openModal("알림", data.result_text);
+            openModal("Notification", data.result_text);
           }else{
-            openModal("알림", data.result_text);
+            openModal("Notification", data.result_text);
           }
           return;
         },
         error: function (request, status, error){
           var msg = "ERROR : " + request.status + "<br>"
-             msg +=  + "내용 : " + request.responseText + "<br>" + error;
+             msg +=  + "Message : " + request.responseText + "<br>" + error;
         }
     });
 }
@@ -494,7 +487,7 @@ async function order_submit() {
 	cal_total_value();
 
    if(is_run == true) {
-      openModal('알림','잠시후에 다시시도 해주세요.');
+      openModal('Notification','Please try again later.');
       return false;
    }
 
@@ -518,7 +511,7 @@ async function order_submit() {
          window.history.pushState("", "", `{% url 'order:user_order_view' %}?id=${data.result_text}`);
          window.location.reload();
       } else {
-         openModal("알림", data.result_text);
+         openModal("Notification", data.result_text);
       }
    });
 }

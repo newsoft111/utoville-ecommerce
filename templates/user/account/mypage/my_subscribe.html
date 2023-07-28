@@ -100,37 +100,37 @@ table { border-collapse: collapse; }
 						<div class="row mb-5">
 							<ul class="pagination justify-content-center m-0">
 								{% if my_order_objs.has_previous %}
-								<li class="page-item ">
-									<a class="page-link" href="?p={{my_order_objs.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">이전</a>
-								</li>
+									<li class="page-item ">
+										<a class="page-link" href="?p={{my_order_objs.previous_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">이전</a>
+									</li>
 								{% else %}
-								<li class="page-item disabled">
-									<span class="page-link">Previous</span>
-								</li>
+									<li class="page-item disabled">
+										<span class="page-link">Previous</span>
+									</li>
 								{% endif %}
 						
 								{% for page_number in my_order_objs.paginator.page_range %}
 									{% if page_number >= my_order_objs.number|add:-2 and page_number <= my_order_objs.number|add:2 %}
 										{% if page_number == my_order_objs.number %}
-										<li class="page-item active">
-											<span class="page-link">{{ page_number }}</span>
-										</li>
+											<li class="page-item active">
+												<span class="page-link">{{ page_number }}</span>
+											</li>
 										{% else %}
-										<li class="page-item">
-												<a class="page-link" href="?p={{page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">{{ page_number }}</a>
-										</li>
+											<li class="page-item">
+													<a class="page-link" href="?p={{page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">{{ page_number }}</a>
+											</li>
 										{% endif %}
 									{% endif %}
 								{% endfor %}
 						
 								{% if my_order_objs.has_next  %}
-								<li class="page-item">
-									<a class="page-link" href="?p={{my_order_objs.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">다음</a> 
-								</li>
+									<li class="page-item">
+										<a class="page-link" href="?p={{my_order_objs.next_page_number }}{% if 'channel' in request.GET %}&channel={{request.GET.channel}}{% endif %}{% if 'type' in request.GET %}&type={{request.GET.type}}{% endif %}">다음</a> 
+									</li>
 								{% else %}
-								<li class="page-item disabled">
-									<span class="page-link">Next</span>
-								</li>
+									<li class="page-item disabled">
+										<span class="page-link">Next</span>
+									</li>
 								{% endif %}
 							</ul>
 						</div>
