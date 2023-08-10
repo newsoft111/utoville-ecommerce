@@ -8,6 +8,7 @@
 .responsiveTable {
 	overflow: auto;
 }
+
 @media only screen and (max-width: 767px) {
 	td[data-label=Charge], td[data-label=Memo] {
 		border-bottom: 0;
@@ -20,13 +21,13 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
-						<h4 class="card-title">정산 예정 <span class="text-muted fw-normal ms-2">({{profit_expect_objs|length}})</span></h4>
+						<h4 class="card-title">Profit Scheduled <span class="text-muted fw-normal ms-2">({{profit_expect_objs|length}})</span></h4>
 					</div>
 					<div class="card-body p-3">
 						<div class="text-end">
 							<div class="d-flex flex-wrap align-items-start justify-content-md-end mt-2 mt-md-0 gap-2 mb-3">
 								<div>
-									<a href="#" class="btn btn-light"><i class="mdi mdi-check-bold me-1"></i>정산 완료</a>
+									<a href="#" class="btn btn-light"><i class="mdi mdi-check-bold me-1"></i>Profit Completed</a>
 								</div>                                                    
 							</div>
 						</div>
@@ -46,7 +47,7 @@
 										<th>Charge fee</th>
 										<th>Total profit</th>
 										<th>Account</th>
-										<th colspan="2">Memo</th>
+										<th>Memo</th>
 										<th>Status</th>
 										<th>Action</th>
 										<th>Details</th>
@@ -66,8 +67,10 @@
 										<td data-label="Payment">₱{{profit_expect_obj.total_charge_fee|intcomma}}</td>
 										<td data-label="profit">₱{{profit_expect_obj.total_profit_amount|intcomma}}</td>
 										<td data-label="Account">Account number here</td>
-										<td data-label="Memo" class="profit-memo" style="white-space:normal; word-break:keep-all;">{{profit_expect_obj.memo}}</td>
-										<td><button class="btn btn-light btn-sm" type="button" onclick="openMemoModal(`{{profit_expect_obj.pk}}`)">Edit</button></td>
+										<td data-label="Memo" class="profit-memo d-flex justify-content-center flex-column" style="white-space:nowrap; word-break:keep-all;">
+											{{profit_expect_obj.memo}}
+											<button class="btn btn-light btn-sm mt-2" type="button" onclick="openMemoModal(`{{profit_expect_obj.pk}}`)">Edit</button>
+										</td>
 										<td data-label="Status">{{profit_expect_obj.get_status_display}}</td>
 										<td data-label="Action">
 											<div class="dropdown">
