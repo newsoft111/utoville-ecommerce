@@ -17,12 +17,12 @@
 		<form name="productWriteForm">
 			<div class="row">
 				<div class="page-title-box d-flex align-items-center justify-content-between">
-					<h4 class="mb-0">상품 등록</h4>
+					<h4 class="mb-0">Product Write</h4>
 				</div>
-				<p>대분류 > 중분류 > 소분류 순으로 선택하세요.</p>
+				<p>Select in the order of First category > Second category > Third category.</p>
 				<div class="col-md-4">
 					<div class="card text-bg-light">
-						<div class="card-header">대분류</div>
+						<div class="card-header">First category</div>
 						<select class="category-select form-select border-0" name="category_first" size="9" id="l1_cat">
 							{% for key, value in cats_data.items %}
 								<option value="{{key}}" onclick="get_l2(this)" style="cursor:pointer; margin-bottom: 5px;"> {{key}} </option>
@@ -32,7 +32,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="card text-bg-light">
-						<div class="card-header">중분류</div>				
+						<div class="card-header">Second category</div>				
 						<select class="category-select form-select border-0" name="category_second" size="9" id="l2_cat">
 
 						</select>
@@ -40,7 +40,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="card text-bg-light">
-						<div class="card-header">소분류</div>
+						<div class="card-header">Third category</div>
 						<select class="category-select form-select border-0" name="category_third" size="9" id="l3_cat">
 
 						</select>
@@ -50,19 +50,19 @@
 				<div class="col-12">
 					<div class="card" style="padding: 20px 10px;">
 						<div class="card-header justify-content-between d-flex align-items-center">
-							<h4 class="card-title">서비스 기본정보</h4>
+							<h4 class="card-title">Basic Information</h4>
 						</div><!-- end card header -->
 						<div class="card-body">
 
 							<div class="mb-3">
-								<label for="example-text-input" class="form-label">서비스 명</label>
-								<input class="form-control" type="text" placeholder="서비스 명을 입력하세요." name="product_name">								
+								<label for="example-text-input" class="form-label">Product Name</label>
+								<input class="form-control" type="text" placeholder="Please enter product name." name="product_name">								
 							</div><!-- end row -->
 
 							<div class="mb-3">
 								<div class="row">
 									<div class="col-md-6">
-										<label class="form-label">지역</label>
+										<label class="form-label">Area</label>
 										<select class="form-select" name="area">
 											<option value="">Select</option>
 											<option>Large select</option>
@@ -70,46 +70,44 @@
 										</select>
 									</div>
 									<div class="col-md-6">
-										<label for="price-search-input" class="form-label">서비스 가격</label>
-										<input class="form-control" type="text" placeholder="가격을 입력하세요." maxlength="11" name="price" id="price-search-input">
+										<label for="price-search-input" class="form-label">Product Prcie</label>
+										<input class="form-control" type="text" placeholder="Please enter product price." maxlength="11" name="price" id="price-search-input">
 									</div>
 								</div>	
 							</div>
 
 							<div class="mb-3">
-								<label class="form-label">옵션 설정</label>
+								<label class="form-label">Option Configuration</label>
 								<div class="border p-3">
 									<div class="row">
 										<div class="col-md-2">
-											<label class="form-label">옵션</label>
+											<label class="form-label">Option</label>
 										</div>
 										<div class="col-md-10">
 											<div class="d-flex">
-												<input class="form-control" type="text" placeholder="옵션을 입력하세요." id="option_name" name="option_name">
-												<button type="button" class="btn btn-primary text-nowrap ms-3" onclick="add_options(this)">추가</button>
+												<input class="form-control" type="text" placeholder="Please enter option." id="option_name" name="option_name">
+												<button type="button" class="btn btn-primary text-nowrap ms-3" onclick="add_options(this)">Add</button>
 											</div>
 											
 											<div class="mt-2">
 												<table class="table mb-9 table-bordered text-center">
 													<thead>
 														<tr>
-															<!-- <th scope="col">순서</th> -->
-															<th scope="col">옵션 항목</th>
-															<th scope="col">옵션 가격</th>
-															<th scope="col">삭제</th>
+															<th scope="col">Option Item</th>
+															<th scope="col">Option Price</th>
+															<th scope="col">Delete</th>
 														</tr>
 													</thead>
 													<tbody id="option-list">
 														<tr>
-															<!-- <th scope="row" id="option-list-num"><span id=""></span>1</th> -->
-															<td><input class="form-control" type="text" placeholder="옵션 항목 입력하세요."></td>
-															<td><input class="form-control" type="text" value="0" placeholder="가격을 입력하세요." maxlength="11" name="option-price" id="option-price-input"></td>
-															<td><button type="button" class="btn btn-secondary" id="remove-option-btn" disabled>삭제</button></td>
+															<td><input class="form-control" type="text" placeholder="Please enter option item"></td>
+															<td><input class="form-control" type="text" value="0" placeholder="Please enter option price." maxlength="11" name="option-price" id="option-price-input"></td>
+															<td><button type="button" class="btn btn-secondary" id="remove-option-btn" disabled>Delete</button></td>
 														</tr>			
 													</tbody>
 													<tfoot>
 														<tr>
-															<td colspan="3"><a href="#!" id="add-option-btn">+ 새 옵션 항목 추가하기</a></td>
+															<td colspan="3"><a href="#!" id="add-option-btn">+ Add New Option Item</a></td>
 														</tr>					
 													</tfoot>
 												</table>
@@ -119,17 +117,16 @@
 
 									<div class="row">
 										<div class="col-md-2">
-											<label class="form-label">추가된옵션</label>
+											<label class="form-label">Added Option</label>
 										</div>
 										<div class="col-md-10">
 									
 											<table class="table mb-9 table-bordered text-center">
 												<thead>
 													<tr>
-														<!-- <th scope="col">순서</th> -->
-														<th scope="col">옵션명</th>
-														<th scope="col">옵션항목</th>
-														<th scope="col">삭제</th>
+														<th scope="col">Option Name</th>
+														<th scope="col">Option Item</th>
+														<th scope="col">Delete</th>
 													</tr>
 												</thead>
 												<tbody id="added-option-list">
@@ -143,26 +140,26 @@
 				
 							<!--Listing Images-->
 							<div class="mb-4" data-dropzone-area="">
-								<label class="form-label">썸네일</label>
+								<label class="form-label">Thumbnail</label>
 								<div class="thumbnail-preview row" id="thumbnail-preview" >
 								</div>
 								<div class="chat-form rounded-pill" data-emoji-form="">
 									<input type="file" class="d-none" name="thumbnail" id="thumbnail-upload" onclick="handleClick(this);" accept="image/png, image/jpeg, image/gif">
 									<label for="thumbnail-upload">
-										<span class="btn btn-primary">업로드</span>
+										<span class="btn btn-primary">Upload</span>
 									</label>
 								</div>
 							</div>
 
 							<div class="mb-3">
-								<label class="form-label">상세정보</label>
+								<label class="form-label">Content</label>
 								<input type="hidden" name="content">
 								<div id="snow-editor" style="height: 300px;"></div>
 							</div>
 
 							<div class="text-end">
-								<a href="#!" class="btn btn-success" onClick='product_write_submit();'>등록</a>
-								<a href="{% url 'product:admin_product_list' %}" class="btn btn-secondary">취소</a>
+								<a href="#!" class="btn btn-success" onClick='product_write_submit();'>Register</a>
+								<a href="{% url 'product:admin_product_list' %}" class="btn btn-secondary">Cancel</a>
 							</div>
 						</div>
 					</div>
@@ -191,7 +188,7 @@ const handler = {
 			const filesExtension = files[0].name.split('.').pop().toLowerCase();
 
 			if(!(filesExtension == 'jpg' || filesExtension == 'jpeg' || filesExtension == 'png' || filesExtension == 'gif')){
-				openModal('알림', '이미지 파일이 아닙니다.');
+				openModal('Notificaion', 'Not an image file.');
 				return false;
 			}	
 			files.forEach((file) => {
@@ -208,7 +205,7 @@ const handler = {
 					reader.readAsDataURL(file);
 					dataTransfer.items.add(file);
 				}else{
-					openModal('알림', '이미 업로드 된 파일입니다.');
+					openModal('Notificaion', 'File already uploaded.');
 					removeArrItem(fileArr, file.lastModified);
 				}
 			});
@@ -282,7 +279,7 @@ function upload_content_image() {
 	
 	async function upload_submit() {
 		if(is_run == true) {
-			openModal('알림','잠시후에 다시시도 해주세요.');
+			openModal('Notification','Please try again later.');
 			return false;
 		}
 
@@ -307,7 +304,7 @@ function upload_content_image() {
 				const range = quill.getSelection();
 				quill.insertEmbed(range.index, 'image', data.result_text);
 			} else {
-				openModal("알림", data.result_text);
+				openModal("Notification", data.result_text);
 			}
 		});
     };
@@ -315,7 +312,7 @@ function upload_content_image() {
 
 async function product_write_submit() {
 	if(is_run == true) {
-		openModal('알림','잠시후에 다시시도 해주세요.');
+		openModal('Notification','Please try again later.');
 		return false;
 	}
 
@@ -362,9 +359,9 @@ let removeoptionBtn = document.getElementById("remove-option-btn")
 let num = 2;
 
 addoptionBtn.addEventListener("click", function(){
-	html = `<tr><td><input class="form-control" type="text" placeholder="옵션 항목 입력하세요."></td>`;
-	html += `<td><input class="form-control" type="text" placeholder="가격을 입력하세요." value="0" maxlength="11" name="option-price" id="option-price-input"></td>`;
-	html += '<td><button type="button" class="btn btn-secondary" onclick=removeOptionItem(this);>삭제</button></td></tr>'
+	html = `<tr><td><input class="form-control" type="text" placeholder="Please enter option item."></td>`;
+	html += `<td><input class="form-control" type="text" placeholder="Please enter option price." value="0" maxlength="11" name="option-price" id="option-price-input"></td>`;
+	html += '<td><button type="button" class="btn btn-secondary" onclick=removeOptionItem(this);>Delete</button></td></tr>'
 	document.querySelector('tbody[id=option-list]').insertAdjacentHTML("beforeend", html);
 });
 

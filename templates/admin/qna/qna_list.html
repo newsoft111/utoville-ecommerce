@@ -12,7 +12,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
-						<h4 class="card-title">문의 내역</h4>
+						<h4 class="card-title">Inquiry History</h4>
 					</div>
 					<div class="card-body">				
 						<div class="responsiveTable text-center">					
@@ -20,10 +20,10 @@
 								<thead>
 									<tr>
 										<th>No.</th>
-										<th style="width: 70%;">제목</th>
-										<th style="width: 10%;">작성자</th>
-										<th style="width: 5%;">상태</th>
-										<th style="width:15%;">날짜</th>
+										<th style="width: 70%;">Title</th>
+										<th style="width: 10%;">Name</th>
+										<th style="width: 5%;">Status</th>
+										<th style="width:15%;">Date</th>
 									</tr><!-- end tr -->
 								</thead><!-- end thead -->
 								<tbody>
@@ -33,23 +33,23 @@
 											{{forloop.counter}}
 										</td>
 
-										<td data-label="제목">
+										<td data-label="Title">
 											<a href="{% url 'qna:admin_qna_detail' qna_obj.pk %}" class="text-link fw-medium">{{qna_obj.subject}}</a>
 										</td>
-										<td data-label="작성자">
-											이름
+										<td data-label="Name">
+											
 										</td>
-										<td data-label="상태">
+										<td data-label="Status">
 											<span href="#" class="badge badge-soft-primary">
 												{% if qna_obj.answered_at is not None %}
-												답변완료
+													Completed
 												{% else %}
-												답변대기
+													Pending
 												{% endif %}
 											</span>
 										</td>
 
-										<td data-label="날짜">
+										<td data-label="Date">
 											{{qna_obj.questioned_at}}
 										</td>
 									</tr><!-- end tr -->
@@ -98,7 +98,6 @@
 								</ul>
 							</div><!-- end col -->
 						</div><!-- end row -->
-						
 					</div><!-- end card body -->
 				</div><!-- end card -->
 			</div><!-- end col -->

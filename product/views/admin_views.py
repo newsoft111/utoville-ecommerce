@@ -43,37 +43,37 @@ def admin_product_write(request):
 		try:
 			thumbnails = request.FILES.getlist('thumbnail')
 		except:
-			result = {'result': '201', 'result_text': '대표 이미지을 등록해주세요.'}
+			result = {'result': '201', 'result_text': 'Please upload the thumbnail.'}
 			return JsonResponse(result)
 
 		if category_first is None or category_first == '':
-			result = {'result': '201', 'result_text': '대분류를 선택해주세요.'}
+			result = {'result': '201', 'result_text': 'Please select first category.'}
 			return JsonResponse(result)
 
 		if category_second is None or category_second == '':
-			result = {'result': '201', 'result_text': '중분류를 선택해주세요.'}
+			result = {'result': '201', 'result_text': 'Please select second category.'}
 			return JsonResponse(result)
 		
 		try:
 			category_third_obj = CategoryThird.objects.get(pk=category_third, parent__name=category_second)
 		except:
-			result = {'result': '201', 'result_text': '소분류를 선택해주세요.'}
+			result = {'result': '201', 'result_text': 'Please select third category.'}
 			return JsonResponse(result)
 
 		if product_name is None or product_name == '':
-			result = {'result': '201', 'result_text': '제목을 입력해주세요.'}
+			result = {'result': '201', 'result_text': 'Please enter product name.'}
 			return JsonResponse(result)
 
 		if area is None or area == '':
-			result = {'result': '201', 'result_text': '지역을 선택해주세요.'}
+			result = {'result': '201', 'result_text': 'Please select the area.'}
 			return JsonResponse(result)
 
 		if price is None or price == '':
-			result = {'result': '201', 'result_text': '가격을 입력해주세요.'}
+			result = {'result': '201', 'result_text': 'Please enter product price.'}
 			return JsonResponse(result)
 
 		if content is None or content == '':
-			result = {'result': '201', 'result_text': '내용을 입력해주세요.'}
+			result = {'result': '201', 'result_text': 'Please enter content.'}
 			return JsonResponse(result)
 
 		try:
@@ -99,12 +99,12 @@ def admin_product_write(request):
 						for k, v in value.items():
 							ProductVariantValue.objects.create(variant=prod_var_obj, value=k, price=v)
 
-			result = {'result': '200', 'result_text': '등록이 완료되었습니다.'}
+			result = {'result': '200', 'result_text': 'Registration is complete.'}
 			return JsonResponse(result)
 
 		except Exception as e:
 			print(e)
-			result = {'result': '201', 'result_text': '알수없는 오류입니다. 관리자에게 문의해주세요.'}
+			result = {'result': '201', 'result_text': 'Unknown error occurred. Please contact the administrator.'}
 			return JsonResponse(result)
 
 	else:
@@ -144,37 +144,37 @@ def admin_product_update(request, product_id):
 		try:
 			thumbnails = request.FILES.getlist('thumbnail')
 		except:
-			result = {'result': '201', 'result_text': '대표 이미지을 등록해주세요.'}
+			result = {'result': '201', 'result_text': 'Please upload the thumbnail.'}
 			return JsonResponse(result)
 
 		if category_first is None or category_first == '':
-			result = {'result': '201', 'result_text': '대분류를 선택해주세요.'}
+			result = {'result': '201', 'result_text': 'Please select first category.'}
 			return JsonResponse(result)
 
 		if category_second is None or category_second == '':
-			result = {'result': '201', 'result_text': '중분류를 선택해주세요.'}
+			result = {'result': '201', 'result_text': 'Please select second category.'}
 			return JsonResponse(result)
 		
 		try:
 			category_third_obj = CategoryThird.objects.get(pk=category_third, parent__name=category_second)
 		except:
-			result = {'result': '201', 'result_text': '소분류를 선택해주세요.'}
+			result = {'result': '201', 'result_text': 'Please select third category.'}
 			return JsonResponse(result)
 
 		if product_name is None or product_name == '':
-			result = {'result': '201', 'result_text': '제목을 입력해주세요.'}
+			result = {'result': '201', 'result_text': 'Please enter product name.'}
 			return JsonResponse(result)
 
 		if area is None or area == '':
-			result = {'result': '201', 'result_text': '지역을 선택해주세요.'}
+			result = {'result': '201', 'result_text': 'Please select the area.'}
 			return JsonResponse(result)
 
 		if price is None or price == '':
-			result = {'result': '201', 'result_text': '가격을 입력해주세요.'}
+			result = {'result': '201', 'result_text': 'Please enter product price.'}
 			return JsonResponse(result)
 
 		if content is None or content == '':
-			result = {'result': '201', 'result_text': '내용을 입력해주세요.'}
+			result = {'result': '201', 'result_text': 'Please enter content.'}
 			return JsonResponse(result)
 
 		try:
@@ -225,7 +225,7 @@ def admin_product_update(request, product_id):
 
 		except Exception as e:
 			print(e)
-			result = {'result': '201', 'result_text': '알수없는 오류입니다. 관리자에게 문의해주세요.'}
+			result = {'result': '201', 'result_text': 'Unknown error occurred. Please contact the administrator.'}
 			return JsonResponse(result)
 
 	else:
@@ -276,7 +276,7 @@ def admin_product_delete(request):
 	)
 	
 	result = '200'
-	result_text = '삭제가 완료되었습니다.'
+	result_text = 'Deletion is complete.'
 
 	result = {'result': result, 'result_text': result_text}
 	return JsonResponse(result)
@@ -301,5 +301,5 @@ def admin_product_upload_content_image(request):
 		print(e)
 		return JsonResponse({
 			'result': '201',
-			'result_text': '알수없는 오류입니다. 다시시도 해주세요.'
+			'result_text': 'Unknown error occurred. Please try again.'
 		})

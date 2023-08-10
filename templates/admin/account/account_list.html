@@ -27,13 +27,13 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
-						<h4 class="card-title">회원 관리</h4>
+						<h4 class="card-title">Member Management</h4>
 					</div>
 					<div class="card-body">
 						<form class="d-block d-md-flex align-items-center mb-3">
 							<div class="me-md-3 mb-md-0 mb-3 mt-md-0">
 								<div class="d-flex align-items-center border rounded-3">
-									<span class="border-end" style="padding: 10px 20px; border-color: #e2e5e8; font-size: 14px;">회원 유형</span>
+									<span class="border-end" style="padding: 10px 20px; border-color: #e2e5e8; font-size: 14px;">Member type</span>
 									<div style="padding: 10px 20px; border-color: #e2e5e8;">
 										<input class="form-check-input" type="radio" name="mb_type" value="" id="all-type" checked><label for="all-type" class="ms-1 mb-0" style="font-size: 13px;">All</label>
 										<input class="form-check-input ms-3" type="radio" name="mb_type" value="R" id="Regidents"><label for="Regidents" class="ms-1 mb-0" style="font-size: 13px;">Residents</label>
@@ -44,43 +44,43 @@
 
 							<div class="d-sm-inline-flex selectArea">
 								<select class="px-nice-select me-1" name="division">
-									<option value="name">이름</option>
-									<option value="id">아이디</option>
+									<option value="name">Name</option>
+									<option value="id">ID</option>
 								</select>
 								<input type="text" name="keyword" class="form-control">
-								<button type="submit" style="width:100px;" class="btn btn-primary mx-1 member-search-btn">검색</button>
+								<button type="submit" style="width:100px;" class="btn btn-primary mx-1 member-search-btn">Search</button>
 							</div>
 							
 						</form>
 						<div class="responsiveTable">
 							<table class="table mb-0 text-center table-check">
-								<thead class="table-light">
+								<thead class="table-light align-middle">
 									<tr>
 										<th>No.</th>
-										<th>회원 유형</th>
-										<th>회원 상태</th>
-										<th>이름</th>
-										<th>아이디</th>
-										<th>전화번호/휴대폰</th>
-										<th>포인트</th>
-										<th>가입일</th>
-										<th>관리</th>
+										<th>Member Type</th>
+										<th>Member Status</th>
+										<th>Name</th>
+										<th>ID</th>
+										<th>Contact Number</th>
+										<th>Point</th>
+										<th>Joining Date</th>
+										<th>Member Management</th>
 									</tr>
 								</thead>
 								<tbody class="align-middle">
 									<tr>
 										{% for account_obj in account_objs %}
 										<td data-label="No." scope="row">{{forloop.counter}}</td>
-										<td data-label="회원 유형">{{account_obj.get_mb_type_display }}</td>
-										<td data-label="회원 상태">{{account_obj.get_mb_status_display }}</td>
-										<td data-label="이름">{{account_obj.mb_name}}</td>
-										<td data-label="아이디">{{account_obj.username}}</td>
-										<td data-label="전화번호/휴대폰">{{account_obj.mb_phone}}</td>
-										<td data-label="포인트">{{account_obj.point}}</td>
-										<td data-label="가입일">{{account_obj.mb_regdate|date:'Y-m-d H:i:s'}}</td>
-										<td data-label="관리">
-											<span class="btn btn-light">수정</span>
-											<button type="button" onclick="account_delete_submit('{{account_obj.pk}}');" class="btn btn-secondary">탈퇴</button>
+										<td data-label="Member Type">{{account_obj.get_mb_type_display }}</td>
+										<td data-label="Member Status">{{account_obj.get_mb_status_display }}</td>
+										<td data-label="Name">{{account_obj.mb_name}}</td>
+										<td data-label="ID">{{account_obj.username}}</td>
+										<td data-label="Contact Number">{{account_obj.mb_phone}}</td>
+										<td data-label="Point">{{account_obj.point}}</td>
+										<td data-label="Joining Date">{{account_obj.mb_regdate|date:'Y-m-d H:i:s'}}</td>
+										<td data-label="Member Management">
+											<span class="btn btn-light w-100 mb-2">Edit</span>
+											<button type="button" onclick="account_delete_submit('{{account_obj.pk}}');" class="btn btn-secondary w-100">Withdrawal</button>
 										</td>
 									</tr>
 									{% endfor %}

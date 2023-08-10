@@ -19,16 +19,16 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
-						<h4 class="card-title">매출 관리</h4>
+						<h4 class="card-title">Revenue Management</h4>
 					</div>	
 					<div class="card-body p-3">
 						<div class="d-md-flex justify-content-center align-items-center mb-5">	
 							<div class="btn-group" id="date-btn">
-								<button type="button" class="btn btn-outline-primary" onclick="todayBtn()">오늘</button>
-								<button type="button" class="btn btn-outline-primary" onclick="lastWeekBtn()">1주일</button>
-								<button type="button" class="btn btn-outline-primary" onclick="lastOneMonthBtn()">1개월</button>
-								<button type="button" class="btn btn-outline-primary" onclick="lastThreeMonthBtn()">3개월</button>
-								<button type="button" class="btn btn-outline-primary" onclick="lastSixMonthBtn()">6개월</button>
+								<button type="button" class="btn btn-outline-primary" onclick="todayBtn()">Today</button>
+								<button type="button" class="btn btn-outline-primary" onclick="lastWeekBtn()">1 Week</button>
+								<button type="button" class="btn btn-outline-primary" onclick="lastOneMonthBtn()">1 Month</button>
+								<button type="button" class="btn btn-outline-primary" onclick="lastThreeMonthBtn()">3 Months</button>
+								<button type="button" class="btn btn-outline-primary" onclick="lastSixMonthBtn()">6 Months</button>
 							</div>
 							<form action="{{request.path}}" method="GET" name="dateSearchForm">
 								<div class="d-flex align-items-center ms-md-5 ms-0">
@@ -45,7 +45,7 @@
 							<div class="col-md-4">
 								<div class="card sales-all">
 									<div class="card-body text-center">
-										<h5 class="card-title fw-bold mb-2">매출</h5>
+										<h5 class="card-title fw-bold mb-2">Sales</h5>
 										<p class="card-text" style="color: rgb(239, 102, 102);"><b class="fs-1">₱{{total_payment|intcomma}}</b></p>
 									</div>
 								</div>
@@ -54,7 +54,7 @@
 							<div class="col-md-4">
 								<div class="card pay-done">
 									<div class="card-body text-center">
-										<h5 class="card-title fw-bold mb-2">결제 금액</h5>
+										<h5 class="card-title fw-bold mb-2">Payment Amount</h5>
 										<p class="card-text" style="color: rgb(101, 202, 113); "><b class="fs-1">₱{{payment_amount|intcomma}}</b></p>
 									</div>
 								</div>
@@ -62,7 +62,7 @@
 							<div class="col-md-4">			
 								<div class="card pay-refund">
 									<div class="card-body text-center">
-										<h5 class="card-title fw-bold mb-2">환불 금액</h5>
+										<h5 class="card-title fw-bold mb-2">Refund Amount</h5>
 										<p class="card-text" style="color: rgb(255, 193, 63);"><b class="fs-1">₱{{refund_amount|intcomma}}</b></p>
 									</div>
 								</div>
@@ -77,19 +77,19 @@
 							<table class="table mt-3 text-center">
 								<thead style="background-color: #f5f6f9;">
 									<tr>
-										<th>날짜</th>
-										<th>결제금액</th>
-										<th>환불금액</th>
-										<th>주문수</th>
+										<th>Date</th>
+										<th>Payment Amount</th>
+										<th>Refund Amount</th>
+										<th>Order Quantity</th>
 									</tr>
 								</thead>
 								<tbody>
 									{% for revenue_admin_obj in revenue_admin_objs %}
 									<tr>
-										<td data-label="날짜">{{revenue_admin_obj.date}}</td>
-										<td data-label="결제금액">₱{{revenue_admin_obj.payment_amount|intcomma}}</td>
-										<td data-label="환불금액">₱{{revenue_admin_obj.refunt_amount|intcomma}}</td>
-										<td data-label="주문수">{{revenue_admin_obj.order_count|intcomma}}</td>
+										<td data-label="Date">{{revenue_admin_obj.date}}</td>
+										<td data-label="Payment Amount">₱{{revenue_admin_obj.payment_amount|intcomma}}</td>
+										<td data-label="Refund Amount">₱{{revenue_admin_obj.refunt_amount|intcomma}}</td>
+										<td data-label="Order Quantity">{{revenue_admin_obj.order_count|intcomma}}</td>
 									</tr>
 									{% endfor %}
 								</tbody>

@@ -13,10 +13,10 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
-						<h4 class="card-title">서비스 관리</h4>
+						<h4 class="card-title">Product Management</h4>
 						<div class="text-end">
-							<a href="#!" onclick="remove_checked_item();" class="remove-btn btn btn-light">체크 삭제</a>
-							<a href="{% url 'product:admin_product_write' %}" class="btn btn-primary">서비스 등록</a>
+							<a href="#!" onclick="remove_checked_item();" class="remove-btn btn btn-light">Delete</a>
+							<a href="{% url 'product:admin_product_write' %}" class="btn btn-primary">Write</a>
 						</div>
 					</div>
 					<div class="card-body">				
@@ -29,18 +29,18 @@
 												<input type="checkbox" class="form-check-input" id="checkAll">		
 											</div>
 										</th>
-										<th scope="col">서비스명</th>
-										<th scope="col">지역</th>
-										<th scope="col">옵션</th>
-										<th scope="col">옵션 가격</th>
-										<th scope="col">서비스 가격</th>
-										<th scope="col" style="width: 100px">수정</th>
+										<th scope="col">Name</th>
+										<th scope="col">Region</th>
+										<th scope="col">Option</th>
+										<th scope="col">Option Price</th>
+										<th scope="col">Price</th>
+										<th scope="col" style="width: 100px">Edit</th>
 									</tr><!-- end tr -->
 								</thead><!-- end thead -->
 								<tbody>
 									{% if not product_list %}
 									<tr>
-										<td class="border-bottom-0 text-center p-5" colspan="10">주문이 없습니다.</td>
+										<td class="border-bottom-0 text-center p-5" colspan="10">No orders found.</td>
 									</tr>
 									{% endif%}
 									
@@ -52,23 +52,13 @@
 												<label class="form-check-label" for="contacusercheck1"></label>
 											</div>
 										</th>	
-										<td data-label="서비스명">
-											<span class="fw-medium">{{productList.product_name}}</span>
-										</td>
-										<td data-label="지역">
-											지역
-										</td>
-										<td data-label="옵션">
-											옵션
-										</td>
-										<td data-label="옵션가격">
-											옵션가격
-										</td>
-										<td data-label="서비스가격">
-											서비스가격
-										</td>
+										<td data-label="Name"><span class="fw-medium">{{productList.product_name}}</span></td>
+										<td data-label="Region"></td>
+										<td data-label="Option"><span class="fw-medium"></span></td>
+										<td data-label="Option Price"></td>
+										<td data-label="Price"><span class="fw-medium">{{productList.price}}</span></td>
 										<td>
-											<a href="{% url 'product:admin_product_update' productList.pk %}" class="btn btn-outline-primary">수정하기</a>
+											<a href="{% url 'product:admin_product_update' productList.pk %}" class="btn btn-outline-primary">Edit</a>
 										</td>
 									</tr><!-- end tr -->
 									{% endfor %}
@@ -160,7 +150,7 @@ function remove_checked_item() {
 
 async function remove_product_submit(cart_item_id) {
 	if(is_run == true) {
-		openModal('알림','잠시후에 다시시도 해주세요.');
+		openModal('Notificaiton','Please try again later.');
 		return false;
 	}
 
@@ -181,12 +171,12 @@ async function remove_product_submit(cart_item_id) {
 		is_run  = false;
 
 		if(item_list.length == 0) {
-			openModal("알림", "삭제할 항목을 하나 이상 선택하세요.")
+			openModal("Notificaiton", "Please select one or more items to delete.")
 			return false;
 		}else if (data.result == '200') {
 			window.location.reload();
 		}else {
-			openModal("알림", data.result_text);
+			openModal("Notificaiton", data.result_text);
 		}
 	});
 
