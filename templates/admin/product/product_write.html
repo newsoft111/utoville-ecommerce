@@ -289,6 +289,8 @@ function upload_content_image() {
 		const file = this.files[0];
 		fd.append('image', file);
 
+		console.log(fd, file)
+
 		const response = fetch("{% url 'product:admin_product_upload_content_image' %}", {
 			method: "POST",
 			headers: {
@@ -298,7 +300,6 @@ function upload_content_image() {
 		})
 		.then(response => response.json())
 		.then(data => {
-			console.log(data);
 			is_run  = false;
 			if (data.result == '200') {
 				const range = quill.getSelection();

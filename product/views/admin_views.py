@@ -298,7 +298,7 @@ def admin_product_upload_content_image(request):
 		})
 
 	except Exception as e:
-		print(e)
+		print("e :", e)
 		return JsonResponse({
 			'result': '201',
 			'result_text': 'Unknown error occurred. Please try again.'
