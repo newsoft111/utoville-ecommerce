@@ -288,6 +288,7 @@ function upload_content_image() {
 		const fd = new FormData();
 		const file = this.files[0];
 		fd.append('image', file);
+		
 
 		const response = fetch("{% url 'product:admin_product_upload_content_image' %}", {
 			method: "POST",
@@ -298,7 +299,6 @@ function upload_content_image() {
 		})
 		.then(response => response.json())
 		.then(data => {
-			console.log(data);
 			is_run  = false;
 			if (data.result == '200') {
 				const range = quill.getSelection();
@@ -415,42 +415,40 @@ function removeAddedOptionItem(e){
 function add_options(elem){
 let addoptionname = document.getElementById("option_name").value;
         if (!addoptionname) {
-            openModal("Required!!", "Please add option", '',);
-				}
-		else
-			{
-				html = `<tr> <td id="options_name" name="options_name" > ${addoptionname} </td>`;
-				let elem = document.getElementById('option-list').querySelectorAll('input');
-				let names = [];
-				let dict = {};
-				let dict1 = {};
-				for (var i = 0; i < elem.length-1; i++) {
-						if(i == elem.length-2){
-							names += elem[i].value +'(+' + elem[i+1].value + ')';
+           		openModal("Required!!", "Please add option", '',);
+		}else{
+			html = `<tr> <td id="options_name" name="options_name" > ${addoptionname} </td>`;
+			let elem = document.getElementById('option-list').querySelectorAll('input');
+			let names = [];
+			let dict = {};
+			let dict1 = {}; 
+			for (var i = 0; i < elem.length-1; i++) {
+					if(i == elem.length-2){
+						names += elem[i].value +'(+' + elem[i+1].value + ')';
+						if (!dict.hasOwnProperty(addoptionname)) {
+							dict1[elem[i].value] = elem[i+1].value
+							dict[addoptionname] = dict1;
+						}
+						else {
+							dict1[elem[i].value] = elem[i+1].value
+						}
+					}
+					else {
+							names += elem[i].value +'(+' + elem[i+1].value + '), ';
 							if (!dict.hasOwnProperty(addoptionname)) {
-								dict1[elem[i].value] = elem[i+1].value
 								dict[addoptionname] = dict1;
+								dict1[elem[i].value] = elem[i+1].value
 							}
 							else {
 								dict1[elem[i].value] = elem[i+1].value
 							}
-						}
-						else {
-								names += elem[i].value +'(+' + elem[i+1].value + '), ';
-								if (!dict.hasOwnProperty(addoptionname)) {
-									dict[addoptionname] = dict1;
-									dict1[elem[i].value] = elem[i+1].value
-								}
-								else {
-									dict1[elem[i].value] = elem[i+1].value
-								}
-								i = i+1;
-						}
+							i = i+1;
 					}
-				options_data.push(dict);
-				html +=	`<td id="options_price" name="options_price" >${names}</td>`;
-				html +=  `<td><button type="button" class="btn btn-secondary" onclick="removeAddedOptionItem(this);" >Remove</button></td></tr>`;
-				document.querySelector('tbody[id=added-option-list]').innerHTML +=  html;
+				}
+			options_data.push(dict);
+			html +=	`<td id="options_price" name="options_price" >${names}</td>`;
+			html +=  `<td><button type="button" class="btn btn-secondary" onclick="removeAddedOptionItem(this);" >Remove</button></td></tr>`;
+			document.querySelector('tbody[id=added-option-list]').innerHTML +=  html;
         }
 }
 
