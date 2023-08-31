@@ -68,7 +68,11 @@
 										<td data-label="profit">₱{{profit_expect_obj.total_profit_amount|intcomma}}</td>
 										<td data-label="Account">Account number here</td>
 										<td data-label="Memo" class="profit-memo d-flex justify-content-center flex-column" style="white-space:nowrap; word-break:keep-all;">
-											{{profit_expect_obj.memo}}
+											{% if profit_expect_obj.memo is NULL %}
+												<span>There is no any memo.</span>
+											{% else %}
+												{{profit_expect_obj.memo}}
+											{% endif %}
 											<button class="btn btn-light btn-sm mt-2" type="button" onclick="openMemoModal(`{{profit_expect_obj.pk}}`)">Edit</button>
 										</td>
 										<td data-label="Status">{{profit_expect_obj.get_status_display}}</td>

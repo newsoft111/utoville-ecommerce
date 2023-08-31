@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="page-title-box d-flex align-items-center justify-content-between">
-					<h4 class="mb-0">문의내용</h4>
+					<h4 class="mb-0">Q&A Details</h4>
 
 					<div class="page-title-right">
 						<ol class="breadcrumb m-0">
@@ -39,13 +39,13 @@
 						<form name="qnaForm">
 							{% csrf_token %}
 							<div class="py-3">
-								<h6>답변</h6>
+								<h6>Answer</h6>
 								<textarea class="form-control" name="answer" placeholder="Leave a comment here" style="height: 300px">{{qna_obj.answer}}</textarea>
 							</div>
 
 							<div class="text-end">
-								<a href="{% url 'qna:admin_qna_list' %}" class="btn btn-light mt-4">목록</a>
-								<a href="#!" onclick="qna_submit();" class="btn btn-primary mt-4">답변완료</a>
+								<a href="{% url 'qna:admin_qna_list' %}" class="btn btn-light mt-4">List</a>
+								<a href="#!" onclick="qna_submit();" class="btn btn-primary mt-4">Submit</a>
 							</div>
 						</form>
 					</div>
@@ -61,16 +61,16 @@
 	<div class="modal-dialog modal-dialog-centered modal-md">
 		<div class="modal-content">
 			<div class="modal-header p-4">
-			<h4 class="mb-0 text-center">알림</h4>
+			<h4 class="mb-0 text-center">Alert</h4>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 
 			<div class="modal-body p-4">
-				정말로 답변을 거부하시겠습니까?
+				Are you sure you want to reject the response?
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-primary ms-1" onclick="qna_delete_submit();">확인</button>
-				<button type="button" class="btn btn-primary btn-md" data-bs-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-outline-primary ms-1" onclick="qna_delete_submit();">Submit</button>
+				<button type="button" class="btn btn-primary btn-md" data-bs-dismiss="modal">Cancel</button>
 			</div>
 
 		</div>
@@ -86,12 +86,12 @@ async function qna_submit() {
 	var answer = qnaForm.answer.value;
 	
 	if (isEmpty(answer)) {
-			openModal('알림','답변을 입력해주세요.');
+			openModal('Alert','Please enter answer.');
 		return false;
 	}
 
 	if(is_run == true) {
-		openModal('알림','잠시후에 다시시도 해주세요.');
+		openModal('Alert','Please try again later.');
 		return false;
 	}
 
@@ -110,9 +110,9 @@ async function qna_submit() {
 	.then(data => {
 		is_run  = false;
 		if (data.result == '200') {
-			openModal("알림", data.result_text, '#qnaDeleteModal', `location.href="{% url 'qna:admin_qna_list' %}";`);
+			openModal("Alert", data.result_text, '#qnaDeleteModal', `location.href="{% url 'qna:admin_qna_list' %}";`);
 		} else {
-			openModal("알림", data.result_text, '#qnaDeleteModal');
+			openModal("Alert", data.result_text, '#qnaDeleteModal');
 		}
 	});
 }

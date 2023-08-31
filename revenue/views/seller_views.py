@@ -38,7 +38,7 @@ def seller_revenue_list(request):
 	total_revenue = payment_amount-refund_amount
 
 
-	temp = { po.date: {"payment_amount": po.payment_amount, "refunt_amount": po.payment_amount, "order_count":po.order_count} for po in revenue_seller_objs }
+	temp = { po.date: {"payment_amount": po.payment_amount, "refund_amount": po.refund_amount, "order_count":po.order_count} for po in revenue_seller_objs }
 
 	result = []
 
@@ -47,7 +47,7 @@ def seller_revenue_list(request):
 		result.append({
 			'date': loop_date,
 			'payment_amount': temp[loop_date]['payment_amount'] if loop_date in temp else 0,
-			'refunt_amount': temp[loop_date]['refunt_amount'] if loop_date in temp else 0,
+			'refund_amount': temp[loop_date]['refund_amount'] if loop_date in temp else 0,
 			'order_count': temp[loop_date]['order_count'] if loop_date in temp else 0,
 		})
 
@@ -84,7 +84,7 @@ def seller_revenue_export(request):
 	total_revenue = payment_amount-refund_amount
 
 
-	temp = { po.date: {"payment_amount": po.payment_amount, "refunt_amount": po.payment_amount, "order_count":po.order_count} for po in revenue_seller_objs }
+	temp = { po.date: {"payment_amount": po.payment_amount, "refund_amount": po.payment_amount, "order_count":po.order_count} for po in revenue_seller_objs }
 
 
 	result = []
@@ -94,7 +94,7 @@ def seller_revenue_export(request):
 		result.append({
 			'date': loop_date,
 			'payment_amount': temp[loop_date]['payment_amount'] if loop_date in temp else 0,
-			'refunt_amount': temp[loop_date]['refunt_amount'] if loop_date in temp else 0,
+			'refund_amount': temp[loop_date]['refund_amount'] if loop_date in temp else 0,
 			'order_count': temp[loop_date]['order_count'] if loop_date in temp else 0,
 		})
 
