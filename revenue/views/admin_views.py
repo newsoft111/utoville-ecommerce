@@ -36,7 +36,7 @@ def admin_revenue_list(request):
 	total_payment = payment_amount-refund_amount
 
 
-	temp = { po.date.strftime("%Y-%m-%d"): {"payment_amount": po.payment_amount, "refunt_amount": po.payment_amount, "order_count":po.order_count} for po in revenue_admin_objs }
+	temp = { po.date.strftime("%Y-%m-%d"): {"payment_amount": po.payment_amount, "refund_amount": po.refund_amount, "order_count":po.order_count} for po in revenue_admin_objs }
 	result = []
 
 	for dy in range(0, (end_date-(start_date-timedelta(days=1))).days):
@@ -44,7 +44,7 @@ def admin_revenue_list(request):
 		result.append({
 			'date': loop_date,
 			'payment_amount': temp[loop_date]['payment_amount'] if loop_date in temp else 0,
-			'refunt_amount': temp[loop_date]['refunt_amount'] if loop_date in temp else 0,
+			'refund_amount': temp[loop_date]['refund_amount'] if loop_date in temp else 0,
 			'order_count': temp[loop_date]['order_count'] if loop_date in temp else 0,
 		})
 
@@ -87,7 +87,7 @@ def admin_revenue_export(request):
 	total_payment = payment_amount-refund_amount
 
 
-	temp = { po.date.strftime("%Y-%m-%d"): {"payment_amount": po.payment_amount, "refunt_amount": po.payment_amount, "order_count":po.order_count} for po in revenue_admin_objs }
+	temp = { po.date.strftime("%Y-%m-%d"): {"payment_amount": po.payment_amount, "refund_amount": po.refund_amount, "order_count":po.order_count} for po in revenue_admin_objs }
 	result_datas = []
 
 	for dy in range(0, (end_date-(start_date-timedelta(days=1))).days):
@@ -95,7 +95,7 @@ def admin_revenue_export(request):
 		result_datas.append({
 			'date': loop_date,
 			'payment_amount': temp[loop_date]['payment_amount'] if loop_date in temp else 0,
-			'refunt_amount': temp[loop_date]['refunt_amount'] if loop_date in temp else 0,
+			'refund_amount': temp[loop_date]['refund_amount'] if loop_date in temp else 0,
 			'order_count': temp[loop_date]['order_count'] if loop_date in temp else 0,
 		})
 
