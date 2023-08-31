@@ -48,18 +48,18 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
-						<h4 class="card-title">주문 관리</h4>
+						<h4 class="card-title">Order Management</h4>
 					</div>
 					<div class="card-body">
 						<form action="{{request.path}}" method="GET" name="dateSearchForm">
-							<div class="date-search nice-select mb-2 float-none">기간 검색</div>
+							<div class="date-search nice-select mb-2 float-none">Period</div>
 							<div class="date-search-area mt-3">
 								<div class="btn-group" id="date-btn">
-									<button type="button" class="btn btn-outline-primary" onclick="todayBtn()">오늘</button>
-									<button type="button" class="btn btn-outline-primary" onclick="lastWeekBtn()">1주일</button>
-									<button type="button" class="btn btn-outline-primary" onclick="lastOneMonthBtn()">1개월</button>
-									<button type="button" class="btn btn-outline-primary" onclick="lastThreeMonthBtn()">3개월</button>
-									<button type="button" class="btn btn-outline-primary" onclick="lastSixMonthBtn()">6개월</button>
+									<button type="button" class="btn btn-outline-primary" onclick="todayBtn()">Today</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastWeekBtn()">1 Week</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastOneMonthBtn()">1 Month</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastThreeMonthBtn()">3 Months</button>
+									<button type="button" class="btn btn-outline-primary" onclick="lastSixMonthBtn()">6 Months</button>
 								</div>
 
 								<div class="d-flex mt-2">
@@ -74,20 +74,20 @@
 							<div class="search-form d-sm-flex justify-content-between">
 								<div class="category-search d-sm-inline-flex mb-3">
 									<select class="nice-select me-1" name="category" style="width: 200px;">
-										<option value="0">주문번호</option>
-										<option value="1">상품명</option>
-										<option value="2">이름</option>
+										<option value="0">Num</option>
+										<option value="1">Product</option>
+										<option value="2">Name</option>
 									</select>
 									<input type="text" name="keyword" class="form-control">
-									<button type="submit" style="width:100px;" class="btn btn-primary mx-1">검색</button>
+									<button type="submit" style="width:100px;" class="btn btn-primary mx-1">Search</button>
 
 									<select name="sort_by" class="nice-select" id="sort-by" style="border-color: #ddd; cursor: pointer;" >
 										<option selected disabled>Fliter</option>
-										<option value="id">지역별</option>
-										<option value="apart">아파트별</option>
-										<option value="state">상태별</option>
-										<option value="order-newest">최신 순</option>
-										<option value="order-oldest">오래된 순</option>
+										<option value="id">By region</option>
+										<option value="apart">By apartment</option>
+										<option value="state">By status</option>
+										<option value="order-newest">Newest</option>
+										<option value="order-oldest">Oldest</option>
 									</select>
 								</div>
 								<div class="excel-btn text-end mb-2">
@@ -107,21 +107,21 @@
 												<label class="form-check-label" for="checkAll"></label>
 											</div>
 										</th>
-										<th scope="col">주문번호</th>
-										<th scope="col">상태</th>
-										<th scope="col">상품명</th>
-										<th scope="col">옵션</th>
-										<th scope="col">수량</th>
-										<th scope="col">이름</th>
-										<th scope="col">연락처</th>
-										<th scope="col">남은수량</th>
-										<th scope="col">결제일</th>
+										<th scope="col">Num</th>
+										<th scope="col">Status</th>
+										<th scope="col">Product</th>
+										<th scope="col">Option</th>
+										<th scope="col">Qty</th>
+										<th scope="col">Name</th>
+										<th scope="col">Contact</th>
+										<th scope="col">Remaining quantity</th>
+										<th scope="col">Payment date</th>
 									</tr><!-- end tr -->
 								</thead><!-- end thead -->
 								<tbody>
 									{% if not order_item_objs %}
 									<tr>
-										<td class="border-bottom-0 text-center p-5" colspan="10">주문이 없습니다.</td>
+										<td class="border-bottom-0 text-center p-5" colspan="10">There is no order.</td>
 									</tr>
 									{% endif%}
 									
@@ -134,39 +134,39 @@
 											</div>
 										</td>
 
-										<td data-label="주문번호">
+										<td data-label="Num">
 											<a href="#!" class="text-link fw-medium" onclick="get_order_item_info('{{order_item_obj.order_item_uid}}', `{% url 'order:admin_order_detail' order_item_obj.pk %}`);">{{order_item_obj.order_item_uid}}</a>
 										</td>
 
-										<td data-label="상태">
+										<td data-label="Status">
 											<span class="badge badge-soft-primary">{{order_item_obj.order_item_status}}</span>
 										</td>
 
-										<td data-label="상품명">
+										<td data-label="Product">
 											<a href="#!" class="text-link fw-medium">{{order_item_obj.product_name}}</a>
 										</td>
 
-										<td data-label="옵션">
+										<td data-label="Option">
 											{{order_item_obj.variant_value}}
 										</td>
 
-										<td data-label="수량">
-											{{order_item_obj.ordered_quantity}}개
+										<td data-label="Qty">
+											{{order_item_obj.ordered_quantity}}
 										</td>
 
-										<td data-label="이름">
+										<td data-label="Name">
 											{{order_item_obj.order.user.mb_name}}
 										</td>
 
-										<td data-label="연락처">
+										<td data-label="Contact">
 											{{order_item_obj.order.user.mb_phone}}
 										</td>
 
-										<td data-label="남은수량">
-											{{order_item_obj.ordered_quantity|sub:order_item_obj.shipped_quantity}}개
+										<td data-label="Remaining quantity">
+											{{order_item_obj.ordered_quantity|sub:order_item_obj.shipped_quantity}}
 										</td>
 
-										<td data-label="결제일">
+										<td data-label="Payment date">
 											{{order_item_obj.order.payment.paid_at}}
 										</td>
 									</tr><!-- end tr -->
@@ -227,14 +227,14 @@
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title fw-bold" id="orderDetailModalLabel">상품주문정보 조회 [주문번호]</h5>
+				<h5 class="modal-title fw-bold" id="orderDetailModalLabel">View Product Order Information [Order Number]</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body" id="orderDetailModalBody">
 				
 			</div>
 			<div class="modal-footer">
-				<span class="btn btn-secondary" data-bs-dismiss="modal">닫기</span>
+				<span class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
 			</div>
 		</div>
 	</div>
@@ -249,12 +249,12 @@ let is_run = false;
 
 async function get_order_item_info(order_item_uid, url) {
 	if(is_run == true) {
-		openModal('알림','잠시후에 다시시도 해주세요.');
+		openModal('Alert','Please try again later.');
 		return false;
 	}
 	let label = document.getElementById('orderDetailModalLabel');
 	let body = document.getElementById('orderDetailModalBody');
-	label.innerHTML = `상품주문정보 조회 []`;
+	label.innerHTML = `View Product Order Information []`;
 	body.innerHTML ='<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('orderDetailModal'));
 	modal.show();
@@ -266,7 +266,7 @@ async function get_order_item_info(order_item_uid, url) {
 	})
 	.then(response => response.text())
 	.then(data => {
-		label.innerHTML = `상품주문정보 조회 [${order_item_uid}]`;
+		label.innerHTML = `View Product Order Information [${order_item_uid}]`;
 		body.innerHTML = data;
 	});
 	is_run  = false;
