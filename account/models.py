@@ -37,7 +37,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 	mb_fcm = models.CharField(max_length=200)
 	mb_del_date = models.DateTimeField(null=True)
 	mb_regdate = models.DateTimeField(default=datetime.now)
- 
+
+	#mbm_residence_type = models.CharField(max_length=200, choices=ResidenceType.choices)
+	
 	USERNAME_FIELD = 'username'
 	REQUIRED_FIELDS = []
 
