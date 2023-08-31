@@ -15,11 +15,6 @@ from util.views import cache
 
 @login_required(login_url="account:seller_login")
 def seller_profit_list(request):
-	profit_objs = Profit.objects.filter(seller=request.user, profit_done=None)
-	profit_amount = profit_objs.aggregate(Sum('profit_amount'))['profit_amount__sum']
-	if profit_amount is None:
-		profit_amount = 0
-
 	now = date.today()
 	start_date = now-relativedelta(months=1)
 	end_date = now
@@ -32,16 +27,24 @@ def seller_profit_list(request):
 
 	start_date = start_date + timedelta(days=1)
 
-	profit_done_objs = ProfitDone.objects.filter(seller=request.user, created_at__range=[start_date, end_date])
+	profit_objs = ProfitDetail.objects.filter(
+		profit__seller=request.user, 
+		profit__is_done=True,
+		created_at__range=[start_date, end_date]
+	)
+
+	profit_amount = profit_objs.aggregate(Sum('profit_amount'))['profit_amount__sum']
+	if profit_amount is None:
+		profit_amount = 0
+
 
 	page        = int(request.GET.get('p', 1))
-	pagenator   = Paginator(profit_done_objs, 10)
-	profit_done_objs = pagenator.get_page(page)
+	pagenator   = Paginator(profit_objs, 10)
+	profit_objs = pagenator.get_page(page)
 
 	return render(request, 'seller/profit/profit_list.html', {
 		"profit_objs": profit_objs,
 		'profit_amount': profit_amount,
-		'profit_done_objs': profit_done_objs
 	})
 
 
