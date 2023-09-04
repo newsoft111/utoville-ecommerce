@@ -27,15 +27,19 @@ def seller_profit_list(request):
 
 	start_date = start_date + timedelta(days=1)
 
-	profit_objs = ProfitDetail.objects.filter(
-		profit__seller=request.user, 
-		profit__is_done=True,
+	profit_objs = Profit.objects.filter(
+		seller=request.user, 
 		created_at__range=[start_date, end_date]
+	).order_by(
+		'-id'
 	)
 
-	profit_amount = profit_objs.aggregate(Sum('profit_amount'))['profit_amount__sum']
-	if profit_amount is None:
-		profit_amount = 0
+	profit_amount = 0
+
+	for profit_obj in profit_objs:
+		if not profit_obj.is_done:
+			profit_amount += profit_obj.total_profit_amount
+		
 
 
 	page        = int(request.GET.get('p', 1))
@@ -51,7 +55,7 @@ def seller_profit_list(request):
 
 @login_required(login_url="account:seller_login")
 def seller_profit_export(request):
-	profit_done_obj = get_object_or_404(ProfitDone, pk=request.GET.get("id"), seller=request.user)
+	profit_done_obj = get_object_or_404(Profit, pk=request.GET.get("id"), seller=request.user)
 	q = Q()
 	q &= Q(profit_done=profit_done_obj)
 
@@ -61,8 +65,9 @@ def seller_profit_export(request):
 		select={'created_at_date': 'DATE(created_at)'}
 	).values_list(
 		'created_at_date', 
-		'charge_amount',
+		'paid_amount',
 		'payment_fee', 
+		'shipping_fee',
 		'profit_amount',
 	)
 
@@ -74,7 +79,7 @@ def seller_profit_export(request):
 	ws = wb.add_sheet('신청자') #시트 추가
 	
 	row_num = 0
-	col_names = ['날짜', '금액', '수수료', '배송비']
+	col_names = ['날짜', '결제금액', '수수료', '배송비', '정산금액']
 	
 	#열이름을 첫번째 행에 추가 시켜준다.
 	for idx, col_name in enumerate(col_names):
@@ -96,35 +101,35 @@ def seller_profit_export(request):
 
 class SellerProfitPreview(View):
 	def get(self, request):
-		profit_objs = Profit.objects.filter(seller=request.user, profit_done=None)
-		profit_amount = profit_objs.aggregate(Sum('profit_amount'))['profit_amount__sum']
-		if profit_amount is None:
-			profit_amount = 0
 
-		
-		self.start_date = datetime.now() - relativedelta(months=1)
-		self.end_date = datetime.now() + timedelta(1)
 
 		q = Q()
 		q &= Q(seller=request.user)
-		q &= Q(created_at__range=[self.start_date, self.end_date])
+		q &= Q(is_done=False)
 
 		if request.GET.get('cache') == 'reload':
-			profit_done_objs = ProfitDone.objects.filter(q)
+			profit_objs = Profit.objects.filter(q)
 		else:
 			profit_items_cache = cache.get(f'{request.user}_profit_items')
 			if profit_items_cache is not None:
-				profit_done_objs = profit_items_cache
+				profit_objs = profit_items_cache
 			else:
-				profit_done_objs = ProfitDone.objects.filter(q)
+				profit_objs = Profit.objects.filter(q)
 			
 			
 		self.date_format = "%b"
 		chart_data = self.monthly()
 
+		profit_amount = 0
 
-		for items in profit_done_objs:
-			chart_data[items.created_at.strftime(self.date_format)] += items.profit_done_amount
+		for profit_obj in profit_objs:
+			if not profit_obj.is_done:
+				profit_amount += profit_obj.total_profit_amount
+				
+
+
+		for profit_obj in profit_objs:
+			chart_data[profit_obj.created_at.strftime(self.date_format)] += profit_obj.total_profit_amount
 			
 		return JsonResponse({
 			"chart_data": [{"x": key, "y": value} for key, value in chart_data.items()],
