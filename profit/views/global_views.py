@@ -37,9 +37,9 @@ class ProfitManage:
 			)
 
 
-			profit_obj.total_charge_amount += charge_amount if self.event_type=='payment' else -charge_amount
+			profit_obj.total_paid_amount += charge_amount if self.event_type=='payment' else -charge_amount
 			profit_obj.total_shipping_fee += shipping_fee
-			profit_obj.total_charge_fee += charge_fee
+			profit_obj.total_payment_fee += charge_fee
 			profit_obj.total_profit_amount += profit_amount
 			profit_obj.save()
 
