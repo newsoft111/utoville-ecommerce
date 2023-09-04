@@ -19,16 +19,16 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header justify-content-between d-flex align-items-center">
-						<h4 class="card-title">정산 관리</h4>
+						<h4 class="card-title">Profit Management</h4>
 					</div>
 					<div class="card-body p-3">
 						<div class="d-md-flex justify-content-center align-items-center mb-5">
 							<div class="btn-group" id="date-btn">
-								<button type="button" class="btn btn-outline-secondary" onclick="todayBtn()">오늘</button>
-								<button type="button" class="btn btn-outline-secondary" onclick="setLastWeek()">1주일</button>
-								<button type="button" class="btn btn-outline-secondary" onclick="setLastMonth(1)">1개월</button>
-								<button type="button" class="btn btn-outline-secondary" onclick="setLastMonth(3)">3개월</button>
-								<button type="button" class="btn btn-outline-secondary" onclick="setLastMonth(6)">6개월</button>
+								<button type="button" class="btn btn-outline-secondary" onclick="todayBtn()">Today</button>
+								<button type="button" class="btn btn-outline-secondary" onclick="setLastWeek()">1 Week</button>
+								<button type="button" class="btn btn-outline-secondary" onclick="setLastMonth(1)">1 Month</button>
+								<button type="button" class="btn btn-outline-secondary" onclick="setLastMonth(3)">3 Months</button>
+								<button type="button" class="btn btn-outline-secondary" onclick="setLastMonth(6)">6 Months</button>
 							</div>
 							<form action="{{request.path}}" method="GET" name="dateSearchForm">
 								<div class="d-flex align-items-center ms-md-5 ms-0">
@@ -45,7 +45,7 @@
 							<div class="col-md-6">
 								<div class="card pay-done">
 									<div class="card-body text-center">
-										<h5 class="card-title fw-bold mb-2">정산 예정 금액</h5>
+										<h5 class="card-title fw-bold mb-2">Projected Settlement Amount</h5>
 										<p class="card-text" style="color: rgb(101, 202, 113); "><b class="fs-1">₱{{profit_amount|intcomma}}</b></p>
 									</div>
 								</div>
@@ -55,28 +55,23 @@
 							<table class="table mt-3 mb-0 text-center">
 								<thead class="align-middle" style="background-color: #f2f3fe;">
 									<tr>
-										<th rowspan="2">정산일</th>
-										<th rowspan="2">정산금액</th>
-										<th colspan="3">상세내역</th>
-										<th rowspan="2">세부내역 다운로드</th>				
+										<th rowspan="2">Settlement Date</th>
+										<th rowspan="2">Settlement Amount</th>
+										<th colspan="3">Details</th>
+										<th rowspan="2">Details Download</th>				
 									</tr>
 									<tr>
-										<th>상품 결제금액</th>
-										<th>결제 수수료</th>
-										<th>배송비</th>
+										<th>Product Payment Amount</th>
+										<th>Payment Fee</th>
+										<th>Shipping Cost</th>
 									</tr>
 								</thead>
 								<tbody>
 									{% for profit_done_obj in profit_done_objs %}
 									<tr>
-										<td data-label="정산일">{{profit_done_obj.created_at}}</td>
-										<td data-label="정산금액">₱{{profit_done_obj.profit_done_amount|intcomma}}</td>
-										<td data-label="상품 결제금액">₱{{profit_done_obj.total_profit_amount|intcomma}}</td>
-										<td data-label="결제 수수료">₱{{profit_done_obj.total_payment_fee|intcomma}}</td>
-										<td data-label="배송비">₱{{profit_done_obj.total_shipping_fee|intcomma}}</td>
-										<td data-label="세부내역 다운로드">
+
 											<div class="excel-btn">
-												<a href="{% url 'profit:seller_profit_export' %}?id={{profit_done_obj.pk}}">
+												<a href="{% url 'profit:seller_profit_export' %}?id={{profit_obj.pk}}">
 													<span class="btn btn-outline-secondary"><img class="me-2" style="width: 40px;" src="{% static 'seller/images/down_i.png' %}">Excel Download</span>
 												</a>
 											</div>

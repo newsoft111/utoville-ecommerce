@@ -11,7 +11,7 @@
 	margin-left: 3px;
 }
 a.fc-daygrid-more-link, .fc-timegrid-more-link-inner {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: bold;
 	color: #000 !important;
 }
@@ -237,7 +237,7 @@ var order_chart_options={
 	yaxis: {
 		labels: {
 			formatter: function (value) {
-			return value;
+				return value;
 			}
 		},
 	},
@@ -359,6 +359,7 @@ get_profit_preview_data();
 
 /*Mainpage Caledar*/
 var order_data_calendar = {{ order_data_calendar|safe }}
+
 document.addEventListener("DOMContentLoaded", function() {
 	let my_modal = document.querySelector("#scheduleModal");
     var n = bootstrap.Modal.getOrCreateInstance(my_modal);
@@ -373,15 +374,17 @@ document.addEventListener("DOMContentLoaded", function() {
         s = e.getDate(),
         r = e.getMonth(),
         e = e.getFullYear();
-    
-		e = order_data_calendar, r = document.getElementById("calendar");
+
+		e = order_data_calendar;
+
+	r = document.getElementById("calendar");
 
     function c() {
         return 768 <= window.innerWidth && window.innerWidth < 1200 ? "timeGridWeek" : window.innerWidth <= 768 ? "listMonth" : "dayGridMonth"
     }
     var m = new FullCalendar.Calendar(r, {
 		dayMaxEvents: 5,
-		eventMaxStack: 2,
+		eventMaxStack: 1,
         timeZone: "local",
 		contentHeight: 'auto',
         initialView: c(),

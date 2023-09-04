@@ -29,14 +29,14 @@
                             <div class="text-center  py-5">
                                 <div class="mb-4 mb-md-5">
                                     <a href="/" class="d-block auth-logo">
-                                        <img src="{% static 'seller/images/logo-dark.png' %}" alt="" height="22" class="auth-logo-dark">
-                                        <img src="{% static 'seller/images/logo-light.png' %}" alt="" height="22" class="auth-logo-light">
+                                        <!-- <img src="{% static 'seller/images/logo-dark.png' %}" alt="" height="22" class="auth-logo-dark">
+                                        <img src="{% static 'seller/images/logo-light.png' %}" alt="" height="22" class="auth-logo-light"> -->
                                     </a>
                                 </div>                               
                                 
                     			<div class="mb-4">
                         			<h5>Welcome</h5>
-									<p>Sign in to continue to Utoville Admin.</p>
+									<p>Sign in to continue to Utoville Seller.</p>
                         		</div>
 
                                 <form name="loginForm">
@@ -68,7 +68,7 @@
 			<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 				<div class="modal-content">
 				<div class="modal-header p-4">
-					<h4 class="mb-0 text-center" id="modal_subject">알림</h4>
+					<h4 class="mb-0 text-center" id="modal_subject">Alert</h4>
 					<button type="button" class="btn-close" id="closeModalBtn" data-before-modal="" onclick="closeModal()" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body p-4" id="modal_content">
@@ -109,18 +109,18 @@
 			var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 				
 			if (isEmpty(username)) {
-				openModal('알림','아이디을 입력해주세요.');
+				openModal('Alert','Please enter ID.');
 				return false;
 		
 			}
 
 			if (isEmpty(password)) {
-					openModal('알림','비밀번호를 입력해주세요.');
+					openModal('Alert','Please enter Password.');
 				return false;
 			}
 		
 			if(is_run == true) {
-				openModal('알림','잠시후에 다시시도 해주세요.');
+				openModal('Alert','Please try again later.');
 				return false;
 			}
 
@@ -142,7 +142,7 @@
 				if (data.result == '200') {
 					location.replace("{% url 'main:seller_index' %}");
 				} else {
-					openModal("알림", data.result_text, '');
+					openModal("Alert", data.result_text, '');
 				}
 			});
 		}
