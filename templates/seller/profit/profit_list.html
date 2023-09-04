@@ -67,16 +67,16 @@
 									</tr>
 								</thead>
 								<tbody>
-									{% for profit_obj in profit_objs %}
+									{% for profit_done_obj in profit_done_objs %}
 									<tr>
-										<td data-label="정산일">{{profit_obj.created_at}}</td>
-										<td data-label="정산금액">₱{{profit_obj.total_profit_amount|intcomma}}</td>
-										<td data-label="상품 결제금액">₱{{profit_obj.total_paid_amount|intcomma}}</td>
-										<td data-label="결제 수수료">₱{{profit_obj.total_payment_fee|intcomma}}</td>
-										<td data-label="배송비">₱{{profit_obj.total_shipping_fee|intcomma}}</td>
+										<td data-label="정산일">{{profit_done_obj.created_at}}</td>
+										<td data-label="정산금액">₱{{profit_done_obj.profit_done_amount|intcomma}}</td>
+										<td data-label="상품 결제금액">₱{{profit_done_obj.total_profit_amount|intcomma}}</td>
+										<td data-label="결제 수수료">₱{{profit_done_obj.total_payment_fee|intcomma}}</td>
+										<td data-label="배송비">₱{{profit_done_obj.total_shipping_fee|intcomma}}</td>
 										<td data-label="세부내역 다운로드">
 											<div class="excel-btn">
-												<a href="{% url 'profit:seller_profit_export' %}?id={{profit_obj.pk}}">
+												<a href="{% url 'profit:seller_profit_export' %}?id={{profit_done_obj.pk}}">
 													<span class="btn btn-outline-secondary"><img class="me-2" style="width: 40px;" src="{% static 'seller/images/down_i.png' %}">Excel Download</span>
 												</a>
 											</div>
