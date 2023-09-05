@@ -3,7 +3,7 @@ from ..models import *
 from order.models import OrderItem
 from django.http import JsonResponse
 from revenue.views import RevenueManage
-from profit.views import ProfitManage
+from profit.actions import ProfitManage
 
 
 def call_back(request):
