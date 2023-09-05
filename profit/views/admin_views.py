@@ -29,20 +29,27 @@ def admin_profit_done_list(request):
 
 	start_date = start_date + timedelta(days=1)
 	
-	profit_done_objs = Profit.objects.filter(is_done=True)
+	profit_objs = Profit.objects.filter(
+		is_done=True,
+		created_at__range=[start_date, end_date]
+	).order_by(
+		'-id'
+	)
 
-	profit_done_amount = profit_done_objs.aggregate(Sum('total_profit_amount'))['total_profit_amount__sum']
-	if profit_done_amount is None:
-		profit_done_amount = 0
+	profit_amount = 0
+
+	for profit_obj in profit_objs:
+		if not profit_obj.is_done:
+			profit_amount += profit_obj.total_profit_amount
 
 
 	page        = int(request.GET.get('p', 1))
-	pagenator   = Paginator(profit_done_objs, 10)
-	profit_done_objs = pagenator.get_page(page)
+	pagenator   = Paginator(profit_objs, 10)
+	profit_objs = pagenator.get_page(page)
 
 	return render(request, 'admin/profit/profit_done_list.html', {
-		"profit_done_objs": profit_done_objs,
-		'profit_done_amount': profit_done_amount,
+		"profit_done_objs": profit_objs,
+		'profit_done_amount': profit_amount,
 	})
 
 

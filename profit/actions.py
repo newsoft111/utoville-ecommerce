@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.db.models import Q, Sum, Avg
-from ..models import *
+from .models import *
 from django.core.paginator import Paginator
 from django.http import JsonResponse, HttpResponse
 from datetime import datetime, timedelta
