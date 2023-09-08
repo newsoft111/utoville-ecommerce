@@ -508,7 +508,7 @@ async function order_submit() {
    .then(data => {
       is_run  = false;
       if (data.result == '200') {
-         window.history.pushState("", "", `{% url 'order:user_order_view' %}?id=${data.result_text}`);
+         window.history.pushState("", "", `{% url 'order:user_order_view' %}?id=${data.order_id}`);
          window.location.reload();
       } else {
          openModal("Notification", data.result_text);
