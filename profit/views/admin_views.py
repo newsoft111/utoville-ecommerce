@@ -16,7 +16,7 @@ import xlwt
 User = get_user_model()
 
 @login_required(login_url="account:admin_login")
-def admin_profit_done_list(request):
+def admin_profit_list(request):
 	now = date.today()
 	start_date = now-relativedelta(months=1)
 	end_date = now
@@ -30,7 +30,6 @@ def admin_profit_done_list(request):
 	start_date = start_date + timedelta(days=1)
 	
 	profit_objs = Profit.objects.filter(
-		is_done=True,
 		created_at__range=[start_date, end_date]
 	).order_by(
 		'-id'
@@ -47,15 +46,15 @@ def admin_profit_done_list(request):
 	pagenator   = Paginator(profit_objs, 10)
 	profit_objs = pagenator.get_page(page)
 
-	return render(request, 'admin/profit/profit_done_list.html', {
-		"profit_done_objs": profit_objs,
-		'profit_done_amount': profit_amount,
+	return render(request, 'admin/profit/profit_list.html', {
+		"profit_objs": profit_objs,
+		'profit_amount': profit_amount,
 	})
 
 
 
 @login_required(login_url="account:admin_login")
-def admin_profit_done_export(request):
+def admin_profit_export(request):
 	profit_done_obj = get_object_or_404(Profit, pk=request.GET.get("id"))
 	
 	q = Q()
@@ -99,20 +98,8 @@ def admin_profit_done_export(request):
 	return response
 
 
-@login_required(login_url="account:admin_login")
-def admin_profit_expect_list(request):
-	profit_expect_objs = Profit.objects.filter(is_done=False)
 
-	page        = int(request.GET.get('p', 1))
-	pagenator   = Paginator(profit_expect_objs, 10)
-	profit_expect_objs = pagenator.get_page(page)
-
-
-	return render(request, 'admin/profit/profit_expect_list.html', {
-		"profit_expect_objs":profit_expect_objs
-	})
-
-def admin_profit_expect_change_status(request):
+def admin_profit_change_status(request):
 	if request.method == 'POST':
 		profit_id = request.POST.get('profit_id')
 		status = request.POST.get('status')
@@ -142,7 +129,7 @@ def admin_profit_expect_change_status(request):
 
 
 @login_required(login_url="account:admin_login")
-def admin_profit_expect_change_memo(request):
+def admin_profit_change_memo(request):
 	if request.method == 'POST':
 		profit_id = request.POST.get('profit_id')
 		memo = request.POST.get('memo')
@@ -170,7 +157,7 @@ def admin_profit_expect_change_memo(request):
 
 
 @login_required(login_url="account:admin_login")
-def admin_profit_expect_detail(request, profit_id):
+def admin_profit_detail(request, profit_id):
 	profit_expect_obj = get_object_or_404(Profit, pk=profit_id)
 
 	q = Q()
@@ -178,6 +165,6 @@ def admin_profit_expect_detail(request, profit_id):
 
 	profit_detail_objs = ProfitDetail.objects.filter(q).order_by('-id')
 
-	return render(request, 'admin/profit/profit_expect_detail.html', {
+	return render(request, 'admin/profit/profit_detail.html', {
 		"profit_detail_objs":profit_detail_objs
 	})
