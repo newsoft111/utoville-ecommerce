@@ -82,8 +82,8 @@
 										<td class="border-bottom" data-label="Member">{{profit_done_obj.seller.username}}</td>
 										<td class="border-bottom" data-label="Profit Date">{{profit_done_obj.updated_at}}</td>
 										<td class="border-bottom" data-label="Profit Amount">₱{{profit_done_obj.total_profit_amount|intcomma}}</td>
-										<td class="border-bottom" data-label="Product Payment Amount">₱{{profit_done_obj.total_charge_amount|intcomma}}</td>
-										<td class="border-bottom" data-label="Payment Commission">₱{{profit_done_obj.total_charge_fee|intcomma}}</td>
+										<td class="border-bottom" data-label="Product Payment Amount">₱{{profit_done_obj.total_paid_amount|intcomma}}</td>
+										<td class="border-bottom" data-label="Payment Commission">₱{{profit_done_obj.total_payment_fee|intcomma}}</td>
 										<td class="border-bottom" data-label="Shipping Fee">₱{{profit_done_obj.total_shipping_fee|intcomma}}</td>
 										<td data-label="Download Details">
 											<div class="excel-btn">
