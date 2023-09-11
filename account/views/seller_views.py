@@ -11,6 +11,7 @@ from django.contrib.auth.hashers import check_password
 from datetime import datetime, timedelta
 from django.conf import settings
 from util.views import EmailSender
+from account.models import UserSeller
 from django.contrib.auth.decorators import login_required
 User = get_user_model()
 
@@ -23,12 +24,19 @@ def seller_login(request):
 		return HttpResponseRedirect(resolve_url('main:seller_index'))
 	if request.method == 'POST':
 		username=request.POST.get('username')
-		print(username)
 		password=request.POST.get('password')
 		
 		user = auth.authenticate(request, username=username, password=password)
 
+
 		if user is None:
+			result = '201'
+			result_text = '아이디와 비밀번호를 정확히 입력해 주세요.'
+			return JsonResponse({'result': result, 'result_text': result_text})
+		
+		try:
+			user_seller = UserSeller.objects.get(user=user)
+		except(UserSeller.DoesNotExist):
 			result = '201'
 			result_text = '아이디와 비밀번호를 정확히 입력해 주세요.'
 			return JsonResponse({'result': result, 'result_text': result_text})
