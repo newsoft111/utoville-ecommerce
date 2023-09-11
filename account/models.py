@@ -49,6 +49,21 @@ class User(AbstractBaseUser, PermissionsMixin):
 		db_table = 'member_tb'
 
 
+
+class UserSeller(models.Model):
+	id = models.AutoField(primary_key=True)
+	user = models.ForeignKey(
+				User,
+				on_delete=models.CASCADE, 
+	)
+	bank_name = models.CharField(max_length=255,default=None, null=True)
+	bank_account = models.CharField(max_length=255,default=None, null=True)
+	bank_holder = models.CharField(max_length=255,default=None, null=True)
+	
+
+	class Meta:
+		db_table = 'member_seller_tb'
+
 class UserShippingAddress(models.Model):
 	user = models.ForeignKey(
 				User,
@@ -64,3 +79,6 @@ class UserShippingAddress(models.Model):
 
 	class Meta:
 		db_table = 'member_shipping_address_tb'
+
+
+
