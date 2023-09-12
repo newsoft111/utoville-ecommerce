@@ -26,7 +26,7 @@ node {
     }
 
 	stage('Clean Docker Image') {
-    	sh 'docker image prune -a --force'
+    	sh 'docker system prune --all --force --volumes'
 	}
 
     stage('SSH docker run') {
